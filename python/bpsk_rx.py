@@ -23,7 +23,8 @@
 from gnuradio import gr, gru
 from gnuradio import eng_notation
 from gnuradio.eng_option import eng_option
-from optparse import OptionParser
+from optparse import OptionParser,Values
+import ConfigParser
 from string import maketrans
 # import scipy
 # import numpy
@@ -51,6 +52,7 @@ from bpsk_demod import bpsk_demod
 
 import struct
 import sys
+import os
 
 #import os
 #print os.getpid()
@@ -66,6 +68,243 @@ def int2binstr(num,length):
 
 def hexstr2int(str):
 	return int(str,16)
+
+def getDefaultConfig():
+	"""
+		Help function for configuration parsing.
+		
+		Returns a dictionary with default config values.
+		All keys that are used within this dictionary are
+		later used to merge the different configurations
+		into each other.
+	"""
+
+	## hardcoded default values in a dictionary
+	default = {'config_filename':'bpsk_rx.conf'}
+	# general configuration
+	default["from_usrp"]      = False
+	default["from_file"]      = None
+	default["frame_sync"]     = False
+	default["viterbi27"]      = False
+	default["reed_solomon"]   = False
+	default["derandomise"]    = False
+	default["frame_check"]    = False
+	default["verbose"]        = False
+	default["inspect_queue"]  = False
+	default["to_file"]        = None
+	default["frame_syms"]     = 20400
+	default["asm_syms"]       = 64
+	# usrp
+	default["centre_freq"]    = 2e9
+	default["usrp_gain"]      = 1
+	default["sym_rate"]       = 2e6
+	# file
+	default["repeat_file"]    = False
+	# demodulation
+	default["sps"]            = 2
+	default["file_path"]      = "/home/ngs1/demod_out"
+	# frame sync
+	default["access_code"]    = "1ACFFC1D"
+	default["sync_threshold"] = 5
+
+	return default
+
+def getCommandLineConfig(default):
+	"""
+		Help function for configuration parsing.
+		
+		Creates a command line parser that will
+		also be used to generate the help output.		
+
+		Returns	a dictionary with all config values
+		that have been specified as command line
+		options.
+
+		Takes a dictionary of default values as
+		parameter to generate the default values
+		in the help output.
+	"""
+
+	# Create Options Parser:
+	parser = OptionParser (conflict_handler="resolve")
+	# expert_grp = parser.add_option_group("Expert")
+
+	parser.add_option("-c","--config", default=default["config_filename"],
+					  help="path to a configuration file", dest="config_filename")
+	parser.add_option("","--from-usrp", action="store_true", default=default["from_usrp"],
+					  help="take live feed from USRP", dest="from_usrp")
+	parser.add_option("", "--freq", default=default["centre_freq"], type="int",
+					  help="USRP: centre frequency [default: %default]", dest="centre_freq")
+	parser.add_option("", "--usrp-gain", default=default["usrp_gain"], type="int",
+					  help="USRP: internal gain setting [default: %default]", dest="usrp_gain")
+	parser.add_option("", "--sps", default=default["sps"], type="int",
+					  help="USRP: samples per symbol [default: %default]", dest="sps")
+	parser.add_option("", "--sym-rate", default=default["sym_rate"], type="int",
+					  help="USRP: symbol rate [default: %default]", dest="sym_rate")
+	parser.add_option("", "--demod-out-filepath", default=default["file_path"],
+					  help="file path to the directory for recording demod output\
+					   [default: %default]", dest="file_path")
+	parser.add_option("","--from-file", default=default["from_file"],
+					  help="input file of samples to demod", dest="from_file")
+	parser.add_option("-r", "--repeat-file", action="store_true", default=default["repeat_file"],
+					  help="Repeat file contents as input?", dest="repeat_file")
+	parser.add_option("", "--ASM", default=default["access_code"],
+					  help="Attached Sync Marker as hex string [default: %default]", dest="access_code")
+	parser.add_option("", "--threshold", default=default["sync_threshold"], type="int",
+					  help="max number of allowable bit errors in ASM detection\
+					  [default: %default, set to -1 for 10% of ASM length]", dest="sync_threshold")
+	parser.add_option("", "--frame-syms", default=default["frame_syms"], type="int",
+					  help="expected number of channel symbols per frame \
+					  [default: %default]", dest="frame_syms")
+	parser.add_option("", "--asm-syms", default=default["asm_syms"], type="int",
+					  help="expected number of channel symbols per sync marker \
+					  [default: %default]", dest="asm_syms")
+	parser.add_option("-I", "--inspect-queue", action="store_true", default=default["inspect_queue"], 
+					  help="monitor the results of the decoding in the console,\
+					  prevents the output of any decoded data to a file,\
+					  i.e. overrides the following option", dest="inspect_queue")
+	parser.add_option("", "--to-file", dest="to_file", 
+					  help="record the decoded frames to a binary file", default=default["to_file"])
+	parser.add_option("-F", "--frame-sync", action="store_true", default=default["frame_sync"], dest="frame_sync")
+	parser.add_option("-V", "--viterbi27", action="store_true", default=default["viterbi27"], dest="viterbi27")
+	parser.add_option("-P", "--pseudo-derandomise", action="store_true", default=default["derandomise"], dest="derandomise")
+	parser.add_option("-R", "--reed-solomon", action="store_true", default=default["reed_solomon"], dest="reed_solomon")
+	parser.add_option("-C", "--frame-check", action="store_true", default=default["frame_check"], dest="frame_check")
+	parser.add_option("-v", "--verbose", action="store_true", default=default["verbose"],dest="verbose")
+
+	v = Values()
+	
+	# old version (also catch default values)
+	#(options, args) = parser.parse_args ()
+
+	# new version (only catch options that have been specified)
+	(options, args) = parser.parse_args(values=v)
+	return (v.__dict__.copy(), options, args, parser)
+
+
+def getFileConfig(filename):
+	"""
+		Help function for configuration parsing.
+		
+		Tries to open and read the specified filename
+		(including path if neseccarry) and parse it
+		to obtain the values from the configuration file.
+
+		Returns dictionary of values specified in the
+		configuration file.
+	"""
+
+	config_values = {}
+	## read out the configuration file
+
+	if not os.path.isfile(filename):
+		print >> sys.stderr, "configuration file %s not found" % filename
+		return config_values
+
+
+	config = ConfigParser.RawConfigParser(allow_no_value=True)
+	try:
+		config.read(filename)
+		print "using configuration file %s" % filename
+	except IOError:
+		print >> sys.stderr, "unable to read configuration file %s" % filename
+		return config_values
+
+	# read general configuration
+	try:
+		config_values["from_usrp"] = config.getboolean('General', 'from-usrp')
+	except ConfigParser.Error:
+		pass
+	try:
+		config_values["from_file"] = config.get('General', 'from-file')
+	except ConfigParser.Error:
+		pass
+	try:
+		config_values["frame_sync"] = config.getboolean('General', 'frame-sync')
+	except ConfigParser.Error:
+		pass
+	try:
+		config_values["viterbi27"] = config.getboolean('General', 'viterbi27')
+	except ConfigParser.Error:
+		pass
+	try:
+		config_values["reed_solomon"] = config.getboolean('General', 'reed-solomon')
+	except ConfigParser.Error:
+		pass
+	try:
+		config_values["derandomize"] = config.getboolean('General', 'pseudo-derandomize')
+	except ConfigParser.Error:
+		pass
+	try:
+		config_values["frame_check"] = config.getboolean('General', 'frame-check')
+	except ConfigParser.Error:
+		pass
+	try:
+		config_values["verbose"] = config.getboolean('General', 'verbose')
+	except ConfigParser.Error:
+		pass
+	try:
+		config_values["inspect_queue"] = config.getboolean('General', 'inspect-queue')
+	except ConfigParser.Error:
+		pass
+	try:
+		config_values["to_file"] = config.get('General', 'to-file')
+	except ConfigParser.Error:
+		pass
+	try:
+		config_values["frame_syms"] = config.get('General', 'frame-syms')
+	except ConfigParser.Error:
+		pass
+	try:
+		config_values["asm_syms"] = config.getint('General', 'asm-syms')
+	except ConfigParser.Error:
+		pass
+
+	# usrp
+	if "from_usrp" in config_values and config_values["from_usrp"]:
+		try:
+			config_values["centre_freq"] = config.getint('USRP', 'freq')
+		except ConfigParser.Error:
+			pass
+		try:
+			config_values["usrp_gain"] = config.getint('USRP', 'gain')
+		except ConfigParser.Error:
+			pass
+		try:
+			config_values["sym_rate"] = config.getint('USRP', 'rate')
+		except ConfigParser.Error:
+			pass
+
+	# file
+	if "from_file" in config_values and config_values["from_file"]:
+		try:
+			config_values["repeat_file"] = config.getboolean('File', 'repeat')
+		except ConfigParser.Error:
+			pass
+
+	# demodulation
+	try:
+		config_values["sps"] = config.getint('Demod', 'sps')
+	except ConfigParser.Error:
+		pass
+	try:
+		config_values["file_path"] = config.get('Demod', 'file-path')
+	except ConfigParser.Error:
+		pass
+
+	# frame sync
+	if "frame_sync" in config_values and config_values["frame_sync"]:
+		try:
+			config_values["access_code"] = config.get('FrameSync', 'ASM')
+		except ConfigParser.Error:
+			pass
+		try:
+			config_values["sync_threshold"] = config.getint('FrameSync', 'threshold')
+		except ConfigParser.Error:
+			pass
+
+	return config_values
+
 
 class frame_sync(gr.hier_block2):
 	def __init__(self, options):
@@ -356,57 +595,63 @@ def main():
 			ok, frameno, n_rcvd, n_lost)
 
 
-	# FIXME: implement a configuration file interface instead of command line options
-	# Create Options Parser:
-	parser = OptionParser (option_class=eng_option, conflict_handler="resolve")
-	# expert_grp = parser.add_option_group("Expert")
+		#
+	## Configuration
+	#
+	default = getDefaultConfig()
+	(cmdline, options, args, parser) = getCommandLineConfig(default)
 
-	parser.add_option("","--from-usrp", action="store_true", default=False,
-					  help="take live feed from USRP", dest="from_usrp")
-	parser.add_option("", "--freq", default=2235e6, type="int",
-					  help="USRP: centre frequency [default: %default]", dest="centre_freq")
-	parser.add_option("", "--usrp-gain", default=10, type="int",
-					  help="USRP: internal gain setting [default: %default]", dest="usrp_gain")
-	parser.add_option("", "--sps", default=2, type="int",
-					  help="USRP: samples per symbol [default: %default]", dest="sps")
-	parser.add_option("", "--sym-rate", default=2e6, type="int",
-					  help="USRP: symbol rate [default: %default]", dest="sym_rate")
-	parser.add_option("", "--demod-out-filepath", default="/home/ngs1/demod_out/",
-					  help="file path to the directory for recording demod output\
-					   [default: %default]", dest="file_path")
-	parser.add_option("","--from-file", default=None,
-					  help="input file of samples to demod", dest="from_file")
-	parser.add_option("-r", "--repeat-file", action="store_true", 
-					  help="Repeat file contents as input?", dest="repeat_file")
-	parser.add_option("", "--ASM", default="1ACFFC1D",
-					  help="Attached Sync Marker as hex string [default: %default]", dest="access_code")
-	parser.add_option("", "--threshold", default=5, type="int",
-					  help="max number of allowable bit errors in ASM detection\
-					  [default: %default, set to -1 for 10% of ASM length]", dest="sync_threshold")
-	parser.add_option("", "--frame-syms", default=20400, type="int",
-					  help="expected number of channel symbols per frame \
-					  [default: %default]", dest="frame_syms")
-	parser.add_option("", "--asm-syms", default=64, type="int",
-					  help="expected number of channel symbols per sync marker \
-					  [default: %default]", dest="asm_syms")
-	parser.add_option("-I", "--inspect-queue", action="store_true", default=False, 
-					  help="monitor the results of the decoding in the console,\
-					  prevents the output of any decoded data to a file,\
-					  i.e. overrides the following option", dest="inspect_queue")
-	parser.add_option("", "--to-file", dest="to_file", 
-					  help="record the decoded frames to a binary file", default=None)
-	parser.add_option("-F", "--frame-sync", action="store_true", default=False, dest="frame_sync")
-	parser.add_option("-V", "--viterbi27", action="store_true", default=False, dest="viterbi27")
-	parser.add_option("-P", "--pseudo-derandomise", action="store_true", default=False, dest="derandomise")
-	parser.add_option("-R", "--reed-solomon", action="store_true", default=False, dest="reed_solomon")
-	parser.add_option("-C", "--frame-check", action="store_true", default=False, dest="frame_check")
-	parser.add_option("-v", "--verbose", action="store_true", default=False)
+	# get configuration filename
+	filename = default["config_filename"]
+	try:
+		filename = getattr(options,"config_filename")
+	except AttributeError:
+		pass
 
-	(options, args) = parser.parse_args ()
+	configfile = getFileConfig(filename)
+	
+	# merge default, file and command line options together
+	for (key, value) in default.items():
+		# priority is commandline > config file > default
+		if  key in cmdline:
+			setattr(options,key,cmdline[key])
+		elif key in configfile:
+			setattr(options,key,configfile[key])
+		else:
+			setattr(options,key,default[key])
 
-	if len(args) != 0:
-		parser.print_help(sys.stderr)
-		sys.exit(1)
+		#print "options.%s=%s" % (key,str(getattr(options,key)))
+
+	# end merge options
+
+	# output configuration if verbose
+	if options.verbose:
+		# check if attribute is a public variable, or not (private variable, function)
+		checkVar = lambda o,k: not callable(getattr(o, k)) and not k.startswith('_')
+		# print out the configurations
+		print "=========== hardcoded default values: ============"
+		print "\n".join(["%s=%s" % (key, value) for (key,value) in default.items()])
+		print "=================================================="
+		print
+		print "============ values from commandline: ============"
+		print "\n".join(["%s=%s" % (key, value) for (key,value) in cmdline.items()])
+		print "=================================================="
+		print
+		print "======== values from configuration files: ========"
+		print "\n".join(["%s=%s" % (key, value) for (key,value) in configfile.items()])
+		print "=================================================="
+		print		
+		print "============== merged configuration =============="
+		print "\n".join(["%s=%s" % (key, str(getattr(options,key)) ) for key in dir(options) if checkVar(options,key)])
+		print "============================================="
+
+
+	# start validating input
+
+	# with new configuration file it is no longer necessarry to provide any command line configuration
+	#if len(args) != 0:
+	#	parser.print_help(sys.stderr)
+	#	sys.exit(1)
 
 	if options.from_usrp is not True and options.from_file is None:
 		sys.stderr.write("You must specify --from-usrp or --from-file\n")
