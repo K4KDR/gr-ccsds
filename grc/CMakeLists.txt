@@ -21,5 +21,7 @@ install(FILES
     ccsds_viterbi27_bb.xml
     ccsds_framer_sink_dual.xml
     ccsds_msg_source.xml
+    ccsds_fll_cc.xml
+    ccsds_mpsk_mod_bc.xml
     ccsds_rs_decode_bb.xml DESTINATION share/gnuradio/grc/blocks
 )

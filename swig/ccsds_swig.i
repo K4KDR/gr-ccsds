@@ -15,6 +15,8 @@
 #include "ccsds_msg_source.h"
 #include "ccsds_rs_decode_bb.h"
 #include "ccsds_crc16.h"
+#include "ccsds_fll_cc.h"
+#include "ccsds_mpsk_mod_bc.h"
 %}
 
 %include "ccsds_crc16.i"
@@ -64,3 +66,9 @@ GR_SWIG_BLOCK_MAGIC(ccsds,msg_source);
 
 GR_SWIG_BLOCK_MAGIC(ccsds,rs_decode_bb);
 %include "ccsds_rs_decode_bb.h"
+
+GR_SWIG_BLOCK_MAGIC(ccsds,fll_cc);
+%include "ccsds_fll_cc.h"
+
+GR_SWIG_BLOCK_MAGIC(ccsds,mpsk_mod_bc);
+%include "ccsds_mpsk_mod_bc.h"

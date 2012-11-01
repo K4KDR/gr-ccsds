@@ -27,5 +27,7 @@ install(FILES
     ccsds_framer_sink_dual.h
     ccsds_msg_source.h
     ccsds_rs_decode_bb.h 
+    ccsds_fll_cc.h
+    ccsds_mpsk_mod_bc.h
     ccsds_crc16.h DESTINATION include/ccsds
 )
