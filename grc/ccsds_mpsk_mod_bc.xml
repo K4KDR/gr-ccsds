@@ -2,24 +2,13 @@
 <block>
   <name>M-PSK Modulator (CCSDS)</name>
   <key>ccsds_mpsk_mod_bc</key>
-  <category>ccsds</category>
-  <import>import ccsds</import>
+  <category>CCSDS</category>
+  <import>ccsds</import>
   <make>ccsds.mpsk_mod_bc()</make>
-  <!-- Make one 'sink' node per input. Sub-nodes:
-       * name (an identifier for the GUI)
-       * type
-       * vlen
-       * optional (set to 1 for optional inputs) -->
   <sink>
     <name>in</name>
     <type>byte</type>
   </sink>
-
-  <!-- Make one 'source' node per output. Sub-nodes:
-       * name (an identifier for the GUI)
-       * type
-       * vlen
-       * optional (set to 1 for optional inputs) -->
   <source>
     <name>out</name>
     <type>complex</type>

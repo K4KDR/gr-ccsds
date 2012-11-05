@@ -1,6 +1,7 @@
 #ifndef INCLUDED_CCSDS_MPSK_MOD_BC_H
 #define INCLUDED_CCSDS_MPSK_MOD_BC_H
 
+#include <ccsds_api.h>
 #include <gr_block.h>
 #include <gr_complex.h>
 
@@ -8,16 +9,16 @@ class ccsds_mpsk_mod_bc;
 
 typedef boost::shared_ptr<ccsds_mpsk_mod_bc> ccsds_mpsk_mod_bc_sptr;
 
-ccsds_mpsk_mod_bc_sptr ccsds_make_mpsk_mod_bc (unsigned int M);
+CCSDS_API ccsds_mpsk_mod_bc_sptr ccsds_make_mpsk_mod_bc (unsigned int M);
+CCSDS_API ccsds_mpsk_mod_bc_sptr ccsds_make_mpsk_mod_bc ();
 
-class ccsds_mpsk_mod_bc : public gr_block
+class CCSDS_API ccsds_mpsk_mod_bc : public gr_block
 {
 private:
-    friend ccsds_mpsk_mod_bc_sptr ccsds_make_mpsk_mod_bc (unsigned int M);
+    friend CCSDS_API ccsds_mpsk_mod_bc_sptr ccsds_make_mpsk_mod_bc (unsigned int M);
+    friend CCSDS_API ccsds_mpsk_mod_bc_sptr ccsds_make_mpsk_mod_bc ();
 
     ccsds_mpsk_mod_bc (unsigned int M);   // private constructor
-    unsigned int binaryToGray(unsigned int num);
-    unsigned int grayToBinary(unsigned int num);
 
     unsigned int d_M;
     gr_complex* d_constellation;

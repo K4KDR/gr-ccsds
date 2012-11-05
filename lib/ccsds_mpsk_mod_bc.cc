@@ -7,9 +7,16 @@
 #include <stdio.h>
 #include <math.h>
 
-ccsds_mpsk_mod_bc_sptr ccsds_make_mpsk_mod_bc (unsigned int M)
+ccsds_mpsk_mod_bc_sptr
+ccsds_make_mpsk_mod_bc (unsigned int M)
 {
     return ccsds_mpsk_mod_bc_sptr (new ccsds_mpsk_mod_bc (M));
+}
+
+ccsds_mpsk_mod_bc_sptr
+ccsds_make_mpsk_mod_bc ()
+{
+    return ccsds_mpsk_mod_bc_sptr (new ccsds_mpsk_mod_bc (2));
 }
 
 static const int MIN_IN = 1;    // mininum number of input streams
@@ -18,7 +25,7 @@ static const int MIN_OUT = 1;   // minimum number of output streams
 static const int MAX_OUT = 1;   // maximum number of output streams
 
 ccsds_mpsk_mod_bc::ccsds_mpsk_mod_bc (unsigned int M)
-  : gr_block ("mpsk_mod_bc",
+  : gr_block ("ccsds_mpsk_mod_bc",
 	gr_make_io_signature (MIN_IN, MAX_IN, sizeof (char)),
 	gr_make_io_signature (MIN_OUT, MAX_OUT, sizeof (gr_complex)))
 {
@@ -38,8 +45,9 @@ ccsds_mpsk_mod_bc::ccsds_mpsk_mod_bc (unsigned int M)
 
 	// go through all constellation points
 	for(unsigned int i=0;i<d_M;i++) {
+		unsigned int i_gray = (i >> 1) ^ i; // From: http://en.wikipedia.org/wiki/Grey_code#Converting_to_and_from_Gray_code
 		// store constellation point
-		d_constellation[binaryToGray(i)] = phasor;
+		d_constellation[i_gray] = phasor;
 		// rotate to next point
 		phasor *= diff_phasor;
 	}
