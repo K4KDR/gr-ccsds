@@ -13,12 +13,14 @@ private:
 	double* inact_freq;
 	unsigned int* act_count;
 	unsigned int* inact_count;
+	void populate_filter(const float *values, unsigned int n);
+	void apply_filter(float *values, unsigned int n);
 
 public:
 	moving_average();   // public constructor
 	~moving_average();  // public destructor
 
-	float filter(float input);
+	void filter(float *values, const unsigned int n);
 	float getState();
 };
 

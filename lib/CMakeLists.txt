@@ -20,7 +20,7 @@
 ########################################################################
 include(GrPlatform) #define LIB_SUFFIX
 add_library(gnuradio-ccsds SHARED ccsds_randomiser_bb.cc ccsds_viterbi27_bb.cc viterbi27_sse.c ccsds_framer_sink_dual.cc ccsds_msg_source.cc ccsds_rs_decode_bb.cc decode_rs_8.c decode_rs_ccsds.c ccsds_globals.c ccsds_crc16.cc ccsds_fll_cc.cc ccsds_mpsk_mod_bc.cc ccsds_moving_average.cc)
-target_link_libraries(gnuradio-ccsds ${Boost_LIBRARIES} ${GRUEL_LIBRARIES} ${GNURADIO_CORE_LIBRARIES})
+target_link_libraries(gnuradio-ccsds ${Boost_LIBRARIES} ${GRUEL_LIBRARIES} ${GNURADIO_CORE_LIBRARIES} fftw3)
 set_target_properties(gnuradio-ccsds PROPERTIES DEFINE_SYMBOL "gnuradio_ccsds_EXPORTS")
 
 ########################################################################

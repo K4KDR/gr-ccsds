@@ -13,14 +13,4 @@
 		<name>samples</name>
 		<type>complex</type>
 	</source>
-	
-	<source>
-		<name>freq</name>
-		<type>float</type>
-	</source>
-	
-	<source>
-		<name>debug</name>
-		<type>float</type>
-	</source>
 </block>

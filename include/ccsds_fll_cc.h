@@ -4,6 +4,7 @@
 #include <ccsds_api.h>
 #include <gr_block.h>
 #include <ccsds_moving_average.h>
+#include <math.h>
 
 class ccsds_fll_cc;
 
@@ -17,10 +18,15 @@ private:
 	friend CCSDS_API ccsds_fll_cc_sptr ccsds_make_fll_cc();
 
 	ccsds_fll_cc();   // private constructor
+	
+	void calc_diffs(gr_complex *tmp_c, const gr_complex *in, const unsigned int num);
+	void calc_phases(float *tmp_f, const gr_complex *tmp_c, const unsigned int num);
+	void calc_rotation(gr_complex *out, const gr_complex *in, const float *tmp_f, const unsigned int num);
 
 	gr_complex d_last_sample;
-	gr_complex d_rotator;
-	
+	double d_phase;
+	static const double D_TWOPI;
+
 	bool d_last_sample_valid;
 	moving_average d_filter;
 
