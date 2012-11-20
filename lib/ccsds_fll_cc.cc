@@ -8,41 +8,56 @@
 #include <gr_rotator.h>
 #include <stdio.h>
 #include <math.h>
-#include <ccsds_moving_average.h>
+#include <ccsds_lpf.h>
 #include <complex>
 #include <cstdlib>
 #include <fftw3.h>
 
 ccsds_fll_cc_sptr
-ccsds_make_fll_cc ()
+ccsds_make_fll_cc (unsigned int obsv_length)
 {
-    return ccsds_fll_cc_sptr (new ccsds_fll_cc ());
+    return ccsds_fll_cc_sptr (new ccsds_fll_cc (obsv_length));
 }
 
-ccsds_fll_cc::ccsds_fll_cc ()
+ccsds_fll_cc::ccsds_fll_cc (unsigned int obsv_length)
   : gr_block ("ccsds_fll_cc",
 	gr_make_io_signature (1, 1, sizeof (gr_complex)),
 	//gr_make_io_signature3 (1, 3, sizeof (gr_complex), sizeof (float), sizeof (float)))
-	gr_make_io_signature (1, 1, sizeof (gr_complex)))
+	gr_make_io_signature (1, 1, sizeof (gr_complex))), D_L(obsv_length)
 {
 	// initialize on real axis
 	d_last_sample = gr_complex(1.0,0.0);
 	d_last_sample_valid = false;
 
 	d_phase = 0.0f;
-	
+
+	d_filter = ccsds_make_lpf(0.005);
+
+	if(D_L < 1) {
+		fprintf(stderr,"ERROR: integration length %d is smaller one\n",D_L);
+		exit(EXIT_FAILURE);
+		return;
+	}
+
+	// we want to process blocks of D_L samples, or multiples of it, so we
+	// will also output in multiples of it 
+	set_output_multiple(D_L);
+
 	const int alignment_multiple = volk_get_alignment() / sizeof(gr_complex);
 	set_alignment(std::max(1, alignment_multiple));
 }
 
 ccsds_fll_cc::~ccsds_fll_cc ()
 {
-    // nothing else required in this example
+	delete d_filter;
 }
 
-const double ccsds_fll_cc::D_TWOPI=2.0f*M_PI;
+const double ccsds_fll_cc::D_TWOPI =2.0f*M_PI;
 
 void ccsds_fll_cc::calc_diffs(gr_complex *tmp_c, const gr_complex *in, const unsigned int num) {
+	if(num == 0)
+		return;
+
 	//* use volk
 	gr_complex *in_shift = (gr_complex*) fftw_malloc(num * sizeof(gr_complex));
 	if(in_shift == 0) {
@@ -52,7 +67,9 @@ void ccsds_fll_cc::calc_diffs(gr_complex *tmp_c, const gr_complex *in, const uns
 	}
 
 	in_shift[0] = d_last_sample;
-	memcpy(&in_shift[1], &in[0], (num-1)*sizeof(gr_complex) );
+	if(num>1) {
+		memcpy(&in_shift[1], &in[0], (num-1)*sizeof(gr_complex) );
+	}
 
 	if(is_unaligned()) {
 		volk_32fc_x2_multiply_conjugate_32fc_u(tmp_c, in, in_shift, num);
@@ -74,38 +91,75 @@ void ccsds_fll_cc::calc_diffs(gr_complex *tmp_c, const gr_complex *in, const uns
 	return;
 }
 
+void ccsds_fll_cc::calc_summs(gr_complex *phasors, unsigned int num) {
+	if(num == 0)
+		return;
+
+	gr_complex sum;
+
+
+	for(unsigned int i=0;i < num/D_L;i++) {
+		sum = gr_complex(0.0f,0.0f);
+
+		// sum up
+		for(unsigned int j=0;j<D_L;j++) {
+			sum += phasors[i*D_L+j];
+		}
+
+		// calculate average
+		//sum = sum / (float)D_L;
+
+		// store average
+		phasors[i] = sum;		
+	}
+}
+
 void ccsds_fll_cc::calc_phases(float *tmp_f, const gr_complex *tmp_c, const unsigned int num) {
+	if(num == 0)
+		return;
+
+	//* with volk
 	// tmp_c and tmp_f are guaranteed to be aligned
 	volk_32fc_s32f_atan2_32f_a(tmp_f, tmp_c, 1.0f, num);
+	//*/
 
 	/* without volk
 	for(unsigned int i=0;i<num;i++) {
 			tmp_f[i] = std::arg(tmp_c[i]);
 	}
 	//*/
+
 	return;
 }
 
-void ccsds_fll_cc::calc_rotation(gr_complex *out, const gr_complex *in, const float *tmp_f, const unsigned int num) {
+void ccsds_fll_cc::calc_rotation(gr_complex *out, const gr_complex *in, const float *freq, const unsigned int num) {
+	if(num == 0)
+		return;
+
 	//* with volk	
-	gr_complex *rot = (gr_complex*)fftwf_malloc(sizeof(gr_complex)*num);
+	gr_complex *rot = (gr_complex*)fftwf_malloc(num*sizeof(gr_complex));
+	if(rot == 0) {
+		fprintf(stderr,"ERROR: allocation of memory failed\n");
+		exit(EXIT_FAILURE);
+		return;
+	}
 
 	// temp variable for sine and cosine part of rotator
-	float tmp_s, tmp_c;
+	float tmp_sin, tmp_cos;
 
 	// create the inidividual rotos
 	for(unsigned int i=0;i<num;i++) {
 		// confine phase between 0 and 2 PI, to ensure that we do not
 		// encounter float over or underruns when iterating to long
-		d_phase = std::fmod(d_phase-tmp_f[i], D_TWOPI);
+		d_phase = std::fmod(d_phase-freq[i], D_TWOPI);
 		
 		// calculate sine and cosine values for this phase. joint cal-
 		// culation for the same angle is faster, than two individual
 		// calls to sin and cos.
-		sincosf(d_phase,&tmp_s, &tmp_c);
+		sincosf(d_phase,&tmp_sin, &tmp_cos);
 
 		// assemble the rotator and store it in an array
-		rot[i] = gr_complex(tmp_c,tmp_s);
+		rot[i] = gr_complex(tmp_cos,tmp_sin);
 	}
 
 	if(is_unaligned()) {
@@ -141,20 +195,28 @@ int  ccsds_fll_cc::general_work (int                     noutput_items,
 	//float *freq_filtered = (float *) output_items[2];
 
 	// how many samples can we process?
-	unsigned int num = (noutput_items > ninput_items[0]) ? ninput_items[0] : noutput_items;
+	// and ensure we output a multiple of D_L
+	const unsigned int num = (((noutput_items > ninput_items[0]) ? ninput_items[0] : noutput_items) / D_L) *D_L;
+
+	if(num == 0) {
+		consume_each(0);
+		return 0;
+	}
 
 	// auxilliary variables
 	gr_complex *tmp_c;
-	float *tmp_f;
+	float *tmp_f, *tmp_fs;
 
 	// allocate temporary memory
-	tmp_c = (gr_complex *) fftw_malloc(num * sizeof(gr_complex));
-	tmp_f = (float *)      fftw_malloc(num * sizeof(float));
-	if (tmp_c == 0 || tmp_f == 0) {
+	tmp_c  = (gr_complex *) fftw_malloc(num * sizeof(gr_complex));
+	tmp_f  = (float *)      fftw_malloc(num * sizeof(float));
+	tmp_fs = (float *)      fftw_malloc(num/D_L * sizeof(float));
+	if (tmp_c == 0 || tmp_f == 0 || tmp_fs == 0) {
 		fprintf(stderr,"ERROR: allocation of memory failed\n");
 		exit(EXIT_FAILURE);
 		return 0;
 	}
+
 
 	//
 	// do the synchronization
@@ -163,19 +225,24 @@ int  ccsds_fll_cc::general_work (int                     noutput_items,
 	// calculate difference phasors
 	calc_diffs(tmp_c, in, num);
 
+	calc_summs(tmp_c, num);
+
 	// take the calculated phasors and calculate the phase difference.
-	calc_phases(tmp_f, tmp_c, num);
-	
+	calc_phases(tmp_fs, tmp_c, num/D_L);
 	
 	// Put these calculations into the filter
-	if(d_last_sample_valid) { // should the first sample be filtered?
-		// no, filter everything
-		d_filter.filter(tmp_f,num);
-	} else if (num > 1) {
-		// more than one sample, skip first value
-		d_filter.filter(&tmp_f[1],num-1);
-	} // else there is only the one sample that should be skipped
-
+	//d_filter->filter(tmp_fs,num/D_L);
+	
+	unsigned int k=0;
+	for(unsigned int i=0;i<num/D_L;i++) {
+		for(unsigned int j=0;j<D_L;j++) {
+			tmp_f[k] = tmp_fs[i];
+			k++;
+		}
+	}
+	// smooth again
+	d_filter->filter(tmp_f,num);
+		
 	// rotate the samples according to the filtered frequency
 	calc_rotation(out, in, tmp_f, num);
 
@@ -183,9 +250,10 @@ int  ccsds_fll_cc::general_work (int                     noutput_items,
 	d_last_sample = in[num-1];
 
 	// free resources
-	fftw_free(tmp_f);
 	fftw_free(tmp_c);
-
+	fftw_free(tmp_f);
+	fftw_free(tmp_fs);
+	
 	// Tell runtime how many input samples we used
 	consume_each(num);
 

@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <block>
-  <name>M-PSK Modulator (CCSDS)</name>
-  <key>ccsds_mpsk_mod_bc</key>
+  <name>M-PSK Demodulator (CCSDS)</name>
+  <key>ccsds_mpsk_demod_cb</key>
   <category>CCSDS</category>
   <import>import ccsds</import>
-  <make>ccsds.mpsk_mod_bc($M)</make>
+  <make>ccsds.mpsk_demod_cb($M)</make>
 	<param>
 		<name>M</name>
 		<key>M</key>
@@ -14,16 +14,16 @@
 	<check>$M >= 2</check>
 	<sink>
 		<name>in</name>
-		<type>byte</type>
+		<type>complex</type>
 	</sink>
 	<source>
 		<name>out</name>
-		<type>complex</type>
+		<type>byte</type>
 	</source>
 	<doc>
-M-PSK symbol modulator.
+M-PSK symbol demodulator.
 
-Take a byte with a value between 0 and M-1 and transform it into a complex M-PSK symbol.
+Take a complex M-PSK symbol and transform it to the nearest byte in range 0 to M-1.
 
 M: Number of modulation symbols.
 	</doc>

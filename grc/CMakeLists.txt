@@ -22,6 +22,8 @@ install(FILES
     ccsds_framer_sink_dual.xml
     ccsds_msg_source.xml
     ccsds_fll_cc.xml
+    ccsds_pll_cc.xml
     ccsds_mpsk_mod_bc.xml
+    ccsds_mpsk_demod_cb.xml
     ccsds_rs_decode_bb.xml DESTINATION share/gnuradio/grc/blocks
 )

@@ -16,7 +16,9 @@
 #include "ccsds_rs_decode_bb.h"
 #include "ccsds_crc16.h"
 #include "ccsds_fll_cc.h"
+#include "ccsds_pll_cc.h"
 #include "ccsds_mpsk_mod_bc.h"
+#include "ccsds_mpsk_demod_cb.h"
 %}
 
 %include "ccsds_crc16.i"
@@ -25,8 +27,14 @@
 GR_SWIG_BLOCK_MAGIC(ccsds,fll_cc);
 %include "ccsds_fll_cc.h"
 
+GR_SWIG_BLOCK_MAGIC(ccsds,pll_cc);
+%include "ccsds_pll_cc.h"
+
 GR_SWIG_BLOCK_MAGIC(ccsds,mpsk_mod_bc);
 %include "ccsds_mpsk_mod_bc.h"
+
+GR_SWIG_BLOCK_MAGIC(ccsds,mpsk_demod_cb);
+%include "ccsds_mpsk_demod_cb.h"
 
 GR_SWIG_BLOCK_MAGIC(ccsds,randomiser_bb);
 %include "ccsds_randomiser_bb.h"

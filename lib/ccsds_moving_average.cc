@@ -3,8 +3,8 @@
 #include <cmath>
 
 moving_average::moving_average() {
-	moving_average::D_NUM_RESET = 10000;
-	moving_average::D_NUM_COLLECT=200;
+	moving_average::D_NUM_RESET = 100000000;
+	moving_average::D_NUM_COLLECT=1000000;
 
 	freq[0]=0.0;
 	freq[1]=0.0;

@@ -28,7 +28,11 @@ install(FILES
     ccsds_msg_source.h
     ccsds_rs_decode_bb.h 
     ccsds_fll_cc.h
+    ccsds_pll_cc.h
     ccsds_mpsk_mod_bc.h
+    ccsds_mpsk_demod_cb.h
     ccsds_moving_average.h
+    ccsds_lpf.h
+    ccsds_lpf2.h
     ccsds_crc16.h DESTINATION include/ccsds
 )

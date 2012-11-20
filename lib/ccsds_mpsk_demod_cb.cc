@@ -2,34 +2,31 @@
 #include "config.h"
 #endif
 
-#include <ccsds_mpsk_mod_bc.h>
+#include <ccsds_mpsk_demod_cb.h>
 #include <gr_io_signature.h>
 #include <stdio.h>
 #include <math.h>
 
-ccsds_mpsk_mod_bc_sptr
-ccsds_make_mpsk_mod_bc (unsigned int M)
+ccsds_mpsk_demod_cb_sptr ccsds_make_mpsk_demod_cb (unsigned int M)
 {
-    return ccsds_mpsk_mod_bc_sptr (new ccsds_mpsk_mod_bc (M));
+    return ccsds_mpsk_demod_cb_sptr (new ccsds_mpsk_demod_cb (M));
 }
 
-ccsds_mpsk_mod_bc_sptr
-ccsds_make_mpsk_mod_bc ()
-{
-    return ccsds_mpsk_mod_bc_sptr (new ccsds_mpsk_mod_bc (2));
-}
-
-static const int MIN_IN = 1;    // mininum number of input streams
-static const int MAX_IN = 1;    // maximum number of input streams
-static const int MIN_OUT = 1;   // minimum number of output streams
-static const int MAX_OUT = 1;   // maximum number of output streams
-
-ccsds_mpsk_mod_bc::ccsds_mpsk_mod_bc (unsigned int M)
-  : gr_block ("ccsds_mpsk_mod_bc",
-	gr_make_io_signature (MIN_IN, MAX_IN, sizeof (char)),
-	gr_make_io_signature (MIN_OUT, MAX_OUT, sizeof (gr_complex)))
+ccsds_mpsk_demod_cb::ccsds_mpsk_demod_cb (unsigned int M)
+  : gr_block ("ccsds_mpsk_demod_cb",
+	gr_make_io_signature (1, 1, sizeof (gr_complex)),
+	gr_make_io_signature (1, 1, sizeof (char)))
 {
 	d_M = M;
+
+	if(M==2) {
+		detect_symbol = &ccsds_mpsk_demod_cb::detect_bpsk_symbol;
+	} else if (M==4) {
+		detect_symbol = &ccsds_mpsk_demod_cb::detect_qpsk_symbol;
+	} else {
+		detect_symbol = &ccsds_mpsk_demod_cb::detect_mpsk_symbol;
+	}
+
 
 	// create phasor for rotation between the symbols
 	const gr_complex diff_phasor = gr_complex(cos(2*M_PI/d_M),sin(2*M_PI/d_M));
@@ -63,24 +60,66 @@ ccsds_mpsk_mod_bc::ccsds_mpsk_mod_bc (unsigned int M)
 	}
 }
 
-ccsds_mpsk_mod_bc::~ccsds_mpsk_mod_bc ()
+ccsds_mpsk_demod_cb::~ccsds_mpsk_demod_cb ()
 {
 	// free memory allocated for the constellation
 	free(d_constellation);
 }
 
-int  ccsds_mpsk_mod_bc::general_work (int                     noutput_items,
+char ccsds_mpsk_demod_cb::detect_bpsk_symbol(gr_complex symbol) {
+	if(std::real(symbol) > 0) {
+		return 0;
+	} else {
+		return 1;
+	}
+}
+
+char ccsds_mpsk_demod_cb::detect_qpsk_symbol(gr_complex symbol) {
+	const float re = std::real(symbol);
+	const float im = std::imag(symbol);
+
+	if(im>re) {
+		if(re>-im) {
+			return 0;
+		} else { // re <= -im
+			return 2;
+		}
+	} else { // im <= re)
+		if(re>-im) {
+			return 1;
+		} else { // re <= -im
+			return 3;
+		}
+	}
+}
+
+// Brute Force per symbol
+char ccsds_mpsk_demod_cb::detect_mpsk_symbol(gr_complex symbol) {
+	float min_dist = INFINITY;
+	float dist;
+	char min_byte = 0;
+
+	for(char byte=0;byte<d_M;byte++) {
+		dist = std::abs(d_constellation[byte]-symbol);
+		min_dist = (dist >= min_dist) ? min_dist : dist;
+		min_byte = (dist >= min_dist) ? min_byte : byte;
+	}
+
+	return min_byte;
+}
+
+int  ccsds_mpsk_demod_cb::general_work (int                     noutput_items,
                                 gr_vector_int               &ninput_items,
                                 gr_vector_const_void_star   &input_items,
                                 gr_vector_void_star         &output_items)
 {
-	const char *in = (const char *) input_items[0];
-	gr_complex *out = (gr_complex *) output_items[0];
+	const gr_complex *in = (const gr_complex *) input_items[0];
+	char *out = (char *) output_items[0];
 
 	// counter
 	unsigned int i;
 	for(i=0;i<noutput_items && i<ninput_items[0];i++) {
-		out[i] = d_constellation[((unsigned int)in[i]) % d_M];
+		out[i] = (this->*detect_symbol)(in[i]);
 	}
 
 	consume_each(i);

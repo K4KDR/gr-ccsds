@@ -4,13 +4,30 @@
 	<key>ccsds_fll_cc</key>
 	<category>CCSDS</category>
 	<import>import ccsds</import>
-	<make>ccsds.fll_cc()</make>
+	<make>ccsds.fll_cc($L)</make>
+	<param>
+		<name>Observation length</name>
+		<key>L</key>
+		<value>4</value>
+		<type>int</type>
+	</param>
+	<check>$L >= 1</check>
 	<sink>
 		<name>in</name>
 		<type>complex</type>
 	</sink>
 	<source>
-		<name>samples</name>
+		<name>out</name>
 		<type>complex</type>
 	</source>
+	<doc>
+Frequency locked loop.
+
+The phase rotation between each symbol is computed and averaged to cancel
+modulations. The samples are rotated back by the estimated frequency. Filtering
+assumes equal symbol transition propability.
+
+Observation length: Number of samples over which should be averaged before
+frequency estimation.
+	</doc>
 </block>
