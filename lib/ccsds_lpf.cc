@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <cmath>
 
-#define LPF_DEBUG
+// #define LPF_DEBUG
 
 lpf * ccsds_make_lpf(float alpha) {
 	return new lpf(alpha);

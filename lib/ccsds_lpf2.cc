@@ -31,7 +31,7 @@ lpf2 * ccsds_make_lpf2(const double loop_bw, const double damping_factor_squared
 	// calculate constants
 	const double a = 4.0*loop_bw*(damping_factor_squared-1.0) + 2.0*damping_factor_squared + 2.0;
 	const double b = 8.0*loop_bw*(damping_factor_squared-1.0) + 4.0*damping_factor_squared + 1.0;
-	const double c = 4.0*loop_bw;
+	const double c = -4.0*loop_bw;
 
 	double rho = 0.0;
 	// run newton for 10 times
@@ -39,7 +39,11 @@ lpf2 * ccsds_make_lpf2(const double loop_bw, const double damping_factor_squared
 		rho -= rho_newton_f(rho,a,b,c) / rho_newton_df(rho,a,b);
 	}
 
-	double gamma = (4.0*damping_factor_squared*rho) / (s_slope * (1.0+rho));
+	double gamma = (4.0*damping_factor_squared*rho) / (s_slope * (1.0+rho)*(1.0+rho));
+
+	printf("Create 2nd order low pass filter with loop bandwidth %f, damping factor of %f and a S-curve slope of %f at the origin\n",loop_bw,std::sqrt(damping_factor_squared),s_slope);
+	printf("	with a=%f, b=%f, c=%f\n",a,b,c);
+	printf("	this will result in the following loop gains: gamma=%f, rho=%f\n",gamma, rho);
 
 	return new lpf2(LPF2_STATE_CAST gamma, LPF2_STATE_CAST rho);
 }
@@ -48,7 +52,7 @@ lpf2 * ccsds_make_lpf2(double loop_bw) {
 	return ccsds_make_lpf2(loop_bw, 0.5, 1.0);
 }
 
-lpf2::lpf2(LPF2_STATE_TYPE gamma, LPF2_STATE_TYPE rho) : RHO(rho), RHOB(1.0 + RHO), GAMMA(gamma) {
+lpf2::lpf2(LPF2_STATE_TYPE gamma, LPF2_STATE_TYPE rho) : RHO(rho), RHOB(1.0 + rho), GAMMA(gamma) {
 	
 	d_phi =0.0;
 	d_xi  =0.0;
@@ -67,19 +71,28 @@ lpf2::~lpf2() {
 }
 
 LPF2_STATE_TYPE lpf2::filter_step(LPF2_STATE_TYPE in) {
+	//*
 	d_xi  += GAMMA * (RHOB*(in-d_phi) - d_ephi);
 	d_phi += d_xi;
 	d_ephi = in - d_phi;
+	//*/
 
+	/*
+	d_xi  = d_xi + GAMMA*RHOB*in - GAMMA*d_ephi;
+	d_phi = d_phi + d_xi;
+	d_ephi = in;
+	//*/
+
+	#ifdef LPF2_DEBUG
+		fprintf(debugFile,"%.10f,%.10f,%.10f,%.10f\n",in,d_phi,d_xi,d_ephi);
+	#endif
+	
 	/*	
 	state[XI]  += GAMMA * (RHOB*(in-state[PHI]) - state[EPHI]);
 	state[PHI] += state[XI];
 	state[EPHI] = in-state[PHI];
 	//*/
 
-	#ifdef LPF2_DEBUG
-		fprintf(debugFile,"%.10f,%.10f,%.10f,%.10f\n",in,d_phi,d_xi,d_ephi);
-	#endif
 	
 	return d_phi;
 }

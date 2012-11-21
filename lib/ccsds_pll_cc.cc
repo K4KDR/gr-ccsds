@@ -38,7 +38,7 @@ ccsds_pll_cc::~ccsds_pll_cc ()
 const double ccsds_pll_cc::D_TWOPI=2.0f*M_PI;
 
 void ccsds_pll_cc::remove_modulation(gr_complex *tmp_c, const gr_complex *in, const unsigned int num) {
-	if(true || is_unaligned()) {
+	if(is_unaligned()) {
 		for(unsigned int i=0;i<num;i++) {
 			tmp_c[i] = std::pow(in[i],d_m) / (float)d_m;
 		}
@@ -133,12 +133,6 @@ int  ccsds_pll_cc::general_work (int                     noutput_items,
 	// remove the modulation
 	remove_modulation(tmp_c,in,num);
 
-	//for(unsigned int i=0;i<num;i++) {
-	//	printf("unfiltered phase: %2.10f\n",tmp_f[i]);
-	//	printf("in=%2.10f+j%2.10f, out=%2.10f+j%2.10f\n",
-	//		std::real(in[i]),std::imag(in[i]),std::real(tmp_c[i]),std::imag(tmp_c[i]));
-	//}
-
 	// take the calculated phasors and calculate the phase
 	calc_phases(tmp_f, tmp_c, num);
 	
@@ -148,14 +142,6 @@ int  ccsds_pll_cc::general_work (int                     noutput_items,
 	
 	// rotate the samples according to the filtered phase
 	calc_rotation(out, in, tmp_f, num);
-
-	/*	
-	for(unsigned int i=0;i<num;i++) {
-	//	printf("filtered phase: %2.10f\n",tmp_f[i]);
-	//	printf("in=%2.10f+j%2.10f, out=%2.10f+j%2.10f\n",
-	//		std::real(in[i]),std::imag(in[i]),std::real(out[i]),std::imag(out[i]));
-	}
-	//*/
 
 	// free resources
 	fftw_free(tmp_f);

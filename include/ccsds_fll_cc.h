@@ -21,6 +21,7 @@ private:
 	
 	void calc_diffs(gr_complex *tmp_c, const gr_complex *in, const unsigned int num);
 	void calc_summs(gr_complex *phasors, unsigned int num);
+	void fill_freqs(float *tmp_f, float *tmp_fs, const unsigned int num_out, const unsigned int num_in);
 	void calc_phases(float *tmp_f, const gr_complex *tmp_c, const unsigned int num);
 	void calc_rotation(gr_complex *out, const gr_complex *in, const float *tmp_f, const unsigned int num);
 

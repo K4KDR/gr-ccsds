@@ -114,6 +114,21 @@ void ccsds_fll_cc::calc_summs(gr_complex *phasors, unsigned int num) {
 	}
 }
 
+void ccsds_fll_cc::fill_freqs(float *tmp_f, float *tmp_fs, const unsigned int num_out, const unsigned int num_in) {
+	/*
+	unsigned int k=0;
+	for(unsigned int i=0;i<num_in;i++) {
+		for(unsigned int j=0;j<D_L;j++) {
+			tmp_f[k] = tmp_fs[i];
+			k++;
+		}
+	}
+	*/
+	for(unsigned int k=0;k<num_out;k++) {
+		tmp_f[k] = tmp_fs[(k/D_L)%num_in];
+	}
+}
+
 void ccsds_fll_cc::calc_phases(float *tmp_f, const gr_complex *tmp_c, const unsigned int num) {
 	if(num == 0)
 		return;
@@ -217,30 +232,27 @@ int  ccsds_fll_cc::general_work (int                     noutput_items,
 		return 0;
 	}
 
-
-	//
-	// do the synchronization
-	//
 	
 	// calculate difference phasors
 	calc_diffs(tmp_c, in, num);
 
+	// summ up difference phasors to average out modulations
+	// this will result in a subsampling by a factor of D_L	
 	calc_summs(tmp_c, num);
 
-	// take the calculated phasors and calculate the phase difference.
+	// take the subsampled phasors and calculate the phase difference.
 	calc_phases(tmp_fs, tmp_c, num/D_L);
 	
-	// Put these calculations into the filter
+	// filter the subsampled values
+	// this will take less computation load, but may result into frequency
+	// jumps in the output, so filtering is performed after upsampling
 	//d_filter->filter(tmp_fs,num/D_L);
-	
-	unsigned int k=0;
-	for(unsigned int i=0;i<num/D_L;i++) {
-		for(unsigned int j=0;j<D_L;j++) {
-			tmp_f[k] = tmp_fs[i];
-			k++;
-		}
-	}
-	// smooth again
+
+	// upsample frequency again, by just copying every input value D_L times
+	// into the output array
+	fill_freqs(tmp_f, tmp_fs, num, num/D_L);
+
+	// now filter (and smooth) the output
 	d_filter->filter(tmp_f,num);
 		
 	// rotate the samples according to the filtered frequency

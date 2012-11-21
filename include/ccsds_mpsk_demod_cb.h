@@ -20,7 +20,10 @@ private:
 
 	unsigned int d_M;
 	gr_complex* d_constellation;
-	
+
+	// debug counter to terminate after a fixed amount of samples (for profiling)
+	unsigned int count;
+
 	char detect_bpsk_symbol(gr_complex symbol);
 	char detect_qpsk_symbol(gr_complex symbol);
 	char detect_mpsk_symbol(gr_complex symbol);

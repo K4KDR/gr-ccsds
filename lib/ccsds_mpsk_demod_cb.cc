@@ -7,6 +7,8 @@
 #include <stdio.h>
 #include <math.h>
 
+
+
 ccsds_mpsk_demod_cb_sptr ccsds_make_mpsk_demod_cb (unsigned int M)
 {
     return ccsds_mpsk_demod_cb_sptr (new ccsds_mpsk_demod_cb (M));
@@ -17,6 +19,7 @@ ccsds_mpsk_demod_cb::ccsds_mpsk_demod_cb (unsigned int M)
 	gr_make_io_signature (1, 1, sizeof (gr_complex)),
 	gr_make_io_signature (1, 1, sizeof (char)))
 {
+	count = 0;
 	d_M = M;
 
 	if(M==2) {
@@ -39,7 +42,8 @@ ccsds_mpsk_demod_cb::ccsds_mpsk_demod_cb (unsigned int M)
 	
 	d_constellation = (gr_complex *)malloc(d_M * sizeof(gr_complex));
 	if (d_constellation == 0) {
-		printf("ERROR: Out of memory\n");
+		fprintf(stderr,"ERROR: memory allocation failed.\n");
+		exit(EXIT_FAILURE);
 		return;
 	}
 
@@ -123,6 +127,15 @@ int  ccsds_mpsk_demod_cb::general_work (int                     noutput_items,
 	}
 
 	consume_each(i);
+
+	/* when profiling, process a fixed amount of samples and terminate afterwards
+	count += i;
+	if(count > 10000000) {
+		fprintf(stdout,"M-PSK Demod: terminating\n");
+		exit(EXIT_FAILURE);
+		return i;
+	}
+	//*/
 
 	// Tell runtime system how many output items we produced.
 	return i;
