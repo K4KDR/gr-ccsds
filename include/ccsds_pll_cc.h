@@ -19,12 +19,13 @@ private:
 
 	ccsds_pll_cc(unsigned int m, float loop_bandwidth);   // private constructor
 	
+	void rotate_constellation(gr_complex *out, const gr_complex *in, const float angle, const unsigned int num);
 	void remove_modulation(gr_complex *tmp_c, const gr_complex *in, const unsigned int num);
 	void calc_phases(float *tmp_f, const gr_complex *tmp_c, const unsigned int num);
 	void calc_rotation(gr_complex *out, const gr_complex *in, const float *tmp_f, const unsigned int num);
 
 	static const double D_TWOPI;
-	unsigned int d_m;
+	const unsigned int d_M;
 	lpf2* d_filter;
 
 public:

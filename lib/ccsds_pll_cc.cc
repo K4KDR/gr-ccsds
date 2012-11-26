@@ -20,10 +20,8 @@ ccsds_pll_cc::ccsds_pll_cc (unsigned int m, float loop_bandwidth)
   : gr_block ("ccsds_pll_cc",
 	gr_make_io_signature (1, 1, sizeof (gr_complex)),
 	//gr_make_io_signature3 (1, 3, sizeof (gr_complex), sizeof (float), sizeof (float)))
-	gr_make_io_signature (1, 1, sizeof (gr_complex)))
+	gr_make_io_signature (1, 1, sizeof (gr_complex))), d_M(m)
 {
-	d_m = m;
-
 	const int alignment_multiple = volk_get_alignment() / sizeof(gr_complex);
 	set_alignment(std::max(1, alignment_multiple));
 
@@ -37,20 +35,31 @@ ccsds_pll_cc::~ccsds_pll_cc ()
 
 const double ccsds_pll_cc::D_TWOPI=2.0f*M_PI;
 
+void ccsds_pll_cc::rotate_constellation(gr_complex *out, const gr_complex *in, const float angle, const unsigned int num) {
+	gr_complex rot = std::polar(1.0f, angle);
+
+	if(is_unaligned()) {
+		volk_32fc_s32fc_multiply_32fc_u(out, in, rot, num);
+	} else {
+		volk_32fc_s32fc_multiply_32fc_a(out, in, rot, num);
+	}
+}
+
 void ccsds_pll_cc::remove_modulation(gr_complex *tmp_c, const gr_complex *in, const unsigned int num) {
 	if(is_unaligned()) {
 		for(unsigned int i=0;i<num;i++) {
-			tmp_c[i] = std::pow(in[i],d_m) / (float)d_m;
+			tmp_c[i] = std::pow(in[i],d_M);
 		}
 	} else {
-		volk_32fc_s32f_power_32fc_a(tmp_c,in,(float)d_m,num);
+		volk_32fc_s32f_power_32fc_a(tmp_c,in,(float)d_M,num);
 	}
 	return;
 }
 
 void ccsds_pll_cc::calc_phases(float *tmp_f, const gr_complex *tmp_c, const unsigned int num) {
 	// tmp_c and tmp_f are guaranteed to be aligned
-	volk_32fc_s32f_atan2_32f_a(tmp_f, tmp_c, (float)d_m, num);
+	//volk_32fc_s32f_atan2_32f_a(tmp_f, tmp_c, (float)d_M, num);
+	volk_32fc_s32f_atan2_32f_a(tmp_f, tmp_c, 1.0f, num);
 
 	/* without volk
 	for(unsigned int i=0;i<num;i++) {
@@ -66,13 +75,18 @@ void ccsds_pll_cc::calc_rotation(gr_complex *out, const gr_complex *in, const fl
 
 	// temp variable for sine and cosine part of rotator
 	float tmp_s, tmp_c;
+	float phase_offset = 0.0f;
+
+	if(d_M == 4) { // QPSK constellation rotated by 45 degree
+		phase_offset = M_PI/4.0f;
+	}
 
 	// create the inidividual rotos
 	for(unsigned int i=0;i<num;i++) {
 		// calculate sine and cosine values for this phase. joint cal-
 		// culation for the same angle is faster, than two individual
 		// calls to sin and cos.
-		sincosf(-tmp_f[i],&tmp_s, &tmp_c);
+		sincosf(-(tmp_f[i]+phase_offset),&tmp_s, &tmp_c);
 
 		// assemble the rotator and store it in an array
 		rot[i] = gr_complex(tmp_c,tmp_s);
@@ -112,7 +126,7 @@ int  ccsds_pll_cc::general_work (int                     noutput_items,
 
 	// how many samples can we process?
 	unsigned int num = (noutput_items > ninput_items[0]) ? ninput_items[0] : noutput_items;
-
+num=150;
 	// auxilliary variables
 	gr_complex *tmp_c;
 	float *tmp_f;
@@ -130,18 +144,55 @@ int  ccsds_pll_cc::general_work (int                     noutput_items,
 	// do the synchronization
 	//
 	
+	printf("Input:\n");
+	for(unsigned int i=0;i<num;i++)
+		printf("samp[%3d] = |%2.5f| * e^j%2.10f\n",i,std::abs(in[i]),std::arg(in[i]));
+	printf("\n\n");
+
+	if(d_M == 4) { // QPSK constellation rotated by 45 degree, fix it
+		rotate_constellation(tmp_c, in, -M_PI/4.0f, num);
+	} else { // no fix necessarry, just move the samples to the next buffer
+		memcpy(tmp_c,in,num*sizeof(gr_complex));
+	}
+
+	printf("After rotation:\n");
+	for(unsigned int i=0;i<num;i++)
+		printf("samp[%3d] = |%2.5f| * e^j%2.10f\n",i,std::abs(tmp_c[i]),std::arg(tmp_c[i]));
+	printf("\n\n");
+
 	// remove the modulation
-	remove_modulation(tmp_c,in,num);
+	remove_modulation(tmp_c,tmp_c,num);
+
+	printf("After mod rmoval:\n");
+	for(unsigned int i=0;i<num;i++)
+		printf("samp[%3d] = |%2.5f| * e^j%2.10f\n",i,std::abs(tmp_c[i]),std::arg(tmp_c[i]));
+	printf("\n\n");
 
 	// take the calculated phasors and calculate the phase
 	calc_phases(tmp_f, tmp_c, num);
 	
-	
+	printf("Raw Phase estimates:\n");
+	for(unsigned int i=0;i<num;i++)
+		printf("samp[%3d] = |xxx| * e^j%2.10f\n",i,tmp_f[i]);
+	printf("\n\n");
+
 	// Put these calculations into the filter
 	d_filter->filter(tmp_f,num);
 	
+	printf("Filtered Phase estimates:\n");
+	for(unsigned int i=0;i<num;i++)
+		printf("samp[%3d] = |xxx| * e^j%2.10f\n",i,tmp_f[i]);
+	printf("\n\n");
+
 	// rotate the samples according to the filtered phase
 	calc_rotation(out, in, tmp_f, num);
+
+	printf("Output:\n");
+	for(unsigned int i=0;i<num;i++)
+		printf("in_rot[%3d] = |%2.5f| * e^j%2.10f\t\tout[%3d] = |%2.5f| * e^j%2.10f\n",i,std::abs(in[i]),std::arg(in[i])-M_PI/4.0f,i,std::abs(out[i]),std::arg(out[i]));
+	printf("\n\n");
+	
+//exit(EXIT_FAILURE);
 
 	// free resources
 	fftw_free(tmp_f);

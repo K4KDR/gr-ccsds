@@ -1,9 +1,6 @@
 #ifndef INCLUDED_LPF2_H
 #define INCLUDED_LPF2_H
 
-#define LPF2_STATE_TYPE double
-#define LPF2_STATE_CAST (double)
-
 #include <stdio.h>
 
 class lpf2;
@@ -16,12 +13,13 @@ class lpf2
 private:
 	friend lpf2 * ccsds_make_lpf2(const double loop_bw, const double damping_factor_squared, const double s_slope);
 
-	const LPF2_STATE_TYPE RHO, GAMMA, RHOB;
-	LPF2_STATE_TYPE d_phi, d_xi, d_ephi;
+	const double  RHO, GAMMA, RHOB;
+	double  d_phi, d_xi, d_ephi;
 	FILE *debugFile;
+	unsigned int debug_count;
 
-	lpf2(LPF2_STATE_TYPE gamma, LPF2_STATE_TYPE rho);   // private constructor
-	LPF2_STATE_TYPE filter_step(LPF2_STATE_TYPE);
+	lpf2(double  gamma, double  rho);   // private constructor
+	float filter_step(float in);
 	
 
 public:

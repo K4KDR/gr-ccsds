@@ -41,18 +41,20 @@ lpf2 * ccsds_make_lpf2(const double loop_bw, const double damping_factor_squared
 
 	double gamma = (4.0*damping_factor_squared*rho) / (s_slope * (1.0+rho)*(1.0+rho));
 
+	/*
 	printf("Create 2nd order low pass filter with loop bandwidth %f, damping factor of %f and a S-curve slope of %f at the origin\n",loop_bw,std::sqrt(damping_factor_squared),s_slope);
 	printf("	with a=%f, b=%f, c=%f\n",a,b,c);
 	printf("	this will result in the following loop gains: gamma=%f, rho=%f\n",gamma, rho);
+	//*/
 
-	return new lpf2(LPF2_STATE_CAST gamma, LPF2_STATE_CAST rho);
+	return new lpf2(gamma, rho);
 }
 
 lpf2 * ccsds_make_lpf2(double loop_bw) {
 	return ccsds_make_lpf2(loop_bw, 0.5, 1.0);
 }
 
-lpf2::lpf2(LPF2_STATE_TYPE gamma, LPF2_STATE_TYPE rho) : RHO(rho), RHOB(1.0 + rho), GAMMA(gamma) {
+lpf2::lpf2(double  gamma, double  rho) : RHO(rho), RHOB(1.0 + rho), GAMMA(gamma) {
 	
 	d_phi =0.0;
 	d_xi  =0.0;
@@ -60,7 +62,8 @@ lpf2::lpf2(LPF2_STATE_TYPE gamma, LPF2_STATE_TYPE rho) : RHO(rho), RHOB(1.0 + rh
 	
 	#ifdef LPF2_DEBUG
 		debugFile = fopen("debug_lpf2.csv","w");
-		fprintf(debugFile,"#in,PHI,XI,EPHI\n");
+		debug_count = 0;
+		fprintf(debugFile,"#n,in,PHI,XI,EPHI\n");
 	#endif
 }
 
@@ -70,11 +73,12 @@ lpf2::~lpf2() {
 	#endif
 }
 
-LPF2_STATE_TYPE lpf2::filter_step(LPF2_STATE_TYPE in) {
+float lpf2::filter_step(float in) {
 	//*
-	d_xi  += GAMMA * (RHOB*(in-d_phi) - d_ephi);
+	double  new_ephi = (double)in-d_phi;
+	d_xi  += GAMMA * (RHOB*new_ephi - d_ephi);
 	d_phi += d_xi;
-	d_ephi = in - d_phi;
+	d_ephi = new_ephi;
 	//*/
 
 	/*
@@ -84,7 +88,8 @@ LPF2_STATE_TYPE lpf2::filter_step(LPF2_STATE_TYPE in) {
 	//*/
 
 	#ifdef LPF2_DEBUG
-		fprintf(debugFile,"%.10f,%.10f,%.10f,%.10f\n",in,d_phi,d_xi,d_ephi);
+		debug_count++;
+		fprintf(debugFile,"%u,%2.10f,%2.10f,%2.10f,%2.10f\n",debug_count,in,d_phi,d_xi,new_ephi);
 	#endif
 	
 	/*	
@@ -94,13 +99,13 @@ LPF2_STATE_TYPE lpf2::filter_step(LPF2_STATE_TYPE in) {
 	//*/
 
 	
-	return d_phi;
+	return (float)d_phi;
 }
 
 
 void lpf2::filter(float *values, const unsigned int n) {
 	for(unsigned int i=0;i<n;i++) {
-		values[i] = filter_step(LPF2_STATE_CAST values[i]);
+		values[i] = filter_step(values[i]);
 	}
 }
 
