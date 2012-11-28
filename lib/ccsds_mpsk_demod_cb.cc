@@ -103,8 +103,8 @@ char ccsds_mpsk_demod_cb::detect_mpsk_symbol(gr_complex symbol) {
 	float dist;
 	char min_byte = 0;
 
-	for(char byte=0;byte<d_M;byte++) {
-		dist = std::abs(d_constellation[byte]-symbol);
+	for(char byte=0;(unsigned int)byte<d_M;byte++) {
+		dist = std::abs(d_constellation[(unsigned int)byte]-symbol);
 		min_dist = (dist >= min_dist) ? min_dist : dist;
 		min_byte = (dist >= min_dist) ? min_byte : byte;
 	}
@@ -122,7 +122,7 @@ int  ccsds_mpsk_demod_cb::general_work (int                     noutput_items,
 
 	// counter
 	unsigned int i;
-	for(i=0;i<noutput_items && i<ninput_items[0];i++) {
+	for(i=0;i<(unsigned int)noutput_items && i<(unsigned int)ninput_items[0];i++) {
 		out[i] = (this->*detect_symbol)(in[i]);
 	}
 

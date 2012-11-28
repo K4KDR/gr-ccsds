@@ -79,7 +79,7 @@ int  ccsds_mpsk_mod_bc::general_work (int                     noutput_items,
 
 	// counter
 	unsigned int i;
-	for(i=0;i<noutput_items && i<ninput_items[0];i++) {
+	for(i=0;i< (unsigned int) noutput_items && i< (unsigned int) ninput_items[0];i++) {
 		out[i] = d_constellation[((unsigned int)in[i]) % d_M];
 	}
 

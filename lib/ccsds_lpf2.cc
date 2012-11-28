@@ -54,7 +54,7 @@ lpf2 * ccsds_make_lpf2(double loop_bw) {
 	return ccsds_make_lpf2(loop_bw, 0.5, 1.0);
 }
 
-lpf2::lpf2(double  gamma, double  rho) : RHO(rho), RHOB(1.0 + rho), GAMMA(gamma) {
+lpf2::lpf2(double  gamma, double  rho) : RHO(rho), GAMMA(gamma), RHOB(1.0 + rho) {
 	
 	d_phi =0.0;
 	d_xi  =0.0;

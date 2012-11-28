@@ -12,6 +12,8 @@
 #include <cstdlib>
 #include <fftw3.h>
 
+// #define PLL_DEBUG
+
 ccsds_pll_cc_sptr ccsds_make_pll_cc(unsigned int m, float loop_bandwidth) {
     return ccsds_pll_cc_sptr (new ccsds_pll_cc(m, loop_bandwidth) );
 }
@@ -99,7 +101,7 @@ void ccsds_pll_cc::calc_rotation(gr_complex *out, const gr_complex *in, const fl
 	}
 
 	fftw_free(rot);
-	/*/
+	// */
 
 	/* without volk
 	gr_complex rotator;
@@ -144,10 +146,12 @@ num=150;
 	// do the synchronization
 	//
 	
-	printf("Input:\n");
-	for(unsigned int i=0;i<num;i++)
-		printf("samp[%3d] = |%2.5f| * e^j%2.10f\n",i,std::abs(in[i]),std::arg(in[i]));
-	printf("\n\n");
+	#ifdef PLL_DEBUG
+		printf("Input:\n");
+		for(unsigned int i=0;i<num;i++)
+			printf("samp[%3d] = |%2.5f| * e^j%2.10f\n",i,std::abs(in[i]),std::arg(in[i]));
+		printf("\n\n");
+	#endif
 
 	if(d_M == 4) { // QPSK constellation rotated by 45 degree, fix it
 		rotate_constellation(tmp_c, in, -M_PI/4.0f, num);
@@ -155,44 +159,53 @@ num=150;
 		memcpy(tmp_c,in,num*sizeof(gr_complex));
 	}
 
-	printf("After rotation:\n");
-	for(unsigned int i=0;i<num;i++)
-		printf("samp[%3d] = |%2.5f| * e^j%2.10f\n",i,std::abs(tmp_c[i]),std::arg(tmp_c[i]));
-	printf("\n\n");
+	#ifdef PLL_DEBUG
+		printf("After rotation:\n");
+		for(unsigned int i=0;i<num;i++)
+			printf("samp[%3d] = |%2.5f| * e^j%2.10f\n",i,std::abs(tmp_c[i]),std::arg(tmp_c[i]));
+		printf("\n\n");
+	#endif
 
 	// remove the modulation
 	remove_modulation(tmp_c,tmp_c,num);
 
-	printf("After mod rmoval:\n");
-	for(unsigned int i=0;i<num;i++)
-		printf("samp[%3d] = |%2.5f| * e^j%2.10f\n",i,std::abs(tmp_c[i]),std::arg(tmp_c[i]));
-	printf("\n\n");
+	#ifdef PLL_DEBUG
+		printf("After mod rmoval:\n");
+		for(unsigned int i=0;i<num;i++)
+			printf("samp[%3d] = |%2.5f| * e^j%2.10f\n",i,std::abs(tmp_c[i]),std::arg(tmp_c[i]));
+		printf("\n\n");
+	#endif
 
 	// take the calculated phasors and calculate the phase
 	calc_phases(tmp_f, tmp_c, num);
 	
-	printf("Raw Phase estimates:\n");
-	for(unsigned int i=0;i<num;i++)
-		printf("samp[%3d] = |xxx| * e^j%2.10f\n",i,tmp_f[i]);
-	printf("\n\n");
+	#ifdef PLL_DEBUG
+		printf("Raw Phase estimates:\n");
+		for(unsigned int i=0;i<num;i++)
+			printf("samp[%3d] = |xxx| * e^j%2.10f\n",i,tmp_f[i]);
+		printf("\n\n");
+	#endif
 
 	// Put these calculations into the filter
 	d_filter->filter(tmp_f,num);
 	
-	printf("Filtered Phase estimates:\n");
-	for(unsigned int i=0;i<num;i++)
-		printf("samp[%3d] = |xxx| * e^j%2.10f\n",i,tmp_f[i]);
-	printf("\n\n");
+	#ifdef PLL_DEBUG
+		printf("Filtered Phase estimates:\n");
+		for(unsigned int i=0;i<num;i++)
+			printf("samp[%3d] = |xxx| * e^j%2.10f\n",i,tmp_f[i]);
+		printf("\n\n");
+	#endif
 
 	// rotate the samples according to the filtered phase
 	calc_rotation(out, in, tmp_f, num);
 
-	printf("Output:\n");
-	for(unsigned int i=0;i<num;i++)
-		printf("in_rot[%3d] = |%2.5f| * e^j%2.10f\t\tout[%3d] = |%2.5f| * e^j%2.10f\n",i,std::abs(in[i]),std::arg(in[i])-M_PI/4.0f,i,std::abs(out[i]),std::arg(out[i]));
-	printf("\n\n");
-	
-//exit(EXIT_FAILURE);
+	#ifdef PLL_DEBUG
+		printf("Output:\n");
+		for(unsigned int i=0;i<num;i++)
+			printf("in_rot[%3d] = |%2.5f| * e^j%2.10f\t\tout[%3d] = |%2.5f| * e^j%2.10f\n",i,std::abs(in[i]),std::arg(in[i])-M_PI/4.0f,i,std::abs(out[i]),std::arg(out[i]));
+		printf("\n\n");
+	#endif
+
 
 	// free resources
 	fftw_free(tmp_f);

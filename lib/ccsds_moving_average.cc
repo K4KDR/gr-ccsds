@@ -120,7 +120,6 @@ void moving_average::apply_filter(float *values, unsigned int n) {
 	// go through all samples
 	for(unsigned int i=0;i<n;i++) {
 		sum += values[i];
-		float tmp2 = values[i];
 		values[i] = (float) ((sum + tmp) / ( *act_count + i + 1));
 	}
 	
@@ -143,7 +142,7 @@ void moving_average::filter(float *values, const unsigned int n) {
 		int samps_to_populate = D_NUM_RESET - D_NUM_COLLECT - *act_count;
 
 		if(samps_to_reset > still_to_process) {
-			if(samps_to_populate > still_to_process) { // all samples only need to be filtered
+			if(samps_to_populate > (int) still_to_process) { // all samples only need to be filtered
 				// active filter
 				apply_filter(values, still_to_process);
 

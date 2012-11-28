@@ -33,6 +33,9 @@ endif(NOT CMAKE_BUILD_TYPE)
 set(CMAKE_BUILD_TYPE ${CMAKE_BUILD_TYPE} CACHE STRING "")
 set(CMAKE_C_FLAGS "-flax-vector-conversions -msse2")
 
+#set(CMAKE_CXX_FLAGS "-Wall -Wextra")
+#set(CMAKE_C_FLAGS "-Wall -Wextra")
+
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/Modules)
 
 ########################################################################

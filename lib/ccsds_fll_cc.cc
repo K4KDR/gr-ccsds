@@ -184,8 +184,7 @@ void ccsds_fll_cc::calc_rotation(gr_complex *out, const gr_complex *in, const fl
 	}
 
 	fftw_free(rot);
-	/*/
-
+	
 	/* without volk
 	gr_complex rotator;
 	for(unsigned int i=0;i<num;i++) {
