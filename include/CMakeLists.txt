@@ -29,6 +29,7 @@ install(FILES
     ccsds_rs_decode_bb.h 
     ccsds_fll_cc.h
     ccsds_pll_cc.h
+    ccsds_dll_cc.h
     ccsds_mpsk_mod_bc.h
     ccsds_mpsk_demod_cb.h
     ccsds_moving_average.h
