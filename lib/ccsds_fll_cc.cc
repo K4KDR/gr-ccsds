@@ -5,7 +5,6 @@
 #include <ccsds_fll_cc.h>
 #include <gr_io_signature.h>
 #include <volk/volk.h>
-#include <gr_rotator.h>
 #include <stdio.h>
 #include <math.h>
 #include <ccsds_lpf.h>
@@ -13,25 +12,26 @@
 #include <cstdlib>
 #include <fftw3.h>
 
+#define FLL_DEBUG
+
 ccsds_fll_cc_sptr
-ccsds_make_fll_cc (unsigned int obsv_length)
+ccsds_make_fll_cc (unsigned int obsv_length, float loop_bw, unsigned int power)
 {
-    return ccsds_fll_cc_sptr (new ccsds_fll_cc (obsv_length));
+    return ccsds_fll_cc_sptr (new ccsds_fll_cc (obsv_length, loop_bw, power));
 }
 
-ccsds_fll_cc::ccsds_fll_cc (unsigned int obsv_length)
+ccsds_fll_cc::ccsds_fll_cc (unsigned int obsv_length, float loop_bw, unsigned int power)
   : gr_block ("ccsds_fll_cc",
 	gr_make_io_signature (1, 1, sizeof (gr_complex)),
 	//gr_make_io_signature3 (1, 3, sizeof (gr_complex), sizeof (float), sizeof (float)))
-	gr_make_io_signature (1, 1, sizeof (gr_complex))), D_L(obsv_length)
+	gr_make_io_signature (1, 1, sizeof (gr_complex))), D_L(obsv_length), d_POWER(power)
 {
 	// initialize on real axis
 	d_last_sample = gr_complex(1.0,0.0);
-	d_last_sample_valid = false;
 
 	d_phase = 0.0f;
 
-	d_filter = ccsds_make_lpf(0.005);
+	d_filter = ccsds_make_lpf(loop_bw);
 
 	if(D_L < 1) {
 		fprintf(stderr,"ERROR: integration length %d is smaller one\n",D_L);
@@ -45,20 +45,74 @@ ccsds_fll_cc::ccsds_fll_cc (unsigned int obsv_length)
 
 	const int alignment_multiple = volk_get_alignment() / sizeof(gr_complex);
 	set_alignment(std::max(1, alignment_multiple));
+
+	#ifdef FLL_DEBUG
+		dbg_input_toggle = 0;
+
+		dbg_count = 0;
+		dbg_count_pow = 0;
+		dbg_count_dif = 0;
+		dbg_count_sum = 0;
+
+		dbg_file = fopen("debug_fll.dat","w");
+		dbg_file_pow = fopen("debug_fll_pow.dat","w");
+		dbg_file_dif = fopen("debug_fll_dif.dat","w");
+		dbg_file_sum = fopen("debug_fll_sum.dat","w");
+		if(dbg_file == NULL || dbg_file_pow == NULL || dbg_file_dif == NULL || dbg_file_sum == NULL) {
+			fprintf(stderr,"ERROR FLL: can not open debug file\n");
+			exit(EXIT_FAILURE);
+			return;
+		}
+		fprintf(dbg_file, "#k,nu_raw,nu,block_toggle\n");
+		fprintf(dbg_file_pow, "#k,arg(in^M),abs(in^M)\n");
+		fprintf(dbg_file_dif, "#k,arg(x[k]*conj(x[k-1]),abs(in)\n");
+		fprintf(dbg_file_sum, "#k,arg(sum)\n");
+	#endif
 }
 
 ccsds_fll_cc::~ccsds_fll_cc ()
 {
 	delete d_filter;
+
+	#ifdef FLL_DEBUG
+		fflush(dbg_file);
+		fflush(dbg_file_pow);
+		fflush(dbg_file_dif);
+		fflush(dbg_file_sum);
+
+		fclose(dbg_file);
+		fclose(dbg_file_pow);
+		fclose(dbg_file_dif);
+		fclose(dbg_file_sum);
+	#endif
 }
 
 const double ccsds_fll_cc::D_TWOPI =2.0f*M_PI;
 
-void ccsds_fll_cc::calc_diffs(gr_complex *tmp_c, const gr_complex *in, const unsigned int num) {
-	if(num == 0)
-		return;
 
-	//* use volk
+void ccsds_fll_cc::calc_power(gr_complex *out, const gr_complex *in, const unsigned int num) {
+	// FIXME volk power block seems to calculate wrong results 
+	// (e.g. 1 squared is -1)	
+	if(true || is_unaligned()) {
+		for(unsigned int i=0;i<num;i++) {
+			out[i] = std::pow(in[i],d_POWER);
+		}
+	} else {
+		volk_32fc_s32f_power_32fc_a(out,in,(float)d_POWER,num);
+	}
+	return;
+}
+
+void ccsds_fll_cc::calc_diffs(gr_complex *tmp_c, const gr_complex *in, const unsigned int num) {
+	if(num < 1) {
+		fprintf(stderr,"ERROR: no samples to calculate differences\n");
+		exit(EXIT_FAILURE);
+		return;
+	}
+
+	// buffer last sample
+	gr_complex tmp = in[num-1];
+
 	gr_complex *in_shift = (gr_complex*) fftw_malloc(num * sizeof(gr_complex));
 	if(in_shift == 0) {
 		fprintf(stderr,"ERROR: allocation of memory failed\n");
@@ -71,6 +125,7 @@ void ccsds_fll_cc::calc_diffs(gr_complex *tmp_c, const gr_complex *in, const uns
 		memcpy(&in_shift[1], &in[0], (num-1)*sizeof(gr_complex) );
 	}
 
+	/* use volk
 	if(is_unaligned()) {
 		volk_32fc_x2_multiply_conjugate_32fc_u(tmp_c, in, in_shift, num);
 	} else {
@@ -80,13 +135,17 @@ void ccsds_fll_cc::calc_diffs(gr_complex *tmp_c, const gr_complex *in, const uns
 	fftw_free(in_shift);
 	//*/
 
-	/* without volk
+	//* without volk
 	// calculate first difference manually
-	tmp_c[0] = in[0] * conj(d_last_sample);
-	for(unsigned int i=1;i<num;i++) {
-		tmp_c[i] = conj(in[i-1]) * in[i];
+	//tmp_c[0] = in[0] * conj(d_last_sample);
+	
+	for(unsigned int i=0;i<num;i++) {
+		tmp_c[i] = in[i] * std::conj(in_shift[i]);
 	}
 	//*/
+
+	// buffer last sample for next diff
+	d_last_sample = tmp;
 
 	return;
 }
@@ -112,6 +171,11 @@ void ccsds_fll_cc::calc_summs(gr_complex *phasors, unsigned int num) {
 		// store average
 		phasors[i] = sum;		
 	}
+}
+
+void ccsds_fll_cc::adjust_phases(float *phases, unsigned int num) {
+	// phases is guaranteed to be aligned
+	volk_32f_s32f_multiply_32f_a(phases,phases,1.0f/(float)d_POWER, num);
 }
 
 void ccsds_fll_cc::fill_freqs(float *tmp_f, float *tmp_fs, const unsigned int num_out, const unsigned int num_in) {
@@ -231,9 +295,38 @@ int  ccsds_fll_cc::general_work (int                     noutput_items,
 		return 0;
 	}
 
+	if(d_POWER == 4) {
+		gr_complex rot = std::polar(1.0f, (float) (M_PI/4.0));
+
+		if(is_unaligned()) {
+			volk_32fc_s32fc_multiply_32fc_u(tmp_c, in, rot, num);
+		} else {
+			volk_32fc_s32fc_multiply_32fc_a(tmp_c, in, rot, num);
+		}
+	}
+
+	if(d_POWER != 1) {
+		// power samples to remove/reduce M-PSK modulation impact
+		calc_power(tmp_c, in, num);
+	} else {
+		// no power, just copy the input
+		memcpy(tmp_c,in,num*sizeof(gr_complex));
+	}
 	
+	#ifdef FLL_DEBUG
+		for(unsigned int i=0;i<num;i++) {		
+			fprintf(dbg_file_pow, "%d,%f,%f\n",dbg_count_pow++,std::arg(tmp_c[i])/M_PI,std::abs(tmp_c[i]));
+		}
+	#endif
+
 	// calculate difference phasors
-	calc_diffs(tmp_c, in, num);
+	calc_diffs(tmp_c, tmp_c, num);
+
+	#ifdef FLL_DEBUG
+		for(unsigned int i=0;i<num;i++) {		
+			fprintf(dbg_file_dif, "%d,%f,%f\n",dbg_count_dif++,std::arg(tmp_c[i])/M_PI,std::abs(tmp_c[i]));
+		}
+	#endif
 
 	// summ up difference phasors to average out modulations
 	// this will result in a subsampling by a factor of D_L	
@@ -242,6 +335,18 @@ int  ccsds_fll_cc::general_work (int                     noutput_items,
 	// take the subsampled phasors and calculate the phase difference.
 	calc_phases(tmp_fs, tmp_c, num/D_L);
 	
+	if(d_POWER != 1) {
+		// we powered the samples, so all phase values are multiplied by
+		// d_POWER
+		adjust_phases(tmp_fs,num/D_L);
+	}
+
+	#ifdef FLL_DEBUG
+		for(unsigned int i=0;i<num/D_L;i++) {		
+			fprintf(dbg_file_sum, "%d,%f\n",D_L*(dbg_count_sum++),std::arg(tmp_c[i])/M_PI);
+		}
+	#endif
+
 	// filter the subsampled values
 	// this will take less computation load, but may result into frequency
 	// jumps in the output, so filtering is performed after upsampling
@@ -251,14 +356,25 @@ int  ccsds_fll_cc::general_work (int                     noutput_items,
 	// into the output array
 	fill_freqs(tmp_f, tmp_fs, num, num/D_L);
 
+	#ifdef FLL_DEBUG
+		float *freq_raw;
+		freq_raw = new float[num];
+		memcpy(freq_raw,tmp_f,num*sizeof(float));
+	#endif
+
 	// now filter (and smooth) the output
 	d_filter->filter(tmp_f,num);
 		
+	#ifdef FLL_DEBUG
+		for(unsigned int i=0;i<num;i++) {		
+			fprintf(dbg_file, "%d,%f,%f,%d\n",dbg_count++,freq_raw[i],tmp_f[i],dbg_input_toggle);
+		}
+		// toggle to indicate next block
+		dbg_input_toggle = (unsigned int) !dbg_input_toggle;
+	#endif
+
 	// rotate the samples according to the filtered frequency
 	calc_rotation(out, in, tmp_f, num);
-
-	// buffer last sample
-	d_last_sample = in[num-1];
 
 	// free resources
 	fftw_free(tmp_c);

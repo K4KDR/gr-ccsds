@@ -15,11 +15,11 @@ class CCSDS_API ccsds_dll_cc : public gr_block
 private:
 	friend CCSDS_API ccsds_dll_cc_sptr ccsds_make_dll_cc(unsigned int osf, float gamma);
 
-	ccsds_dll_cc(unsigned int osf, float gammab);   // private constructor
+	ccsds_dll_cc(unsigned int osf, float gamma);   // private constructor
 	
 	const unsigned int d_OSF;
 	const float d_OSF_HALF;
-	const float d_GAMMAB;
+	const float d_GAMMA;
 
 	// used to name the sampled in d_last_interp, starting from zero so last
 	// dummy element equals to the ammount of elements in the enum
@@ -30,13 +30,16 @@ private:
 		INTERP_COUNT};
 
 	FILE *dbg_file_o;
+	FILE *dbg_file_s;
 	FILE *dbg_file_i;
+	FILE *dbg_file_t;
 	unsigned int dbg_count;
 
 	gr_complex d_last_interp[INTERP_COUNT];
 	bool d_init;
 
 	float d_tau_hat;
+	float d_gamma_eps;
 	float d_mu;
 	int d_l;
 

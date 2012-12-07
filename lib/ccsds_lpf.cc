@@ -4,8 +4,8 @@
 
 // #define LPF_DEBUG
 
-lpf * ccsds_make_lpf(float alpha) {
-	return new lpf(alpha);
+lpf * ccsds_make_lpf(float loop_bw) {
+	return new lpf(4.0f*loop_bw);
 }
 
 lpf::lpf(float alpha) : ALPHA(alpha), ALPHAB(1.0 - ALPHA) {

@@ -15,7 +15,7 @@
 		<name>Loop Stepsize</name>
 		<key>gamma</key>
 		<value>0.1</value>
-		<type>float</type>
+		<type>real</type>
 	</param>
 	<check>$osf >= 2</check>
 	<check>$gamma > 0.0</check>

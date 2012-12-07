@@ -102,10 +102,56 @@ float lpf2::filter_step(float in) {
 	return (float)d_phi;
 }
 
+float lpf2::wrap(float in, float max) {
+	while(in > max) {
+		in -= 2.0*max;
+	}
+	while(in < -max) {
+		in += 2.0*max;
+	}
+	return in;
+}
+
+float lpf2::filter_step_wrapped(float in, float wrap_max) {
+	//*
+	double  new_ephi = wrap(in-d_phi,wrap_max);
+	d_xi  += GAMMA * (RHOB*new_ephi - d_ephi);
+	float ret = d_phi;
+	d_phi = wrap(d_phi + d_xi, M_PI);
+	d_ephi = new_ephi;
+	//*/
+
+	/*
+	d_xi  = d_xi + GAMMA*RHOB*in - GAMMA*d_ephi;
+	d_phi = d_phi + d_xi;
+	d_ephi = in;
+	//*/
+
+	#ifdef LPF2_DEBUG
+		debug_count++;
+		fprintf(debugFile,"%u,%2.10f,%2.10f,%2.10f,%2.10f\n",debug_count,in,d_phi,d_xi,new_ephi);
+	#endif
+	
+	/*	
+	state[XI]  += GAMMA * (RHOB*(in-state[PHI]) - state[EPHI]);
+	state[PHI] += state[XI];
+	state[EPHI] = in-state[PHI];
+	//*/
+
+	
+	return (float)ret;
+}
+
 
 void lpf2::filter(float *values, const unsigned int n) {
 	for(unsigned int i=0;i<n;i++) {
 		values[i] = filter_step(values[i]);
+	}
+}
+
+void lpf2::filter_wrapped(float *values, float wrap_max, const unsigned int n) {
+	for(unsigned int i=0;i<n;i++) {
+		values[i] = filter_step_wrapped(values[i], wrap_max);
 	}
 }
 

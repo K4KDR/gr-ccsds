@@ -27,6 +27,11 @@ private:
 	static const double D_TWOPI;
 	const unsigned int d_M;
 	lpf2* d_filter;
+	float d_phi_hat;
+
+	FILE *dbg_file;
+	unsigned int dbg_count;
+
 
 public:
     ~ccsds_pll_cc ();  // public destructor

@@ -10,28 +10,40 @@ class ccsds_fll_cc;
 
 typedef boost::shared_ptr<ccsds_fll_cc> ccsds_fll_cc_sptr;
 
-CCSDS_API ccsds_fll_cc_sptr ccsds_make_fll_cc (unsigned int obsv_length);
+CCSDS_API ccsds_fll_cc_sptr ccsds_make_fll_cc (unsigned int obsv_length, float loop_bw, unsigned int power);
 
 class CCSDS_API ccsds_fll_cc : public gr_block
 {
 private:
-	friend CCSDS_API ccsds_fll_cc_sptr ccsds_make_fll_cc(unsigned int obsv_length);
+	friend CCSDS_API ccsds_fll_cc_sptr ccsds_make_fll_cc(unsigned int obsv_length, float loop_bw, unsigned int power);
 
-	ccsds_fll_cc(unsigned int obsv_length);   // private constructor
+	ccsds_fll_cc(unsigned int obsv_length, float loop_bw, unsigned int power);   // private constructor
 	
+	void calc_power(gr_complex *out, const gr_complex *in, const unsigned int num);
 	void calc_diffs(gr_complex *tmp_c, const gr_complex *in, const unsigned int num);
 	void calc_summs(gr_complex *phasors, unsigned int num);
+	void adjust_phases(float *phases, unsigned int num);
 	void fill_freqs(float *tmp_f, float *tmp_fs, const unsigned int num_out, const unsigned int num_in);
 	void calc_phases(float *tmp_f, const gr_complex *tmp_c, const unsigned int num);
 	void calc_rotation(gr_complex *out, const gr_complex *in, const float *tmp_f, const unsigned int num);
 
 	const unsigned int D_L;
+	const unsigned int d_POWER;
 
 	gr_complex d_last_sample;
 	double d_phase;
 	static const double D_TWOPI;
 
-	bool d_last_sample_valid;
+	FILE *dbg_file;
+	FILE *dbg_file_pow;
+	FILE *dbg_file_dif;
+	FILE *dbg_file_sum;
+	unsigned int dbg_count;
+	unsigned int dbg_count_pow;
+	unsigned int dbg_count_dif;
+	unsigned int dbg_count_sum;
+	unsigned int dbg_input_toggle;
+
 	lpf *d_filter;
 
 public:

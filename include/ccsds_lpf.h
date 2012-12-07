@@ -8,7 +8,7 @@
 
 class lpf;
 
-lpf * ccsds_make_lpf(float alpha);
+lpf * ccsds_make_lpf(float loop_bw);
 
 class lpf
 {

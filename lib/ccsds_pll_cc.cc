@@ -12,7 +12,7 @@
 #include <cstdlib>
 #include <fftw3.h>
 
-// #define PLL_DEBUG
+#define PLL_DEBUG
 
 ccsds_pll_cc_sptr ccsds_make_pll_cc(unsigned int m, float loop_bandwidth) {
     return ccsds_pll_cc_sptr (new ccsds_pll_cc(m, loop_bandwidth) );
@@ -28,11 +28,30 @@ ccsds_pll_cc::ccsds_pll_cc (unsigned int m, float loop_bandwidth)
 	set_alignment(std::max(1, alignment_multiple));
 
 	d_filter = ccsds_make_lpf2(loop_bandwidth, 0.5, 1.0);
+	d_phi_hat = 0.0f;
+
+	#ifdef PLL_DEBUG
+		dbg_count = 0;
+
+		dbg_file = fopen("debug_pll.dat","w");
+		if(dbg_file == NULL) {
+			fprintf(stderr,"ERROR PLL: can not open debug file\n");
+			exit(EXIT_FAILURE);
+			return;
+		}
+		fprintf(dbg_file, "#k,phi_raw,phi_hat,arg(in),arg(in^M)\n");
+	#endif
 }
 
 ccsds_pll_cc::~ccsds_pll_cc ()
 {
-    delete d_filter;
+	delete d_filter;
+
+	#ifdef DLL_DEBUG
+		fflush(dbg_file);
+
+		fclose(dbg_file);
+	#endif
 }
 
 const double ccsds_pll_cc::D_TWOPI=2.0f*M_PI;
@@ -47,21 +66,23 @@ void ccsds_pll_cc::rotate_constellation(gr_complex *out, const gr_complex *in, c
 	}
 }
 
-void ccsds_pll_cc::remove_modulation(gr_complex *tmp_c, const gr_complex *in, const unsigned int num) {
-	if(is_unaligned()) {
+void ccsds_pll_cc::remove_modulation(gr_complex *out, const gr_complex *in, const unsigned int num) {
+	// FIXME volk power block seems to calculate wrong results 
+	// (e.g. 1 squared is -1)	
+	if(true || is_unaligned()) {
 		for(unsigned int i=0;i<num;i++) {
-			tmp_c[i] = std::pow(in[i],d_M);
+			out[i] = std::pow(in[i],d_M);
 		}
 	} else {
-		volk_32fc_s32f_power_32fc_a(tmp_c,in,(float)d_M,num);
+		volk_32fc_s32f_power_32fc_a(out,in,(float)d_M,num);
 	}
 	return;
 }
 
 void ccsds_pll_cc::calc_phases(float *tmp_f, const gr_complex *tmp_c, const unsigned int num) {
 	// tmp_c and tmp_f are guaranteed to be aligned
-	//volk_32fc_s32f_atan2_32f_a(tmp_f, tmp_c, (float)d_M, num);
-	volk_32fc_s32f_atan2_32f_a(tmp_f, tmp_c, 1.0f, num);
+	volk_32fc_s32f_atan2_32f_a(tmp_f, tmp_c, (float)d_M, num);
+	//volk_32fc_s32f_atan2_32f_a(tmp_f, tmp_c, 1.0f, num);
 
 	/* without volk
 	for(unsigned int i=0;i<num;i++) {
@@ -123,12 +144,10 @@ int  ccsds_pll_cc::general_work (int                     noutput_items,
 {
 	const gr_complex *in = (const gr_complex *) input_items[0];
 	gr_complex *out = (gr_complex *) output_items[0];
-	//float *freq = (float *) output_items[1];
-	//float *freq_filtered = (float *) output_items[2];
-
+	
 	// how many samples can we process?
 	unsigned int num = (noutput_items > ninput_items[0]) ? ninput_items[0] : noutput_items;
-num=150;
+
 	// auxilliary variables
 	gr_complex *tmp_c;
 	float *tmp_f;
@@ -146,66 +165,45 @@ num=150;
 	// do the synchronization
 	//
 	
-	#ifdef PLL_DEBUG
-		printf("Input:\n");
-		for(unsigned int i=0;i<num;i++)
-			printf("samp[%3d] = |%2.5f| * e^j%2.10f\n",i,std::abs(in[i]),std::arg(in[i]));
-		printf("\n\n");
-	#endif
-
 	if(d_M == 4) { // QPSK constellation rotated by 45 degree, fix it
 		rotate_constellation(tmp_c, in, -M_PI/4.0f, num);
 	} else { // no fix necessarry, just move the samples to the next buffer
 		memcpy(tmp_c,in,num*sizeof(gr_complex));
 	}
 
-	#ifdef PLL_DEBUG
-		printf("After rotation:\n");
-		for(unsigned int i=0;i<num;i++)
-			printf("samp[%3d] = |%2.5f| * e^j%2.10f\n",i,std::abs(tmp_c[i]),std::arg(tmp_c[i]));
-		printf("\n\n");
-	#endif
-
 	// remove the modulation
 	remove_modulation(tmp_c,tmp_c,num);
 
 	#ifdef PLL_DEBUG
-		printf("After mod rmoval:\n");
-		for(unsigned int i=0;i<num;i++)
-			printf("samp[%3d] = |%2.5f| * e^j%2.10f\n",i,std::abs(tmp_c[i]),std::arg(tmp_c[i]));
-		printf("\n\n");
+		gr_complex *mod_removed;
+		mod_removed = new gr_complex[num];
+		memcpy(mod_removed, tmp_c, num*sizeof(gr_complex));
 	#endif
 
 	// take the calculated phasors and calculate the phase
 	calc_phases(tmp_f, tmp_c, num);
 	
 	#ifdef PLL_DEBUG
-		printf("Raw Phase estimates:\n");
-		for(unsigned int i=0;i<num;i++)
-			printf("samp[%3d] = |xxx| * e^j%2.10f\n",i,tmp_f[i]);
-		printf("\n\n");
+		float *phase_unfiltered;
+		phase_unfiltered = new float[num];
+		memcpy(phase_unfiltered, tmp_f, num*sizeof(float));
 	#endif
 
 	// Put these calculations into the filter
-	d_filter->filter(tmp_f,num);
+	d_filter->filter_wrapped(tmp_f,M_PI/(float)d_M,num);
+	
+	//float e_phi;
 	
 	#ifdef PLL_DEBUG
-		printf("Filtered Phase estimates:\n");
-		for(unsigned int i=0;i<num;i++)
-			printf("samp[%3d] = |xxx| * e^j%2.10f\n",i,tmp_f[i]);
-		printf("\n\n");
+		for(unsigned int i=0;i<num;i++) {
+			fprintf(dbg_file, "%d,%f,%f,%f,%f\n",dbg_count++,phase_unfiltered[i]/M_PI,tmp_f[i]/M_PI,std::arg(in[i])/M_PI,std::arg(mod_removed[i])/M_PI);
+		}
+		delete[] phase_unfiltered;
+		delete[] mod_removed;
 	#endif
 
 	// rotate the samples according to the filtered phase
 	calc_rotation(out, in, tmp_f, num);
-
-	#ifdef PLL_DEBUG
-		printf("Output:\n");
-		for(unsigned int i=0;i<num;i++)
-			printf("in_rot[%3d] = |%2.5f| * e^j%2.10f\t\tout[%3d] = |%2.5f| * e^j%2.10f\n",i,std::abs(in[i]),std::arg(in[i])-M_PI/4.0f,i,std::abs(out[i]),std::arg(out[i]));
-		printf("\n\n");
-	#endif
-
 
 	// free resources
 	fftw_free(tmp_f);
