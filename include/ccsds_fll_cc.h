@@ -5,19 +5,20 @@
 #include <gr_block.h>
 #include <ccsds_lpf.h>
 #include <math.h>
+#include <gr_msg_queue.h>
 
 class ccsds_fll_cc;
 
 typedef boost::shared_ptr<ccsds_fll_cc> ccsds_fll_cc_sptr;
 
-CCSDS_API ccsds_fll_cc_sptr ccsds_make_fll_cc (unsigned int obsv_length, float loop_bw, unsigned int power);
+CCSDS_API ccsds_fll_cc_sptr ccsds_make_fll_cc (unsigned int obsv_length, float loop_bw, unsigned int power, gr_msg_queue_sptr msgq);
 
 class CCSDS_API ccsds_fll_cc : public gr_block
 {
 private:
-	friend CCSDS_API ccsds_fll_cc_sptr ccsds_make_fll_cc(unsigned int obsv_length, float loop_bw, unsigned int power);
+	friend CCSDS_API ccsds_fll_cc_sptr ccsds_make_fll_cc(unsigned int obsv_length, float loop_bw, unsigned int power, gr_msg_queue_sptr msgq);
 
-	ccsds_fll_cc(unsigned int obsv_length, float loop_bw, unsigned int power);   // private constructor
+	ccsds_fll_cc(unsigned int obsv_length, float loop_bw, unsigned int power, gr_msg_queue_sptr msgq);   // private constructor
 	
 	void calc_power(gr_complex *out, const gr_complex *in, const unsigned int num);
 	void calc_diffs(gr_complex *tmp_c, const gr_complex *in, const unsigned int num);
@@ -30,7 +31,10 @@ private:
 	const unsigned int D_L;
 	const unsigned int d_POWER;
 
+	gr_msg_queue_sptr d_msgq;
+
 	gr_complex d_last_sample;
+	double d_lo_freq;
 	double d_phase;
 	static const double D_TWOPI;
 

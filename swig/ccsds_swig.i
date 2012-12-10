@@ -15,6 +15,7 @@
 #include "ccsds_msg_source.h"
 #include "ccsds_rs_decode_bb.h"
 #include "ccsds_crc16.h"
+#include "ccsds_local_oscillator_cc.h"
 #include "ccsds_fll_cc.h"
 #include "ccsds_pll_cc.h"
 #include "ccsds_dll_cc.h"
@@ -24,6 +25,9 @@
 
 %include "ccsds_crc16.i"
 
+
+GR_SWIG_BLOCK_MAGIC(ccsds,local_oscillator_cc);
+%include "ccsds_local_oscillator_cc.h"
 
 GR_SWIG_BLOCK_MAGIC(ccsds,fll_cc);
 %include "ccsds_fll_cc.h"

@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<block>
+	<name>Local oscillator (CCSDS)</name>
+	<key>ccsds_local_oscillator_cc</key>
+	<category>CCSDS</category>
+	<import>import ccsds</import>
+	<make>ccsds.local_oscillator_cc($L,$osf,$(id)_msgq_in)</make>
+	<param>
+		<name>Block length</name>
+		<key>L</key>
+		<value>4</value>
+		<type>int</type>
+	</param>
+	<param>
+		<name>Oversampling factor</name>
+		<key>osf</key>
+		<value>1</value>
+		<type>int</type>
+	</param>
+	<check>$L >= 1</check>
+	<check>$osf >= 1</check>
+	<sink>
+		<name>in</name>
+		<type>complex</type>
+	</sink>
+	<sink>
+		<name>freq</name>
+		<type>msg</type>
+	</sink>
+	<source>
+		<name>out</name>
+		<type>complex</type>
+	</source>
+	<doc>
+Message controlled local oscillator
+
+Rotates the incomming samples by a fixed phase increase per sample. The amount
+of phase increase can be changed by messages with the new phase increase. The
+processing is done blockwhise and per each block the most recent set phase
+increase is used.
+
+Block length: Number of symbols (not samples!) that should be processed as one
+block.
+
+Oversampling factor: Number of samples per symbol. This information is used to
+define the block length in samples and to scale the frequency estimates from per
+symbol difference to per sample difference.
+	</doc>
+</block>

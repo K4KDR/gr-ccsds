@@ -11,25 +11,30 @@
 #include <complex>
 #include <cstdlib>
 #include <fftw3.h>
+#include <string>
+#include <gruel/pmt.h>
+#include <gr_msg_queue.h>
+#include <gr_message.h>
 
 #define FLL_DEBUG
 
 ccsds_fll_cc_sptr
-ccsds_make_fll_cc (unsigned int obsv_length, float loop_bw, unsigned int power)
+ccsds_make_fll_cc (unsigned int obsv_length, float loop_bw, unsigned int power, gr_msg_queue_sptr msgq)
 {
-    return ccsds_fll_cc_sptr (new ccsds_fll_cc (obsv_length, loop_bw, power));
+    return ccsds_fll_cc_sptr (new ccsds_fll_cc (obsv_length, loop_bw, power, msgq));
 }
 
-ccsds_fll_cc::ccsds_fll_cc (unsigned int obsv_length, float loop_bw, unsigned int power)
+ccsds_fll_cc::ccsds_fll_cc (unsigned int obsv_length, float loop_bw, unsigned int power, gr_msg_queue_sptr msgq)
   : gr_block ("ccsds_fll_cc",
 	gr_make_io_signature (1, 1, sizeof (gr_complex)),
 	//gr_make_io_signature3 (1, 3, sizeof (gr_complex), sizeof (float), sizeof (float)))
-	gr_make_io_signature (1, 1, sizeof (gr_complex))), D_L(obsv_length), d_POWER(power)
+	gr_make_io_signature (1, 1, sizeof (gr_complex))), D_L(obsv_length), d_POWER(power), d_msgq(msgq)
 {
 	// initialize on real axis
 	d_last_sample = gr_complex(1.0,0.0);
 
 	d_phase = 0.0f;
+	d_lo_freq = 0.0f;
 
 	d_filter = ccsds_make_lpf(loop_bw);
 
@@ -332,6 +337,12 @@ int  ccsds_fll_cc::general_work (int                     noutput_items,
 	// this will result in a subsampling by a factor of D_L	
 	calc_summs(tmp_c, num);
 
+	#ifdef FLL_DEBUG
+		for(unsigned int i=0;i<num/D_L;i++) {		
+			fprintf(dbg_file_sum, "%d,%f\n",D_L*(dbg_count_sum++),std::arg(tmp_c[i])/M_PI);
+		}
+	#endif
+
 	// take the subsampled phasors and calculate the phase difference.
 	calc_phases(tmp_fs, tmp_c, num/D_L);
 	
@@ -341,11 +352,35 @@ int  ccsds_fll_cc::general_work (int                     noutput_items,
 		adjust_phases(tmp_fs,num/D_L);
 	}
 
-	#ifdef FLL_DEBUG
-		for(unsigned int i=0;i<num/D_L;i++) {		
-			fprintf(dbg_file_sum, "%d,%f\n",D_L*(dbg_count_sum++),std::arg(tmp_c[i])/M_PI);
+	// add frequency from local oscillator
+	for(unsigned int i=0;i<num/D_L;i++) {
+		std::vector<gr_tag_t> tags;
+  		const uint64_t nread = this->nitems_read(0); //number of items read on port 0
+  		const size_t ninput_items = noutput_items; //assumption for sync block, this can change
+
+  		//read all tags associated with port 0 for items in this work function
+  		this->get_tags_in_range(tags, 0, nread+i*D_L, nread+i*D_L+D_L-1);
+
+		if(tags.size() <= 0) {
+			printf("no lo frequency tag fount in block\n");
 		}
-	#endif
+		
+		bool hit = false;
+		std::string key("freq_offset");
+		for(unsigned int j=0;j<tags.size();j++) {
+			if(key.compare(pmt::pmt_symbol_to_string(tags[j].key)) == 0) {
+				printf("valid freq_offset tag\n");
+				d_lo_freq = pmt::pmt_to_double(tags[j].value);
+				hit = true;
+			}
+		}
+		if(!hit) {
+			printf("no valid frequency offset found\n");
+		}
+
+		
+		tmp_fs[i] += d_lo_freq;
+	}
 
 	// filter the subsampled values
 	// this will take less computation load, but may result into frequency

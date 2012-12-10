@@ -21,6 +21,7 @@ install(FILES
     ccsds_viterbi27_bb.xml
     ccsds_framer_sink_dual.xml
     ccsds_msg_source.xml
+    ccsds_local_oscillator_cc.xml
     ccsds_fll_cc.xml
     ccsds_pll_cc.xml
     ccsds_dll_cc.xml

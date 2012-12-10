@@ -4,7 +4,7 @@
 	<key>ccsds_fll_cc</key>
 	<category>CCSDS</category>
 	<import>import ccsds</import>
-	<make>ccsds.fll_cc($L,$bw,$power)</make>
+	<make>ccsds.fll_cc($L,$bw,$power,$(id)_msgq_out)</make>
 	<param>
 		<name>Power</name>
 		<key>power</key>
@@ -33,6 +33,10 @@
 	<source>
 		<name>out</name>
 		<type>complex</type>
+	</source>
+	<source>
+		<name>freq</name>
+		<type>msg</type>
 	</source>
 	<doc>
 Frequency locked loop.
