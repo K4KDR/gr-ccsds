@@ -47,4 +47,6 @@ GR_ADD_TEST(qa_viterbi27_bb ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_
 GR_ADD_TEST(qa_framer_sink_dual ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_ccsds_framer_sink_dual.py)
 GR_ADD_TEST(qa_msg_source ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_ccsds_msg_source.py)
 GR_ADD_TEST(qa_rs_decode_bb ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_ccsds_rs_decode_bb.py)
-GR_ADD_TEST(qa_moving_average ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_ccsds_moving_average.py)
+GR_ADD_TEST(qa_mpsk_mod_bc ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_ccsds_mpsk_mod_bc.py)
+GR_ADD_TEST(qa_mpsk_demod_cb ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_ccsds_mpsk_demod_cb.py)
+GR_ADD_TEST(qa_mpsk_demod2_cb ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_ccsds_mpsk_demod2_cb.py)

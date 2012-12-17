@@ -2,6 +2,7 @@
 #include "config.h"
 #endif
 
+#include "ccsds_lo_feedback.h"
 #include <ccsds_fll_cc.h>
 #include <gr_io_signature.h>
 #include <volk/volk.h>
@@ -16,7 +17,8 @@
 #include <gr_msg_queue.h>
 #include <gr_message.h>
 
-#define FLL_DEBUG
+// #define FLL_DEBUG
+// #define FLL_NUM_SAMPS_AND_DONE 5000000
 
 ccsds_fll_cc_sptr
 ccsds_make_fll_cc (unsigned int obsv_length, float loop_bw, unsigned int power, gr_msg_queue_sptr msgq)
@@ -58,12 +60,16 @@ ccsds_fll_cc::ccsds_fll_cc (unsigned int obsv_length, float loop_bw, unsigned in
 		dbg_count_pow = 0;
 		dbg_count_dif = 0;
 		dbg_count_sum = 0;
+		dbg_count_tag = 0;
+
+		dbg_last_msg = 0.0f;
 
 		dbg_file = fopen("debug_fll.dat","w");
 		dbg_file_pow = fopen("debug_fll_pow.dat","w");
 		dbg_file_dif = fopen("debug_fll_dif.dat","w");
 		dbg_file_sum = fopen("debug_fll_sum.dat","w");
-		if(dbg_file == NULL || dbg_file_pow == NULL || dbg_file_dif == NULL || dbg_file_sum == NULL) {
+		dbg_file_tag = fopen("debug_fll_tag.dat","w");
+		if(dbg_file == NULL || dbg_file_pow == NULL || dbg_file_dif == NULL || dbg_file_sum == NULL || dbg_file_tag == NULL) {
 			fprintf(stderr,"ERROR FLL: can not open debug file\n");
 			exit(EXIT_FAILURE);
 			return;
@@ -72,6 +78,7 @@ ccsds_fll_cc::ccsds_fll_cc (unsigned int obsv_length, float loop_bw, unsigned in
 		fprintf(dbg_file_pow, "#k,arg(in^M),abs(in^M)\n");
 		fprintf(dbg_file_dif, "#k,arg(x[k]*conj(x[k-1]),abs(in)\n");
 		fprintf(dbg_file_sum, "#k,arg(sum)\n");
+		fprintf(dbg_file_tag, "#k,freq_tag,local_freq,msg_freq\n");
 	#endif
 }
 
@@ -84,15 +91,17 @@ ccsds_fll_cc::~ccsds_fll_cc ()
 		fflush(dbg_file_pow);
 		fflush(dbg_file_dif);
 		fflush(dbg_file_sum);
+		fflush(dbg_file_tag);
 
 		fclose(dbg_file);
 		fclose(dbg_file_pow);
 		fclose(dbg_file_dif);
 		fclose(dbg_file_sum);
+		fflush(dbg_file_tag);
 	#endif
 }
 
-const double ccsds_fll_cc::D_TWOPI =2.0f*M_PI;
+const float ccsds_fll_cc::D_TWOPI =2.0f*M_PI;
 
 
 void ccsds_fll_cc::calc_power(gr_complex *out, const gr_complex *in, const unsigned int num) {
@@ -130,28 +139,30 @@ void ccsds_fll_cc::calc_diffs(gr_complex *tmp_c, const gr_complex *in, const uns
 		memcpy(&in_shift[1], &in[0], (num-1)*sizeof(gr_complex) );
 	}
 
-	/* use volk
+
+	//* use volk
 	if(is_unaligned()) {
 		volk_32fc_x2_multiply_conjugate_32fc_u(tmp_c, in, in_shift, num);
 	} else {
 		volk_32fc_x2_multiply_conjugate_32fc_a(tmp_c, in, in_shift, num);
 	}
 	
-	fftw_free(in_shift);
-	//*/
+	/*/
+
 
 	//* without volk
-	// calculate first difference manually
-	//tmp_c[0] = in[0] * conj(d_last_sample);
-	
 	for(unsigned int i=0;i<num;i++) {
 		tmp_c[i] = in[i] * std::conj(in_shift[i]);
 	}
 	//*/
 
+
 	// buffer last sample for next diff
 	d_last_sample = tmp;
 
+	// free buffer
+	fftw_free(in_shift);
+	
 	return;
 }
 
@@ -179,11 +190,48 @@ void ccsds_fll_cc::calc_summs(gr_complex *phasors, unsigned int num) {
 }
 
 void ccsds_fll_cc::adjust_phases(float *phases, unsigned int num) {
+	/* using volk
 	// phases is guaranteed to be aligned
 	volk_32f_s32f_multiply_32f_a(phases,phases,1.0f/(float)d_POWER, num);
+	//*/
+
+	//* without volk
+	for(unsigned int i=0;i<num;i++) {
+		phases[i] = phases[i]/(float)d_POWER;
+	}
 }
 
-void ccsds_fll_cc::fill_freqs(float *tmp_f, float *tmp_fs, const unsigned int num_out, const unsigned int num_in) {
+void ccsds_fll_cc::get_lo_tags(float *lo_freqs, const unsigned int num) {
+	//FIXME tags from LO are now aimed at the PLL, this code might no longer work with the LO out of the box
+
+	const uint64_t nread = this->nitems_read(0); //number of items read on port 0
+	const pmt::pmt_t key = pmt::mp("freq_offset");
+	std::vector<gr_tag_t> tags;
+  	
+	for(unsigned int i=0;i<num/D_L;i++) {
+		//read all tags associated with port 0 for items in this work function
+  		this->get_tags_in_range(tags, 0, nread+i*D_L, nread+i*D_L+D_L-1, key);
+
+
+		if(tags.size() == 1) {
+			d_lo_freq = pmt::pmt_to_double(tags[0].value);
+		} else if(tags.size() == 0) {
+			//printf("%lu stream tags found for this block\n",tags.size());
+			// don't do anything and reuse the last tag
+		} else {
+			//printf("%lu stream tags found for this block\n",tags.size());
+			// multiple tags, take the last one
+			d_lo_freq = pmt::pmt_to_double(tags[tags.size()-1].value);
+		}
+
+
+		lo_freqs[i] = d_lo_freq;
+	}
+
+	return;
+}
+
+void ccsds_fll_cc::fill_freqs(float *tmp_f, float *tmp_fs, float *tmp_lo, const unsigned int num_out) {
 	/*
 	unsigned int k=0;
 	for(unsigned int i=0;i<num_in;i++) {
@@ -193,9 +241,24 @@ void ccsds_fll_cc::fill_freqs(float *tmp_f, float *tmp_fs, const unsigned int nu
 		}
 	}
 	*/
-	for(unsigned int k=0;k<num_out;k++) {
-		tmp_f[k] = tmp_fs[(k/D_L)%num_in];
+
+	// do first sample manually
+	tmp_f[0] = tmp_fs[0]+tmp_lo[0];
+
+	// low rate index
+	unsigned int indx = 0;
+
+	// iterate through high rate symbols
+	for(unsigned int k=1;k<num_out;k++) {
+		tmp_f[k] = tmp_fs[indx]+tmp_lo[indx];
+
+		// switch to next low rate symbol
+		if( k%D_L == 0 ) {
+			indx++;
+		} 
 	}
+
+	return;
 }
 
 void ccsds_fll_cc::calc_phases(float *tmp_f, const gr_complex *tmp_c, const unsigned int num) {
@@ -216,7 +279,52 @@ void ccsds_fll_cc::calc_phases(float *tmp_f, const gr_complex *tmp_c, const unsi
 	return;
 }
 
-void ccsds_fll_cc::calc_rotation(gr_complex *out, const gr_complex *in, const float *freq, const unsigned int num) {
+void ccsds_fll_cc::send_freq_estimate(double est) {
+	//FIXME tags from LO are now aimed at the PLL, this code might no longer work with the LO out of the box
+
+	// frequency message with the following values (arbitrary chosen)
+	// type = (long) MSG_FREQ_TYPE (defined in ccsds.h)
+	// arg1 = (float) requested phase_incr
+	// arg2 = (float) MSG_FREQ_ARG2 (defined in ccsds.h)
+	// length = 0 (we just pass the arguments)
+
+	// make sure there is space in the queue
+	if(d_msgq->full_p()) {
+		// just delete one, so in case of race conditions there are
+		// still some older messages arround (but any message in the
+		// queue is still newer than the information the LO has.
+		d_msgq->delete_head_nowait();
+	}
+
+	// now put the new message in the queue
+	d_msgq->handle(gr_make_message(MSG_FREQ_TYPE, est, MSG_FREQ_ARG2, 0));
+
+	return;
+}
+
+void ccsds_fll_cc::substract_lo_freq(double *tmp_f, float *tmp_lo, const unsigned int num){
+	// tmp_f contains filteres frequencies at high rate with num samples
+	// tmp_lo contains lo frequencies at low rate with num/D_L samples
+
+	// index for low rate vector
+	unsigned int indx = 0;
+
+	// iterate through high rate vextor
+	for(unsigned int i=0;i<num;i++) {
+		// substract lo freq from absolute freq. estimate to obtain the
+		// filtered local frequency offset
+		tmp_f[i] -= (double)tmp_lo[indx];
+
+		// after D_L high rate samples, switch to next low rate sample
+		if(i%D_L == 0) {
+			indx++;
+		}
+	}
+
+	return;
+}
+
+void ccsds_fll_cc::calc_rotation(gr_complex *out, const gr_complex *in, const double *freq, const unsigned int num) {
 	if(num == 0)
 		return;
 
@@ -231,12 +339,15 @@ void ccsds_fll_cc::calc_rotation(gr_complex *out, const gr_complex *in, const fl
 	// temp variable for sine and cosine part of rotator
 	float tmp_sin, tmp_cos;
 
-	// create the inidividual rotos
-	for(unsigned int i=0;i<num;i++) {
-		// confine phase between 0 and 2 PI, to ensure that we do not
-		// encounter float over or underruns when iterating to long
-		d_phase = std::fmod(d_phase-freq[i], D_TWOPI);
+	// confine phase between 0 and 2 PI, to ensure that we do not
+	// encounter float over or underruns when iterating to long
+	d_phase = std::fmod(d_phase, D_TWOPI);
 		
+
+	// create the inidividual rotors
+	for(unsigned int i=0;i<num;i++) {
+		d_phase = (float) ((double)d_phase - freq[i]);
+
 		// calculate sine and cosine values for this phase. joint cal-
 		// culation for the same angle is faster, than two individual
 		// calls to sin and cos.
@@ -257,8 +368,8 @@ void ccsds_fll_cc::calc_rotation(gr_complex *out, const gr_complex *in, const fl
 	/* without volk
 	gr_complex rotator;
 	for(unsigned int i=0;i<num;i++) {
-		// do the phase integration in double precision
-		d_phase = std::fmod(d_phase-(double)tmp_f[i], D_TWOPI);
+		// do the phase integration in float precision
+		d_phase = std::fmod(d_phase-(float)tmp_f[i], D_TWOPI);
 		// the rotation itself can be single precision
 		rotator = std::polar(1.0f,(float)d_phase);
 		out[i] = in[i] * rotator;
@@ -277,6 +388,14 @@ int  ccsds_fll_cc::general_work (int                     noutput_items,
 	//float *freq = (float *) output_items[1];
 	//float *freq_filtered = (float *) output_items[2];
 
+	#ifdef FLL_NUM_SAMPS_AND_DONE
+		if(this->nitems_read(0) > FLL_NUM_SAMPS_AND_DONE) {
+			printf("\nFLL: %d processed, exit.\n", FLL_NUM_SAMPS_AND_DONE);
+			exit(EXIT_FAILURE);
+			return 0;
+		}
+	#endif
+
 	// how many samples can we process?
 	// and ensure we output a multiple of D_L
 	const unsigned int num = (((noutput_items > ninput_items[0]) ? ninput_items[0] : noutput_items) / D_L) *D_L;
@@ -288,13 +407,16 @@ int  ccsds_fll_cc::general_work (int                     noutput_items,
 
 	// auxilliary variables
 	gr_complex *tmp_c;
-	float *tmp_f, *tmp_fs;
+	float *tmp_f, *tmp_fs, *tmp_lo;
+	double *tmp_d;
 
 	// allocate temporary memory
 	tmp_c  = (gr_complex *) fftw_malloc(num * sizeof(gr_complex));
 	tmp_f  = (float *)      fftw_malloc(num * sizeof(float));
+	tmp_d  = (double *)     fftw_malloc(num * sizeof(double));
 	tmp_fs = (float *)      fftw_malloc(num/D_L * sizeof(float));
-	if (tmp_c == 0 || tmp_f == 0 || tmp_fs == 0) {
+	tmp_lo = (float *)      fftw_malloc(num/D_L * sizeof(float));
+	if (tmp_c == 0 || tmp_f == 0  || tmp_d == 0 || tmp_fs == 0 || tmp_lo == 0) {
 		fprintf(stderr,"ERROR: allocation of memory failed\n");
 		exit(EXIT_FAILURE);
 		return 0;
@@ -308,9 +430,8 @@ int  ccsds_fll_cc::general_work (int                     noutput_items,
 		} else {
 			volk_32fc_s32fc_multiply_32fc_a(tmp_c, in, rot, num);
 		}
-	}
-
-	if(d_POWER != 1) {
+		calc_power(tmp_c, tmp_c, num);
+	} else if(d_POWER != 1) {
 		// power samples to remove/reduce M-PSK modulation impact
 		calc_power(tmp_c, in, num);
 	} else {
@@ -352,69 +473,52 @@ int  ccsds_fll_cc::general_work (int                     noutput_items,
 		adjust_phases(tmp_fs,num/D_L);
 	}
 
-	// add frequency from local oscillator
-	for(unsigned int i=0;i<num/D_L;i++) {
-		std::vector<gr_tag_t> tags;
-  		const uint64_t nread = this->nitems_read(0); //number of items read on port 0
-  		const size_t ninput_items = noutput_items; //assumption for sync block, this can change
-
-  		//read all tags associated with port 0 for items in this work function
-  		this->get_tags_in_range(tags, 0, nread+i*D_L, nread+i*D_L+D_L-1);
-
-		if(tags.size() <= 0) {
-			printf("no lo frequency tag fount in block\n");
-		}
-		
-		bool hit = false;
-		std::string key("freq_offset");
-		for(unsigned int j=0;j<tags.size();j++) {
-			if(key.compare(pmt::pmt_symbol_to_string(tags[j].key)) == 0) {
-				printf("valid freq_offset tag\n");
-				d_lo_freq = pmt::pmt_to_double(tags[j].value);
-				hit = true;
-			}
-		}
-		if(!hit) {
-			printf("no valid frequency offset found\n");
-		}
-
-		
-		tmp_fs[i] += d_lo_freq;
-	}
+	// get the frequency tags from the local oscillator
+	get_lo_tags(tmp_lo, num);
 
 	// filter the subsampled values
 	// this will take less computation load, but may result into frequency
 	// jumps in the output, so filtering is performed after upsampling
 	//d_filter->filter(tmp_fs,num/D_L);
 
-	// upsample frequency again, by just copying every input value D_L times
-	// into the output array
-	fill_freqs(tmp_f, tmp_fs, num, num/D_L);
-
-	#ifdef FLL_DEBUG
-		float *freq_raw;
-		freq_raw = new float[num];
-		memcpy(freq_raw,tmp_f,num*sizeof(float));
-	#endif
+	// upsample frequency again and add LO frequency
+	fill_freqs(tmp_f, tmp_fs, tmp_lo, num);
 
 	// now filter (and smooth) the output
-	d_filter->filter(tmp_f,num);
-		
+	d_filter->filter(tmp_d, tmp_f,num);
+
 	#ifdef FLL_DEBUG
 		for(unsigned int i=0;i<num;i++) {		
-			fprintf(dbg_file, "%d,%f,%f,%d\n",dbg_count++,freq_raw[i],tmp_f[i],dbg_input_toggle);
+			fprintf(dbg_file, "%d,%f,%lf,%d\n",dbg_count++,tmp_f[i],tmp_d[i],dbg_input_toggle);
 		}
 		// toggle to indicate next block
 		dbg_input_toggle = (unsigned int) !dbg_input_toggle;
 	#endif
 
-	// rotate the samples according to the filtered frequency
-	calc_rotation(out, in, tmp_f, num);
+	// send out next global freq estimate (local offset + lo freq)
+	send_freq_estimate(tmp_d[num-1]);
+	
+	
+	#ifdef FLL_DEBUG
+		for(unsigned int i=0;i<num/D_L;i++) {
+			fprintf(dbg_file_tag, "%d,%f,%f,%f\n",(dbg_count_tag++)*D_L,tmp_lo[i],tmp_fs[i],dbg_last_msg);
+		}
+		dbg_last_msg = tmp_f[num-1];
+	#endif
+
+	// calculate local freq offset (portion of the filtered global frequency
+	// offset that has not been compensated by the LO
+	substract_lo_freq(tmp_d, tmp_lo, num);
+
+	// rotate the samples according to the filtered local frequency offset
+	calc_rotation(out, in, tmp_d, num);
 
 	// free resources
 	fftw_free(tmp_c);
 	fftw_free(tmp_f);
+	fftw_free(tmp_d);
 	fftw_free(tmp_fs);
+	fftw_free(tmp_lo);
 	
 	// Tell runtime how many input samples we used
 	consume_each(num);

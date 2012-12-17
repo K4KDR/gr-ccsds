@@ -2,44 +2,57 @@
 #include "config.h"
 #endif
 
+#include "ccsds_lo_feedback.h"
+
 #include <ccsds_pll_cc.h>
 #include <gr_io_signature.h>
 #include <volk/volk.h>
 #include <stdio.h>
 #include <math.h>
-#include <ccsds_moving_average.h>
 #include <complex>
 #include <cstdlib>
 #include <fftw3.h>
+#include <gr_msg_queue.h>
+#include <gr_message.h>
 
-#define PLL_DEBUG
+// #define PLL_DEBUG
 
-ccsds_pll_cc_sptr ccsds_make_pll_cc(unsigned int m, float loop_bandwidth) {
-    return ccsds_pll_cc_sptr (new ccsds_pll_cc(m, loop_bandwidth) );
+ccsds_pll_cc_sptr ccsds_make_pll_cc(unsigned int m, float loop_bandwidth, gr_msg_queue_sptr msgq) {
+    return ccsds_pll_cc_sptr (new ccsds_pll_cc(m, loop_bandwidth, msgq) );
 }
 
-ccsds_pll_cc::ccsds_pll_cc (unsigned int m, float loop_bandwidth)
+ccsds_pll_cc::ccsds_pll_cc (unsigned int m, float loop_bandwidth, gr_msg_queue_sptr msgq)
   : gr_block ("ccsds_pll_cc",
 	gr_make_io_signature (1, 1, sizeof (gr_complex)),
 	//gr_make_io_signature3 (1, 3, sizeof (gr_complex), sizeof (float), sizeof (float)))
-	gr_make_io_signature (1, 1, sizeof (gr_complex))), d_M(m)
+	gr_make_io_signature (1, 1, sizeof (gr_complex))), d_M(m), d_msgq(msgq)
 {
 	const int alignment_multiple = volk_get_alignment() / sizeof(gr_complex);
 	set_alignment(std::max(1, alignment_multiple));
 
 	d_filter = ccsds_make_lpf2(loop_bandwidth, 0.5, 1.0);
+
+
+	d_lo_msg_tag = false;
+	d_lo_msg_offset = 0;
+
+	send_freq_estimate(0.0);
+
 	d_phi_hat = 0.0f;
 
 	#ifdef PLL_DEBUG
-		dbg_count = 0;
+		dbg_count    = 0;
+		dbg_count_lo = 0;
 
 		dbg_file = fopen("debug_pll.dat","w");
-		if(dbg_file == NULL) {
+		dbg_file_lo = fopen("debug_pll_lo.dat","w");
+		if(dbg_file == NULL || dbg_file_lo == NULL) {
 			fprintf(stderr,"ERROR PLL: can not open debug file\n");
 			exit(EXIT_FAILURE);
 			return;
 		}
-		fprintf(dbg_file, "#k,phi_raw,phi_hat,arg(in),arg(in^M)\n");
+		fprintf(dbg_file, "#k,phi_raw,phi_hat,arg(in),arg(in^M),abs(in),real(in),imag(in),freq_est\n");
+		fprintf(dbg_file_lo, "#k,freq_raw, freq_filtered\n");
 	#endif
 }
 
@@ -89,6 +102,59 @@ void ccsds_pll_cc::calc_phases(float *tmp_f, const gr_complex *tmp_c, const unsi
 			tmp_f[i] = std::arg(tmp_c[i]);
 	}
 	//*/
+	return;
+}
+
+void ccsds_pll_cc::check_lo_tags(const uint64_t from, const unsigned int num) {
+	if(d_lo_msg_tag) {
+		// we already have received a tag and are waiting
+		return;
+	}
+
+	std::vector<gr_tag_t> tags;
+
+	// default tag is out of range
+	uint64_t offset = from+num;
+
+	//read all tags associated with port 0 in given range
+	this->get_tags_in_range(tags, 0, from, from+num, LO_TAG_KEY);
+
+	// did we receive new tags?
+	if(tags.size() == 0) {
+		return;
+	} else {
+
+		// go through all tags and find the earliest one
+		for(unsigned int i=0;i<tags.size();i++) {
+			offset = (tags[i].offset < offset) ? tags[i].offset : offset;
+		}
+
+		d_lo_msg_tag = true;
+		d_lo_msg_offset = (unsigned int) offset-from + PLL_FREQ_UPDATE;
+
+		return;
+	}
+}
+
+void ccsds_pll_cc::send_freq_estimate(double est) {
+	// frequency message with the following values (arbitrary chosen)
+	// type = (long) MSG_FREQ_TYPE (defined in ccsds.h)
+	// arg1 = (float) requested phase_incr per symbol
+	// arg2 = (float) MSG_FREQ_ARG2 (defined in ccsds.h)
+	// length = 0 (we just pass the arguments)
+
+	// make sure there is space in the queue
+	if(d_msgq->full_p()) {
+		// just delete one, so in case of race conditions there are
+		// still some older messages arround (but any message in the
+		// queue is still newer than the information the LO has.
+		d_msgq->delete_head_nowait();
+		//FIXME add increase to current estimate
+	}
+
+	// now put the new message in the queue
+	d_msgq->handle(gr_make_message(MSG_FREQ_TYPE, est, MSG_FREQ_ARG2, 0));
+
 	return;
 }
 
@@ -147,15 +213,17 @@ int  ccsds_pll_cc::general_work (int                     noutput_items,
 	
 	// how many samples can we process?
 	unsigned int num = (noutput_items > ninput_items[0]) ? ninput_items[0] : noutput_items;
+	const uint64_t nread = this->nitems_read(0); //number of items read on port 0
 
 	// auxilliary variables
 	gr_complex *tmp_c;
-	float *tmp_f;
+	float *tmp_f, *tmp_freq;
 
 	// allocate temporary memory
 	tmp_c = (gr_complex *) fftw_malloc(num * sizeof(gr_complex));
 	tmp_f = (float *)      fftw_malloc(num * sizeof(float));
-	if (tmp_c == 0 || tmp_f == 0) {
+	tmp_freq = (float *)      fftw_malloc(num * sizeof(float));
+	if (tmp_c == 0 || tmp_f == 0 || tmp_freq == 0) {
 		fprintf(stderr,"ERROR: allocation of memory failed\n");
 		exit(EXIT_FAILURE);
 		return 0;
@@ -190,23 +258,63 @@ int  ccsds_pll_cc::general_work (int                     noutput_items,
 	#endif
 
 	// Put these calculations into the filter
-	d_filter->filter_wrapped(tmp_f,M_PI/(float)d_M,num);
+	d_filter->filter_wrapped(tmp_f, tmp_freq, M_PI/(float)d_M,num);
 	
-	//float e_phi;
+	// check if new lo frequency tag arrived
+	check_lo_tags(nread, num);
+
+	// did we receive a tag?
+	if(d_lo_msg_tag) {
+		// check if new frequency update is due
+		if(d_lo_msg_offset >= num) {
+			// not yet, just update counter
+			d_lo_msg_offset -= num;
+		} else {
+			send_freq_estimate(tmp_freq[d_lo_msg_offset]);
+
+			#ifdef PLL_DEBUG
+				fprintf(dbg_file_lo, "%lu,%f\n",nread+d_lo_msg_offset,tmp_freq[d_lo_msg_offset]);
+			#endif
+
+			// we "consumed" the tag, wait for the next one
+			d_lo_msg_tag = false;
+		}
+	}
+
+	/*
+	// send frequency update every PLL_FREQ_UPDATE symbols
+	double freq_est = 0.0;
+	for(unsigned int i=0;i<num;i++) {
+
+		// wait five update blocks to let the other loops settle
+		if(nread+i >= PLL_FREQ_SKIP_FIRST && (nread+i)%PLL_FREQ_UPDATE == 0) {
+			d_freq_filter->filter(&freq_est, &tmp_freq[i], 1);
+			send_freq_estimate(freq_est);
+
+			#ifdef PLL_DEBUG
+				fprintf(dbg_file_lo, "%lu,%f,%f\n",nread+i,tmp_freq[i],freq_est);
+			#endif
+		}
 	
+		
+	}
+	*/
+	
+	// rotate the samples according to the filtered phase
+	calc_rotation(out, in, tmp_f, num);
+
 	#ifdef PLL_DEBUG
 		for(unsigned int i=0;i<num;i++) {
-			fprintf(dbg_file, "%d,%f,%f,%f,%f\n",dbg_count++,phase_unfiltered[i]/M_PI,tmp_f[i]/M_PI,std::arg(in[i])/M_PI,std::arg(mod_removed[i])/M_PI);
+			fprintf(dbg_file, "%d,%f,%f,%f,%f,%f,%f,%f,%f\n",dbg_count++,phase_unfiltered[i]/M_PI,tmp_f[i]/M_PI,std::arg(in[i])/M_PI,std::arg(mod_removed[i])/M_PI,
+					std::abs(in[i]),std::real(in[i]),std::imag(in[i]),tmp_freq[i]);
 		}
 		delete[] phase_unfiltered;
 		delete[] mod_removed;
 	#endif
 
-	// rotate the samples according to the filtered phase
-	calc_rotation(out, in, tmp_f, num);
-
 	// free resources
 	fftw_free(tmp_f);
+	fftw_free(tmp_freq);
 	fftw_free(tmp_c);
 
 	// Tell runtime how many input samples we used

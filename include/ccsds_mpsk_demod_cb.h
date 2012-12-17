@@ -2,7 +2,7 @@
 #define INCLUDED_CCSDS_MPSK_DEMOD_CB_H
 
 #include <ccsds_api.h>
-#include <gr_block.h>
+#include <gr_sync_block.h>
 #include <gr_complex.h>
 
 class ccsds_mpsk_demod_cb;
@@ -11,7 +11,7 @@ typedef boost::shared_ptr<ccsds_mpsk_demod_cb> ccsds_mpsk_demod_cb_sptr;
 
 CCSDS_API ccsds_mpsk_demod_cb_sptr ccsds_make_mpsk_demod_cb (unsigned int M);
 
-class CCSDS_API ccsds_mpsk_demod_cb : public gr_block
+class CCSDS_API ccsds_mpsk_demod_cb : public gr_sync_block
 {
 private:
 	friend CCSDS_API ccsds_mpsk_demod_cb_sptr ccsds_make_mpsk_demod_cb (unsigned int M);
@@ -32,10 +32,9 @@ private:
 
 public:
     ~ccsds_mpsk_demod_cb ();  // public destructor
-    int general_work (  int                         noutput_items,
-                        gr_vector_int               &ninput_items,
-                        gr_vector_const_void_star   &input_items,
-                        gr_vector_void_star         &output_items);
+    int work (  int                         noutput_items,
+                gr_vector_const_void_star   &input_items,
+                gr_vector_void_star         &output_items);
 };
 
 #endif /* INCLUDED_CCSDS_MPSK_DEMOD_CB_H */

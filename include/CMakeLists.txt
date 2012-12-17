@@ -33,6 +33,7 @@ install(FILES
     ccsds_dll_cc.h
     ccsds_mpsk_mod_bc.h
     ccsds_mpsk_demod_cb.h
+    ccsds_mpsk_demod2_cb.h
     ccsds_moving_average.h
     ccsds_lpf.h
     ccsds_lpf2.h

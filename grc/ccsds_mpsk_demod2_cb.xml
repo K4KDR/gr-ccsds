@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <block>
-  <name>M-PSK Demodulator [MLE based] (CCSDS)</name>
-  <key>ccsds_mpsk_demod_cb</key>
+  <name>M-PSK Demodulator [angle based] (CCSDS)</name>
+  <key>ccsds_mpsk_demod2_cb</key>
   <category>CCSDS</category>
   <import>import ccsds</import>
   <make>ccsds.mpsk_demod_cb($M)</make>
@@ -23,7 +23,7 @@
 	<doc>
 M-PSK symbol demodulator.
 
-Take a complex M-PSK symbol and map it to the nearest byte in range 0 to M-1. For BPSK and QPSK the decision borders are evaluated, for higher orders a brute force search over all constellation points is performed.
+Take a complex M-PSK symbol map it to the nearest byte in range 0 to M-1. The decisions are derived based on the phase value of the incoming signal.
 
 M: Number of modulation symbols.
 	</doc>

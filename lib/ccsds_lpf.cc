@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <cmath>
 
-// #define LPF_DEBUG
+#define LPF_DEBUG
 
 lpf * ccsds_make_lpf(float loop_bw) {
 	return new lpf(4.0f*loop_bw);
@@ -25,7 +25,7 @@ lpf::~lpf() {
 	#endif
 }
 
-LPF_STATE_TYPE lpf::filter_step(LPF_STATE_TYPE in) {
+double lpf::filter_step(double in) {
 	if(d_state_init) {
 		d_state = ALPHAB * d_state + ALPHA * in;
 	} else {
@@ -33,13 +33,19 @@ LPF_STATE_TYPE lpf::filter_step(LPF_STATE_TYPE in) {
 		d_state_init = true;
 	}
 	#ifdef LPF_DEBUG
-		fprintf(debugFile,"%.10f,%.10f,%.10f,%.10f\n",in,d_state,0.0f,0.0f);
+		fprintf(debugFile,"%.10lf,%.10lf,%.10f,%.10f\n",in,d_state,0.0f,0.0f);
 	#endif
 	return d_state;
 }
 
-void lpf::filter(float *values, const unsigned int n) {
+void lpf::filter(double *out, float *in, const unsigned int n) {
 	for(unsigned int i=0;i<n;i++) {
-		values[i] = filter_step(LPF_STATE_CAST values[i]);
+		out[i] = filter_step(in[i]);
+	}
+}
+
+void lpf::filter(float *out, float *in, const unsigned int n) {
+	for(unsigned int i=0;i<n;i++) {
+		out[i] = (float) filter_step(in[i]);
 	}
 }

@@ -15,6 +15,7 @@ private:
 
 	const double  RHO, GAMMA, RHOB;
 	double  d_phi, d_xi, d_ephi;
+
 	FILE *debugFile;
 	unsigned int debug_count;
 
@@ -22,8 +23,8 @@ private:
 
 	float wrap(float in, float max);
 
-	float filter_step(float in);
-	float filter_step_wrapped(float in, float wrap_max);
+	double filter_step(float in);
+	double filter_step_wrapped(float in, float wrap_max);
 	
 
 public:
@@ -31,7 +32,11 @@ public:
 
 
 	void filter(float *values, const unsigned int n);
-	void filter_wrapped(float *values, float wrap_max, const unsigned int n);
+	void filter(float *out, const float *in, const unsigned int n);
+	void filter(double *out, const float *in, const unsigned int n);
+	void filter_wrapped(float *values, float *freq_est, float wrap_max, const unsigned int n);
+	double get_freq_estimate(void);
+
 };
 
 #endif /* INCLUDED_LPF2_H */

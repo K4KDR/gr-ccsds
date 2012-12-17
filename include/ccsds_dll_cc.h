@@ -4,6 +4,8 @@
 #include <ccsds_api.h>
 #include <gr_block.h>
 
+#define DLL_INTERP_NUMSAMPS 4
+
 class ccsds_dll_cc;
 
 typedef boost::shared_ptr<ccsds_dll_cc> ccsds_dll_cc_sptr;
@@ -34,6 +36,7 @@ private:
 	FILE *dbg_file_i;
 	FILE *dbg_file_t;
 	unsigned int dbg_count;
+	bool dbg_toggle;
 
 	gr_complex d_last_interp[INTERP_COUNT];
 	bool d_init;
@@ -43,13 +46,21 @@ private:
 	float d_mu;
 	int d_l;
 
-	float get_frac(float value);
-	int get_int(float value);
+	uint64_t d_tag_count;
+
+	float *d_real;
+	float *d_imag;
+
+	inline float get_frac(float value);
+	inline int get_int(float value);
 	void to_real(float *out, const gr_complex *in, const unsigned int num);
 	void to_imag(float *out, const gr_complex *in, const unsigned int num);
+	void to_real4(float *out, const gr_complex *in);
+	void to_imag4(float *out, const gr_complex *in);
 	float interpolate_value(const float *y, float mu);
 	gr_complex interpolate_cvalue(const gr_complex *y, float mu);
-	float gardner(gr_complex previous, gr_complex intermediate, gr_complex current);
+	inline float gardner(gr_complex previous, gr_complex intermediate, gr_complex current);
+	void propagate_tags(const unsigned int num_in, const unsigned int num_out);
 
 public:
 	~ccsds_dll_cc ();  // public destructor

@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <cmath>
 
-#define LPF2_DEBUG
+// #define LPF2_DEBUG
 
 /** 	help function for newton algorithm to determine the loop parameters.
 
@@ -59,7 +59,7 @@ lpf2::lpf2(double  gamma, double  rho) : RHO(rho), GAMMA(gamma), RHOB(1.0 + rho)
 	d_phi =0.0;
 	d_xi  =0.0;
 	d_ephi=0.0;
-	
+
 	#ifdef LPF2_DEBUG
 		debugFile = fopen("debug_lpf2.csv","w");
 		debug_count = 0;
@@ -73,7 +73,7 @@ lpf2::~lpf2() {
 	#endif
 }
 
-float lpf2::filter_step(float in) {
+double lpf2::filter_step(float in) {
 	//*
 	double  new_ephi = (double)in-d_phi;
 	d_xi  += GAMMA * (RHOB*new_ephi - d_ephi);
@@ -99,26 +99,54 @@ float lpf2::filter_step(float in) {
 	//*/
 
 	
-	return (float)d_phi;
+	return d_phi;
 }
 
-float lpf2::wrap(float in, float max) {
+inline float lpf2::wrap(float in, float max) {
+	// if nothing to wrap, return immediatley
+	if(in <= max && in > -max) {
+		return in;
+	}
+
 	while(in > max) {
 		in -= 2.0*max;
 	}
-	while(in < -max) {
+	while(in <= -max) {
 		in += 2.0*max;
 	}
+
 	return in;
 }
 
-float lpf2::filter_step_wrapped(float in, float wrap_max) {
-	//*
+double lpf2::filter_step_wrapped(float in, const float wrap_max) {
+	/*
 	double  new_ephi = wrap(in-d_phi,wrap_max);
 	d_xi  += GAMMA * (RHOB*new_ephi - d_ephi);
 	float ret = d_phi;
 	d_phi = wrap(d_phi + d_xi, M_PI);
 	d_ephi = new_ephi;
+	//*/
+
+	//*
+
+
+	double ephi = wrap(in-d_phi,wrap_max);
+
+	/*
+	if(std::abs(ephi) > wrap_max) {
+		printf("possible cycle slip\n");
+	}
+	*/
+
+	// compute new correction
+	d_xi  += GAMMA * wrap(RHOB*ephi - d_ephi, wrap_max);
+	double ret = d_phi;
+	d_phi = wrap(d_phi + d_xi, M_PI);
+
+	d_ephi = ephi;
+
+	
+	double freq = 0.0;
 	//*/
 
 	/*
@@ -129,7 +157,7 @@ float lpf2::filter_step_wrapped(float in, float wrap_max) {
 
 	#ifdef LPF2_DEBUG
 		debug_count++;
-		fprintf(debugFile,"%u,%2.10f,%2.10f,%2.10f,%2.10f\n",debug_count,in,d_phi,d_xi,new_ephi);
+		fprintf(debugFile,"%u,%2.10f,%2.10f,%2.10f,%2.10f,%2.10f\n",debug_count,in/M_PI,ret/M_PI,d_xi/M_PI,freq/M_PI,ephi/M_PI);
 	#endif
 	
 	/*	
@@ -139,19 +167,35 @@ float lpf2::filter_step_wrapped(float in, float wrap_max) {
 	//*/
 
 	
-	return (float)ret;
+	return ret;
 }
 
 
 void lpf2::filter(float *values, const unsigned int n) {
+	filter(values, values, n);
+}
+
+void lpf2::filter(float *out, const float *in, const unsigned int n) {
 	for(unsigned int i=0;i<n;i++) {
-		values[i] = filter_step(values[i]);
+		out[i] = (float) filter_step(in[i]);
 	}
 }
 
-void lpf2::filter_wrapped(float *values, float wrap_max, const unsigned int n) {
+void lpf2::filter(double *out, const float *in, const unsigned int n) {
+	for(unsigned int i=0;i<n;i++) {
+		out[i] = filter_step(in[i]);
+	}
+}
+
+
+void lpf2::filter_wrapped(float *values, float *freq_est, const float wrap_max, const unsigned int n) {
 	for(unsigned int i=0;i<n;i++) {
 		values[i] = filter_step_wrapped(values[i], wrap_max);
+		freq_est[i] = get_freq_estimate();
 	}
 }
 
+
+double lpf2::get_freq_estimate(void) {
+	return d_xi;
+}

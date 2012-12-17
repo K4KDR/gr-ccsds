@@ -25,7 +25,7 @@ static const int MIN_OUT = 1;   // minimum number of output streams
 static const int MAX_OUT = 1;   // maximum number of output streams
 
 ccsds_mpsk_mod_bc::ccsds_mpsk_mod_bc (unsigned int M)
-  : gr_block ("ccsds_mpsk_mod_bc",
+  : gr_sync_block ("ccsds_mpsk_mod_bc",
 	gr_make_io_signature (MIN_IN, MAX_IN, sizeof (char)),
 	gr_make_io_signature (MIN_OUT, MAX_OUT, sizeof (gr_complex)))
 {
@@ -69,22 +69,21 @@ ccsds_mpsk_mod_bc::~ccsds_mpsk_mod_bc ()
 	free(d_constellation);
 }
 
-int  ccsds_mpsk_mod_bc::general_work (int                     noutput_items,
-                                gr_vector_int               &ninput_items,
-                                gr_vector_const_void_star   &input_items,
-                                gr_vector_void_star         &output_items)
+int  ccsds_mpsk_mod_bc::work (int                     noutput_items,
+                         gr_vector_const_void_star   &input_items,
+                         gr_vector_void_star         &output_items)
 {
 	const char *in = (const char *) input_items[0];
 	gr_complex *out = (gr_complex *) output_items[0];
 
-	// counter
-	unsigned int i;
-	for(i=0;i< (unsigned int) noutput_items && i< (unsigned int) ninput_items[0];i++) {
-		out[i] = d_constellation[((unsigned int)in[i]) % d_M];
+	const unsigned int num = noutput_items;
+
+	for(unsigned int i=0;i<num;i++) {
+		out[i] = d_constellation[(in[i]) % d_M];
 	}
 
-	consume_each(i);
+	//consume_each(i);
 
 	// Tell runtime system how many output items we produced.
-	return i;
+	return num;
 }

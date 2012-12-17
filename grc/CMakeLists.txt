@@ -27,5 +27,6 @@ install(FILES
     ccsds_dll_cc.xml
     ccsds_mpsk_mod_bc.xml
     ccsds_mpsk_demod_cb.xml
+    ccsds_mpsk_demod2_cb.xml
     ccsds_rs_decode_bb.xml DESTINATION share/gnuradio/grc/blocks
 )

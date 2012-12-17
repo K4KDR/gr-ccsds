@@ -21,6 +21,7 @@
 #include "ccsds_dll_cc.h"
 #include "ccsds_mpsk_mod_bc.h"
 #include "ccsds_mpsk_demod_cb.h"
+#include "ccsds_mpsk_demod2_cb.h"
 %}
 
 %include "ccsds_crc16.i"
@@ -43,6 +44,9 @@ GR_SWIG_BLOCK_MAGIC(ccsds,mpsk_mod_bc);
 
 GR_SWIG_BLOCK_MAGIC(ccsds,mpsk_demod_cb);
 %include "ccsds_mpsk_demod_cb.h"
+
+GR_SWIG_BLOCK_MAGIC(ccsds,mpsk_demod2_cb);
+%include "ccsds_mpsk_demod2_cb.h"
 
 GR_SWIG_BLOCK_MAGIC(ccsds,randomiser_bb);
 %include "ccsds_randomiser_bb.h"

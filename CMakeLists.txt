@@ -35,6 +35,7 @@ set(CMAKE_C_FLAGS "-flax-vector-conversions -msse2")
 
 #set(CMAKE_CXX_FLAGS "-Wall -Wextra")
 #set(CMAKE_C_FLAGS "-Wall -Wextra")
+set(CMAKE_CXX_FLAGS "-Werror")
 
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/Modules)
 
