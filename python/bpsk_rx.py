@@ -35,8 +35,8 @@ from gnuradio import digital
 from gnuradio.digital import digital_swig
 
 # From gr-extras
-from gnuradio import extras
-from gnuradio.extras import extras_swig
+#from gnuradio import extras
+#from gnuradio.extras import extras_swig
 
 # From gr-ccsds
 import ccsds
@@ -49,6 +49,7 @@ import gnuradio.gr.gr_threading as _threading
 from datetime import datetime
 # from current dir
 from bpsk_demod import bpsk_demod
+from mpsk_demod import mpsk_demod
 
 import struct
 import sys
@@ -89,6 +90,7 @@ def getDefaultConfig():
 	default["reed_solomon"]   = False
 	default["derandomise"]    = False
 	default["frame_check"]    = False
+	default["sync"]    	  = "Costas"
 	default["verbose"]        = False
 	default["inspect_queue"]  = False
 	default["to_file"]        = None
@@ -165,6 +167,8 @@ def getCommandLineConfig(default):
 					  i.e. overrides the following option", dest="inspect_queue")
 	parser.add_option("", "--to-file", dest="to_file", 
 					  help="record the decoded frames to a binary file", default=default["to_file"])
+	parser.add_option("", "--sync", dest="sync", 
+					  help="select the channel synchronization. Costas: Costas PLL + Mueller&Mueller DLL | Viterbi: Local Oscillator + Gardner Passband DLL + Viterbi&Viterbi PLL", default=default["sync"])
 	parser.add_option("-F", "--frame-sync", action="store_true", default=default["frame_sync"], dest="frame_sync")
 	parser.add_option("-V", "--viterbi27", action="store_true", default=default["viterbi27"], dest="viterbi27")
 	parser.add_option("-P", "--pseudo-derandomise", action="store_true", default=default["derandomise"], dest="derandomise")
@@ -252,7 +256,11 @@ def getFileConfig(filename):
 	except ConfigParser.Error:
 		pass
 	try:
-		config_values["frame_syms"] = config.get('General', 'frame-syms')
+		config_values["sync"] = config.get('General', 'sync')
+	except ConfigParser.Error:
+		pass
+	try:
+		config_values["frame_syms"] = config.getint('General', 'frame-syms')
 	except ConfigParser.Error:
 		pass
 	try:
@@ -263,15 +271,15 @@ def getFileConfig(filename):
 	# usrp
 	if "from_usrp" in config_values and config_values["from_usrp"]:
 		try:
-			config_values["centre_freq"] = config.getint('USRP', 'freq')
+			config_values["centre_freq"] = config.getfloat('USRP', 'freq')
 		except ConfigParser.Error:
 			pass
 		try:
-			config_values["usrp_gain"] = config.getint('USRP', 'gain')
+			config_values["usrp_gain"] = config.getfloat('USRP', 'gain')
 		except ConfigParser.Error:
 			pass
 		try:
-			config_values["sym_rate"] = config.getint('USRP', 'rate')
+			config_values["sym_rate"] = config.getfloat('USRP', 'rate')
 		except ConfigParser.Error:
 			pass
 
@@ -525,8 +533,14 @@ class my_top_block(gr.top_block):
 		# Set up receive path
 		self.rxpath = receive_path(rx_callback, options) 
 		if (options.from_usrp) :
-			self.source = bpsk_demod(options.centre_freq, options.usrp_gain,
+			if(options.sync.lower() == "viterbi") :
+				# Fixed to BPSK right now
+				self.source = mpsk_demod(2, options.centre_freq, options.usrp_gain,
 										options.sps, options.sym_rate)
+			else : 
+				self.source = bpsk_demod(options.centre_freq, options.usrp_gain,
+										options.sps, options.sym_rate)
+
 			self.connect(self.source, self.rxpath)
 			# record live demod source to file
 			self.file_path = file_path = options.file_path
