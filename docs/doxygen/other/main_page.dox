@@ -1,10 +1,43 @@
-/*! \mainpage
+/*! \mainpage CCSDS Signal Processing blocks
 
-Welcome to the GNU Radio CCSDS Block
+\section Introduction
+This package provides signal processing blocks used for sending and receiving signals conforming to the Standards by the Consultative Committee for Space Data Systems (CCSDS).
 
-This is the intro page for the Doxygen manual generated for the CCSDS
-block (docs/doxygen/other/main_page.dox). Edit it to add more detailed
-documentation about the new GNU Radio modules contained in this
-project.
+\section Installation
+\subsection Build
+The package is distributed as an out of tree module and can be installed using cmake.
+\code
+cd gr-ccsds
+mkdir build
+cd build
+cmake ../
+make
+make test
+sudo make install
+\endcode
 
+\subsection Usage
+To use the CCSDS blocks, the Python namespaces is in ccsds, which would be normally
+imported as:
+
+\code
+    import ccsds
+\endcode
+
+See this Doxygen documentation for details about the blocks available
+in this package.
+
+A quick listing of the details can be found in Python after importing
+by using:
+
+\code
+    help(ccsds)
+\endcode
+\todo Create ccsds package's python help
+
+\section Modules
+\subpage page_lo_feedback
+
+\section Bibliography
+\subpage bib_mengali
 */

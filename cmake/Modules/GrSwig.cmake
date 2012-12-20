@@ -35,6 +35,9 @@ include(GrPython)
 function(GR_SWIG_MAKE_DOCS output_file)
     find_package(Doxygen)
     if(DOXYGEN_FOUND)
+	file(TO_NATIVE_PATH ${CMAKE_SOURCE_DIR} abs_top_srcdir)
+	file(TO_NATIVE_PATH ${CMAKE_SOURCE_DIR} top_srcdir)
+	file(TO_NATIVE_PATH ${CMAKE_BINARY_DIR} top_builddir)
 
         #setup the input files variable list, quote formated
         set(input_files)

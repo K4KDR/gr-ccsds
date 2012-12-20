@@ -1,7 +1,22 @@
 /*!
- * \defgroup block GNU Radio CCSDS C++ Signal Processing Blocks
- * \brief All C++ blocks that can be used from the CCSDS GNU Radio
- *        module are listed here or in the subcategories below.
- *
+ *  \defgroup modulation CCSDS modulation/demodulation blocks
+ *  \brief Blocks used for modulating or demodulating CCSDS signals
  */
 
+/*!
+ *  \defgroup synchronization CCSDS synchronization blocks
+ *  \brief Blocks used for channel synchronization of CCSDS conforming signals
+ *
+ *  \ingroup modulation
+ */
+
+
+/*!
+ *  \defgroup channelcoding CCSDS channel coding blocks
+ *  \brief Blocks used for channelcoding and decoding of CCSDS conforming signals
+ */
+
+/*!
+ *  \defgroup filter CCSDS filter blocks
+ *  \brief Blocks used for filtering
+ */
