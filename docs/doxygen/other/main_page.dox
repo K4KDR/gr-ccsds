@@ -36,8 +36,8 @@ by using:
 \todo Create ccsds package's python help
 
 \section Modules
-\subpage page_lo_feedback
+\subpage page_mpsk_demod
 
 \section Bibliography
-\subpage bib_mengali
+\subpage page_bibliography
 */

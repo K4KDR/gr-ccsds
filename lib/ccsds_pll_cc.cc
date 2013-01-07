@@ -69,16 +69,6 @@ ccsds_pll_cc::~ccsds_pll_cc ()
 
 const double ccsds_pll_cc::D_TWOPI=2.0f*M_PI;
 
-void ccsds_pll_cc::rotate_constellation(gr_complex *out, const gr_complex *in, const float angle, const unsigned int num) {
-	gr_complex rot = std::polar(1.0f, angle);
-
-	if(is_unaligned()) {
-		volk_32fc_s32fc_multiply_32fc_u(out, in, rot, num);
-	} else {
-		volk_32fc_s32fc_multiply_32fc_a(out, in, rot, num);
-	}
-}
-
 void ccsds_pll_cc::remove_modulation(gr_complex *out, const gr_complex *in, const unsigned int num) {
 	// FIXME volk power block seems to calculate wrong results 
 	// (e.g. 1 squared is -1)	
@@ -233,12 +223,8 @@ int  ccsds_pll_cc::general_work (int                     noutput_items,
 	// do the synchronization
 	//
 	
-	if(d_M == 4) { // QPSK constellation rotated by 45 degree, fix it
-		rotate_constellation(tmp_c, in, -M_PI/4.0f, num);
-	} else { // no fix necessarry, just move the samples to the next buffer
-		memcpy(tmp_c,in,num*sizeof(gr_complex));
-	}
-
+	memcpy(tmp_c,in,num*sizeof(gr_complex));
+	
 	// remove the modulation
 	remove_modulation(tmp_c,tmp_c,num);
 

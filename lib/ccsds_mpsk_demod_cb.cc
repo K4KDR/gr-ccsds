@@ -19,7 +19,6 @@ ccsds_mpsk_demod_cb::ccsds_mpsk_demod_cb (unsigned int M)
 	gr_make_io_signature (1, 1, sizeof (gr_complex)),
 	gr_make_io_signature (1, 1, sizeof (char)))
 {
-	count = 0;
 	d_M = M;
 
 	if(M==2) {
@@ -35,7 +34,7 @@ ccsds_mpsk_demod_cb::ccsds_mpsk_demod_cb (unsigned int M)
 	const gr_complex diff_phasor = gr_complex(cos(2*M_PI/d_M),sin(2*M_PI/d_M));
 	// initial phasor is on the real axis, except for QPSK (according to ECSS standard)
 	gr_complex phasor = (d_M!=4) ? gr_complex(1.0f,0.0f) : gr_complex(1.0f,1.0f);
-	// make sure we handle only with real phasors
+	// make sure we handle only with abs(.)=1 phasors
 	phasor = phasor / std::abs(phasor);
 
 	// allocate memory for the constellation points

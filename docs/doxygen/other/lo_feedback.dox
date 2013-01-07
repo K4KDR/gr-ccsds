@@ -1,21 +1,21 @@
 /*! \page page_lo_feedback Local oscillator frequency correction feedback loop
 
-\section introduction Introduction
+\section page_lo_feedback_introduction Introduction
 Usually frequency errors introduced by doppler shift and drifts between sending and receiving oscillators are corrected by a frequency or phase synchronization block after the matched filter. Since the matched filter should only cut out the original signal and attenuate additional noise as much as possible, parts of the signal shifted by a frequency offset can be attenuated as well by the matched filter. The purpose of this local oscillator is to compensate frequency errors before the signal passes the matched filter, while the frequency offset estimation is performed after the matched filter to benefit from the better SNR and possible channel synchronization before the frequency offset estimator.
 
-\section setup Setup
+\section page_lo_feedback_setup Setup
 The essential parts of the frrequency feedback loop are the local oscillator (LO), the reception filter (often a matched filter, MF), a decimator (DEC) to convert from sample to symbol rate and a synchronization block that is capable of estimating the frequency offset and sending it back as an asynchronous message. 
 
 \image html LO_Feedback_Loop.png "Principal setup of the frequency feedback loop"
 
 There can be other blocks in between or one block doing more than one of the above mentioned functionalities as long as the sample stream arriving at the frequency estimator is at symbol rate and still has the frequency tags attatched.
 
-\subsection setup_example Example
+\subsection page_lo_feedback_setup_example Example
 Below is an example of the frequency feedback loop as used in the M-PSK receiver of this package where an additional gain control block is added and the delay locked loop acts as a decimator as well. The frequency offset is estimated and compensated by the phase locked loop.
 
 \image html LO_Feedback_Loop_Example.png "Example setup of the frequency feedback loop in the M-PSK receiver of this package"
 
-\section msg Frequency correction messages
+\section page_lo_feedback_msg Frequency correction messages
 The frequency estimator sends the frequency offset between two symbols it observes to the local oscillator. The local oscillator converts this offset in a per sample offset and adds it to it's current frequency estimate which should result in a zero frequency offset for the samples going out of the oscillator.
 
 The frequency correction messages are standard GNU Radio messages of length zero. The frequency estimate is passed as the per symbol phase difference in rad as \c arg1 while \c arg2 and the message type are defined by #MSG_FREQ_TYPE and #MSG_FREQ_ARG2 defined in ccsds_lo_feedback.h .

@@ -13,12 +13,6 @@ ccsds_make_mpsk_mod_bc (unsigned int M)
     return ccsds_mpsk_mod_bc_sptr (new ccsds_mpsk_mod_bc (M));
 }
 
-ccsds_mpsk_mod_bc_sptr
-ccsds_make_mpsk_mod_bc ()
-{
-    return ccsds_mpsk_mod_bc_sptr (new ccsds_mpsk_mod_bc (2));
-}
-
 static const int MIN_IN = 1;    // mininum number of input streams
 static const int MAX_IN = 1;    // maximum number of input streams
 static const int MIN_OUT = 1;   // minimum number of output streams

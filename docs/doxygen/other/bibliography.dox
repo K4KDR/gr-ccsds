@@ -1,0 +1,44 @@
+/*! \page page_bibliography Bibliography and References
+
+\section bib_mengali Mengali & D'Andrea
+
+<em>Umberto Mengali and Aldo N. D'Andrea</em>
+
+<b>Synchronization Techniques for Digital Receivers</b>
+
+
+1997 Plenum Press, New York
+\htmlonly
+	<hr />
+\endhtmlonly
+
+\section bib_gnuradio_links GNU Radio links
+<b>GNU Radio C++ API</b>
+
+http://gnuradio.org/doc/doxygen/index.html
+
+
+<b>How to debug python blocks with a debugger</b>
+
+http://gnuradio.org/redmine/projects/gnuradio/wiki/TutorialsDebugging#Tutorial-Using-gdb-with-Pythonic-GR-applications
+
+
+<b>How to use doxygen Markup in GNU Radio</b>
+
+http://gnuradio.org/redmine/projects/gnuradio/wiki/Development#How-is-the-code-documented
+\htmlonly
+	<hr />
+\endhtmlonly
+
+
+\section bib_doxygen_links Doxygen links
+<b>Doxygen commands referrence</b>
+
+http://www.stack.nl/~dimitri/doxygen/commands.html
+
+\htmlonly
+	<!-- Create huge vertical whitespace, so anchors to this page allways center at the anchored section -->
+	<div style="height: 1000px;"><br /></div>
+\endhtmlonly
+\ref page_bibliography
+*/

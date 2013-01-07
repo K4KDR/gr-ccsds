@@ -1,6 +1,11 @@
 /*!
- *  \defgroup modulation CCSDS modulation/demodulation blocks
- *  \brief Blocks used for modulating or demodulating CCSDS signals
+ *  \defgroup modulation CCSDS modulation blocks
+ *  \brief Blocks used for modulating CCSDS signals
+ */
+
+/*!
+ *  \defgroup demodulation CCSDS demodulation blocks
+ *  \brief Blocks used for demodulating CCSDS signals
  */
 
 /*!

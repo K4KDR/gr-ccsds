@@ -32,8 +32,7 @@ typedef boost::shared_ptr<ccsds_fll_cc> ccsds_fll_cc_sptr;
  */
 CCSDS_API ccsds_fll_cc_sptr ccsds_make_fll_cc (unsigned int obsv_length, float  loop_bw, unsigned int power, gr_msg_queue_sptr msgq);
 
-/*!
- *  \brief Frequency locked loop
+/*! \brief Frequency locked loop.
  *  \ingroup synchronization
  *
  *  Frequency estimation based on feedforward delay and multiply scheme. Sends
@@ -49,6 +48,63 @@ class CCSDS_API ccsds_fll_cc : public gr_block
 private:
 	friend CCSDS_API ccsds_fll_cc_sptr ccsds_make_fll_cc(unsigned int obsv_length, float  loop_bw, unsigned int power, gr_msg_queue_sptr msgq);
 
+	/*! \brief Storage for observation length.
+	 *
+	 *  How many samples should be accumulated in order to cancel modulation
+	 *  and smooth estimate. Set by ccsds_fll_cc::ccsds_fll_cc()
+	 */
+	const unsigned int D_L;
+
+	/*! \brief Storage for modulation removal power.
+	 *
+	 *  Which power of the input samples should be computed for further
+	 *  processing. If set to 1, the input samples will be used directly.
+	 *  Set by ccsds_fll_cc::ccsds_fll_cc()
+	 */
+	const unsigned int d_POWER;
+
+	/*! \brief Constant buffer of two pi with float precision. */
+	static const float D_TWOPI;
+
+	/*! \brief Shared pointer to frequency correction message queue.
+	 *
+	 *  \sa \ref page_lo_feedback
+	 *  \sa ccsds_lo_feedback.h
+	 *
+	 *  Shared pointer to the message queue where frequency corrections
+	 *  should be send to.
+	 */
+	gr_msg_queue_sptr d_msgq;
+
+	/*! \brief Buffer for last sample before the current block.
+	 *
+	 *  \sa calc_diffs()
+	 *
+	 *  To determine the phase difference between the first sample of a
+	 *  block and the previous sample, this sample is buffered here.
+	 *
+	 *  Is initialized to 1+0j by ccsds_fll_cc::ccsds_fll_cc().
+	 */
+	gr_complex d_last_sample;
+
+	/*! \todo fix frequency feedback loop */
+	float d_lo_freq;
+
+	/*! \brief Buffer to store the current phase of the local oscillator,
+	 *	used to correct the detected frequency offset.
+	 *
+	 *  \sa calc_rotation()
+	 */
+	float d_phase;
+
+	/*! \brief Filter to smooth frequency estimates.
+	 *
+	 *  Linear first order low pass filter to smooth frequency estimates.
+	 */
+	lpf *d_filter;
+
+
+
 	/*! \brief Private constructor for frequency locked loop.
 	 *
 	 *  \param obsv_length Number of samples that should be accumulated for a
@@ -58,8 +114,9 @@ private:
 	 *  \param power Take the power of the incomming samples for frequency
 	 *	estimation instead of the incomming samples directly to cancel out
 	 *	modulations. For M-PSK modulated signal the M-th power is recommended,
-	 *	while power=1 means take the incomming samples directly (modulations is
-	 *	still canceled out by averaging over \c obsv_length samples).
+	 *	while \c power=1 means take the incomming samples directly
+	 *	(modulations is still canceled out by averaging over \c
+	 *	obsv_length samples).
 	 *  \param msgq Message queue to store new frequency corrections. See \ref
 	 *	page_lo_feedback for more details.
 	 *
@@ -76,7 +133,7 @@ private:
 	 *  \param num Number of samples to process.
 	 *
 	 *  Take the complex input array \c in, calculate the samplewise power
-	 *  ccsds_fll_cc::d_POWER and store them in \c out.
+	 *  d_POWER and store them in \c out.
 	 *
 	 *  \todo Check if volk kernel of new GNU radio version computes the
 	 *	right powers and switch back to volk if true.
@@ -85,8 +142,8 @@ private:
 
 	/*! \brief Calculate the samplewise phase difference as a rotator.
 	 *
-	 *  \param tmp_c Aligned complex array in which the differences should be
-	 *	stored. Memory for at least \c num elements must be allocated.
+	 *  \param tmp_c Aligned complex array in which the differences should
+	 *	be stored. Memory for at least \c num elements must be allocated.
 	 *  \param in Complex array of samples which's differences should be
 	 *	computed. Must contain at least \c num elements.
 	 *  \param num Number of samples to process.
@@ -110,12 +167,13 @@ private:
 	 *  \param phasors Complex vector of samples that should be accumulated.
 	 *	Must contain at least \c num elements. The accumulated results
 	 *	will be written back into this vector into the first \c num/
-	 *	\c ::D_L positions.
-	 *  \param num Number of samples to process, must be a multiple of ::D_L.
+	 *	\c ccsds_fll_cc::D_L positions.
+	 *  \param num Number of samples to process, must be a multiple of
+	 *	ccsds_fll_cc::D_L.
 	 *
-	 *  Accumulates blocks of ::D_L samples and stores them at the begining
-	 *  of \c phasors. Used to filter out modulations and smooth the
-	 *  frequency estimates.
+	 *  Accumulates blocks of ccsds_fll_cc::D_L samples and stores them at
+	 *  the begining of \c phasors. Used to filter out modulations and
+	 *  smooth the frequency estimates.
 	 */
 	void calc_summs(gr_complex *phasors, unsigned int num);
 
@@ -129,7 +187,7 @@ private:
 	 */
 	void calc_phases(float  *tmp_f, const gr_complex *tmp_c, const unsigned int num);
 
-	/*! \brief Divides array samplewise by ccsds_fll_cc::d_POWER
+	/*! \brief Divides array samplewise by d_POWER
 	 *
 	 *  \param phases Array to process. Must contain at least \c num
 	 *	elements. Results are written back into this array.
@@ -137,7 +195,7 @@ private:
 	 *
 	 *  By taking the M-th power of the samples the frequency offset between
 	 *  the samples is amplified by a factor of M. In this block this effect
-	 *  is reversed by dividing by ccsds_fll_cc::d_POWER.
+	 *  is reversed by dividing by d_POWER.
 	 */
 	void adjust_phases(float  *phases, unsigned int num);
 
@@ -155,51 +213,88 @@ private:
 	void get_lo_tags(float  *lo_freqs, const unsigned int num);	
 
 	/*! \brief Sums up \c tmp_fs and \c tmp_lo elementwise and copies the
-	 *	sum into \c tmp_f ::D_L times each.
+	 *	sum into \c tmp_f ccsds_fll_cc::D_L times each.
 	 *
 	 *  \param tmp_f Array in which to store the sums. Memory must be
-	 *	allocated for at least \c num elements.
+	 *	allocated for at least \c num_out elements.
 	 *  \param tmp_fs Array with summands. Must contain at least \c num_out/
-	 *	\c ::D_L elements.
+	 *	\c ccsds_fll_cc::D_L elements.
 	 *  \param tmp_lo Array with summands. Must contain at least \c num_out/
-	 *	\c ::D_L elements.
-	 *  \param num Number of samples to output.
+	 *	\c ccsds_fll_cc::D_L elements.
+	 *  \param num_out Number of samples to output.
 	 *
-	 *  By summing over ::D_L samples each we decimated by a rate of ::D_L.
-	 *  While summing up tmp_fs and tmp_lo we repeat them ::D_L times each
-	 *  to return to the original input rate.
-	 *
-	 *  \todo continue documentation of ccsds_fll_cc
+	 *  By summing over ccsds_fll_cc::D_L samples each we decimated by a
+	 *  rate of ccsds_fll_cc::D_L. While summing up tmp_fs and tmp_lo we
+	 *  repeat them ccsds_fll_cc::D_L times each to return to the original
+	 *  input rate.
 	 */
 	void fill_freqs(float  *tmp_f, float  *tmp_fs, float  *tmp_lo, const unsigned int num_out);
+
+	/*! \brief Send a frequency estimate to the asynchronous message queue.
+	 *
+	 *  \param est Frequency estimate to send.
+	 *  \sa \ref page_lo_feedback
+	 *  \sa ccsds_lo_feedback.h
+	 */
 	void send_freq_estimate(double  est);
+
+	/*! \note not needed any more!
+	 *  \todo remove frequency substraction
+	 */
 	void substract_lo_freq(double *tmp_f, float  *tmp_lo, const unsigned int num);
+
+	/*! \brief Rotates complex array according to frequency estimates.
+	 *
+	 *  \param out Complex array to store the rotated samples in. Memory for
+	 *	at least \c num elements must be allocated.
+	 *  \param in Complex array of samples to be rotated. Must contain at
+	 *	least \c num elements.
+	 *  \param tmp_f Per sample phase increase (i.e. frequency) estimate in
+	 *	radians. Must contain at least \c num elements.
+	 *  \param num Number of samples to process.
+	 *
+	 *  Rotates samplewise by local phase ccsds_fll_cc::d_phase, which is increased by the
+	 *  estimates in \c tmp_f after each rotation.
+	 */
 	void calc_rotation(gr_complex *out, const gr_complex *in, const double  *tmp_f, const unsigned int num);
 
-	const unsigned int D_L;
-	const unsigned int d_POWER;
+	
 
-	gr_msg_queue_sptr d_msgq;
-
-	gr_complex d_last_sample;
-	float d_lo_freq;
-	float d_phase;
-	static const float D_TWOPI;
-
+	/*! /brief File pointer for debugging */
 	FILE *dbg_file;
-	FILE *dbg_file_pow;
-	FILE *dbg_file_dif;
-	FILE *dbg_file_sum;
-	FILE *dbg_file_tag;
-	unsigned int dbg_count;
-	unsigned int dbg_count_pow;
-	unsigned int dbg_count_dif;
-	unsigned int dbg_count_sum;
-	unsigned int dbg_count_tag;
-	unsigned int dbg_input_toggle;
-	float dbg_last_msg;
 
-	lpf *d_filter;
+	/*! /brief File pointer for debugging */
+	FILE *dbg_file_pow;
+
+	/*! /brief File pointer for debugging */
+	FILE *dbg_file_dif;
+
+	/*! /brief File pointer for debugging */
+	FILE *dbg_file_sum;
+
+	/*! /brief File pointer for debugging */
+	FILE *dbg_file_tag;
+
+	/*! /brief Counter for debugging */
+	unsigned int dbg_count;
+
+	/*! /brief Counter for debugging */
+	unsigned int dbg_count_pow;
+
+	/*! /brief Counter for debugging */
+	unsigned int dbg_count_dif;
+
+	/*! /brief Counter for debugging */
+	unsigned int dbg_count_sum;
+
+	/*! /brief Counter for debugging */
+	unsigned int dbg_count_tag;
+
+	/*! /brief Counter for debugging */
+	unsigned int dbg_input_toggle;
+
+	/*! /brief Buffer for last send frequency estimate */
+	float dbg_last_msg;
 
 public:
     ~ccsds_fll_cc ();  // public destructor

@@ -1,0 +1,69 @@
+/*! \page page_mpsk_demod M-PSK demodulation chain
+
+\section page_mpsk_demod_introduction Introduction
+This pages describes a general purpose M-PSK receiver which can be used to
+synchronize and demodulate arbitrary M-PSK signals.
+
+\section page_mpsk_demod_setup Setup
+The Figure below shows the GRC blocks of this M-PSK demodulator. It's parameters
+and blocks are described in the next Sections.
+
+\image html mpsk_demod.png "Setup of the M-PSK receiver of this package"
+
+\section page_mpsk_demod_variables Variables
+
+\subsection page_mpsk_demod_samp_rate samp_rate
+The sampling rate of the incomming signal.
+
+\subsection page_mpsk_demod_M M
+The Modulation order of the signal. Must be a power of two. For BPSK (i.e. M=2)
+the previously developed BPSK demodulator \a bpsk_demod can be used as an
+alternative.
+
+\subsection page_mpsk_demod_osf osf
+Oversampling factor, or samples per symbol. The demodulation block performs a
+decimation by this factor. Oversampling must be at least two.
+
+\subsection page_mpsk_demod_sym_rate sym_rate
+Symbol rate of the incomming signal given by \c samp_rate / \c osf.
+
+\subsection page_mpsk_demod_alpha alpha
+Rollof factor from the RX factor. Also used
+
+\section page_mpsk_demod_blocks Blocks
+\subsection page_mpsk_demod_lo Local oscillator
+The local oscillator shifts the incomminc signal by a frequency estimate it
+receives over the \subpage page_lo_feedback . If no frequency error is received
+(at the start) it uses a zero frequency estimate and thus does nothing at all
+until it receives an estimate. The LO is implemented in
+\ref ccsds_local_oscillator_cc.
+
+\subsection page_mpsk_demod_filter RX filter
+The RX filter cuts out all frequency parts with a frequency higher than the
+symbol rate and thus filtering out all the noise that was introduced due to
+oversampling. The concatenation of this filter and the TX filter should fulfill
+the first Nyquist criterion. A standard GRC RRC filter implementation is used.
+\todo Use a raised cosine filter instead of a RRC if no TX filter is used.
+
+\subsection page_mpsk_demod_dll Delay locked loop
+Estimate the timing error introduced by a propagation delay and estimate the
+signal at the correct time instances at symbol rate. This block performs a
+decimation by \c osf. The DLL is implemented in \ref ccsds_dll_cc.
+
+\subsection page_mpsk_demod_pll Phase locked loop
+Estimates the signal's phase and local frequency offset (after the LO). Sends
+frequency corrections to the LO and compensates the phase offset of the samples.
+The PLL is implemented in \ref ccsds_pll_cc.
+
+\subsection page_mpsk_demod_detector Detector/Demodulator
+Detects the received M-PSK symbols based on the synchronized samples. Two
+different implementations are available in \ref ccsds_mpsk_demod_cb and
+\ref ccsds_mpsk_demod2_cb. The latter one is used in the example above.
+\todo Resolve M-PSK ambiguity.
+
+
+\todo Finish this documentation
+
+
+
+*/
