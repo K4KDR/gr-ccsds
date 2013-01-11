@@ -25,6 +25,7 @@ install(FILES
     ccsds_fll_cc.xml
     ccsds_pll_cc.xml
     ccsds_dll_cc.xml
+    ccsds_mpsk_ambiguity_resolver_bb.xml
     ccsds_mpsk_mod_bc.xml
     ccsds_mpsk_demod_cb.xml
     ccsds_mpsk_demod2_cb.xml

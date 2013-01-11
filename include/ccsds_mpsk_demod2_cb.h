@@ -58,7 +58,7 @@ private:
 	/*! \brief Array to map binary constellation points to gray coded data
 	 *	bits.
 	 */
-	char *map;
+	const unsigned char *map;
 	
 public:
 

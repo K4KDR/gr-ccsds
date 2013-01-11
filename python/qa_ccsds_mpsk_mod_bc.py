@@ -27,7 +27,7 @@ from math import pi, sqrt
 class qa_mpsk_mod_bc (gr_unittest.TestCase):
 
     def setUp (self):
-        self.tb = gr.top_block ()
+	self.tb = gr.top_block ()
 
     def tearDown (self):
         self.tb = None
@@ -50,7 +50,7 @@ class qa_mpsk_mod_bc (gr_unittest.TestCase):
 
     def test_mod_qpsk (self):
 	src_data = (0, 1, 2, 3)
-	expected_result = (1+1j, -1+1j, 1-1j, -1-1j)
+	expected_result = (1+1j, 1-1j, -1+1j, -1-1j)
 	# scale to unit circle
 	expected_result = tuple(p/sqrt(2.0) for p in expected_result)
 	src = gr.vector_source_b (src_data)
@@ -60,10 +60,10 @@ class qa_mpsk_mod_bc (gr_unittest.TestCase):
 	self.tb.connect (sqr, dst)
 	self.tb.run ()
 	result_data = dst.data ()
-	#print "=====  QPSK  =====================================\n"
-	#print "expected data: %s\n" % (expected_result, )
-	#print "received data: %s\n" % (result_data, )
-	#print "==================================================\n"
+	print "=====  QPSK  =====================================\n"
+	print "expected data: %s\n" % (expected_result, )
+	print "received data: %s\n" % (result_data, )
+	print "==================================================\n"
 
 	self.assertFloatTuplesAlmostEqual (expected_result, result_data, 6, 'QPSK constellation does not match')
 

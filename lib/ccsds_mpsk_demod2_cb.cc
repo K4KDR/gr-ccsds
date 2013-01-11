@@ -2,6 +2,7 @@
 #include "config.h"
 #endif
 
+#include "ccsds_mpsk_constellation.h"
 #include <ccsds_mpsk_demod2_cb.h>
 #include <gr_io_signature.h>
 #include <stdio.h>
@@ -26,21 +27,7 @@ ccsds_mpsk_demod2_cb::ccsds_mpsk_demod2_cb (const unsigned int M)
 		return;
 	}
 
-	map = new char[M];
-
-	// go through all constellation points
-	for(unsigned int i=0;i<d_M;i++) {
-		unsigned int i_gray = (i >> 1) ^ i; // From: http://en.wikipedia.org/wiki/Grey_code#Converting_to_and_from_Gray_code
-
-		// check if the next access is valid (not true for e.g M=3)
-		if(i_gray >= d_M) {
-			fprintf(stderr,"ERROR: modulation order M=%d not supported. M needs to be a power of two.\n",d_M);
-			exit(EXIT_FAILURE);
-			return;
-		}	
-		// store constellation point
-		map[i] = (char)i_gray;
-	}
+	map = ccsds_make_mpsk_map(M);
 }
 
 ccsds_mpsk_demod2_cb::~ccsds_mpsk_demod2_cb ()

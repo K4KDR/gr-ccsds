@@ -24,6 +24,8 @@ import ccsds_swig
 from cmath import rect
 from math import pi, sqrt
 
+
+
 class qa_mpsk_demod2_cb (gr_unittest.TestCase):
 
     def setUp (self):
@@ -51,7 +53,7 @@ class qa_mpsk_demod2_cb (gr_unittest.TestCase):
 
     def test_demod_qpsk (self):
 	src_data =        (1+0j, -1+0j, 0+1j, 0-1j, 1+10j, 1-10j, 0.1+0j, 0.1+10j, -10+9j, -10-7j, -0.1+0j, -0.1+10j )
-	expected_result = (0   ,     3,     1,   2,     1,     2,      0,       1,      3,      3,       3,        1 )
+	expected_result = (0   ,     3,     2,   1,     2,     1,      0,       2,      3,      3,       3,        2 )
 	src = gr.vector_source_c (src_data)
 	sqr = ccsds_swig.mpsk_demod2_cb (4)
 	dst = gr.vector_sink_b ()
@@ -139,6 +141,40 @@ class qa_mpsk_demod2_cb (gr_unittest.TestCase):
 	#print "==================================================\n"
 	self.assertEqual (expected_result, result_data, '16-PSK constellation does not match')
 
+    def mod_demod_test(self, M):
+	src_data = tuple(range(M))
+	src = gr.vector_source_b (src_data)
+	mod = ccsds_swig.mpsk_mod_bc (int(M))
+	demod = ccsds_swig.mpsk_demod2_cb (int(M))
+	dst = gr.vector_sink_b ()
+	self.tb.connect (src, mod)
+	if(M != 4) :
+		self.tb.connect (mod, demod)
+	else :
+		rot = gr.multiply_const_cc(rect(1,-0.25*pi))
+		self.tb.connect (mod, rot)
+		self.tb.connect (rot, demod)
+	self.tb.connect (demod, dst)
+	self.tb.run ()
+	result_data = dst.data ()
+	#print "=====  %d-PSK  =====================================\n" % M
+	#print "expected data: %s\n" % (src_data, )
+	#print "received data: %s\n" % (result_data, )
+	#print "==================================================\n"
+	self.assertEqual (src_data, result_data, 'Constellation of Modulator and Demodulator do not match')
+
+
+    def test_demod_with_mod_bpsk (self):
+	self.mod_demod_test(2)
+
+    def test_demod_with_mod_qpsk (self):
+	self.mod_demod_test(4)
+
+    def test_demod_with_mod_8psk (self):
+	self.mod_demod_test(8)
+
+    def test_demod_with_mod_16psk (self):
+	self.mod_demod_test(16)
 
 
 if __name__ == '__main__':

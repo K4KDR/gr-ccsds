@@ -19,6 +19,7 @@
 #include "ccsds_fll_cc.h"
 #include "ccsds_pll_cc.h"
 #include "ccsds_dll_cc.h"
+#include "ccsds_mpsk_ambiguity_resolver_bb.h"
 #include "ccsds_mpsk_mod_bc.h"
 #include "ccsds_mpsk_demod_cb.h"
 #include "ccsds_mpsk_demod2_cb.h"
@@ -38,6 +39,9 @@ GR_SWIG_BLOCK_MAGIC(ccsds,pll_cc);
 
 GR_SWIG_BLOCK_MAGIC(ccsds,dll_cc);
 %include "ccsds_dll_cc.h"
+
+GR_SWIG_BLOCK_MAGIC(ccsds,mpsk_ambiguity_resolver_bb);
+%include "ccsds_mpsk_ambiguity_resolver_bb.h"
 
 GR_SWIG_BLOCK_MAGIC(ccsds,mpsk_mod_bc);
 %include "ccsds_mpsk_mod_bc.h"

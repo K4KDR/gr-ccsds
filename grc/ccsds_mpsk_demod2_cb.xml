@@ -4,7 +4,7 @@
   <key>ccsds_mpsk_demod2_cb</key>
   <category>CCSDS</category>
   <import>import ccsds</import>
-  <make>ccsds.mpsk_demod_cb($M)</make>
+  <make>ccsds.mpsk_demod2_cb($M)</make>
 	<param>
 		<name>M</name>
 		<key>M</key>
