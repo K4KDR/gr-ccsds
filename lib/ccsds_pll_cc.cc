@@ -62,8 +62,10 @@ ccsds_pll_cc::~ccsds_pll_cc ()
 
 	#ifdef DLL_DEBUG
 		fflush(dbg_file);
+		fflush(dbg_file_lo);
 
 		fclose(dbg_file);
+		fclose(dbg_file_lo);
 	#endif
 }
 
@@ -154,21 +156,15 @@ void ccsds_pll_cc::calc_rotation(gr_complex *out, const gr_complex *in, const fl
 
 	// temp variable for sine and cosine part of rotator
 	float tmp_s, tmp_c;
-	float phase_offset = 0.0f;
-
-	if(d_M == 4) { // QPSK constellation rotated by 45 degree
-		phase_offset = M_PI/4.0f;
-	}
-
 	// create the inidividual rotos
 	for(unsigned int i=0;i<num;i++) {
 		// calculate sine and cosine values for this phase. joint cal-
 		// culation for the same angle is faster, than two individual
 		// calls to sin and cos.
-		sincosf(-(tmp_f[i]+phase_offset),&tmp_s, &tmp_c);
+		sincosf(tmp_f[i],&tmp_s, &tmp_c);
 
 		// assemble the rotator and store it in an array
-		rot[i] = gr_complex(tmp_c,tmp_s);
+		rot[i] = gr_complex(tmp_c,-tmp_s);
 	}
 
 	if(is_unaligned()) {

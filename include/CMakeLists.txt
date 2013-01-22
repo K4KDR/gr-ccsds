@@ -35,8 +35,11 @@ install(FILES
     ccsds_mpsk_mod_bc.h
     ccsds_mpsk_demod_cb.h
     ccsds_mpsk_demod2_cb.h
+    ccsds_frame_sync_bb.h
     ccsds_moving_average.h
     ccsds_lpf.h
     ccsds_lpf2.h
+    ccsds_ticp_frame_source_b.h
+    ccsds_ticp_frame_sink_b.h
     ccsds_crc16.h DESTINATION include/ccsds
 )

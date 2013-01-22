@@ -4,6 +4,7 @@
 #include <ccsds_api.h>
 #include <gr_block.h>
 #include <string>
+#include "ccsds_asm_operator.h"
 
 /*! \brief Verbosity level: Do not output anything */
 #define CCSDS_AR_OUTPUT_NONE 0
@@ -20,7 +21,7 @@
  *  \sa #CCSDS_AR_OUTPUT_STATE
  *  \sa #CCSDS_AR_OUTPUT_DEBUG
  */
-#define CCSDS_AR_VERBOSITY_LEVEL CCSDS_AR_OUTPUT_STATE
+#define CCSDS_AR_VERBOSITY_LEVEL CCSDS_AR_OUTPUT_NONE
 
 class ccsds_mpsk_ambiguity_resolver_bb;
 
@@ -106,35 +107,22 @@ private:
 	/*! \brief number of bits in an unpacked input bytecalculated as ld(d_M). */
 	const unsigned int d_ldM;
 
-	/*! \brief Storage for attached snc marker
-	 *
-	 *  \sa d_ASM_LEN
-	 */
-	unsigned char *d_ASM;
-
-	/*! \brief Length of ASM in bytes 
-	 *
-	 *  \sa d_ASM
-	 */
-	const unsigned int d_ASM_LEN;
-
 	/*! \brief Number of ASM losses to enter full search again. If
 	 *	set to one, a full search is performed every time an ASM is lost.
 	 */
 	const unsigned int d_THRESHOLD;
 
-	/*! \brief Maximum number of bit errors that may occur between a
-	 *	sequence and the ASM to still consider the sequence as an ASM.
-	 *	If set to zero, sequence must match the ASM exactly.
-	 */
-	const unsigned int d_BER_THRESHOLD;
-
 	/*! \brief Length of a frame (without ASM) in bytes. */
 	const unsigned int d_FRAME_LEN;
 
-	
+	/*! \brief Length of an ASM in bytes. */
+	const unsigned int d_ASM_LEN;
+
 	/*! \brief Counter variable on how many ASMs have been observed */
 	unsigned int d_count;
+
+	/*! \brief Counter variable on how bytes have been observed in total */
+	unsigned long dbg_count;
 
 	/*! \brief Index of the input stream that the AR is locked in. If in
 	 *	search state, this variable may contain anything.
@@ -166,6 +154,9 @@ private:
 	 */
 	unsigned int d_samp_skip_bits;
 
+	/*! \brief Pointer to helper class \ref ccsds_asm_operator */
+	ccsds_asm_operator *d_asm_operator;
+
 	/*! \brief Extract an array of packed bytes from the samples of unpacked
 	 *	bits and change it's change ambiguity.
 	 *
@@ -194,58 +185,7 @@ private:
 	 */
 	unsigned char * get_packed_bytes(const unsigned char *in_unpacked, const unsigned int bytes_offset, const unsigned int bytes_req, unsigned int ambiguity);
 
-	/*! \brief Checks if stream matches an ASM at given bit offset.
-	 *
-	 *  \param stream Array of bytes to check ASM against. If \c offset_bits is zero
-	 *	\c stream must have at least \c d_ASM_LEN elements, otherwise one element
-	 *	more.
-	 *  \param offset_bits Number of bits to ignore in the first byte of the stream.
-	 *  \return \a true if stream is matching the ASM, \a false if not.
-	 *
-	 *  \sa d_BER_THRESHOLD
-	 *
-	 *  The stream is considered to match if \c d_BER_THRESHOLD or less bits
-	 *  differ.
-	 */
-	bool check_for_asm(const unsigned char* stream, unsigned int offset_bits);
-
-	/*! \brief Searches for ASM in the given stream.
-	 *
-	 *  \param stream Array of bytes in which to search for the ASM.
-	 *  \param stream_len Length of the stream. The last \c d_ASM_LEN bytes of this
-	 *	stream are not searched (as the ASM would only fit in partially).
-	 *  \param *offset_bytes Pointer to an unsigned int where the offset bytes between
-	 *	start of stream and the found ASM should be stored, if a match is found.
-	 *  \param *offset_bits Pointer to an unsigned int where the offset bits between
-	 *	start of stream and the found ASM should be stored, if a match is found.
-	 *  \return \a true if ASM is found, \a false otherwise.
-	 */
-	bool search_asm(const unsigned char* stream, const unsigned int stream_len, unsigned int *offset_bytes, unsigned int *offset_bits);
-
-	/*! \brief Copy bitstream from a byte array with a bit offset into an
-	 *	aligned byte array.
-	 *
-	 *  \param stream_in Array of bytes to copy. First bit to copy is
-	 *	located in the first element of this array. If \c offset_bit is
-	 *	zero this array must contain at least \c len elements, if
-	 *	\c offset_bit is greater thatn zero, this array must contain
-	 *	at least \c len+1 elements.
-	 *  \param stream_out Array in which the resulting bytes should be
-	 *	copied. Memory for at least \c len elements must be allocated.
-	 *  \param len Number of bytes to copy.
-	 *  \param offset_bits Number of bits to skip in the first byte, starting
-	 *	with the MSB. If offset_bit is zero this function copies the
-	 *	first \c len bytes from \c stream_in to \c stream_out by using
-	 *	\c memcpy. Otherwise the copy operation is done manually using
-	 *	bitwise operations.
-	 *
-	 *  
-	 *  The first \c offset_bits starting with the MSB from the first
-	 *  element of \c stream_in are skipped, afterwards all bits from
-	 *  \c stream_in are copied to \c stream_out until \c len bytes have
-	 *  been copied to \c stream_out.
-	 */
-	void copy_stream(const unsigned char * stream_in, unsigned char * stream_out, const unsigned int len, const unsigned int offset_bits);
+	
 public:
 	/*! \brief Public deconstructor of the AR */	
 	~ccsds_mpsk_ambiguity_resolver_bb ();  // public destructor

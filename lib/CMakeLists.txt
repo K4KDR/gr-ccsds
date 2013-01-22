@@ -19,8 +19,8 @@
 # Setup library
 ########################################################################
 include(GrPlatform) #define LIB_SUFFIX
-add_library(gnuradio-ccsds SHARED ccsds_randomiser_bb.cc ccsds_viterbi27_bb.cc viterbi27_sse.c ccsds_framer_sink_dual.cc ccsds_msg_source.cc ccsds_rs_decode_bb.cc decode_rs_8.c decode_rs_ccsds.c ccsds_globals.c ccsds_crc16.cc ccsds_local_oscillator_cc.cc ccsds_fll_cc.cc ccsds_pll_cc.cc ccsds_dll_cc.cc ccsds_mpsk_ambiguity_resolver_bb.cc ccsds_mpsk_mod_bc.cc ccsds_mpsk_demod_cb.cc ccsds_mpsk_demod2_cb.cc ccsds_moving_average.cc ccsds_lpf.cc ccsds_lpf2.cc)
-target_link_libraries(gnuradio-ccsds ${Boost_LIBRARIES} ${GRUEL_LIBRARIES} ${GNURADIO_CORE_LIBRARIES} fftw3)
+add_library(gnuradio-ccsds SHARED ccsds_randomiser_bb.cc ccsds_viterbi27_bb.cc viterbi27_sse.c ccsds_framer_sink_dual.cc ccsds_msg_source.cc ccsds_rs_decode_bb.cc decode_rs_8.c decode_rs_ccsds.c ccsds_globals.c ccsds_crc16.cc ccsds_local_oscillator_cc.cc ccsds_fll_cc.cc ccsds_pll_cc.cc ccsds_dll_cc.cc ccsds_mpsk_ambiguity_resolver_bb.cc ccsds_mpsk_mod_bc.cc ccsds_mpsk_demod_cb.cc ccsds_mpsk_demod2_cb.cc ccsds_frame_sync_bb.cc ccsds_moving_average.cc ccsds_lpf.cc ccsds_lpf2.cc ccsds_ticp_frame_source_b.cc ccsds_ticp_frame_sink_b.cc)
+target_link_libraries(gnuradio-ccsds ${Boost_LIBRARIES} ${GRUEL_LIBRARIES} ${GNURADIO_CORE_LIBRARIES} fftw3 ticp)
 set_target_properties(gnuradio-ccsds PROPERTIES DEFINE_SYMBOL "gnuradio_ccsds_EXPORTS")
 
 ########################################################################

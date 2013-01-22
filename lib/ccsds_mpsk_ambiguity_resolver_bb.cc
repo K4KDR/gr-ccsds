@@ -21,7 +21,7 @@ ccsds_mpsk_ambiguity_resolver_bb_sptr ccsds_make_mpsk_ambiguity_resolver_bb(cons
 ccsds_mpsk_ambiguity_resolver_bb::ccsds_mpsk_ambiguity_resolver_bb (const unsigned int M, std::string ASM, unsigned int threshold, const unsigned int frame_length)
   : gr_block ("ccsds_mpsk_ambiguity_resolver_bb",
 	gr_make_io_signature (1, 1, sizeof (unsigned char)),
-	gr_make_io_signature (1, 1, sizeof (unsigned char))), d_M(M), d_ldM((unsigned int)(log(M)/log(2))), d_ASM_LEN(std::floor(ASM.length()/2)), d_THRESHOLD(threshold), d_BER_THRESHOLD(0), d_FRAME_LEN(frame_length)
+	gr_make_io_signature (1, 1, sizeof (unsigned char))), d_M(M), d_ldM((unsigned int)(log(M)/log(2))), d_THRESHOLD(threshold), d_FRAME_LEN(frame_length), d_ASM_LEN(std::floor(ASM.length()/2))
 {
 
 	// If no ASM is found, samples will be dropped, so no rate can be
@@ -34,8 +34,10 @@ ccsds_mpsk_ambiguity_resolver_bb::ccsds_mpsk_ambiguity_resolver_bb (const unsign
 	d_map_bits_to_index = ccsds_make_mpsk_rev_map(M);
 
 	// Copy ASM to private memory
-	d_ASM = new unsigned char[d_ASM_LEN];
-	ccsds_hexstring_to_binary(&ASM, d_ASM);
+	const unsigned int ber_threshold = 0;
+	unsigned char *tmp = new unsigned char[d_ASM_LEN];
+	ccsds_hexstring_to_binary(&ASM, tmp);
+	d_asm_operator = new ccsds_asm_operator(tmp, d_ASM_LEN, ber_threshold);
 
 	// Initialize variables
 	d_state = STATE_SEARCH;
@@ -46,12 +48,15 @@ ccsds_mpsk_ambiguity_resolver_bb::ccsds_mpsk_ambiguity_resolver_bb (const unsign
 
 	// At the beginning samples and bytes are aligned
 	d_samp_skip_bits = 0;
+
+	dbg_count = 0lu;
 }
 
 ccsds_mpsk_ambiguity_resolver_bb::~ccsds_mpsk_ambiguity_resolver_bb () {
-	delete[] d_ASM;
+	//delete[] d_ASM;
 	delete[] d_map_index_to_bits;
 	delete[] d_map_bits_to_index;
+	delete d_asm_operator;
 }
 
 void ccsds_mpsk_ambiguity_resolver_bb::forecast(int noutput_items,gr_vector_int &ninput_items_required){
@@ -190,165 +195,6 @@ unsigned char * ccsds_mpsk_ambiguity_resolver_bb::get_packed_bytes(const unsigne
 	return out;
 }
 
-
-/*! \brief Checks if stream matches an ASM at given bit offset.
- *
- *  \param stream Array of bytes to check ASM against. If \c offset_bits is zero
- *	\c stream must have at least \c d_ASM_LEN elements, otherwise one element
- *	more.
- *  \param offset_bits Number of bits to ignore in the first byte of the stream.
- *  \return \a true if stream is matching the ASM, \a false if not.
- *
- *  \sa ::d_BER_THRESHOLD
- *
- *  The stream is considered to match if ::d_BER_THRESHOLD or less bits differ.
- */
-bool ccsds_mpsk_ambiguity_resolver_bb::check_for_asm(const unsigned char* stream, unsigned int offset_bits) {
-
-	#if CCSDS_AR_VERBOSITY_LEVEL >= CCSDS_AR_OUTPUT_DEBUG
-		printf("++ check_for_asm ++\n");
-		printf("  compare: %u, offset=%u\n",stream[0],offset_bits);
-		printf("     with: %u\n",d_ASM[0]);
-	#endif
-
-	// Bitmasks to select a single bit position
-	unsigned char* mask = new unsigned char[8];
-	for(unsigned int i=0;i<8;i++) {
-		mask[i] = 0x1 << (7-i);
-	}
-	
-	// counter which bit we will compare next
-	unsigned int count = d_ASM_LEN*8u;
-
-	// byte index in the stream where the current bit is.
-	unsigned int s_byte = 0;
-	// bit index in the current stream byte 0 means MSB
-	unsigned int s_bit  = offset_bits;
-
-	// byte index in the ASM that we are currently comparing
-	unsigned int a_byte = 0;
-	// bit index in the current ASM byte. 0 means MSB
-	unsigned int a_bit  = 0;
-
-	// Number of bit errors that we can still tolerate to
-	// consider sequence as ASM
-	unsigned int err_count = 0;
-
-	// loop through all ASM bits
-	while(count > 0) {
-		// current bit value in the stream moved to the
-		// LSB position
-		unsigned char val_s_bit = (stream[s_byte] & mask[s_bit]) >> (7-s_bit);
-		// current bit value in the ASM moved to the LSB
-		// position
-		unsigned char val_a_bit = ( d_ASM[a_byte] & mask[a_bit]) >> (7-a_bit);
-
-		// if bits are not equal, there is a ber
-		if(val_s_bit != val_a_bit) {
-			err_count++;
-		}
-		
-		// To much errors, this sequence is not the ASM
-		if(err_count > d_BER_THRESHOLD) {
-			delete[] mask;
-
-			#if CCSDS_AR_VERBOSITY_LEVEL >= CCSDS_AR_OUTPUT_DEBUG
-				printf("\n abort with %u comparisons remaining\n",count);
-				printf("+++++++++++++++++++\n");
-			#endif
-
-			return false;
-		}
-		
-		#if CCSDS_AR_VERBOSITY_LEVEL >= CCSDS_AR_OUTPUT_DEBUG
-			printf("  bit %1u equal, %u comparisons remaining\n",val_s_bit,count);
-		#endif
-
-		s_bit++;
-		a_bit++;
-		count--;
-		if(s_bit >= 8) {
-			s_bit = 0;
-			s_byte++;
-		}
-		if(a_bit >= 8) {
-			a_bit = 0;
-			a_byte++;
-		}
-	}
-	
-	delete[] mask;
-
-	#if CCSDS_AR_VERBOSITY_LEVEL >= CCSDS_AR_OUTPUT_DEBUG
-		printf("+++++++++++++++++++\n");
-	#endif
-
-	//exit(0);
-	// we survived, so we must have received an ASM
-	return true;
-}
-
-/*! \brief Searches for ASM in the given stream.
- *
- *  \param stream Array of bytes in which to search for the ASM.
- *  \param stream_len Length of the stream. The last \c d_ASM_LEN bytes of this
- *	stream are not searched (as the ASM would only fit in partially).
- *  \param *offset_bytes Pointer to an unsigned int where the offset bytes between
- *	start of stream and the found ASM should be stored, if a match is found.
- *  \param *offset_bits Pointer to an unsigned int where the offset bits between
- *	start of stream and the found ASM should be stored, if a match is found.
- *  \return \a true if ASM is found, \a false otherwise.
- */
-bool ccsds_mpsk_ambiguity_resolver_bb::search_asm(const unsigned char* stream, const unsigned int stream_len, unsigned int *offset_bytes, unsigned int *offset_bits) {
-
-	// check all possible byte offsets
-	for(unsigned int byte=0;byte<stream_len-d_ASM_LEN;byte++) {
-		// for a given byte offset, check all possible bit offsets
-		for(unsigned int bit=0;bit<8;bit++) {
-
-			// Does the stream at this position match the ASM?			
-			if(check_for_asm(&stream[byte], bit)) {
-
-				// Match found, store position
-				*offset_bytes = byte;
-				*offset_bits  = bit;
-
-				// ASM found, return
-				return true;
-			}
-		}
-	}
-
-	// No match found so far, return.
-	return false;
-}
-
-void ccsds_mpsk_ambiguity_resolver_bb::copy_stream(const unsigned char * stream_in, unsigned char * stream_out, const unsigned int len, const unsigned int offset_bits) {
-
-	if(offset_bits == 0u) {
-		// Input stream is aligned, use memcpy instead of doing
-		// everything by hand
-		memcpy(stream_out, stream_in, len*sizeof(unsigned char));
-	} else {
-		// Input stream has a bit offset, so we need to do the work
-
-		// Go through all output bytes
-		for(unsigned int i=0;i<len;i++) {
-			// Shift the bits from the first byte to the right position
-			unsigned char tmp_l = stream_in[i]   << offset_bits;
-			// Shift the bits from the second byte to the right position
-			unsigned char tmp_h = stream_in[i+1] >> (8-offset_bits);
-
-			// Both bytes should now have all zeros on the positions
-			// where they don't carry information, we join them by
-			// bit-wise OR operations and write them out.
-			stream_out[i] = tmp_l | tmp_h;
-		}
-	}
-	
-	return;
-}
-
 int  ccsds_mpsk_ambiguity_resolver_bb::general_work (int                     noutput_items,
                                 gr_vector_int               &ninput_items,
                                 gr_vector_const_void_star   &input_items,
@@ -380,7 +226,7 @@ int  ccsds_mpsk_ambiguity_resolver_bb::general_work (int                     nou
 
 	// How many samples do we need if locked? If ASM is not aligned we need
 	// another byte for the last bit(s)
-	const unsigned int bytes_req = d_ASM_LEN + d_FRAME_LEN + ( (d_offset_bits) ? 1u : 0u );
+	const unsigned int bytes_req = d_ASM_LEN + d_FRAME_LEN + 1;
 
 	// If we copy to the output stream, how many bytes do we copy?
 	const unsigned int copy = d_ASM_LEN + d_FRAME_LEN;
@@ -396,7 +242,7 @@ int  ccsds_mpsk_ambiguity_resolver_bb::general_work (int                     nou
 				}
 
 				#if CCSDS_AR_VERBOSITY_LEVEL >= CCSDS_AR_OUTPUT_STATE
-					printf("AR: state=SEARCH\n");
+					printf("AR: state=SEARCH at byte %lu\n",dbg_count+bytes_consumed);
 				#endif
 
 				// We have enough samples, let's search in each
@@ -405,9 +251,21 @@ int  ccsds_mpsk_ambiguity_resolver_bb::general_work (int                     nou
 					// we need search_len
 					const unsigned char *in_bytes = get_packed_bytes(in_unpacked, bytes_consumed, search_len, i);
 
-					if(search_asm(in_bytes, search_len, &d_offset_bytes, &d_offset_bits)) {
+					#if CCSDS_AR_VERBOSITY_LEVEL >= CCSDS_AR_OUTPUT_DEBUG
+						printf("AR: ambiguity=%u in=",i);
+						for(unsigned int j=0;j<search_len;j++) {
+							printf("%2X ",in_bytes[j]);
+						}
+						printf("   ");
+					#endif
+					if(d_asm_operator->search_asm(in_bytes, search_len, &d_offset_bytes, &d_offset_bits)) {
+						#if CCSDS_AR_VERBOSITY_LEVEL >= CCSDS_AR_OUTPUT_DEBUG
+							printf("match at byte %u and bit %u\n",d_offset_bytes,d_offset_bits);
+						#endif
+
 						// ASM found, enter LOCK
 						d_state = STATE_LOCK;
+						d_count = 0;
 						d_locked_on_stream = i;
 
 						// Do not output the first one,
@@ -422,14 +280,25 @@ int  ccsds_mpsk_ambiguity_resolver_bb::general_work (int                     nou
 
 						// Do not search the other streams
 						break;
+					} else {
+						#if CCSDS_AR_VERBOSITY_LEVEL >= CCSDS_AR_OUTPUT_DEBUG
+							printf("no match\n");
+						#endif
+						delete[] in_bytes;
 					}
-					delete[] in_bytes;
 				}
 
 				// Consume samples if we did not find anything
 				if(d_state != STATE_LOCK) {
-					bytes_consumed += search_len - d_ASM_LEN;
-					bytes_remain -= search_len - d_ASM_LEN;
+					const unsigned char *in_bytes = get_packed_bytes(in_unpacked, bytes_consumed, copy, d_locked_on_stream);
+
+					// copy to output
+					d_asm_operator->copy_stream(&out[num_out], &in_bytes[d_offset_bytes], copy, d_offset_bits);
+
+					// consume samples
+					num_out	     += copy;
+					bytes_consumed += copy;
+					bytes_remain -= copy;
 				}
 				break; // End state SEARCH
 
@@ -450,8 +319,16 @@ int  ccsds_mpsk_ambiguity_resolver_bb::general_work (int                     nou
 
 					const unsigned char *in_bytes = get_packed_bytes(in_unpacked, bytes_consumed, bytes_req, d_locked_on_stream);
 
+					#if CCSDS_AR_VERBOSITY_LEVEL >= CCSDS_AR_OUTPUT_DEBUG
+						printf("AR: ambiguity=%u in=",d_locked_on_stream);
+						for(unsigned int j=0;j<search_len;j++) {
+							printf("%2X ",in_bytes[j]);
+						}
+						printf(" expected match at byte %u and bit %u\n",d_offset_bytes,d_offset_bits);
+					#endif
+
 					// We have enough samples, lets check for the ASM
-					if(check_for_asm(&in_bytes[d_offset_bytes], d_offset_bits)) {
+					if(d_asm_operator->check_for_asm(&in_bytes[d_offset_bytes], d_offset_bits)) {
 						// ASM found
 						d_count = std::min(d_count+1, d_THRESHOLD);
 					} else if(d_count > 1) {
@@ -462,12 +339,6 @@ int  ccsds_mpsk_ambiguity_resolver_bb::general_work (int                     nou
 						// Lost lock, enter search
 						d_state = STATE_SEARCH;
 						d_count = 0;
-
-						// Reset variables that are undefined in
-						// search state
-						d_offset_bytes = 0;
-						d_offset_bits  = 0;
-						d_locked_on_stream = 0;
 					
 						// Do not consume any samples here. Our
 						// lock on this stream seems to be wrong
@@ -483,7 +354,7 @@ int  ccsds_mpsk_ambiguity_resolver_bb::general_work (int                     nou
 					// We are still locked
 
 					// copy to output
-					copy_stream(&in_bytes[d_offset_bytes], &out[num_out], copy, d_offset_bits);
+					d_asm_operator->copy_stream(&out[num_out], &in_bytes[d_offset_bytes], copy, d_offset_bits);
 				
 					// consume samples
 					num_out	     += copy;
@@ -514,6 +385,8 @@ int  ccsds_mpsk_ambiguity_resolver_bb::general_work (int                     nou
 	// Tell runtime system, how many input samples per stream are not
 	// obsolete
 	consume_each(samps_consumed);
+
+	dbg_count += bytes_consumed;
 
 	// Tell runtime system how many output items we produced
 	return num_out;

@@ -23,6 +23,9 @@
 #include "ccsds_mpsk_mod_bc.h"
 #include "ccsds_mpsk_demod_cb.h"
 #include "ccsds_mpsk_demod2_cb.h"
+#include "ccsds_frame_sync_bb.h"
+#include "ccsds_ticp_frame_source_b.h"
+#include "ccsds_ticp_frame_sink_b.h"
 %}
 
 %include "ccsds_crc16.i"
@@ -51,6 +54,15 @@ GR_SWIG_BLOCK_MAGIC(ccsds,mpsk_demod_cb);
 
 GR_SWIG_BLOCK_MAGIC(ccsds,mpsk_demod2_cb);
 %include "ccsds_mpsk_demod2_cb.h"
+
+GR_SWIG_BLOCK_MAGIC(ccsds,frame_sync_bb);
+%include "ccsds_frame_sync_bb.h"
+
+GR_SWIG_BLOCK_MAGIC(ccsds,ticp_frame_source_b);
+%include "ccsds_ticp_frame_source_b.h"
+
+GR_SWIG_BLOCK_MAGIC(ccsds,ticp_frame_sink_b);
+%include "ccsds_ticp_frame_sink_b.h"
 
 GR_SWIG_BLOCK_MAGIC(ccsds,randomiser_bb);
 %include "ccsds_randomiser_bb.h"

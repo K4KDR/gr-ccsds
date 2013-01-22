@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<block>
+  <name>Frame Synchonizer (CCSDS)</name>
+  <key>ccsds_frame_sync_bb</key>
+  <category>CCSDS</category>
+  <import>import ccsds</import>
+  <make>ccsds.frame_sync_bb($ASM,$threshold,$ber_threshold,$frame_len,$(id)_msgq_out)</make>
+	<param>
+		<name>Sync Marker</name>
+		<key>ASM</key>
+		<value>'1ACFFC1D'</value>
+		<type>string</type>
+	</param>
+	<param>
+		<name>Lock threshold</name>
+		<key>threshold</key>
+		<value>1</value>
+		<type>int</type>
+	</param>
+	<param>
+		<name>BER threshold</name>
+		<key>ber_threshold</key>
+		<value>0</value>
+		<type>int</type>
+	</param>
+	<param>
+		<name>Frame data length</name>
+		<key>frame_len</key>
+		<type>int</type>
+	</param>
+	<check>len($ASM)%2 == 0</check>
+	<check>$threshold > 0</check>
+	<check>$ber_threshold >= 0</check>
+	<check>$frame_len > 0</check>
+	<sink>
+		<name>bitstream</name>
+		<type>byte</type>
+	</sink>
+	<source>
+		<name>null</name>
+		<type>byte</type>
+	</source>
+	<source>
+		<name>frame</name>
+		<type>msg</type>
+	</source>
+	<doc>
+Frame Synchronizer
+
+Take an input stream and look for the attatched sync marker (ASM) in the stream.
+Once the ASM is found, lock on it and look for the following ASMs. If in fully
+locked state a threshold number of ASM are missing, the block enters search mode
+again.
+
+Sync Marker: Hexadecimal representation of the ASM. Must be of odd length as the
+ASM must be an integer number of bytes.
+
+Lock threshold: Everytime an ASM is found a counter is increased up to this
+threshold value. Everytime a ASM is expected, but did not match the counter is
+decreased. As long as the counter is larger than zero the block is in locked
+state. If the counter reaches zero the block enters search mode again. Setting
+threshold to one will make the block loose lock immediatley if an exprected ASM
+does not match.
+
+BER threshold: Maximum number of bit differences between the stream and the ASM
+that may occur while the stream is still consider to match the ASM. If set to
+zero the received stream must contain the exact ASM to match.
+
+Frame data length: Length of the frame data (excluding the ASM) in bytes. Every
+frame data length after the end of an ASM the start of another ASM is expected.
+	</doc>
+</block>

@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<block>
+  <name>TICP Frame Source</name>
+  <key>ccsds_ticp_frame_source_b</key>
+  <category>CCSDS</category>
+  <import>import ccsds</import>
+  <make>ccsds.ticp_frame_source_b($hostname, $port, $frame_len)</make>
+	<param>
+		<name>Hostname</name>
+		<key>hostname</key>
+		<value>localhost</value>
+		<type>string</type>
+	</param>
+	<param>
+		<name>Port</name>
+		<key>port</key>
+		<value>1737</value>
+		<type>int</type>
+	</param>
+	<param>
+		<name>Frame Length</name>
+		<key>frame_len</key>
+		<value>44</value>
+		<type>int</type>
+	</param>
+	<check>$port >= 1</check>
+	<check>$frame_len >= 1</check>
+	<source>
+		<name>out</name>
+		<type>byte</type>
+	</source>
+	<doc>
+TICP Frame source
+
+TICP Client that outputs a bytestream of incomming frames from the TICP to GNURadio.
+
+Hostname: Hostname of the TICP Server.
+
+Port: Port on which the TICP Server is listening
+
+Frame Length: Number of bytes per frame.
+	</doc>
+</block>

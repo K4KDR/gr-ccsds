@@ -30,7 +30,7 @@
 	</param>
 	<check>$M >= 2</check>
 	<check>len($ASM)%2 == 0</check>
-	<check>$threshold >= 0</check>
+	<check>$threshold > 0</check>
 	<check>$frame_len > 0</check>
 	<sink>
 		<name>in</name>
