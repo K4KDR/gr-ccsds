@@ -41,20 +41,24 @@ ccsds_frame_sync_bb::ccsds_frame_sync_bb (std::string ASM, unsigned int threshol
 	d_offset_bytes = 0;
 	d_offset_bits =0;
 
-	dbg_file_in       = fopen("/tmp/ccsds_frame_sync_debug_frame_in.dat","w");
-	dbg_file_out      = fopen("/tmp/ccsds_frame_sync_debug_frame_out.dat","w");
-	dbg_file_instream = fopen("/tmp/ccsds_frame_sync_debug_stream_in.dat","w");
-	dbg_count = 0;
+	#if CCSDS_FS_VERBOSITY_LEVEL >= CCSDS_FS_OUTPUT_FILE
+		dbg_file_in       = fopen("/tmp/ccsds_frame_sync_debug_frame_in.dat","w");
+		dbg_file_out      = fopen("/tmp/ccsds_frame_sync_debug_frame_out.dat","w");
+		dbg_file_instream = fopen("/tmp/ccsds_frame_sync_debug_stream_in.dat","w");
+		dbg_count = 0;
+	#endif
 }
 
 ccsds_frame_sync_bb::~ccsds_frame_sync_bb () {
 	delete d_asm_operator;
-	fflush(dbg_file_in);
-	fflush(dbg_file_out);
-	fflush(dbg_file_instream);
-	fclose(dbg_file_in);
-	fclose(dbg_file_out);
-	fclose(dbg_file_instream);
+	#if CCSDS_FS_VERBOSITY_LEVEL >= CCSDS_FS_OUTPUT_FILE
+		fflush(dbg_file_in);
+		fflush(dbg_file_out);
+		fflush(dbg_file_instream);
+		fclose(dbg_file_in);
+		fclose(dbg_file_out);
+		fclose(dbg_file_instream);
+	#endif
 }
 
 void ccsds_frame_sync_bb::forecast(int noutput_items,gr_vector_int &ninput_items_required){
@@ -193,18 +197,20 @@ int  ccsds_frame_sync_bb::general_work (int                     noutput_items,
 					d_asm_operator->copy_stream(msg->msg(), &in[bytes_consumed+d_offset_bytes+d_ASM_LEN], d_FRAME_LEN, d_offset_bits);
 					d_msgq->insert_tail(msg);
 					
-					fprintf(dbg_file_in,"%3u  ",dbg_count);
-					fprintf(dbg_file_out,"%3u  ",dbg_count);
-					unsigned char tmp[d_FRAME_LEN];
-					d_asm_operator->copy_stream(tmp, &in[bytes_consumed+d_offset_bytes+d_ASM_LEN], d_FRAME_LEN, d_offset_bits);
-					for(unsigned int i=0u;i<d_FRAME_LEN;i++) {
-						fprintf(dbg_file_in,"%2X ",tmp[i]);
-						fprintf(dbg_file_out,"%2X ",msg->msg()[i]);
-					}
-					fprintf(dbg_file_in,"\n");
-					fprintf(dbg_file_out,"\n");
-					dbg_count++;
-					
+					#if CCSDS_FS_VERBOSITY_LEVEL >= CCSDS_FS_OUTPUT_FILE
+						fprintf(dbg_file_in,"%3u  ",dbg_count);
+						fprintf(dbg_file_out,"%3u  ",dbg_count);
+						unsigned char tmp[d_FRAME_LEN];
+						d_asm_operator->copy_stream(tmp, &in[bytes_consumed+d_offset_bytes+d_ASM_LEN], d_FRAME_LEN, d_offset_bits);
+						for(unsigned int i=0u;i<d_FRAME_LEN;i++) {
+							fprintf(dbg_file_in,"%2X ",tmp[i]);
+							fprintf(dbg_file_out,"%2X ",msg->msg()[i]);
+						}
+						fprintf(dbg_file_in,"\n");
+						fprintf(dbg_file_out,"\n");
+						dbg_count++;
+					#endif
+
 					// consume samples
 					bytes_consumed += d_COPY_LEN;
 					bytes_remain -= d_COPY_LEN;
@@ -225,10 +231,12 @@ int  ccsds_frame_sync_bb::general_work (int                     noutput_items,
 	// copy input to output
 	memcpy(out, in, bytes_consumed*sizeof(unsigned char));
 
-	for(unsigned int i=0u;i<bytes_consumed;i++) {
-		fprintf(dbg_file_instream,"%2X ",in[i]);
-	}
-	fprintf(dbg_file_instream,"\n");
+	#if CCSDS_FS_VERBOSITY_LEVEL >= CCSDS_FS_OUTPUT_FILE
+		for(unsigned int i=0u;i<bytes_consumed;i++) {
+			fprintf(dbg_file_instream,"%2X ",in[i]);
+		}
+		fprintf(dbg_file_instream,"\n");
+	#endif
 
 	// Tell runtime system, how many input samples per stream are not
 	// obsolete

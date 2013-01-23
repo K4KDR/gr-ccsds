@@ -8,6 +8,7 @@
 #include <boost/thread.hpp>
 #include <gr_msg_queue.h>
 
+// #define CCSDS_TICP_FRAME_SINK_DEBUG
 
 class ccsds_ticp_frame_sink_b;
 
@@ -59,11 +60,13 @@ private:
 	/*! \brief Messagequeue from where to get the frames. */
 	gr_msg_queue_sptr d_msgq;
 
-	/*! \brief File pointer for debugging. */
-	FILE *dbg_file;
+	#ifdef CCSDS_TICP_FRAME_SINK_DEBUG
+		/*! \brief File pointer for debugging. */
+		FILE *dbg_file;
 
-	/*! \brief Counter for debugging. */
-	unsigned int dbg_count;
+		/*! \brief Counter for debugging. */
+		unsigned int dbg_count;
+	#endif
 
 	/*! \brief Pops a frame from the message queue and send it to the client.
 	 *	Blocks until there is a frame in the message queue.

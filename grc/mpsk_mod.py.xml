@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='ASCII'?>
+<block>
+  <name>M-PSK Modulation Chain</name>
+  <key>mpsk_mod</key>
+  <category>CCSDS</category>
+  <import>execfile("/home/ngs1/.grc_gnuradio/mpsk_mod.py")</import>
+  <make>mpsk_mod(
+	osf=$osf,
+	alpha=$alpha,
+	M=$M,
+	samp_rate=$samp_rate,
+)</make>
+  <callback>set_osf($osf)</callback>
+  <callback>set_alpha($alpha)</callback>
+  <callback>set_M($M)</callback>
+  <callback>set_samp_rate($samp_rate)</callback>
+  <param>
+    <name>Samples per Symbol</name>
+    <key>osf</key>
+    <value>4</value>
+    <type>raw</type>
+  </param>
+  <param>
+    <name>Rollof factor</name>
+    <key>alpha</key>
+    <value>0.5</value>
+    <type>raw</type>
+  </param>
+  <param>
+    <name>Modulation Order</name>
+    <key>M</key>
+    <value>4</value>
+    <type>raw</type>
+  </param>
+  <param>
+    <name>samp_rate</name>
+    <key>samp_rate</key>
+    <value>32000</value>
+    <type>raw</type>
+  </param>
+  <sink>
+    <name>bytestream</name>
+    <type>byte</type>
+    <vlen>1</vlen>
+  </sink>
+  <source>
+    <name>samples</name>
+    <type>complex</type>
+    <vlen>1</vlen>
+  </source>
+  <doc>Martin Luelf
+A block for modulation and signal forming of an M-PSK signal.
+/home/ngs1/.grc_gnuradio/mpsk_mod.py</doc>
+</block>

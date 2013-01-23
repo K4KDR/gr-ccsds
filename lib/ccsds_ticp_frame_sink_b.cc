@@ -18,8 +18,10 @@ ccsds_ticp_frame_sink_b::ccsds_ticp_frame_sink_b (unsigned int port, const unsig
 	gr_make_io_signature (0, 0, 0)), TicpServer(), d_FRAME_LEN(frame_length)
 {
 
-	dbg_file = fopen("/tmp/ccsds_ticp_frame_sink_debug.dat","w");
-	dbg_count = 0;
+	#ifdef CCSDS_TICP_FRAME_SINK_DEBUG
+		dbg_file = fopen("/tmp/ccsds_ticp_frame_sink_debug.dat","w");
+		dbg_count = 0;
+	#endif
 
 	// store queue
 	d_msgq = msgq;
@@ -33,8 +35,10 @@ ccsds_ticp_frame_sink_b::ccsds_ticp_frame_sink_b (unsigned int port, const unsig
 }
 
 ccsds_ticp_frame_sink_b::~ccsds_ticp_frame_sink_b () {
-	fflush(dbg_file);
-	fclose(dbg_file);
+	#ifdef CCSDS_TICP_FRAME_SINK_DEBUG
+		fflush(dbg_file);
+		fclose(dbg_file);
+	#endif
 }
 
 const std::vector< unsigned char > ccsds_ticp_frame_sink_b::getFrame(void) {
@@ -49,13 +53,22 @@ const std::vector< unsigned char > ccsds_ticp_frame_sink_b::getFrame(void) {
 	unsigned char *msg_data = msg->msg();
 	std::vector< unsigned char > frame(d_FRAME_LEN, 0u);
 
-	fprintf(dbg_file,"%3u  ",dbg_count);
+	#ifdef CCSDS_TICP_FRAME_SINK_DEBUG
+		fprintf(dbg_file,"%3u  ",dbg_count);
+	#endif
+
 	for(unsigned int i=0u;i<d_FRAME_LEN;i++) {
 		frame[i] = msg_data[i];
-		fprintf(dbg_file,"%2X ",frame[i]);
+		
+		#ifdef CCSDS_TICP_FRAME_SINK_DEBUG
+			fprintf(dbg_file,"%2X ",frame[i]);
+		#endif
 	}
-	fprintf(dbg_file,"\n");
-	dbg_count++;
+
+	#ifdef CCSDS_TICP_FRAME_SINK_DEBUG
+		fprintf(dbg_file,"\n");
+		dbg_count++;
+	#endif
 
 	return frame;
 }

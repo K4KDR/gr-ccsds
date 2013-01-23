@@ -1,201 +1,115 @@
 #!/usr/bin/env python
 ##################################################
 # Gnuradio Python Flow Graph
-# Title: Mpsk Demod
-# Generated: Wed Aug 22 08:53:26 2012
+# Title: M-PSK Demodulation Chain
+# Author: Martin Luelf
+# Description: A block for synchronization and demodulation of M-PSK signals.
+# Generated: Mon Jan 21 18:04:54 2013
 ##################################################
 
-from gnuradio import digital
 from gnuradio import gr
-from gnuradio import uhd
-from gnuradio import window
 from gnuradio.gr import firdes
-# for dynamicly named file output of the recorded live usrp raw output
-from datetime import datetime
 import ccsds
-import math
 
 class mpsk_demod(gr.hier_block2):
 
-	def __init__(self, M, centre_freq, usrp_gain, samp_per_sym, sym_rate):
+	def __init__(self, alpha=0.5, ASM='1ACFFC1D', frame_len=40, M=4, samp_rate=32000, osf=4):
 		gr.hier_block2.__init__(
-			self, "Mpsk Demod",
-			gr.io_signature(0, 0, 0),
+			self, "M-PSK Demodulation Chain",
+			gr.io_signature(1, 1, gr.sizeof_gr_complex*1),
 			gr.io_signature(1, 1, gr.sizeof_char*1),
 		)
 
 		##################################################
+		# Parameters
+		##################################################
+		self.alpha = alpha
+		self.ASM = ASM
+		self.frame_len = frame_len
+		self.M = M
+		self.samp_rate = samp_rate
+		self.osf = osf
+
+		##################################################
 		# Variables
 		##################################################
-		self.M = M
-		self.ldM = ldM = math.log(M,2) # logarrithmus dualis of M
-		self.omega = omega = samp_per_sym # 2
-		self.bit_rate = bit_rate = ldM * sym_rate # 2e6
-		self.usrp_gain = usrp_gain # 20
-		self.samp_rate = samp_rate = sym_rate*omega
-		self.lpf_interp = lpf_interp = 1
-		self.loop_bw = loop_bw = 6.28/100
-		self.freq = freq = centre_freq # 2.235e9
-		self.bp_transition_width = bp_transition_width = sym_rate/2
-		self.Beta = Beta = 1
-		self.alpha = alpha = 0.5 # Matched filter roll-off
+		self.sym_rate = sym_rate = samp_rate/osf
 
 		##################################################
 		# Message Queues
 		##################################################
-		ccsds_pll_msgq_out = ccsds_local_oscillator_msgq_in = gr.msg_queue(0)
+		ccsds_pll_cc_0_msgq_out = ccsds_local_oscillator_cc_0_msgq_in = gr.msg_queue(2)
 
 		##################################################
 		# Blocks
 		##################################################
-		# self.wxgui_scopesink2_0_0 = scopesink2.scope_sink_f(
-			# window=self.GetWin(),
-			# title="Scope Plot",
-			# sample_rate=samp_rate,
-			# v_scale=0,
-			# v_offset=0,
-			# t_scale=0,
-			# ac_couple=False,
-			# xy_mode=False,
-			# num_inputs=1,
-			# trig_mode=gr.gr_TRIG_MODE_AUTO,
-			# y_axis_label="Counts"
-		# )
-		# self.Add(self.wxgui_scopesink2_0_0.win)
-		# self.wxgui_fftsink2_0 = fftsink2.fft_sink_c(
-			# self.GetWin(),
-			# baseband_freq=0,
-			# y_per_div=1,
-			# y_divs=10,
-			# ref_level=0,
-			# ref_scale=2.0,
-			# sample_rate=samp_rate,
-			# fft_size=1024,
-			# fft_rate=15,
-			# average=True,
-			# avg_alpha=None,
-			# title="FFT Plot",
-			# peak_hold=False,
-			# win=window.hamming,
-		# )
-		# self.Add(self.wxgui_fftsink2_0.win)
-		self.uhd_usrp_source = uhd.usrp_source(
-			device_addr="addr=192.168.10.2",
-			stream_args=uhd.stream_args(
-				cpu_format="fc32",
-				channels=range(1),
-			),
-		)
-		self.uhd_usrp_source.set_samp_rate(samp_rate)
-		self.uhd_usrp_source.set_center_freq(freq, 0)
-		self.uhd_usrp_source.set_gain(usrp_gain, 0)
-		self.uhd_usrp_source.set_bandwidth(10000000, 0)
-		
-		self.gr_agc = gr.agc_cc(1e-5, 1.0, 1, 10.0)
-		
-		self.ccsds_local_oscillator = ccsds.local_oscillator_cc(128,omega,ccsds_local_oscillator_msgq_in)
-		self.rx_filter = gr.fir_filter_ccf(1, firdes.root_raised_cosine(
-			1, samp_rate, sym_rate, 0.5, 11*omega))
-		self.ccsds_dll = ccsds.dll_cc(omega,0.001)
-		self.ccsds_pll = ccsds.pll_cc(M, 1e-2,ccsds_pll_msgq_out)
-		self.ccsds_mpsk_demod = ccsds.mpsk_demod_cb(M)
-		
-#		self.low_pass_filter_0 = gr.interp_fir_filter_ccf(lpf_interp, firdes.low_pass(
-#			1, samp_rate, bit_rate*1, bp_transition_width, firdes.WIN_HAMMING, 6.76))
-#		self.gr_complex_to_real_0 = gr.complex_to_real(1)
-#		self.digital_costas_loop_cc_0 = digital.costas_loop_cc(loop_bw, 2)
-#		self.digital_clock_recovery_mm_xx_0_0 = digital.clock_recovery_mm_cc(omega, 0.00005, 0.5, 0.5, 0.05)
-#		self.digital_binary_slicer_fb_0_0 = digital.binary_slicer_fb()
-#		self.band_pass_filter_0 = gr.interp_fir_filter_ccf(1, firdes.band_pass(
-#			1, samp_rate, 1, bit_rate, bp_transition_width, firdes.WIN_HAMMING, 6.76))
-		#self.file_out = file_out = "/home/ngs1/usrp_raw_output/" + datetime.now().strftime("%Y.%m.%d.%H.%M.%S") + ".dat"
-		#self.raw_sink = gr.file_sink(gr.sizeof_gr_complex*1, file_out);
+		self.root_raised_cosine_filter_0_1 = gr.fir_filter_ccf(1, firdes.root_raised_cosine(
+			1, samp_rate, sym_rate, alpha, 11*osf))
+		self.gr_throttle_0_0_0 = gr.throttle(gr.sizeof_gr_complex*1, sym_rate)
+		self.ccsds_pll_cc_0 = ccsds.pll_cc(M, 1e-2,ccsds_pll_cc_0_msgq_out)
+		self.ccsds_mpsk_demod_cb_0 = ccsds.mpsk_demod_cb(M)
+		self.ccsds_mpsk_ambiguity_resolver_bb = ccsds.mpsk_ambiguity_resolver_bb(M,ASM,1,frame_len)
+		self.ccsds_local_oscillator_cc_0 = ccsds.local_oscillator_cc(4,osf,ccsds_local_oscillator_cc_0_msgq_in)
+		self.ccsds_dll_cc_0 = ccsds.dll_cc(osf,0.1)
 
 		##################################################
 		# Connections
 		##################################################
-		self.connect((self.uhd_usrp_source, 0), (self.gr_agc, 0))
-		self.connect((self.gr_agc, 0), (self.ccsds_local_oscillator, 0))
-		self.connect((self.ccsds_local_oscillator, 0), (self.rx_filter, 0))
-		self.connect((self.rx_filter, 0), (self.ccsds_dll, 0))
-		self.connect((self.ccsds_dll, 0), (self.ccsds_pll, 0))
-		self.connect((self.ccsds_pll, 0), (self.ccsds_mpsk_demod, 0))
-		self.connect((self.ccsds_mpsk_demod, 0), (self, 0))
+		self.connect((self.ccsds_mpsk_ambiguity_resolver_bb, 0), (self, 0))
+		self.connect((self.ccsds_local_oscillator_cc_0, 0), (self.root_raised_cosine_filter_0_1, 0))
+		self.connect((self.root_raised_cosine_filter_0_1, 0), (self.ccsds_dll_cc_0, 0))
+		self.connect((self, 0), (self.ccsds_local_oscillator_cc_0, 0))
+		self.connect((self.ccsds_dll_cc_0, 0), (self.gr_throttle_0_0_0, 0))
+		self.connect((self.gr_throttle_0_0_0, 0), (self.ccsds_pll_cc_0, 0))
+		self.connect((self.ccsds_pll_cc_0, 0), (self.ccsds_mpsk_demod_cb_0, 0))
+		self.connect((self.ccsds_mpsk_demod_cb_0, 0), (self.ccsds_mpsk_ambiguity_resolver_bb, 0))
 
-	def get_omega(self):
-		return self.omega
+	def get_alpha(self):
+		return self.alpha
 
-	def set_omega(self, omega):
-		self.omega = omega
-		self.set_samp_rate(self.sym_rate*self.omega)
-		self.ccsds_local_oscillator = ccsds.local_oscillator_cc(128,self.omega,ccsds_local_oscillator_msgq_in)
-		self.rx_filter = gr.fir_filter_ccf(1, firdes.root_raised_cosine(
-			1, self.samp_rate, self.sym_rate, self.alpha, 11*self.omega))
-		self.ccsds_dll = ccsds.dll_cc(self.omega,0.001)
-		
+	def set_alpha(self, alpha):
+		self.alpha = alpha
+		self.root_raised_cosine_filter_0_1.set_taps(firdes.root_raised_cosine(1, self.samp_rate, self.sym_rate, self.alpha, 11*self.osf))
 
-	def get_bit_rate(self):
-		return self.bit_rate
+	def get_ASM(self):
+		return self.ASM
 
-	def set_bit_rate(self, bit_rate):
-		self.bit_rate = bit_rate
-		self.sym_rate = bit_rate / self.ldM
-		self.set_samp_rate(self.sym_rate*self.omega)
-		self.rx_filter = gr.fir_filter_ccf(1, firdes.root_raised_cosine(
-			1, self.samp_rate, self.sym_rate, self.alpha, 11*self.omega))
-		
+	def set_ASM(self, ASM):
+		self.ASM = ASM
 
-	def get_usrp_gain(self):
-		return self.usrp_gain
+	def get_frame_len(self):
+		return self.frame_len
 
-	def set_usrp_gain(self, usrp_gain):
-		self.usrp_gain = usrp_gain
-		self.uhd_usrp_source.set_gain(self.usrp_gain, 0)
+	def set_frame_len(self, frame_len):
+		self.frame_len = frame_len
+
+	def get_M(self):
+		return self.M
+
+	def set_M(self, M):
+		self.M = M
 
 	def get_samp_rate(self):
 		return self.samp_rate
 
 	def set_samp_rate(self, samp_rate):
 		self.samp_rate = samp_rate
-		self.rx_filter = gr.fir_filter_ccf(1, firdes.root_raised_cosine(
-			1, self.samp_rate, self.sym_rate, self.alpha, 11*self.omega))
-		self.uhd_usrp_source.set_samp_rate(self.samp_rate)
+		self.set_sym_rate(self.samp_rate/self.osf)
+		self.root_raised_cosine_filter_0_1.set_taps(firdes.root_raised_cosine(1, self.samp_rate, self.sym_rate, self.alpha, 11*self.osf))
 
-	def get_lpf_interp(self):
-		return self.lpf_interp
+	def get_osf(self):
+		return self.osf
 
-	def set_lpf_interp(self, lpf_interp):
-		self.lpf_interp = lpf_interp
+	def set_osf(self, osf):
+		self.osf = osf
+		self.set_sym_rate(self.samp_rate/self.osf)
+		self.root_raised_cosine_filter_0_1.set_taps(firdes.root_raised_cosine(1, self.samp_rate, self.sym_rate, self.alpha, 11*self.osf))
 
-	def get_loop_bw(self):
-		return self.loop_bw
+	def get_sym_rate(self):
+		return self.sym_rate
 
-	#FIXME apply new loop bandwidths to loops
-	def set_loop_bw(self, loop_bw):
-		self.loop_bw = loop_bw
-		self.digital_costas_loop_cc_0.set_loop_bandwidth(self.loop_bw)
-
-	def get_freq(self):
-		return self.freq
-
-	def set_freq(self, freq):
-		self.freq = freq
-		self.uhd_usrp_source.set_center_freq(self.freq, 0)
-
-
-	def get_bp_transition_width(self):
-		return self.bp_transition_width
-
-	#FIXME apply new width
-	def set_bp_transition_width(self, bp_transition_width):
-		self.bp_transition_width = bp_transition_width
-		#self.band_pass_filter_0.set_taps(firdes.band_pass(1, self.samp_rate, 1, self.bit_rate, self.bp_transition_width, firdes.WIN_HAMMING, 6.76))
-		#self.low_pass_filter_0.set_taps(firdes.low_pass(1, self.samp_rate, self.bit_rate*1, self.bp_transition_width, firdes.WIN_HAMMING, 6.76))
-
-	def get_Beta(self):
-		return self.Beta
-
-	def set_Beta(self, Beta):
-		self.Beta = Beta
+	def set_sym_rate(self, sym_rate):
+		self.sym_rate = sym_rate
+		self.root_raised_cosine_filter_0_1.set_taps(firdes.root_raised_cosine(1, self.samp_rate, self.sym_rate, self.alpha, 11*self.osf))
 
 

@@ -14,8 +14,12 @@
 /*! \brief Verbosity level: Do output state information */
 #define CCSDS_FS_OUTPUT_STATE 1
 
+/*! \brief Verbosity level: Do output into debug file */
+#define CCSDS_FS_OUTPUT_FILE 2
+
 /*! \brief Verbosity level: Do output debug information */
-#define CCSDS_FS_OUTPUT_DEBUG 2
+#define CCSDS_FS_OUTPUT_DEBUG 3
+
 
 /*! \brief Level of verbosity of this block.
  *
@@ -162,13 +166,15 @@ private:
 	 */
 	gr_msg_queue_sptr d_msgq;
 
-	/*! \brief File pointer for debugging. */
-	FILE *dbg_file_in;
-	FILE *dbg_file_instream;
-	FILE *dbg_file_out;
+	#if CCSDS_FS_VERBOSITY_LEVEL >= CCSDS_FS_OUTPUT_FILE
+		/*! \brief File pointer for debugging. */
+		FILE *dbg_file_in;
+		FILE *dbg_file_instream;
+		FILE *dbg_file_out;
 
-	/*! \brief Counter for debugging. */
-	unsigned int dbg_count;
+		/*! \brief Counter for debugging. */
+		unsigned int dbg_count;
+	#endif
 
 	/*! \brief Calculates how many input bytes are needed to check for a
 	 *	known ASM position.

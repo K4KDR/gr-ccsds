@@ -13,7 +13,7 @@
 /*! \brief If defined the work function stops after sourcing at least the defined
  *	number of bytes.
  */
-#define PROFILE_NUM_SAMPS 10000u
+// #define PROFILE_NUM_SAMPS 1000000u
 
 class ccsds_ticp_frame_source_b;
 
@@ -60,20 +60,6 @@ private:
 	/*! \brief Length of a frame in bytes. */
 	const unsigned int d_FRAME_LEN;
 
-	const unsigned int d_BUFFER_SIZE;
-
-	/*! \brief Buffer to store frames in */
-	unsigned char *d_frame_buffer;
-
-	/*! \brief Number of frames in buffer */
-	unsigned int d_frames_buffered;
-
-	/*! \brief Number of frames that are requested from the TICP server */
-	unsigned int d_frames_requested;
-
-	/*! \brief Mutex to synchronize the access to the buffer */
-	boost::mutex d_mutex;
-
 	/*! \brief Flag to indicate that the block is stopped and that all
 	 *	requests should be droped.
 	 */
@@ -90,16 +76,6 @@ private:
 	#ifdef PROFILE_NUM_SAMPS
 		unsigned long profile_count;
 	#endif
-
-	/*! \brief Function to call when there is a new frame. */
-	boost::function<void(vector< unsigned char > const &)> d_ticp_add_function;
-
-	/*! \brief Waits for lock and adds frame to the buffer once locked.
-	 *
-	 *  \param frame Frame to buffer. Must contain exactly d_FRAME_LEN
-	 *	elements
-	 */
-	void addFrame(const std::vector< unsigned char > &frame);
 
 public:
 	/*! \brief Public deconstructor of the ticp frame source */	

@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='ASCII'?>
+<block>
+  <name>M-PSK Demodulation Chain</name>
+  <key>mpsk_demod</key>
+  <category>CCSDS</category>
+  <import>execfile("/home/ngs1/.grc_gnuradio/mpsk_demod.py")</import>
+  <make>mpsk_demod(
+	alpha=$alpha,
+	ASM=$ASM,
+	frame_len=$frame_len,
+	M=$M,
+	samp_rate=$samp_rate,
+	osf=$osf,
+)</make>
+  <callback>set_alpha($alpha)</callback>
+  <callback>set_ASM($ASM)</callback>
+  <callback>set_frame_len($frame_len)</callback>
+  <callback>set_M($M)</callback>
+  <callback>set_samp_rate($samp_rate)</callback>
+  <callback>set_osf($osf)</callback>
+  <param>
+    <name>Rollof factor</name>
+    <key>alpha</key>
+    <value>0.5</value>
+    <type>raw</type>
+  </param>
+  <param>
+    <name>Sync Marker</name>
+    <key>ASM</key>
+    <value>'1ACFFC1D'</value>
+    <type>raw</type>
+  </param>
+  <param>
+    <name>Frame Length</name>
+    <key>frame_len</key>
+    <value>40</value>
+    <type>raw</type>
+  </param>
+  <param>
+    <name>Modulation Order</name>
+    <key>M</key>
+    <value>4</value>
+    <type>raw</type>
+  </param>
+  <param>
+    <name>samp_rate</name>
+    <key>samp_rate</key>
+    <value>32000</value>
+    <type>raw</type>
+  </param>
+  <param>
+    <name>Samples per Symbol</name>
+    <key>osf</key>
+    <value>4</value>
+    <type>raw</type>
+  </param>
+  <sink>
+    <name>samples</name>
+    <type>complex</type>
+    <vlen>1</vlen>
+  </sink>
+  <source>
+    <name>bytestream</name>
+    <type>byte</type>
+    <vlen>1</vlen>
+  </source>
+  <doc>Martin Luelf
+A block for synchronization and demodulation of M-PSK signals.
+/home/ngs1/.grc_gnuradio/mpsk_demod.py</doc>
+</block>
