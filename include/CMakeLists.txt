@@ -25,7 +25,6 @@ install(FILES
     ccsds_randomiser_bb.h
     ccsds_viterbi27_bb.h
     ccsds_framer_sink_dual.h
-    ccsds_msg_source.h
     ccsds_rs_decode_bb.h
     ccsds_local_oscillator_cc.h
     ccsds_fll_cc.h

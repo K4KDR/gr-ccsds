@@ -12,7 +12,6 @@
 #include "ccsds_viterbi27_bb.h"
 #include "ccsds_conv_encode.h"
 #include "ccsds_framer_sink_dual.h"
-#include "ccsds_msg_source.h"
 #include "ccsds_rs_decode_bb.h"
 #include "ccsds_crc16.h"
 #include "ccsds_local_oscillator_cc.h"
@@ -103,9 +102,6 @@ GR_SWIG_BLOCK_MAGIC(ccsds,viterbi27_bb);
 
 GR_SWIG_BLOCK_MAGIC(ccsds,framer_sink_dual);
 %include "ccsds_framer_sink_dual.h"
-
-GR_SWIG_BLOCK_MAGIC(ccsds,msg_source);
-%include "ccsds_msg_source.h"
 
 GR_SWIG_BLOCK_MAGIC(ccsds,rs_decode_bb);
 %include "ccsds_rs_decode_bb.h"
