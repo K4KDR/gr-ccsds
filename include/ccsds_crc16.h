@@ -9,7 +9,7 @@
 
 /*!
  * \brief update running CRC-16
- * \ingroup misc
+ * \ingroup channelcoding
  *
  * Update a running CRC with the bytes buf[0..len-1] The CRC should be
  * initialized to all 1's, and the transmitted value is the 1's
@@ -20,7 +20,7 @@ CCSDS_API unsigned int
 ccsds_update_crc16(unsigned int crc, const unsigned char *buf, size_t len);
 
 CCSDS_API unsigned int
-CCSDS_API ccsds_update_crc16(unsigned int crc, const std::string buf);
+ccsds_update_crc16(unsigned int crc, const std::string buf);
 
 CCSDS_API unsigned int
 ccsds_crc16(const unsigned char *buf, size_t len);

@@ -55,9 +55,8 @@ CCSDS_API ccsds_randomiser_bb_sptr ccsds_make_randomiser_bb(gr_msg_queue_sptr ou
  * The gnuradio-core gri_lfsr has a bug in that can be worked-around by defining the length of the 
  * shift register (in the 'len' parameter) to be one less than its actual length
  *
- * \ingroup ccsds
+ * \ingroup telemetry
  */
-
 class CCSDS_API ccsds_randomiser_bb : public gr_sync_block
 {
 	friend CCSDS_API ccsds_randomiser_bb_sptr 

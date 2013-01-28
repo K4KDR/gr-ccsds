@@ -1,24 +1,39 @@
 /*!
- *  \defgroup modulation CCSDS modulation blocks
- *  \brief Blocks used for modulating CCSDS signals
+ *  \defgroup sender CCSDS sender blocks
+ *  \brief Summary of all blocks used for modulating and sending a CCSDS
+ *	conformant signal.
  */
 
 /*!
- *  \defgroup demodulation CCSDS demodulation blocks
- *  \brief Blocks used for demodulating CCSDS signals
+ *  \defgroup receiver CCSDS receiver blocks
+ *  \brief Summary of all blocks used for demodulating and receiving a CCSDS
+ *	conformant signal.
  */
 
 /*!
  *  \defgroup synchronization CCSDS synchronization blocks
  *  \brief Blocks used for channel synchronization of CCSDS conforming signals
  *
- *  \ingroup modulation
+ *  \ingroup receiver
  */
 
 
 /*!
  *  \defgroup channelcoding CCSDS channel coding blocks
  *  \brief Blocks used for channelcoding and decoding of CCSDS conforming signals
+ */
+
+/*!
+ *  \defgroup telemetry CCSDS telemetry blocks
+ *  \brief Summary of all blocks used for telemetry frame operations.
+ */
+
+/*!
+ *  \defgroup ticp CCSDS TICP blocks
+ *  \brief Summary of all blocks that use the tranceiver intercommunication
+ *	protocol (TICP) to communicate with blocks developed at TUM
+ *
+ * \ingroup telemetry
  */
 
 /*!

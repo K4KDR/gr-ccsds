@@ -36,7 +36,7 @@ typedef boost::shared_ptr<ccsds_rs_decode_bb> ccsds_rs_decode_bb_sptr;
 CCSDS_API ccsds_rs_decode_bb_sptr ccsds_make_rs_decode_bb (gr_msg_queue_sptr output_queue, int codeblock_bits);
 
 /*! \brief A (255,223) Reed-Solomon decoder for CCSDS TM Frames
- * \ingroup ccsds
+ * \ingroup channelcoding
  *
  * The forward error correction library by Phil Karn is used.
  *

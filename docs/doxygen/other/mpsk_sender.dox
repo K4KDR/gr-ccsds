@@ -1,0 +1,56 @@
+/*! \page page_mpsk_sender M-PSK sender chain
+
+\section page_mpsk_sender_introduction Introduction
+This pages describes a general purpose M-PSK sender which can be used to
+transmitt arbitrary M-PSK signals.
+
+This block takes an input stream of packed data bytes and outputs complex M-PSK
+samples at sampling rate.
+
+\section page_mpsk_sender_setup Setup
+The Figure below shows the GRC blocks of this M-PSK sender. It's parameters and
+blocks are described in the next Sections.
+
+\image html mpsk_mod.png "Setup of the M-PSK sender of this package"
+
+\section page_mpsk_sender_parameters Parameters
+
+\subsection page_mpsk_sender_samp_rate samp_rate
+The sampling rate of the outgoing samples.
+
+\subsection page_mpsk_sender_M M
+The Modulation order of the signal. Must be a power of two.
+
+\subsection page_mpsk_sender_osf osf
+Oversampling factor, or samples per symbol. The sender block performs an
+upsampling by this factor. Oversampling must be at least two.
+
+\subsection page_mpsk_sender_alpha alpha
+Rollof factor from the TX factor.
+
+\subsection page_mpsk_sender_sym_rate sym_rate
+Symbol rate of the outgoing signal given by \c samp_rate / \c osf.
+
+\subsection page_mpsk_sender_ldM ldM
+Number of bits per symbol given by \c ld(M) with \c ld beeing the logarithmus
+dualis (\c log of base two).
+
+\section page_mpsk_sender_blocks Blocks
+\subsection page_mpsk_sender_packed_to_unpacked Byte unpacker
+Takes the packed bytes from the input stream and output bytes with only \c ldM
+information bits in each output byte. The \c ldM bits containing the MSB are
+taken first, the ones containing the LSB are taken last. The standardt GNURadio
+Packed to Unpacked block is used.
+
+\subsection page_mpsk_sender_mod Modulator
+The incomming unpacked bytes containing \c ldM information bits each are
+transformed into complex baseband symbols. Implemented in \ref ccsds_mpsk_mod_bc.
+
+\subsection page_mpsk_sender_filter TX filter
+The TX filter limits the bandwidth of the send signal and performs the
+oversampling by a factor of \c osf. The concatenation of this filter and the RX
+filter should fulfill the first Nyquist criterion. A standard GRC RRC filter
+implementation is used.
+\todo Use a brick wall interpolation filter instead of a RRC if no TX filter
+should used.
+*/

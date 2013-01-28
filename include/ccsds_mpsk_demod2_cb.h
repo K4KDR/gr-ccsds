@@ -17,7 +17,7 @@ typedef boost::shared_ptr<ccsds_mpsk_demod2_cb> ccsds_mpsk_demod2_cb_sptr;
 CCSDS_API ccsds_mpsk_demod2_cb_sptr ccsds_make_mpsk_demod2_cb (unsigned int M);
 
 /*! \brief M-PSK demodulator. 
- *  \ingroup demodulation
+ *  \ingroup receiver
  *
  *  M-PSK demodulation based on the phase of the incomming signal.
  *

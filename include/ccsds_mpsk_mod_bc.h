@@ -17,7 +17,7 @@ typedef boost::shared_ptr<ccsds_mpsk_mod_bc> ccsds_mpsk_mod_bc_sptr;
 CCSDS_API ccsds_mpsk_mod_bc_sptr ccsds_make_mpsk_mod_bc (unsigned int M);
 
 /*! \brief M-PSK modulator. 
- *  \ingroup modulation
+ *  \ingroup sender
  *
  *  On construction a constellation array is generated. This constellation is
  *  later used to map the individual data bits to symbols.

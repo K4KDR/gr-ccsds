@@ -64,12 +64,20 @@ typedef boost::shared_ptr<ccsds_frame_sync_bb> ccsds_frame_sync_bb_sptr;
 CCSDS_API ccsds_frame_sync_bb_sptr ccsds_make_frame_sync_bb(std::string ASM, unsigned int threshold, const unsigned int ber_threshold, const unsigned int frame_length, gr_msg_queue_sptr msgq);
 
 /*!
- * \brief Take the input streams and look for an ASM. If the block finds an ASM
- * it will create an asynchronous message containing the \c frame_length bytes
- * after the ASM. The input stream is copied the output stream in any case.
- * \ingroup synchronization
+ * \brief Take the input streams and look for an ASM.
  *
- * \todo Document final search and lock algorithms.
+ * \ingroup receiver
+ *
+ * The block will start in searchmode, looking for every possible bit and byte
+ * offset. Once an ASM is found it will enter locked state where it will only
+ * check for the ASM at the expected position. If the ASM is found a counter is
+ * increased up to \c d_THRESHOLD. If an exprected ASM is not found the counter
+ * is decreased. If the counter reaches zero the block goes into search mode
+ * again.
+ *
+ * If the block finds an ASM it will create an asynchronous message containing
+ * the \c frame_length bytes after the ASM. The input stream is copied the
+ * output stream in any case.
  */
 class CCSDS_API ccsds_frame_sync_bb : public gr_block
 {
@@ -89,10 +97,12 @@ private:
 	 *  \param msgq Shared pointer to an asynchronous message queue to which
 	 *	the frame data will be copied.
 	 *
-	 *  Constructs a AR block that searches for the ASM in the \c M input
-	 *  streams and outputs the one that contains the ASM. If no ASM is
-	 *  found, no output is given. This block preserves the ASM, as it is
-	 *  still needed for frame synchronization after decoding.
+	 *  Constructs a Frame sync block that searches for the ASM in the input
+	 *  streams and outputs an asynchronous message with the \c d_FRAME_LEN 
+	 *  bytes after the ASM. If no ASM is is found, no message is created.
+	 *  This block consumes the ASM in the output message.
+	 *
+	 *  The input of this block is copied one-to-one to the output stream.
 	 */
 	ccsds_frame_sync_bb(std::string ASM, unsigned int threshold, const unsigned int ber_threshold, const unsigned int frame_length, gr_msg_queue_sptr msgq);
 	

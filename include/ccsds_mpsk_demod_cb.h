@@ -18,7 +18,7 @@ CCSDS_API ccsds_mpsk_demod_cb_sptr ccsds_make_mpsk_demod_cb (unsigned int M);
 
 
 /*! \brief M-PSK demodulator. 
- *  \ingroup demodulation
+ *  \ingroup receiver
  *  \sa ccsds_mpsk_demod_cb::detect_bpsk_symbol
  *  \sa ccsds_mpsk_demod_cb::detect_qpsk_symbol
  *  \sa ccsds_mpsk_demod_cb::detect_mpsk_symbol

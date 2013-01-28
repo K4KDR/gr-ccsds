@@ -42,7 +42,10 @@ typedef boost::shared_ptr<ccsds_ticp_frame_source_b> ccsds_ticp_frame_source_b_s
  */
 CCSDS_API ccsds_ticp_frame_source_b_sptr ccsds_make_ticp_frame_source_b(std::string hostname, unsigned int port, const unsigned int frame_length);
 
-/*! \brief Reads frames from a TicpServer and outputs it as a stream. */
+/*! \brief Reads frames from a TicpServer and outputs it as a stream.
+ *
+ *  \ingroup ticp
+ */
 class CCSDS_API ccsds_ticp_frame_source_b : public gr_block, public TicpClient
 {
 private:

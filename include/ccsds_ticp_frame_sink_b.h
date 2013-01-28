@@ -38,7 +38,11 @@ typedef boost::shared_ptr<ccsds_ticp_frame_sink_b> ccsds_ticp_frame_sink_b_sptr;
  */
 CCSDS_API ccsds_ticp_frame_sink_b_sptr ccsds_make_ticp_frame_sink_b(unsigned int port, const unsigned int frame_length, gr_msg_queue_sptr msgq);
 
-/*! \brief Reads frames from asynchronous message queue and outputs it to a TicpClient. */
+/*! \brief Reads frames from asynchronous message queue and outputs it to a
+ *	TicpClient.
+ *
+ *  \ingroup ticp
+ */
 class CCSDS_API ccsds_ticp_frame_sink_b : public gr_block, public TicpServer
 {
 private:

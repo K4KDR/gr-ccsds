@@ -33,7 +33,8 @@ ccsds_make_framer_sink_dual (gr_msg_queue_sptr target_queue, int framesyms, int 
 
 /*!
  * \brief Given 2 parallel streams of bits and access_code flags, assemble TM Frames.
- * \ingroup ccsds
+ * \ingroup receiver
+ * \ingroup synchronization
  *
  * It is a fact of non-differential BPSK demodulation that an inverted bit stream may be produced. 
  * Two parallel gr_correlate_access_code_bb blocks have been setup, one looking for the non-inverted ASM,

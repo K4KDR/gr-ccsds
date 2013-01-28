@@ -36,7 +36,8 @@ by using:
 \todo Create ccsds package's python help
 
 \section Modules
-\subpage page_mpsk_demod
+\subpage page_mpsk_receiver
+\subpage page_mpsk_sender
 
 \section Bibliography
 \subpage page_bibliography

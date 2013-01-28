@@ -36,7 +36,7 @@ CCSDS_API ccsds_viterbi27_bb_sptr ccsds_make_viterbi27_bb(
 				gr_msg_queue_sptr output_queue, int framebits, unsigned long int sync_marker, int asm_length);
 
 /*! \brief A rate 1/2, k=7 convolutional frame decoder for the CCSDS standard
- * \ingroup ccsds
+ * \ingroup channelcoding
  *
  * This block performs hard-decision convolutional decoding using the Viterbi
  * algorithm. The fec library by Phil Karn is used.

@@ -54,12 +54,24 @@ typedef boost::shared_ptr<ccsds_mpsk_ambiguity_resolver_bb> ccsds_mpsk_ambiguity
 CCSDS_API ccsds_mpsk_ambiguity_resolver_bb_sptr ccsds_make_mpsk_ambiguity_resolver_bb(const unsigned int M, std::string ASM, unsigned int threshold, const unsigned int frame_length);
 
 /*!
- * \brief M-PSK Ambiguity resolution. Take M input streams and look for ASM on
- *	each one. Output the one that shows the ASM, i.e. that has the right
- *	phase ambiguity. ASM is preserved in the output stream.
+ * \brief M-PSK Ambiguity resolution.
+ *
  * \ingroup synchronization
  *
- * \todo Document final search and lock algorithms.
+ * The input to this block is a stream of unpacked bytes, each containing \c ld(M)
+ * used information bits. The output of this block is a stream of packed bytes.
+ *
+ * The block will start in searchmode, looking for every possible bit and byte
+ * offset in all possible \c M ambiguities. Once an ASM is found it will enter
+ * locked state where it will only check for the ASM at the expected position
+ * and ambiguity. If the ASM is found a counter is increased up to
+ * \c d_THRESHOLD. If an exprected ASM is not found the counter is decreased.
+ * If the counter reaches zero the block goes into search mode again.
+
+ * The stream with the last known ambiguity and bit offset is send to the output.
+ * In locked state this will result in the correct byte stream beeing output,
+ * while in searchmode the output might be nonsense (since there is no ASM in it)
+ * or might still be correct if the block has lost it's lock to early.
  */
 class CCSDS_API ccsds_mpsk_ambiguity_resolver_bb : public gr_block
 {

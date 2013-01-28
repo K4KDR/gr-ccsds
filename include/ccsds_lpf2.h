@@ -122,7 +122,9 @@ private:
 	/*! \brief Update filtered state from a single input.
 	 *
 	 *  \param in Value to be filtered.
-	 *  \todo Add filter's block diagram as graphic
+	 *
+	 *  \image html lpf2_filter_step.png "Block diagram of the \c filter_step() function"
+	 *
 	 */
 	double filter_step(float in);
 
@@ -131,7 +133,9 @@ private:
 	 *
 	 *  \param in Value to be filtered.
 	 *  \param wrap_max Bound arround which the input value is wrapped.
-	 *  \todo Add filter's block diagram as graphic
+	 *
+	 *  \image html lpf2_filter_step_wrapped.png "Block diagram of the \c filter_step_wrapped() function"
+	 *
 	 *  \sa wrap()
 	 */
 	double filter_step_wrapped(float in, float wrap_max);

@@ -4,9 +4,20 @@
 #include <cstring>
 #include <cstdio>
 
+/*! \brief Outputs debug messages to stdout if defined */
 // #define CCSDS_ASM_DEBUG
 
-
+/*! \brief Helper class for bit wise ASM search functions
+ *
+ *  \ingroup receiver
+ *  \ingroup synchronization
+ *
+ *  \sa ccsds_mpsk_ambiguity_resolver_bb
+ *  \sa ccsds_frame_sync_bb
+ *
+ *  \todo Continue searching if ASM matches with a few tolerable bit errors (but there might also be a better match at later ambiguities)
+ *  \todo Document search algorithm
+ */
 class ccsds_asm_operator {
 
 private:

@@ -3,6 +3,10 @@
 #include "fec.h"
 // #define PY_ARRAY_UNIQUE_SYMBOL aaa
 
+/*! \brief Helper class for convolutional encoding
+ *
+ *  \ingroup channelcoding
+ */
 class CCSDS_API ccsds_conv_encode
 {
  private:
