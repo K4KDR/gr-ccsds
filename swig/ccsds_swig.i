@@ -22,7 +22,9 @@
 #include "ccsds_mpsk_mod_bc.h"
 #include "ccsds_mpsk_demod_cb.h"
 #include "ccsds_mpsk_demod2_cb.h"
-#include "ccsds_frame_sync_bb.h"
+#include "ccsds_frame_sync_b.h"
+#include "ccsds_add_asm.h"
+#include "ccsds_ticp_frame_source.h"
 #include "ccsds_ticp_frame_source_b.h"
 #include "ccsds_ticp_frame_sink_b.h"
 %}
@@ -54,8 +56,14 @@ GR_SWIG_BLOCK_MAGIC(ccsds,mpsk_demod_cb);
 GR_SWIG_BLOCK_MAGIC(ccsds,mpsk_demod2_cb);
 %include "ccsds_mpsk_demod2_cb.h"
 
-GR_SWIG_BLOCK_MAGIC(ccsds,frame_sync_bb);
-%include "ccsds_frame_sync_bb.h"
+GR_SWIG_BLOCK_MAGIC(ccsds,frame_sync_b);
+%include "ccsds_frame_sync_b.h"
+
+GR_SWIG_BLOCK_MAGIC(ccsds,add_asm);
+%include "ccsds_add_asm.h"
+
+GR_SWIG_BLOCK_MAGIC(ccsds,ticp_frame_source);
+%include "ccsds_ticp_frame_source.h"
 
 GR_SWIG_BLOCK_MAGIC(ccsds,ticp_frame_source_b);
 %include "ccsds_ticp_frame_source_b.h"

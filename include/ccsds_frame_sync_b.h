@@ -1,5 +1,5 @@
-#ifndef INCLUDED_CCSDS_FRAME_SYNC_BB_H
-#define INCLUDED_CCSDS_FRAME_SYNC_BB_H
+#ifndef INCLUDED_CCSDS_FRAME_SYNC_B_H
+#define INCLUDED_CCSDS_FRAME_SYNC_B_H
 
 #include <ccsds_api.h>
 #include <ccsds_asm_operator.h>
@@ -29,7 +29,7 @@
  */
 #define CCSDS_FS_VERBOSITY_LEVEL CCSDS_FS_OUTPUT_NONE
 
-class ccsds_frame_sync_bb;
+class ccsds_frame_sync_b;
 
 /*
  * We use boost::shared_ptr's instead of raw pointers for all access
@@ -42,12 +42,12 @@ class ccsds_frame_sync_bb;
  *
  * As a convention, the _sptr suffix indicates a boost::shared_ptr
  */
-typedef boost::shared_ptr<ccsds_frame_sync_bb> ccsds_frame_sync_bb_sptr;
+typedef boost::shared_ptr<ccsds_frame_sync_b> ccsds_frame_sync_b_sptr;
 
 /*!
- *  \brief Return a shared_ptr to a new instance of ccsds_frame_sync_bb
+ *  \brief Return a shared_ptr to a new instance of ccsds_frame_sync_b
  *
- *  Create an instance of ccsds_frame_sync_bb and return it's shared_ptr.
+ *  Create an instance of ccsds_frame_sync_b and return it's shared_ptr.
  *
  *  \param ASM String containing the attached sync marker to look for in
  *	hexadecimal representation. Must be of even length.
@@ -57,11 +57,9 @@ typedef boost::shared_ptr<ccsds_frame_sync_bb> ccsds_frame_sync_bb_sptr;
  *	ASM to consider the sequence matching. If threshold equals zero the
  *	sequence must be an exact copy of the ASM.
  *  \param frame_length Length of a frame (without ASM) in bytes.
- *  \param msgq Shared pointer to an asynchronous message queue to which the
- *	frame data will be copied.
  *  \return Shared pointer to the created AR block
  */
-CCSDS_API ccsds_frame_sync_bb_sptr ccsds_make_frame_sync_bb(std::string ASM, unsigned int threshold, const unsigned int ber_threshold, const unsigned int frame_length, gr_msg_queue_sptr msgq);
+CCSDS_API ccsds_frame_sync_b_sptr ccsds_make_frame_sync_b(std::string ASM, unsigned int threshold, const unsigned int ber_threshold, const unsigned int frame_length);
 
 /*!
  * \brief Take the input streams and look for an ASM.
@@ -79,10 +77,10 @@ CCSDS_API ccsds_frame_sync_bb_sptr ccsds_make_frame_sync_bb(std::string ASM, uns
  * the \c frame_length bytes after the ASM. The input stream is copied the
  * output stream in any case.
  */
-class CCSDS_API ccsds_frame_sync_bb : public gr_block
+class CCSDS_API ccsds_frame_sync_b : public gr_block
 {
 private:
-	friend CCSDS_API ccsds_frame_sync_bb_sptr ccsds_make_frame_sync_bb(std::string ASM, unsigned int threshold, const unsigned int ber_threshold, const unsigned int frame_length, gr_msg_queue_sptr msgq);
+	friend CCSDS_API ccsds_frame_sync_b_sptr ccsds_make_frame_sync_b(std::string ASM, unsigned int threshold, const unsigned int ber_threshold, const unsigned int frame_length);
 
 	/*!
 	 * \brief Private constructor of the frame synchronizer
@@ -94,8 +92,6 @@ private:
 	 *	and the ASM to consider the sequence matching. If threshold
 	 *	equals zero the sequence must be an exact copy of the ASM.
 	 *  \param frame_length Length of a frame (without ASM) in bytes.
-	 *  \param msgq Shared pointer to an asynchronous message queue to which
-	 *	the frame data will be copied.
 	 *
 	 *  Constructs a Frame sync block that searches for the ASM in the input
 	 *  streams and outputs an asynchronous message with the \c d_FRAME_LEN 
@@ -104,7 +100,7 @@ private:
 	 *
 	 *  The input of this block is copied one-to-one to the output stream.
 	 */
-	ccsds_frame_sync_bb(std::string ASM, unsigned int threshold, const unsigned int ber_threshold, const unsigned int frame_length, gr_msg_queue_sptr msgq);
+	ccsds_frame_sync_b(std::string ASM, unsigned int threshold, const unsigned int ber_threshold, const unsigned int frame_length);
 	
 	/*! \brief Enumerator for the two different states. */
 	enum d_STATE {
@@ -171,11 +167,6 @@ private:
 	 */
 	unsigned int d_offset_bits;
 
-	/*! \brief Shared pointer to message queue to which the frame data
-	 *	should be copied.
-	 */
-	gr_msg_queue_sptr d_msgq;
-
 	#if CCSDS_FS_VERBOSITY_LEVEL >= CCSDS_FS_OUTPUT_FILE
 		/*! \brief File pointer for debugging. */
 		FILE *dbg_file_in;
@@ -196,8 +187,8 @@ private:
 
 
 public:
-	/*! \brief Public deconstructor of the AR */	
-	~ccsds_frame_sync_bb ();  // public destructor
+	/*! \brief Public deconstructor of the FS */	
+	~ccsds_frame_sync_b ();  // public destructor
 
 	void forecast(int noutput_items,gr_vector_int &ninput_items_required);
 
@@ -206,4 +197,4 @@ public:
                                 gr_vector_const_void_star   &input_items,
                                 gr_vector_void_star         &output_items);};
 
-#endif /* INCLUDED_CCSDS_FRAME_SYNC_BB_H */
+#endif /* INCLUDED_CCSDS_FRAME_SYNC_B_H */

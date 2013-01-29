@@ -7,7 +7,7 @@ synchronize and demodulate arbitrary M-PSK signals.
 This block takes an input stream of complex samples at sampling rate and outputs
 a bit synchronized, packed bytestream (8 information bits per byte) of the
 received data stream. This is usually followed by frame synchronization as done
-by \ref ccsds_frame_sync_bb
+by \ref ccsds_frame_sync_b
 
 \section page_mpsk_receiver_setup Setup
 The Figure below shows the GRC blocks of this M-PSK demodulator. It's parameters

@@ -1,5 +1,5 @@
-#ifndef INCLUDED_CCSDS_TICP_FRAME_SOURCE_H
-#define INCLUDED_CCSDS_TICP_FRAME_SOURCE_H
+#ifndef INCLUDED_CCSDS_TICP_FRAME_SOURCE_B_H
+#define INCLUDED_CCSDS_TICP_FRAME_SOURCE_B_H
 
 #include <ccsds_api.h>
 #include <gr_block.h>
@@ -8,7 +8,7 @@
 // #include <boost/thread.hpp>
 
 /*! \brief If set to one, dump data to debug file */
-#define TICP_FRAME_SOURCE_DEBUG 0
+#define TICP_FRAME_SOURCE_B_DEBUG 0
 
 /*! \brief If defined the work function stops after sourcing at least the defined
  *	number of bytes.
@@ -68,7 +68,7 @@ private:
 	 */
 	bool d_stop;
 
-	#if TICP_FRAME_SOURCE_DEBUG == 1
+	#if TICP_FRAME_SOURCE_B_DEBUG == 1
 		/*! \brief File pointer for debugging. */
 		FILE *dbg_file;
 
@@ -93,4 +93,4 @@ public:
                                 gr_vector_const_void_star   &input_items,
                                 gr_vector_void_star         &output_items);};
 
-#endif /* INCLUDED_CCSDS_TICP_FRAME_SOURCE_H */
+#endif /* INCLUDED_CCSDS_TICP_FRAME_SOURCE_B_H */

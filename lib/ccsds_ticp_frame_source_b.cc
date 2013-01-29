@@ -17,8 +17,8 @@ ccsds_ticp_frame_source_b::ccsds_ticp_frame_source_b (std::string hostname, unsi
 	gr_make_io_signature (1, 1, sizeof (unsigned char))), TicpClient(), d_FRAME_LEN(frame_length)
 {
 
-	#if TICP_FRAME_SOURCE_DEBUG == 1
-		dbg_file = fopen("/tmp/ccsds_ticp_frame_source_debug.dat","w");
+	#if TICP_FRAME_SOURCE_B_DEBUG == 1
+		dbg_file = fopen("/tmp/ccsds_ticp_frame_source_b_debug.dat","w");
 		dbg_count = 0;
 	#endif
 
@@ -36,7 +36,7 @@ ccsds_ticp_frame_source_b::ccsds_ticp_frame_source_b (std::string hostname, unsi
 }
 
 ccsds_ticp_frame_source_b::~ccsds_ticp_frame_source_b () {
-	#if TICP_FRAME_SOURCE_DEBUG == 1
+	#if TICP_FRAME_SOURCE_B_DEBUG == 1
 		fflush(dbg_file);
 		fclose(dbg_file);
 	#endif
@@ -82,7 +82,7 @@ int  ccsds_ticp_frame_source_b::general_work (int                     noutput_it
 			return 0;
 		}
 
-		#if TICP_FRAME_SOURCE_DEBUG == 1
+		#if TICP_FRAME_SOURCE_B_DEBUG == 1
 			fprintf(dbg_file,"%3u  ",dbg_count);
 		#endif
 
@@ -93,12 +93,12 @@ int  ccsds_ticp_frame_source_b::general_work (int                     noutput_it
 
 			out[ofst+i] = frame[i];
 
-			#if TICP_FRAME_SOURCE_DEBUG == 1
+			#if TICP_FRAME_SOURCE_B_DEBUG == 1
 				fprintf(dbg_file,"%2X ",frame[i]);
 			#endif
 		}
 
-		#if TICP_FRAME_SOURCE_DEBUG == 1
+		#if TICP_FRAME_SOURCE_B_DEBUG == 1
 			fprintf(dbg_file,"\n");
 			dbg_count++;
 		#endif

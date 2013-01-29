@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <block>
   <name>Frame Synchonizer (CCSDS)</name>
-  <key>ccsds_frame_sync_bb</key>
+  <key>ccsds_frame_sync_b</key>
   <category>CCSDS</category>
   <import>import ccsds</import>
-  <make>ccsds.frame_sync_bb($ASM,$threshold,$ber_threshold,$frame_len,$(id)_msgq_out)</make>
+  <make>ccsds.frame_sync_b($ASM,$threshold,$ber_threshold,$frame_len)</make>
 	<param>
 		<name>Sync Marker</name>
 		<key>ASM</key>
@@ -33,16 +33,12 @@
 	<check>$ber_threshold >= 0</check>
 	<check>$frame_len > 0</check>
 	<sink>
-		<name>bitstream</name>
+		<name>in</name>
 		<type>byte</type>
 	</sink>
 	<source>
-		<name>null</name>
-		<type>byte</type>
-	</source>
-	<source>
-		<name>frame</name>
-		<type>msg</type>
+		<name>out</name>
+		<type>message</type>
 	</source>
 	<doc>
 Frame Synchronizer
