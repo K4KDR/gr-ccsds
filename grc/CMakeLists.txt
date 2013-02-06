@@ -19,8 +19,10 @@
 install(FILES
     ccsds_randomiser_bb.xml
     ccsds_viterbi27_bb.xml
+    ccsds_rs_encode.xml
+    ccsds_rs_decode.xml
+    ccsds_rs_decode_bb.xml
     ccsds_framer_sink_dual.xml
-    ccsds_msg_source.xml
     ccsds_local_oscillator_cc.xml
     ccsds_fll_cc.xml
     ccsds_pll_cc.xml
@@ -29,10 +31,13 @@ install(FILES
     ccsds_mpsk_mod_bc.xml
     ccsds_mpsk_demod_cb.xml
     ccsds_mpsk_demod2_cb.xml
-    ccsds_frame_sync_bb.xml
+    ccsds_mpsk_preamble_cc.xml
+    ccsds_frame_sync_b.xml
     ccsds_add_asm.xml
+    ccsds_msg_blob_source_b.xml
+    ccsds_msg_blob_sink_b.xml
     ccsds_ticp_frame_source.xml
     ccsds_ticp_frame_source_b.xml
-    ccsds_ticp_frame_sink_b.xml
+    ccsds_ticp_frame_sink.xml
     ccsds_rs_decode_bb.xml DESTINATION share/gnuradio/grc/blocks
 )

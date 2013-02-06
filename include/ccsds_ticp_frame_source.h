@@ -6,14 +6,15 @@
 #include <string>
 #include <boost/thread.hpp>
 #include <ticp/TicpClient.hpp>
+#include <asynchronous_start.hpp>
 
 /*! \brief If set to one, dump data to debug file */
-#define TICP_FRAME_SOURCE_DEBUG 0
+#define TICP_FRAME_SOURCE_DEBUG 1
 
 /*! \brief If defined the work function stops after sourcing at least the defined
  *	number of bytes.
  */
-#define PROFILE_NUM_SAMPS 1000000u
+// #define PROFILE_NUM_SAMPS 1000000u
 
 class ccsds_ticp_frame_source;
 
@@ -81,6 +82,9 @@ private:
 	 */
 	bool d_stop;
 
+	/*! \brief Reference to the worker thread. */
+	boost::shared_ptr<boost::thread> d_worker_thread;
+
 	#if TICP_FRAME_SOURCE_DEBUG == 1
 		/*! \brief File pointer for debugging. */
 		FILE *dbg_file;
@@ -93,17 +97,19 @@ private:
 		unsigned long profile_count;
 	#endif
 	
+	/*! \brief workarround to ensure we only start transmitting, when the
+	 *	flowgraph is started.
+	 * \todo reove workarround
+	 */
+	asynchronous_start d_astart;
+
 	/*! \brief Asynchronous work function which is processing the queues. */
 	void asynchronous_work(void);
 
 public:
 	/*! \brief Public deconstructor of the ticp frame source */	
 	~ccsds_ticp_frame_source ();  // public destructor
-	
-	/*! \brief Create the worker thread. */
-	bool start(void);
 
-	/*! \brief Signal the worker thread to return. */
-	bool stop(void);
+	bool start(void);
 };
 #endif /* INCLUDED_CCSDS_TICP_FRAME_SOURCE_H */

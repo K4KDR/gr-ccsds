@@ -20,7 +20,7 @@
  *  Arbitrary chosen type number to be used for sending frequency correction
  *  values to the local oscillator.
  */
-#define MSG_FREQ_TYPE 1
+#define MSG_FREQ_TYPE 0
 
 /*! \brief Value used for message's \c arg2 when sending frequency corrections
  *	to the local oscillator.

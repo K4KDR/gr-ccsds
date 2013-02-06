@@ -28,7 +28,7 @@
 #include <cstdio>
 
 #define VERBOSE 0
-#define ERRCNT 1
+#define ERRCNT 0
 
 ccsds_rs_decode_bb_sptr
 ccsds_make_rs_decode_bb (gr_msg_queue_sptr output_queue, int codeblock_bits)
@@ -65,6 +65,10 @@ ccsds_rs_decode_bb::ccsds_rs_decode_bb (gr_msg_queue_sptr output_queue, int code
 
 ccsds_rs_decode_bb::~ccsds_rs_decode_bb ()
 {
+}
+
+bool ccsds_rs_decode_bb::stop(void) {
+	d_output_queue->insert_tail(gr_make_message(1, 0, 0, 0)); // EOF message
 }
 
 int 

@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <block>
   <name>TICP Frame Sink</name>
-  <key>ccsds_ticp_frame_sink_b</key>
+  <key>ccsds_ticp_frame_sink</key>
   <category>CCSDS</category>
   <import>import ccsds</import>
-  <make>ccsds.ticp_frame_sink_b($port, $frame_len, $(id)_msgq_in)</make>
+  <make>ccsds.ticp_frame_sink($port, $frame_len)</make>
 	<param>
 		<name>Port</name>
 		<key>port</key>
@@ -20,12 +20,8 @@
 	<check>$port >= 1</check>
 	<check>$frame_len >= 1</check>
 	<sink>
-		<name>null</name>
-		<type>byte</type>
-	</sink>
-	<sink>
-		<name>frame</name>
-		<type>msg</type>
+		<name>in</name>
+		<type>message</type>
 	</sink>
 	<doc>
 TICP Frame sink

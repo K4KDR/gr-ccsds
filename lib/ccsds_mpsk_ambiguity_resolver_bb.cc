@@ -49,7 +49,11 @@ ccsds_mpsk_ambiguity_resolver_bb::ccsds_mpsk_ambiguity_resolver_bb (const unsign
 	// At the beginning samples and bytes are aligned
 	d_samp_skip_bits = 0;
 
-	dbg_count = 0lu;
+	#if CCSDS_AR_VERBOSITY_LEVEL >= CCSDS_AR_OUTPUT_DEBUG
+		dbg_file_in = fopen("/tmp/ccsds_mpsk_ambiguity_resolver_debug_in.dat","w");
+		dbg_file_out = fopen("/tmp/ccsds_mpsk_ambiguity_resolver_debug_out.dat","w");
+		dbg_count = 0;
+	#endif
 }
 
 ccsds_mpsk_ambiguity_resolver_bb::~ccsds_mpsk_ambiguity_resolver_bb () {
@@ -57,6 +61,14 @@ ccsds_mpsk_ambiguity_resolver_bb::~ccsds_mpsk_ambiguity_resolver_bb () {
 	delete[] d_map_index_to_bits;
 	delete[] d_map_bits_to_index;
 	delete d_asm_operator;
+
+	#if CCSDS_AR_VERBOSITY_LEVEL >= CCSDS_AR_OUTPUT_DEBUG
+		fflush(dbg_file_in);
+		fflush(dbg_file_out);
+
+		fclose(dbg_file_in);
+		fclose(dbg_file_out);
+	#endif
 }
 
 void ccsds_mpsk_ambiguity_resolver_bb::forecast(int noutput_items,gr_vector_int &ninput_items_required){
@@ -252,15 +264,15 @@ int  ccsds_mpsk_ambiguity_resolver_bb::general_work (int                     nou
 					const unsigned char *in_bytes = get_packed_bytes(in_unpacked, bytes_consumed, search_len, i);
 
 					#if CCSDS_AR_VERBOSITY_LEVEL >= CCSDS_AR_OUTPUT_DEBUG
-						printf("AR: ambiguity=%u in=",i);
+						fprintf(dbg_file_in,"AR: ambiguity=%u in=",i);
 						for(unsigned int j=0;j<search_len;j++) {
-							printf("%2X ",in_bytes[j]);
+							fprintf(dbg_file_in,"%2X ",in_bytes[j]);
 						}
-						printf("   ");
+						fprintf(dbg_file_in,"   ");
 					#endif
 					if(d_asm_operator->search_asm(in_bytes, search_len, &d_offset_bytes, &d_offset_bits)) {
 						#if CCSDS_AR_VERBOSITY_LEVEL >= CCSDS_AR_OUTPUT_DEBUG
-							printf("match at byte %u and bit %u\n",d_offset_bytes,d_offset_bits);
+							fprintf(dbg_file_in,"match at byte %u and bit %u\n",d_offset_bytes,d_offset_bits);
 						#endif
 
 						// ASM found, enter LOCK
@@ -282,7 +294,7 @@ int  ccsds_mpsk_ambiguity_resolver_bb::general_work (int                     nou
 						break;
 					} else {
 						#if CCSDS_AR_VERBOSITY_LEVEL >= CCSDS_AR_OUTPUT_DEBUG
-							printf("no match\n");
+							fprintf(dbg_file_in,"no match\n");
 						#endif
 						delete[] in_bytes;
 					}
@@ -294,6 +306,13 @@ int  ccsds_mpsk_ambiguity_resolver_bb::general_work (int                     nou
 
 					// copy to output
 					d_asm_operator->copy_stream(&out[num_out], &in_bytes[d_offset_bytes], copy, d_offset_bits);
+
+					#if CCSDS_AR_VERBOSITY_LEVEL >= CCSDS_AR_OUTPUT_DEBUG
+						for(unsigned int j=0;j<copy;j++) {
+							fprintf(dbg_file_out,"%2X ",out[num_out+j]);
+						}
+						fprintf(dbg_file_out,"\n");
+					#endif
 
 					// consume samples
 					num_out	     += copy;
@@ -320,11 +339,11 @@ int  ccsds_mpsk_ambiguity_resolver_bb::general_work (int                     nou
 					const unsigned char *in_bytes = get_packed_bytes(in_unpacked, bytes_consumed, bytes_req, d_locked_on_stream);
 
 					#if CCSDS_AR_VERBOSITY_LEVEL >= CCSDS_AR_OUTPUT_DEBUG
-						printf("AR: ambiguity=%u in=",d_locked_on_stream);
+						fprintf(dbg_file_in,"AR: ambiguity=%u in=",d_locked_on_stream);
 						for(unsigned int j=0;j<search_len;j++) {
-							printf("%2X ",in_bytes[j]);
+							fprintf(dbg_file_in,"%2X ",in_bytes[j]);
 						}
-						printf(" expected match at byte %u and bit %u\n",d_offset_bytes,d_offset_bits);
+						fprintf(dbg_file_in," expected match at byte %u and bit %u\n",d_offset_bytes,d_offset_bits);
 					#endif
 
 					// We have enough samples, lets check for the ASM
@@ -355,7 +374,14 @@ int  ccsds_mpsk_ambiguity_resolver_bb::general_work (int                     nou
 
 					// copy to output
 					d_asm_operator->copy_stream(&out[num_out], &in_bytes[d_offset_bytes], copy, d_offset_bits);
-				
+
+					#if CCSDS_AR_VERBOSITY_LEVEL >= CCSDS_AR_OUTPUT_DEBUG
+						for(unsigned int j=0;j<copy;j++) {
+							fprintf(dbg_file_out,"%2X ",out[num_out+j]);
+						}
+						fprintf(dbg_file_out,"\n");
+					#endif
+
 					// consume samples
 					num_out	     += copy;
 					bytes_consumed += copy;

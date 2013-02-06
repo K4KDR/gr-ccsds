@@ -27,7 +27,7 @@
  *  \sa #CCSDS_FS_OUTPUT_STATE
  *  \sa #CCSDS_FS_OUTPUT_DEBUG
  */
-#define CCSDS_FS_VERBOSITY_LEVEL CCSDS_FS_OUTPUT_NONE
+#define CCSDS_FS_VERBOSITY_LEVEL CCSDS_FS_OUTPUT_FILE
 
 class ccsds_frame_sync_b;
 
@@ -191,6 +191,8 @@ public:
 	~ccsds_frame_sync_b ();  // public destructor
 
 	void forecast(int noutput_items,gr_vector_int &ninput_items_required);
+
+	bool stop(void);
 
 	int  general_work (int                     noutput_items,
                                 gr_vector_int               &ninput_items,

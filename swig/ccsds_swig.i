@@ -12,7 +12,9 @@
 #include "ccsds_viterbi27_bb.h"
 #include "ccsds_conv_encode.h"
 #include "ccsds_framer_sink_dual.h"
+#include "ccsds_rs_encode.h"
 #include "ccsds_rs_decode_bb.h"
+#include "ccsds_rs_decode.h"
 #include "ccsds_crc16.h"
 #include "ccsds_local_oscillator_cc.h"
 #include "ccsds_fll_cc.h"
@@ -22,11 +24,14 @@
 #include "ccsds_mpsk_mod_bc.h"
 #include "ccsds_mpsk_demod_cb.h"
 #include "ccsds_mpsk_demod2_cb.h"
+#include "ccsds_mpsk_preamble_cc.h"
 #include "ccsds_frame_sync_b.h"
 #include "ccsds_add_asm.h"
+#include "ccsds_msg_blob_source_b.h"
+#include "ccsds_msg_blob_sink_b.h"
 #include "ccsds_ticp_frame_source.h"
 #include "ccsds_ticp_frame_source_b.h"
-#include "ccsds_ticp_frame_sink_b.h"
+#include "ccsds_ticp_frame_sink.h"
 %}
 
 %include "ccsds_crc16.i"
@@ -56,11 +61,20 @@ GR_SWIG_BLOCK_MAGIC(ccsds,mpsk_demod_cb);
 GR_SWIG_BLOCK_MAGIC(ccsds,mpsk_demod2_cb);
 %include "ccsds_mpsk_demod2_cb.h"
 
+GR_SWIG_BLOCK_MAGIC(ccsds,mpsk_preamble_cc);
+%include "ccsds_mpsk_preamble_cc.h"
+
 GR_SWIG_BLOCK_MAGIC(ccsds,frame_sync_b);
 %include "ccsds_frame_sync_b.h"
 
 GR_SWIG_BLOCK_MAGIC(ccsds,add_asm);
 %include "ccsds_add_asm.h"
+
+GR_SWIG_BLOCK_MAGIC(ccsds,msg_blob_source_b);
+%include "ccsds_msg_blob_source_b.h"
+
+GR_SWIG_BLOCK_MAGIC(ccsds,msg_blob_sink_b);
+%include "ccsds_msg_blob_sink_b.h"
 
 GR_SWIG_BLOCK_MAGIC(ccsds,ticp_frame_source);
 %include "ccsds_ticp_frame_source.h"
@@ -68,8 +82,8 @@ GR_SWIG_BLOCK_MAGIC(ccsds,ticp_frame_source);
 GR_SWIG_BLOCK_MAGIC(ccsds,ticp_frame_source_b);
 %include "ccsds_ticp_frame_source_b.h"
 
-GR_SWIG_BLOCK_MAGIC(ccsds,ticp_frame_sink_b);
-%include "ccsds_ticp_frame_sink_b.h"
+GR_SWIG_BLOCK_MAGIC(ccsds,ticp_frame_sink);
+%include "ccsds_ticp_frame_sink.h"
 
 GR_SWIG_BLOCK_MAGIC(ccsds,randomiser_bb);
 %include "ccsds_randomiser_bb.h"
@@ -111,5 +125,11 @@ GR_SWIG_BLOCK_MAGIC(ccsds,viterbi27_bb);
 GR_SWIG_BLOCK_MAGIC(ccsds,framer_sink_dual);
 %include "ccsds_framer_sink_dual.h"
 
+GR_SWIG_BLOCK_MAGIC(ccsds,rs_encode);
+%include "ccsds_rs_encode.h"
+
 GR_SWIG_BLOCK_MAGIC(ccsds,rs_decode_bb);
 %include "ccsds_rs_decode_bb.h"
+
+GR_SWIG_BLOCK_MAGIC(ccsds,rs_decode);
+%include "ccsds_rs_decode.h"

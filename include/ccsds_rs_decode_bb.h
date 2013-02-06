@@ -21,13 +21,14 @@
 #ifndef INCLUDED_CCSDS_RS_DECODE_BB_H
 #define INCLUDED_CCSDS_RS_DECODE_BB_H
 
+#define NROOTS 32
+
 #include <ccsds_api.h>
 #include <gr_sync_block.h>
 #include <gr_msg_queue.h>
 
 extern "C" {
 #include <fec.h>
-#include <fixed.h>
 }
 
 class ccsds_rs_decode_bb;
@@ -85,6 +86,7 @@ class CCSDS_API ccsds_rs_decode_bb : public gr_sync_block
  public:
 	~ccsds_rs_decode_bb ();
 
+	bool stop(void);
 
 	int work (int noutput_items,
 		gr_vector_const_void_star &input_items,

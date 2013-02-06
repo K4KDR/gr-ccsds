@@ -14,8 +14,8 @@ ccsds_add_asm_sptr ccsds_make_add_asm(std::string ASM, const unsigned int frame_
 
 ccsds_add_asm::ccsds_add_asm(std::string ASM, const unsigned int frame_len)
   : gr_block ("ccsds_add_asm",
-	gr_make_io_signature (0, 0, sizeof (unsigned char)),
-	gr_make_io_signature (0, 0, sizeof (unsigned char))), d_ASM_LEN(std::floor(ASM.length()/2)), d_FRAME_LEN(frame_len)
+	gr_make_io_signature (0, 0, 0),
+	gr_make_io_signature (0, 0, 0)), d_ASM_LEN(std::floor(ASM.length()/2)), d_FRAME_LEN(frame_len)
 {
 	// Transfer ASM from Hex to bytes
 	d_ASM = new unsigned char[d_ASM_LEN];
@@ -34,6 +34,13 @@ ccsds_add_asm::~ccsds_add_asm () {
 }
 
 void ccsds_add_asm::process_frame(pmt::pmt_t msg_in) {
+
+	// check for EOF
+	if(pmt::pmt_is_eof_object(msg_in)) {
+		message_port_pub( pmt::mp("out"), pmt::PMT_EOF );
+		return;
+	}
+
 	if(!pmt::pmt_is_blob(msg_in)) {
 		fprintf(stderr,"ERROR ADD ASM: expecting message of type blob, skipping.\n");
 		return;

@@ -25,7 +25,9 @@ install(FILES
     ccsds_randomiser_bb.h
     ccsds_viterbi27_bb.h
     ccsds_framer_sink_dual.h
+    ccsds_rs_decode.h
     ccsds_rs_decode_bb.h
+    ccsds_rs_encode.h
     ccsds_local_oscillator_cc.h
     ccsds_fll_cc.h
     ccsds_pll_cc.h
@@ -34,13 +36,17 @@ install(FILES
     ccsds_mpsk_mod_bc.h
     ccsds_mpsk_demod_cb.h
     ccsds_mpsk_demod2_cb.h
+    ccsds_mpsk_preamble_cc.h
     ccsds_frame_sync_b.h
     ccsds_moving_average.h
     ccsds_lpf.h
     ccsds_lpf2.h
     ccsds_add_asm.h
+    ccsds_msg_blob_source_b.h
+    ccsds_msg_blob_sink_b.h
     ccsds_ticp_frame_source.h
     ccsds_ticp_frame_source_b.h
-    ccsds_ticp_frame_sink_b.h
-    ccsds_crc16.h DESTINATION include/ccsds
+    ccsds_ticp_frame_sink.h
+    ccsds_crc16.h
+    asynchronous_start.hpp DESTINATION include/ccsds
 )

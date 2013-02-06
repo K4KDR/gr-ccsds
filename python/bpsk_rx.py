@@ -314,7 +314,7 @@ def getFileConfig(filename):
 	return config_values
 
 
-class frame_sync(gr.hier_block2):
+class bpsk_frame_sync(gr.hier_block2):
 	def __init__(self, options):
 	# """
 	# Hierarchical block for frame syncing.
@@ -322,7 +322,7 @@ class frame_sync(gr.hier_block2):
 		# @param options: command line and derived options
 		# @type options: object
 	# """
-		gr.hier_block2.__init__(self, "frame_sync",
+		gr.hier_block2.__init__(self, "bpsk_frame_sync",
 				gr.io_signature(1, 1, gr.sizeof_char), # Input signature
 				gr.io_signature(0, 0, 0))					# Output signature
 
@@ -485,10 +485,10 @@ class receive_path(gr.hier_block2):
 		# if self._verbose:
 			# self._print_verbage()
 		if options.frame_sync:
-			self.frame_sync = frame_sync(options)
-			input_msgq = self.frame_sync.output_msgq
+			self.bpsk_frame_sync = bpsk_frame_sync(options)
+			input_msgq = self.bpsk_frame_sync.output_msgq
 			# connect block input to the frame receiver
-			self.connect((self,0), (self.frame_sync,0))
+			self.connect((self,0), (self.bpsk_frame_sync,0))
 		else: 
 			input_msgq = gr.msg_queue()
 			self.packer_bb = gr.unpacked_to_packed_bb(1,gr.GR_MSB_FIRST)

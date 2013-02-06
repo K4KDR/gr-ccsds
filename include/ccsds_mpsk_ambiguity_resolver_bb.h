@@ -21,7 +21,7 @@
  *  \sa #CCSDS_AR_OUTPUT_STATE
  *  \sa #CCSDS_AR_OUTPUT_DEBUG
  */
-#define CCSDS_AR_VERBOSITY_LEVEL CCSDS_AR_OUTPUT_NONE
+#define CCSDS_AR_VERBOSITY_LEVEL CCSDS_AR_OUTPUT_DEBUG
 
 class ccsds_mpsk_ambiguity_resolver_bb;
 
@@ -133,8 +133,16 @@ private:
 	/*! \brief Counter variable on how many ASMs have been observed */
 	unsigned int d_count;
 
-	/*! \brief Counter variable on how bytes have been observed in total */
-	unsigned long dbg_count;
+	#if CCSDS_AR_VERBOSITY_LEVEL >= CCSDS_AR_OUTPUT_DEBUG
+		/*! \brief File pointer for debugging. */
+		FILE *dbg_file_in;
+
+		/*! \brief File pointer for debugging. */
+		FILE *dbg_file_out;
+
+		/*! \brief Counter for debugging. */
+		unsigned long dbg_count;
+	#endif
 
 	/*! \brief Index of the input stream that the AR is locked in. If in
 	 *	search state, this variable may contain anything.

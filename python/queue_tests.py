@@ -66,7 +66,7 @@ def int2binstr(num,length):
 def hexstr2int(str):
 	return int(str,16)
 
-class frame_sync(gr.hier_block2):
+class bpsk_frame_sync(gr.hier_block2):
 	def __init__(self, access_code=None, callback=None, threshold=-1):
 	# """
 	# Hierarchical block for frame syncing.
@@ -78,7 +78,7 @@ class frame_sync(gr.hier_block2):
 		# @param threshold: detect access_code with up to threshold bits wrong (-1 -> use default)
 		# @type threshold: int
 	# """
-		gr.hier_block2.__init__(self, "frame_sync",
+		gr.hier_block2.__init__(self, "bpsk_frame_sync",
 				gr.io_signature(2, 2, gr.sizeof_char), # Input signature
 				gr.io_signature(0, 0, 0))					# Output signature
 
@@ -178,7 +178,7 @@ class receive_path(gr.hier_block2):
 
 		# receiver
 		self.frame_receiver = \
-			frame_sync(access_code=self._access_code,
+			bpsk_frame_sync(access_code=self._access_code,
 							   callback=self._rx_callback,
 							   threshold=self._threshold)
 

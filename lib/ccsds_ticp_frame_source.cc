@@ -16,8 +16,6 @@ ccsds_ticp_frame_source::ccsds_ticp_frame_source (std::string hostname, unsigned
 	gr_make_io_signature (0, 0, 0),
 	gr_make_io_signature (0, 0, 0)), TicpClient(), d_FRAME_LEN(frame_length)
 {
-	printf("Constructor\n");
-
 	// register output port
 	message_port_register_out(pmt::mp("out"));
 
@@ -35,10 +33,18 @@ ccsds_ticp_frame_source::ccsds_ticp_frame_source (std::string hostname, unsigned
 
 	d_stop = false;
 
-	boost::thread t(boost::bind(&ccsds_ticp_frame_source::asynchronous_work, this));
+	d_worker_thread = boost::shared_ptr<boost::thread>( new boost::thread(boost::bind(&ccsds_ticp_frame_source::asynchronous_work, this)) );
+	printf("constructor\n");
 }
 
 ccsds_ticp_frame_source::~ccsds_ticp_frame_source () {
+	d_mutex.lock();
+	d_stop = true;
+	d_mutex.unlock();
+
+	d_worker_thread->interrupt();
+	d_worker_thread->join();
+
 	#if TICP_FRAME_SOURCE_DEBUG == 1
 		fflush(dbg_file);
 		fclose(dbg_file);
@@ -46,19 +52,14 @@ ccsds_ticp_frame_source::~ccsds_ticp_frame_source () {
 }
 
 bool ccsds_ticp_frame_source::start(void) {
-	printf("start()\n");
-}
-
-bool ccsds_ticp_frame_source::stop( void ) {
-	d_mutex.lock();
-	d_stop = true;
-	printf("stop\n");
-	d_mutex.unlock();
+	printf("start\n");
 }
 
 void ccsds_ticp_frame_source::asynchronous_work(void)
 {
-	printf("asynchronous_work()\n");
+
+	d_astart.wait_for_start(); // blocking
+
 	bool stop;
 
 	do {
@@ -87,7 +88,7 @@ void ccsds_ticp_frame_source::asynchronous_work(void)
 		for(unsigned int i=0;i<d_FRAME_LEN;i++) {
 			out_data[i] = frame[i];
 			#if TICP_FRAME_SOURCE_DEBUG == 1
-				fprintf(dbg_file,"%2X",frame[i]);
+				fprintf(dbg_file,"%2X ",frame[i]);
 			#endif
 		}
 
@@ -115,8 +116,14 @@ void ccsds_ticp_frame_source::asynchronous_work(void)
 			printf("%7lu/%7u bytes processed\n",profile_count,PROFILE_NUM_SAMPS);
 		#endif
 
+		try {
+			boost::this_thread::interruption_point();
+		} catch(...) {
+			// do nothing, we just want to be able to be interrupted
+		}
+
 		d_mutex.lock();
-		stop = d_stop;
+		stop = d_stop or d_astart.is_stopped();
 		d_mutex.unlock();
 	} while(!stop);
 	

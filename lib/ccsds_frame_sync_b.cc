@@ -16,7 +16,7 @@ ccsds_frame_sync_b_sptr ccsds_make_frame_sync_b(std::string ASM, const unsigned 
 ccsds_frame_sync_b::ccsds_frame_sync_b (std::string ASM, unsigned int threshold, const unsigned int ber_threshold, const unsigned int frame_length)
   : gr_block ("ccsds_frame_sync_b",
 	gr_make_io_signature (1, 1, sizeof (unsigned char)),
-	gr_make_io_signature (1, 1, sizeof (unsigned char))), d_ASM_LEN(std::floor(ASM.length()/2)), d_THRESHOLD(threshold), d_BER_THRESHOLD(ber_threshold), d_FRAME_LEN(frame_length),
+	gr_make_io_signature (0, 0, 0)), d_ASM_LEN(std::floor(ASM.length()/2)), d_THRESHOLD(threshold), d_BER_THRESHOLD(ber_threshold), d_FRAME_LEN(frame_length),
 	d_SEARCH_LEN(d_FRAME_LEN + 2u * d_ASM_LEN), d_COPY_LEN(d_FRAME_LEN+d_ASM_LEN)
 {
 
@@ -55,6 +55,11 @@ ccsds_frame_sync_b::~ccsds_frame_sync_b () {
 		fclose(dbg_file_out);
 		fclose(dbg_file_instream);
 	#endif
+}
+
+bool ccsds_frame_sync_b::stop(void) {
+	// Signal EOF
+	message_port_pub( pmt::mp("out"), pmt::PMT_EOF );
 }
 
 void ccsds_frame_sync_b::forecast(int noutput_items,gr_vector_int &ninput_items_required){
