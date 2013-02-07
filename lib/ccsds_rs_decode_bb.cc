@@ -69,6 +69,7 @@ ccsds_rs_decode_bb::~ccsds_rs_decode_bb ()
 
 bool ccsds_rs_decode_bb::stop(void) {
 	d_output_queue->insert_tail(gr_make_message(1, 0, 0, 0)); // EOF message
+	return true;
 }
 
 int 
@@ -89,18 +90,18 @@ ccsds_rs_decode_bb::decode(unsigned char *deinterleaved) {
 int
 ccsds_rs_decode_bb::work (int noutput_items,
 			gr_vector_const_void_star &input_items,
-			gr_vector_void_star &output_items)
+			gr_vector_void_star& /*output_items*/)
 {
 	const char *in = (const char *) input_items[0];
 
-	int ninput_items = 0;
+	unsigned int ninput_items = 0;
 	#if VERBOSE
 		printf("\nde-interleaving %d items\n",noutput_items);
 	#endif
 
 	// De-interleave
-	while( ninput_items < noutput_items ) {
-		while( ninput_items < noutput_items && d_deinterleaved_frame_pos < d_codeblock_syms ) {
+	while( ninput_items < (unsigned int)noutput_items ) {
+		while( ninput_items < (unsigned int)noutput_items && d_deinterleaved_frame_pos < d_codeblock_syms ) {
 			d_rs_in[d_deinterleaved_frame_pos] = in[ninput_items++];
 			d_deinterleaved_frame_pos += d_codeword_syms;
 			d_count++;

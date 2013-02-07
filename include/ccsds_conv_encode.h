@@ -77,20 +77,12 @@ class CCSDS_API ccsds_conv_encode
 	d_polys[0] = POLYA & 127;
 	d_polys[1] = POLYB & 127;
 	long long int syms;
-	int newbit;
 	// printf("POLYA: %#x \nPOLYB: %#x\n",d_polys[0],d_polys[1]);
 	for(int i = len - 1; i >= 0; i--){
 		d_shift_register = (d_shift_register << 1) | ((data >> i) & 1);    
 		// printf("shift_register: %#x \n",d_shift_register);
-		syms = (syms << 1) | parityb(d_shift_register & d_polys[0]) & 1;
+		syms = (syms << 1) | (parityb(d_shift_register & d_polys[0]) & 1);
 		syms = (syms << 1) | !(parityb(d_shift_register & d_polys[1]) & 1);
-		// for(int j = 0; j < d_rate; j++){
-			// syms[d_rate*i+j] = parityb(d_shift_register & d_polys[j]);
-			// newbit = parityb(d_shift_register & d_polys[j]) & 1;
-			// if (j) newbit = !newbit;
-			// printf("%d",newbit);
-			// syms = (syms << 1) | newbit;
-		// }
 	}
 	return syms;
   }

@@ -1,10 +1,10 @@
 #ifndef INCLUDED_CCSDS_INTERLEAVING_AUX_H
 #define INCLUDED_CCSDS_INTERLEAVING_AUX_H
 
-inline const unsigned int ccsds_interl_indx(const unsigned int index, unsigned int interleaving_depth, const unsigned int num_elements) {
+inline unsigned int ccsds_interl_indx(const unsigned int index, const unsigned int interleaving_depth, const unsigned int num_elements) {
 
 	// maximum index we may address
-	const unsigned int max_index = num_elements-1;
+	const unsigned int max_index = num_elements-1u;
 
 	// interleave all indices but the last one (which will also be the last
 	// one in the new order

@@ -28,6 +28,9 @@ endif()
 include(GrSwig)
 include(GrPython)
 
+set(CMAKE_CXX_FLAGS "")
+set(CMAKE_C_FLAGS "-flax-vector-conversions -msse2")
+
 ########################################################################
 # Setup swig generation
 ########################################################################

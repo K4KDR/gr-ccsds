@@ -60,13 +60,16 @@ ccsds_frame_sync_b::~ccsds_frame_sync_b () {
 bool ccsds_frame_sync_b::stop(void) {
 	// Signal EOF
 	message_port_pub( pmt::mp("out"), pmt::PMT_EOF );
+	return true;
 }
 
 void ccsds_frame_sync_b::forecast(int noutput_items,gr_vector_int &ninput_items_required){
 	// If we know exactly where to look, we need one ASM plus the following
 	// frame data per requested frame.
 	const unsigned int bytes_per_frame = d_ASM_LEN + d_FRAME_LEN;
-		
+	
+	const unsigned int num_frames = std::max(noutput_items/bytes_per_frame, 1u);
+
 	// If we have a bit offset, we need an additional byte
 	const unsigned int bit_offset = (d_offset_bits == 0) ? 0 : 1;
 	
@@ -74,17 +77,17 @@ void ccsds_frame_sync_b::forecast(int noutput_items,gr_vector_int &ninput_items_
 	// to guarantee that there is one complete ASM in the first sequence.
 	// Afterwards the state should be locked.
 	if(d_state == STATE_SEARCH) {
-		ninput_items_required[0] = bytes_per_frame + bit_offset + d_ASM_LEN;
+		ninput_items_required[0] = num_frames*(bytes_per_frame + bit_offset) + d_ASM_LEN;
 		
 	} else { // d_state == STATE_LOCKED
 		// No need to search again (hopefully)
-		ninput_items_required[0] = bytes_per_frame + bit_offset;
+		ninput_items_required[0] = num_frames*(bytes_per_frame + bit_offset);
 	}
 
 	return;
 }
 
-const unsigned int ccsds_frame_sync_b::get_bytes_required(void) {
+inline unsigned int ccsds_frame_sync_b::get_bytes_required(void) {
 	if(d_offset_bits == 0)
 		return d_COPY_LEN;
 	else
@@ -92,9 +95,9 @@ const unsigned int ccsds_frame_sync_b::get_bytes_required(void) {
 }
 
 int  ccsds_frame_sync_b::general_work (int                     noutput_items,
-                                gr_vector_int               &ninput_items,
-                                gr_vector_const_void_star   &input_items,
-                                gr_vector_void_star         &output_items)
+                                gr_vector_int&              ninput_items,
+                                gr_vector_const_void_star&  input_items,
+                                gr_vector_void_star&        /*output_items*/)
 {
 	// pointer to pointer to a const gr_complex
 	const unsigned char *in = (const unsigned char *) input_items[0];

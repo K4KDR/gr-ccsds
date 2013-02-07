@@ -168,7 +168,7 @@ inline float ccsds_dll_cc::interpolate_value(const float *y, float mu) {
 
 }
 
-void ccsds_dll_cc::propagate_tags(const unsigned int num_in, const unsigned int num_out) {
+void ccsds_dll_cc::propagate_tags(const unsigned int num_in) {
 	std::vector<gr_tag_t> tags;
 	uint64_t tmp_to = d_tag_count + (uint64_t)num_in;
 
@@ -309,7 +309,7 @@ int  ccsds_dll_cc::general_work (int                     noutput_items,
 		consume_each(d_l-1);
 
 		// make sure tags are propagated to the following blocks
-		propagate_tags(d_l-1, 2);
+		propagate_tags(d_l-1);
 
 		// next block will contain exactly one sample prior to the
 		// basepoint sample
@@ -406,7 +406,7 @@ int  ccsds_dll_cc::general_work (int                     noutput_items,
 		// 3		: additional samples for interpolation
 		missing = d_l + get_int(d_mu + d_OSF_HALF) + 3 - num;
 		missing = (missing > 0) ? missing : 0;
-		if( missing > 0 || num_out >= noutput_items) {
+		if( missing > 0 || num_out >= (unsigned int)noutput_items) {
 			break;
 		}
 	}
@@ -426,7 +426,7 @@ int  ccsds_dll_cc::general_work (int                     noutput_items,
 //	consume_each(d_l-1-missing);
 	consume_each(d_l-1);
 
-	propagate_tags(d_l-1, num_out);
+	propagate_tags(d_l-1);
 
 	// next block will contain exactly one sample prior to the basepoint
 	// sample or $missing$ more, if we could not consume the full last block

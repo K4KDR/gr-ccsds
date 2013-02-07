@@ -70,7 +70,7 @@ private:
   unsigned long int d_sync_marker;
   int d_asm_length;
   
-  void forecast (int noutput_items, gr_vector_int &ninput_items_required)
+  void forecast (int /*noutput_items*/, gr_vector_int &ninput_items_required)
   {
 	  // make sure that we get at least one frame per input buffer
 	  unsigned ninputs = ninput_items_required.size ();

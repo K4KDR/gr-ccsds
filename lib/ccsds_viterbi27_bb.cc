@@ -42,14 +42,15 @@ ccsds_viterbi27_bb::ccsds_viterbi27_bb(
 		      gr_make_io_signature(1, 1, sizeof(char)),
 		      gr_make_io_signature(0, 0, sizeof(char))),
 		      // 1),  // Rate 1/2 code
+	
 	d_output_queue(output_queue),
-	d_framesyms(framesyms),
-	d_framebits(framesyms>>1),
-	d_framebytes(framesyms>>4),
-	d_sync_marker(sync_marker),
-	d_asm_length(asm_length),
 	d_count(0),
-	d_frame_counter(0)
+	d_frame_counter(0),
+	d_framesyms(framesyms),
+	d_framebytes(framesyms>>4),
+	d_framebits(framesyms>>1),
+	d_sync_marker(sync_marker),
+	d_asm_length(asm_length)
 {
 	int polys[2] = { V27POLYB, -V27POLYA }; // the polynomials as recommended by the CCSDS
 	set_viterbi27_polynomial(polys);
@@ -72,8 +73,8 @@ ccsds_viterbi27_bb::~ccsds_viterbi27_bb()
 
 int
 ccsds_viterbi27_bb::work(int noutput_items,
-			    gr_vector_const_void_star &input_items,
-			    gr_vector_void_star &output_items)
+			    gr_vector_const_void_star& input_items,
+			    gr_vector_void_star& /*output_items*/)
 {
   const char *in = (const char *)input_items[0];
 
@@ -87,11 +88,10 @@ ccsds_viterbi27_bb::work(int noutput_items,
 		# if VERBOSE
 			printf("\nviterbi decoding, channel symbols = %d\n",d_count);
 		# endif
-		unsigned char data[d_framebytes];
 		for(int j = 1; j <= 6; j++) 
 			// the 6 bits at the head of the next ASM that 'flush out' from the register the 
 			// final channel symbols that are affected by the frame bits
-			d_viterbi_in[d_count++] = ((d_sync_marker >> d_asm_length-j) & 1) ? -Gain : Gain;
+			d_viterbi_in[d_count++] = ((d_sync_marker >> (d_asm_length-j)) & 1) ? -Gain : Gain;
 		init_viterbi27(d_vp,d_sync_marker&0x3f); // start state is tail of ASM
 
 		// Decode block (decode frame)

@@ -29,12 +29,13 @@ ccsds_msg_blob_sink_b::~ccsds_msg_blob_sink_b () {
 bool ccsds_msg_blob_sink_b::stop(void) {
 	// Signal EOF
 	message_port_pub( pmt::mp("out"), pmt::PMT_EOF );
+	return true;
 }
 
-int ccsds_msg_blob_sink_b::general_work (int                     noutput_items,
-                                gr_vector_int               &ninput_items,
-                                gr_vector_const_void_star   &input_items,
-                                gr_vector_void_star         &output_items)
+int ccsds_msg_blob_sink_b::general_work (int                 /*noutput_items*/,
+                                gr_vector_int&               ninput_items,
+                                gr_vector_const_void_star&   input_items,
+                                gr_vector_void_star&         /*output_items*/)
 {
 	const unsigned char *in = (const unsigned char *) input_items[0];
 

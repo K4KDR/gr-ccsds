@@ -57,24 +57,24 @@ class CCSDS_API ccsds_rs_decode_bb : public gr_sync_block
 	
  private:
 	gr_msg_queue_sptr d_output_queue;
-	int d_codeblock_bits;
-	int d_codeblock_syms;
-	int d_codeword_syms;
-	int d_interleave_depth;
-	int d_count;
-	int d_block_bits;
-	int d_parity_syms_per_word;
-	int d_frame_bits;
-	int d_frame_bytes;
-	int d_deinterleaved_frame_pos;
+	const unsigned int d_codeblock_bits;
+	const unsigned int d_codeblock_syms;
+	const unsigned int d_codeword_syms;
+	const unsigned int d_parity_syms_per_word;
+	const unsigned int d_interleave_depth;
+	const unsigned int d_frame_bits;
+	const unsigned int d_frame_bytes;
+	unsigned int d_deinterleaved_frame_pos;
 	int d_loop;
+	unsigned int d_count;
+	int d_block_bits;
 	int d_frame_counter;
 	int d_lost_frame_counter;
 	unsigned char *d_rs_in;
 
 	int decode(unsigned char *deinterleaved);
 	
-	void forecast (int noutput_items, gr_vector_int &ninput_items_required)
+	void forecast (int /*noutput_items*/, gr_vector_int &ninput_items_required)
 	{
 		// make sure we have at least one frame per input buffer
 		unsigned ninputs = ninput_items_required.size ();

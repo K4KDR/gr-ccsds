@@ -62,8 +62,8 @@ class CCSDS_API ccsds_randomiser_bb : public gr_sync_block
 	friend CCSDS_API ccsds_randomiser_bb_sptr 
 		ccsds_make_randomiser_bb(gr_msg_queue_sptr output_queue, int frame_bits, int mask, int seed, int len);
 
-	gri_lfsr d_lfsr;
 	gr_msg_queue_sptr d_output_queue;
+	gri_lfsr d_lfsr;
 	int d_bits;
 	int d_count;
 	int d_byte;
@@ -76,10 +76,12 @@ class CCSDS_API ccsds_randomiser_bb : public gr_sync_block
 
 	void forecast (int noutput_items, gr_vector_int &ninput_items_required)
 	{
+		const unsigned int num_frames = std::max(noutput_items/d_frame_bits, 1);
+
 		// make sure that we get at least one frame per input buffer
-		unsigned ninputs = ninput_items_required.size ();
+		const unsigned int ninputs = ninput_items_required.size ();
 		for (unsigned i = 0; i < ninputs; i++)
-		ninput_items_required[i] = d_frame_bits;
+		ninput_items_required[i] = d_frame_bits*num_frames;
 	}
 
 public:

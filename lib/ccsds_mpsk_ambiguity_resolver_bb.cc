@@ -168,7 +168,7 @@ unsigned char * ccsds_mpsk_ambiguity_resolver_bb::get_packed_bytes(const unsigne
 				out_byte++;
 				out_bit = 0;
 
-				if(out_byte >= bytes_req) {
+				if((unsigned int)out_byte >= bytes_req) { // out_byte >= 0 because of above check
 					// next loop we would write out of the
 					// requested range, so we are finished now
 					return out;
@@ -193,7 +193,7 @@ unsigned char * ccsds_mpsk_ambiguity_resolver_bb::get_packed_bytes(const unsigne
 			out_byte++;
 			out_bit = split;
 
-			if(out_byte >= bytes_req) {
+			if((unsigned int)out_byte >= bytes_req) { // out_byte >= 0. Lowest possible value is -1 and it is increased by one above
 				// we would write out of the requested range, so
 				// we are finished now
 				return out;

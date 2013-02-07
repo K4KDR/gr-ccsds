@@ -46,17 +46,17 @@ ccsds_randomiser_bb::ccsds_randomiser_bb(gr_msg_queue_sptr output_queue, int fra
 	d_bits(0),
 	d_count(0),
 	d_byte(0),
-	d_frame_counter(0),
 	d_frame_bits(frame_bits),
-	d_frame_bytes(frame_bits>>3)
+	d_frame_bytes(frame_bits>>3),
+	d_frame_counter(0)
 {
 	d_packed_frame = new unsigned char[d_frame_bytes];
 }
 
 int
 ccsds_randomiser_bb::work(int noutput_items,
-				gr_vector_const_void_star &input_items,
-				gr_vector_void_star &output_items)
+				gr_vector_const_void_star& input_items,
+				gr_vector_void_star& /*output_items*/)
 {
 	const unsigned char *in = (const unsigned char *) input_items[0];
 

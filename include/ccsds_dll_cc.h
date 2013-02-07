@@ -248,9 +248,8 @@ private:
 	/*! \brief Propagates stream tags of the current block to the decimated
 	 *	output stream.
 	 *  \param num_in Number of samples read during this block operation.
-	 *  \param num_out Number of samples written during this block operation.
 	 */
-	void propagate_tags(const unsigned int num_in, const unsigned int num_out);
+	void propagate_tags(const unsigned int num_in);
 
 public:
 	/*! \brief Public deconstructor of the DLL */	

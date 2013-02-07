@@ -42,19 +42,20 @@ ccsds_ticp_frame_source_b::~ccsds_ticp_frame_source_b () {
 	#endif
 }
 
-void ccsds_ticp_frame_source_b::forecast(int noutput_items,gr_vector_int &ninput_items_required){
+void ccsds_ticp_frame_source_b::forecast(int /*noutput_items*/,gr_vector_int& /*ninput_items_required*/){
 	// We are a source, so we don't need input samples to generate output
 	return;
 }
 
 bool ccsds_ticp_frame_source_b::stop( void ) {
 	d_stop = true;
+	return true;
 }
 
-int  ccsds_ticp_frame_source_b::general_work (int                     noutput_items,
-                                gr_vector_int               &ninput_items,
-                                gr_vector_const_void_star   &input_items,
-                                gr_vector_void_star         &output_items)
+int  ccsds_ticp_frame_source_b::general_work (int           noutput_items,
+                                gr_vector_int&              /*ninput_items*/,
+                                gr_vector_const_void_star&  /*input_items*/,
+                                gr_vector_void_star&        output_items)
 {
 	// Output stream
 	unsigned char *out = (unsigned char *) output_items[0];

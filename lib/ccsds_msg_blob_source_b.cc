@@ -40,10 +40,12 @@ ccsds_msg_blob_source_b::~ccsds_msg_blob_source_b () {
 
 bool ccsds_msg_blob_source_b::start(void) {
 	d_astart.start();
+	return true;
 }
 
 bool ccsds_msg_blob_source_b::stop(void) {
 	d_astart.stop();
+	return true;
 }
 
 void ccsds_msg_blob_source_b::process_message(pmt::pmt_t msg_in) {
@@ -81,10 +83,10 @@ void ccsds_msg_blob_source_b::process_message(pmt::pmt_t msg_in) {
 	return;
 }
 
-int ccsds_msg_blob_source_b::general_work (int                     noutput_items,
-                                gr_vector_int               &ninput_items,
-                                gr_vector_const_void_star   &input_items,
-                                gr_vector_void_star         &output_items)
+int ccsds_msg_blob_source_b::general_work (int               noutput_items,
+                                gr_vector_int&               /*ninput_items*/,
+                                gr_vector_const_void_star&   /*input_items*/,
+                                gr_vector_void_star&         output_items)
 {
 
 	if(d_stop == 0) {

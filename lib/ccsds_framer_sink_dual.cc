@@ -52,7 +52,7 @@ ccsds_framer_sink_dual::enter_search()
 }
 
 inline void
-ccsds_framer_sink_dual::enter_locking(const unsigned char *stream, bool standard)
+ccsds_framer_sink_dual::enter_locking(bool standard)
 {
 	# if VERBOSE
 		printf( "@ enter_locking\n");
@@ -70,8 +70,6 @@ ccsds_framer_sink_dual::enter_locking(const unsigned char *stream, bool standard
 		std::cout << "lock on inverse\n";
 	}
 	d_count = 0;
-	// d_in = stream;
-	// d_inverse_buffer_byte_count = 0;
 }
 
 ccsds_framer_sink_dual_sptr
@@ -169,7 +167,7 @@ ccsds_framer_sink_dual::~ccsds_framer_sink_dual ()
 int
 ccsds_framer_sink_dual::work (int noutput_items,
 		gr_vector_const_void_star &input_items,
-		gr_vector_void_star &output_items)
+		gr_vector_void_star& /*output_items*/)
 		{
 	const unsigned char *in_standard = (const unsigned char *) input_items[0];
 	const unsigned char *in_inverse = (const unsigned char *) input_items[1];
@@ -220,7 +218,7 @@ ccsds_framer_sink_dual::work (int noutput_items,
 							continue; 
 						}
 					}
-					enter_locking(in_standard,true);
+					enter_locking(true);
 					break;
 				}
 				else if ( check_flag(in_inverse[count]) ){	// Found it on the inverted stream
@@ -231,7 +229,7 @@ ccsds_framer_sink_dual::work (int noutput_items,
 							continue;
 						}
 					}
-					enter_locking(in_inverse,false);
+					enter_locking(false);
 					break;
 				}
 				else 

@@ -51,10 +51,6 @@ ccsds_ticp_frame_source::~ccsds_ticp_frame_source () {
 	#endif
 }
 
-bool ccsds_ticp_frame_source::start(void) {
-	printf("start\n");
-}
-
 void ccsds_ticp_frame_source::asynchronous_work(void)
 {
 

@@ -147,10 +147,10 @@ void ccsds_fll_cc::calc_diffs(gr_complex *tmp_c, const gr_complex *in, const uns
 		volk_32fc_x2_multiply_conjugate_32fc_a(tmp_c, in, in_shift, num);
 	}
 	
-	/*/
+	//*/
 
 
-	//* without volk
+	/* without volk
 	for(unsigned int i=0;i<num;i++) {
 		tmp_c[i] = in[i] * std::conj(in_shift[i]);
 	}

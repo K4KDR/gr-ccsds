@@ -19,7 +19,7 @@ typedef boost::shared_ptr<ccsds_local_oscillator_cc> ccsds_local_oscillator_cc_s
  *  \todo Remove block_length from the code
  *  \todo Improve adaptive filtering of frequency estimates
  */
-CCSDS_API ccsds_local_oscillator_cc_sptr ccsds_make_local_oscillator_cc (unsigned int block_length, unsigned int osf, gr_msg_queue_sptr msgq);
+CCSDS_API ccsds_local_oscillator_cc_sptr ccsds_make_local_oscillator_cc(unsigned int block_length, unsigned int osf, gr_msg_queue_sptr msgq);
 
 /*! \brief Local oscillator controlled by asynchronous frequency corrections
  *  \ingroup synchronization

@@ -62,6 +62,17 @@ class CCSDS_API ccsds_framer_sink_dual : public gr_sync_block
   // static const int HEADERBITLEN   = 32;
 
   gr_msg_queue_sptr  d_target_queue;		// where to send the packet when received
+  const int d_frame_byte_length;
+  const int d_frame_bit_length;
+  const int d_asm_byte_length;
+  const int d_asm_bit_length;
+  const int d_sync_lock_diff;
+  int d_count;
+  unsigned char d_byte;
+  int d_frame_counter;
+    
+
+
   state_t            d_state;
 
   bool 	b_standard;			// flag to identify if the standard stream is being used. if false, the inverted stream is used instead
@@ -73,20 +84,12 @@ class CCSDS_API ccsds_framer_sink_dual : public gr_sync_block
   int			d_payload_size;			// The payload size
   int			d_packet_size;			// The frame size, which is the sum of the payload plus the frame sync marker
 
-  int d_frame_byte_length;
-  int d_frame_bit_length;
-  int d_asm_byte_length;
-  int d_asm_bit_length;
   int d_message_bits;
-  int d_count;
-  unsigned char d_byte;
   // unsigned char	*d_packet; //[MAX_PKT_LEN];	// assembled payload
   unsigned char	*d_packed_frame; //[MAX_PKT_LEN];
   // unsigned char	*d_buffer_inverse; //[MAX_PKT_LEN];
   const unsigned char *d_in;
   
-  int d_sync_lock_diff;
-  int d_frame_counter;
 
   int			d_packetlen;		// length of packet
   int			d_packet_whitener_offset;  // offset into whitener string to use
@@ -130,7 +133,7 @@ class CCSDS_API ccsds_framer_sink_dual : public gr_sync_block
 	if (byte & 0x2) return true;
 	else return false;
   }
-  void forecast (int noutput_items, gr_vector_int &ninput_items_required)
+  void forecast (int /*noutput_items*/, gr_vector_int &ninput_items_required)
   {
   // make sure all inputs have noutput_items available
   unsigned ninputs = ninput_items_required.size ();
@@ -143,7 +146,7 @@ class CCSDS_API ccsds_framer_sink_dual : public gr_sync_block
   ccsds_framer_sink_dual(gr_msg_queue_sptr target_queue, int framebytes, int sync_marker_bytes);
 
   void enter_search();
-  void enter_locking(const unsigned char *stream, bool standard);
+  void enter_locking(bool standard);
   void enter_have_sync();
 
  public:

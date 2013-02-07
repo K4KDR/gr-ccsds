@@ -119,53 +119,19 @@ inline float lpf2::wrap(float in, float max) {
 }
 
 double lpf2::filter_step_wrapped(float in, const float wrap_max) {
-	/*
-	double  new_ephi = wrap(in-d_phi,wrap_max);
-	d_xi  += GAMMA * (RHOB*new_ephi - d_ephi);
-	float ret = d_phi;
-	d_phi = wrap(d_phi + d_xi, M_PI);
-	d_ephi = new_ephi;
-	//*/
-
-	//*
-
-
+	
 	double ephi = wrap(in-d_phi,wrap_max);
 
-	/*
-	if(std::abs(ephi) > wrap_max) {
-		printf("possible cycle slip\n");
-	}
-	*/
-
-	// compute new correction
 	d_xi  += GAMMA * wrap(RHOB*ephi - d_ephi, wrap_max);
 	double ret = d_phi;
 	d_phi = wrap(d_phi + d_xi, M_PI);
 
 	d_ephi = ephi;
 
-	
-	double freq = 0.0;
-	//*/
-
-	/*
-	d_xi  = d_xi + GAMMA*RHOB*in - GAMMA*d_ephi;
-	d_phi = d_phi + d_xi;
-	d_ephi = in;
-	//*/
-
 	#ifdef LPF2_DEBUG
 		debug_count++;
 		fprintf(debugFile,"%u,%2.10f,%2.10f,%2.10f,%2.10f,%2.10f\n",debug_count,in/M_PI,ret/M_PI,d_xi/M_PI,freq/M_PI,ephi/M_PI);
 	#endif
-	
-	/*	
-	state[XI]  += GAMMA * (RHOB*(in-state[PHI]) - state[EPHI]);
-	state[PHI] += state[XI];
-	state[EPHI] = in-state[PHI];
-	//*/
-
 	
 	return ret;
 }

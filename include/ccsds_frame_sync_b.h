@@ -183,7 +183,7 @@ private:
 	 *  \return \c d_ASM_LEN+d_FRAME_LEN if \c d_offset_bits is zero,
 	 *	otherwise \c d_ASM_LEN+d_FRAME_LEN+1
 	 */
-	const unsigned int get_bytes_required(void);
+	inline unsigned int get_bytes_required(void);
 
 
 public:
