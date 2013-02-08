@@ -42,8 +42,8 @@ install(FILES
     ccsds_lpf.h
     ccsds_lpf2.h
     ccsds_add_asm.h
-    ccsds_msg_blob_source_b.h
-    ccsds_msg_blob_sink_b.h
+    ccsds_blob_msg_source_b.h
+    ccsds_blob_msg_sink_b.h
     ccsds_ticp_frame_source.h
     ccsds_ticp_frame_source_b.h
     ccsds_ticp_frame_sink.h

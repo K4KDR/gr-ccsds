@@ -109,7 +109,5 @@ private:
 public:
 	/*! \brief Public deconstructor of the ticp frame source */	
 	~ccsds_ticp_frame_source ();  // public destructor
-
-	bool start(void);
 };
 #endif /* INCLUDED_CCSDS_TICP_FRAME_SOURCE_H */

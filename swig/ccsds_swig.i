@@ -27,8 +27,8 @@
 #include "ccsds_mpsk_preamble_cc.h"
 #include "ccsds_frame_sync_b.h"
 #include "ccsds_add_asm.h"
-#include "ccsds_msg_blob_source_b.h"
-#include "ccsds_msg_blob_sink_b.h"
+#include "ccsds_blob_msg_source_b.h"
+#include "ccsds_blob_msg_sink_b.h"
 #include "ccsds_ticp_frame_source.h"
 #include "ccsds_ticp_frame_source_b.h"
 #include "ccsds_ticp_frame_sink.h"
@@ -70,11 +70,11 @@ GR_SWIG_BLOCK_MAGIC(ccsds,frame_sync_b);
 GR_SWIG_BLOCK_MAGIC(ccsds,add_asm);
 %include "ccsds_add_asm.h"
 
-GR_SWIG_BLOCK_MAGIC(ccsds,msg_blob_source_b);
-%include "ccsds_msg_blob_source_b.h"
+GR_SWIG_BLOCK_MAGIC(ccsds,blob_msg_source_b);
+%include "ccsds_blob_msg_source_b.h"
 
-GR_SWIG_BLOCK_MAGIC(ccsds,msg_blob_sink_b);
-%include "ccsds_msg_blob_sink_b.h"
+GR_SWIG_BLOCK_MAGIC(ccsds,blob_msg_sink_b);
+%include "ccsds_blob_msg_sink_b.h"
 
 GR_SWIG_BLOCK_MAGIC(ccsds,ticp_frame_source);
 %include "ccsds_ticp_frame_source.h"

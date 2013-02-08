@@ -34,8 +34,8 @@ install(FILES
     ccsds_mpsk_preamble_cc.xml
     ccsds_frame_sync_b.xml
     ccsds_add_asm.xml
-    ccsds_msg_blob_source_b.xml
-    ccsds_msg_blob_sink_b.xml
+    ccsds_blob_msg_source_b.xml
+    ccsds_blob_msg_sink_b.xml
     ccsds_ticp_frame_source.xml
     ccsds_ticp_frame_source_b.xml
     ccsds_ticp_frame_sink.xml

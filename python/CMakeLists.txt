@@ -50,4 +50,6 @@ GR_ADD_TEST(qa_rs_encode ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_ccs
 GR_ADD_TEST(qa_mpsk_mod_bc ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_ccsds_mpsk_mod_bc.py)
 GR_ADD_TEST(qa_mpsk_demod_cb ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_ccsds_mpsk_demod_cb.py)
 GR_ADD_TEST(qa_mpsk_demod2_cb ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_ccsds_mpsk_demod2_cb.py)
-GR_ADD_TEST(qa_msg_blob ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_ccsds_msg_blob.py)
+GR_ADD_TEST(qa_blob_msg ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_ccsds_blob_msg.py)
+GR_ADD_TEST(qa_blob_msg_source ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_ccsds_blob_msg_source.py)
+GR_ADD_TEST(qa_blob_msg_sink ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_ccsds_blob_msg_sink.py)

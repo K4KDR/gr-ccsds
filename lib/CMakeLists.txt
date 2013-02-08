@@ -41,8 +41,8 @@ add_library(gnuradio-ccsds SHARED
 	ccsds_lpf.cc
 	ccsds_lpf2.cc
 	ccsds_add_asm.cc
-	ccsds_msg_blob_source_b.cc
-	ccsds_msg_blob_sink_b.cc
+	ccsds_blob_msg_source_b.cc
+	ccsds_blob_msg_sink_b.cc
 	ccsds_ticp_frame_source.cc
 	ccsds_ticp_frame_source_b.cc
 	ccsds_ticp_frame_sink.cc
