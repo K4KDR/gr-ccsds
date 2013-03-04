@@ -2,7 +2,7 @@
 <block>
 	<name>FLL (CCSDS)</name>
 	<key>ccsds_fll_cc</key>
-	<category>CCSDS</category>
+	<category>CCSDS/Receiver/Synchronization</category>
 	<import>import ccsds</import>
 	<make>ccsds.fll_cc($L,$bw,$power,$(id)_msgq_out)</make>
 	<param>

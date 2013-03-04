@@ -51,18 +51,8 @@ private:
 	/*! \brief Length of BLOBs in bytes */
 	const unsigned int d_BLOB_LEN;
 
-	/*! \brief Queue in which to buffer the pointer to the blobs. */
-	std::queue<unsigned char *> d_queue;
-
-	/*! \brief Buffer to store BLOB that is currently beeing transmitted */
-	unsigned char *d_buffer;
-
-	/*! \brief Counter to point to byte in current BLOB that has to be
-	 *	transmitted next
-	 *
-	 *  \sa d_buffer
-	 */
-	unsigned int d_buffer_count;
+	/*! \brief Queue in which to buffer the message bytes. */
+	std::queue<unsigned char> d_queue;
 
 	/*! \brief Flag to indicate EOF arrival. When true and the buffers are
 	 *	empty, signal EOF.
@@ -71,7 +61,7 @@ private:
 
 	/*! \brief workarround to ensure we only start transmitting, when the
 	 *	flowgraph is started.
-	 * \todo reove workarround
+	 * \todo remove workarround
 	 */
 	asynchronous_start d_astart;
 
@@ -85,8 +75,6 @@ public:
 	bool start(void);
 	bool stop(void);
 
-	int work (  int                         noutput_items,
-                        gr_vector_const_void_star   &input_items,
-                        gr_vector_void_star         &output_items);
+	int work(int noutput_items, gr_vector_const_void_star& input_items, gr_vector_void_star& output_items);
 };
 #endif /* INCLUDED_CCSDS_MSG_BLOB_SOURCE_B_H */

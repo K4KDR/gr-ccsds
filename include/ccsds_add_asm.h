@@ -2,7 +2,7 @@
 #define INCLUDED_CCSDS_ADD_ASM_H
 
 #include <ccsds_api.h>
-#include <gr_block.h>
+#include <gr_sync_block.h>
 #include <string>
 
 
@@ -43,7 +43,7 @@ CCSDS_API ccsds_add_asm_sptr ccsds_make_add_asm(std::string ASM, const unsigned 
  *  followed by the data of the incomming message. This new message is then
  *  queued in the output message port named "out".
  */
-class CCSDS_API ccsds_add_asm : public gr_block
+class CCSDS_API ccsds_add_asm : public gr_sync_block
 {
 private:
 	friend CCSDS_API ccsds_add_asm_sptr ccsds_make_add_asm(std::string ASM, const unsigned int frame_len);
@@ -72,12 +72,19 @@ private:
 	 */
 	unsigned char *d_ASM;
 
+	bool d_stop;
+
 	/*! \brief Asynchronous work function which is processing the queues. */
 	void process_frame(pmt::pmt_t msg);
 
 public:
 	/*! \brief Public deconstructor of the AR */	
 	~ccsds_add_asm ();  // public destructor
+
+	bool start(void);
+	bool stop(void);
+
+	int work(int noutput_items, gr_vector_const_void_star& input_items, gr_vector_void_star& output_items);
 
 };
 #endif /* INCLUDED_CCSDS_ADD_ASM_H */

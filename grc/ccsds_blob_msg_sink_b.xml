@@ -2,7 +2,7 @@
 <block>
   <name>BLOB Message Sink</name>
   <key>ccsds_blob_msg_sink_b</key>
-  <category>CCSDS</category>
+  <category>CCSDS/Conversion</category>
   <import>import ccsds</import>
   <make>ccsds.blob_msg_sink_b($blob_len)</make>
 	<param>

@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <block>
-  <name>M-PSK Demodulator [MLE based] (CCSDS)</name>
+  <name>M-PSK Detector (CCSDS)</name>
   <key>ccsds_mpsk_demod_cb</key>
-  <category>CCSDS</category>
+  <category>CCSDS/Receiver</category>
   <import>import ccsds</import>
   <make>ccsds.mpsk_demod_cb($M)</make>
 	<param>

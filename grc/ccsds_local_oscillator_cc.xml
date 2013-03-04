@@ -2,7 +2,7 @@
 <block>
 	<name>Local oscillator (CCSDS)</name>
 	<key>ccsds_local_oscillator_cc</key>
-	<category>CCSDS</category>
+	<category>CCSDS/Receiver/Synchronization</category>
 	<import>import ccsds</import>
 	<make>ccsds.local_oscillator_cc($L,$osf,$(id)_msgq_in)</make>
 	<param>

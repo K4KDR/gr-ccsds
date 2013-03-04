@@ -2,7 +2,7 @@
 <block>
 	<name>Add M-PSK Preamble (CCSDS)</name>
 	<key>ccsds_mpsk_preamble_cc</key>
-	<category>CCSDS</category>
+	<category>CCSDS/Sender</category>
 	<import>import ccsds</import>
 	<make>ccsds.mpsk_preamble_cc($M,$num_syms)</make>
 	<param>

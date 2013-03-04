@@ -2,7 +2,7 @@
 <block>
   <name>Frame Synchonizer (CCSDS)</name>
   <key>ccsds_frame_sync_b</key>
-  <category>CCSDS</category>
+  <category>CCSDS/Receiver</category>
   <import>import ccsds</import>
   <make>ccsds.frame_sync_b($ASM,$threshold,$ber_threshold,$frame_len)</make>
 	<param>

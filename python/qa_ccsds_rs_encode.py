@@ -24,7 +24,6 @@ import ccsds_swig
 from gruel import pmt
 import numpy
 import random
-import os
 import time
 
 class qa_ccsds_rs_encode (gr_unittest.TestCase):
@@ -46,8 +45,8 @@ class qa_ccsds_rs_encode (gr_unittest.TestCase):
 	self.snk = gr.vector_sink_b(1)
 	self.encoder = ccsds_swig.rs_encode(I)
 	self.decoder = ccsds_swig.rs_decode(I)
-	self.blob_source = ccsds_swig.msg_blob_source_b(223*I)
-	self.blob_sink = ccsds_swig.msg_blob_sink_b(223*I)
+	self.blob_source = ccsds_swig.blob_msg_source_b(223*I)
+	self.blob_sink = ccsds_swig.blob_msg_sink_b(223*I)
 
 	##################################################
 	# Connections
@@ -97,8 +96,8 @@ class qa_ccsds_rs_encode (gr_unittest.TestCase):
 	self.msg_to_byte = gr.message_source(gr.sizeof_char*1, msg_to_byte_msgq_in)
 	self.encoder = ccsds_swig.rs_encode(I)
 	self.decoder = ccsds_swig.rs_decode_bb(decoder_msgq_out, 10200)
-	self.byte_to_blob_msg = ccsds_swig.msg_blob_sink_b(223*I)
-	self.blob_msg_to_byte = ccsds_swig.msg_blob_source_b(255*I)
+	self.byte_to_blob_msg = ccsds_swig.blob_msg_sink_b(223*I)
+	self.blob_msg_to_byte = ccsds_swig.blob_msg_source_b(255*I)
 
 	##################################################
 	# Connections
@@ -195,9 +194,7 @@ class qa_ccsds_rs_encode (gr_unittest.TestCase):
 
     # Send multiple frames
     def test_stream_multiple(self):
-	# repeat 20 times
-	for i in xrange(20):
-		self.runStreamExperiment(20)
+	self.runStreamExperiment(20)
 
 
 

@@ -2,7 +2,7 @@
 <block>
   <name>PLL (CCSDS)</name>
   <key>ccsds_pll_cc</key>
-  <category>CCSDS</category>
+  <category>CCSDS/Receiver/Synchronization</category>
   <import>import ccsds</import>
   <make>ccsds.pll_cc($M, $BL,$(id)_msgq_out)</make>
 	<param>

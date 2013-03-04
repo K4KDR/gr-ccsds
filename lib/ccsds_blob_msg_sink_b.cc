@@ -77,7 +77,8 @@ int ccsds_blob_msg_sink_b::work (int                 noutput_items,
 		}
 	}
 	
-	// We are a sink, so no data generated
+	// We are a sink, so no data generated, but we are a sync block, so tell
+	// runtime how many inputs we consumed.
 	return noutput_items;
 }
 

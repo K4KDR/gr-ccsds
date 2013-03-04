@@ -2,7 +2,7 @@
 <block>
   <name>Reed Solomon Decoder (CCSDS)</name>
   <key>ccsds_rs_decode_bb</key>
-  <category>CCSDS</category>
+  <category>CCSDS/Channelcoding</category>
   <import>import ccsds</import>
   <make>ccsds.rs_decode_bb($(id)_msgq_out, $codeword_length)</make>
   <param>

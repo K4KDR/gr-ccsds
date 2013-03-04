@@ -2,7 +2,7 @@
 <block>
 	<name>DLL (CCSDS)</name>
 	<key>ccsds_dll_cc</key>
-	<category>CCSDS</category>
+	<category>CCSDS/Receiver/Synchronization</category>
 	<import>import ccsds</import>
 	<make>ccsds.dll_cc($osf,$gamma)</make>
 	<param>

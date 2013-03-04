@@ -2,9 +2,9 @@
 <block>
   <name>M-PSK Ambiguity Resolver (CCSDS)</name>
   <key>ccsds_mpsk_ambiguity_resolver_bb</key>
-  <category>CCSDS</category>
+  <category>CCSDS/Receiver/Synchronization</category>
   <import>import ccsds</import>
-  <make>ccsds.mpsk_ambiguity_resolver_bb($M,$ASM,$threshold,$frame_len)</make>
+  <make>ccsds.mpsk_ambiguity_resolver_bb($M,$ASM,$threshold,$ber_threshold,$frame_len)</make>
 	<param>
 		<name>M</name>
 		<key>M</key>
@@ -21,6 +21,12 @@
 		<name>Lock threshold</name>
 		<key>threshold</key>
 		<value>1</value>
+		<type>int</type>
+	</param>
+	<param>
+		<name>BER threshold</name>
+		<key>ber_threshold</key>
+		<value>0</value>
 		<type>int</type>
 	</param>
 	<param>
@@ -60,6 +66,10 @@ state, returning the bytes of the locked stream as output. If the counter
 reaches zero the block enters search mode again and stops it's output until it
 is locked again. Setting threshold to one will make the block loose lock
 immediatley if an exprected ASM does not match.
+
+BER threshold: Number of biterrors between ASM and received sequence that may
+occur to still consider the sequence to match. If set to zero the sequence must
+be an exact match of the ASM.
 
 Frame data length: Length of the frame data (excluding the ASM) in bytes. Every
 frame data length after an ASM another ASM is expected.

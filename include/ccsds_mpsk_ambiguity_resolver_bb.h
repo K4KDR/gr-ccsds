@@ -2,7 +2,7 @@
 #define INCLUDED_CCSDS_MPSK_AMBIGUITY_RESOLVER_BB_H
 
 #include <ccsds_api.h>
-#include <gr_block.h>
+#include <gr_sync_block.h>
 #include <string>
 #include "ccsds_asm_operator.h"
 
@@ -21,7 +21,7 @@
  *  \sa #CCSDS_AR_OUTPUT_STATE
  *  \sa #CCSDS_AR_OUTPUT_DEBUG
  */
-#define CCSDS_AR_VERBOSITY_LEVEL CCSDS_AR_OUTPUT_DEBUG
+#define CCSDS_AR_VERBOSITY_LEVEL CCSDS_AR_OUTPUT_NONE
 
 class ccsds_mpsk_ambiguity_resolver_bb;
 
@@ -48,10 +48,13 @@ typedef boost::shared_ptr<ccsds_mpsk_ambiguity_resolver_bb> ccsds_mpsk_ambiguity
  *	hexadecimal representation. Must be of even length.
  *  \param threshold Number of ASM losses to enter full search again. If
  *	set to one, a full search is performed every time an ASM is lost.
+ *  \param ber_threshold Maximum number of bit errors that may occur between a
+ *	sequence and the ASM to still consider the sequence as an ASM. If set to
+ *	zero, sequence must match the ASM exactly.
  *  \param frame_length Length of a frame (without ASM) in bytes.
  *  \return Shared pointer to the created AR block
  */
-CCSDS_API ccsds_mpsk_ambiguity_resolver_bb_sptr ccsds_make_mpsk_ambiguity_resolver_bb(const unsigned int M, std::string ASM, unsigned int threshold, const unsigned int frame_length);
+CCSDS_API ccsds_mpsk_ambiguity_resolver_bb_sptr ccsds_make_mpsk_ambiguity_resolver_bb(const unsigned int M, std::string ASM, unsigned int threshold, const unsigned int ber_threshold, const unsigned int frame_length);
 
 /*!
  * \brief M-PSK Ambiguity resolution.
@@ -73,10 +76,10 @@ CCSDS_API ccsds_mpsk_ambiguity_resolver_bb_sptr ccsds_make_mpsk_ambiguity_resolv
  * while in searchmode the output might be nonsense (since there is no ASM in it)
  * or might still be correct if the block has lost it's lock to early.
  */
-class CCSDS_API ccsds_mpsk_ambiguity_resolver_bb : public gr_block
+class CCSDS_API ccsds_mpsk_ambiguity_resolver_bb : public gr_sync_block
 {
 private:
-	friend CCSDS_API ccsds_mpsk_ambiguity_resolver_bb_sptr ccsds_make_mpsk_ambiguity_resolver_bb(const unsigned int M, std::string ASM, unsigned int threshold, const unsigned int frame_length);
+	friend CCSDS_API ccsds_mpsk_ambiguity_resolver_bb_sptr ccsds_make_mpsk_ambiguity_resolver_bb(const unsigned int M, std::string ASM, unsigned int threshold, const unsigned int ber_threshold, const unsigned int frame_length);
 
 	/*!
 	 * \brief Private constructor of the AR
@@ -86,6 +89,9 @@ private:
 	 *	hexadecimal representation. Must be of even length.
 	 *  \param threshold Number of ASM losses to enter full search again. If
 	 *	set to one, a full search is performed every time an ASM is lost.
+	 *  \param ber_threshold Maximum number of bit errors that may occur
+	 *	between a sequence and the ASM to still consider the sequence as
+	 *	an ASM. If set to zero, sequence must match the ASM exactly.
 	 *  \param frame_length Length of a frame (without ASM) in bytes.
 	 *
 	 *  Constructs a AR block that searches for the ASM in the \c M input
@@ -93,7 +99,7 @@ private:
 	 *  found, no output is given. This block preserves the ASM, as it is
 	 *  still needed for frame synchronization after decoding.
 	 */
-	ccsds_mpsk_ambiguity_resolver_bb(const unsigned int M, std::string ASM, unsigned int threshold, const unsigned int frame_length);
+	ccsds_mpsk_ambiguity_resolver_bb(const unsigned int M, std::string ASM, unsigned int threshold, const unsigned int ber_threshold, const unsigned int frame_length);
 	
 	/*! \brief Enumerator for the two different states. */
 	enum d_STATE {
@@ -127,8 +133,20 @@ private:
 	/*! \brief Length of a frame (without ASM) in bytes. */
 	const unsigned int d_FRAME_LEN;
 
+	/*! \brief Length of a frame (without ASM) in bits. */
+	const unsigned int d_FRAME_LEN_BITS;
+
 	/*! \brief Length of an ASM in bytes. */
 	const unsigned int d_ASM_LEN;
+
+	/*! \brief Length of an ASM in bits. */
+	const unsigned int d_ASM_LEN_BITS;
+
+	/*! \brief Number of remaining bits if ASM and frame are put into symbols.
+	 *
+	 *  Must be in the interval [0,d_ldM).
+	 */
+	const unsigned int d_FULL_FRAME_REMAIN_BITS;
 
 	/*! \brief Counter variable on how many ASMs have been observed */
 	unsigned int d_count;
@@ -139,7 +157,8 @@ private:
 
 		/*! \brief File pointer for debugging. */
 		FILE *dbg_file_out;
-
+	#endif
+	#if CCSDS_AR_VERBOSITY_LEVEL >= CCSDS_AR_OUTPUT_STATE
 		/*! \brief Counter for debugging. */
 		unsigned long dbg_count;
 	#endif
@@ -177,44 +196,44 @@ private:
 	/*! \brief Pointer to helper class \ref ccsds_asm_operator */
 	ccsds_asm_operator *d_asm_operator;
 
-	/*! \brief Extract an array of packed bytes from the samples of unpacked
-	 *	bits and change it's change ambiguity.
+	/*!
+	 *  \brief Returns the number of unpacked symbols (as float) that relate
+	 *	to the given number of packed bytes.
 	 *
-	 *  \param in_unpacked Array of samples (unpacked bits) to process.
-	 *  \param bytes_offset Index of the first requested byte if the
-	 *	complete packed stream was available in a single array.
-	 *  \param bytes_req Number of bytes that should be produced.
-	 *  \param ambiguity The number of symbols by which the received
-	 *	constellation was rotated before going into the detector.
-	 *
-	 *  \sa d_offset_bits
-	 *
-	 *  Assuming the input samples (unpacked bits) would be converted into
-	 *  one huge array of packed bytes. This function gives access to the
-	 *  \c bytes_req elements of this array starting at index \c bytes_offset,
-	 *  given the complete original input sequence \c in_unpacked.
-	 *  Additionally the byte and sample stream can be shifted by a few bits
-	 *  is the last run of \ref general_work did not end on a boundary of a
-	 *  sample but only on a byte boundary. This shift is stored in
-	 *  \c d_offset_bits.
-	 *
-	 *  The input bits are converted from gray code to binary code to see
-	 *  which constellation point was received, increase it's index by
-	 *  \c ambiguity_offset and convert the binary index back to gray coded
-	 *  bits.
+	 *  \param packed Number of packed bytes.
+	 *  \return Number of unpacked bytes (symbols) that relate to \c packed.
 	 */
-	unsigned char * get_packed_bytes(const unsigned char *in_unpacked, const unsigned int bytes_offset, const unsigned int bytes_req, unsigned int ambiguity);
+	float from_packed_to_unpacked(unsigned int packed);
 
-	
+	/*!
+	 *  \brief Ensures that \c d_offset_bits is confined within [0,d_ldM).
+	 *	If not \c d_offset_bytes is increased accordingly.
+	 *
+	 *  \sa d_offset_bytes
+	 *  \sa d_offset_bits
+	 */
+	void confine_offsets(void);
+
+	/*!
+	 *  \brief Change ambiguity of incomming symbol stream.
+	 *
+	 *  \param out Symbol array where to put the new ambiguity in. Memory
+	 *	for at least \c num elements must be allocated.
+	 *  \param in Symbol array which's abmiguity is to be changed. Must
+	 *	contain at least \c num elements.
+	 *  \param num Number of elements that should be converted.
+	 *  \param ambiguity Ambiguity that should be calculated. Must be in the
+	 *	range of [0,d_M), where 0 will just copy \c num elements from
+	 *	\c in to \c out.
+	 */
+	void convert_ambiguity(unsigned char *out, const unsigned char *in, const unsigned int num, unsigned int ambiguity);
+
 public:
 	/*! \brief Public deconstructor of the AR */	
 	~ccsds_mpsk_ambiguity_resolver_bb ();  // public destructor
 
-	void forecast(int noutput_items,gr_vector_int &ninput_items_required);
-
-	int  general_work (int                     noutput_items,
-                                gr_vector_int               &ninput_items,
-                                gr_vector_const_void_star   &input_items,
-                                gr_vector_void_star         &output_items);};
+	int  work (int  noutput_items,
+                        gr_vector_const_void_star   &input_items,
+                        gr_vector_void_star         &output_items);};
 
 #endif /* INCLUDED_CCSDS_MPSK_AMBIGUITY_RESOLVER_BB_H */

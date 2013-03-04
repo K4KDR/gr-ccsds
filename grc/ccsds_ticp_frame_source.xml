@@ -2,7 +2,7 @@
 <block>
   <name>TICP Frame Source (messages)</name>
   <key>ccsds_ticp_frame_source</key>
-  <category>CCSDS</category>
+  <category>CCSDS/TICP</category>
   <import>import ccsds</import>
   <make>ccsds.ticp_frame_source($hostname, $port, $frame_len)</make>
 	<param>

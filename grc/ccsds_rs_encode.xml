@@ -2,10 +2,10 @@
 <block>
   <name>Reed Solomon Encoder (CCSDS)</name>
   <key>ccsds_rs_encode</key>
-  <category>CCSDS</category>
+  <category>CCSDS/Channelcoding</category>
   <import>import ccsds</import>
   <make>ccsds.rs_encode(int($I.fcn))</make>
-		<param>
+	<param>
 		<name>Length of interleaving</name>
 		<key>I</key>
 		<value>5</value>

@@ -2,7 +2,7 @@
 <block>
   <name>framer_sink_dual</name>
   <key>ccsds_framer_sink_dual</key>
-  <category>ccsds</category>
+  <category>CCSDS</category>
   <import>import ccsds</import>
   <make>ccsds.framer_sink_dual(target_queue)</make>
   <!-- Make one 'param' node for every Parameter you want settable from the GUI.

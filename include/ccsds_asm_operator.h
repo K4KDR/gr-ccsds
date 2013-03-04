@@ -3,17 +3,17 @@
 
 #include <cstring>
 #include <cstdio>
+#include <cmath>
 
 /*! \brief Outputs debug messages to stdout if defined */
 // #define CCSDS_ASM_DEBUG
 
-/*! \brief Helper class for bit wise ASM search functions
+/*! \brief Helper class for unpacked bit wise ASM search functions
  *
  *  \ingroup receiver
  *  \ingroup synchronization
  *
  *  \sa ccsds_mpsk_ambiguity_resolver_bb
- *  \sa ccsds_frame_sync_bb
  *
  *  \todo Continue searching if ASM matches with a few tolerable bit errors (but there might also be a better match at later ambiguities)
  *  \todo Document search algorithm
@@ -34,12 +34,17 @@ private:
 	 */
 	const unsigned int d_ASM_LEN;
 
+	/*! \brief Length of ASM in symbols (rounded up). */
+	const unsigned int d_ASM_SYM_LEN;
+
 	/*! \brief Maximum number of bit errors that may occur between a
 	 *	sequence and the ASM to still consider the sequence as an ASM.
 	 *	If set to zero, sequence must match the ASM exactly.
 	 */
 	const unsigned int d_BER_THRESHOLD;
 
+	/*! \brief Number of information bits per symbol. */
+	const unsigned int d_INFO_BITS_PER_SYMBOL;
 public:
 
 	/*! \brief Constructor of ASM operator
@@ -49,9 +54,11 @@ public:
 	 *  \param BER_THRESHOLD Maximum number of bit errors that may occur
 	 *	between a sequence and the ASM to still consider the sequence as
 	 *	an ASM. If set to zero, sequence must match the ASM exactly.
+	 *  \param INFO_BITS_PER_SYMBOL Number of information bits per byte.
+	 *	Default is 8 (packed bytes).
 	 */
-	ccsds_asm_operator(const unsigned char *ASM, const unsigned int ASM_LEN, const unsigned int BER_THRESHOLD) :
-		d_ASM_LEN(ASM_LEN), d_BER_THRESHOLD(BER_THRESHOLD) {
+	ccsds_asm_operator(const unsigned char *ASM, const unsigned int ASM_LEN, const unsigned int BER_THRESHOLD, const unsigned int INFO_BITS_PER_SYMBOL = 8) :
+		d_ASM_LEN(ASM_LEN), d_ASM_SYM_LEN(std::ceil((unsigned int) (d_ASM_LEN*8.0f/INFO_BITS_PER_SYMBOL))), d_BER_THRESHOLD(BER_THRESHOLD), d_INFO_BITS_PER_SYMBOL(INFO_BITS_PER_SYMBOL) {
 
 
 		d_ASM = new unsigned char[ASM_LEN];
@@ -64,12 +71,16 @@ public:
 		delete[] d_ASM;
 	}
 
+	/*! \return The number of unpacked symbols necesarry to hold the ASM. */
+	unsigned int get_asm_sym_len(void) {
+		return d_ASM_SYM_LEN;
+	}
+
 	/*! \brief Checks if stream matches an ASM at given bit offset.
 	 *
-	 *  \param stream Array of bytes to check ASM against. If \c offset_bits is zero
-	 *	\c stream must have at least \c d_ASM_LEN elements, otherwise one element
-	 *	more.
-	 *  \param offset_bits Number of bits to ignore in the first byte of the stream.
+	 *  \param symbols Array of unpacked bytes to check ASM against. Must
+	 *	contain at least d_ASM_SYM_LEN elements.
+	 *  \param offset_bits Number of bits to ignore in the first symbol.
 	 *  \return \a true if stream is matching the ASM, \a false if not.
 	 *
 	 *  \sa d_BER_THRESHOLD
@@ -77,25 +88,33 @@ public:
 	 *  The stream is considered to match if \c d_BER_THRESHOLD or less bits
 	 *  differ.
 	 */
-	bool check_for_asm(const unsigned char* stream, unsigned int offset_bits) {
+	bool check_for_asm(const unsigned char* symbols, unsigned int offset_bits) {
 		#ifdef CCSDS_ASM_DEBUG
-			printf("++ check_for_asm ++\n");
-			printf("  compare: %u, offset=%u\n",stream[0],offset_bits);
-			printf("     with: %u\n",d_ASM[0]);
+			printf("++ check_for_asm in: ");
+			for(unsigned int i=0;i<std::ceil(d_ASM_LEN*8.0f/d_INFO_BITS_PER_SYMBOL);i++) {
+				printf("%02X ",symbols[i]);
+			}
+			printf("  with bit_offset=%u++\n",offset_bits);
 		#endif
+
+		if(offset_bits >= d_INFO_BITS_PER_SYMBOL) {
+			fprintf(stderr,"WARNING ASM OPERATOR: invalid offset_bits %u.\n", offset_bits);
+			return false;
+		}
+		
 
 		// Bitmasks to select a single bit position
 		unsigned char mask[8];
 		for(unsigned int i=0;i<8;i++) {
 			mask[i] = 0x1 << (7-i);
 		}
-	
-		// counter which bit we will compare next
+
+		// counter how many bits are still to be compared
 		unsigned int count = d_ASM_LEN*8u;
 
 		// byte index in the stream where the current bit is.
 		unsigned int s_byte = 0;
-		// bit index in the current stream byte 0 means MSB
+		// bit index in the current stream 0 means MSB
 		unsigned int s_bit  = offset_bits;
 
 		// byte index in the ASM that we are currently comparing
@@ -109,16 +128,25 @@ public:
 
 		// loop through all ASM bits
 		while(count > 0) {
+			const unsigned char bit_mask = (1 << (d_INFO_BITS_PER_SYMBOL-1)) >> s_bit;
+
 			// current bit value in the stream moved to the
 			// LSB position
-			unsigned char val_s_bit = (stream[s_byte] & mask[s_bit]) >> (7-s_bit);
+			const unsigned char val_s_bit = (symbols[s_byte] & bit_mask) >> (d_INFO_BITS_PER_SYMBOL-1-s_bit);
 			// current bit value in the ASM moved to the LSB
 			// position
-			unsigned char val_a_bit = ( d_ASM[a_byte] & mask[a_bit]) >> (7-a_bit);
+			const unsigned char val_a_bit = ( d_ASM[a_byte] & mask[a_bit]) >> (7-a_bit);
+
+			#ifdef CCSDS_ASM_DEBUG
+				printf("  bit %u %sequal, %u comparisons remaining\n",val_s_bit,((val_s_bit != val_a_bit) ? "not " : ""), count);
+			#endif
 
 			// if bits are not equal, there is a ber
 			if(val_s_bit != val_a_bit) {
 				err_count++;
+				#ifdef CCSDS_ASM_DEBUG
+					printf("    bit error %u/%u\n",err_count, d_BER_THRESHOLD);
+				#endif
 			}
 		
 			// To much errors, this sequence is not the ASM
@@ -131,14 +159,11 @@ public:
 				return false;
 			}
 		
-			#ifdef CCSDS_ASM_DEBUG
-				printf("  bit %1u equal, %u comparisons remaining\n",val_s_bit,count);
-			#endif
 
 			s_bit++;
 			a_bit++;
 			count--;
-			if(s_bit >= 8) {
+			if(s_bit >= d_INFO_BITS_PER_SYMBOL) {
 				s_bit = 0;
 				s_byte++;
 			}
@@ -161,7 +186,7 @@ public:
 	/*! \brief Searches for ASM in the given stream.
 	 *
 	 *  \param stream Array of bytes in which to search for the ASM.
-	 *  \param stream_len Length of the stream. The last \c d_ASM_LEN bytes of this
+	 *  \param stream_len Length of the stream. The last \c d_ASM_SYM_LEN bytes of this
 	 *	stream are not searched (as the ASM would only fit in partially).
 	 *  \param *offset_bytes Pointer to an unsigned int where the offset bytes between
 	 *	start of stream and the found ASM should be stored, if a match is found.
@@ -170,11 +195,13 @@ public:
 	 *  \return \a true if ASM is found, \a false otherwise.
 	 */
 	bool search_asm(const unsigned char* stream, const unsigned int stream_len, unsigned int *offset_bytes, unsigned int *offset_bits) {
+		*offset_bytes = 0;
+		*offset_bits  = 0;
 
 		// check all possible byte offsets
-		for(unsigned int byte=0;byte<stream_len-d_ASM_LEN;byte++) {
+		for(unsigned int byte=0;byte<stream_len-d_ASM_SYM_LEN;byte++) {
 			// for a given byte offset, check all possible bit offsets
-			for(unsigned int bit=0;bit<8;bit++) {
+			for(unsigned int bit=0;bit<d_INFO_BITS_PER_SYMBOL;bit++) {
 
 				// Does the stream at this position match the ASM?			
 				if(check_for_asm(&stream[byte], bit)) {

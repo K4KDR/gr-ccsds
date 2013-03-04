@@ -22,6 +22,11 @@ include(GrPlatform) #define LIB_SUFFIX
 add_library(gnuradio-ccsds SHARED
 	ccsds_randomiser_bb.cc
 	ccsds_viterbi27_bb.cc
+	ccsds_conv_encode27_bb.cc
+	ccsds_conv_encode27_aux.cc
+	ccsds_conv_decode27.cc
+	ccsds_sym_to_softbits_bf.cc
+	ccsds_sym_to_softbits_bb.cc
 	ccsds_framer_sink_dual.cc
 	ccsds_rs_decode_bb.cc
 	ccsds_rs_decode.cc
@@ -32,8 +37,10 @@ add_library(gnuradio-ccsds SHARED
 	ccsds_pll_cc.cc
 	ccsds_dll_cc.cc
 	ccsds_mpsk_ambiguity_resolver_bb.cc
+	ccsds_mpsk_ambiguity_resolver_f.cc
 	ccsds_mpsk_mod_bc.cc
 	ccsds_mpsk_demod_cb.cc
+	ccsds_mpsk_detector_soft_cf.cc
 	ccsds_mpsk_demod2_cb.cc
 	ccsds_mpsk_preamble_cc.cc
 	ccsds_frame_sync_b.cc
@@ -41,6 +48,9 @@ add_library(gnuradio-ccsds SHARED
 	ccsds_lpf.cc
 	ccsds_lpf2.cc
 	ccsds_add_asm.cc
+	ccsds_msg_copy.cc
+	ccsds_msg_null_src.cc
+	ccsds_softbits_msg_to_bytes_b.cc
 	ccsds_blob_msg_source_b.cc
 	ccsds_blob_msg_sink_b.cc
 	ccsds_ticp_frame_source.cc
@@ -59,10 +69,12 @@ install(TARGETS gnuradio-ccsds
     RUNTIME DESTINATION bin              # .dll file
 )
 
+add_executable (test_ccsds_conv_encode27_aux test_ccsds_conv_encode27_aux.cc ccsds_conv_encode27_aux.cc) 
+
 ########################################################################
 # Build and register unit test
 ########################################################################
-find_package(Boost COMPONENTS unit_test_framework)
+find_package(Boost COMPONENTS unit_test_framework system)
 
 include(GrTest)
 set(GR_TEST_TARGET_DEPS gnuradio-ccsds)
@@ -84,3 +96,12 @@ GR_ADD_TEST(qa_ccsds_framer_sink_dual qa_ccsds_framer_sink_dual)
 add_executable(qa_ccsds_rs_decode_bb qa_ccsds_rs_decode_bb.cc)
 target_link_libraries(qa_ccsds_rs_decode_bb gnuradio-ccsds ${Boost_LIBRARIES})
 GR_ADD_TEST(qa_ccsds_rs_decode_bb qa_ccsds_rs_decode_bb)
+
+add_executable(qa_ccsds_conv_encode27_aux qa_ccsds_conv_encode27_aux.cc ccsds_conv_encode27_aux.cc)
+target_link_libraries(qa_ccsds_conv_encode27_aux ${Boost_LIBRARIES})
+GR_ADD_TEST(qa_ccsds_conv_encode27_aux qa_ccsds_conv_encode27_aux)
+
+
+add_executable(qa_ccsds_asm_operator qa_ccsds_asm_operator.cc)
+target_link_libraries(qa_ccsds_asm_operator ${Boost_LIBRARIES})
+GR_ADD_TEST(qa_ccsds_asm_operator qa_ccsds_asm_operator)

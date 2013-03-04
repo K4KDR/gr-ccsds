@@ -2,7 +2,7 @@
 <block>
   <name>M-PSK Modulator (CCSDS)</name>
   <key>ccsds_mpsk_mod_bc</key>
-  <category>CCSDS</category>
+  <category>CCSDS/Sender</category>
   <import>import ccsds</import>
   <make>ccsds.mpsk_mod_bc($M)</make>
 	<param>

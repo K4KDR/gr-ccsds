@@ -52,7 +52,7 @@ int  ccsds_mpsk_preamble_cc::general_work (int                     noutput_items
                          gr_vector_const_void_star   &input_items,
                          gr_vector_void_star         &output_items)
 {
-	const char *in = (const char *) input_items[0];
+	const gr_complex *in = (const gr_complex *) input_items[0];
 	gr_complex *out = (gr_complex *) output_items[0];
 
 

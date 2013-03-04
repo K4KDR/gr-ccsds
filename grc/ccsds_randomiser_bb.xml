@@ -2,7 +2,7 @@
 <block>
   <name>randomiser_bb</name>
   <key>ccsds_randomiser_bb</key>
-  <category>ccsds</category>
+  <category>CCSDS</category>
   <import>import ccsds</import>
   <make>ccsds.randomiser_bb(framelen, mask, seed, len, count)</make>
   <!-- Make one 'param' node for every Parameter you want settable from the GUI.

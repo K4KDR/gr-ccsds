@@ -2,7 +2,7 @@
 <block>
   <name>viterbi27_bb</name>
   <key>ccsds_viterbi27_bb</key>
-  <category>ccsds</category>
+  <category>CCSDS/Channelcoding</category>
   <import>import ccsds</import>
   <make>ccsds.viterbi27_bb()</make>
   <!-- Make one 'param' node for every Parameter you want settable from the GUI.

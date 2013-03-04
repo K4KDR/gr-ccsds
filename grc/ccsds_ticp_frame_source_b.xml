@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <block>
-  <name>TICP Frame Source</name>
+  <name>TICP Frame Source (stream)</name>
   <key>ccsds_ticp_frame_source_b</key>
-  <category>CCSDS</category>
+  <category>CCSDS/TICP</category>
   <import>import ccsds</import>
   <make>ccsds.ticp_frame_source_b($hostname, $port, $frame_len)</make>
 	<param>
