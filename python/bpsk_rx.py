@@ -85,11 +85,11 @@ def getDefaultConfig():
 	# general configuration
 	default["from_usrp"]      = False
 	default["from_file"]      = None
-	default["frame_sync"]     = False
-	default["viterbi27"]      = False
-	default["reed_solomon"]   = False
-	default["derandomise"]    = False
-	default["frame_check"]    = False
+	default["frame_sync"]     = True
+	default["viterbi27"]      = True
+	default["reed_solomon"]   = True
+	default["derandomise"]    = True
+	default["frame_check"]    = True
 	default["sync"]    	  = "Costas"
 	default["verbose"]        = False
 	default["inspect_queue"]  = False
@@ -97,7 +97,7 @@ def getDefaultConfig():
 	default["frame_syms"]     = 20400
 	default["asm_syms"]       = 64
 	# usrp
-	default["centre_freq"]    = 2e9
+	default["centre_freq"]    = 2.235e9
 	default["usrp_gain"]      = 1
 	default["sym_rate"]       = 2e6
 	# file
@@ -391,7 +391,7 @@ class vit27_decode(gr.hier_block2):
 		self.output_msgq = gr.msg_queue()
 		self._decoder = ccsds_swig.viterbi27_bb(self.output_msgq, options.frame_syms, hexstr2int(options.access_code), options.code_length);
 		options.message_bits /= 2
-		self._msg_input = ccsds_swig.msg_source(gr.sizeof_char, input_msgq)
+		self._msg_input = gr.message_source(gr.sizeof_char, input_msgq)
 		self.unpacker_bb = gr.packed_to_unpacked_bb(1, gr.GR_MSB_FIRST)
 		self.connect(self._msg_input, self.unpacker_bb, self._decoder)
 
@@ -418,7 +418,7 @@ class pdr(gr.hier_block2):
 		seed = 0xff # all ones
 		length = 7 # workaround for bug in gnuradio core code
 		self._pdr = ccsds_swig.randomiser_bb(self.output_msgq, options.message_bits, mask, seed, length);
-		self._msg_input = ccsds_swig.msg_source(gr.sizeof_char, input_msgq)
+		self._msg_input = gr.message_source(gr.sizeof_char, input_msgq)
 		self.unpacker_bb = gr.packed_to_unpacked_bb(1,gr.GR_MSB_FIRST)
 		self.connect(self._msg_input, self.unpacker_bb, self._pdr)
 
@@ -443,7 +443,7 @@ class reed_solomon(gr.hier_block2):
 		self.output_msgq = gr.msg_queue()
 		self._rs = ccsds_swig.rs_decode_bb(self.output_msgq, options.message_bits)
 		options.message_bits -= 5*32*8 # FIXME: do this properly
-		self._msg_input = ccsds_swig.msg_source(gr.sizeof_char, input_msgq)
+		self._msg_input = gr.message_source(gr.sizeof_char, input_msgq)
 		self.connect(self._msg_input, self._rs)
 
 
@@ -512,7 +512,7 @@ class receive_path(gr.hier_block2):
 			self._watcher = _queue_watcher_thread(input_msgq, rx_callback, options)
 		elif options.to_file:
 			self.file_sink = gr.file_sink(gr.sizeof_char, options.to_file)
-			self._msg_input = ccsds_swig.msg_source(gr.sizeof_char, input_msgq)
+			self._msg_input = gr.message_source(gr.sizeof_char, input_msgq)
 			self.connect(self._msg_input, self.file_sink)
 
 	
@@ -583,7 +583,8 @@ def main():
 	def rx_callback(ok, payload):
 		global n_rcvd, n_lost, p_frameno, lock
 		# print "\n\nnew msg\n%s" % (digital.packet_utils.conv_packed_binary_string_to_1_0_string(payload[2:3]))
-		# print len(payload[2:3])
+		print len(payload[2:3])
+		
 		(frameno,) = struct.unpack('!B', payload[2:3]) # payload is a packed binary string
 		if n_rcvd:
 			if lock < 3:

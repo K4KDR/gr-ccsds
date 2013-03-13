@@ -23,6 +23,7 @@
 install(FILES
 	ccsds_api.h
 	ccsds_randomiser_bb.h
+	ccsds_randomiser.h
 	ccsds_viterbi27_bb.h
 	ccsds_conv_encode27_bb.h
 	ccsds_conv_decode27.h

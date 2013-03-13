@@ -18,6 +18,7 @@
 # Boston, MA 02110-1301, USA.
 install(FILES
 	ccsds_randomiser_bb.xml
+	ccsds_randomiser.xml
 	ccsds_viterbi27_bb.xml
 	ccsds_conv_encode27_bb.xml
 	ccsds_conv_decode27.xml

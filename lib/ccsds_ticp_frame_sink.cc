@@ -79,6 +79,12 @@ const std::vector< unsigned char > ccsds_ticp_frame_sink::getFrame(void) {
 }
 
 void ccsds_ticp_frame_sink::process_message(pmt::pmt_t msg_in) {
+	
+	// check for EOF
+	if(pmt::pmt_is_eof_object(msg_in)) {
+		return;
+	}
+	
 	// check if message has right format	
 	if(!pmt::pmt_is_blob(msg_in)) {
 		fprintf(stderr,"ERROR TICP FRAME SINK: expecting message of type blob, skipping.\n");

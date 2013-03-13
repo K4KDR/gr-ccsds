@@ -9,6 +9,7 @@
 
 %{
 #include "ccsds_randomiser_bb.h"
+#include "ccsds_randomiser.h"
 #include "ccsds_viterbi27_bb.h"
 #include "ccsds_conv_encode27_bb.h"
 #include "ccsds_conv_decode27.h"
@@ -115,6 +116,9 @@ GR_SWIG_BLOCK_MAGIC(ccsds,ticp_frame_sink);
 
 GR_SWIG_BLOCK_MAGIC(ccsds,randomiser_bb);
 %include "ccsds_randomiser_bb.h"
+
+GR_SWIG_BLOCK_MAGIC(ccsds,randomiser);
+%include "ccsds_randomiser.h"
 
 GR_SWIG_BLOCK_MAGIC(ccsds,viterbi27_bb);
 %include "ccsds_viterbi27_bb.h"

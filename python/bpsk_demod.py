@@ -14,6 +14,7 @@ from gnuradio.wxgui import fftsink2
 from gnuradio.wxgui import scopesink2
 # for dynamicly named file output of the recorded live usrp raw output
 from datetime import datetime
+import sys
 
 class bpsk_demod(gr.hier_block2):
 
@@ -71,13 +72,18 @@ class bpsk_demod(gr.hier_block2):
 			# win=window.hamming,
 		# )
 		# self.Add(self.wxgui_fftsink2_0.win)
-		self.uhd_usrp_source = uhd.usrp_source(
-			device_addr="addr=192.168.10.2",
-			stream_args=uhd.stream_args(
-				cpu_format="fc32",
-				channels=range(1),
-			),
-		)
+		try:
+			self.uhd_usrp_source = uhd.usrp_source(
+				device_addr="addr=192.168.10.2",
+				stream_args=uhd.stream_args(
+					cpu_format="fc32",
+					channels=range(1),
+				),
+			)
+		except RuntimeError:
+			print 'Error accessing the USRP'
+			exit(1)
+
 		self.uhd_usrp_source.set_samp_rate(samp_rate)
 		self.uhd_usrp_source.set_center_freq(freq, 0)
 		self.uhd_usrp_source.set_gain(usrp_gain, 0)

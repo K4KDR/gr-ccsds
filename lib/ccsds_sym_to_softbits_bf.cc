@@ -57,7 +57,7 @@ int  ccsds_sym_to_softbits_bf::general_work (int	noutput_items,
 		// go through all bits in the input symbol
 		for(unsigned int j=0;j<d_NUM_BITS;j++) {
 			// extract the infobit
-			const bool bit = ( in_sym[i] & (0x01<<j) );
+			const bool bit = ( (in_sym[i]>>(d_NUM_BITS-1-j)) & 0x01 );
 
 			// transform to softbit and output
 			out[d_NUM_BITS*i+j] = bit_to_softbit(bit, in_conf[i]);

@@ -180,7 +180,7 @@ class qa_ccsds_mpsk_ambiguity_resolver_f (gr_unittest.TestCase):
 	# 8-PSK
 	################################################################################
 
-	'''
+	#'''
 	def test_8psk_ofst0_amb0(self):
 		src_data =     [ 1.0, 1.0,-1.0,-1.0, 1.0,-1.0, 1.0,-1.0,  # ASM
 				-1.0,-1.0,-1.0,-1.0,-1.0,-1.0,-1.0,-1.0,  # FD1  0x00
@@ -262,7 +262,7 @@ class qa_ccsds_mpsk_ambiguity_resolver_f (gr_unittest.TestCase):
 	# BPSK with tails
 	################################################################################
 
-	#'''
+	'''
 	def test_bpsk_ofst2_amb0(self):
 		src_data =     [ 1.0, 1.0,-1.0,-1.0, 1.0,-1.0, 1.0,-1.0,  # ASM   0xCA
 				-1.0,-1.0,-1.0,-1.0,-1.0,-1.0,-1.0,-1.0,  # Frame 0x00

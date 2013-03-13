@@ -15,11 +15,11 @@
 #include <boost/scoped_array.hpp>
 
 
-ccsds_mpsk_ambiguity_resolver_f_sptr ccsds_make_mpsk_ambiguity_resolver_f(const unsigned int M, std::string ASM, const unsigned int asm_len, const unsigned int threshold, const float ber_threshold, const unsigned int frame_length, const unsigned int num_tail_syms) {
-    return ccsds_mpsk_ambiguity_resolver_f_sptr (new ccsds_mpsk_ambiguity_resolver_f(M, ASM,asm_len, threshold, ber_threshold, frame_length, num_tail_syms) );
+ccsds_mpsk_ambiguity_resolver_f_sptr ccsds_make_mpsk_ambiguity_resolver_f(const unsigned int M, std::string ASM, const unsigned int asm_len, const unsigned int threshold, const float correlation_threshold, const unsigned int frame_length, const unsigned int num_tail_syms) {
+    return ccsds_mpsk_ambiguity_resolver_f_sptr (new ccsds_mpsk_ambiguity_resolver_f(M, ASM,asm_len, threshold, correlation_threshold, frame_length, num_tail_syms) );
 }
 
-ccsds_mpsk_ambiguity_resolver_f::ccsds_mpsk_ambiguity_resolver_f (const unsigned int M, std::string ASM, const unsigned int asm_len, const unsigned int threshold, const float ber_threshold, const unsigned int frame_length, const unsigned int num_tail_syms)
+ccsds_mpsk_ambiguity_resolver_f::ccsds_mpsk_ambiguity_resolver_f (const unsigned int M, std::string ASM, const unsigned int asm_len, const unsigned int threshold, const float correlation_threshold, const unsigned int frame_length, const unsigned int num_tail_syms)
   : gr_block ("ccsds_mpsk_ambiguity_resolver_f",
 	gr_make_io_signature (1, 1, sizeof (float)),
 	gr_make_io_signature (0, 0, sizeof (float))),
@@ -27,7 +27,7 @@ ccsds_mpsk_ambiguity_resolver_f::ccsds_mpsk_ambiguity_resolver_f (const unsigned
 	d_M(M),
 	d_ldM((unsigned int)round(log(M)/log(2.0f))),
 	d_THRESHOLD(threshold),
-	d_BER_THRESHOLD(ber_threshold),
+	d_CORRELATION_THRESHOLD(correlation_threshold),
 	d_FRAME_LEN_BITS(frame_length*8),
 	d_ASM_LEN_BITS(asm_len),
 	d_NUM_TAIL_SYMS(num_tail_syms),
@@ -58,15 +58,17 @@ ccsds_mpsk_ambiguity_resolver_f::ccsds_mpsk_ambiguity_resolver_f (const unsigned
 	d_count = 0;
 	d_locked_on_stream = 0;
 	d_offset_bits =0;
+	d_msg_buffer_count = 0;
 
 	// register output
 	message_port_register_out(pmt::mp("out"));
 
 	#if CCSDS_AR_SOFT_VERBOSITY_LEVEL >= CCSDS_AR_SOFT_OUTPUT_DEBUG
-		dbg_file_in = fopen("/tmp/ccsds_mpsk_ambiguity_resolver_debug_in.dat","w");
-		dbg_file_out = fopen("/tmp/ccsds_mpsk_ambiguity_resolver_debug_out.dat","w");
+		dbg_file_in = fopen("/tmp/ccsds_mpsk_ambiguity_resolver_f_debug_in.dat","w");
+		dbg_file_in_hard = fopen("/tmp/ccsds_mpsk_ambiguity_resolver_f_debug_in_hard.dat","w");
+		dbg_file_out = fopen("/tmp/ccsds_mpsk_ambiguity_resolver_f_debug_out.dat","w");
 	#endif
-	#if CCSDS_AR_SOFT_VERBOSITY_LEVEL >= CCSDS_AR_SOFT_OUTPUT_STATE
+	#if CCSDS_AR_SOFT_VERBOSITY_LEVEL >= CCSDS_AR_SOFT_OUTPUT_CHANGE
 		dbg_count = 0;
 
 		printf("==== Ambiguity resolution and Frame sync ====\n");
@@ -87,9 +89,11 @@ ccsds_mpsk_ambiguity_resolver_f::~ccsds_mpsk_ambiguity_resolver_f () {
 
 	#if CCSDS_AR_SOFT_VERBOSITY_LEVEL >= CCSDS_AR_SOFT_OUTPUT_DEBUG
 		fflush(dbg_file_in);
+		fflush(dbg_file_in_hard);
 		fflush(dbg_file_out);
 
 		fclose(dbg_file_in);
+		fclose(dbg_file_in_hard);
 		fclose(dbg_file_out);
 	#endif
 }
@@ -206,7 +210,7 @@ void ccsds_mpsk_ambiguity_resolver_f::forecast(int /*noutput_items*/,gr_vector_i
 	switch(d_state) {
 		case STATE_SEARCH:	ninput_items_required[0] = d_SEARCH_LEN_MIN;
 					break;
-		case STATE_LOCK:	ninput_items_required[0] = get_upper_mul(d_NUM_TAIL_SYMS + d_ASM_LEN_BITS + d_FRAME_LEN_BITS + d_offset_bits);
+		case STATE_LOCK:	ninput_items_required[0] = get_upper_mul( d_msg_buffer_fill ? 1 : (d_ASM_LEN_BITS + d_offset_bits));
 					break;
 	}
 	//printf("AR: need at least %d input items in this state\n",ninput_items_required[0]);
@@ -248,7 +252,7 @@ int  ccsds_mpsk_ambiguity_resolver_f::general_work (int 		    /*noutput_items*/,
 				// We want to search, make sure we have enough
 				// samples
 				if(ninput_items[0]-num_consumed < d_SEARCH_LEN_MIN) {
-					#if CCSDS_AR_SOFT_VERBOSITY_LEVEL >= CCSDS_AR_SOFT_OUTPUT_STATE
+					#if CCSDS_AR_SOFT_VERBOSITY_LEVEL >= CCSDS_AR_SOFT_OUTPUT_DEBUG
 						printf("AR: skip because we need %u symbols for the next search, while there are only %d left\n",d_SEARCH_LEN_MIN,ninput_items[0]-num_consumed);
 					#endif
 
@@ -291,31 +295,68 @@ int  ccsds_mpsk_ambiguity_resolver_f::general_work (int 		    /*noutput_items*/,
 					} // END search all ambiguity streams
 
 					// Did we find something?
-					if(max_corr > d_BER_THRESHOLD) {
+					if(max_corr > d_CORRELATION_THRESHOLD) {
 						// ASM found, enter LOCK
 						d_state = STATE_LOCK;
 						d_count = 0;
 						d_locked_on_stream = max_amb;
 
-						// drop the first symbols that do not match the ASM
-						const unsigned int num_syms = d_offset_bits / d_ldM;
-						if(num_syms > 0) {
-							num_consumed += num_syms*d_ldM;
-							d_offset_bits -= num_syms*d_ldM;
-						}
+						// Since ASM is already found we will
+						// copy to the buffer immediatley
+						d_msg_buffer_fill = true;
 
+						// Consume samples up to the next
+						// frame data (including ASM)
+						num_consumed += get_lower_mul(d_offset_bits+d_ASM_LEN_BITS);
+						d_offset_bits = (d_offset_bits+d_ASM_LEN_BITS) % d_ldM;
+
+						#if CCSDS_AR_SOFT_VERBOSITY_LEVEL >= CCSDS_AR_SOFT_OUTPUT_CHANGE
+							printf("AR: Found ASM at frame slot %lu => LOCK\n",(dbg_count+num_consumed)/(d_ASM_LEN_BITS+d_FRAME_LEN_BITS+d_NUM_TAIL_SYMS));
+						#endif
+					
 					} else { // We found nothing
 						// Consume samples if we did not find anything
 					
+						/*
+							printf("ASM             : ");
+							for(unsigned int i=0;i<d_ASM_LEN_BITS;i++) {
+								printf("%+1.1f ",d_ASM[i]);
+							}
+							boost::scoped_array<float> in_syms(new float[search_len]);
+							convert_ambiguity(in_syms.get(), &in[num_consumed], search_len, max_amb);
+							printf("\nbest match amb=%d: ",max_amb);
+							for(unsigned int i=0;i<d_ASM_LEN_BITS;i++) {
+								printf("%+1.1f ",in_syms[i+d_offset_bits]);
+							}
+							printf("\n");
+						//*/
+
+						#if CCSDS_AR_SOFT_VERBOSITY_LEVEL >= CCSDS_AR_SOFT_OUTPUT_DEBUG
+							fprintf(dbg_file_in,"%10lu: ",dbg_count+num_consumed);
+							fprintf(dbg_file_in_hard,"%10lu: ",dbg_count+num_consumed);
+							for(unsigned int j=0;j<get_lower_mul(search_len-(d_ASM_LEN_BITS-1));j++) {
+								fprintf(dbg_file_in,"%+1.2f ",in[num_consumed+j]);
+								fprintf(dbg_file_in_hard,"%1u ",(in[num_consumed+j]>0.0) ? 1:0);
+							}
+							fprintf(dbg_file_in,"\n");
+							fprintf(dbg_file_in_hard,"\n");
+						#endif
+
 						// the last d_ASM_BITS-1 have not been searched yet, everything
 						// else can be consumed as long as throw away multiples of the
 						// symbol bits. Otherwise we will loose track of the symbol periods
 						num_consumed += get_lower_mul(search_len-(d_ASM_LEN_BITS-1));
 
-						#if CCSDS_AR_SOFT_VERBOSITY_LEVEL >= CCSDS_AR_SOFT_OUTPUT_STATE
+						d_offset_bits = 0;
+
+						#if CCSDS_AR_SOFT_VERBOSITY_LEVEL >= CCSDS_AR_SOFT_OUTPUT_DEBUG
 							printf("AR: nothing found, consume %u samples.\n",get_lower_mul(search_len-(d_ASM_LEN_BITS-1)));
 						#endif
 					}
+
+					#if CCSDS_AR_SOFT_VERBOSITY_LEVEL >= CCSDS_AR_SOFT_OUTPUT_STATE
+						printf("AR:   maximum correlation: %f => %s\n",max_corr,((d_state==STATE_LOCK)?"LOCK":"SEARCH"));
+					#endif
 
 				} // END num_in >= search_len_min
 				break; // End state SEARCH
@@ -323,20 +364,66 @@ int  ccsds_mpsk_ambiguity_resolver_f::general_work (int 		    /*noutput_items*/,
 			case STATE_LOCK:
 				// How many samples do we need if locked? If ASM is not aligned we need
 				// d_offset_bits additional bits.
-				check_len = get_upper_mul(d_NUM_TAIL_SYMS + d_ASM_LEN_BITS + d_FRAME_LEN_BITS + d_offset_bits);
+				check_len = get_upper_mul( d_msg_buffer_fill ? 1 : (d_ASM_LEN_BITS + d_offset_bits));
 
 				// Make sure we have enough samples
 				if(ninput_items[0]-num_consumed < check_len) {
-					#if CCSDS_AR_SOFT_VERBOSITY_LEVEL >= CCSDS_AR_SOFT_OUTPUT_STATE
+					#if CCSDS_AR_SOFT_VERBOSITY_LEVEL >= CCSDS_AR_SOFT_OUTPUT_DEBUG
 						printf("AR: skip because we need %u symbols for the next lock, while there are only %d left\n",check_len,ninput_items[0]-num_consumed);
 					#endif
 
 					abort = true;
 					break;
+				} else if(d_msg_buffer_fill) {
+					// Put as much samples into the buffer
+					// as we can.
+					
+					// How many samples do we have
+					const unsigned int to_buffer = std::min(
+							get_lower_mul(ninput_items[0]-num_consumed),					 // Number of symbols available
+							get_upper_mul(d_FRAME_LEN_BITS+d_NUM_TAIL_SYMS-d_msg_buffer_count+d_offset_bits) // Number of symbols that are needed to fill the buffer
+						);
+
+					// Convert ambiguity
+					boost::scoped_array<float> in_syms(new float[to_buffer]);
+					convert_ambiguity(in_syms.get(), &in[num_consumed], to_buffer, d_locked_on_stream);
+
+					// Fill buffer
+					// Is this the first item, then create a new buffer
+					if(d_msg_buffer_count == 0) {
+						d_msg_buffer = pmt::pmt_make_f32vector(d_FRAME_LEN_BITS+d_NUM_TAIL_SYMS, 0.0f);
+					}
+
+					const unsigned int to_copy = std::min(d_FRAME_LEN_BITS+d_NUM_TAIL_SYMS-d_msg_buffer_count, to_buffer-d_offset_bits);
+
+					for(unsigned int i=0;i<to_copy;i++) {
+						pmt::pmt_f32vector_set(d_msg_buffer, d_msg_buffer_count+i, in_syms[i+d_offset_bits]);
+					}
+					d_msg_buffer_count += to_copy;
+
+					// Update consumed counter
+					num_consumed += get_lower_mul(to_copy+d_offset_bits);
+
+					// Update offset pointer
+					d_offset_bits = (to_copy+d_offset_bits) % d_ldM;
+
+					// Did we will the buffer?
+					if(d_msg_buffer_count >= d_FRAME_LEN_BITS+d_NUM_TAIL_SYMS) {
+						// buffer is now full
+		
+						message_port_pub(pmt::mp("out"), d_msg_buffer);
+
+						// reset buffer
+						d_msg_buffer_count = 0;
+
+						// we are no longer filling the buffer (need to check next ASM first)
+						d_msg_buffer_fill = false;
+					}
+					break; // END state LOCK
+
 				} else {
-					// We have enough samples, continue in
-					// else clause to have an own local 
-					// context for this state.
+					// We have enough samples and we need to
+					// check for the next ASM
 
 					#if CCSDS_AR_SOFT_VERBOSITY_LEVEL >= CCSDS_AR_SOFT_OUTPUT_STATE
 								printf("AR: state=LOCK, stream=%u, bit_offset=%u, confidence=%u/%u\n",
@@ -349,7 +436,7 @@ int  ccsds_mpsk_ambiguity_resolver_f::general_work (int 		    /*noutput_items*/,
 					const float correlation = check_for_ASM(in_syms.get(), d_offset_bits);
 					
 					// We have enough samples, lets check for the ASM
-					if(correlation > d_BER_THRESHOLD) {				
+					if(correlation > d_CORRELATION_THRESHOLD) {				
 						// ASM found
 						d_count = std::min(d_count+1, d_THRESHOLD);
 					} else if(d_count > 1) {
@@ -367,38 +454,29 @@ int  ccsds_mpsk_ambiguity_resolver_f::general_work (int 		    /*noutput_items*/,
 						// so start new search with the same
 						// samples again
 
+						#if CCSDS_AR_SOFT_VERBOSITY_LEVEL >= CCSDS_AR_SOFT_OUTPUT_CHANGE
+							printf("AR: ASM lost at frame slot %lu => SEARCH\n",(dbg_count+num_consumed)/(d_ASM_LEN_BITS+d_FRAME_LEN_BITS+d_NUM_TAIL_SYMS));
+						#endif
+
 						break;
 					}
 
 					// We are still locked
 
-					// copy to output
-					pmt::pmt_t msg = pmt::pmt_make_f32vector(d_FRAME_LEN_BITS+d_NUM_TAIL_SYMS, 0.0f);
-					for(unsigned int i=0;i<d_FRAME_LEN_BITS+d_NUM_TAIL_SYMS;i++) {
-						pmt::pmt_f32vector_set(msg, i, in_syms[i+d_offset_bits+d_ASM_LEN_BITS]);
-					}
-					message_port_pub(pmt::mp("out"), msg);
+					// consume ASM and set flag to fill the
+					// buffer
+					num_consumed += get_lower_mul(d_ASM_LEN_BITS+d_offset_bits);
+
+					// We might not have consumed every bit, so adjust the
+					// offsets to point to the exact start of the frame
+					d_offset_bits = (d_ASM_LEN_BITS+d_offset_bits) % d_ldM;
+
+					d_msg_buffer_fill = true;
 
 					#if CCSDS_AR_SOFT_VERBOSITY_LEVEL >= CCSDS_AR_SOFT_OUTPUT_DEBUG
-						//TODO bring this up to date again
-						for(unsigned int j=0;j<copy;j++) {
-							//fprintf(dbg_file_out,"%02X ",out[num_out+j]);
-						}
-							//fprintf(dbg_file_out,"\n");
+						printf("AR:  %u samples consumed, fill frame buffer in next step.\n",get_lower_mul(d_ASM_LEN_BITS+d_offset_bits));
 					#endif
 
-					#if CCSDS_AR_SOFT_VERBOSITY_LEVEL >= CCSDS_AR_SOFT_OUTPUT_STATE
-						printf("AR: %u bits copied (offset=%u), %u samples consumed.\n",d_FRAME_LEN_BITS+d_NUM_TAIL_SYMS,
-								d_offset_bits,
-								get_lower_mul(d_NUM_TAIL_SYMS+d_ASM_LEN_BITS+d_FRAME_LEN_BITS+d_offset_bits));
-					#endif
-
-					// consume samples
-					num_consumed	+= get_lower_mul(d_NUM_TAIL_SYMS+d_ASM_LEN_BITS+d_FRAME_LEN_BITS+d_offset_bits);
-
-					// We might not have copied every bit, so adjust the
-					// offsets to find the next ASM at the expected position
-					d_offset_bits = (d_NUM_TAIL_SYMS+d_ASM_LEN_BITS+d_FRAME_LEN_BITS+d_offset_bits) % d_ldM;
 				}
 				break; // End state LOCK
 			default:
@@ -414,7 +492,7 @@ int  ccsds_mpsk_ambiguity_resolver_f::general_work (int 		    /*noutput_items*/,
 	//// Cleanup
 	//
 
-	#if CCSDS_AR_SOFT_VERBOSITY_LEVEL >= CCSDS_AR_SOFT_OUTPUT_STATE
+	#if CCSDS_AR_SOFT_VERBOSITY_LEVEL >= CCSDS_AR_SOFT_OUTPUT_CHANGE
 		dbg_count += num_consumed;
 	#endif
 

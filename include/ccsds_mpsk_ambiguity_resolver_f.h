@@ -8,19 +8,23 @@
 /*! \brief Verbosity level: Do not output anything */
 #define CCSDS_AR_SOFT_OUTPUT_NONE 0
 
+/*! \brief Verbosity level: Do output state change information */
+#define CCSDS_AR_SOFT_OUTPUT_CHANGE 1
+
 /*! \brief Verbosity level: Do output state information */
-#define CCSDS_AR_SOFT_OUTPUT_STATE 1
+#define CCSDS_AR_SOFT_OUTPUT_STATE 2
 
 /*! \brief Verbosity level: Do output debug information */
-#define CCSDS_AR_SOFT_OUTPUT_DEBUG 2
+#define CCSDS_AR_SOFT_OUTPUT_DEBUG 3
 
 /*! \brief Level of verbosity of this block.
  *
  *  \sa #CCSDS_AR_SOFT_OUTPUT_NONE
+ *  \sa #CCSDS_AR_SOFT_OUTPUT_CHANGE
  *  \sa #CCSDS_AR_SOFT_OUTPUT_STATE
  *  \sa #CCSDS_AR_SOFT_OUTPUT_DEBUG
  */
-#define CCSDS_AR_SOFT_VERBOSITY_LEVEL CCSDS_AR_SOFT_OUTPUT_NONE
+#define CCSDS_AR_SOFT_VERBOSITY_LEVEL CCSDS_AR_SOFT_OUTPUT_STATE
 
 class ccsds_mpsk_ambiguity_resolver_f;
 
@@ -49,15 +53,14 @@ typedef boost::shared_ptr<ccsds_mpsk_ambiguity_resolver_f> ccsds_mpsk_ambiguity_
  *  \param asm_len Length of the ASM in bits
  *  \param threshold Number of ASM losses to enter full search again. If
  *	set to one, a full search is performed every time an ASM is lost.
- *  \param ber_threshold Maximum number of bit errors that may occur between a
- *	sequence and the ASM to still consider the sequence as an ASM. If set to
- *	zero, sequence must match the ASM exactly.
+ *  \param correlation_threshold Minimum normalized correlation between an incomming
+ *	bit sequence and the ASM to consider them matching.
  *  \param frame_length Length of a frame (without ASM) in bytes.
  *  \param num_tail_syms Number of bits after the Frame that should be copied as
  *	well. Default is zero, so only the frame data is copied.
  *  \return Shared pointer to the created AR block
  */
-CCSDS_API ccsds_mpsk_ambiguity_resolver_f_sptr ccsds_make_mpsk_ambiguity_resolver_f(const unsigned int M, std::string ASM, const unsigned int asm_len, const unsigned int threshold, const float ber_threshold, const unsigned int frame_length, const unsigned int num_tail_syms=0);
+CCSDS_API ccsds_mpsk_ambiguity_resolver_f_sptr ccsds_make_mpsk_ambiguity_resolver_f(const unsigned int M, std::string ASM, const unsigned int asm_len, const unsigned int threshold, const float correlation_threshold, const unsigned int frame_length, const unsigned int num_tail_syms=0);
 
 /*!
  * \brief M-PSK soft bit ambiguity resolution and frame synchronization.
@@ -87,7 +90,7 @@ CCSDS_API ccsds_mpsk_ambiguity_resolver_f_sptr ccsds_make_mpsk_ambiguity_resolve
 class CCSDS_API ccsds_mpsk_ambiguity_resolver_f : public gr_block
 {
 private:
-	friend CCSDS_API ccsds_mpsk_ambiguity_resolver_f_sptr ccsds_make_mpsk_ambiguity_resolver_f(const unsigned int M, std::string ASM, const unsigned int asm_len, const unsigned int threshold, const float ber_threshold, const unsigned int frame_length, const unsigned int num_tail_syms);
+	friend CCSDS_API ccsds_mpsk_ambiguity_resolver_f_sptr ccsds_make_mpsk_ambiguity_resolver_f(const unsigned int M, std::string ASM, const unsigned int asm_len, const unsigned int threshold, const float correlation_threshold, const unsigned int frame_length, const unsigned int num_tail_syms);
 
 	/*!
 	 * \brief Private constructor of the AR
@@ -98,9 +101,8 @@ private:
 	 *  \param asm_len Length of the ASM in bits
 	 *  \param threshold Number of ASM losses to enter full search again. If
 	 *	set to one, a full search is performed every time an ASM is lost.
-	 *  \param ber_threshold Maximum number of bit errors that may occur
-	 *	between a sequence and the ASM to still consider the sequence as
-	 *	an ASM. If set to zero, sequence must match the ASM exactly.
+	 *  \param correlation_threshold Minimum normalized correlation between an incomming
+	 *	bit sequence and the ASM to consider them matching.
 	 *  \param num_tail_syms Number of bits after the Frame that should be copied as
 	 *	well. Default is zero, so only the frame data is copied.
 	 *  \param frame_length Length of a frame (without ASM) in bytes.
@@ -110,7 +112,7 @@ private:
 	 *  found, no output is given. This block preserves the ASM, as it is
 	 *  still needed for frame synchronization after decoding.
 	 */
-	ccsds_mpsk_ambiguity_resolver_f(const unsigned int M, std::string ASM, const unsigned int asm_len, const unsigned int threshold, const float ber_threshold, const unsigned int frame_length, const unsigned int num_tail_syms=0);
+	ccsds_mpsk_ambiguity_resolver_f(const unsigned int M, std::string ASM, const unsigned int asm_len, const unsigned int threshold, const float correlation_threshold, const unsigned int frame_length, const unsigned int num_tail_syms=0);
 	
 	/*! \brief Enumerator for the two different states. */
 	enum d_STATE {
@@ -141,7 +143,7 @@ private:
 	 */
 	const unsigned int d_THRESHOLD;
 
-	const float d_BER_THRESHOLD;
+	const float d_CORRELATION_THRESHOLD;
 
 	/*! \brief Length of a frame (without ASM) in bytes. */
 	//const unsigned int d_FRAME_LEN;
@@ -164,14 +166,29 @@ private:
 	/*! \brief Counter variable on how many ASMs have been observed */
 	unsigned int d_count;
 
+	/*! \brief buffer to strore message in */
+	pmt::pmt_t d_msg_buffer;
+
+	/*! \brief Number of elements that are already in buffer */
+	unsigned int d_msg_buffer_count;
+
+	/*! \brief Flag whether the buffer is beeing filled right now, or not.
+	 *	If not and we are in state LOCK, check for the existence of an
+	 *	ASM at the current position.
+	 */
+	bool d_msg_buffer_fill;
+
 	#if CCSDS_AR_SOFT_VERBOSITY_LEVEL >= CCSDS_AR_SOFT_OUTPUT_DEBUG
 		/*! \brief File pointer for debugging. */
 		FILE *dbg_file_in;
 
 		/*! \brief File pointer for debugging. */
+		FILE *dbg_file_in_hard;
+
+		/*! \brief File pointer for debugging. */
 		FILE *dbg_file_out;
 	#endif
-	#if CCSDS_AR_SOFT_VERBOSITY_LEVEL >= CCSDS_AR_SOFT_OUTPUT_STATE
+	#if CCSDS_AR_SOFT_VERBOSITY_LEVEL >= CCSDS_AR_SOFT_OUTPUT_CHANGE
 		/*! \brief Counter for debugging. */
 		unsigned long dbg_count;
 	#endif

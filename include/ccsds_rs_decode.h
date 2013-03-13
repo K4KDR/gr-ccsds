@@ -9,6 +9,19 @@ extern "C" {
 #include <fec.h>
 }
 
+/*! \brief Verbosity level: Do not output */
+#define CCSDS_RS_DECODE_OUTPUT_NONE 0
+
+/*! \brief Verbosity level: Do output debug information */
+#define CCSDS_RS_DECODE_OUTPUT_DEBUG 1
+
+/*! \brief Level of verbosity of this block.
+ *
+ *  \sa #CCSDS_RS_DECODE_OUTPUT_NONE
+ *  \sa #CCSDS_RS_DECODE_OUTPUT_DEBUG
+ */
+#define CCSDS_RS_DECODE_VERBOSITY_LEVEL CCSDS_RS_DECODE_OUTPUT_DEBUG
+
 class ccsds_rs_decode;
 
 /*
@@ -84,6 +97,17 @@ private:
 
 	/*  Storage for the output frames symbols */
 	unsigned char *d_buf_out;
+
+	#if CCSDS_RS_DECODE_VERBOSITY_LEVEL >= CCSDS_RS_DECODE_OUTPUT_DEBUG
+		/*! \brief File pointer for debugging. */
+		FILE *dbg_file_in;
+
+		/*! \brief File pointer for debugging. */
+		FILE *dbg_file_in_valid;
+
+		/*! \brief File pointer for debugging. */
+		FILE *dbg_file_out;
+	#endif
 
 	/*! \brief Asynchronous work function which is processing the queues. */
 	void process_frame(pmt::pmt_t msg);
