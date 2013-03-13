@@ -46,13 +46,28 @@ void ccsds_rs_encode::process_frame(pmt::pmt_t msg_in) {
 		return;
 	}
 
-
-	if(!pmt::pmt_is_blob(msg_in)) {
-		fprintf(stderr,"ERROR RS ENCODE: expecting message of type blob, skipping.\n");
+	// check that input is a pair value
+	if(!pmt::pmt_is_pair(msg_in)) {
+		fprintf(stderr,"WARNING RS DECODE: expecting message of type pair, skipping.\n");
 		return;
 	}
 
-	const unsigned int blob_len = (unsigned int) pmt::pmt_blob_length(msg_in);
+	const pmt::pmt_t hdr = pmt::pmt_car(msg_in);
+	const pmt::pmt_t msg = pmt::pmt_cdr(msg_in);
+
+	// check that input header is a dictionary
+	if(!pmt::pmt_is_dict(hdr)) {
+		fprintf(stderr,"WARNING RS DECODE: expecting message header of type dict, skipping.\n");
+		return;
+	}
+
+	// check that input data is a blob
+	if(!pmt::pmt_is_blob(msg)) {
+		fprintf(stderr,"WARNING RS DECODE: expecting message data of type blob, skipping.\n");
+		return;
+	}
+
+	const unsigned int blob_len = (unsigned int) pmt::pmt_blob_length(msg);
 
 	if(blob_len < d_DATA_LEN) {
 		fprintf(stderr,"ERROR RS ENCODE: blob message length of %u bytes is smaller than the expected length of %u bytes.\n", blob_len, d_DATA_LEN);
@@ -63,7 +78,7 @@ void ccsds_rs_encode::process_frame(pmt::pmt_t msg_in) {
 
 
 	// Message is BLOB
-	const unsigned char *data_in = (const unsigned char *) pmt::pmt_blob_data(msg_in);
+	const unsigned char *data_in = (const unsigned char *) pmt::pmt_blob_data(msg);
 
 	// instead of performing the second step of the interleaving where we
 	// would mainly copy data arround to get it back into the order it came
@@ -91,7 +106,10 @@ void ccsds_rs_encode::process_frame(pmt::pmt_t msg_in) {
 	memcpy(&d_buf_out[d_DATA_LEN], d_buf_parity2, d_PARITY_LEN);
 
 	// create output message
-	pmt::pmt_t msg_out = pmt::pmt_make_blob(d_buf_out, d_OUT_LEN);
+	pmt::pmt_t msg_out_data = pmt::pmt_make_blob(d_buf_out, d_OUT_LEN);
+
+	// Construct the new message using the received header
+	pmt::pmt_t msg_out = pmt::pmt_cons(hdr, msg_out_data);
 
 	// send generated codeblock
 	message_port_pub( pmt::mp("out"), msg_out );

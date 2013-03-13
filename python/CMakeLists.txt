@@ -47,7 +47,7 @@ GR_ADD_TEST(qa_randomiser ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_cc
 GR_ADD_TEST(qa_viterbi27_bb ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_ccsds_viterbi27_bb.py)
 GR_ADD_TEST(qa_framer_sink_dual ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_ccsds_framer_sink_dual.py)
 GR_ADD_TEST(qa_rs_decode_bb ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_ccsds_rs_decode_bb.py)
-GR_ADD_TEST(qa_rs_encode ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_ccsds_rs_encode.py)
+GR_ADD_TEST(qa_rs_chain ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_ccsds_rs_chain.py)
 GR_ADD_TEST(qa_conv_encode27_bb ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_ccsds_conv_encode27_bb.py)
 GR_ADD_TEST(qa_conv_decode27 ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_ccsds_conv_decode27.py)
 GR_ADD_TEST(qa_mpsk_mod_bc ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_ccsds_mpsk_mod_bc.py)

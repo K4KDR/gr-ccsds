@@ -59,6 +59,7 @@ ccsds_mpsk_ambiguity_resolver_f::ccsds_mpsk_ambiguity_resolver_f (const unsigned
 	d_locked_on_stream = 0;
 	d_offset_bits =0;
 	d_msg_buffer_count = 0;
+	d_frame_count = 1;
 
 	// register output
 	message_port_register_out(pmt::mp("out"));
@@ -311,7 +312,7 @@ int  ccsds_mpsk_ambiguity_resolver_f::general_work (int 		    /*noutput_items*/,
 						d_offset_bits = (d_offset_bits+d_ASM_LEN_BITS) % d_ldM;
 
 						#if CCSDS_AR_SOFT_VERBOSITY_LEVEL >= CCSDS_AR_SOFT_OUTPUT_CHANGE
-							printf("AR: Found ASM at frame slot %lu => LOCK\n",(dbg_count+num_consumed)/(d_ASM_LEN_BITS+d_FRAME_LEN_BITS+d_NUM_TAIL_SYMS));
+							printf("AR: Found ASM => LOCK\n");
 						#endif
 					
 					} else { // We found nothing
@@ -409,9 +410,14 @@ int  ccsds_mpsk_ambiguity_resolver_f::general_work (int 		    /*noutput_items*/,
 
 					// Did we will the buffer?
 					if(d_msg_buffer_count >= d_FRAME_LEN_BITS+d_NUM_TAIL_SYMS) {
-						// buffer is now full
-		
-						message_port_pub(pmt::mp("out"), d_msg_buffer);
+						// buffer is now full, create message
+						
+						pmt::pmt_t meta = pmt::pmt_make_dict();
+						meta = pmt::pmt_dict_add(meta, pmt::mp("frame_number"), pmt::pmt_from_long(d_frame_count++));
+
+						pmt::pmt_t msg = pmt::pmt_cons(meta, d_msg_buffer);
+
+						message_port_pub(pmt::mp("out"), msg);
 
 						// reset buffer
 						d_msg_buffer_count = 0;
@@ -455,7 +461,7 @@ int  ccsds_mpsk_ambiguity_resolver_f::general_work (int 		    /*noutput_items*/,
 						// samples again
 
 						#if CCSDS_AR_SOFT_VERBOSITY_LEVEL >= CCSDS_AR_SOFT_OUTPUT_CHANGE
-							printf("AR: ASM lost at frame slot %lu => SEARCH\n",(dbg_count+num_consumed)/(d_ASM_LEN_BITS+d_FRAME_LEN_BITS+d_NUM_TAIL_SYMS));
+							printf("AR: ASM lost at frame %lu => SEARCH\n",d_frame_count);
 						#endif
 
 						break;

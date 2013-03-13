@@ -85,16 +85,37 @@ void ccsds_ticp_frame_sink::process_message(pmt::pmt_t msg_in) {
 		return;
 	}
 	
-	// check if message has right format	
-	if(!pmt::pmt_is_blob(msg_in)) {
-		fprintf(stderr,"ERROR TICP FRAME SINK: expecting message of type blob, skipping.\n");
+	// check that input is a pair value
+	if(!pmt::pmt_is_pair(msg_in)) {
+		fprintf(stderr,"WARNING TICP FRAME SINK: expecting message of type pair, skipping.\n");
+		return;
+	}
+
+	const pmt::pmt_t hdr = pmt::pmt_car(msg_in);
+	const pmt::pmt_t msg = pmt::pmt_cdr(msg_in);
+
+	// check that input header is a dictionary
+	if(!pmt::pmt_is_dict(hdr)) {
+		fprintf(stderr,"WARNING TICP FRAME SINK: expecting message header of type dict, skipping.\n");
+		return;
+	}
+
+	// check that input data is a blob
+	if(!pmt::pmt_is_blob(msg)) {
+		fprintf(stderr,"WARNING TICP FRAME SINK: expecting message data of type blob, skipping.\n");
 		return;
 	}
 
 	// Message is BLOB
 
+	const unsigned int blob_len = (unsigned int) pmt::pmt_blob_length(msg);
+
+	if(blob_len != d_FRAME_LEN) {
+		fprintf(stderr,"WARNING TICP FRAME SINK: blob message length of %u bytes does not match the expected length of %u bytes.\n", blob_len, d_FRAME_LEN);
+	}
+
 	// pointer to frame
-	const unsigned char *data_in = (const unsigned char *) pmt::pmt_blob_data(msg_in);
+	const unsigned char *data_in = (const unsigned char *) pmt::pmt_blob_data(msg);
 
 	// message for the buffer
 	gr_message_sptr msg_buf = gr_make_message(0, 0, 0, d_FRAME_LEN);

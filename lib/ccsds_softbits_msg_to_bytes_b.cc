@@ -35,13 +35,28 @@ void ccsds_softbits_msg_to_bytes_b::process_message(pmt::pmt_t msg_in) {
 		return;
 	}
 
-	// check if message has right format	
-	if(!pmt::pmt_is_f32vector(msg_in)) {
-		fprintf(stderr,"ERROR SOFTBIT MSG TO BYTES: expecting message of type f32vector, skipping.\n");
+	// check that input is a pair value
+	if(!pmt::pmt_is_pair(msg_in)) {
+		fprintf(stderr,"WARNING SOFTBIT MSG TO BYTES: expecting message of type pair, skipping.\n");
 		return;
 	}
 
-	const unsigned int num_bits = pmt::pmt_length(msg_in);
+	const pmt::pmt_t hdr = pmt::pmt_car(msg_in);
+	const pmt::pmt_t msg = pmt::pmt_cdr(msg_in);
+
+	// check that input header is a dictionary
+	if(!pmt::pmt_is_dict(hdr)) {
+		fprintf(stderr,"WARNING SOFTBIT MSG TO BYTES: expecting message header of type dict, skipping.\n");
+		return;
+	}
+
+	// check that input data is a float vector
+	if(!pmt::pmt_is_f32vector(msg)) {
+		fprintf(stderr,"WARNING SOFTBIT MSG TO BYTES: expecting message data of type f32vector, skipping.\n");
+		return;
+	}
+
+	const unsigned int num_bits = pmt::pmt_length(msg);
 
 	if(num_bits % 8 != 0) {
 		fprintf(stderr,"WARNING SOFTBIT MSG TO BYTES: expecting message to contain a integer number of bytes. Actual length %d bits, last byte will be padded with zeros.\n", num_bits);
@@ -59,7 +74,7 @@ void ccsds_softbits_msg_to_bytes_b::process_message(pmt::pmt_t msg_in) {
 		// go through all bits of the current byte
 		for(unsigned int j=0;j<8;j++) {
 			// convert soft bit to hard decision
-			const bool bit = (8*i+j < num_bits) ? (pmt::pmt_f32vector_ref(msg_in,i*8+j) > 0) : 0;
+			const bool bit = (8*i+j < num_bits) ? (pmt::pmt_f32vector_ref(msg,i*8+j) > 0) : 0;
 
 			// add bit to output
 			byte = (byte<<1) | (bit ? 0x01 : 0x00);

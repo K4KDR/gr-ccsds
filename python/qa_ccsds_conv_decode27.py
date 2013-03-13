@@ -71,7 +71,10 @@ class qa_ccsds_conv_decode27(gr_unittest.TestCase):
 			for j in xrange(len(messages_in[i])) :
 				pmt.pmt_f32vector_set(msg_in, j, messages_in[i][j])
 
-			block._post( port, msg_in )
+			meta = pmt.pmt_make_dict()
+			meta = pmt.pmt_dict_add(meta, pmt.pmt_intern("frame_number"), pmt.pmt_from_long(i))
+			
+			block._post( port, pmt.pmt_cons(meta, msg_in) )
 			num_messages = num_messages+1
 		
 		block._post( port, pmt.PMT_EOF )
@@ -93,7 +96,14 @@ class qa_ccsds_conv_decode27(gr_unittest.TestCase):
 
 		# test the blobs
 		for i in xrange(len(messages_out_exp)):
-			dbg_msg = self.dbg.get_message(i)
+			dbg_msg_in = self.dbg.get_message(i)
+			dbg_msg = pmt.pmt_cdr(dbg_msg_in)
+			dbg_hdr = pmt.pmt_car(dbg_msg_in)
+
+			dbg_frame_num = int(pmt.pmt_to_long(pmt.pmt_dict_ref(dbg_hdr, pmt.pmt_intern("frame_number"), pmt.pmt_from_long(num_messages+100))))
+
+			self.assertEqual (i, dbg_frame_num, 'Frame number %d does not match the expected %d' %	(dbg_frame_num, i))
+
 			dbg_data = []
 			[dbg_data.append(pmt.pmt_u8vector_ref(dbg_msg, j)) for j in xrange(pmt.pmt_length(dbg_msg))]
 			dbg_data = tuple(dbg_data)
@@ -194,7 +204,14 @@ class qa_ccsds_conv_decode27(gr_unittest.TestCase):
 		self.assertEqual (pmt.pmt_is_eof_object(eof_msg), True, 'EOF block not at expected position')
 
 		for i in xrange(num_frames) :
-			dbg_msg = self.dbg.get_message(i)
+			dbg_msg_in = self.dbg.get_message(i)
+			dbg_msg = pmt.pmt_cdr(dbg_msg_in)
+			dbg_hdr = pmt.pmt_car(dbg_msg_in)
+
+			dbg_frame_num = int(pmt.pmt_to_long(pmt.pmt_dict_ref(dbg_hdr, pmt.pmt_intern("frame_number"), pmt.pmt_from_long(self.dbg.num_messages()+100))))
+
+			self.assertEqual (i+1, dbg_frame_num, 'Frame number %d does not match the expected %d' %	(dbg_frame_num, i+1))
+
 			dbg_data = []
 			[dbg_data.append(pmt.pmt_u8vector_ref(dbg_msg, j)) for j in xrange(pmt.pmt_length(dbg_msg))]
 			dbg_data = tuple(dbg_data)

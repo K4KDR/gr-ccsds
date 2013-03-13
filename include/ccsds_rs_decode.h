@@ -13,14 +13,17 @@ extern "C" {
 #define CCSDS_RS_DECODE_OUTPUT_NONE 0
 
 /*! \brief Verbosity level: Do output debug information */
-#define CCSDS_RS_DECODE_OUTPUT_DEBUG 1
+#define CCSDS_RS_DECODE_OUTPUT_FRAMEINFO 1
+
+/*! \brief Verbosity level: Do output debug information */
+#define CCSDS_RS_DECODE_OUTPUT_DEBUG 2
 
 /*! \brief Level of verbosity of this block.
  *
  *  \sa #CCSDS_RS_DECODE_OUTPUT_NONE
  *  \sa #CCSDS_RS_DECODE_OUTPUT_DEBUG
  */
-#define CCSDS_RS_DECODE_VERBOSITY_LEVEL CCSDS_RS_DECODE_OUTPUT_DEBUG
+#define CCSDS_RS_DECODE_VERBOSITY_LEVEL CCSDS_RS_DECODE_OUTPUT_NONE
 
 class ccsds_rs_decode;
 

@@ -172,15 +172,30 @@ void ccsds_conv_decode27::process_message(pmt::pmt_t msg_in) {
 		return;
 	}
 
-	// check that input is a float vector
-	if(!pmt::pmt_is_f32vector(msg_in)) {
-		fprintf(stderr,"WARNING CONV DECODE27: expecting message of type f32vector, skipping.\n");
+	// check that input is a pair value
+	if(!pmt::pmt_is_pair(msg_in)) {
+		fprintf(stderr,"WARNING CONV DECODE27: expecting message of type pair, skipping.\n");
+		return;
+	}
+
+	const pmt::pmt_t hdr = pmt::pmt_car(msg_in);
+	const pmt::pmt_t msg = pmt::pmt_cdr(msg_in);
+
+	// check that input header is a dictionary
+	if(!pmt::pmt_is_dict(hdr)) {
+		fprintf(stderr,"WARNING CONV DECODE27: expecting message header of type dict, skipping.\n");
+		return;
+	}
+
+	// check that input data is a float vector
+	if(!pmt::pmt_is_f32vector(msg)) {
+		fprintf(stderr,"WARNING CONV DECODE27: expecting message data of type f32vector, skipping.\n");
 		return;
 	}
 
 	// check that input has the expected length
-	if(pmt::pmt_length(msg_in) != d_BLOCK_NUM_BITS_IN) {
-		fprintf(stderr,"WARNING CONV DECODE27: expecting message of %u floats, got %lu, skipping.\n",d_BLOCK_NUM_BITS_IN,pmt::pmt_length(msg_in));
+	if(pmt::pmt_length(msg) != d_BLOCK_NUM_BITS_IN) {
+		fprintf(stderr,"WARNING CONV DECODE27: expecting message of %u floats, got %lu, skipping.\n",d_BLOCK_NUM_BITS_IN,pmt::pmt_length(msg));
 		return;
 	}
 
@@ -197,7 +212,7 @@ void ccsds_conv_decode27::process_message(pmt::pmt_t msg_in) {
 
 	// Fill buffer with unpunctured and converted bytes
 	size_t num_softbits = d_BLOCK_NUM_BITS_IN;
-	unpuncture_and_convert(d_buffer, pmt::pmt_f32vector_elements(msg_in, num_softbits));
+	unpuncture_and_convert(d_buffer, pmt::pmt_f32vector_elements(msg, num_softbits));
 
 	/// init decoder
 	init_viterbi27(d_viterbi, d_START_STATE);
@@ -213,8 +228,11 @@ void ccsds_conv_decode27::process_message(pmt::pmt_t msg_in) {
 	// Let the decoder decode the corrected byte sequence
 	chainback_viterbi27(d_viterbi, data_dec, d_BLOCK_NUM_BITS_OUT, d_TERM_STATE);
 
-	// Create new message containing the decoded bytes as BLOB
-	pmt::pmt_t msg_out = pmt::pmt_make_blob(data_dec, d_BLOCK_NUM_BITS_OUT/8);
+	// Create new message data containing the decoded bytes as BLOB
+	pmt::pmt_t msg_out_data = pmt::pmt_make_blob(data_dec, d_BLOCK_NUM_BITS_OUT/8);
+
+	// Construct the new message using the received header
+	pmt::pmt_t msg_out = pmt::pmt_cons(hdr, msg_out_data);
 
 	// Post message on output port
 	message_port_pub( pmt::mp("out"), msg_out );

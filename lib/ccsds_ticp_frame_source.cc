@@ -93,8 +93,11 @@ void ccsds_ticp_frame_source::asynchronous_work(void)
 			dbg_count++;
 		#endif
 
-		// create message from buffer
-		pmt::pmt_t msg_out = pmt::pmt_make_blob(out_data, d_FRAME_LEN);
+		// create message data from buffer
+		pmt::pmt_t msg_out_data = pmt::pmt_make_blob(out_data, d_FRAME_LEN);
+
+		// Construct the new message using the received header
+		pmt::pmt_t msg_out = pmt::pmt_cons(pmt::pmt_make_dict(), msg_out_data);
 
 		// enqueue message
 		message_port_pub( pmt::mp("out"), msg_out );

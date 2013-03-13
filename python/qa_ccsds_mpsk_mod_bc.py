@@ -60,10 +60,10 @@ class qa_mpsk_mod_bc (gr_unittest.TestCase):
 	self.tb.connect (sqr, dst)
 	self.tb.run ()
 	result_data = dst.data ()
-	print "=====  QPSK  =====================================\n"
-	print "expected data: %s\n" % (expected_result, )
-	print "received data: %s\n" % (result_data, )
-	print "==================================================\n"
+	#print "=====  QPSK  =====================================\n"
+	#print "expected data: %s\n" % (expected_result, )
+	#print "received data: %s\n" % (result_data, )
+	#print "==================================================\n"
 
 	self.assertFloatTuplesAlmostEqual (expected_result, result_data, 6, 'QPSK constellation does not match')
 

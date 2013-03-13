@@ -62,7 +62,10 @@ class qa_ccsds_blob_msg_source (gr_unittest.TestCase):
 			pmt.pmt_u8vector_set(msg, j, data[j])
 
 		#post message
-		self.blob_source.to_basic_block()._post( port, msg )
+		meta = pmt.pmt_make_dict()
+		meta = pmt.pmt_dict_add(meta, pmt.pmt_intern("frame_number"), pmt.pmt_from_long(i))
+		
+		self.blob_source.to_basic_block()._post( port, pmt.pmt_cons(meta, msg) )
 	
         
         #send EOF

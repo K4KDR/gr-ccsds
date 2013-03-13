@@ -66,8 +66,11 @@ int ccsds_blob_msg_sink_b::work (int                 noutput_items,
 		if(d_buffer_count >= d_BLOB_LEN) {
 			// buffer is full, empty it
 			
-			// create message
-			pmt::pmt_t msg_out = pmt::pmt_make_blob(d_buffer, d_BLOB_LEN);
+			// create message data
+			pmt::pmt_t msg_out_data = pmt::pmt_make_blob(d_buffer, d_BLOB_LEN);
+
+			// Construct the new message using the received header
+			pmt::pmt_t msg_out = pmt::pmt_cons(pmt::pmt_make_dict(), msg_out_data);
 
 			// send message out
 			message_port_pub( pmt::mp("out"), msg_out );

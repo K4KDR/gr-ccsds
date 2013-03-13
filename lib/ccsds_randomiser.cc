@@ -72,16 +72,32 @@ void ccsds_randomiser::process_frame(pmt::pmt_t msg_in) {
 		return;
 	}
 
-	if(!pmt::pmt_is_blob(msg_in)) {
-		fprintf(stderr,"ERROR PSEUDO RANDOMIZER: expecting message of type blob, skipping.\n");
+	// check that input is a pair value
+	if(!pmt::pmt_is_pair(msg_in)) {
+		fprintf(stderr,"WARNING RANDOMISER: expecting message of type pair, skipping.\n");
+		return;
+	}
+
+	const pmt::pmt_t hdr = pmt::pmt_car(msg_in);
+	const pmt::pmt_t msg = pmt::pmt_cdr(msg_in);
+
+	// check that input header is a dictionary
+	if(!pmt::pmt_is_dict(hdr)) {
+		fprintf(stderr,"WARNING RANDOMISER: expecting message header of type dict, skipping.\n");
+		return;
+	}
+
+	// check that input data is a float vector
+	if(!pmt::pmt_is_blob(msg)) {
+		fprintf(stderr,"WARNING RANDOMISER: expecting message data of type blob, skipping.\n");
 		return;
 	}
 
 	// Message is BLOB
-	const unsigned int BLOB_LEN = pmt::pmt_length(msg_in);
+	const unsigned int BLOB_LEN = pmt::pmt_length(msg);
 
 	// Assign input and output pointer
-	const uint8_t *data_in = (const uint8_t *) pmt::pmt_blob_data(msg_in);
+	const uint8_t *data_in = (const uint8_t *) pmt::pmt_blob_data(msg);
 	boost::shared_ptr<uint8_t[]> data_out = boost::shared_ptr<uint8_t[]>(new uint8_t[BLOB_LEN]);
 
 	// Reset state before new block
@@ -92,8 +108,11 @@ void ccsds_randomiser::process_frame(pmt::pmt_t msg_in) {
 		data_out[i] = (data_in[i] ^ get_next_byte());
 	}
 
-	// Generate output message
-	pmt::pmt_t msg_out = pmt::pmt_make_blob(data_out.get(), BLOB_LEN);
+	// Generate output message data
+	pmt::pmt_t msg_out_data = pmt::pmt_make_blob(data_out.get(), BLOB_LEN);
+
+	// Construct the new message using the received header
+	pmt::pmt_t msg_out = pmt::pmt_cons(hdr, msg_out_data);
 
 	// Post message
 	message_port_pub( pmt::mp("out"), msg_out );

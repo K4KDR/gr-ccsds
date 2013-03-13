@@ -24,7 +24,7 @@
  *  \sa #CCSDS_AR_SOFT_OUTPUT_STATE
  *  \sa #CCSDS_AR_SOFT_OUTPUT_DEBUG
  */
-#define CCSDS_AR_SOFT_VERBOSITY_LEVEL CCSDS_AR_SOFT_OUTPUT_STATE
+#define CCSDS_AR_SOFT_VERBOSITY_LEVEL CCSDS_AR_SOFT_OUTPUT_NONE
 
 class ccsds_mpsk_ambiguity_resolver_f;
 
@@ -177,6 +177,9 @@ private:
 	 *	ASM at the current position.
 	 */
 	bool d_msg_buffer_fill;
+
+	/*! \brief Counter for the outgoing frames. */
+	unsigned long d_frame_count;
 
 	#if CCSDS_AR_SOFT_VERBOSITY_LEVEL >= CCSDS_AR_SOFT_OUTPUT_DEBUG
 		/*! \brief File pointer for debugging. */

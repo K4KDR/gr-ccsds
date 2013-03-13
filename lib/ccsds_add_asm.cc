@@ -53,20 +53,39 @@ void ccsds_add_asm::process_frame(pmt::pmt_t msg_in) {
 		return;
 	}
 
-	if(!pmt::pmt_is_blob(msg_in)) {
-		fprintf(stderr,"ERROR ADD ASM: expecting message of type blob, skipping.\n");
+	// check that input is a pair value
+	if(!pmt::pmt_is_pair(msg_in)) {
+		fprintf(stderr,"WARNING ADD ASM: expecting message of type pair, skipping.\n");
+		return;
+	}
+
+	const pmt::pmt_t hdr = pmt::pmt_car(msg_in);
+	const pmt::pmt_t msg = pmt::pmt_cdr(msg_in);
+
+	// check that input header is a dictionary
+	if(!pmt::pmt_is_dict(hdr)) {
+		fprintf(stderr,"WARNING ADD ASM: expecting message header of type dict, skipping.\n");
+		return;
+	}
+
+	// check that input data is a blob
+	if(!pmt::pmt_is_blob(msg)) {
+		fprintf(stderr,"WARNING ADD ASM: expecting message data of type blob, skipping.\n");
 		return;
 	}
 
 	// Message is BLOB
-	const unsigned char *data_in = (const unsigned char *) pmt::pmt_blob_data(msg_in);
+	const unsigned char *data_in = (const unsigned char *) pmt::pmt_blob_data(msg);
 
 	unsigned char *data_out = new unsigned char[d_ASM_LEN+d_FRAME_LEN];
 
 	memcpy(&data_out[0]        , d_ASM  , d_ASM_LEN  *sizeof(unsigned char));
 	memcpy(&data_out[d_ASM_LEN], data_in, d_FRAME_LEN*sizeof(unsigned char));
 
-	pmt::pmt_t msg_out = pmt::pmt_make_blob(data_out, d_ASM_LEN+d_FRAME_LEN);
+	pmt::pmt_t msg_out_data = pmt::pmt_make_blob(data_out, d_ASM_LEN+d_FRAME_LEN);
+
+	// Construct the new message using the received header
+	pmt::pmt_t msg_out = pmt::pmt_cons(hdr, msg_out_data);
 
 	message_port_pub( pmt::mp("out"), msg_out );
 

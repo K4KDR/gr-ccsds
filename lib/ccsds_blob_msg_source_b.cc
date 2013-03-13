@@ -52,22 +52,37 @@ void ccsds_blob_msg_source_b::process_message(pmt::pmt_t msg_in) {
 		return;
 	}
 
-	// check if message has right format	
-	if(!pmt::pmt_is_blob(msg_in)) {
-		fprintf(stderr,"WARNING MSG BLOB SOURCE: expecting message of type blob, skipping.\n");
+	// check that input is a pair value
+	if(!pmt::pmt_is_pair(msg_in)) {
+		fprintf(stderr,"WARNING MSG BLOB SOURCE: expecting message of type pair, skipping.\n");
+		return;
+	}
+
+	const pmt::pmt_t hdr = pmt::pmt_car(msg_in);
+	const pmt::pmt_t msg = pmt::pmt_cdr(msg_in);
+
+	// check that input header is a dictionary
+	if(!pmt::pmt_is_dict(hdr)) {
+		fprintf(stderr,"WARNING MSG BLOB SOURCE: expecting message header of type dict, skipping.\n");
+		return;
+	}
+
+	// check that input data is a float vector
+	if(!pmt::pmt_is_blob(msg)) {
+		fprintf(stderr,"WARNING MSG BLOB SOURCE: expecting message data of type blob, skipping.\n");
 		return;
 	}
 
 	// check if message has right length
-	if(pmt::pmt_length(msg_in) != d_BLOB_LEN) {
-		fprintf(stderr,"WARNING MSG BLOB SOURCE: message of length %lu does not match the expected length of %u, skipping.\n",pmt::pmt_length(msg_in), d_BLOB_LEN);
+	if(pmt::pmt_length(msg) != d_BLOB_LEN) {
+		fprintf(stderr,"WARNING MSG BLOB SOURCE: message of length %lu does not match the expected length of %u, skipping.\n",pmt::pmt_length(msg), d_BLOB_LEN);
 		return;
 	}
 
 	// Message is BLOB and has the right length
 
 	// pointer to frame
-	const unsigned char *data_in = (const unsigned char *) pmt::pmt_blob_data(msg_in);
+	const unsigned char *data_in = (const unsigned char *) pmt::pmt_blob_data(msg);
 
 	for(unsigned int i=0;i<d_BLOB_LEN;i++) {
 		d_queue.push(data_in[i]);

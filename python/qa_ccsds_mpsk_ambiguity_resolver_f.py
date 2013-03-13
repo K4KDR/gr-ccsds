@@ -98,7 +98,7 @@ class qa_ccsds_mpsk_ambiguity_resolver_f (gr_unittest.TestCase):
 	# BPSK
 	################################################################################
 
-	'''
+	#'''
 	def test_bpsk_ofst0_amb0(self):
 		src_data =     [ 1.0, 1.0,-1.0,-1.0, 1.0,-1.0, 1.0,-1.0,  # ASM   0xCA
 				-1.0,-1.0,-1.0,-1.0,-1.0,-1.0,-1.0,-1.0,  # Frame 0x00
@@ -113,7 +113,7 @@ class qa_ccsds_mpsk_ambiguity_resolver_f (gr_unittest.TestCase):
 		self.runBlock(src_data,exp_data,2)
 	#'''
 
-	'''
+	#'''
 	def test_bpsk_ofst1_amb0(self):
 		src_data =     [      1.0,-1.0,-1.0, 1.0,-1.0, 1.0,-1.0,
 				-1.0,-1.0,-1.0,-1.0,-1.0,-1.0,-1.0,-1.0,
@@ -128,7 +128,7 @@ class qa_ccsds_mpsk_ambiguity_resolver_f (gr_unittest.TestCase):
 		self.runBlock(src_data,exp_data,2)
 	#'''
 
-	'''
+	#'''
 	def test_bpsk_ofst0_amb1(self):
 		src_data =     [-1.0,-1.0, 1.0, 1.0,-1.0, 1.0,-1.0, 1.0,
 				 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0,
@@ -143,7 +143,7 @@ class qa_ccsds_mpsk_ambiguity_resolver_f (gr_unittest.TestCase):
 		self.runBlock(src_data,exp_data,M=2)
 	#'''
 
-	'''
+	#'''
 	def test_bpsk_ofst1_amb1(self):
 		src_data =     [     -1.0, 1.0, 1.0,-1.0, 1.0,-1.0, 1.0,
 				 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0,
@@ -158,7 +158,7 @@ class qa_ccsds_mpsk_ambiguity_resolver_f (gr_unittest.TestCase):
 		self.runBlock(src_data,exp_data,M=2)
 	#'''
 
-	'''
+	#'''
 	def test_bpsk_ofst3_amb0_ber(self):
 		src_data =     [               -1.0, 1.0,-1.0, 1.0,-1.0,
 				-1.0,-1.0,-1.0,-1.0,-1.0,-1.0,-1.0,-1.0,
@@ -195,7 +195,7 @@ class qa_ccsds_mpsk_ambiguity_resolver_f (gr_unittest.TestCase):
 		self.runBlock(src_data,exp_data,8)
 	#'''
 
-	'''
+	#'''
 	def test_8psk_ofst6_amb5(self):
 		src_data =     [                               1.0, 1.0, # 0x00
 				-1.0,-1.0, 1.0, 1.0,-1.0,-1.0, 1.0,-1.0, # ASM
@@ -220,7 +220,7 @@ class qa_ccsds_mpsk_ambiguity_resolver_f (gr_unittest.TestCase):
 		self.runBlock(src_data,exp_data,8)
 	#'''
 
-	'''
+	#'''
 	def test_8psk_ofst6_amb5_reord(self):
 		src_data =     [                               1.0, 1.0, # 0x00
 				-1.0,-1.0, 1.0, 1.0,-1.0,-1.0, 1.0, 1.0, # ASM
@@ -241,7 +241,7 @@ class qa_ccsds_mpsk_ambiguity_resolver_f (gr_unittest.TestCase):
 		self.runBlock(src_data,exp_data,M=8)
 	#'''
 
-	'''
+	#'''
 	def test_8psk_ofst2_amb1(self):
 		src_data =     [          -1.0, 1.0, 1.0, 1.0, 1.0,-1.0,  # ASM
 				-1.0,-1.0, 1.0,-1.0,-1.0, 1.0,-1.0, 1.0,  # FD1  0x00
@@ -262,7 +262,7 @@ class qa_ccsds_mpsk_ambiguity_resolver_f (gr_unittest.TestCase):
 	# BPSK with tails
 	################################################################################
 
-	'''
+	#'''
 	def test_bpsk_ofst2_amb0(self):
 		src_data =     [ 1.0, 1.0,-1.0,-1.0, 1.0,-1.0, 1.0,-1.0,  # ASM   0xCA
 				-1.0,-1.0,-1.0,-1.0,-1.0,-1.0,-1.0,-1.0,  # Frame 0x00

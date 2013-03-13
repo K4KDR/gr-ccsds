@@ -60,12 +60,32 @@ void ccsds_rs_decode::process_frame(pmt::pmt_t msg_in) {
 		return;
 	}
 
-	if(!pmt::pmt_is_blob(msg_in)) {
-		fprintf(stderr,"ERROR RS DECODE: expecting message of type blob, skipping.\n");
+	// check that input is a pair value
+	if(!pmt::pmt_is_pair(msg_in)) {
+		fprintf(stderr,"WARNING RS DECODE: expecting message of type pair, skipping.\n");
 		return;
 	}
 
-	const unsigned int blob_len = (unsigned int) pmt::pmt_blob_length(msg_in);
+	const pmt::pmt_t hdr = pmt::pmt_car(msg_in);
+	const pmt::pmt_t msg = pmt::pmt_cdr(msg_in);
+
+	// check that input header is a dictionary
+	if(!pmt::pmt_is_dict(hdr)) {
+		fprintf(stderr,"WARNING RS DECODE: expecting message header of type dict, skipping.\n");
+		return;
+	}
+
+	// check that input data is a blob
+	if(!pmt::pmt_is_blob(msg)) {
+		fprintf(stderr,"WARNING RS DECODE: expecting message data of type blob, skipping.\n");
+		return;
+	}
+
+	#if CCSDS_RS_DECODE_VERBOSITY_LEVEL >= CCSDS_RS_DECODE_OUTPUT_FRAMEINFO
+		const unsigned long frame_number = pmt::pmt_to_long(pmt::pmt_dict_ref(hdr, pmt::mp("frame_number"), pmt::pmt_from_long(0)));
+	#endif
+
+	const unsigned int blob_len = (unsigned int) pmt::pmt_blob_length(msg);
 
 	if(blob_len < d_IN_LEN) {
 		fprintf(stderr,"ERROR RS DECODE: blob message length of %u bytes is smaller than the expected length of %u bytes.\n", blob_len, d_IN_LEN);
@@ -75,7 +95,7 @@ void ccsds_rs_decode::process_frame(pmt::pmt_t msg_in) {
 	}
 
 	// Message is BLOB
-	const unsigned char *data_in = (const unsigned char *) pmt::pmt_blob_data(msg_in);
+	const unsigned char *data_in = (const unsigned char *) pmt::pmt_blob_data(msg);
 
 	#if CCSDS_RS_DECODE_VERBOSITY_LEVEL >= CCSDS_RS_DECODE_OUTPUT_DEBUG
 		// Write input to debug file
@@ -96,9 +116,15 @@ void ccsds_rs_decode::process_frame(pmt::pmt_t msg_in) {
 		int ret = decode_rs_ccsds(&d_buf_in[i*(d_k+d_2E)], NULL, 0, 0);
 		if(ret < 0) {
 			// unable to decode, drop this codeblock
-			printf("Invalid RS codeblock, dropping frame\n");
+			#if CCSDS_RS_DECODE_VERBOSITY_LEVEL >= CCSDS_RS_DECODE_OUTPUT_FRAMEINFO
+				printf("Invalid RS codeblock, dropping frame number %lu\n",frame_number);
+			#endif
 			return;
 		} else {
+			#if CCSDS_RS_DECODE_VERBOSITY_LEVEL >= CCSDS_RS_DECODE_OUTPUT_FRAMEINFO
+				printf("Corrected %d symbols in frame number %lu\n",ret, frame_number);
+			#endif
+
 			// copy to data buffer (without parity) for an easier
 			// 2nd interleaving step
 			memcpy(&d_buf_data[i*d_k], &d_buf_in[i*(d_k+d_2E)], d_k);
@@ -124,8 +150,11 @@ void ccsds_rs_decode::process_frame(pmt::pmt_t msg_in) {
 		fprintf(dbg_file_out, "\n");
 	#endif
 
-	// create output message
-	pmt::pmt_t msg_out = pmt::pmt_make_blob(d_buf_out, d_DATA_LEN);
+	// create output message data
+	pmt::pmt_t msg_out_data = pmt::pmt_make_blob(d_buf_out, d_DATA_LEN);
+
+	// Construct the new message using the received header
+	pmt::pmt_t msg_out = pmt::pmt_cons(hdr, msg_out_data);
 
 	// send generated codeblock
 	message_port_pub( pmt::mp("out"), msg_out );

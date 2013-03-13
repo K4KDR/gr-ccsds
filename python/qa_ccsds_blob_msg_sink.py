@@ -69,7 +69,8 @@ class qa_ccsds_blob_msg_sink (gr_unittest.TestCase):
 
 	# test the blobs
 	for i in xrange(len(blobs)):
-		dbg_msg = self.dbg.get_message(i)
+		dbg_msg_in = self.dbg.get_message(i)
+		dbg_msg = pmt.pmt_cdr(dbg_msg_in)
 		dbg_data = []
 		[dbg_data.append(pmt.pmt_u8vector_ref(dbg_msg, j)) for j in xrange(pmt.pmt_length(dbg_msg))]
 		self.assertEqual (blobs[i], dbg_data, 'BLOB data mismatch in %d byte BLOB no %d/%d' % (blob_len, i+1, num_blobs))

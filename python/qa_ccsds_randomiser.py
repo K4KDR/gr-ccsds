@@ -68,7 +68,10 @@ class qa_ccsds_randomiser(gr_unittest.TestCase):
 			for j in xrange(len(messages_in[i])) :
 				pmt.pmt_u8vector_set(msg_in, j, messages_in[i][j])
 
-			block._post( port, msg_in )
+			meta = pmt.pmt_make_dict()
+			meta = pmt.pmt_dict_add(meta, pmt.pmt_intern("frame_number"), pmt.pmt_from_long(i))
+			
+			block._post( port, pmt.pmt_cons(meta, msg_in) )
 			num_messages = num_messages+1
 		
 		block._post( port, pmt.PMT_EOF )
@@ -90,7 +93,14 @@ class qa_ccsds_randomiser(gr_unittest.TestCase):
 
 		# test the blobs
 		for i in xrange(len(messages_out_exp)):
-			dbg_msg = self.dbg.get_message(i)
+			dbg_msg_in = self.dbg.get_message(i)
+			dbg_msg = pmt.pmt_cdr(dbg_msg_in)
+			dbg_hdr = pmt.pmt_car(dbg_msg_in)
+
+			dbg_frame_num = int(pmt.pmt_to_long(pmt.pmt_dict_ref(dbg_hdr, pmt.pmt_intern("frame_number"), pmt.pmt_from_long(num_messages+100))))
+
+			self.assertEqual (i, dbg_frame_num, 'Frame number %d does not match the expected %d' %	(dbg_frame_num, i))
+
 			dbg_data = []
 			[dbg_data.append(pmt.pmt_u8vector_ref(dbg_msg, j)) for j in xrange(pmt.pmt_length(dbg_msg))]
 			dbg_data = tuple(dbg_data)
@@ -138,7 +148,10 @@ class qa_ccsds_randomiser(gr_unittest.TestCase):
 			for j in xrange(len(messages_in[i])) :
 				pmt.pmt_u8vector_set(msg_in, j, messages_in[i][j])
 
-			block._post( port, msg_in )
+			meta = pmt.pmt_make_dict()
+			meta = pmt.pmt_dict_add(meta, pmt.pmt_intern("frame_number"), pmt.pmt_from_long(i))
+
+			block._post( port, pmt.pmt_cons(meta, msg_in) )
 			num_messages = num_messages+1
 		
 		block._post( port, pmt.PMT_EOF )
@@ -160,7 +173,14 @@ class qa_ccsds_randomiser(gr_unittest.TestCase):
 
 		# test the blobs
 		for i in xrange(len(messages_in)):
-			dbg_msg = self.dbg.get_message(i)
+			dbg_msg_in = self.dbg.get_message(i)
+			dbg_msg = pmt.pmt_cdr(dbg_msg_in)
+			dbg_hdr = pmt.pmt_car(dbg_msg_in)
+
+			dbg_frame_num = int(pmt.pmt_to_long(pmt.pmt_dict_ref(dbg_hdr, pmt.pmt_intern("frame_number"), pmt.pmt_from_long(num_messages+100))))
+
+			self.assertEqual (i, dbg_frame_num, 'Frame number %d does not match the expected %d' %	(dbg_frame_num, i))
+
 			dbg_data = []
 			[dbg_data.append(pmt.pmt_u8vector_ref(dbg_msg, j)) for j in xrange(pmt.pmt_length(dbg_msg))]
 			dbg_data = tuple(dbg_data)
@@ -181,11 +201,10 @@ class qa_ccsds_randomiser(gr_unittest.TestCase):
 
 	#'''
 	def test_zero_in(self) :
-		'''
-		ECSS defines the first 40 bits of the pseudo-random sequence. By
-		using zero as neutral element of XOR an input sequence of all
-		zeros should yield the pseudo-random sequence as output.
-		'''
+		#ECSS defines the first 40 bits of the pseudo-random sequence. By
+		#using zero as neutral element of XOR an input sequence of all
+		#zeros should yield the pseudo-random sequence as output.
+		
 		messages_in = ( (0x00,0x00,0x00,0x00,0x00) ,)
 
 		messages_out_exp = ( (0xFF,0x48,0x0E,0xC0,0x9A), )
@@ -194,11 +213,10 @@ class qa_ccsds_randomiser(gr_unittest.TestCase):
 
 	#'''
 	def test_one_in(self) :
-		'''
-		ECSS defines the first 40 bits of the pseudo-random sequence. To
-		check that XOR is used now a stream of all ones is inserted.
-		This should lead to the inverted pseudo-random sequence
-		'''
+		#ECSS defines the first 40 bits of the pseudo-random sequence. To
+		#check that XOR is used now a stream of all ones is inserted.
+		#This should lead to the inverted pseudo-random sequence
+
 		messages_in = ( (0xFF,0xFF,0xFF,0xFF,0xFF) ,)
 
 		messages_out_exp = ( (0x00,0xB7,0xF1,0x3F,0x65), )
@@ -215,10 +233,9 @@ class qa_ccsds_randomiser(gr_unittest.TestCase):
 
 	#'''
 	def test_chain_zeros(self) :
-		'''
-		Test the concatenation of two randomisers which should output
-		the original input message.
-		'''
+		#Test the concatenation of two randomisers which should output
+		#the original input message.
+
 		messages_in = ( (0x00,0x00,0x00,0x00,0x00) ,)*5
 
 		self.runChainExperiment(messages_in, poly=0x95,seed=0xFF)
@@ -226,10 +243,8 @@ class qa_ccsds_randomiser(gr_unittest.TestCase):
 
 	#'''
 	def test_chain_ones(self) :
-		'''
-		Test the concatenation of two randomisers which should output
-		the original input message.
-		'''
+		#Test the concatenation of two randomisers which should output
+		#the original input message.
 		
 		messages_in = ( (0xFF,0xFF,0xFF,0xFF,0xFF) ,)*10
 
@@ -238,10 +253,8 @@ class qa_ccsds_randomiser(gr_unittest.TestCase):
 
 	#'''
 	def test_chain_random(self) :
-		'''
-		Test the concatenation of two randomisers which should output
-		the original input message.
-		'''
+		#Test the concatenation of two randomisers which should output
+		#the original input message.
 		
 		# 10 messages with 100 random bytes in each
 		messages_in = (
