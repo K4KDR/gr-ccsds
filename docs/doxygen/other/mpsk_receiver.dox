@@ -1,19 +1,48 @@
-/*! \page page_mpsk_receiver M-PSK receiver chain
+/*! \page page_mpsk_receiver M-PSK demodulation chain
 
 \section page_mpsk_receiver_introduction Introduction
-This pages describes a general purpose M-PSK receiver which can be used to
-synchronize and demodulate arbitrary M-PSK signals.
+This pages describes two general purpose M-PSK demodulation chains which can be used to
+synchronize and demodulate arbitrary M-PSK signals. The first one is working on
+hard bit decisions, while the latter on uses soft-bit decisions. These blocks
+are available as GRC blocks in \a apps/blocks/mpsk_demod_hard.grc and
+\a apps/blocks/mpsk_demod_soft.grc
 
+The output of these two demodulators still have phase ambiguity, which has to be
+resolved either by differential encoding/decoding or by \subpage page_mpsk_ar
+
+\subsection page_mpsk_receiver_introduction_hard Hard-bit Decisions
 This block takes an input stream of complex samples at sampling rate and outputs
-a bit synchronized, packed bytestream (8 information bits per byte) of the
-received data stream. This is usually followed by frame synchronization as done
-by \ref ccsds_frame_sync_b
+a bit synchronized, unpacked (ld(M) information bits per byte) stream of bits
+(with unresolved phase ambiguity). This block is usually followed by the hard
+decision M-PSK ambiguity resolver implemented in
+\ref ccsds_mpsk_ambiguity_resolver_bb and the frame synchronization
+implemented in \ref ccsds_frame_sync_b.
+
+\subsection page_mpsk_receiver_introduction_soft Soft-bit Decisions
+This block takes an input stream of complex samples at sampling rate and outputs
+a bit synchronized stream of soft-bits (with unresolved phase ambiguity). This
+is usually followed by the soft-bit decision M-PSK ambiguity resolver and frame
+synchronization block implemented in \ref ccsds_mpsk_ambiguity_resolver_f.
+
+\subsection page_mpsk_receiver_introduction_hard_or_soft Hard- or Soft-bit Decisions
+Soft-bit decisions are recommended when following up with channelcoding (usually
+viterbi decoding) that can take advantage of the soft-bits. But the output of
+the soft-bit AR/FS block can also be cast back to hard-bit decisions with the
+\ref ccsds_softbits_msg_to_bytes_b block so blocks downstream can take hard-bit
+decisions even when the soft-bit demodulator chain was used. The advantage of
+this is that the AR and FS profit from the soft-bit correlation, but they meed
+more recources than using the hard-bit detector block.
+
+\todo Put the ambiguity resolution and frame synchronization into this block as
+soon as Hierachial blocks can have message ports.
 
 \section page_mpsk_receiver_setup Setup
-The Figure below shows the GRC blocks of this M-PSK demodulator. It's parameters
-and blocks are described in the next Sections.
+The Figure below shows the GRC block of the soft-bit M-PSK demodulation chain.
+The hard-bit demodulation chain is identical to the soft-bit one except for a
+different detector and a byte stream instead of a float stream as output. Both's
+parameters and blocks are described in the next Sections.
 
-\image html mpsk_demod.png "Setup of the M-PSK receiver of this package"
+\image html mpsk_demod_soft.png "Setup of the soft-bit M-PSK demodulation chain of this package"
 
 \section page_mpsk_receiver_parameters Parameters
 
@@ -30,7 +59,7 @@ Oversampling factor, or samples per symbol. The receiver block performs a
 decimation by this factor. Oversampling must be at least two.
 
 \subsection page_mpsk_receiver_alpha alpha
-Rollof factor from the RX filter.
+Rollof factor for the RX filter.
 
 \subsection page_mpsk_receiver_asm Attached sync marker (ASM)
 The repeating sequence used for ambiguity resolution as a hex string. The
@@ -42,7 +71,6 @@ Length of the data between two sync markers in bytes.
 
 \subsection page_mpsk_receiver_sym_rate sym_rate
 Symbol rate of the incomming signal given by \c samp_rate / \c osf.
-
 
 
 \section page_mpsk_receiver_blocks Blocks
@@ -57,28 +85,54 @@ until it receives an estimate. The LO is implemented in
 The RX filter cuts out all frequency parts with a frequency higher than the
 symbol rate and thus filtering out all the noise that was introduced due to
 oversampling. The concatenation of this filter and the TX filter should fulfill
-the first Nyquist criterion. A standard GRC RRC filter implementation is used.
-\todo Use a raised cosine filter instead of a RRC if no TX filter is used.
+the first Nyquist criterion. The two most common TX/RX filter combinations are
+a brick wall filter (or no filtering at all) at the TX side together with a
+raised cosine filter at the RX side, or a root raised cosine filter at each TX
+and RX side. 
+
+These two options are predefined in the block and by default the RRC filter is
+used. The raised cosine filter can be used by enabling the two RRC Filter path
+and disabling the single Root Raised Cosine Filter path.
+
+\todo In the future this block should be able to switch between the two filters
+and leaving the GRC definition untouched.
+\subsubsection page_mpsk_receiver_filter_rrc Root Raised Cosine Filter
+A standard GRC RRC filter implementation is used.
+
+\subsubsection page_mpsk_receiver_filter_rc Raised Cosine Filter
+There is no Raised Cosine filter block in GRC, the concatenation of two
+standard GRC RRC filters is used instead which is the same as using one RC
+filter.
 
 \subsection page_mpsk_receiver_dll Delay locked loop
-Estimate the timing error introduced by a propagation delay and estimate the
+Estimate the timing error introduced by a propagation delay and interpolate the
 signal at the correct time instances at symbol rate. This block performs a
 decimation by \c osf. The DLL is implemented in \ref ccsds_dll_cc.
+
+\subsection page_mpsk_receiver_agc2 Automatic Gain Control
+The incomming signal energy can vary based on the TX power on the sending side
+and the attenuation between transmitter and receiver. At this point in the chain
+the relative power level between samples is no longer essential, so the overall
+signal level is regulated to have an average signal energy of 1. This is
+performed by this block. A standard GRC AGC2 implementation is used.
 
 \subsection page_mpsk_receiver_pll Phase locked loop
 Estimates the signal's phase and local frequency offset (after the LO). Sends
 frequency corrections to the LO and compensates the phase offset of the samples.
 The PLL is implemented in \ref ccsds_pll_cc.
 
-\subsection page_mpsk_receiver_detector Detector/Demodulator
+\subsection page_mpsk_receiver_detector M-PSK Detector
 Detects the received M-PSK symbols based on the synchronized samples. Two
-different implementations are available in \ref ccsds_mpsk_demod_cb and
-\ref ccsds_mpsk_demod2_cb. The first one is used in the example above.
+different implementations are available.
 
-\subsection page_mpsk_receiver_ambiguity_resolver Ambiguity Resolver
-Searches for a repeating known sequence (sync marker) in the input stream and
-all it's possible ambiguities. If the marker is fount the ambiguity is fixed and
-the corrected input is send to the next block. The ambiguity resolver is
-implemented in \ref ccsds_mpsk_ambiguity_resolver_bb.
+\subsubsection page_mpsk_receiver_detector_hard Hard-bit Detector
+Performs hard bit decisions and outputs the detected bits in an unpacked bytes
+containing ld(M) information bits.
+
+\subsubsection page_mpsk_receiver_detector_soft Soft-bit Detector
+Performs soft-bit decisions and outputs ld(M) soft-bit floats per incomming
+symbol. The soft bits range from -1.0f (very confident zero) over 0.0f (no
+confidence at all, this could either be a zero or a one) up to 1.0f (very
+confident one).
 
 */

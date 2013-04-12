@@ -4,26 +4,24 @@
 
 #include "ccsds_lo_feedback.h"
 #include <ccsds_local_oscillator_cc.h>
-#include <gr_msg_queue.h>
-#include <gr_message.h>
 #include <gr_io_signature.h>
 #include <volk/volk.h>
 #include <math.h>
 #include <fftw3.h>
 
-// #define LO_DEBUG
-// #define LO_NUM_SAMPS_AND_DONE 500000lu
+//#define LO_DEBUG
+//#define LO_NUM_SAMPS_AND_DONE 100000lu
 
 ccsds_local_oscillator_cc_sptr
-ccsds_make_local_oscillator_cc (unsigned int block_length, unsigned int osf, gr_msg_queue_sptr msgq)
+ccsds_make_local_oscillator_cc (unsigned int block_length, unsigned int osf)
 {
-    return ccsds_local_oscillator_cc_sptr (new ccsds_local_oscillator_cc (block_length, osf, msgq));
+    return ccsds_local_oscillator_cc_sptr (new ccsds_local_oscillator_cc (block_length, osf));
 }
 
-ccsds_local_oscillator_cc::ccsds_local_oscillator_cc (unsigned int block_length, unsigned int osf, gr_msg_queue_sptr msgq)
+ccsds_local_oscillator_cc::ccsds_local_oscillator_cc (unsigned int block_length, unsigned int osf)
   : gr_sync_block ("ccsds_local_oscillator_cc",
 	gr_make_io_signature (1, 1, sizeof (gr_complex)),
-	gr_make_io_signature (1, 1, sizeof (gr_complex))), d_L(block_length*osf), d_OSF(osf), d_msgq(msgq)
+	gr_make_io_signature (1, 1, sizeof (gr_complex))), d_L(block_length*osf), d_OSF(osf)
 {
 	d_phase = 0.0f;
 	d_phase_incr = 0.0f;
@@ -38,20 +36,22 @@ ccsds_local_oscillator_cc::ccsds_local_oscillator_cc (unsigned int block_length,
 	const int alignment_multiple = volk_get_alignment() / sizeof(gr_complex);
 	set_alignment(std::max(1, alignment_multiple));
 
+	message_port_register_in(pmt::mp("freq"));
+	set_msg_handler(pmt::mp("freq"), boost::bind(&ccsds_local_oscillator_cc::process_messages, this, _1));
 
 	#ifdef LO_DEBUG
 		dbg_count = 0;
 		dbg_toggle = false;
 		
-		dbg_file = fopen("debug_lo.dat","w");
-		dbg_file_msg = fopen("debug_lo_msg.dat","w");
+		dbg_file = fopen("/tmp/ccsds_lo_debug.dat","w");
+		dbg_file_msg = fopen("/tmp/ccsds_lo_debug_msg.dat","w");
 		if(dbg_file == NULL || dbg_file_msg == NULL) {
 			fprintf(stderr,"ERROR LO: can not open debug file\n");
 			exit(EXIT_FAILURE);
 			return;
 		}
 		fprintf(dbg_file, "#k,freq,interp freq,toggle\n");
-		fprintf(dbg_file, "#k,freq_incr,freq\n");
+		fprintf(dbg_file_msg, "#k,freq_incr,freq\n");
 	#endif
 }
 
@@ -73,56 +73,32 @@ inline void ccsds_local_oscillator_cc::wrap_phase(void) {
 	return;
 }
 
-void ccsds_local_oscillator_cc::process_messages(void) {
-	if(d_msgq->empty_p()) {
-		// nothing new, return
+void ccsds_local_oscillator_cc::process_messages(pmt::pmt_t msg_in) {
+	// sanity check 1: there should always be a message
+	if(!(pmt::pmt_is_real(msg_in))) {
+		fprintf(stderr,"ERROR LO: invalid message, expected double\n");
+		exit(EXIT_FAILURE);
 		return;
-	} else {
-		// there are new messages
-
-		// in order to avoid frequency jumps, we take every frequency
-		// message for at least one block, even if it might be already 
-		// outdated
-		gr_message_sptr msg = d_msgq->delete_head_nowait();
-
-		// sanity check 1: there should always be a message
-		if(msg == 0) {
-			fprintf(stderr,"ERROR LO: invalid message\n");
-			exit(EXIT_FAILURE);
-			return;
-		}
-
-		// sanity check 2: frequency adjustment messages should have the
-		// following values (arbitrary chosen)
-		// type = (long) MSG_FREQ_TYPE (defined in ccsds.h)
-		// arg1 = (double) requested phase_incr
-		// arg2 = (double) MSG_FREQ_ARG2 (defined in ccsds.h)
-		// length = 0 (we just pass the arguments)
-		if(msg->type() != MSG_FREQ_TYPE || msg->arg2() != MSG_FREQ_ARG2 || msg->length() != 0) {
-			fprintf(stderr,"ERROR LO: message has wrong type or wrong parameters\n");
-			//exit(EXIT_FAILURE);
-			return;
-		}
-
-		// looks like we are fine, take the message's phase increase
-		// value and use it for future rotations
-		double correction = msg->arg1();
-
-		// apply a nonlinearity to keep high correction values and
-		// attenuate low ones
-		correction *= (correction/M_PI < 0.00001) ? 0.1 : 1.0;
-		correction *= (correction/M_PI < 0.0001) ? 0.5 : 1.0;
-		correction *= (correction/M_PI < 0.001) ? 0.5 : 1.0;
-
-		d_phase_incr += correction / (double)d_OSF;
-
-		// add lo tag to inform pll of new frequency
-		add_tag();
-
-		#ifdef LO_DEBUG
-			fprintf(dbg_file_msg, "%f,%f,%f\n",(float)this->nitems_written(0)/d_OSF,msg->arg1()/((double)d_OSF*M_PI), d_phase_incr/M_PI);
-		#endif
 	}
+
+	// looks like we are fine, take the message's phase increase
+	// value and use it for future rotations
+	double correction = pmt::pmt_to_double(msg_in);
+
+	// apply a nonlinearity to keep high correction values and
+	// attenuate low ones
+	correction *= (correction/M_PI < 0.00001) ? 0.01 : 1.0;
+	correction *= (correction/M_PI < 0.0001) ? 0.1 : 1.0;
+	correction *= (correction/M_PI < 0.001) ? 0.5 : 1.0;
+
+	d_phase_incr += correction / (double)d_OSF;
+
+	// add lo tag to inform pll of new frequency
+	add_tag();
+
+	#ifdef LO_DEBUG
+		fprintf(dbg_file_msg, "%f,%f,%f\n",(float)this->nitems_written(0)/d_OSF,pmt::pmt_to_double(msg_in)/((double)d_OSF*M_PI), d_phase_incr/M_PI);
+	#endif
 }
 
 void ccsds_local_oscillator_cc::add_tag() {
@@ -214,14 +190,12 @@ int  ccsds_local_oscillator_cc::work (int                     noutput_items,
 	#ifdef LO_NUM_SAMPS_AND_DONE
 		uint64_t nread = this->nitems_read(0);
 		if(nread > LO_NUM_SAMPS_AND_DONE) {
-			printf("\nLO: %lu samples processed, exit.\n", LO_NUM_SAMPS_AND_DONE);
+			printf("LO: %lu samples processed, exit.\n", LO_NUM_SAMPS_AND_DONE);
 			exit(EXIT_FAILURE);
 			return 0;
 		}
 		printf("\nLO: %lu/%lu samples processed.\n", nread,LO_NUM_SAMPS_AND_DONE);
 	#endif
-
-	process_messages();
 
 	double phase_incr_slope = (d_phase_incr-d_last_phase_incr)/(double)num;
 	

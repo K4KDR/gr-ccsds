@@ -33,7 +33,6 @@ by using:
 \code
     help(ccsds)
 \endcode
-\todo Create ccsds package's python help
 
 \section Modules
 \subpage page_mpsk_receiver

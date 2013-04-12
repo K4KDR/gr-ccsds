@@ -10,7 +10,7 @@
 #include <fftw3.h>
 #include <cstdio>
 
-// #define DLL_DEBUG
+//#define DLL_DEBUG
 
 ccsds_dll_cc_sptr ccsds_make_dll_cc(unsigned int osf, float gamma) {
     return ccsds_dll_cc_sptr (new ccsds_dll_cc(osf,gamma) );
@@ -40,10 +40,10 @@ ccsds_dll_cc::ccsds_dll_cc (unsigned int osf, float gamma)
 		dbg_count = 0;
 		dbg_toggle = false;
 
-		dbg_file_o = fopen("debug_dll_orig.dat","w");
-		dbg_file_i = fopen("debug_dll_intp.dat","w");
-		dbg_file_s = fopen("debug_dll_symb.dat","w");
-		dbg_file_t = fopen("debug_dll_tauh.dat","w");
+		dbg_file_o = fopen("/tmp/ccsds_dll_debug_orig.dat","w");
+		dbg_file_i = fopen("/tmp/ccsds_dll_debug_intp.dat","w");
+		dbg_file_s = fopen("/tmp/ccsds_dll_debug_symb.dat","w");
+		dbg_file_t = fopen("/tmp/ccsds_dll_debug_tauh.dat","w");
 		if(dbg_file_o == NULL || dbg_file_i == NULL || dbg_file_s == NULL || dbg_file_i == NULL) {
 			fprintf(stderr,"ERROR DLL: can not open debug file\n");
 			exit(EXIT_FAILURE);
@@ -234,7 +234,7 @@ int  ccsds_dll_cc::general_work (int                     noutput_items,
 		d_last_interp[PREV] = in[1];
 
 		// update indices
-		d_l += get_int(d_OSF_HALF);
+		d_l += get_int(d_mu + d_OSF_HALF);
 		d_mu = get_frac(d_mu + d_OSF_HALF);
 
 		#ifdef DLL_DEBUG
@@ -288,7 +288,7 @@ int  ccsds_dll_cc::general_work (int                     noutput_items,
 								abs(d_last_interp[CURR]),arg(d_last_interp[CURR])/M_PI);
 			
 			// debug input samples
-			for(unsigned int i=0;i<d_l-1;i++) {
+			for(unsigned int i=0;i<(unsigned int) std::max(d_l-1, 0);i++) {
 				fprintf(dbg_file_o, "%f,%f,%f,%f,%f\n",(float)(dbg_count++)/(float)d_OSF,real(in[i]),imag(in[i]),abs(in[i]),arg(in[i])/M_PI);
 			}
 
@@ -413,7 +413,7 @@ int  ccsds_dll_cc::general_work (int                     noutput_items,
 
 	#ifdef DLL_DEBUG
 		// debug original incomming samples
-		for(unsigned int i=0;i<d_l-1-missing;i++) {
+		for(unsigned int i=0;i<(unsigned int) std::max(d_l-1-missing, 0);i++) {
 			fprintf(dbg_file_o, "%f,%f,%f,%f,%f,%d\n",(float)(dbg_count++)/(float)d_OSF,real(in[i]),imag(in[i]),abs(in[i]),arg(in[i])/M_PI,dbg_toggle);
 		}
 		dbg_toggle = !dbg_toggle;

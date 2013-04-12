@@ -11,16 +11,14 @@ typedef boost::shared_ptr<ccsds_mpsk_preamble_cc> ccsds_mpsk_preamble_cc_sptr;
 
 /*! \brief Create a M-PSK preamble block and return it's shared pointer.
  *
- *  \param M Modulation order.
  *  \param num_symbols Number of preamble symbols.
  *  \return Shared pointer of the M-PSK preamble block.
  */
-CCSDS_API ccsds_mpsk_preamble_cc_sptr ccsds_make_mpsk_preamble_cc (const unsigned int M, const unsigned int num_symbols);
+CCSDS_API ccsds_mpsk_preamble_cc_sptr ccsds_make_mpsk_preamble_cc (const unsigned int num_symbols);
 
 /*! \brief Append a M-PSK preamble before the input stream. 
  *  \ingroup sender
  *
- *  \param M Modulation order
  *  \param num Number of preamble symbols.
  *
  *  Outputs \c num preamble symbols, before the input stream is copied to
@@ -31,24 +29,17 @@ CCSDS_API ccsds_mpsk_preamble_cc_sptr ccsds_make_mpsk_preamble_cc (const unsigne
  *  The preable consists of alternating BPSK symbols (starting with 1+0j). BPSK
  *  symbols are also part of any other M-PSK constellation where M is a power of
  *  two and thus works for all M-PSK receivers.
- *
- *  If M is 4 i.e. QPSK the two preable symbols are rotated by 45 degree
- *  starting with (1+1j)/sqrt(2)
  */
 class CCSDS_API ccsds_mpsk_preamble_cc : public gr_block
 {
 private:
-	friend CCSDS_API ccsds_mpsk_preamble_cc_sptr ccsds_make_mpsk_preamble_cc (const unsigned int M, const unsigned int num_symbols);
+	friend CCSDS_API ccsds_mpsk_preamble_cc_sptr ccsds_make_mpsk_preamble_cc (const unsigned int num_symbols);
 
 	/*! \brief Private constructor for the M-PSK preamble block.
 	 *
-	 *  \param M Modulation order.
 	 *  \param num_symbols Number of preamble symbols.
 	 */
-	ccsds_mpsk_preamble_cc (const unsigned int M, const unsigned int num_symbols);   // private constructor
-
-	/*! \brief Storage for the modulation order. */
-	const unsigned int d_M;
+	ccsds_mpsk_preamble_cc (const unsigned int num_symbols);   // private constructor
 
 	/*! \brief Storage for the number of preable symbols to generate. */
 	const unsigned int d_NUM_SYMBOLS;

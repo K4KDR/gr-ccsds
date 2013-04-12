@@ -7,7 +7,6 @@
 #include <stdio.h>
 #include <boost/scoped_array.hpp>
 #include "ccsds_hexstring_to_binary.h"
-#include <fec.h>
 
 unsigned int ccsds_conv_decode27::get_rate_in(ccsds_conv_encode27_punct::punct_t puncturing_type) {
 	switch(puncturing_type) {
@@ -138,10 +137,10 @@ ccsds_conv_decode27::ccsds_conv_decode27(const unsigned char gen_poly_c1, const 
 	// Translate polynomials
 	int polys[2] = {convert_poly(gen_poly_c1),convert_poly(gen_poly_c2)};
 	// set polynomials
-	set_viterbi27_polynomial(polys);
+	FEC_FUNC_VITERBI27_SET_POLYNOMIAL(polys);
 
 	// output one byte per iteration
-	d_viterbi = create_viterbi27((int)d_BLOCK_NUM_BITS_OUT);
+	d_viterbi = FEC_FUNC_VITERBI27_CREATE((int)d_BLOCK_NUM_BITS_OUT);
 
 	if(d_viterbi == NULL) {
 		fprintf(stderr,"ERROR CONV DECODE27: Unable to create viterbi decoder\n");
@@ -160,7 +159,7 @@ ccsds_conv_decode27::ccsds_conv_decode27(const unsigned char gen_poly_c1, const 
 ccsds_conv_decode27::~ccsds_conv_decode27(void) {
 
 	// free viterbi decoder resources
-	delete_viterbi27(d_viterbi);
+	FEC_FUNC_VITERBI27_DELETE(d_viterbi);
 
 	delete[] d_buffer;
 }
@@ -215,10 +214,10 @@ void ccsds_conv_decode27::process_message(pmt::pmt_t msg_in) {
 	unpuncture_and_convert(d_buffer, pmt::pmt_f32vector_elements(msg, num_softbits));
 
 	/// init decoder
-	init_viterbi27(d_viterbi, d_START_STATE);
+	FEC_FUNC_VITERBI27_INIT(d_viterbi, d_START_STATE);
 
 	// fill in data
-	update_viterbi27_blk(d_viterbi, d_buffer, d_BLOCK_NUM_BITS_OUT+6);
+	FEC_FUNC_VITERBI27_UPDATE_BLK(d_viterbi, d_buffer, d_BLOCK_NUM_BITS_OUT+6);
 
 	// allocate memory for the decoded bits (will be put into packed bytes
 	// by the library and we checked that the number of bits is a multiple
@@ -226,11 +225,11 @@ void ccsds_conv_decode27::process_message(pmt::pmt_t msg_in) {
 	unsigned char *data_dec = new unsigned char[d_BLOCK_NUM_BITS_OUT/8];
 
 	// Let the decoder decode the corrected byte sequence
-	chainback_viterbi27(d_viterbi, data_dec, d_BLOCK_NUM_BITS_OUT, d_TERM_STATE);
+	FEC_FUNC_VITERBI27_CHAINBACK(d_viterbi, data_dec, d_BLOCK_NUM_BITS_OUT, d_TERM_STATE);
 
 	// Create new message data containing the decoded bytes as BLOB
 	pmt::pmt_t msg_out_data = pmt::pmt_make_blob(data_dec, d_BLOCK_NUM_BITS_OUT/8);
-
+						
 	// Construct the new message using the received header
 	pmt::pmt_t msg_out = pmt::pmt_cons(hdr, msg_out_data);
 

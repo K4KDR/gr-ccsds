@@ -248,6 +248,10 @@ private:
 	/*! \brief Propagates stream tags of the current block to the decimated
 	 *	output stream.
 	 *  \param num_in Number of samples read during this block operation.
+	 *
+	 *  \todo Tag propagation is done with a fixed rate conversion. For
+	 *	higher timing accuracy use the timing estimations for rate
+	 *	conversion.
 	 */
 	void propagate_tags(const unsigned int num_in);
 

@@ -8,14 +8,16 @@
 #include <gr_message.h>
 
 
-ccsds_ticp_frame_sink_sptr ccsds_make_ticp_frame_sink(unsigned int port, const unsigned int frame_length) {
-    return ccsds_ticp_frame_sink_sptr (new ccsds_ticp_frame_sink(port, frame_length) );
+ccsds_ticp_frame_sink_sptr ccsds_make_ticp_frame_sink(unsigned int port, const unsigned int frame_length, const uint8_t data_type, std::vector<std::string> map_names, std::vector<uint8_t> map_types) {
+    return ccsds_ticp_frame_sink_sptr (new ccsds_ticp_frame_sink(port, frame_length, data_type, map_names, map_types) );
 }
 
-ccsds_ticp_frame_sink::ccsds_ticp_frame_sink (unsigned int port, const unsigned int frame_length)
+ccsds_ticp_frame_sink::ccsds_ticp_frame_sink (unsigned int port, const unsigned int frame_length, const uint8_t data_type, std::vector<std::string> map_names, std::vector<uint8_t> map_types)
   : gr_block ("ccsds_ticp_frame_sink",
 	gr_make_io_signature (0, 0, sizeof(unsigned char)),
-	gr_make_io_signature (0, 0, 0)), TicpServer(), d_FRAME_LEN(frame_length)
+	gr_make_io_signature (0, 0, 0)),
+	d_FRAME_LEN(frame_length),
+	d_DATA_TYPE(data_type)
 {
 
 	#ifdef CCSDS_TICP_FRAME_SINK_DEBUG
@@ -23,22 +25,44 @@ ccsds_ticp_frame_sink::ccsds_ticp_frame_sink (unsigned int port, const unsigned 
 		dbg_count = 0;
 	#endif
 
+	// create metadata dictionary
+	if(map_names.size() != map_types.size()) {
+		fprintf(stderr,"ERROR TICP FRAME SINK: Invalid metadata mapping, number of names and types are not equal.\n");
+		exit(EXIT_FAILURE);
+		return;
+	}
+	for(unsigned int i=0;i<map_types.size();i++) {
+		if(map_types[i] == d_DATA_TYPE) {
+			fprintf(stderr,"ERROR TICP FRAME SINK: Invalid metadata mapping, data type appears in metadata types as well.\n");
+			exit(EXIT_FAILURE);
+			return;
+		}
+		d_metadata_map[ map_names[i] ] = map_types[i];
+	}
+	if(d_metadata_map.size() != map_types.size()) {
+		fprintf(stderr,"ERROR TICP FRAME SINK: Invalid metadata mapping, names are not unique\n");
+		exit(EXIT_FAILURE);
+		return;
+	}
+
+	d_frame_count = 0;
+
 	// register input type
 	message_port_register_in(pmt::mp("in"));
 	set_msg_handler(pmt::mp("in"), boost::bind(&ccsds_ticp_frame_sink::process_message, this, _1));
 
-	// store queue
-	d_msgq = gr_msg_queue_sptr(new gr_msg_queue(5));
-
+	// create TICP Client
+	d_ticp_sptr = boost::shared_ptr< ticp::Server<ticp::data_v2_t> >( new ticp::Server<ticp::data_v2_t>() );
+	
 	// Add getFrame method	
-	ticpConnectGetFrameFunction(boost::bind(&ccsds_ticp_frame_sink::getFrame, this));
+	d_ticp_sptr->ticpConnectGetFrameFunction(boost::bind(&ccsds_ticp_frame_sink::getFrame, this));
 
 	// Open connection
-	ticpStartServer(port, false);
+	d_ticp_sptr->ticpStartServer(port, false);
 }
 
 ccsds_ticp_frame_sink::~ccsds_ticp_frame_sink () {
-	d_msgq.reset();
+	d_ticp_sptr.reset(); // make sure the ticp Server is deleted as well.
 
 	#ifdef CCSDS_TICP_FRAME_SINK_DEBUG
 		fflush(dbg_file);
@@ -46,9 +70,28 @@ ccsds_ticp_frame_sink::~ccsds_ticp_frame_sink () {
 	#endif
 }
 
-const std::vector< unsigned char > ccsds_ticp_frame_sink::getFrame(void) {
-	gr_message_sptr msg = d_msgq->delete_head(); // blocking
+const ticp::data_v2_t ccsds_ticp_frame_sink::getFrame(void) {
 
+	// Lock before accessing the queue
+	boost::mutex::scoped_lock lock(d_mutex);
+
+	// Wait until there is at least one frame in the queue
+	while(d_queue.size() == 0) {
+		d_condition_var.wait(lock);
+	}
+
+	// okay, there is a frame available now
+	ticp::data_v2_t frame = d_queue.front();
+
+	// remove frame
+	d_queue.pop();
+
+	// we are done with the queue, release lock early
+	lock.unlock();
+
+	return frame;
+
+	/*
 	if(msg->length() != d_FRAME_LEN) {
 		fprintf(stderr,"ERROR TICP frame sink: frame lengths do not match. msg:%lu, internal:%u\n",msg->length(),d_FRAME_LEN);
 		exit(EXIT_FAILURE);
@@ -76,6 +119,7 @@ const std::vector< unsigned char > ccsds_ticp_frame_sink::getFrame(void) {
 	#endif
 
 	return frame;
+	*/
 }
 
 void ccsds_ticp_frame_sink::process_message(pmt::pmt_t msg_in) {
@@ -114,17 +158,58 @@ void ccsds_ticp_frame_sink::process_message(pmt::pmt_t msg_in) {
 		fprintf(stderr,"WARNING TICP FRAME SINK: blob message length of %u bytes does not match the expected length of %u bytes.\n", blob_len, d_FRAME_LEN);
 	}
 
-	// pointer to frame
-	const unsigned char *data_in = (const unsigned char *) pmt::pmt_blob_data(msg);
+	// generate frame
+	ticp::data_v2_t frame;
 
-	// message for the buffer
-	gr_message_sptr msg_buf = gr_make_message(0, 0, 0, d_FRAME_LEN);
+	// extract data
+	ticp::data_v1_t data((unsigned char *)pmt::pmt_blob_data(msg), (unsigned char *)pmt::pmt_blob_data(msg)+d_FRAME_LEN);
 
-	// fill message
-	memcpy(msg_buf->msg(), data_in, d_FRAME_LEN*sizeof(unsigned char));
+	// insert main data
+	frame[d_DATA_TYPE] = data;
 
-	// enqueue
-	d_msgq->insert_tail(msg_buf); // blocking
+	// process metadata
+
+	// get metadata keys
+	pmt::pmt_t hdr_keys = pmt::pmt_dict_keys(hdr);
+
+	// number of available metadata elements
+	const unsigned int hdr_len = pmt::pmt_length(hdr_keys); // evaluate length once, instead of every loop iteration
+
+	for(unsigned int i=0;i<hdr_len;i++) {
+		const pmt::pmt_t key = pmt::pmt_nth(i, hdr_keys);
+		const pmt::pmt_t value = pmt::pmt_dict_ref(hdr, key, pmt::PMT_NIL);
+
+		std::string name = pmt::pmt_symbol_to_string(key);
+
+		if(!pmt::pmt_is_blob(value)) {
+			fprintf(stderr,"WARNING TICP FRAME SINK: expecting metadata with key %s to be of type blob, skipping.\n", name.c_str());
+			continue;
+		}
+
+		ticp::data_v1_t mdata((unsigned char *)pmt::pmt_blob_data(value), (unsigned char *)pmt::pmt_blob_data(value)+pmt::pmt_length(value));
+
+		frame[ d_metadata_map[name] ] = mdata;
+	}
+
+	// Data structure generated, store into queue
+
+	// Get lock for queue access
+	boost::mutex::scoped_lock lock(d_mutex);
+
+	// Check if the queue is empty (if so wake up the consumer later)
+	const bool was_empty = d_queue.empty();
+
+	// store the frame
+	d_queue.push(frame);
+
+	// unlock
+	lock.unlock();
+
+	// If queue was empty, we need to notify the consumer that there is data
+	// available now
+	if(was_empty) {
+		d_condition_var.notify_one();
+	}
 
 	return;
 }

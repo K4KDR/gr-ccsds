@@ -56,7 +56,6 @@ install(FILES
 	ccsds_blob_msg_source_b.h
 	ccsds_blob_msg_sink_b.h
 	ccsds_ticp_frame_source.h
-	ccsds_ticp_frame_source_b.h
 	ccsds_ticp_frame_sink.h
 	ccsds_crc16.h
 	asynchronous_start.hpp DESTINATION include/ccsds

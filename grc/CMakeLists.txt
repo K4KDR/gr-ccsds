@@ -46,7 +46,6 @@ install(FILES
 	ccsds_blob_msg_source_b.xml
 	ccsds_blob_msg_sink_b.xml
 	ccsds_ticp_frame_source.xml
-	ccsds_ticp_frame_source_b.xml
 	ccsds_ticp_frame_sink.xml
 	ccsds_rs_decode_bb.xml DESTINATION share/gnuradio/grc/blocks
 )

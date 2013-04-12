@@ -13,10 +13,13 @@ extern "C" {
 #define CCSDS_RS_DECODE_OUTPUT_NONE 0
 
 /*! \brief Verbosity level: Do output debug information */
-#define CCSDS_RS_DECODE_OUTPUT_FRAMEINFO 1
+#define CCSDS_RS_DECODE_OUTPUT_FRAMEERR 1
 
 /*! \brief Verbosity level: Do output debug information */
-#define CCSDS_RS_DECODE_OUTPUT_DEBUG 2
+#define CCSDS_RS_DECODE_OUTPUT_FRAMEINFO 2
+
+/*! \brief Verbosity level: Do output debug information */
+#define CCSDS_RS_DECODE_OUTPUT_DEBUG 3
 
 /*! \brief Level of verbosity of this block.
  *

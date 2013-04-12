@@ -3,7 +3,6 @@
 
 #include <ccsds_api.h>
 #include <gr_sync_block.h>
-#include <gr_msg_queue.h>
 
 class ccsds_local_oscillator_cc;
 
@@ -14,12 +13,11 @@ typedef boost::shared_ptr<ccsds_local_oscillator_cc> ccsds_local_oscillator_cc_s
  *  \param block_length Unused in current implementation
  *  \param osf Oversampling factor, used to scale down symbolrate frequency
  *	estimates
- *  \param msgq Message queue from which to obtain frequency corrections
  *  \return Return shared pointer to local oscillator
  *  \todo Remove block_length from the code
  *  \todo Improve adaptive filtering of frequency estimates
  */
-CCSDS_API ccsds_local_oscillator_cc_sptr ccsds_make_local_oscillator_cc(unsigned int block_length, unsigned int osf, gr_msg_queue_sptr msgq);
+CCSDS_API ccsds_local_oscillator_cc_sptr ccsds_make_local_oscillator_cc(unsigned int block_length, unsigned int osf);
 
 /*! \brief Local oscillator controlled by asynchronous frequency corrections
  *  \ingroup synchronization
@@ -27,11 +25,13 @@ CCSDS_API ccsds_local_oscillator_cc_sptr ccsds_make_local_oscillator_cc(unsigned
  *  Oscillates with an internal frequency (initially zero) that can be tuned
  *  by asynchronous frequency correction messages. Every time a new frequency is
  *  used a stream tag with the new frequency is attatched to the sample stream.
+ *
+ *  Frequency corrections are taken on the input port "freq".
  */
 class CCSDS_API ccsds_local_oscillator_cc : public gr_sync_block
 {
 private:
-	friend CCSDS_API ccsds_local_oscillator_cc_sptr ccsds_make_local_oscillator_cc(unsigned int block_length, unsigned int osf, gr_msg_queue_sptr msgq);
+	friend CCSDS_API ccsds_local_oscillator_cc_sptr ccsds_make_local_oscillator_cc(unsigned int block_length, unsigned int osf);
 
 	/*! \brief 2pi with double precision */
 	static const double d_TWOPI;
@@ -57,9 +57,6 @@ private:
 	 *  avoid frequency jumps
 	 */
 	double d_last_phase_incr;
-
-	/*! \brief Messagequeue to obtain frequency corrections from. */
-	gr_msg_queue_sptr d_msgq;
 
 	/*! \brief temporary storage for cosine calculation in the rotator
 	 *
@@ -94,7 +91,7 @@ private:
 	 *  \param msgq Message queue from which to obtain frequency corrections
 	 *  \return Return shared pointer to local oscillator
 	 */
-	ccsds_local_oscillator_cc(unsigned int block_length, unsigned int osf, gr_msg_queue_sptr msgq);   // private constructor
+	ccsds_local_oscillator_cc(unsigned int block_length, unsigned int osf);   // private constructor
 	
 	/*! \brief Keep d_phase in range [-pi,pi] */
 	inline void wrap_phase(void);
@@ -107,7 +104,7 @@ private:
 	 *
 	 *  \sa ccsds_lo_feedback.h
 	 */
-	void process_messages(void);
+	void process_messages(pmt::pmt_t msg_in);
 
 	/*! \brief Attach a stream tag with the current per symbol frequency
 	 *	estimate to the first sample in the current input block.

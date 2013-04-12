@@ -19,10 +19,15 @@
 
 include(GrPython)
 
-GR_PYTHON_INSTALL(
-    PROGRAMS
-    DESTINATION bin
+add_executable (ccsds_latency_sender ccsds_latency_sender.cpp)
+target_link_libraries(ccsds_latency_sender ticp boost_system-mt boost_thread-mt)
+
+add_executable (ccsds_latency_receiver ccsds_latency_receiver.cpp)
+target_link_libraries(ccsds_latency_receiver ticp boost_system-mt boost_thread-mt)
+
+install(
+	TARGETS
+		ccsds_latency_sender
+		ccsds_latency_receiver
+	DESTINATION bin
 )
-
-add_subdirectory(latency_measurements)
-

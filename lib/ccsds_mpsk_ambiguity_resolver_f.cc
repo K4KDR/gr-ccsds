@@ -13,7 +13,7 @@
 #include <cstdio>
 #include <gruel/pmt.h>
 #include <boost/scoped_array.hpp>
-
+#include <volk/volk.h>
 
 ccsds_mpsk_ambiguity_resolver_f_sptr ccsds_make_mpsk_ambiguity_resolver_f(const unsigned int M, std::string ASM, const unsigned int asm_len, const unsigned int threshold, const float correlation_threshold, const unsigned int frame_length, const unsigned int num_tail_syms) {
     return ccsds_mpsk_ambiguity_resolver_f_sptr (new ccsds_mpsk_ambiguity_resolver_f(M, ASM,asm_len, threshold, correlation_threshold, frame_length, num_tail_syms) );
@@ -45,7 +45,16 @@ ccsds_mpsk_ambiguity_resolver_f::ccsds_mpsk_ambiguity_resolver_f (const unsigned
 	boost::scoped_array<unsigned char> tmp(new unsigned char[asm_len_byte]);
 	ccsds_hexstring_to_binary(&ASM, tmp.get());
 
-	d_ASM = new float[d_ASM_LEN_BITS];
+	d_ASM = (float*) fftw_malloc(d_ASM_LEN_BITS * sizeof(float));
+	d_tmp_fv = (float*) fftw_malloc(d_ASM_LEN_BITS * sizeof(float)); // Aligned buffer for sequence to be checked against ASM
+	d_tmp_f  = (float*) fftw_malloc(sizeof(float));			 // Aligned float for correlation result
+	
+	if(d_ASM == 0 || d_tmp_fv == 0 || d_tmp_f == 0) {
+		fprintf(stderr,"ERROR AR SOFT: allocation of memory failed\n");
+		exit(EXIT_FAILURE);
+		return;
+	}
+
 	for(unsigned int i=0;i<d_ASM_LEN_BITS;i++) {
 		const uint8_t byte = tmp[i/8];
 		
@@ -59,7 +68,8 @@ ccsds_mpsk_ambiguity_resolver_f::ccsds_mpsk_ambiguity_resolver_f (const unsigned
 	d_locked_on_stream = 0;
 	d_offset_bits =0;
 	d_msg_buffer_count = 0;
-	d_frame_count = 1;
+	d_frame_count = 0;
+	d_tag_lastupdate = 0;
 
 	// register output
 	message_port_register_out(pmt::mp("out"));
@@ -68,6 +78,7 @@ ccsds_mpsk_ambiguity_resolver_f::ccsds_mpsk_ambiguity_resolver_f (const unsigned
 		dbg_file_in = fopen("/tmp/ccsds_mpsk_ambiguity_resolver_f_debug_in.dat","w");
 		dbg_file_in_hard = fopen("/tmp/ccsds_mpsk_ambiguity_resolver_f_debug_in_hard.dat","w");
 		dbg_file_out = fopen("/tmp/ccsds_mpsk_ambiguity_resolver_f_debug_out.dat","w");
+		dbg_file_asms = fopen("/tmp/ccsds_mpsk_ambiguity_resolver_f_debug_asms.dat","w");
 	#endif
 	#if CCSDS_AR_SOFT_VERBOSITY_LEVEL >= CCSDS_AR_SOFT_OUTPUT_CHANGE
 		dbg_count = 0;
@@ -86,16 +97,21 @@ ccsds_mpsk_ambiguity_resolver_f::ccsds_mpsk_ambiguity_resolver_f (const unsigned
 ccsds_mpsk_ambiguity_resolver_f::~ccsds_mpsk_ambiguity_resolver_f () {
 	delete[] d_map_index_to_bits;
 	delete[] d_map_bits_to_index;
-	delete[] d_ASM;
+	
+	fftw_free(d_ASM);
+	fftw_free(d_tmp_fv);
+	fftw_free(d_tmp_f);
 
 	#if CCSDS_AR_SOFT_VERBOSITY_LEVEL >= CCSDS_AR_SOFT_OUTPUT_DEBUG
 		fflush(dbg_file_in);
 		fflush(dbg_file_in_hard);
 		fflush(dbg_file_out);
+		fflush(dbg_file_asms);
 
 		fclose(dbg_file_in);
 		fclose(dbg_file_in_hard);
 		fclose(dbg_file_out);
+		fclose(dbg_file_asms);
 	#endif
 }
 
@@ -108,13 +124,26 @@ bool ccsds_mpsk_ambiguity_resolver_f::stop(void) {
 float ccsds_mpsk_ambiguity_resolver_f::check_for_ASM(const float *in, const unsigned int offset) {
 	float correlation = 0.0f;
 
+	/* correlation without volk
 	for(unsigned int i=0;i<d_ASM_LEN_BITS;i++) {
 		//TODO use volk for multiplication
 		correlation += d_ASM[i] * in[i+offset];
 	}
-
 	// normalization
 	correlation /= d_ASM_LEN_BITS;
+	*/
+
+	//* correlation with volk
+
+	// copy input into aligned memory
+	memcpy(d_tmp_fv, &in[offset], d_ASM_LEN_BITS*sizeof(float));
+
+	// correlation
+	volk_32f_x2_dot_prod_32f_a(d_tmp_f, d_ASM, d_tmp_fv, d_ASM_LEN_BITS);
+	// normalization
+	correlation = *d_tmp_f / d_ASM_LEN_BITS;
+	//*/
+
 
 
 	#if CCSDS_AR_SOFT_VERBOSITY_LEVEL >= CCSDS_AR_SOFT_OUTPUT_STATE
@@ -226,6 +255,99 @@ unsigned int ccsds_mpsk_ambiguity_resolver_f::get_upper_mul(const unsigned int n
 	return (unsigned int)std::ceil((float)n/d_ldM)*d_ldM;
 }
 
+void ccsds_mpsk_ambiguity_resolver_f::updateTags(const uint64_t until) {
+	// buffer for tags
+	std::vector< gr_tag_t > tagvec;
+
+	// just update, don't repeat work
+	const uint64_t from = std::max(this->nitems_read(0), d_tag_lastupdate+1lu);
+
+	// nothing to do here. Note: if equal there is one sample to check
+	if(until < from) {
+		return;
+	}
+
+	// get tags
+	this->get_tags_in_range(tagvec, 0, from, until);
+
+	// loop through tags
+	for(unsigned int i=0;i<tagvec.size();i++) {
+		// copy tag to buffer
+		d_tag_buffer[ pmt::pmt_symbol_to_string(tagvec[i].key) ] = tagvec[i].value;
+
+		// if we copied rx_time, update sample counter
+		if(pmt::pmt_symbol_to_string(tagvec[i].key).compare("rx_time") == 0) {
+			d_tag_last_rx_time = tagvec[i].offset;
+		}
+	}
+
+	// update counter
+	d_tag_lastupdate = from;
+
+	return;
+}
+
+pmt::pmt_t ccsds_mpsk_ambiguity_resolver_f::extractTags(const uint64_t from, const unsigned int len) {
+	// create empty header
+	pmt::pmt_t dict = pmt::pmt_make_dict();
+
+	// If rx_rate and rx_time tags are available, we can calculate the frame rx_time
+	if(d_tag_buffer.count(std::string("rx_rate")) == 1 && d_tag_buffer.count(std::string("rx_time")) == 1) {
+
+		// bring buffer for rx_time and rx_rate up to date (which meanst at the start of the frame)
+		updateTags(from);
+
+		// how many samples have passed since last update
+		uint64_t samples_diff = from-d_tag_last_rx_time;
+		// what is the current sampling rate
+		const double rate = pmt::pmt_to_double( d_tag_buffer["rx_rate"] );
+		// time passed in seconds since last update
+		const uint64_t passed_sec = samples_diff / (uint64_t)rate;
+		// additional time passed in fractional seconds since last update
+		const double passed_frac = (samples_diff % (uint64_t)rate) / rate;
+
+		// time tag of last update in seconds
+		uint64_t time_sec = pmt::pmt_to_double(pmt::pmt_car( d_tag_buffer["rx_time"] ));
+		// time tag of last update in additional fractional seconds
+		double time_frac  = pmt::pmt_to_uint64(pmt::pmt_cdr( d_tag_buffer["rx_time"] ));
+
+		// update fractional time passed
+		time_frac += passed_frac;
+		// update seconds past
+		time_sec += passed_sec;
+		// update carry seconds
+		time_sec += (uint64_t)std::floor(time_frac);
+		// remove additional seconds from the fractional part
+		time_frac = fmod(time_frac, 1.0);
+
+		// create time tuple
+		const pmt::pmt_t time_val = pmt::pmt_cons(pmt::pmt_from_uint64(time_sec), pmt::pmt_from_double(time_frac));
+
+		// add time tuple to dict
+		dict = pmt::pmt_dict_add(dict, pmt::pmt_intern("rx_time"), time_val);
+	}
+
+
+	// update buffer to contain tags that are received within this frame
+	updateTags(from+len);
+
+
+	// now copy all updated tags into our header except for rx_time, which has been set before
+
+	// loop through all tags in our buffer
+	for(std::map<std::string, pmt::pmt_t>::const_iterator it=d_tag_buffer.begin();it != d_tag_buffer.end();it++) {
+		// we already processed rx_time tag and don't want to copy it to the frame
+		if(it->first.compare("rx_time") == 0) {
+			continue;
+		}
+
+		// add tag
+		dict = pmt::pmt_dict_add(dict, pmt::pmt_intern(it->first), it->second);
+	}
+
+	return dict;
+}
+
 int  ccsds_mpsk_ambiguity_resolver_f::general_work (int 		    /*noutput_items*/,
 					        gr_vector_int&              ninput_items,
 					        gr_vector_const_void_star&  input_items,
@@ -306,13 +428,32 @@ int  ccsds_mpsk_ambiguity_resolver_f::general_work (int 		    /*noutput_items*/,
 						// copy to the buffer immediatley
 						d_msg_buffer_fill = true;
 
+						// This is a new frame, increase counter
+						d_frame_count++;
+
+						#if CCSDS_AR_SOFT_VERBOSITY_LEVEL >= CCSDS_AR_SOFT_OUTPUT_DEBUG
+							boost::scoped_array<float> in_syms(new float[d_ASM_LEN_BITS+get_upper_mul(d_offset_bits)]);
+					
+							convert_ambiguity(in_syms.get(), &in[num_consumed], d_ASM_LEN_BITS+get_upper_mul(d_offset_bits), d_locked_on_stream);
+
+							fprintf(dbg_file_asms,"frame %6lu: ",d_frame_count);
+							for(unsigned int j=0;j<d_ASM_LEN_BITS;j++) {
+								fprintf(dbg_file_asms,"%+1.2f ",in_syms[d_offset_bits+j]);
+							}
+							fprintf(dbg_file_asms,"      ");
+							for(unsigned int j=0;j<d_ASM_LEN_BITS;j++) {
+								fprintf(dbg_file_asms,"%1u ",(in_syms[d_offset_bits+j]>0.0) ? 1:0);
+							}
+							fprintf(dbg_file_asms," found correlation=%lf\n", max_corr);
+						#endif
+
 						// Consume samples up to the next
 						// frame data (including ASM)
 						num_consumed += get_lower_mul(d_offset_bits+d_ASM_LEN_BITS);
 						d_offset_bits = (d_offset_bits+d_ASM_LEN_BITS) % d_ldM;
 
 						#if CCSDS_AR_SOFT_VERBOSITY_LEVEL >= CCSDS_AR_SOFT_OUTPUT_CHANGE
-							printf("AR: Found ASM => LOCK\n");
+							printf("AR: Found ASM for frame number %lu => LOCK\n", d_frame_count);
 						#endif
 					
 					} else { // We found nothing
@@ -411,12 +552,19 @@ int  ccsds_mpsk_ambiguity_resolver_f::general_work (int 		    /*noutput_items*/,
 					// Did we will the buffer?
 					if(d_msg_buffer_count >= d_FRAME_LEN_BITS+d_NUM_TAIL_SYMS) {
 						// buffer is now full, create message
-						
-						pmt::pmt_t meta = pmt::pmt_make_dict();
-						meta = pmt::pmt_dict_add(meta, pmt::mp("frame_number"), pmt::pmt_from_long(d_frame_count++));
 
+						// extract Tags from buffer and add them to the header
+						const unsigned int len = d_FRAME_LEN_BITS+d_NUM_TAIL_SYMS;
+						const uint64_t from = this->nitems_read(0)+num_consumed+d_offset_bits-len;
+						pmt::pmt_t meta = extractTags(from, len);
+
+						// Add frame count for debugging
+						meta = pmt::pmt_dict_add(meta, pmt::mp("frame_number"), pmt::pmt_from_long(d_frame_count));
+
+						// create PDU
 						pmt::pmt_t msg = pmt::pmt_cons(meta, d_msg_buffer);
-
+						
+						// send PDU
 						message_port_pub(pmt::mp("out"), msg);
 
 						// reset buffer
@@ -441,6 +589,21 @@ int  ccsds_mpsk_ambiguity_resolver_f::general_work (int 		    /*noutput_items*/,
 
 					const float correlation = check_for_ASM(in_syms.get(), d_offset_bits);
 					
+					// increase counter, next time we will come here it will be a new potential frame
+					d_frame_count++;
+
+					#if CCSDS_AR_SOFT_VERBOSITY_LEVEL >= CCSDS_AR_SOFT_OUTPUT_DEBUG
+						fprintf(dbg_file_asms,"frame %6lu: ",d_frame_count);
+						for(unsigned int j=0;j<d_ASM_LEN_BITS;j++) {
+							fprintf(dbg_file_asms,"%+1.2f ",in_syms[d_offset_bits+j]);
+						}
+						fprintf(dbg_file_asms,"      ");
+						for(unsigned int j=0;j<d_ASM_LEN_BITS;j++) {
+							fprintf(dbg_file_asms,"%1u ",(in_syms[d_offset_bits+j]>0.0) ? 1:0);
+						}
+						fprintf(dbg_file_asms," %s correlation=%lf\n", (correlation > d_CORRELATION_THRESHOLD)?"checked":"not found", correlation);
+					#endif
+
 					// We have enough samples, lets check for the ASM
 					if(correlation > d_CORRELATION_THRESHOLD) {				
 						// ASM found
@@ -461,13 +624,14 @@ int  ccsds_mpsk_ambiguity_resolver_f::general_work (int 		    /*noutput_items*/,
 						// samples again
 
 						#if CCSDS_AR_SOFT_VERBOSITY_LEVEL >= CCSDS_AR_SOFT_OUTPUT_CHANGE
-							printf("AR: ASM lost at frame %lu => SEARCH\n",d_frame_count);
+							printf("AR: ASM lost after frame %lu => SEARCH\n",d_frame_count);
 						#endif
 
 						break;
 					}
 
 					// We are still locked
+
 
 					// consume ASM and set flag to fill the
 					// buffer
@@ -491,8 +655,12 @@ int  ccsds_mpsk_ambiguity_resolver_f::general_work (int 		    /*noutput_items*/,
 				d_count = 0;
 
 				break;
-		}
-	}
+
+		} // end switch(d_state)
+	} // end while(!abort)
+
+	// make sure we dont miss any tags
+	updateTags(this->nitems_read(0)+num_consumed);
 
 	//
 	//// Cleanup

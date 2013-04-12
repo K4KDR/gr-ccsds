@@ -5,7 +5,6 @@
 #include <gr_block.h>
 #include <ccsds_lpf2.h>
 #include <math.h>
-#include <gr_msg_queue.h>
 
 /*! \brief Number os samples the PLL has to wait after eception of an
  *	frequency_offset tag before another frequency correction is send out.
@@ -20,10 +19,8 @@ typedef boost::shared_ptr<ccsds_pll_cc> ccsds_pll_cc_sptr;
  *
  *  \param m Modulation order of the signal.
  *  \param loop_bandwidth Bandwidth of the loop filter.
- *  \param msgq Mesage queue to which frequency correction messages should be
- *	send.
  */
-CCSDS_API ccsds_pll_cc_sptr ccsds_make_pll_cc(unsigned int m, float loop_bandwidth, gr_msg_queue_sptr msgq);
+CCSDS_API ccsds_pll_cc_sptr ccsds_make_pll_cc(unsigned int m, float loop_bandwidth);
 
 /*! \brief Phase locked loop that sends frequency correction messages.
  *  \ingroup synchronization
@@ -38,28 +35,21 @@ CCSDS_API ccsds_pll_cc_sptr ccsds_make_pll_cc(unsigned int m, float loop_bandwid
  *  After reception of a frequency_offset tag the loop waits for another
  *  #PLL_FREQ_UPDATE samples before a new frequency correction message is send
  *  out to close the frequency feedback loop.
+ *
+ *  Frequency corrections are send out on the port "freq".
  */
 
 class CCSDS_API ccsds_pll_cc : public gr_block
 {
 private:
-	friend CCSDS_API ccsds_pll_cc_sptr ccsds_make_pll_cc(unsigned int m, float loop_bandwidth, gr_msg_queue_sptr msgq);
+	friend CCSDS_API ccsds_pll_cc_sptr ccsds_make_pll_cc(unsigned int m, float loop_bandwidth);
 
 	/*! \brief Constant buffer of two pi with float precision. */
 	static const double D_TWOPI;
 
 	/*! \brief Storage for modulation order. */
 	const unsigned int d_M;
-	
-	/*! \brief Shared pointer to frequency correction message queue.
-	 *
-	 *  \sa \ref page_lo_feedback
-	 *  \sa ccsds_lo_feedback.h
-	 *
-	 *  Shared pointer to the message queue where frequency corrections
-	 *  should be send to.
-	 */
-	gr_msg_queue_sptr d_msgq;
+
 
 	/*! \brief Indicator whether the loop has recently received a
 	 *	frequency_offset tag or not.
@@ -110,10 +100,8 @@ private:
 	 *
 	 *  \param m Modulation order.
 	 *  \param loop_bandwidth Bandwidth of the loop filter.
-	 *  \param msgq Mesage queue to which frequency correction messages should be
-	 *	send.
 	 */
-	ccsds_pll_cc(unsigned int m, float loop_bandwidth, gr_msg_queue_sptr msgq);   // private constructor
+	ccsds_pll_cc(unsigned int m, float loop_bandwidth);   // private constructor
 	
 	/*! \brief Remove phase modulation by taking the M-th power of the
 	 *	samples.
@@ -171,15 +159,16 @@ private:
 	 */
 	void check_lo_tags(const uint64_t from, const unsigned int num);
 
-	/*! \brief Send a frequency correction message to LO
+	/*! \brief Send a frequency correction message
 	 *
 	 *  \param est Per symbol phase increase (i.e. frequency) estimate in
-	 *	radians, that should be send to ccsds_pll_cc::d_msgq.
+	 *	radians are send out on port "freq" as double.
 	 *  \sa \ref page_lo_feedback
 	 *  \sa ccsds_lo_feedback.h
 	 *
-	 *  Sends given estimate \c est to mesage queue according to
+	 *  Sends given estimate \c est to output port "freq" according to
 	 *  \ref page_lo_feedback_msg
+	 *  \todo document new message passing type of frequency correction
 	 */
 	void send_freq_estimate(double est);
 

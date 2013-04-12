@@ -14,9 +14,6 @@
  *  \ingroup synchronization
  *
  *  \sa ccsds_mpsk_ambiguity_resolver_bb
- *
- *  \todo Continue searching if ASM matches with a few tolerable bit errors (but there might also be a better match at later ambiguities)
- *  \todo Document search algorithm
  */
 class ccsds_asm_operator {
 
@@ -76,19 +73,16 @@ public:
 		return d_ASM_SYM_LEN;
 	}
 
-	/*! \brief Checks if stream matches an ASM at given bit offset.
+	/*! \brief Checks if stream matches an ASM at given bit offset and
+	 *	return the number of bit errors found.
 	 *
 	 *  \param symbols Array of unpacked bytes to check ASM against. Must
 	 *	contain at least d_ASM_SYM_LEN elements.
 	 *  \param offset_bits Number of bits to ignore in the first symbol.
-	 *  \return \a true if stream is matching the ASM, \a false if not.
-	 *
-	 *  \sa d_BER_THRESHOLD
-	 *
-	 *  The stream is considered to match if \c d_BER_THRESHOLD or less bits
-	 *  differ.
+	 *  \return Hamming distance (number of bit positions that differ)
+	 *	between the symbols and the ASM.
 	 */
-	bool check_for_asm(const unsigned char* symbols, unsigned int offset_bits) {
+	unsigned int check_for_asm_hamming(const unsigned char* symbols, unsigned int offset_bits) {
 		#ifdef CCSDS_ASM_DEBUG
 			printf("++ check_for_asm in: ");
 			for(unsigned int i=0;i<std::ceil(d_ASM_LEN*8.0f/d_INFO_BITS_PER_SYMBOL);i++) {
@@ -149,17 +143,6 @@ public:
 				#endif
 			}
 		
-			// To much errors, this sequence is not the ASM
-			if(err_count > d_BER_THRESHOLD) {
-				#ifdef CCSDS_ASM_DEBUG
-					printf("\n abort with %u comparisons remaining\n",count);
-					printf("+++++++++++++++++++\n");
-				#endif
-
-				return false;
-			}
-		
-
 			s_bit++;
 			a_bit++;
 			count--;
@@ -174,14 +157,28 @@ public:
 		}
 
 		#ifdef CCSDS_ASM_DEBUG
+			printf("  Check complete with %u bit errors\n", err_count);
 			printf("+++++++++++++++++++\n");
 		#endif
 
-		//exit(0);
-		// we survived, so we must have received an ASM
-		return true;
+		return err_count;
 	}
 
+	/*! \brief Checks if stream matches an ASM at given bit offset.
+	 *
+	 *  \param symbols Array of unpacked bytes to check ASM against. Must
+	 *	contain at least d_ASM_SYM_LEN elements.
+	 *  \param offset_bits Number of bits to ignore in the first symbol.
+	 *  \return \a true if stream is matching the ASM, \a false if not.
+	 *
+	 *  \sa d_BER_THRESHOLD
+	 *
+	 *  The stream is considered to match if \c d_BER_THRESHOLD or less bits
+	 *  differ.
+	 */
+	bool check_for_asm(const unsigned char* symbols, unsigned int offset_bits) {
+		return (check_for_asm_hamming(symbols, offset_bits) <= d_BER_THRESHOLD);
+	}
 
 	/*! \brief Searches for ASM in the given stream.
 	 *
@@ -193,31 +190,39 @@ public:
 	 *  \param *offset_bits Pointer to an unsigned int where the offset bits between
 	 *	start of stream and the found ASM should be stored, if a match is found.
 	 *  \return \a true if ASM is found, \a false otherwise.
+	 *
+	 *  The match with the minimum Hamming distance is searched. If this
+	 *  minimum Hamming distance is less or equal the \c d_BER_THRESHOLD a
+	 *  match is found, otherwise no match is found and \c d_offset_bytes
+	 *  and \c d_offset_bits are set to zero.
+	 *
+	 *  In case there are two matches with the same Hamming distance the one
+	 *  with the lower byte offset or lower bit offset (in this priority) is
+	 *  chosen.
 	 */
 	bool search_asm(const unsigned char* stream, const unsigned int stream_len, unsigned int *offset_bytes, unsigned int *offset_bits) {
 		*offset_bytes = 0;
 		*offset_bits  = 0;
-
+		unsigned int min_hamming = d_BER_THRESHOLD+1; // To many bit errors
 		// check all possible byte offsets
 		for(unsigned int byte=0;byte<stream_len-d_ASM_SYM_LEN;byte++) {
 			// for a given byte offset, check all possible bit offsets
 			for(unsigned int bit=0;bit<d_INFO_BITS_PER_SYMBOL;bit++) {
 
+				const unsigned int hamming_dist = check_for_asm_hamming(&stream[byte], bit);
 				// Does the stream at this position match the ASM?			
-				if(check_for_asm(&stream[byte], bit)) {
+				if(hamming_dist < min_hamming && hamming_dist <= d_BER_THRESHOLD) {
 
-					// Match found, store position
+					// Better match found, store position
 					*offset_bytes = byte;
 					*offset_bits  = bit;
 
-					// ASM found, return
-					return true;
+					min_hamming = hamming_dist;
 				}
 			}
 		}
 
-		// No match found so far, return.
-		return false;
+		return (min_hamming <= d_BER_THRESHOLD);
 	}
 
 

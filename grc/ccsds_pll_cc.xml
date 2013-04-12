@@ -4,7 +4,7 @@
   <key>ccsds_pll_cc</key>
   <category>CCSDS/Receiver/Synchronization</category>
   <import>import ccsds</import>
-  <make>ccsds.pll_cc($M, $BL,$(id)_msgq_out)</make>
+  <make>ccsds.pll_cc($M, $BL)</make>
 	<param>
 		<name>M</name>
 		<key>M</key>
@@ -27,7 +27,8 @@
 	</source>
 	<source>
 		<name>freq</name>
-		<type>msg</type>
+		<type>message</type>
+		<optional>1</optional>
 	</source>
 	<doc>
 Phase locked loop for M-PSK symbols.

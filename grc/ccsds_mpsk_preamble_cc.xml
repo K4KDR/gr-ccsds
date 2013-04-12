@@ -4,20 +4,13 @@
 	<key>ccsds_mpsk_preamble_cc</key>
 	<category>CCSDS/Sender</category>
 	<import>import ccsds</import>
-	<make>ccsds.mpsk_preamble_cc($M,$num_syms)</make>
-	<param>
-		<name>Modulation order</name>
-		<key>M</key>
-		<value>4</value>
-		<type>int</type>
-	</param>
+	<make>ccsds.mpsk_preamble_cc($num_syms)</make>
 	<param>
 		<name>Number of Symbols</name>
 		<key>num_syms</key>
 		<value>50</value>
 		<type>int</type>
 	</param>
-	<check>$M >= 1</check>
 	<check>$num_syms >= 0</check>
 	<sink>
 		<name>in</name>
@@ -33,9 +26,6 @@ Add M-PSK Preamble
 Outputs num_syms preamble symbols, before the input stream is copied to the
 output stream. The preamble consists of alternating BPSK symbols (starting at
 1+0j) which are part of every M-PSK modulation alphabet.
-
-Modulation order: Number of symbols in the constellation. If M=4 i.e. QPSK the
-preamble symbols are rotated by 45 degree.
 
 Number of Symbols: Number of preamble symbols that are generated. If this value
 is set to zero this block does nothing at all.

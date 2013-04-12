@@ -61,7 +61,8 @@ private:
 
 	/*! \brief workarround to ensure we only start transmitting, when the
 	 *	flowgraph is started.
-	 * \todo remove workarround
+	 * \todo Remove this workarround as soon as GNURadio has a method to
+	 *      signal the start of a flowgraph for asynchronous sources.
 	 */
 	asynchronous_start d_astart;
 

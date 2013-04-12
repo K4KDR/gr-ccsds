@@ -40,8 +40,8 @@ class qa_ccsds_conv_decode27(gr_unittest.TestCase):
 		return '0x%02X' % (dec)
 
     	def runExperiment(self, messages_in, messages_out_exp,poly1=0x79,poly2=0xDB,punct=ccsds_swig.NONE,ASM='1ACFFC1D'):
-		#print 'Blocked waiting for GDB attach (pid = %d)' % (os.getpid(),)
-		#raw_input ('Press Enter to continue: ')
+		print 'Blocked waiting for GDB attach (pid = %d)' % (os.getpid(),)
+		raw_input ('Press Enter to continue: ')
 
 
 		##################################################
@@ -123,8 +123,8 @@ class qa_ccsds_conv_decode27(gr_unittest.TestCase):
 		##################################################
 		self.M = M = 2
 		self.ldM = ldM = int(math.log(M)/math.log(2))
-		self.frame_len_byte = frame_len_byte = 8 #FIXME 210 if it should work for all puncturings
-		self.num_frames = num_frames = 1
+		self.frame_len_byte = frame_len_byte = 1115 #FIXME 210 if it should work for all puncturings
+		self.num_frames = num_frames = 12
 
 		data_in = []
 		data_out = []
@@ -232,7 +232,7 @@ class qa_ccsds_conv_decode27(gr_unittest.TestCase):
 	# Rate 1/2
 	##################################################
 
-	#'''
+	'''
 	def test_1block_r12(self) :
 		messages_in = [  [  	 1.0,-1.0,-1.0, 1.0,-1.0, 1.0, 1.0,-1.0,  -1.0,-1.0,-1.0, 1.0, 1.0, 1.0, 1.0, 1.0,   # 0xCA (with dependency on end of ASM (0x1D)
 					 1.0,-1.0, 1.0, 1.0, 1.0,-1.0,-1.0,-1.0,  -1.0, 1.0,-1.0,-1.0, 1.0, 1.0,-1.0,-1.0,   # 0x0F
@@ -244,7 +244,7 @@ class qa_ccsds_conv_decode27(gr_unittest.TestCase):
 		self.runExperiment(messages_in, messages_out_exp)
 	#'''
 
-	#'''
+	'''
 	def test_1block_r12_ber(self) :
 		messages_in = [  [  	 1.0,-1.0,-1.0, 1.0,-1.0, 1.0, 1.0,-1.0,  -1.0,-1.0,-1.0, 1.0, 1.0, 1.0, 1.0, 1.0,   # 0xCA (with dependency on end of ASM (0x1D)
 					 1.0,-1.0, 1.0, 1.0, 1.0,-1.0,-1.0,-1.0,  -1.0, 1.0,-1.0,-1.0, 1.0, 1.0,-1.0,-1.0,   # 0x0F
@@ -257,7 +257,7 @@ class qa_ccsds_conv_decode27(gr_unittest.TestCase):
 		self.runExperiment(messages_in, messages_out_exp)
 	#'''
 
-	#'''
+	'''
 	def test_1block_r12_c2noinvert(self) :
 		messages_in = [  [	 1.0, 1.0,-1.0,-1.0,-1.0,-1.0, 1.0, 1.0,   -1.0, 1.0,-1.0,-1.0, 1.0,-1.0, 1.0,-1.0,   # 0xCS (with dependency on end of ASM (0x1D)
 					 1.0, 1.0, 1.0,-1.0, 1.0, 1.0,-1.0, 1.0,   -1.0,-1.0,-1.0, 1.0, 1.0,-1.0,-1.0, 1.0,   # 0x0F
@@ -269,7 +269,7 @@ class qa_ccsds_conv_decode27(gr_unittest.TestCase):
 		self.runExperiment(messages_in, messages_out_exp,poly1=0x79,poly2=0x5B,punct=ccsds_swig.NONE)
 	#'''
 
-	#'''
+	'''
 	def test_1block_r12_c2noinvert_ber(self) :
 		messages_in = [  [	 1.0, 1.0,-1.0,-1.0,-1.0,-1.0, 1.0, 1.0,   -1.0, 1.0,-1.0,-1.0, 1.0,-1.0, 1.0,-1.0,   # 0xCS (with dependency on end of ASM (0x1D)
 					 1.0, 1.0, 1.0,-1.0, 1.0, 1.0,-1.0, 1.0,   -1.0,-1.0,-1.0, 1.0, 1.0,-1.0,-1.0, 1.0,   # 0x0F
@@ -286,7 +286,7 @@ class qa_ccsds_conv_decode27(gr_unittest.TestCase):
 	# Rate 2/3
 	##################################################
 
-	#'''
+	'''
 	def test_1block_r23(self) :
 		messages_in = [  [	 1.0, 1.0,     -1.0,-1.0,-1.0,      1.0,   -1.0, 1.0,     -1.0, 1.0,-1.0,     -1.0,   # 0xCS (with dependency on end of ASM (0x1D)
 					 1.0, 1.0,     -1.0, 1.0, 1.0,      1.0,   -1.0,-1.0,      1.0, 1.0,-1.0,      1.0,   # 0x0F
@@ -298,7 +298,7 @@ class qa_ccsds_conv_decode27(gr_unittest.TestCase):
 		self.runExperiment(messages_in, messages_out_exp,poly1=0x79,poly2=0x5B,punct=ccsds_swig.ECSS_23)
 	#'''
 
-	#'''
+	'''
 	def test_1block_r23_ber(self) :
 		messages_in = [  [	 1.0, 1.0,     -1.0,-1.0,-1.0,      1.0,   -1.0, 1.0,     -1.0, 1.0,-1.0,     -1.0,   # 0xCS (with dependency on end of ASM (0x1D)
 					 1.0, 1.0,     -1.0, 1.0, 1.0,      1.0,   -1.0,-1.0,      1.0, 1.0,-1.0,      1.0,   # 0x0F
@@ -316,7 +316,7 @@ class qa_ccsds_conv_decode27(gr_unittest.TestCase):
 	# Rate 3/4
 	##################################################
 
-	#'''
+	'''
 	def test_1block_r34(self) :
 		messages_in = [  [	 1.0, 1.0,     -1.0,-1.0,      1.0, 1.0,         1.0,-1.0,      1.0,-1.0,     -1.0,   # 0xCS (with dependency on end of ASM (0x1D)
 					 1.0,      1.0,-1.0,      1.0,-1.0,        -1.0,-1.0,      1.0, 1.0,     -1.0, 1.0,   # 0x0F
@@ -328,7 +328,7 @@ class qa_ccsds_conv_decode27(gr_unittest.TestCase):
 		self.runExperiment(messages_in, messages_out_exp,poly1=0x79,poly2=0x5B,punct=ccsds_swig.ECSS_34)
 	#'''
 
-	#'''
+	'''
 	def test_1block_r34_ber(self) :
 		messages_in = [  [	 1.0, 1.0,     -1.0,-1.0,      1.0, 1.0,         1.0,-1.0,      1.0,-1.0,     -1.0,   # 0xCS (with dependency on end of ASM (0x1D)
 					 1.0,      1.0,-1.0,      1.0,-1.0,        -1.0,-1.0,      1.0, 1.0,     -1.0, 1.0,   # 0x0F
@@ -346,7 +346,7 @@ class qa_ccsds_conv_decode27(gr_unittest.TestCase):
 	# Rate 5/6
 	##################################################
 
-	#'''
+	'''
 	def test_1block_r56(self) :
 		messages_in = [  [	 1.0, 1.0,     -1.0,-1.0,           1.0,   -1.0,     -1.0,-1.0,     -1.0, 1.0,        # 0xCS (with dependency on end of ASM (0x1D)
 					      1.0, 1.0,      1.0, 1.0,      1.0,   -1.0,           1.0, 1.0,     -1.0, 1.0,   # 0x0F
@@ -358,7 +358,7 @@ class qa_ccsds_conv_decode27(gr_unittest.TestCase):
 		self.runExperiment(messages_in, messages_out_exp,poly1=0x79,poly2=0x5B,punct=ccsds_swig.ECSS_56)
 	#'''
 
-	#'''
+	'''
 	def test_1block_r56_ber(self) :
 		messages_in = [  [	 1.0, 1.0,     -1.0,-1.0,           1.0,   -1.0,     -1.0,-1.0,     -1.0, 1.0,        # 0xCS (with dependency on end of ASM (0x1D)
 					      1.0, 1.0,      1.0, 1.0,      1.0,   -1.0,           1.0, 1.0,     -1.0, 1.0,   # 0x0F
@@ -375,7 +375,7 @@ class qa_ccsds_conv_decode27(gr_unittest.TestCase):
 	# Rate 7/8
 	##################################################
 
-	#'''
+	'''
 	def test_1block_r78(self) :
 		messages_in = [  [	 1.0, 1.0,     -1.0,     -1.0,      1.0,   -1.0,          -1.0, 1.0,      1.0,-1.0,   # 0xCS (with dependency on end of ASM (0x1D)
 					      1.0,     -1.0,      1.0,-1.0,             -1.0,-1.0,      1.0,-1.0,      1.0,   # 0x0F
@@ -387,7 +387,7 @@ class qa_ccsds_conv_decode27(gr_unittest.TestCase):
 		self.runExperiment(messages_in, messages_out_exp,poly1=0x79,poly2=0x5B,punct=ccsds_swig.ECSS_78)
 	#'''
 
-	#'''
+	'''
 	def test_1block_r78_ber(self) :
 		messages_in = [  [	 1.0, 1.0,     -1.0,     -1.0,      1.0,   -1.0,          -1.0, 1.0,      1.0,-1.0,   # 0xCS (with dependency on end of ASM (0x1D)
 					      1.0,     -1.0,      1.0,-1.0,             -1.0,-1.0,      1.0,-1.0,      1.0,   # 0x0F
@@ -410,7 +410,7 @@ class qa_ccsds_conv_decode27(gr_unittest.TestCase):
 		self.runChainExperiment(poly1=0x79,poly2=0xDB,punct=ccsds_swig.NONE)
 	#'''
 
-	#'''
+	'''
 	def test_chain_r23(self) :
 		self.runChainExperiment(poly1=0x79,poly2=0x5B,punct=ccsds_swig.ECSS_23)
 	#'''

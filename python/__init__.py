@@ -19,8 +19,11 @@
 # The presence of this file turns this directory into a Python package
 
 '''
-This is the GNU Radio CCSDS module. Place your Python package
-description here (python/__init__.py).
+This package provides signal processing blocks used for sending and receiving
+signals conforming to the Standards by the Consultative Committee for Space Data
+Systems (CCSDS).
+
+It's documentation is done in doxygen and is installed under $PREFIX/doc/gr-ccsds
 '''
 
 # ----------------------------------------------------------------

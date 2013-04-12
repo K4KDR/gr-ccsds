@@ -41,7 +41,6 @@
 #include "ccsds_blob_msg_source_b.h"
 #include "ccsds_blob_msg_sink_b.h"
 #include "ccsds_ticp_frame_source.h"
-#include "ccsds_ticp_frame_source_b.h"
 #include "ccsds_ticp_frame_sink.h"
 %}
 
@@ -107,9 +106,6 @@ GR_SWIG_BLOCK_MAGIC(ccsds,blob_msg_sink_b);
 
 GR_SWIG_BLOCK_MAGIC(ccsds,ticp_frame_source);
 %include "ccsds_ticp_frame_source.h"
-
-GR_SWIG_BLOCK_MAGIC(ccsds,ticp_frame_source_b);
-%include "ccsds_ticp_frame_source_b.h"
 
 GR_SWIG_BLOCK_MAGIC(ccsds,ticp_frame_sink);
 %include "ccsds_ticp_frame_sink.h"

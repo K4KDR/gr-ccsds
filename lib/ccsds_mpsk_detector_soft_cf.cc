@@ -77,7 +77,7 @@ int  ccsds_mpsk_detector_soft_cf::work (int                 noutput_items,
 		return 0;
 	}
 
-	if(!is_unaligned()) {
+	if(!is_unaligned() && false) {
 		// input is aligned, use aligned call directly
 		volk_32fc_s32f_atan2_32f_a(tmp_angle, in, 1.0f, num_in);
 

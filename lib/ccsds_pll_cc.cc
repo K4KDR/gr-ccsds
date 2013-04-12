@@ -12,26 +12,25 @@
 #include <complex>
 #include <cstdlib>
 #include <fftw3.h>
-#include <gr_msg_queue.h>
-#include <gr_message.h>
 
-// #define PLL_DEBUG
+//#define PLL_DEBUG
 
-ccsds_pll_cc_sptr ccsds_make_pll_cc(unsigned int m, float loop_bandwidth, gr_msg_queue_sptr msgq) {
-    return ccsds_pll_cc_sptr (new ccsds_pll_cc(m, loop_bandwidth, msgq) );
+ccsds_pll_cc_sptr ccsds_make_pll_cc(unsigned int m, float loop_bandwidth) {
+    return ccsds_pll_cc_sptr (new ccsds_pll_cc(m, loop_bandwidth) );
 }
 
-ccsds_pll_cc::ccsds_pll_cc (unsigned int m, float loop_bandwidth, gr_msg_queue_sptr msgq)
+ccsds_pll_cc::ccsds_pll_cc (unsigned int m, float loop_bandwidth)
   : gr_block ("ccsds_pll_cc",
 	gr_make_io_signature (1, 1, sizeof (gr_complex)),
 	//gr_make_io_signature3 (1, 3, sizeof (gr_complex), sizeof (float), sizeof (float)))
-	gr_make_io_signature (1, 1, sizeof (gr_complex))), d_M(m), d_msgq(msgq)
+	gr_make_io_signature (1, 1, sizeof (gr_complex))), d_M(m)
 {
 	const int alignment_multiple = volk_get_alignment() / sizeof(gr_complex);
 	set_alignment(std::max(1, alignment_multiple));
 
 	d_filter = ccsds_make_lpf2(loop_bandwidth, 0.5, 1.0);
 
+	message_port_register_out(pmt::pmt_intern("freq"));
 
 	d_lo_msg_tag = false;
 	d_lo_msg_offset = 0;
@@ -44,8 +43,8 @@ ccsds_pll_cc::ccsds_pll_cc (unsigned int m, float loop_bandwidth, gr_msg_queue_s
 		dbg_count    = 0;
 		dbg_count_lo = 0;
 
-		dbg_file = fopen("debug_pll.dat","w");
-		dbg_file_lo = fopen("debug_pll_lo.dat","w");
+		dbg_file = fopen("/tmp/ccsds_pll_debug.dat","w");
+		dbg_file_lo = fopen("/tmp/ccsds_pll_debug_lo.dat","w");
 		if(dbg_file == NULL || dbg_file_lo == NULL) {
 			fprintf(stderr,"ERROR PLL: can not open debug file\n");
 			exit(EXIT_FAILURE);
@@ -129,24 +128,10 @@ void ccsds_pll_cc::check_lo_tags(const uint64_t from, const unsigned int num) {
 }
 
 void ccsds_pll_cc::send_freq_estimate(double est) {
-	// frequency message with the following values (arbitrary chosen)
-	// type = (long) MSG_FREQ_TYPE (defined in ccsds.h)
-	// arg1 = (float) requested phase_incr per symbol
-	// arg2 = (float) MSG_FREQ_ARG2 (defined in ccsds.h)
-	// length = 0 (we just pass the arguments)
-
-	// make sure there is space in the queue
-	if(d_msgq->full_p()) {
-		// just delete one, so in case of race conditions there are
-		// still some older messages arround (but any message in the
-		// queue is still newer than the information the LO has.
-		d_msgq->delete_head_nowait();
-		//FIXME add increase to current estimate
-	}
+	pmt::pmt_t freq = pmt::pmt_from_double(est);
 
 	// now put the new message in the queue
-	d_msgq->handle(gr_make_message(MSG_FREQ_TYPE, est, MSG_FREQ_ARG2, 0));
-
+	message_port_pub(pmt::pmt_intern("freq"), freq);
 	return;
 }
 

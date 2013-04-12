@@ -81,7 +81,7 @@ void ccsds_rs_decode::process_frame(pmt::pmt_t msg_in) {
 		return;
 	}
 
-	#if CCSDS_RS_DECODE_VERBOSITY_LEVEL >= CCSDS_RS_DECODE_OUTPUT_FRAMEINFO
+	#if CCSDS_RS_DECODE_VERBOSITY_LEVEL >= CCSDS_RS_DECODE_OUTPUT_FRAMEERR
 		const unsigned long frame_number = pmt::pmt_to_long(pmt::pmt_dict_ref(hdr, pmt::mp("frame_number"), pmt::pmt_from_long(0)));
 	#endif
 
@@ -116,13 +116,15 @@ void ccsds_rs_decode::process_frame(pmt::pmt_t msg_in) {
 		int ret = decode_rs_ccsds(&d_buf_in[i*(d_k+d_2E)], NULL, 0, 0);
 		if(ret < 0) {
 			// unable to decode, drop this codeblock
-			#if CCSDS_RS_DECODE_VERBOSITY_LEVEL >= CCSDS_RS_DECODE_OUTPUT_FRAMEINFO
+			#if CCSDS_RS_DECODE_VERBOSITY_LEVEL >= CCSDS_RS_DECODE_OUTPUT_FRAMEERR
 				printf("Invalid RS codeblock, dropping frame number %lu\n",frame_number);
 			#endif
 			return;
 		} else {
 			#if CCSDS_RS_DECODE_VERBOSITY_LEVEL >= CCSDS_RS_DECODE_OUTPUT_FRAMEINFO
-				printf("Corrected %d symbols in frame number %lu\n",ret, frame_number);
+				if(ret > 0) {
+					printf("Corrected %d symbols in frame number %lu\n",ret, frame_number);
+				}
 			#endif
 
 			// copy to data buffer (without parity) for an easier

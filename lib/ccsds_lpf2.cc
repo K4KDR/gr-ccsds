@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <cmath>
 
-// #define LPF2_DEBUG
+//#define LPF2_DEBUG
 
 /** 	help function for newton algorithm to determine the loop parameters.
 
@@ -61,9 +61,9 @@ lpf2::lpf2(double  gamma, double  rho) : RHO(rho), GAMMA(gamma), RHOB(1.0 + rho)
 	d_ephi=0.0;
 
 	#ifdef LPF2_DEBUG
-		debugFile = fopen("debug_lpf2.csv","w");
+		debugFile = fopen("/tmp/ccsds_lpf2_debug.dat","w");
 		debug_count = 0;
-		fprintf(debugFile,"#n,in,PHI,XI,EPHI\n");
+		fprintf(debugFile,"#n,in,PHI,XI,EPHI,wrap_max\n");
 	#endif
 }
 
@@ -89,7 +89,7 @@ double lpf2::filter_step(float in) {
 
 	#ifdef LPF2_DEBUG
 		debug_count++;
-		fprintf(debugFile,"%u,%2.10f,%2.10f,%2.10f,%2.10f\n",debug_count,in,d_phi,d_xi,new_ephi);
+		fprintf(debugFile,"%u,%2.10f,%2.10f,%2.10f,%2.10f,0.0\n",debug_count,in,d_phi,d_xi,new_ephi);
 	#endif
 	
 	/*	
@@ -122,7 +122,8 @@ double lpf2::filter_step_wrapped(float in, const float wrap_max) {
 	
 	double ephi = wrap(in-d_phi,wrap_max);
 
-	d_xi  += GAMMA * wrap(RHOB*ephi - d_ephi, wrap_max);
+	d_xi += GAMMA * wrap(RHOB*ephi - d_ephi, wrap_max);
+	d_xi  = wrap(d_xi, wrap_max);
 	double ret = d_phi;
 	d_phi = wrap(d_phi + d_xi, M_PI);
 
@@ -130,7 +131,7 @@ double lpf2::filter_step_wrapped(float in, const float wrap_max) {
 
 	#ifdef LPF2_DEBUG
 		debug_count++;
-		fprintf(debugFile,"%u,%2.10f,%2.10f,%2.10f,%2.10f,%2.10f\n",debug_count,in/M_PI,ret/M_PI,d_xi/M_PI,freq/M_PI,ephi/M_PI);
+		fprintf(debugFile,"%u,%2.10f,%2.10f,%2.10f,%2.10f,%2.10f\n",debug_count,in/M_PI,ret/M_PI,d_xi/M_PI,ephi/M_PI,wrap_max/M_PI);
 	#endif
 	
 	return ret;

@@ -1,17 +1,20 @@
-/*! \page page_mpsk_sender M-PSK sender chain
+/*! \page page_mpsk_sender M-PSK modulation chain
 
 \section page_mpsk_sender_introduction Introduction
 This pages describes a general purpose M-PSK sender which can be used to
-transmitt arbitrary M-PSK signals.
+transmitt arbitrary M-PSK signals. This block is available as GRC block in
+\a apps/blocks/mpsk_mod.grc
 
 This block takes an input stream of packed data bytes and outputs complex M-PSK
-samples at sampling rate.
+samples at sampling rate including an optional alternating BPSK preamble to
+allow the receiver to sync with this sender before sending the real M-PSK
+data symbols.
 
 \section page_mpsk_sender_setup Setup
-The Figure below shows the GRC blocks of this M-PSK sender. It's parameters and
-blocks are described in the next Sections.
+The Figure below shows the GRC block of this M-PSK modulation chain. It's
+parameters and individual blocks are described in the next Sections.
 
-\image html mpsk_mod.png "Setup of the M-PSK sender of this package"
+\image html mpsk_mod.png "Setup of the M-PSK modulation chain of this package"
 
 \section page_mpsk_sender_parameters Parameters
 
@@ -23,10 +26,15 @@ The Modulation order of the signal. Must be a power of two.
 
 \subsection page_mpsk_sender_osf osf
 Oversampling factor, or samples per symbol. The sender block performs an
-upsampling by this factor. Oversampling must be at least two.
+upsampling by this factor. Oversampling must be at least two for most receivers
+to enable syncrhonization.
 
 \subsection page_mpsk_sender_alpha alpha
-Rollof factor from the TX factor.
+Rollof factor from the TX filter, if the root raised cosine filter is used.
+
+\subsection page_mpsk_sender_preamble_len preamble_len
+Length of the optional BPSK preamble in symbols. If length is zero, no preamble
+is send.
 
 \subsection page_mpsk_sender_sym_rate sym_rate
 Symbol rate of the outgoing signal given by \c samp_rate / \c osf.
@@ -42,15 +50,32 @@ information bits in each output byte. The \c ldM bits containing the MSB are
 taken first, the ones containing the LSB are taken last. The standardt GNURadio
 Packed to Unpacked block is used.
 
-\subsection page_mpsk_sender_mod Modulator
+\subsection page_mpsk_sender_mod M-PSK Modulator
 The incomming unpacked bytes containing \c ldM information bits each are
 transformed into complex baseband symbols. Implemented in \ref ccsds_mpsk_mod_bc.
+
+\subsection page_mpsk_sender_add_preamble Preamble
+Add \c preamble_len alternating BPSK symbols, before copying the input stream to
+the output stream. Implemented in \ref ccsds_mpsk_preamble_cc.
 
 \subsection page_mpsk_sender_filter TX filter
 The TX filter limits the bandwidth of the send signal and performs the
 oversampling by a factor of \c osf. The concatenation of this filter and the RX
-filter should fulfill the first Nyquist criterion. A standard GRC RRC filter
-implementation is used.
-\todo Use a brick wall interpolation filter instead of a RRC if no TX filter
-should used.
+filter should fulfill the first Nyquist criterion. The simplest TX filter is a
+rectangular filter, leaving all the filtering to the receiver. The most common
+solution is to split the filters into equal halves at sending and receiving side
+and thus using a root raised cosine (RRC) filter at both sides.
+
+These two options are predefined in the block and by default the RRC filter is
+used. The rectangular filter can be used by enabling the Low Pass Filter and
+disabling the Root Raised Cosine Filter.
+
+\todo In the future this block should be able to switch between the two filters
+and leaving the GRC definition untouched.
+\subsubsection page_mpsk_sender_filter_rrc Root Raised Cosine Filter
+A standard GRC RRC filter implementation is used.
+
+\subsubsection page_mpsk_sender_filter_rect Rectangle Lowpass Interpolation Filter
+A standard GRC filter implementation is used.
+
 */

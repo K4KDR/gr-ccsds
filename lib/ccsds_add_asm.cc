@@ -93,6 +93,5 @@ void ccsds_add_asm::process_frame(pmt::pmt_t msg_in) {
 }
 
 int ccsds_add_asm::work(int /*noutput_items*/, gr_vector_const_void_star& /*input_items*/, gr_vector_void_star& /*output_items*/) {
-	printf("ADD ASM work\n");
 	return (d_stop ? -1 : 0);
 }
