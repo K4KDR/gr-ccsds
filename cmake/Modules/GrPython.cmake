@@ -36,11 +36,11 @@ if(PYTHON_EXECUTABLE)
 else(PYTHON_EXECUTABLE)
 
     #use the built-in find script
-    find_package(PythonInterp)
+    find_package(PythonInterp 2)
 
     #and if that fails use the find program routine
     if(NOT PYTHONINTERP_FOUND)
-        find_program(PYTHON_EXECUTABLE NAMES python python2.7 python2.6 python2.5)
+        find_program(PYTHON_EXECUTABLE NAMES python python2 python2.7 python2.6 python2.5)
         if(PYTHON_EXECUTABLE)
             set(PYTHONINTERP_FOUND TRUE)
         endif(PYTHON_EXECUTABLE)
@@ -97,7 +97,7 @@ endmacro(GR_PYTHON_CHECK_MODULE)
 ########################################################################
 execute_process(COMMAND ${PYTHON_EXECUTABLE} -c "
 from distutils import sysconfig
-print sysconfig.get_python_lib(plat_specific=True, prefix='')
+print (sysconfig.get_python_lib(plat_specific=True, prefix=''))
 " OUTPUT_VARIABLE GR_PYTHON_DIR OUTPUT_STRIP_TRAILING_WHITESPACE
 )
 file(TO_CMAKE_PATH ${GR_PYTHON_DIR} GR_PYTHON_DIR)
