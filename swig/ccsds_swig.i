@@ -131,41 +131,6 @@ GR_SWIG_BLOCK_MAGIC(ccsds,sym_to_softbits_bf);
 GR_SWIG_BLOCK_MAGIC(ccsds,sym_to_softbits_bb);
 %include "ccsds_sym_to_softbits_bb.h"
 
-
-
-
-//GR_SWIG_BLOCK_MAGIC(ccsds,conv_encode);
-%include <numpy.i>
-// %init %{
-// import_array();
-// %}
-// %apply (int* IN_ARRAY1, int DIM1) {(int* polys, int rate)};
-// %typemap(in) (const int rate, int *polys) {
-  // int i;
-  // if (!PyList_Check($input)) {
-    // PyErr_SetString(PyExc_ValueError, "Expecting a list");
-    // return NULL;
-  // }
-  // $1 = PyList_Size($input);
-  // $2 = (int *) malloc(($1)*sizeof(int));
-  // for (i = 0; i < $1; i++) {
-    // PyObject *s = PyList_GetItem($input,i);
-    // if (!PyInt_Check(s)) {
-        // free($2);
-        // PyErr_SetString(PyExc_ValueError, "List items must be integers");
-        // return NULL;
-    // }
-    // $2[i] = PyInt_AsLong(s);
-  // }
-// }
-
-// %typemap(freearg) (const int rate, int *polys) {
-   // if ($2) free($2);
-// }
-
-%include "ccsds_conv_encode.h"
-
-
 GR_SWIG_BLOCK_MAGIC(ccsds,framer_sink_dual);
 %include "ccsds_framer_sink_dual.h"
 
