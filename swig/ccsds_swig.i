@@ -40,6 +40,7 @@
 #include "ccsds_msg_null_src.h"
 #include "ccsds_blob_msg_source_b.h"
 #include "ccsds_blob_msg_sink_b.h"
+#include "ccsds_trunk_tail.h"
 #include "ccsds_ticp_frame_source.h"
 #include "ccsds_ticp_frame_sink.h"
 %}
@@ -91,6 +92,9 @@ GR_SWIG_BLOCK_MAGIC(ccsds,frame_sync_b);
 
 GR_SWIG_BLOCK_MAGIC(ccsds,add_asm);
 %include "ccsds_add_asm.h"
+
+GR_SWIG_BLOCK_MAGIC(ccsds,trunk_tail);
+%include "ccsds_trunk_tail.h"
 
 GR_SWIG_BLOCK_MAGIC(ccsds,msg_copy);
 %include "ccsds_msg_copy.h"

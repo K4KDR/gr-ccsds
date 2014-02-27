@@ -54,6 +54,7 @@ add_library(gnuradio-ccsds SHARED
 	ccsds_softbits_msg_to_bytes_b.cc
 	ccsds_blob_msg_source_b.cc
 	ccsds_blob_msg_sink_b.cc
+	ccsds_trunk_tail.cc
 	ccsds_ticp_frame_source.cc
 	ccsds_ticp_frame_sink.cc
 	asynchronous_start.cc)

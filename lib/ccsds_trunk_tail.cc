@@ -58,18 +58,19 @@ void ccsds_trunk_tail::process_frame(pmt::pmt_t msg_in) {
 	}
 
 	// check that input data is a blob
-	if(!pmt::pmt_is_blob(msg)) {
-		fprintf(stderr,"WARNING TRUNK TAIL: expecting message data of type blob, skipping.\n");
+	if(!pmt::pmt_is_f32vector(msg)) {
+		fprintf(stderr,"WARNING TRUNK TAIL: expecting message data of type f32vector, skipping.\n");
 		return;
+	}
+	
+	pmt::pmt_t msg_out_data = pmt::pmt_make_f32vector(d_FRAME_LEN-d_TRUNK_LEN, 0.0f);
+	
+	for(size_t i=0;i<d_FRAME_LEN-d_TRUNK_LEN;i++) {
+		pmt::pmt_f32vector_set(msg_out_data, i, pmt::pmt_f32vector_ref(msg, i));
 	}
 
 	// TODO Check frame length
 	
-	// Message is BLOB
-	const unsigned char *data_in = (const unsigned char *) pmt::pmt_blob_data(msg);
-
-	pmt::pmt_t msg_out_data = pmt::pmt_make_blob(data_in, d_FRAME_LEN-d_TRUNK_LEN);
-
 	// Construct the new message using the received header
 	pmt::pmt_t msg_out = pmt::pmt_cons(hdr, msg_out_data);
 

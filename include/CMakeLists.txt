@@ -55,6 +55,7 @@ install(FILES
 	ccsds_softbits_msg_to_bytes_b.h
 	ccsds_blob_msg_source_b.h
 	ccsds_blob_msg_sink_b.h
+	ccsds_trunk_tail.h
 	ccsds_ticp_frame_source.h
 	ccsds_ticp_frame_sink.h
 	ccsds_crc16.h

@@ -2,7 +2,7 @@
 <block>
   <name>Trunk Tail (CCSDS)</name>
   <key>ccsds_trunk_tail</key>
-  <category>CCSDS/Sender</category>
+  <category>CCSDS/Misc</category>
   <import>import ccsds</import>
   <make>ccsds.trunk_tail($tail_len,$frame_len)</make>
 	<param>
