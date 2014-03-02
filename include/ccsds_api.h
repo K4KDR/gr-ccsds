@@ -22,7 +22,7 @@
 #ifndef INCLUDED_CCSDS_API_H
 #define INCLUDED_CCSDS_API_H
 
-#include <gruel/attributes.h>
+#include <gnuradio/attributes.h>
 
 #ifdef gnuradio_ccsds_EXPORTS
 #  define CCSDS_API __GR_ATTR_EXPORT
