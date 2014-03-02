@@ -58,8 +58,8 @@ add_library(gnuradio-ccsds SHARED
 	ccsds_ticp_frame_source.cc
 	ccsds_ticp_frame_sink.cc
 	asynchronous_start.cc)
-#target_link_libraries(gnuradio-ccsds ${Boost_LIBRARIES} ${GRUEL_LIBRARIES} ${GNURADIO_CORE_LIBRARIES} fftw3 ticp /usr/local/lib/libfec.a)
-target_link_libraries(gnuradio-ccsds ${Boost_LIBRARIES} ${GRUEL_LIBRARIES} ${GNURADIO_CORE_LIBRARIES} fftw3 ticp fec)
+#target_link_libraries(gnuradio-ccsds ${Boost_LIBRARIES}  ${GNURADIO_RUNTIME_LIBRARIES} fftw3 ticp /usr/local/lib/libfec.a)
+target_link_libraries(gnuradio-ccsds ${Boost_LIBRARIES} ${GNURADIO_RUNTIME_LIBRARIES} fftw3 ticp fec)
 set_target_properties(gnuradio-ccsds PROPERTIES DEFINE_SYMBOL "gnuradio_ccsds_EXPORTS")
 
 ########################################################################
