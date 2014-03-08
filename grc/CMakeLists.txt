@@ -17,36 +17,24 @@
 # the Free Software Foundation, Inc., 51 Franklin Street,
 # Boston, MA 02110-1301, USA.
 install(FILES
-	ccsds_randomiser_bb.xml
 	ccsds_randomiser.xml
 	ccsds_viterbi27_bb.xml
 	ccsds_conv_encode27_bb.xml
 	ccsds_conv_decode27.xml
-	ccsds_sym_to_softbits_bf.xml
 	ccsds_rs_encode.xml
 	ccsds_rs_decode.xml
-	ccsds_rs_decode_bb.xml
-	ccsds_framer_sink_dual.xml
-	ccsds_local_oscillator_cc.xml
-	ccsds_fll_cc.xml
 	ccsds_pll_cc.xml
 	ccsds_dll_cc.xml
-	ccsds_mpsk_ambiguity_resolver_bb.xml
 	ccsds_mpsk_ambiguity_resolver_f.xml
 	ccsds_mpsk_mod_bc.xml
-	ccsds_mpsk_demod_cb.xml
-	ccsds_mpsk_demod2_cb.xml
 	ccsds_mpsk_detector_soft_cf.xml
 	ccsds_mpsk_preamble_cc.xml
-	ccsds_frame_sync_b.xml
 	ccsds_softbits_msg_to_bytes_b.xml
-	ccsds_msg_copy.xml
 	ccsds_msg_null_src.xml
 	ccsds_add_asm.xml
 	ccsds_blob_msg_source_b.xml
 	ccsds_blob_msg_sink_b.xml
 	ccsds_trunk_tail.xml
 	ccsds_ticp_frame_source.xml
-	ccsds_ticp_frame_sink.xml
-	ccsds_rs_decode_bb.xml DESTINATION share/gnuradio/grc/blocks
+	ccsds_ticp_frame_sink.xml DESTINATION share/gnuradio/grc/blocks
 )
