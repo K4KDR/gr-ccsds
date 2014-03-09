@@ -20,7 +20,7 @@
 ########################################################################
 include(GrPlatform) #define LIB_SUFFIX
 add_library(gnuradio-ccsds SHARED
-	ccsds_randomiser.cc
+	randomiser_impl.cc
 	ccsds_conv_encode27_bb.cc
 	ccsds_conv_encode27_aux.cc
 	ccsds_conv_decode27.cc
