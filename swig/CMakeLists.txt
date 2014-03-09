@@ -55,7 +55,6 @@ GR_SWIG_INSTALL(TARGETS ccsds_swig DESTINATION ${GR_PYTHON_DIR}/ccsds)
 install(
     FILES
     ccsds_swig.i
-    ccsds_crc16.i
     ${CMAKE_CURRENT_BINARY_DIR}/ccsds_swig_doc.i
     DESTINATION ${GR_INCLUDE_DIR}/ccsds/swig
 )

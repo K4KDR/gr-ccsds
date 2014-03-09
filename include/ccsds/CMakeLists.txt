@@ -23,24 +23,26 @@
 install(FILES
 	api.h
 	randomiser.h
-	conv_encode27_bb.h
-	conv_decode27.h
-	conv_encode27_punct.h
-	rs_decode.h
-	rs_encode.h
-	pll_cc.h
-	dll_cc.h
-	mpsk_ambiguity_resolver_f.h
-	mpsk_mod_bc.h
-	mpsk_detector_soft_cf.h
-	mpsk_preamble_cc.h
-	lpf2.h
-	add_asm.h
-	msg_null_src.h
-	softbits_msg_to_bytes_b.h
-	blob_msg_source_b.h
-	blob_msg_sink_b.h
-	trunk_tail.h
-	ticp_frame_source.h
-	ticp_frame_sink.h DESTINATION include/ccsds
+	DESTINATION include/ccsds
 )
+#	conv_encode27_bb.h
+#	conv_decode27.h
+#	conv_encode27_punct.h
+#	rs_decode.h
+#	rs_encode.h
+#	pll_cc.h
+#	dll_cc.h
+#	mpsk_ambiguity_resolver_f.h
+#	mpsk_mod_bc.h
+#	mpsk_detector_soft_cf.h
+#	mpsk_preamble_cc.h
+#	lpf2.h
+#	add_asm.h
+#	msg_null_src.h
+#	softbits_msg_to_bytes_b.h
+#	blob_msg_source_b.h
+#	blob_msg_sink_b.h
+#	trunk_tail.h
+#	ticp_frame_source.h
+#	ticp_frame_sink.h DESTINATION include/ccsds
+#)

@@ -18,23 +18,24 @@
 # Boston, MA 02110-1301, USA.
 install(FILES
 	ccsds_randomiser.xml
-	ccsds_viterbi27_bb.xml
-	ccsds_conv_encode27_bb.xml
-	ccsds_conv_decode27.xml
-	ccsds_rs_encode.xml
-	ccsds_rs_decode.xml
-	ccsds_pll_cc.xml
-	ccsds_dll_cc.xml
-	ccsds_mpsk_ambiguity_resolver_f.xml
-	ccsds_mpsk_mod_bc.xml
-	ccsds_mpsk_detector_soft_cf.xml
-	ccsds_mpsk_preamble_cc.xml
-	ccsds_softbits_msg_to_bytes_b.xml
-	ccsds_msg_null_src.xml
-	ccsds_add_asm.xml
-	ccsds_blob_msg_source_b.xml
-	ccsds_blob_msg_sink_b.xml
-	ccsds_trunk_tail.xml
-	ccsds_ticp_frame_source.xml
-	ccsds_ticp_frame_sink.xml DESTINATION share/gnuradio/grc/blocks
+	DESTINATION share/gnuradio/grc/blocks
 )
+##	ccsds_conv_encode27_bb.xml
+##	ccsds_conv_decode27.xml
+##	ccsds_rs_encode.xml
+##	ccsds_rs_decode.xml
+##	ccsds_pll_cc.xml
+##	ccsds_dll_cc.xml
+##	ccsds_mpsk_ambiguity_resolver_f.xml
+##	ccsds_mpsk_mod_bc.xml
+##	ccsds_mpsk_detector_soft_cf.xml
+##	ccsds_mpsk_preamble_cc.xml
+##	ccsds_softbits_msg_to_bytes_b.xml
+##	ccsds_msg_null_src.xml
+##	ccsds_add_asm.xml
+##	ccsds_blob_msg_source_b.xml
+##	ccsds_blob_msg_sink_b.xml
+##	ccsds_trunk_tail.xml
+##	ccsds_ticp_frame_source.xml
+##	ccsds_ticp_frame_sink.xml 
+

@@ -20,9 +20,10 @@
 #
 
 from gnuradio import gr, gr_unittest
-import ccsds_swig
+from gnuradio import blocks
+import ccsds_swig as ccsds
 import os
-from gruel import pmt
+import pmt
 import time
 
 class qa_ccsds_randomiser(gr_unittest.TestCase):

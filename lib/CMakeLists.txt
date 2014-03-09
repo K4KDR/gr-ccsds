@@ -20,28 +20,27 @@
 ########################################################################
 include(GrPlatform) #define LIB_SUFFIX
 add_library(gnuradio-ccsds SHARED
-	randomiser_impl.cc
-	ccsds_conv_encode27_bb.cc
-	ccsds_conv_encode27_aux.cc
-	ccsds_conv_decode27.cc
-	ccsds_rs_decode.cc
-	ccsds_rs_encode.cc
-	ccsds_pll_cc.cc
-	ccsds_dll_cc.cc
-	ccsds_mpsk_ambiguity_resolver_f.cc
-	ccsds_mpsk_mod_bc.cc
-	ccsds_mpsk_detector_soft_cf.cc
-	ccsds_mpsk_preamble_cc.cc
-	ccsds_lpf2.cc
-	ccsds_add_asm.cc
-	ccsds_msg_null_src.cc
-	ccsds_softbits_msg_to_bytes_b.cc
-	ccsds_blob_msg_source_b.cc
-	ccsds_blob_msg_sink_b.cc
-	ccsds_trunk_tail.cc
-	ccsds_ticp_frame_source.cc
-	ccsds_ticp_frame_sink.cc)
-#target_link_libraries(gnuradio-ccsds ${Boost_LIBRARIES}  ${GNURADIO_RUNTIME_LIBRARIES} fftw3 ticp /usr/local/lib/libfec.a)
+	randomiser_impl.cc)
+##	ccsds_conv_encode27_bb.cc
+##	ccsds_conv_encode27_aux.cc
+##	ccsds_conv_decode27.cc
+##	ccsds_rs_decode.cc
+##	ccsds_rs_encode.cc
+##	ccsds_pll_cc.cc
+##	ccsds_dll_cc.cc
+##	ccsds_mpsk_ambiguity_resolver_f.cc
+##	ccsds_mpsk_mod_bc.cc
+##	ccsds_mpsk_detector_soft_cf.cc
+##	ccsds_mpsk_preamble_cc.cc
+##	ccsds_lpf2.cc
+##	ccsds_add_asm.cc
+##	ccsds_msg_null_src.cc
+##	ccsds_softbits_msg_to_bytes_b.cc
+##	ccsds_blob_msg_source_b.cc
+##	ccsds_blob_msg_sink_b.cc
+##	ccsds_trunk_tail.cc
+##	ccsds_ticp_frame_source.cc
+##	ccsds_ticp_frame_sink.cc)
 target_link_libraries(gnuradio-ccsds ${Boost_LIBRARIES} ${GNURADIO_RUNTIME_LIBRARIES} fftw3 ticp fec)
 set_target_properties(gnuradio-ccsds PROPERTIES DEFINE_SYMBOL "gnuradio_ccsds_EXPORTS")
 
@@ -54,7 +53,7 @@ install(TARGETS gnuradio-ccsds
     RUNTIME DESTINATION bin              # .dll file
 )
 
-add_executable (test_ccsds_conv_encode27_aux test_ccsds_conv_encode27_aux.cc ccsds_conv_encode27_aux.cc) 
+##add_executable (test_ccsds_conv_encode27_aux test_ccsds_conv_encode27_aux.cc ccsds_conv_encode27_aux.cc) 
 
 ########################################################################
 # Build and register unit test
@@ -66,11 +65,11 @@ set(GR_TEST_TARGET_DEPS gnuradio-ccsds)
 #turn each test cpp file into an executable with an int main() function
 add_definitions(-DBOOST_TEST_DYN_LINK -DBOOST_TEST_MAIN)
 
-add_executable(qa_ccsds_conv_encode27_aux qa_ccsds_conv_encode27_aux.cc ccsds_conv_encode27_aux.cc)
-target_link_libraries(qa_ccsds_conv_encode27_aux ${Boost_LIBRARIES})
-GR_ADD_TEST(qa_ccsds_conv_encode27_aux qa_ccsds_conv_encode27_aux)
-
-
-add_executable(qa_ccsds_asm_operator qa_ccsds_asm_operator.cc)
-target_link_libraries(qa_ccsds_asm_operator ${Boost_LIBRARIES})
-GR_ADD_TEST(qa_ccsds_asm_operator qa_ccsds_asm_operator)
+##add_executable(qa_ccsds_conv_encode27_aux qa_ccsds_conv_encode27_aux.cc ccsds_conv_encode27_aux.cc)
+##target_link_libraries(qa_ccsds_conv_encode27_aux ${Boost_LIBRARIES})
+##GR_ADD_TEST(qa_ccsds_conv_encode27_aux qa_ccsds_conv_encode27_aux)
+##
+##
+##add_executable(qa_ccsds_asm_operator qa_ccsds_asm_operator.cc)
+##target_link_libraries(qa_ccsds_asm_operator ${Boost_LIBRARIES})
+##GR_ADD_TEST(qa_ccsds_asm_operator qa_ccsds_asm_operator)
