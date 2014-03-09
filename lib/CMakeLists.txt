@@ -21,41 +21,26 @@
 include(GrPlatform) #define LIB_SUFFIX
 add_library(gnuradio-ccsds SHARED
 	ccsds_randomiser.cc
-	ccsds_viterbi27_bb.cc
 	ccsds_conv_encode27_bb.cc
 	ccsds_conv_encode27_aux.cc
 	ccsds_conv_decode27.cc
-	ccsds_sym_to_softbits_bf.cc
-	ccsds_sym_to_softbits_bb.cc
-	ccsds_framer_sink_dual.cc
 	ccsds_rs_decode.cc
 	ccsds_rs_encode.cc
-	ccsds_crc16.cc
-	ccsds_local_oscillator_cc.cc
-	ccsds_fll_cc.cc
 	ccsds_pll_cc.cc
 	ccsds_dll_cc.cc
-	ccsds_mpsk_ambiguity_resolver_bb.cc
 	ccsds_mpsk_ambiguity_resolver_f.cc
 	ccsds_mpsk_mod_bc.cc
-	ccsds_mpsk_demod_cb.cc
 	ccsds_mpsk_detector_soft_cf.cc
-	ccsds_mpsk_demod2_cb.cc
 	ccsds_mpsk_preamble_cc.cc
-	ccsds_frame_sync_b.cc
-	ccsds_moving_average.cc
-	ccsds_lpf.cc
 	ccsds_lpf2.cc
 	ccsds_add_asm.cc
-	ccsds_msg_copy.cc
 	ccsds_msg_null_src.cc
 	ccsds_softbits_msg_to_bytes_b.cc
 	ccsds_blob_msg_source_b.cc
 	ccsds_blob_msg_sink_b.cc
 	ccsds_trunk_tail.cc
 	ccsds_ticp_frame_source.cc
-	ccsds_ticp_frame_sink.cc
-	asynchronous_start.cc)
+	ccsds_ticp_frame_sink.cc)
 #target_link_libraries(gnuradio-ccsds ${Boost_LIBRARIES}  ${GNURADIO_RUNTIME_LIBRARIES} fftw3 ticp /usr/local/lib/libfec.a)
 target_link_libraries(gnuradio-ccsds ${Boost_LIBRARIES} ${GNURADIO_RUNTIME_LIBRARIES} fftw3 ticp fec)
 set_target_properties(gnuradio-ccsds PROPERTIES DEFINE_SYMBOL "gnuradio_ccsds_EXPORTS")
@@ -80,22 +65,6 @@ include(GrTest)
 set(GR_TEST_TARGET_DEPS gnuradio-ccsds)
 #turn each test cpp file into an executable with an int main() function
 add_definitions(-DBOOST_TEST_DYN_LINK -DBOOST_TEST_MAIN)
-
-add_executable(qa_ccsds_randomiser_bb qa_ccsds_randomiser_bb.cc)
-target_link_libraries(qa_ccsds_randomiser_bb gnuradio-ccsds ${Boost_LIBRARIES})
-GR_ADD_TEST(qa_ccsds_randomiser_bb qa_ccsds_randomiser_bb)
-
-add_executable(qa_ccsds_viterbi27_bb qa_ccsds_viterbi27_bb.cc)
-target_link_libraries(qa_ccsds_viterbi27_bb gnuradio-ccsds ${Boost_LIBRARIES})
-GR_ADD_TEST(qa_ccsds_viterbi27_bb qa_ccsds_viterbi27_bb)
-
-add_executable(qa_ccsds_framer_sink_dual qa_ccsds_framer_sink_dual.cc)
-target_link_libraries(qa_ccsds_framer_sink_dual gnuradio-ccsds ${Boost_LIBRARIES})
-GR_ADD_TEST(qa_ccsds_framer_sink_dual qa_ccsds_framer_sink_dual)
-
-add_executable(qa_ccsds_rs_decode_bb qa_ccsds_rs_decode_bb.cc)
-target_link_libraries(qa_ccsds_rs_decode_bb gnuradio-ccsds ${Boost_LIBRARIES})
-GR_ADD_TEST(qa_ccsds_rs_decode_bb qa_ccsds_rs_decode_bb)
 
 add_executable(qa_ccsds_conv_encode27_aux qa_ccsds_conv_encode27_aux.cc ccsds_conv_encode27_aux.cc)
 target_link_libraries(qa_ccsds_conv_encode27_aux ${Boost_LIBRARIES})
