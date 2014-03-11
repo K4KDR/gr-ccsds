@@ -3,7 +3,6 @@
 
 #include <ccsds/api.h>
 #include <gnuradio/sync_block.h>
-//#include <string>
 
 namespace gr {
   namespace ccsds {

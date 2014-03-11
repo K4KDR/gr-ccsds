@@ -25,15 +25,15 @@ set(Boost_USE_STATIC_RUNTIME OFF)
 
 find_package( Boost REQUIRED COMPONENTS system thread )
 
-add_executable (ccsds_latency_sender ccsds_latency_sender.cpp)
-target_link_libraries(ccsds_latency_sender ticp ${Boost_SYSTEM_LIBRARY} ${Boost_THREAD_LIBRARY})
-
-add_executable (ccsds_latency_receiver ccsds_latency_receiver.cpp)
-target_link_libraries(ccsds_latency_receiver ticp ${Boost_SYSTEM_LIBRARY} ${Boost_THREAD_LIBRARY})
-
-install(
-	TARGETS
-		ccsds_latency_sender
-		ccsds_latency_receiver
-	DESTINATION bin
-)
+###add_executable (ccsds_latency_sender ccsds_latency_sender.cpp)
+###target_link_libraries(ccsds_latency_sender ticp ${Boost_SYSTEM_LIBRARY} ${Boost_THREAD_LIBRARY})
+###
+###add_executable (ccsds_latency_receiver ccsds_latency_receiver.cpp)
+###target_link_libraries(ccsds_latency_receiver ticp ${Boost_SYSTEM_LIBRARY} ${Boost_THREAD_LIBRARY})
+###
+###install(
+###	TARGETS
+###		ccsds_latency_sender
+###		ccsds_latency_receiver
+###	DESTINATION bin
+###)

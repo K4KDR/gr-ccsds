@@ -26,7 +26,7 @@ import os
 import pmt
 import time
 
-class qa_ccsds_randomiser(gr_unittest.TestCase):
+class qa_randomiser(gr_unittest.TestCase):
 
 	def setUp (self):
 		self.tb = gr.top_block ()
@@ -45,8 +45,8 @@ class qa_ccsds_randomiser(gr_unittest.TestCase):
 		##################################################
 		# Blocks
 		##################################################
-		self.null_src = ccsds_swig.msg_null_src()
-		self.randomizer = ccsds_swig.randomiser(poly, seed)
+		self.null_src = ccsds.msg_null_src()
+		self.randomizer = ccsds.randomiser(poly, seed)
 		self.dbg = gr.message_debug()
 
 		##################################################
@@ -123,9 +123,9 @@ class qa_ccsds_randomiser(gr_unittest.TestCase):
 		##################################################
 		# Blocks
 		##################################################
-		self.null_src = ccsds_swig.msg_null_src()
-		self.randomizer = ccsds_swig.randomiser(poly, seed)
-		self.derandomizer = ccsds_swig.randomiser(poly, seed)
+		self.null_src = ccsds.msg_null_src()
+		self.randomizer = ccsds.randomiser(poly, seed)
+		self.derandomizer = ccsds.randomiser(poly, seed)
 		self.dbg = gr.message_debug()
 
 		##################################################
