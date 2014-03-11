@@ -17,7 +17,7 @@
 # the Free Software Foundation, Inc., 51 Franklin Street,
 # Boston, MA 02110-1301, USA.
 install(FILES
-	ccsds_randomiser.xml
+	##	ccsds_randomiser.xml
 	DESTINATION share/gnuradio/grc/blocks
 )
 ##	ccsds_conv_encode27_bb.xml

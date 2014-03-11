@@ -60,19 +60,19 @@ class qa_randomiser(gr_unittest.TestCase):
 		self.tb.start()
 
 		block = self.randomizer.to_basic_block()
-		port = pmt.pmt_intern("in")
+		port = pmt.intern("in")
 
 		num_messages = 0
 		
 		for i in xrange(len(messages_in)) :
-			msg_in = pmt.pmt_make_u8vector(len(messages_in[i]), 0x00)
+			msg_in = pmt.make_u8vector(len(messages_in[i]), 0x00)
 			for j in xrange(len(messages_in[i])) :
-				pmt.pmt_u8vector_set(msg_in, j, messages_in[i][j])
+				pmt.u8vector_set(msg_in, j, messages_in[i][j])
 
-			meta = pmt.pmt_make_dict()
-			meta = pmt.pmt_dict_add(meta, pmt.pmt_intern("frame_number"), pmt.pmt_from_long(i))
+			meta = pmt.make_dict()
+			meta = pmt.dict_add(meta, pmt.intern("frame_number"), pmt.from_long(i))
 			
-			block._post( port, pmt.pmt_cons(meta, msg_in) )
+			block._post( port, pmt.cons(meta, msg_in) )
 			num_messages = num_messages+1
 		
 		block._post( port, pmt.PMT_EOF )
@@ -90,20 +90,20 @@ class qa_randomiser(gr_unittest.TestCase):
 		
 		# test for EOF
 		eof_msg = self.dbg.get_message(num_messages)
-		self.assertEqual (pmt.pmt_is_eof_object(eof_msg), True, 'EOF block not at expected position')
+		self.assertEqual (pmt.is_eof_object(eof_msg), True, 'EOF block not at expected position')
 
 		# test the blobs
 		for i in xrange(len(messages_out_exp)):
 			dbg_msg_in = self.dbg.get_message(i)
-			dbg_msg = pmt.pmt_cdr(dbg_msg_in)
-			dbg_hdr = pmt.pmt_car(dbg_msg_in)
+			dbg_msg = pmt.cdr(dbg_msg_in)
+			dbg_hdr = pmt.car(dbg_msg_in)
 
-			dbg_frame_num = int(pmt.pmt_to_long(pmt.pmt_dict_ref(dbg_hdr, pmt.pmt_intern("frame_number"), pmt.pmt_from_long(num_messages+100))))
+			dbg_frame_num = int(pmt.to_long(pmt.dict_ref(dbg_hdr, pmt.intern("frame_number"), pmt.from_long(num_messages+100))))
 
 			self.assertEqual (i, dbg_frame_num, 'Frame number %d does not match the expected %d' %	(dbg_frame_num, i))
 
 			dbg_data = []
-			[dbg_data.append(pmt.pmt_u8vector_ref(dbg_msg, j)) for j in xrange(pmt.pmt_length(dbg_msg))]
+			[dbg_data.append(pmt.u8vector_ref(dbg_msg, j)) for j in xrange(pmt.length(dbg_msg))]
 			dbg_data = tuple(dbg_data)
 
 			out_hex = map(self.to_hex,dbg_data)
@@ -140,19 +140,19 @@ class qa_randomiser(gr_unittest.TestCase):
 		self.tb.start()
 
 		block = self.randomizer.to_basic_block()
-		port = pmt.pmt_intern("in")
+		port = pmt.intern("in")
 
 		num_messages = 0
 		
 		for i in xrange(len(messages_in)) :
-			msg_in = pmt.pmt_make_u8vector(len(messages_in[i]), 0x00)
+			msg_in = pmt.make_u8vector(len(messages_in[i]), 0x00)
 			for j in xrange(len(messages_in[i])) :
-				pmt.pmt_u8vector_set(msg_in, j, messages_in[i][j])
+				pmt.u8vector_set(msg_in, j, messages_in[i][j])
 
-			meta = pmt.pmt_make_dict()
-			meta = pmt.pmt_dict_add(meta, pmt.pmt_intern("frame_number"), pmt.pmt_from_long(i))
+			meta = pmt.make_dict()
+			meta = pmt.dict_add(meta, pmt.intern("frame_number"), pmt.from_long(i))
 
-			block._post( port, pmt.pmt_cons(meta, msg_in) )
+			block._post( port, pmt.cons(meta, msg_in) )
 			num_messages = num_messages+1
 		
 		block._post( port, pmt.PMT_EOF )
@@ -170,20 +170,20 @@ class qa_randomiser(gr_unittest.TestCase):
 		
 		# test for EOF
 		eof_msg = self.dbg.get_message(num_messages)
-		self.assertEqual (pmt.pmt_is_eof_object(eof_msg), True, 'EOF block not at expected position')
+		self.assertEqual (pmt.is_eof_object(eof_msg), True, 'EOF block not at expected position')
 
 		# test the blobs
 		for i in xrange(len(messages_in)):
 			dbg_msg_in = self.dbg.get_message(i)
-			dbg_msg = pmt.pmt_cdr(dbg_msg_in)
-			dbg_hdr = pmt.pmt_car(dbg_msg_in)
+			dbg_msg = pmt.cdr(dbg_msg_in)
+			dbg_hdr = pmt.car(dbg_msg_in)
 
-			dbg_frame_num = int(pmt.pmt_to_long(pmt.pmt_dict_ref(dbg_hdr, pmt.pmt_intern("frame_number"), pmt.pmt_from_long(num_messages+100))))
+			dbg_frame_num = int(pmt.to_long(pmt.dict_ref(dbg_hdr, pmt.intern("frame_number"), pmt.from_long(num_messages+100))))
 
 			self.assertEqual (i, dbg_frame_num, 'Frame number %d does not match the expected %d' %	(dbg_frame_num, i))
 
 			dbg_data = []
-			[dbg_data.append(pmt.pmt_u8vector_ref(dbg_msg, j)) for j in xrange(pmt.pmt_length(dbg_msg))]
+			[dbg_data.append(pmt.u8vector_ref(dbg_msg, j)) for j in xrange(pmt.length(dbg_msg))]
 			dbg_data = tuple(dbg_data)
 
 			out_hex = map(self.to_hex,dbg_data)

@@ -8,8 +8,7 @@
 
 namespace gr {
   namespace ccsds {
-    randomiser::sptr
-    randomiser::make(const uint8_t polynomial, const uint8_t seed) {
+    randomiser::sptr randomiser::make(const uint8_t polynomial, const uint8_t seed) {
         return gnuradio::get_initial_sptr (new randomiser_impl(polynomial, seed) );
     }
     
