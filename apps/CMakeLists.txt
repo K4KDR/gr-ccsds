@@ -24,5 +24,5 @@ GR_PYTHON_INSTALL(
     DESTINATION bin
 )
 
-##add_subdirectory(latency_measurements)
+add_subdirectory(latency_measurements)
 

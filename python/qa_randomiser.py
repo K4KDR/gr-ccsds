@@ -47,7 +47,7 @@ class qa_randomiser(gr_unittest.TestCase):
 		##################################################
 		self.null_src = ccsds.msg_null_src()
 		self.randomizer = ccsds.randomiser(poly, seed)
-		self.dbg = gr.message_debug()
+		self.dbg = blocks.message_debug()
 
 		##################################################
 		# Asynch Message Connections
@@ -126,7 +126,7 @@ class qa_randomiser(gr_unittest.TestCase):
 		self.null_src = ccsds.msg_null_src()
 		self.randomizer = ccsds.randomiser(poly, seed)
 		self.derandomizer = ccsds.randomiser(poly, seed)
-		self.dbg = gr.message_debug()
+		self.dbg = blocks.message_debug()
 
 		##################################################
 		# Asynch Message Connections
