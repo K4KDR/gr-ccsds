@@ -274,4 +274,4 @@ class qa_randomiser(gr_unittest.TestCase):
 	#'''
 
 if __name__ == '__main__':
-	gr_unittest.main ()
+	gr_unittest.run (qa_randomiser, "qa_randomiser.xml")

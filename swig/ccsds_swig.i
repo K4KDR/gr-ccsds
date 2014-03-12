@@ -35,7 +35,8 @@
 ////%include "ccsds_conv_encode27_punct.h"
 
 
-GR_SWIG_BLOCK_MAGIC(ccsds,randomiser);
+//FIXME : Swig magic does not work at the moment .... dont know why
+////GR_SWIG_BLOCK_MAGIC(ccsds, randomiser);
 %include "ccsds/randomiser.h"
 
 ////GR_SWIG_BLOCK_MAGIC(ccsds,pll_cc);

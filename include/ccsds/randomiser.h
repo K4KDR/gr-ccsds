@@ -35,7 +35,8 @@ namespace gr {
 	 * As a convention, the _sptr suffix indicates a boost::shared_ptr
 	 */
 
-	static sptr make(const uint8_t polynomial=0x95, const uint8_t seed=0xFF);
+//	static sptr make(const uint8_t polynomial=0x95, const uint8_t seed=0xFF);
+	static sptr make(const uint8_t polynomial, const uint8_t seed);
         /*!
          *  \brief Return a shared_ptr to a new instance of ccsds::randomiser
          *
