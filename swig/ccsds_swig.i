@@ -35,10 +35,10 @@
 
 
 %include "ccsds/randomiser.h"
-GR_SWIG_BLOCK_MAGIC2(ccsds, randomiser);
+GR_SWIG_BLOCK_MAGIC2(ccsds,randomiser);
 
 %include "ccsds/msg_null_src.h"
-GR_SWIG_BLOCK_MAGIC2(ccsds, msg_null_src);
+GR_SWIG_BLOCK_MAGIC2(ccsds,msg_null_src);
 
 ////GR_SWIG_BLOCK_MAGIC2(ccsds,pll_cc);
 ////%include "ccsds_pll_cc.h"

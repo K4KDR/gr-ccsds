@@ -16,6 +16,10 @@ namespace gr {
     	message_port_register_out(pmt::mp("out"));
     
     }
+   msg_null_src_impl::~msg_null_src_impl()
+   {
+   // nothing to do
+   }
 
   } // namespace ccsds
 } // namespace gr
