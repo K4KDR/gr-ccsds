@@ -3,6 +3,9 @@
 
 #include <cstdio>
 
+namespace gr {
+  namespace ccsds {
+
 
 /*! \brief Converts hexadecimal value into decimal one.
  *
@@ -48,7 +51,7 @@ inline unsigned char hex2bin(char hex) {
  *  \param bin Array of bytes where the binary representation should be stored.
  *	Memory for at least \c str.length()/2 elements must be aligned.
  */
-inline void ccsds_hexstring_to_binary(const std::string *str, unsigned char *bin) {
+inline void hexstring_to_binary(const std::string *str, unsigned char *bin) {
 
 	// convert string into char array
 	const char *const c_str = str->c_str();
@@ -67,5 +70,8 @@ inline void ccsds_hexstring_to_binary(const std::string *str, unsigned char *bin
 
 	return;
 }
+
+  } // namespace ccsds
+} // namespace gr
 
 #endif /* INCLUDED_CCSDS_HEXSTRING_TO_BINARY_H */

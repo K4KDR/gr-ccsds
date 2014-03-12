@@ -24,6 +24,7 @@ install(FILES
 	api.h
 	randomiser.h
 	msg_null_src.h
+	add_asm.h
 	DESTINATION include/ccsds
 )
 #	conv_encode27_bb.h
@@ -38,7 +39,6 @@ install(FILES
 #	mpsk_detector_soft_cf.h
 #	mpsk_preamble_cc.h
 #	lpf2.h
-#	add_asm.h
 #	softbits_msg_to_bytes_b.h
 #	blob_msg_source_b.h
 #	blob_msg_sink_b.h
