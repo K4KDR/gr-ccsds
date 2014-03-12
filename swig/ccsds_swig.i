@@ -9,6 +9,7 @@
 
 %{
 #include "ccsds/randomiser.h"
+#include "ccsds/msg_null_src.h"
 ////#include "ccsds_conv_encode27_bb.h"
 ////#include "ccsds_conv_decode27.h"
 ////#include "ccsds_conv_encode27_punct.h"
@@ -23,7 +24,6 @@
 ////#include "ccsds_mpsk_preamble_cc.h"
 ////#include "ccsds_softbits_msg_to_bytes_b.h"
 ////#include "ccsds_add_asm.h"
-////#include "ccsds_msg_null_src.h"
 ////#include "ccsds_blob_msg_source_b.h"
 ////#include "ccsds_blob_msg_sink_b.h"
 ////#include "ccsds_trunk_tail.h"
@@ -38,6 +38,9 @@
 //FIXME : Swig magic does not work at the moment .... dont know why
 ////GR_SWIG_BLOCK_MAGIC(ccsds, randomiser);
 %include "ccsds/randomiser.h"
+
+GR_SWIG_BLOCK_MAGIC(ccsds, msg_null_src);
+%include "ccsds/msg_null_src.h"
 
 ////GR_SWIG_BLOCK_MAGIC(ccsds,pll_cc);
 ////%include "ccsds_pll_cc.h"
@@ -65,9 +68,6 @@
 ////
 ////GR_SWIG_BLOCK_MAGIC(ccsds,trunk_tail);
 ////%include "ccsds_trunk_tail.h"
-////
-////GR_SWIG_BLOCK_MAGIC(ccsds,msg_null_src);
-////%include "ccsds_msg_null_src.h"
 ////
 ////GR_SWIG_BLOCK_MAGIC(ccsds,blob_msg_source_b);
 ////%include "ccsds_blob_msg_source_b.h"

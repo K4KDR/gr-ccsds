@@ -3,7 +3,7 @@
 #endif
 
 #include <gnuradio/io_signature.h>
-#include <randomiser_impl.h>
+#include "randomiser_impl.h"
 #include <stdio.h>
 
 namespace gr {
