@@ -23,6 +23,7 @@ add_library(gnuradio-ccsds SHARED
 	add_asm_impl.cc
 	msg_null_src_impl.cc
 	ticp_frame_source_impl.cc
+	asynchronous_start.cc
 	ticp_frame_sink_impl.cc
 	trunk_tail_impl.cc
 	randomiser_impl.cc)
