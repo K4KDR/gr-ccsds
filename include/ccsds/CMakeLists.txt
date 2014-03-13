@@ -25,6 +25,7 @@ install(FILES
 	randomiser.h
 	msg_null_src.h
 	add_asm.h
+	ticp_frame_source.h
 	DESTINATION include/ccsds
 )
 #	conv_encode27_bb.h
@@ -43,6 +44,5 @@ install(FILES
 #	blob_msg_source_b.h
 #	blob_msg_sink_b.h
 #	trunk_tail.h
-#	ticp_frame_source.h
 #	ticp_frame_sink.h DESTINATION include/ccsds
 #)

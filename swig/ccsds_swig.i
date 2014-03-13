@@ -10,6 +10,7 @@
 #include "ccsds/randomiser.h"
 #include "ccsds/msg_null_src.h"
 #include "ccsds/add_asm.h"
+#include "ccsds/ticp_frame_source.h"
 ////#include "ccsds/conv_encode27_bb.h"
 ////#include "ccsds/conv_decode27.h"
 ////#include "ccsds/conv_encode27_punct.h"
@@ -26,7 +27,6 @@
 ////#include "ccsds/blob_msg_source_b.h"
 ////#include "ccsds/blob_msg_sink_b.h"
 ////#include "ccsds/trunk_tail.h"
-////#include "ccsds/ticp_frame_source.h"
 ////#include "ccsds/ticp_frame_sink.h"
 %}
 
@@ -42,6 +42,9 @@ GR_SWIG_BLOCK_MAGIC2(ccsds,msg_null_src);
 
 %include "ccsds/add_asm.h"
 GR_SWIG_BLOCK_MAGIC2(ccsds,add_asm);
+
+%include "ccsds/ticp_frame_source.h"
+GR_SWIG_BLOCK_MAGIC2(ccsds,ticp_frame_source);
 
 ////GR_SWIG_BLOCK_MAGIC2(ccsds,pll_cc);
 ////%include "ccsds/pll_cc.h"
@@ -72,9 +75,6 @@ GR_SWIG_BLOCK_MAGIC2(ccsds,add_asm);
 ////
 ////GR_SWIG_BLOCK_MAGIC2(ccsds,blob_msg_sink_b);
 ////%include "ccsds/blob_msg_sink_b.h"
-////
-////GR_SWIG_BLOCK_MAGIC2(ccsds,ticp_frame_source);
-////%include "ccsds/ticp_frame_source.h"
 ////
 ////GR_SWIG_BLOCK_MAGIC2(ccsds,ticp_frame_sink);
 ////%include "ccsds/ticp_frame_sink.h"
