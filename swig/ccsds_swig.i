@@ -12,6 +12,7 @@
 #include "ccsds/add_asm.h"
 #include "ccsds/ticp_frame_source.h"
 #include "ccsds/ticp_frame_sink.h"
+#include "ccsds/trunk_tail.h"
 ////#include "ccsds/conv_encode27_bb.h"
 ////#include "ccsds/conv_decode27.h"
 ////#include "ccsds/conv_encode27_punct.h"
@@ -27,7 +28,6 @@
 ////#include "ccsds/softbits_msg_to_bytes_b.h"
 ////#include "ccsds/blob_msg_source_b.h"
 ////#include "ccsds/blob_msg_sink_b.h"
-////#include "ccsds/trunk_tail.h"
 %}
 
 // Puncturing definitions
@@ -49,6 +49,9 @@ GR_SWIG_BLOCK_MAGIC2(ccsds,ticp_frame_source);
 %include "ccsds/ticp_frame_sink.h"
 GR_SWIG_BLOCK_MAGIC2(ccsds,ticp_frame_sink);
 
+%include "ccsds/trunk_tail.h"
+GR_SWIG_BLOCK_MAGIC2(ccsds,trunk_tail);
+
 ////GR_SWIG_BLOCK_MAGIC2(ccsds,pll_cc);
 ////%include "ccsds/pll_cc.h"
 ////
@@ -69,9 +72,6 @@ GR_SWIG_BLOCK_MAGIC2(ccsds,ticp_frame_sink);
 ////
 ////GR_SWIG_BLOCK_MAGIC2(ccsds,softbits_msg_to_bytes_b);
 ////%include "ccsds/softbits_msg_to_bytes_b.h"
-////
-////GR_SWIG_BLOCK_MAGIC2(ccsds,trunk_tail);
-////%include "ccsds/trunk_tail.h"
 ////
 ////GR_SWIG_BLOCK_MAGIC2(ccsds,blob_msg_source_b);
 ////%include "ccsds/blob_msg_source_b.h"

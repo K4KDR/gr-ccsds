@@ -9,14 +9,8 @@ namespace gr {
     public:
     	enum STATE { CONSTRUCTING, RUNNING, STOPPED};
     
-    private:
-    	static boost::condition_variable d_cond;
-    	static boost::mutex d_mutex;
-    
-    	static STATE d_state;
-    
-    public:
     	asynchronous_start(void);
+    	~asynchronous_start(void);
     
     	static bool wait_for_start(void);
     
@@ -25,7 +19,16 @@ namespace gr {
     	static void stop(void);
     
     	static void start(void);
+
+    private:
+    	static boost::condition_variable d_cond;
+    	static boost::mutex d_mutex;
+    
+    	static STATE d_state;
+    
     };
+
   } // namespace ccsds
 } // namespace gr
+
 #endif /* ASYNCRHONOUS_START_H */

@@ -5,6 +5,7 @@ namespace gr {
   namespace ccsds {
 
     asynchronous_start::asynchronous_start(void) {}
+    asynchronous_start::~asynchronous_start(void) {}
     
     bool asynchronous_start::wait_for_start(void) {
     	boost::unique_lock<boost::mutex> lock(d_mutex);
