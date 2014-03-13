@@ -19,6 +19,7 @@
 install(FILES
 	ccsds_randomiser.xml
 	ccsds_msg_null_src.xml
+	ccsds_ticp_frame_source.xml
 	DESTINATION share/gnuradio/grc/blocks
 )
 ##	ccsds_conv_encode27_bb.xml
@@ -36,6 +37,5 @@ install(FILES
 ##	ccsds_blob_msg_source_b.xml
 ##	ccsds_blob_msg_sink_b.xml
 ##	ccsds_trunk_tail.xml
-##	ccsds_ticp_frame_source.xml
 ##	ccsds_ticp_frame_sink.xml 
 
