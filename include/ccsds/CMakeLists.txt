@@ -28,6 +28,7 @@ install(FILES
 	ticp_frame_source.h
 	ticp_frame_sink.h
 	trunk_tail.h
+	pll_cc.h
 	DESTINATION include/ccsds
 )
 #	conv_encode27_bb.h
@@ -35,7 +36,6 @@ install(FILES
 #	conv_encode27_punct.h
 #	rs_decode.h
 #	rs_encode.h
-#	pll_cc.h
 #	dll_cc.h
 #	mpsk_ambiguity_resolver_f.h
 #	mpsk_mod_bc.h

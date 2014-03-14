@@ -27,13 +27,13 @@ add_library(gnuradio-ccsds SHARED
 	ticp_frame_sink_impl.cc
 	trunk_tail_impl.cc
 	lpf2.cc
+	pll_cc_impl.cc
 	randomiser_impl.cc)
 ##	conv_encode27_bb_impl.cc
 ##	conv_encode27_aux_impl.cc
 ##	conv_decode27_impl.cc
 ##	rs_decode_impl.cc
 ##	rs_encode_impl.cc
-##	pll_cc_impl.cc
 ##	dll_cc_impl.cc
 ##	mpsk_ambiguity_resolver_f_impl.cc
 ##	mpsk_mod_bc_impl.cc

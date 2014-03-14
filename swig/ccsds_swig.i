@@ -13,13 +13,13 @@
 #include "ccsds/ticp_frame_source.h"
 #include "ccsds/ticp_frame_sink.h"
 #include "ccsds/trunk_tail.h"
+#include "ccsds/pll_cc.h"
 ////#include "ccsds/conv_encode27_bb.h"
 ////#include "ccsds/conv_decode27.h"
 ////#include "ccsds/conv_encode27_punct.h"
 ////#include "ccsds/conv_encode.h"
 ////#include "ccsds/rs_encode.h"
 ////#include "ccsds/rs_decode.h"
-////#include "ccsds/pll_cc.h"
 ////#include "ccsds/dll_cc.h"
 ////#include "ccsds/mpsk_ambiguity_resolver_f.h"
 ////#include "ccsds/mpsk_mod_bc.h"
@@ -52,9 +52,9 @@ GR_SWIG_BLOCK_MAGIC2(ccsds,ticp_frame_sink);
 %include "ccsds/trunk_tail.h"
 GR_SWIG_BLOCK_MAGIC2(ccsds,trunk_tail);
 
-////GR_SWIG_BLOCK_MAGIC2(ccsds,pll_cc);
-////%include "ccsds/pll_cc.h"
-////
+%include "ccsds/pll_cc.h"
+GR_SWIG_BLOCK_MAGIC2(ccsds,pll_cc);
+
 ////GR_SWIG_BLOCK_MAGIC2(ccsds,dll_cc);
 ////%include "ccsds/dll_cc.h"
 ////
