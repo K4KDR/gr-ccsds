@@ -41,7 +41,6 @@ install(FILES
 #	mpsk_mod_bc.h
 #	mpsk_detector_soft_cf.h
 #	mpsk_preamble_cc.h
-#	lpf2.h
 #	softbits_msg_to_bytes_b.h
 #	blob_msg_source_b.h
 #	blob_msg_sink_b.h

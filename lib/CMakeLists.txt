@@ -26,6 +26,7 @@ add_library(gnuradio-ccsds SHARED
 	asynchronous_start.cc
 	ticp_frame_sink_impl.cc
 	trunk_tail_impl.cc
+	lpf2.cc
 	randomiser_impl.cc)
 ##	conv_encode27_bb_impl.cc
 ##	conv_encode27_aux_impl.cc
@@ -38,7 +39,6 @@ add_library(gnuradio-ccsds SHARED
 ##	mpsk_mod_bc_impl.cc
 ##	mpsk_detector_soft_cf_impl.cc
 ##	mpsk_preamble_cc_impl.cc
-##	lpf2_impl.cc
 ##	softbits_msg_to_bytes_b_impl.cc
 ##	blob_msg_source_b_impl.cc
 ##	blob_msg_sink_b_impl.cc
