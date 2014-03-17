@@ -151,7 +151,9 @@ namespace gr {
     */
     void pll_cc_impl::calc_rotation(gr_complex *out, const gr_complex *in, const float *tmp_f, const unsigned int num) {
     	//* with volk	
-    	gr_complex *rot = (gr_complex*)fftwf_malloc(sizeof(gr_complex)*num);
+    	gr_complex *rot = (gr_complex*)fftw_malloc(sizeof(gr_complex)*num);
+	// TODO in 3.7.3 replace fftw_malloc with volk_malloc
+    	//gr_complex *rot = (gr_complex*)volk_malloc(sizeof(gr_complex)*num);
     
     	// temp variable for sine and cosine part of rotator
     	float tmp_s, tmp_c;

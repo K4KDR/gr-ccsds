@@ -13,7 +13,7 @@
 #include "ccsds/ticp_frame_source.h"
 #include "ccsds/ticp_frame_sink.h"
 #include "ccsds/trunk_tail.h"
-//#include "ccsds/pll_cc.h"
+#include "ccsds/pll_cc.h"
 #include "ccsds/blob_msg_sink_b.h"
 ////#include "ccsds/conv_encode27_bb.h"
 ////#include "ccsds/conv_decode27.h"
@@ -52,8 +52,8 @@ GR_SWIG_BLOCK_MAGIC2(ccsds,ticp_frame_sink);
 %include "ccsds/trunk_tail.h"
 GR_SWIG_BLOCK_MAGIC2(ccsds,trunk_tail);
 
-//%include "ccsds/pll_cc.h"
-//GR_SWIG_BLOCK_MAGIC2(ccsds,pll_cc);
+%include "ccsds/pll_cc.h"
+GR_SWIG_BLOCK_MAGIC2(ccsds,pll_cc);
 
 %include "ccsds/blob_msg_sink_b.h"
 GR_SWIG_BLOCK_MAGIC2(ccsds,blob_msg_sink_b);

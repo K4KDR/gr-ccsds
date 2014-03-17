@@ -28,7 +28,7 @@ install(FILES
 	ticp_frame_source.h
 	ticp_frame_sink.h
 	trunk_tail.h
-	#pll_cc.h
+	pll_cc.h
 	blob_msg_sink_b.h
 	DESTINATION include/ccsds
 )
