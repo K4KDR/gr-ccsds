@@ -28,7 +28,8 @@ install(FILES
 	ticp_frame_source.h
 	ticp_frame_sink.h
 	trunk_tail.h
-	pll_cc.h
+	#pll_cc.h
+	blob_msg_sink_b.h
 	DESTINATION include/ccsds
 )
 #	conv_encode27_bb.h
@@ -43,5 +44,4 @@ install(FILES
 #	mpsk_preamble_cc.h
 #	softbits_msg_to_bytes_b.h
 #	blob_msg_source_b.h
-#	blob_msg_sink_b.h
 #)
