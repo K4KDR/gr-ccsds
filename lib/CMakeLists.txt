@@ -30,6 +30,7 @@ add_library(gnuradio-ccsds SHARED
 	pll_cc_impl.cc
 	blob_msg_sink_b_impl.cc
 	blob_msg_source_b_impl.cc
+	softbits_msg_to_bytes_b_impl.cc
 	randomiser_impl.cc)
 ##	conv_encode27_bb_impl.cc
 ##	conv_encode27_aux_impl.cc
@@ -41,7 +42,6 @@ add_library(gnuradio-ccsds SHARED
 ##	mpsk_mod_bc_impl.cc
 ##	mpsk_detector_soft_cf_impl.cc
 ##	mpsk_preamble_cc_impl.cc
-##	softbits_msg_to_bytes_b_impl.cc
 target_link_libraries(gnuradio-ccsds ${Boost_LIBRARIES} ${GNURADIO_RUNTIME_LIBRARIES} fftw3 ticp fec)
 set_target_properties(gnuradio-ccsds PROPERTIES DEFINE_SYMBOL "gnuradio_ccsds_EXPORTS")
 
