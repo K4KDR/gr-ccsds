@@ -31,11 +31,11 @@ add_library(gnuradio-ccsds SHARED
 	blob_msg_sink_b_impl.cc
 	blob_msg_source_b_impl.cc
 	softbits_msg_to_bytes_b_impl.cc
+	rs_decode_impl.cc
 	randomiser_impl.cc)
 ##	conv_encode27_bb_impl.cc
 ##	conv_encode27_aux_impl.cc
 ##	conv_decode27_impl.cc
-##	rs_decode_impl.cc
 ##	rs_encode_impl.cc
 ##	dll_cc_impl.cc
 ##	mpsk_ambiguity_resolver_f_impl.cc

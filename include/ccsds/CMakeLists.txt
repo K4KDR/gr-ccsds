@@ -32,12 +32,12 @@ install(FILES
 	blob_msg_sink_b.h
 	blob_msg_source_b.h
 	softbits_msg_to_bytes_b.h
+	rs_decode.h
 	DESTINATION include/ccsds
 )
 #	conv_encode27_bb.h
 #	conv_decode27.h
 #	conv_encode27_punct.h
-#	rs_decode.h
 #	rs_encode.h
 #	dll_cc.h
 #	mpsk_ambiguity_resolver_f.h
