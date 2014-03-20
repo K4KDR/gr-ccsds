@@ -29,6 +29,7 @@ install(FILES
 	ticp_frame_sink.h
 	trunk_tail.h
 	pll_cc.h
+	dll_cc.h
 	blob_msg_sink_b.h
 	blob_msg_source_b.h
 	softbits_msg_to_bytes_b.h
@@ -39,7 +40,6 @@ install(FILES
 #	conv_decode27.h
 #	conv_encode27_punct.h
 #	rs_encode.h
-#	dll_cc.h
 #	mpsk_ambiguity_resolver_f.h
 #	mpsk_mod_bc.h
 #	mpsk_detector_soft_cf.h

@@ -14,6 +14,7 @@
 #include "ccsds/ticp_frame_sink.h"
 #include "ccsds/trunk_tail.h"
 #include "ccsds/pll_cc.h"
+#include "ccsds/dll_cc.h"
 #include "ccsds/blob_msg_sink_b.h"
 #include "ccsds/blob_msg_source_b.h"
 #include "ccsds/softbits_msg_to_bytes_b.h"
@@ -23,7 +24,6 @@
 ////#include "ccsds/conv_encode27_punct.h"
 ////#include "ccsds/conv_encode.h"
 ////#include "ccsds/rs_encode.h"
-////#include "ccsds/dll_cc.h"
 ////#include "ccsds/mpsk_ambiguity_resolver_f.h"
 ////#include "ccsds/mpsk_mod_bc.h"
 ////#include "ccsds/mpsk_detector_soft_cf.h"
@@ -55,6 +55,9 @@ GR_SWIG_BLOCK_MAGIC2(ccsds,trunk_tail);
 %include "ccsds/pll_cc.h"
 GR_SWIG_BLOCK_MAGIC2(ccsds,pll_cc);
 
+%include "ccsds/dll_cc.h"
+GR_SWIG_BLOCK_MAGIC2(ccsds,dll_cc);
+
 %include "ccsds/blob_msg_sink_b.h"
 GR_SWIG_BLOCK_MAGIC2(ccsds,blob_msg_sink_b);
 
@@ -67,9 +70,6 @@ GR_SWIG_BLOCK_MAGIC2(ccsds,softbits_msg_to_bytes_b);
 %include "ccsds/rs_decode.h"
 GR_SWIG_BLOCK_MAGIC2(ccsds,rs_decode);
 
-////GR_SWIG_BLOCK_MAGIC2(ccsds,dll_cc);
-////%include "ccsds/dll_cc.h"
-////
 ////GR_SWIG_BLOCK_MAGIC2(ccsds,mpsk_ambiguity_resolver_f);
 ////%include "ccsds/mpsk_ambiguity_resolver_f.h"
 ////
