@@ -18,9 +18,12 @@
 # Boston, MA 02110-1301, USA.
 install(FILES
 	ccsds_randomiser.xml
+	ccsds_reversebits.xml
 	ccsds_msg_null_src.xml
 	ccsds_ticp_frame_source.xml
 	ccsds_ticp_frame_sink.xml 
+	ccsds_blob_msg_source_b.xml
+	ccsds_blob_msg_sink_b.xml
 	DESTINATION share/gnuradio/grc/blocks
 )
 ##	ccsds_conv_encode27_bb.xml
@@ -35,7 +38,5 @@ install(FILES
 ##	ccsds_mpsk_preamble_cc.xml
 ##	ccsds_softbits_msg_to_bytes_b.xml
 ##	ccsds_add_asm.xml
-##	ccsds_blob_msg_source_b.xml
-##	ccsds_blob_msg_sink_b.xml
 ##	ccsds_trunk_tail.xml
 

@@ -23,6 +23,7 @@
 install(FILES
 	api.h
 	randomiser.h
+	reversebits.h
 	msg_null_src.h
 	add_asm.h
 	ticp_frame_source.h

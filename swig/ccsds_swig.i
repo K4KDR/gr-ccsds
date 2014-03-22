@@ -8,6 +8,7 @@
 
 %{
 #include "ccsds/randomiser.h"
+#include "ccsds/reversebits.h"
 #include "ccsds/msg_null_src.h"
 #include "ccsds/add_asm.h"
 #include "ccsds/ticp_frame_source.h"
@@ -36,6 +37,9 @@
 
 %include "ccsds/randomiser.h"
 GR_SWIG_BLOCK_MAGIC2(ccsds,randomiser);
+
+%include "ccsds/reversebits.h"
+GR_SWIG_BLOCK_MAGIC2(ccsds,reversebits);
 
 %include "ccsds/msg_null_src.h"
 GR_SWIG_BLOCK_MAGIC2(ccsds,msg_null_src);
