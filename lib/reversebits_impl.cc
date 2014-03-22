@@ -38,7 +38,6 @@ namespace gr {
 	for(uint8_t i=0;i<8;i++) {
 		out = (out << 1) | ( (in >> i) & 0x01 );
 	}
-	printf("reversebits: 0x%02X => 0x%02X\n", in, out);
 	return out;
     }
 
