@@ -155,7 +155,7 @@ namespace gr {
     
     		// Check that frames have the same size in both systems
     		if(frame_maindata->size() != d_FRAME_LEN) {
-    			fprintf(stderr,"ERROR TICP FRAME SOURCE: frame lengths do not match TICP:%u, Internal:%u\n",frame_maindata->size(),d_FRAME_LEN);
+    			fprintf(stderr,"ERROR TICP FRAME SOURCE: frame lengths do not match TICP:%lu, Internal:%u\n",(long unsigned int)frame_maindata->size(),d_FRAME_LEN);
     			exit(EXIT_FAILURE);
     			return;
     		}

@@ -198,7 +198,7 @@ namespace gr {
     
     	// check that input has the expected length
     	if(pmt::length(msg) != d_BLOCK_NUM_BITS_IN) {
-    		fprintf(stderr,"WARNING CONV DECODE27: expecting message of %u floats, got %u, skipping.\n",d_BLOCK_NUM_BITS_IN,pmt::length(msg));
+    		fprintf(stderr,"WARNING CONV DECODE27: expecting message of %u floats, got %lu, skipping.\n",d_BLOCK_NUM_BITS_IN,(long unsigned int)pmt::length(msg));
     		return;
     	}
     

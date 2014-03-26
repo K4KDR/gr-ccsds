@@ -77,7 +77,7 @@ namespace gr {
     
     	// check if message has right length
     	if(pmt::length(msg) != d_BLOB_LEN) {
-    		fprintf(stderr,"WARNING MSG BLOB SOURCE: message of length %u does not match the expected length of %u, skipping.\n",pmt::length(msg), d_BLOB_LEN);
+    		fprintf(stderr,"WARNING MSG BLOB SOURCE: message of length %lu does not match the expected length of %u, skipping.\n",(long unsigned int)pmt::length(msg), d_BLOB_LEN);
     		return;
     	}
     
