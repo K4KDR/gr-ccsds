@@ -2,7 +2,6 @@
 #define INCLUDED_CCSDS_CONV_DECODE27_IMPL_H
 
 #include <ccsds/conv_decode27.h>
-#include "conv_encode27_punct.h"
 
 //#define __i386__
 #include <fec.h>
@@ -40,7 +39,7 @@ namespace gr {
     void noop(int* /*polys[2]*/) {}
     /*
     #include <spiral-viterbi.h>
-    
+
     #define FEC_FUNC_VITERBI27_SET_POLYNOMIAL ccsds_noop
     #define FEC_FUNC_VITERBI27_CREATE create_viterbi_SPIRAL
     #define FEC_FUNC_VITERBI27_DELETE delete_viterbi_SPIRAL
@@ -48,26 +47,26 @@ namespace gr {
     #define FEC_FUNC_VITERBI27_UPDATE_BLK update_viterbi_blk_SPIRAL
     #define FEC_FUNC_VITERBI27_CHAINBACK chainback_viterbi_SPIRAL
     //*/
-    
+
     class conv_decode27_impl : public conv_decode27 {
-    
+
     private:
     	typedef boost::shared_ptr<float[]> softbits_sptr;
-    
-    
+
+
     	/*! \brief Type of unpuncturing that has to be performed before the decoding. */
-    	const conv_encode27_punct::punct_t d_PUNCT_TYPE;
-    
+    	const conv_puncturing27::punct_t d_PUNCT_TYPE;
+
     	/*! \brief Number of bits (more precise: bytes containing a soft bit)
     	 *	that need to be read in to generate \c d_RATE_NUM_OUT bytes.
     	 *
     	 *  \sa d_RATE_NUM_OUT
     	 */
     	const unsigned int d_RATE_NUM_IN;
-    
+
     	/*! \brief pointer to the viterbi decoder structure. */
     	void *d_viterbi;
-    
+
     	/*! \brief Number of bytes that are generated when \c d_RATE_NUM_IN bits
     	 *	have been read.
     	 *
@@ -123,10 +122,10 @@ namespace gr {
     
     	void process_message(pmt::pmt_t msg_in);
     
-    	static unsigned int get_rate_in(conv_encode27_punct::punct_t puncturing_type);
-    	static unsigned int get_rate_out(conv_encode27_punct::punct_t puncturing_type);
+    	static unsigned int get_rate_in(conv_puncturing27::punct_t puncturing_type);
+    	static unsigned int get_rate_out(conv_puncturing27::punct_t puncturing_type);
     
-    	static unsigned int get_num_inputs_req(conv_encode27_punct::punct_t puncturing_type, const unsigned int num_out);
+    	static unsigned int get_num_inputs_req(conv_puncturing27::punct_t puncturing_type, const unsigned int num_out);
     
     	/*! \brief Extract the last 6 bits from the ASM as a right aligned integer */
     	static int get_start_state(std::string ASM);
@@ -141,7 +140,7 @@ namespace gr {
     	 *  \param gen_poly_c1 Compact generator polynom for c1 stream. Default is 0x79.
     	 *  \param gen_poly_c2 Compact generator polynom for c2 stream. Default is 0xDB.
     	 *  \param puncturing_type Symbol for type of puncturing. Default is NONE.
-    	 *  \param block_len Number of output data bits per block as BLOB. (BLOB len = 
+    	 *  \param block_len Number of output data bits per block as BLOB. (BLOB len =
     	 *	\c block_len / 8).
     	 *  \param ASM Unencoded attached sync marker that is used to determine the
     	 *	start and termination state of the decoder.
@@ -159,7 +158,7 @@ namespace gr {
     	 *  with 0x79 for c1 and 0x5B for c2. Together with the MSB for the inversion of
     	 *  c2 the compact polynomials are 0x79 and 0xDB.
     	 */
-    	conv_decode27_impl(const unsigned char gen_poly_c1, const unsigned char gen_poly_c2, conv_encode27_punct::punct_t puncturing_type, const unsigned int block_len, std::string ASM);
+    	conv_decode27_impl(const unsigned char gen_poly_c1, const unsigned char gen_poly_c2, conv_puncturing27::punct_t puncturing_type, const unsigned int block_len, std::string ASM);
     
     	/*! \brief Public deconstructor. */
     	~conv_decode27_impl(void);  // public destructor

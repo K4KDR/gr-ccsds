@@ -37,6 +37,7 @@ install(FILES
 	rs_decode.h
 	mpsk_ambiguity_resolver_f.h
 	conv_decode27.h
+	conv_puncturing27.h
 	DESTINATION include/ccsds
 )
 #	conv_encode27_bb.h

@@ -11,36 +11,36 @@
 namespace gr {
   namespace ccsds {
     
-    unsigned int conv_decode27_impl::get_rate_in(conv_encode27_punct::punct_t puncturing_type) {
+    unsigned int conv_decode27_impl::get_rate_in(conv_puncturing27::punct_t puncturing_type) {
     	switch(puncturing_type) {
-    		case conv_encode27_punct::NONE:		return 16; // 16 bits in, 1 byte out
-    		case conv_encode27_punct::ECSS_23:	return 12; // 12 bits in, 1 byte out
-    		case conv_encode27_punct::ECSS_34:	return 32; // 32 bits in, 3 byte out
-    		case conv_encode27_punct::ECSS_56:	return 48; // 48 bits in, 5 byte out
-    		case conv_encode27_punct::ECSS_78:	return 64; // 64 bits in, 7 byte out
+    		case conv_puncturing27::NONE:		return 16; // 16 bits in, 1 byte out
+    		case conv_puncturing27::ECSS_23:	return 12; // 12 bits in, 1 byte out
+    		case conv_puncturing27::ECSS_34:	return 32; // 32 bits in, 3 byte out
+    		case conv_puncturing27::ECSS_56:	return 48; // 48 bits in, 5 byte out
+    		case conv_puncturing27::ECSS_78:	return 64; // 64 bits in, 7 byte out
     		default:			fprintf(stderr,"ERROR CONV DECODE27: invalid puncturing type %d\n",puncturing_type);
     						exit(EXIT_FAILURE);
     						return 0;
     	}
     }
     
-    unsigned int conv_decode27_impl::get_rate_out(conv_encode27_punct::punct_t puncturing_type) {
+    unsigned int conv_decode27_impl::get_rate_out(conv_puncturing27::punct_t puncturing_type) {
     	switch(puncturing_type) {
-    		case conv_encode27_punct::NONE:		return 1; // 16 bits in, 1 byte out
-    		case conv_encode27_punct::ECSS_23:	return 1; // 12 bits in, 1 byte out
-    		case conv_encode27_punct::ECSS_34:	return 3; // 32 bits in, 3 byte out
-    		case conv_encode27_punct::ECSS_56:	return 5; // 48 bits in, 5 byte out
-    		case conv_encode27_punct::ECSS_78:	return 7; // 64 bits in, 7 byte out
+    		case conv_puncturing27::NONE:		return 1; // 16 bits in, 1 byte out
+    		case conv_puncturing27::ECSS_23:	return 1; // 12 bits in, 1 byte out
+    		case conv_puncturing27::ECSS_34:	return 3; // 32 bits in, 3 byte out
+    		case conv_puncturing27::ECSS_56:	return 5; // 48 bits in, 5 byte out
+    		case conv_puncturing27::ECSS_78:	return 7; // 64 bits in, 7 byte out
     		default:			fprintf(stderr,"ERROR CONV DECODE27: invalid puncturing type %d\n",puncturing_type);
     						exit(EXIT_FAILURE);
     						return 0;
     	}
     }
     
-    unsigned int conv_decode27_impl::get_num_inputs_req(conv_encode27_punct::punct_t puncturing_type, const unsigned int num_out) {
+    unsigned int conv_decode27_impl::get_num_inputs_req(conv_puncturing27::punct_t puncturing_type, const unsigned int num_out) {
     
-    	const unsigned int pattern_len = conv_encode27_punct::get_pattern_len(puncturing_type);
-    	boost::shared_ptr<bool[]> pattern = conv_encode27_punct::get_pattern(puncturing_type);
+    	const unsigned int pattern_len = conv_puncturing27::get_pattern_len(puncturing_type);
+    	boost::shared_ptr<bool[]> pattern = conv_puncturing27::get_pattern(puncturing_type);
     
     	unsigned int count_in = 0;
     	unsigned int count_pattern = 0;
@@ -112,11 +112,11 @@ namespace gr {
     }
     
     conv_decode27::sptr
-    conv_decode27::make (const unsigned char gen_poly_c1, const unsigned char gen_poly_c2, conv_encode27_punct::punct_t puncturing_type, const unsigned int block_len, std::string ASM) {
+    conv_decode27::make (const unsigned char gen_poly_c1, const unsigned char gen_poly_c2, conv_puncturing27::punct_t puncturing_type, const unsigned int block_len, std::string ASM) {
         return gnuradio::get_initial_sptr (new conv_decode27_impl (gen_poly_c1, gen_poly_c2, puncturing_type, block_len, ASM));
     }
     
-    conv_decode27_impl::conv_decode27_impl(const unsigned char gen_poly_c1, const unsigned char gen_poly_c2, conv_encode27_punct::punct_t puncturing_type, const unsigned int block_len, std::string ASM)  
+    conv_decode27_impl::conv_decode27_impl(const unsigned char gen_poly_c1, const unsigned char gen_poly_c2, conv_puncturing27::punct_t puncturing_type, const unsigned int block_len, std::string ASM)  
     : gr::sync_block ("conv_decode27",
     	gr::io_signature::make (0, 0, sizeof(unsigned char)),
     	gr::io_signature::make (0, 0, sizeof(unsigned char))),
@@ -128,12 +128,12 @@ namespace gr {
     	d_BLOCK_NUM_BITS_OUT(block_len),
     	d_START_STATE(get_start_state(ASM)),
     	d_TERM_STATE(get_term_state(ASM)),
-    	d_PATTERN_LEN(conv_encode27_punct::get_pattern_len(d_PUNCT_TYPE))
+    	d_PATTERN_LEN(conv_puncturing27::get_pattern_len(d_PUNCT_TYPE))
     {
     	// Allocate buffer memory to store a complete depunctured soft byte sequence plus the 12 tail symbols
     	d_buffer = new unsigned char[d_BLOCK_NUM_BITS_IN_UNPUNC];
     
-    	d_punct_pattern = conv_encode27_punct::get_pattern(d_PUNCT_TYPE);
+    	d_punct_pattern = conv_puncturing27::get_pattern(d_PUNCT_TYPE);
     
     	// Set CPU mode of libfec
     	Cpu_mode = SSE2;
@@ -253,7 +253,7 @@ namespace gr {
     
     void conv_decode27_impl::unpuncture_and_convert(unsigned char *out, const float *in) {
     	
-    	if(d_PUNCT_TYPE == conv_encode27_punct::NONE) {
+    	if(d_PUNCT_TYPE == conv_puncturing27::NONE) {
     		// No unpuncturing, just conversion
     
     		for(unsigned int i=0;i<d_BLOCK_NUM_BITS_IN_UNPUNC;i++) {

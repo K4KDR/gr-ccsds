@@ -6,6 +6,9 @@
 //load generated python docstrings
 %include "ccsds_swig_doc.i"
 
+// Puncturing definitions
+%include "ccsds/conv_puncturing27.h"
+
 %{
 #include "ccsds/randomiser.h"
 #include "ccsds/reversebits.h"
@@ -31,8 +34,6 @@
 ////#include "ccsds/mpsk_preamble_cc.h"
 %}
 
-// Puncturing definitions
-////%include "ccsds/conv_encode27_punct.h"
 
 
 %include "ccsds/randomiser.h"

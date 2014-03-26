@@ -35,7 +35,6 @@ add_library(gnuradio-ccsds SHARED
 	rs_decode_impl.cc
 	mpsk_ambiguity_resolver_f_impl.cc
 	conv_decode27_impl.cc
-	conv_encode27_punct.cc
 	reversebits_impl.cc
 	randomiser_impl.cc)
 ##	conv_encode27_bb_impl.cc

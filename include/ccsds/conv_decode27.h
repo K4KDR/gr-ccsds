@@ -3,11 +3,11 @@
 
 #include <ccsds/api.h>
 #include <gnuradio/sync_block.h>
-#include "conv_encode27_punct.h"
+#include "ccsds/conv_puncturing27.h"
 
 namespace gr {
   namespace ccsds {
-    
+
     /*! \brief Perform unpuncturing and convloutional decoding on the input stream.
      *  \ingroup channelcoding
      *
@@ -32,7 +32,7 @@ namespace gr {
     class CCSDS_API conv_decode27 : virtual public gr::sync_block {
     public:
     	typedef boost::shared_ptr<conv_decode27> sptr;
-    	static sptr make (const unsigned char gen_poly_c1, const unsigned char gen_poly_c2, conv_encode27_punct::punct_t puncturing_type, const unsigned int block_len, std::string ASM);
+    	static sptr make (const unsigned char gen_poly_c1, const unsigned char gen_poly_c2, conv_puncturing27::punct_t puncturing_type, const unsigned int block_len, std::string ASM);
     };
 
   } // namespace ccsds
