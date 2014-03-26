@@ -9,10 +9,10 @@ namespace gr {
     {
     private:
     	/*! Message length */
-    	const size_t d_MSG_LEN;
+    	const unsigned int d_MSG_LEN;
 
     	/*! Initial state of the LFSR */
-    	const std::vector<size_t> d_POSITIONS;
+    	const std::vector<unsigned int> d_POSITIONS;
 
     	/*! Flag to store whether EOF has been received or not */
     	bool d_stop;
@@ -25,7 +25,7 @@ namespace gr {
 
     public:
     	/*! \brief Public deconstructor */
-    	reversebits_impl(const size_t msg_length, const std::vector<size_t> reverse_indices);
+    	reversebits_impl(const unsigned int msg_length, const std::vector<unsigned int> &reverse_indices);
     	~reversebits_impl ();
 
     	/*! \brief Dummy work function */

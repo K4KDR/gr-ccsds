@@ -33,7 +33,7 @@ namespace gr {
 	 * As a convention, the _sptr suffix indicates a boost::shared_ptr
 	 */
 
-	static sptr make(const size_t msg_length, const std::vector<size_t> reverse_indices);
+	static sptr make(const unsigned int msg_length, const std::vector<unsigned int> &reverse_indices);
         /*!
          *  \brief Return a shared_ptr to a new instance of ccsds::reversebits
          *

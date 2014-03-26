@@ -8,11 +8,11 @@
 
 namespace gr {
   namespace ccsds {
-    reversebits::sptr reversebits::make(const size_t msg_length, const std::vector<size_t> reverse_indices) {
+    reversebits::sptr reversebits::make(const unsigned int msg_length, const std::vector<unsigned int> &reverse_indices) {
         return gnuradio::get_initial_sptr (new reversebits_impl(msg_length, reverse_indices) );
     }
 
-    reversebits_impl::reversebits_impl(const size_t msg_length, const std::vector<size_t> reverse_indices)
+    reversebits_impl::reversebits_impl(const unsigned int msg_length, const std::vector<unsigned int> &reverse_indices)
       : gr::sync_block ("reversebits",
     	gr::io_signature::make (0, 0, 0),
     	gr::io_signature::make (0, 0, 0)), d_MSG_LEN(msg_length), d_POSITIONS(reverse_indices)
@@ -89,7 +89,7 @@ namespace gr {
 	memcpy(data_out, data_in, d_MSG_LEN);
 
 	// Iterate over all bytes to reverse
-	for(std::vector<size_t>::const_iterator it = d_POSITIONS.begin(); it != d_POSITIONS.end(); ++it) {
+	for(std::vector<unsigned int>::const_iterator it = d_POSITIONS.begin(); it != d_POSITIONS.end(); ++it) {
 		// Check if index is within our message
 		if(*it >= d_MSG_LEN || *it < 0) {
 			fprintf(stderr, "WARNING REVERSEBITS: attempting to reverse bits of byte at position %lu, which is outside the message, skipping.\n", (long unsigned int)*it);
