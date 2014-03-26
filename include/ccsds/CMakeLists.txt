@@ -23,7 +23,7 @@
 install(FILES
 	api.h
 	randomiser.h
-	reversebits.h
+##	reversebits.h
 	msg_null_src.h
 	add_asm.h
 	ticp_frame_source.h
@@ -35,13 +35,13 @@ install(FILES
 	blob_msg_source_b.h
 	softbits_msg_to_bytes_b.h
 	rs_decode.h
+	mpsk_ambiguity_resolver_f.h
 	DESTINATION include/ccsds
 )
 #	conv_encode27_bb.h
 #	conv_decode27.h
 #	conv_encode27_punct.h
 #	rs_encode.h
-#	mpsk_ambiguity_resolver_f.h
 #	mpsk_mod_bc.h
 #	mpsk_detector_soft_cf.h
 #	mpsk_preamble_cc.h

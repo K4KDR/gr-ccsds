@@ -18,7 +18,7 @@ namespace gr {
     	bool d_stop;
 
 	/* Perform reversal of a single byte */
-	uint8_t reverse_bits(const uint8_t in);
+	unsigned char reverse_bits(const unsigned char in);
 
     	/*! \brief Asynchronous work function which is processing the queues. */
     	void process_frame(pmt::pmt_t msg);

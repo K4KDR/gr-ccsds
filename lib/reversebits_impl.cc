@@ -30,12 +30,12 @@ namespace gr {
     reversebits_impl::~reversebits_impl () {
     }
 
-    uint8_t reversebits_impl::reverse_bits(const uint8_t in) {
+    unsigned char reversebits_impl::reverse_bits(const unsigned char in) {
 	// output
-	uint8_t out = 0x00;
+	unsigned char out = 0x00;
 
 	// iterate from (input) LSB (i=0) to MSB (i=7)
-	for(uint8_t i=0;i<8;i++) {
+	for(unsigned char i=0;i<8;i++) {
 		out = (out << 1) | ( (in >> i) & 0x01 );
 	}
 	return out;
@@ -82,8 +82,8 @@ namespace gr {
     	// Message is BLOB with correct length
 
     	// Assign input and output pointer
-    	const uint8_t *data_in = (const uint8_t *) pmt::blob_data(msg);
-	uint8_t data_out[d_MSG_LEN];
+    	const unsigned char *data_in = (const unsigned char *) pmt::blob_data(msg);
+	unsigned char data_out[d_MSG_LEN];
 
 	// Copy message, reverse bits afterwards
 	memcpy(data_out, data_in, d_MSG_LEN);

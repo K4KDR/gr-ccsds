@@ -8,7 +8,7 @@
 
 %{
 #include "ccsds/randomiser.h"
-#include "ccsds/reversebits.h"
+////#include "ccsds/reversebits.h"
 #include "ccsds/msg_null_src.h"
 #include "ccsds/add_asm.h"
 #include "ccsds/ticp_frame_source.h"
@@ -20,12 +20,12 @@
 #include "ccsds/blob_msg_source_b.h"
 #include "ccsds/softbits_msg_to_bytes_b.h"
 #include "ccsds/rs_decode.h"
+#include "ccsds/mpsk_ambiguity_resolver_f.h"
 ////#include "ccsds/conv_encode27_bb.h"
 ////#include "ccsds/conv_decode27.h"
 ////#include "ccsds/conv_encode27_punct.h"
 ////#include "ccsds/conv_encode.h"
 ////#include "ccsds/rs_encode.h"
-////#include "ccsds/mpsk_ambiguity_resolver_f.h"
 ////#include "ccsds/mpsk_mod_bc.h"
 ////#include "ccsds/mpsk_detector_soft_cf.h"
 ////#include "ccsds/mpsk_preamble_cc.h"
@@ -38,8 +38,8 @@
 %include "ccsds/randomiser.h"
 GR_SWIG_BLOCK_MAGIC2(ccsds,randomiser);
 
-%include "ccsds/reversebits.h"
-GR_SWIG_BLOCK_MAGIC2(ccsds,reversebits);
+////%include "ccsds/reversebits.h"
+////GR_SWIG_BLOCK_MAGIC2(ccsds,reversebits);
 
 %include "ccsds/msg_null_src.h"
 GR_SWIG_BLOCK_MAGIC2(ccsds,msg_null_src);
@@ -74,9 +74,9 @@ GR_SWIG_BLOCK_MAGIC2(ccsds,softbits_msg_to_bytes_b);
 %include "ccsds/rs_decode.h"
 GR_SWIG_BLOCK_MAGIC2(ccsds,rs_decode);
 
-////GR_SWIG_BLOCK_MAGIC2(ccsds,mpsk_ambiguity_resolver_f);
-////%include "ccsds/mpsk_ambiguity_resolver_f.h"
-////
+%include "ccsds/mpsk_ambiguity_resolver_f.h"
+GR_SWIG_BLOCK_MAGIC2(ccsds,mpsk_ambiguity_resolver_f);
+
 ////GR_SWIG_BLOCK_MAGIC2(ccsds,mpsk_mod_bc);
 ////%include "ccsds/mpsk_mod_bc.h"
 ////
