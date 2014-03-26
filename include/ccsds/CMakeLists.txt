@@ -36,10 +36,10 @@ install(FILES
 	softbits_msg_to_bytes_b.h
 	rs_decode.h
 	mpsk_ambiguity_resolver_f.h
+	conv_decode27.h
 	DESTINATION include/ccsds
 )
 #	conv_encode27_bb.h
-#	conv_decode27.h
 #	conv_encode27_punct.h
 #	rs_encode.h
 #	mpsk_mod_bc.h
