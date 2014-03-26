@@ -20,7 +20,8 @@
 #
 
 from gnuradio import gr, gr_unittest
-import ccsds_swig
+from gnuradio import blocks
+import ccsds_swig as ccsds
 import os
 import math
 
@@ -48,10 +49,10 @@ class qa_ccsds_mpsk_ambiguity_resolver_f (gr_unittest.TestCase):
 		##################################################
 		# Blocks
 		##################################################
-		self.src = gr.vector_source_f(src_data, False, 1)
-		self.snk = gr.vector_sink_b(1)
-		self.ccsds_softbits_msg_to_bytes_b_0 = ccsds_swig.softbits_msg_to_bytes_b()
-		self.ccsds_mpsk_ambiguity_resolver_f_0 = ccsds_swig.mpsk_ambiguity_resolver_f(M,ASM,ASM_len,1,ber_thresh,frame_len,num_tail)
+		self.src = blocks.vector_source_f(src_data, False, 1)
+		self.snk = blocks.vector_sink_b(1)
+		self.ccsds_softbits_msg_to_bytes_b_0 = ccsds.softbits_msg_to_bytes_b()
+		self.ccsds_mpsk_ambiguity_resolver_f_0 = ccsds.mpsk_ambiguity_resolver_f(M,ASM,ASM_len,1,ber_thresh,frame_len,num_tail)
 
 		##################################################
 		# Connections

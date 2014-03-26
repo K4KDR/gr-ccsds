@@ -20,11 +20,12 @@
 #
 
 from gnuradio import gr, gr_unittest
-import ccsds_swig
+from gnuradio import blocks
+import ccsds_swig as ccsds
 import random
 import numpy
 import os
-from gruel import pmt
+import pmt
 import time
 
 class qa_ccsds_blob_msg_sink (gr_unittest.TestCase):
@@ -46,9 +47,9 @@ class qa_ccsds_blob_msg_sink (gr_unittest.TestCase):
 
 		
 	# blocks
-	self.blob_sink = ccsds_swig.blob_msg_sink_b(blob_len)
-	self.src = gr.vector_source_b(tuple(data), False)
-        self.dbg = gr.message_debug()
+	self.blob_sink = ccsds.blob_msg_sink_b(blob_len)
+	self.src = blocks.vector_source_b(tuple(data), False)
+        self.dbg = blocks.message_debug()
 
 	# connections
 	self.tb.connect((self.src, 0), (self.blob_sink, 0))
@@ -65,14 +66,14 @@ class qa_ccsds_blob_msg_sink (gr_unittest.TestCase):
 
 	# test for EOF
 	eof_msg = self.dbg.get_message(num_blobs)
-	self.assertEqual (pmt.pmt_is_eof_object(eof_msg), True, 'EOF block no at expected position')
+	self.assertEqual (pmt.is_eof_object(eof_msg), True, 'EOF block no at expected position')
 
 	# test the blobs
 	for i in xrange(len(blobs)):
 		dbg_msg_in = self.dbg.get_message(i)
-		dbg_msg = pmt.pmt_cdr(dbg_msg_in)
+		dbg_msg = pmt.cdr(dbg_msg_in)
 		dbg_data = []
-		[dbg_data.append(pmt.pmt_u8vector_ref(dbg_msg, j)) for j in xrange(pmt.pmt_length(dbg_msg))]
+		[dbg_data.append(pmt.u8vector_ref(dbg_msg, j)) for j in xrange(pmt.length(dbg_msg))]
 		self.assertEqual (blobs[i], dbg_data, 'BLOB data mismatch in %d byte BLOB no %d/%d' % (blob_len, i+1, num_blobs))
 
 

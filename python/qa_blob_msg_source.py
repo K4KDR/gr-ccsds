@@ -20,11 +20,12 @@
 #
 
 from gnuradio import gr, gr_unittest
-import ccsds_swig
+from gnuradio import blocks
+import ccsds_swig as ccsds
 import random
 import numpy
 import os
-from gruel import pmt
+import pmt
 
 class qa_ccsds_blob_msg_source (gr_unittest.TestCase):
 
@@ -36,8 +37,8 @@ class qa_ccsds_blob_msg_source (gr_unittest.TestCase):
 
     def runExperiment(self, num_blobs, blob_len):
 	# blocks
-	self.blob_source = ccsds_swig.blob_msg_source_b(blob_len)
-	self.snk = gr.vector_sink_b(1)
+	self.blob_source = ccsds.blob_msg_source_b(blob_len)
+	self.snk = blocks.vector_sink_b(1)
 
 	# connections
 	self.tb.connect((self.blob_source, 0), (self.snk, 0))
@@ -46,7 +47,7 @@ class qa_ccsds_blob_msg_source (gr_unittest.TestCase):
 	self.tb.start()
 
 	src_data = [];
-	port = pmt.pmt_intern("in")
+	port = pmt.intern("in")
 
 	for i in xrange(num_blobs):
 		#generate random blob data
@@ -56,16 +57,16 @@ class qa_ccsds_blob_msg_source (gr_unittest.TestCase):
 		[src_data.append(byte) for byte in data]
 
 		#generate message
-		msg = pmt.pmt_make_u8vector(blob_len, 0x00);
+		msg = pmt.make_u8vector(blob_len, 0x00);
 		# fill message with data
 		for j in xrange(blob_len) :
-			pmt.pmt_u8vector_set(msg, j, data[j])
+			pmt.u8vector_set(msg, j, data[j])
 
 		#post message
-		meta = pmt.pmt_make_dict()
-		meta = pmt.pmt_dict_add(meta, pmt.pmt_intern("frame_number"), pmt.pmt_from_long(i))
+		meta = pmt.make_dict()
+		meta = pmt.dict_add(meta, pmt.intern("frame_number"), pmt.from_long(i))
 		
-		self.blob_source.to_basic_block()._post( port, pmt.pmt_cons(meta, msg) )
+		self.blob_source.to_basic_block()._post( port, pmt.cons(meta, msg) )
 	
         
         #send EOF
