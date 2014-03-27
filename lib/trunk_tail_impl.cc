@@ -68,7 +68,7 @@ namespace gr {
     	
     	pmt::pmt_t msg_out_data = pmt::make_f32vector(d_FRAME_LEN-d_TRUNK_LEN, 0.0f);
     	
-    	for(size_t i=0;i<d_FRAME_LEN-d_TRUNK_LEN;i++) {
+    	for(size_t i=0;i<d_FRAME_LEN-d_TRUNK_LEN-12;i++) { // don't copy last 12 bits so they stay 0.0 and thus have no weight for the viterbi decoder
     		pmt::f32vector_set(msg_out_data, i, pmt::f32vector_ref(msg, i));
     	}
     
