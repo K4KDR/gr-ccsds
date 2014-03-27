@@ -185,11 +185,19 @@ namespace gr {
     
     		std::string name = pmt::symbol_to_string(key);
     
+		if(d_metadata_map.count(name) == 0) {
+#ifdef CCSDS_TICP_FRAME_SINK_WARN_HEADER
+			fprintf(stderr,"WARNING TICP FRAME SINK: dropping metadata with key '%s'. Frame will still be transmitted.\n", name.c_str());
+#endif
+			continue;
+		}
+
+		/*
     		if(!pmt::is_blob(value)) {
     			fprintf(stderr,"WARNING TICP FRAME SINK: expecting metadata with key %s to be of type blob, skipping.\n", name.c_str());
     			continue;
     		}
-    
+		*/
     		ticp::data_v1_t mdata((unsigned char *)pmt::blob_data(value), (unsigned char *)pmt::blob_data(value)+pmt::length(value));
     
     		frame[ d_metadata_map[name] ] = mdata;

@@ -12,6 +12,9 @@
 
 // #define CCSDS_TICP_FRAME_SINK_DEBUG
 
+/*! Print out warnings about missing metadata header mappings, otherwise be silent */
+// #define CCSDS_TICP_FRAME_SINK_WARN_HEADER
+
 namespace gr {
   namespace ccsds {
 

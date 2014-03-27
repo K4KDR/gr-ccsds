@@ -553,7 +553,7 @@ namespace gr {
     						pmt::pmt_t meta = extractTags(from, len);
     
     						// Add frame count for debugging
-    						meta = pmt::dict_add(meta, pmt::mp("frame_number"), pmt::from_long(d_frame_count));
+    						meta = pmt::dict_add(meta, pmt::mp("frame_number"), pmt::make_blob(&d_frame_count, 4));
     
     						// create PDU
     						pmt::pmt_t msg = pmt::cons(meta, d_msg_buffer);
