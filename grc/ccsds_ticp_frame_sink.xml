@@ -4,7 +4,7 @@
   <key>ccsds_ticp_frame_sink</key>
   <category>CCSDS/TICP</category>
   <import>import ccsds</import>
-  <make>ccsds.ticp_frame_sink($port, $frame_len, $data_type, $mapping.values(), $mapping.keys())</make>
+  <make>ccsds.ticp_frame_sink($port, $frame_len, $data_type, $mapping.keys(), $mapping.values())</make>
 	<param>
 		<name>Port</name>
 		<key>port</key>
