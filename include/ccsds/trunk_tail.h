@@ -14,12 +14,19 @@ namespace gr {
      *
      *  The block has an input message port named "in" at which new frames can
      *  arrive. The message is trunkated then queued in the output message port named "out".
+     *  
+     *  
      */
     class CCSDS_API trunk_tail : virtual public gr::sync_block
     {
     public:
     	typedef boost::shared_ptr<trunk_tail> sptr;
-    	static sptr make(const unsigned int trunk_len, const unsigned int frame_len);
+	/*!
+	* \param truc_len bits that are trucated
+	* \param frame_len the total frame length including trunc_len
+	* \param blanc_bits bit at the end that are uncertain
+	*/
+    	static sptr make(const unsigned int trunk_len, const unsigned int frame_len, const unsigned int blanc_bits);
     };
 
   } // namespace ccsds

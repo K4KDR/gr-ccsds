@@ -9,14 +9,14 @@ namespace gr {
   namespace ccsds {
 
     trunk_tail::sptr 
-    trunk_tail::make (const unsigned int trunk_len, const unsigned int frame_len) {
-        return gnuradio::get_initial_sptr (new trunk_tail_impl(trunk_len, frame_len) );
+    trunk_tail::make (const unsigned int trunk_len, const unsigned int frame_len, const unsigned int blanc_bits) {
+        return gnuradio::get_initial_sptr (new trunk_tail_impl(trunk_len, frame_len, blanc_bits) );
     }
     
-    trunk_tail_impl::trunk_tail_impl(const unsigned int trunk_len, const unsigned int frame_len)
+    trunk_tail_impl::trunk_tail_impl(const unsigned int trunk_len, const unsigned int frame_len, const unsigned int blanc_bits)
       : gr::sync_block ("trunk_tail",
     	gr::io_signature::make (0, 0, 0),
-    	gr::io_signature::make (0, 0, 0)), d_TRUNK_LEN(trunk_len), d_FRAME_LEN(frame_len)
+    	gr::io_signature::make (0, 0, 0)), d_TRUNK_LEN(trunk_len), d_FRAME_LEN(frame_len), d_BLANC_BITS(blanc_bits)
     {
     
     	d_stop = false;
@@ -68,7 +68,7 @@ namespace gr {
     	
     	pmt::pmt_t msg_out_data = pmt::make_f32vector(d_FRAME_LEN-d_TRUNK_LEN, 0.0f);
     	
-    	for(size_t i=0;i<d_FRAME_LEN-d_TRUNK_LEN-12;i++) { // don't copy last 12 bits so they stay 0.0 and thus have no weight for the viterbi decoder
+    	for(size_t i=0;i<d_FRAME_LEN - d_TRUNK_LEN - d_BLANC_BITS;i++) { // don't copy last 12 bits (d_BLANC_BITS) so they stay 0.0 and thus have no weight for the viterbi decoder
     		pmt::f32vector_set(msg_out_data, i, pmt::f32vector_ref(msg, i));
     	}
     
