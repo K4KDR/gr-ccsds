@@ -38,12 +38,12 @@ install(FILES
 	mpsk_ambiguity_resolver_f.h
 	conv_decode27.h
 	conv_puncturing27.h
+	mpsk_detector_soft_cf.h
 	DESTINATION include/ccsds
 )
 #	conv_encode27_bb.h
 #	conv_encode27_punct.h
 #	rs_encode.h
 #	mpsk_mod_bc.h
-#	mpsk_detector_soft_cf.h
 #	mpsk_preamble_cc.h
 #)
