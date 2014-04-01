@@ -34,6 +34,7 @@ install(FILES
 	blob_msg_sink_b.h
 	blob_msg_source_b.h
 	softbits_msg_to_bytes_b.h
+	rs_encode.h
 	rs_decode.h
 	mpsk_ambiguity_resolver_f.h
 	conv_decode27.h
@@ -43,7 +44,6 @@ install(FILES
 )
 #	conv_encode27_bb.h
 #	conv_encode27_punct.h
-#	rs_encode.h
 #	mpsk_mod_bc.h
 #	mpsk_preamble_cc.h
 #)

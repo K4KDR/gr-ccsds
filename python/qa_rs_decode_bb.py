@@ -20,7 +20,7 @@
 #
 
 from gnuradio import gr, gr_unittest
-import ccsds_swig
+import ccsds_swig as ccsds
 
 class qa_rs_decode_bb (gr_unittest.TestCase):
 
@@ -31,7 +31,7 @@ class qa_rs_decode_bb (gr_unittest.TestCase):
         self.tb = None
 
     def test_001_t (self):
-        # set up fg
+        # set up fas g
         self.tb.run ()
         # check data
 

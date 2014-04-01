@@ -20,8 +20,9 @@
 #
 
 from gnuradio import gr, gr_unittest
-import ccsds_swig
-from gruel import pmt
+from gnuradio import blocks
+import ccsds_swig as ccsds
+import pmt
 import numpy
 import random
 import time
@@ -41,12 +42,12 @@ class qa_ccsds_rs_chain (gr_unittest.TestCase):
 		##################################################
 		# Blocks
 		##################################################
-		self.src = gr.vector_source_b(data, False)
-		self.snk = gr.vector_sink_b(1)
-		self.encoder = ccsds_swig.rs_encode(I)
-		self.decoder = ccsds_swig.rs_decode(I)
-		self.blob_source = ccsds_swig.blob_msg_source_b(223*I)
-		self.blob_sink = ccsds_swig.blob_msg_sink_b(223*I)
+		self.src = blocks.vector_source_b(data, False)
+		self.snk = blocks.vector_sink_b(1)
+		self.encoder = ccsds.rs_encode(I)
+		self.decoder = ccsds.rs_decode(I)
+		self.blob_source = ccsds.blob_msg_source_b(223*I)
+		self.blob_sink = ccsds.blob_msg_sink_b(223*I)
 
 		##################################################
 		# Connections
@@ -94,13 +95,13 @@ class qa_ccsds_rs_chain (gr_unittest.TestCase):
 		##################################################
 		# Blocks
 		##################################################
-		self.src = gr.vector_source_b(data, False)
-		self.snk = gr.vector_sink_b(1)
-		self.msg_to_byte = gr.message_source(gr.sizeof_char*1, msg_to_byte_msgq_in)
-		self.encoder = ccsds_swig.rs_encode(I)
-		self.decoder = ccsds_swig.rs_decode_bb(decoder_msgq_out, 10200)
-		self.byte_to_blob_msg = ccsds_swig.blob_msg_sink_b(223*I)
-		self.blob_msg_to_byte = ccsds_swig.blob_msg_source_b(255*I)
+		self.src = blocks.vector_source_b(data, False)
+		self.snk = blocks.vector_sink_b(1)
+		self.msg_to_byte = blocks.message_source(gr.sizeof_char*1, msg_to_byte_msgq_in)
+		self.encoder = ccsds.rs_encode(I)
+		self.decoder = ccsds.rs_decode_bb(decoder_msgq_out, 10200)
+		self.byte_to_blob_msg = ccsds.blob_msg_sink_b(223*I)
+		self.blob_msg_to_byte = ccsds.blob_msg_source_b(255*I)
 
 		##################################################
 		# Connections
