@@ -80,58 +80,58 @@ class qa_ccsds_rs_chain (gr_unittest.TestCase):
 
 	
 
-	# Randm Source --stream--> BLOB Message Sink --message--> ccsds_rs_encode
-	# --message--> BLOB Message source --stream--> ccsds_rs_decode_bb --msg-->
-	# msg_source --stream--> vector source
-	def runStreamTest(self, num_frames):
-		I = 5
-		data = tuple(map(int, numpy.random.randint(0, 256, 223*num_frames*I)))
-		#data = tuple(map(int, numpy.random.randint(1, 2, 223*num_frames*I)))
-		##################################################
-		# Message Queues
-		##################################################
-		decoder_msgq_out = msg_to_byte_msgq_in = gr.msg_queue(2)
-
-		##################################################
-		# Blocks
-		##################################################
-		self.src = blocks.vector_source_b(data, False)
-		self.snk = blocks.vector_sink_b(1)
-		self.msg_to_byte = blocks.message_source(gr.sizeof_char*1, msg_to_byte_msgq_in)
-		self.encoder = ccsds.rs_encode(I)
-		self.decoder = ccsds.rs_decode_bb(decoder_msgq_out, 10200)
-		self.byte_to_blob_msg = ccsds.blob_msg_sink_b(223*I)
-		self.blob_msg_to_byte = ccsds.blob_msg_source_b(255*I)
-
-		##################################################
-		# Connections
-		##################################################
-		self.tb.connect((self.src, 0), (self.byte_to_blob_msg, 0))
-		self.tb.connect((self.blob_msg_to_byte, 0), (self.decoder, 0))
-		self.tb.connect((self.msg_to_byte, 0), (self.snk, 0))
-
-		##################################################
-		# Asynch Message Connections
-		##################################################
-		self.tb.msg_connect(self.byte_to_blob_msg, "out", self.encoder, "in")
-		self.tb.msg_connect(self.encoder, "out", self.blob_msg_to_byte, "in")
-
-		#self.dbg = gr.message_debug()
-		#self.tb.msg_connect(self.blob_sink, "out", self.dbg, "print")
-
-		# start
-		self.tb.start()
-
-		while(len(self.snk.data()) < 223*num_frames*I):
-			time.sleep(0.1)
-			#print "%d/%d samples arrived, sleep until all data arrived" % (len(self.snk.data()), 223*num_frames*I)
-
-		# stop flowgraph
-		self.tb.stop()
-		self.tb.wait()
-
-		self.assertEqual(data, self.snk.data(), 'Output is not matching input for I=%d (using ccsds_rs_decode_bb)' % (I))
-
+#	# Randm Source --stream--> BLOB Message Sink --message--> ccsds_rs_encode
+#	# --message--> BLOB Message source --stream--> ccsds_rs_decode_bb --msg-->
+#	# msg_source --stream--> vector source
+#	def runStreamTest(self, num_frames):
+#		I = 5
+#		data = tuple(map(int, numpy.random.randint(0, 256, 223*num_frames*I)))
+#		#data = tuple(map(int, numpy.random.randint(1, 2, 223*num_frames*I)))
+#		##################################################
+#		# Message Queues
+#		##################################################
+#		decoder_msgq_out = msg_to_byte_msgq_in = gr.msg_queue(2)
+#
+#		##################################################
+#		# Blocks
+#		##################################################
+#		self.src = blocks.vector_source_b(data, False)
+#		self.snk = blocks.vector_sink_b(1)
+#		self.msg_to_byte = blocks.message_source(gr.sizeof_char*1, msg_to_byte_msgq_in)
+#		self.encoder = ccsds.rs_encode(I)
+#		self.decoder = ccsds.rs_decode_bb(decoder_msgq_out, 10200)
+#		self.byte_to_blob_msg = ccsds.blob_msg_sink_b(223*I)
+#		self.blob_msg_to_byte = ccsds.blob_msg_source_b(255*I)
+#
+#		##################################################
+#		# Connections
+#		##################################################
+#		self.tb.connect((self.src, 0), (self.byte_to_blob_msg, 0))
+#		self.tb.connect((self.blob_msg_to_byte, 0), (self.decoder, 0))
+#		self.tb.connect((self.msg_to_byte, 0), (self.snk, 0))
+#
+#		##################################################
+#		# Asynch Message Connections
+#		##################################################
+#		self.tb.msg_connect(self.byte_to_blob_msg, "out", self.encoder, "in")
+#		self.tb.msg_connect(self.encoder, "out", self.blob_msg_to_byte, "in")
+#
+#		#self.dbg = gr.message_debug()
+#		#self.tb.msg_connect(self.blob_sink, "out", self.dbg, "print")
+#
+#		# start
+#		self.tb.start()
+#
+#		while(len(self.snk.data()) < 223*num_frames*I):
+#			time.sleep(0.1)
+#			#print "%d/%d samples arrived, sleep until all data arrived" % (len(self.snk.data()), 223*num_frames*I)
+#
+#		# stop flowgraph
+#		self.tb.stop()
+#		self.tb.wait()
+#
+#		self.assertEqual(data, self.snk.data(), 'Output is not matching input for I=%d (using ccsds_rs_decode_bb)' % (I))
+#
 
 	##
 	## ccsds_rs_decode
@@ -220,17 +220,17 @@ class qa_ccsds_rs_chain (gr_unittest.TestCase):
 	##
 
 
-	# Send one uninterleaved frame
-	#'''
-	def test_stream_once(self):
-		self.runStreamTest(1)
-	#'''
-
-	#'''
-	# Send multiple frames
-	def test_stream_multiple(self):
-		self.runStreamTest(20)
-	#'''
+#	# Send one uninterleaved frame
+#	#'''
+#	def test_stream_once(self):
+#		self.runStreamTest(1)
+#	#'''
+#
+#	#'''
+#	# Send multiple frames
+#	def test_stream_multiple(self):
+#		self.runStreamTest(20)
+#	#'''
 
 
 if __name__ == '__main__':
