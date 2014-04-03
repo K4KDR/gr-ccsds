@@ -29,7 +29,7 @@
 #include "ccsds/mpsk_mod_bc.h"
 #include "ccsds/mpsk_detector_soft_cf.h"
 #include "ccsds/conv_encode27_bb.h"
-////#include "ccsds/mpsk_preamble_cc.h"
+#include "ccsds/mpsk_preamble_cc.h"
 %}
 
 
@@ -91,6 +91,6 @@ GR_SWIG_BLOCK_MAGIC2(ccsds,mpsk_mod_bc);
 %include "ccsds/conv_encode27_bb.h"
 GR_SWIG_BLOCK_MAGIC2(ccsds,conv_encode27_bb);
 
-////GR_SWIG_BLOCK_MAGIC2(ccsds,mpsk_preamble_cc);
-////%include "ccsds/mpsk_preamble_cc.h"
-////
+%include "ccsds/mpsk_preamble_cc.h"
+GR_SWIG_BLOCK_MAGIC2(ccsds,mpsk_preamble_cc);
+

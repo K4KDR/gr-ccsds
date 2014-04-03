@@ -35,8 +35,8 @@ install(FILES
 	ccsds_softbits_msg_to_bytes_b.xml
 	ccsds_mpsk_detector_soft_cf.xml
 	ccsds_mpsk_mod_bc.xml
+	ccsds_conv_encode27_bb.xml
+	ccsds_mpsk_preamble_cc.xml
 	DESTINATION share/gnuradio/grc/blocks
 )
-##	ccsds_conv_encode27_bb.xml
-##	ccsds_mpsk_preamble_cc.xml
 

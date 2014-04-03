@@ -42,7 +42,6 @@ install(FILES
 	conv_puncturing27.h
 	mpsk_mod_bc.h
 	mpsk_detector_soft_cf.h
+	mpsk_preamble_cc.h
 	DESTINATION include/ccsds
 )
-#	mpsk_preamble_cc.h
-#)
