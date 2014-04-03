@@ -7,7 +7,6 @@
 #include <math.h>
 #include <complex>
 #include <cstdlib>
-#include <fftw3.h>
 #include <cstdio>
 
 //#define DLL_DEBUG

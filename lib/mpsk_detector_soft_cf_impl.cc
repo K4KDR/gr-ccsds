@@ -67,8 +67,8 @@ namespace gr {
     		return 0;
     	}
     
-    	float *tmp_angle = (float*)fftw_malloc(num_in*sizeof(float));
-    	float *tmp_mag = (float*)fftw_malloc(num_in*sizeof(float));
+    	float *tmp_angle = (float*)volk_malloc(num_in*sizeof(float), volk_get_alignment());
+    	float *tmp_mag = (float*)volk_malloc(num_in*sizeof(float), volk_get_alignment());
     
     	if(tmp_angle == 0 || tmp_mag == 0) {
     		fprintf(stderr,"ERROR MPSK DETECTOR SOFT: allocation of memory failed\n");
@@ -86,7 +86,7 @@ namespace gr {
     		// unaligned, copy input to aligned buffer
     
     		// allocate buffer
-    		gr_complex *tmp_c = (gr_complex*)fftw_malloc(num_in*sizeof(gr_complex));
+    		gr_complex *tmp_c = (gr_complex*)volk_malloc(num_in*sizeof(gr_complex), volk_get_alignment());
     		if(tmp_c == 0) {
     			fprintf(stderr,"ERROR MPSK DETECTOR SOFT: allocation of memory failed\n");
     			exit(EXIT_FAILURE);
@@ -100,7 +100,7 @@ namespace gr {
     		volk_32fc_s32f_atan2_32f_a(tmp_angle, tmp_c, 1.0f, num_in);
     
     		// free buffer
-    		fftw_free(tmp_c);
+    		volk_free(tmp_c);
     
     		// process magnitude
     		volk_32fc_magnitude_squared_32f_u(tmp_mag, in, num_in);
@@ -125,8 +125,8 @@ namespace gr {
     		}
     	}
     
-    	fftw_free(tmp_angle);
-    	fftw_free(tmp_mag);
+    	volk_free(tmp_angle);
+    	volk_free(tmp_mag);
     
     	// Tell runtime system how many output items we produced.
     	return num_in*d_ldM;

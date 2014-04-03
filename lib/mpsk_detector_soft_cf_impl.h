@@ -6,7 +6,6 @@
 #include <stdio.h>
 #include <math.h>
 #include <volk/volk.h>
-#include <fftw3.h>
 #include <complex.h>
 
 namespace gr {

@@ -2,9 +2,6 @@
 #include "config.h"
 #endif
 
-//TODO lo_feedback RAUS!!
-//#include "ccsds_lo_feedback.h"
-
 #include "pll_cc_impl.h"
 #include <gnuradio/io_signature.h>
 #include <volk/volk.h>
@@ -12,7 +9,7 @@
 #include <math.h>
 #include <complex>
 #include <cstdlib>
-#include <fftw3.h>
+#include <volk/volk.h>
 
 //#define PLL_DEBUG
 
@@ -151,9 +148,7 @@ namespace gr {
     */
     void pll_cc_impl::calc_rotation(gr_complex *out, const gr_complex *in, const float *tmp_f, const unsigned int num) {
     	//* with volk	
-    	gr_complex *rot = (gr_complex*)fftw_malloc(sizeof(gr_complex)*num);
-	// TODO in 3.7.3 replace fftw_malloc with volk_malloc
-    	//gr_complex *rot = (gr_complex*)volk_malloc(sizeof(gr_complex)*num);
+    	gr_complex *rot = (gr_complex*)volk_malloc(sizeof(gr_complex)*num, volk_get_alignment());
     
     	// temp variable for sine and cosine part of rotator
     	float tmp_s, tmp_c;
@@ -174,7 +169,7 @@ namespace gr {
     		volk_32fc_x2_multiply_32fc_a(out, in, rot, num);
     	}
     
-    	fftw_free(rot);
+    	volk_free(rot);
     	// */
     
     	/* without volk
@@ -207,9 +202,9 @@ namespace gr {
     	float *tmp_f, *tmp_freq;
     
     	// allocate temporary memory
-    	tmp_c = (gr_complex *) fftw_malloc(num * sizeof(gr_complex));
-    	tmp_f = (float *)      fftw_malloc(num * sizeof(float));
-    	tmp_freq = (float *)      fftw_malloc(num * sizeof(float));
+    	tmp_c = (gr_complex *) volk_malloc(num * sizeof(gr_complex), volk_get_alignment());
+    	tmp_f = (float *)      volk_malloc(num * sizeof(float), volk_get_alignment());
+    	tmp_freq = (float *)      volk_malloc(num * sizeof(float), volk_get_alignment());
     	if (tmp_c == 0 || tmp_f == 0 || tmp_freq == 0) {
     		fprintf(stderr,"ERROR: allocation of memory failed\n");
     		exit(EXIT_FAILURE);
@@ -243,49 +238,6 @@ namespace gr {
     	// Put these calculations into the filter
     	d_filter->filter_wrapped(tmp_f, tmp_freq, M_PI/(float)d_M,num);
     	
-	/*
-	 * removed lo_feedback
-	 *
-    	// check if new lo frequency tag arrived
-    	check_lo_tags(nread, num);
-    
-    	// did we receive a tag?
-    	if(d_lo_msg_tag) {
-    		// check if new frequency update is due
-    		if(d_lo_msg_offset >= num) {
-    			// not yet, just update counter
-    			d_lo_msg_offset -= num;
-    		} else {
-    			send_freq_estimate(tmp_freq[d_lo_msg_offset]);
-    
-    			#ifdef PLL_DEBUG
-    				fprintf(dbg_file_lo, "%lu,%f\n",nread+d_lo_msg_offset,tmp_freq[d_lo_msg_offset]);
-    			#endif
-    
-    			// we "consumed" the tag, wait for the next one
-    			d_lo_msg_tag = false;
-    		}
-    	}
-   	*/
-
-    	/*
-    	// send frequency update every PLL_FREQ_UPDATE symbols
-    	double freq_est = 0.0;
-    	for(unsigned int i=0;i<num;i++) {
-    
-    		// wait five update blocks to let the other loops settle
-    		if(nread+i >= PLL_FREQ_SKIP_FIRST && (nread+i)%PLL_FREQ_UPDATE == 0) {
-    			d_freq_filter->filter(&freq_est, &tmp_freq[i], 1);
-    			send_freq_estimate(freq_est);
-    
-    			#ifdef PLL_DEBUG
-    				fprintf(dbg_file_lo, "%lu,%f,%f\n",nread+i,tmp_freq[i],freq_est);
-    			#endif
-    		}
-    	
-    		
-    	}
-    	*/
     	
     	// rotate the samples according to the filtered phase
     	calc_rotation(out, in, tmp_f, num);
@@ -300,9 +252,9 @@ namespace gr {
     	#endif
     
     	// free resources
-    	fftw_free(tmp_f);
-    	fftw_free(tmp_freq);
-    	fftw_free(tmp_c);
+    	volk_free(tmp_f);
+    	volk_free(tmp_freq);
+    	volk_free(tmp_c);
     
     	// Tell runtime how many input samples we used
     	consume_each(num);

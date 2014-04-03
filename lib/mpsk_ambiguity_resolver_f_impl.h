@@ -10,9 +10,7 @@
 #include <math.h>
 #include <complex>
 #include <cstdlib>
-#include <fftw3.h>
 #include <cstdio>
-//#include <gruel/pmt.h>
 #include <boost/scoped_array.hpp>
 #include <volk/volk.h>
 

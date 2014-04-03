@@ -39,9 +39,9 @@ namespace gr {
     	boost::scoped_array<unsigned char> tmp(new unsigned char[asm_len_byte]);
     	hexstring_to_binary(&ASM, tmp.get());
     
-    	d_ASM = (float*) fftw_malloc(d_ASM_LEN_BITS * sizeof(float));
-    	d_tmp_fv = (float*) fftw_malloc(d_ASM_LEN_BITS * sizeof(float)); // Aligned buffer for sequence to be checked against ASM
-    	d_tmp_f  = (float*) fftw_malloc(sizeof(float));			 // Aligned float for correlation result
+    	d_ASM = (float*) volk_malloc(d_ASM_LEN_BITS * sizeof(float), volk_get_alignment());
+    	d_tmp_fv = (float*) volk_malloc(d_ASM_LEN_BITS * sizeof(float), volk_get_alignment()); // Aligned buffer for sequence to be checked against ASM
+    	d_tmp_f  = (float*) volk_malloc(sizeof(float), volk_get_alignment());			 // Aligned float for correlation result
     	
     	if(d_ASM == 0 || d_tmp_fv == 0 || d_tmp_f == 0) {
     		fprintf(stderr,"ERROR AR SOFT: allocation of memory failed\n");
@@ -92,9 +92,9 @@ namespace gr {
     	delete[] d_map_index_to_bits;
     	delete[] d_map_bits_to_index;
     	
-    	fftw_free(d_ASM);
-    	fftw_free(d_tmp_fv);
-    	fftw_free(d_tmp_f);
+    	volk_free(d_ASM);
+    	volk_free(d_tmp_fv);
+    	volk_free(d_tmp_f);
     
     	#if CCSDS_AR_SOFT_VERBOSITY_LEVEL >= CCSDS_AR_SOFT_OUTPUT_DEBUG
     		fflush(dbg_file_in);
