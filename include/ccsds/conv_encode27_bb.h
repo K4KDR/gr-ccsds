@@ -15,7 +15,7 @@ namespace gr {
      *  \param gen_poly_c2 Compact generator polynom for c2 stream. Default is 0xDB.
      *  \param puncturing_type Symbol for type of puncturing. Default is NONE.
      */
-    class conv_encode27_bb : virtual public gr::block 
+    class CCSDS_API conv_encode27_bb : virtual public gr::block 
     {
     
     public:
