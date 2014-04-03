@@ -31,6 +31,8 @@ namespace gr {
      	 *  \param trunk_len Number of softbits to trunkate
     	 *
     	 *  \param frame_len Length of a frame (without ASM) in bytes.
+	 *
+	 *  \param blanc_bits bit at the end that are uncertain
     	 */
     	trunk_tail_impl(const unsigned int trunk_len, const unsigned int frame_len, const unsigned int blanc_bits);
 

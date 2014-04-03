@@ -3,32 +3,25 @@
 \section page_mpsk_receiver_introduction Introduction
 This pages describes two general purpose M-PSK demodulation chains which can be used to
 synchronize and demodulate arbitrary M-PSK signals. The first one is working on
-hard bit decisions, while the latter on uses soft-bit decisions. These blocks
+hard bit decisions(not implemented in gnuradio 3.7), 
+while the latter on uses soft-bit decisions. These blocks
 are available as GRC blocks in \a apps/blocks/mpsk_demod_hard.grc and
 \a apps/blocks/mpsk_demod_soft.grc
 
 The output of these two demodulators still have phase ambiguity, which has to be
 resolved either by differential encoding/decoding or by \subpage page_mpsk_ar
 
-\subsection page_mpsk_receiver_introduction_hard Hard-bit Decisions
-This block takes an input stream of complex samples at sampling rate and outputs
-a bit synchronized, unpacked (ld(M) information bits per byte) stream of bits
-(with unresolved phase ambiguity). This block is usually followed by the hard
-decision M-PSK ambiguity resolver implemented in
-\ref ccsds_mpsk_ambiguity_resolver_bb and the frame synchronization
-implemented in \ref ccsds_frame_sync_b.
-
 \subsection page_mpsk_receiver_introduction_soft Soft-bit Decisions
 This block takes an input stream of complex samples at sampling rate and outputs
 a bit synchronized stream of soft-bits (with unresolved phase ambiguity). This
 is usually followed by the soft-bit decision M-PSK ambiguity resolver and frame
-synchronization block implemented in \ref ccsds_mpsk_ambiguity_resolver_f.
+synchronization block implemented in \ref ccsds/mpsk_ambiguity_resolver_f.h.
 
 \subsection page_mpsk_receiver_introduction_hard_or_soft Hard- or Soft-bit Decisions
 Soft-bit decisions are recommended when following up with channelcoding (usually
 viterbi decoding) that can take advantage of the soft-bits. But the output of
 the soft-bit AR/FS block can also be cast back to hard-bit decisions with the
-\ref ccsds_softbits_msg_to_bytes_b block so blocks downstream can take hard-bit
+\ref ccsds/softbits_msg_to_bytes_b.h block so blocks downstream can take hard-bit
 decisions even when the soft-bit demodulator chain was used. The advantage of
 this is that the AR and FS profit from the soft-bit correlation, but they meed
 more recources than using the hard-bit detector block.
@@ -74,12 +67,6 @@ Symbol rate of the incomming signal given by \c samp_rate / \c osf.
 
 
 \section page_mpsk_receiver_blocks Blocks
-\subsection page_mpsk_receiver_lo Local oscillator
-The local oscillator shifts the incomminc signal by a frequency estimate it
-receives over the \subpage page_lo_feedback . If no frequency error is received
-(at the start) it uses a zero frequency estimate and thus does nothing at all
-until it receives an estimate. The LO is implemented in
-\ref ccsds_local_oscillator_cc.
 
 \subsection page_mpsk_receiver_filter RX filter
 The RX filter cuts out all frequency parts with a frequency higher than the
@@ -107,7 +94,7 @@ filter.
 \subsection page_mpsk_receiver_dll Delay locked loop
 Estimate the timing error introduced by a propagation delay and interpolate the
 signal at the correct time instances at symbol rate. This block performs a
-decimation by \c osf. The DLL is implemented in \ref ccsds_dll_cc.
+decimation by \c osf. The DLL is implemented in \ref ccsds/dll_cc.h.
 
 \subsection page_mpsk_receiver_agc2 Automatic Gain Control
 The incomming signal energy can vary based on the TX power on the sending side
@@ -119,7 +106,7 @@ performed by this block. A standard GRC AGC2 implementation is used.
 \subsection page_mpsk_receiver_pll Phase locked loop
 Estimates the signal's phase and local frequency offset (after the LO). Sends
 frequency corrections to the LO and compensates the phase offset of the samples.
-The PLL is implemented in \ref ccsds_pll_cc.
+The PLL is implemented in \ref ccsds/pll_cc.h.
 
 \subsection page_mpsk_receiver_detector M-PSK Detector
 Detects the received M-PSK symbols based on the synchronized samples. Two

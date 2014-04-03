@@ -22,11 +22,11 @@ namespace gr {
     public:
     	typedef boost::shared_ptr<trunk_tail> sptr;
 	/*!
-	* \param truc_len bits that are trucated
+	* \param trunc_len bits that are trucated
 	* \param frame_len the total frame length including trunc_len
 	* \param blanc_bits bit at the end that are uncertain
 	*/
-    	static sptr make(const unsigned int trunk_len, const unsigned int frame_len, const unsigned int blanc_bits);
+    	static sptr make(const unsigned int trunc_len, const unsigned int frame_len, const unsigned int blanc_bits);
     };
 
   } // namespace ccsds

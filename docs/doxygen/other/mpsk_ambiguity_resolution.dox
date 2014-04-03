@@ -26,7 +26,7 @@ beeing dropped because the downstream blocks still see the old ambiguity stream.
 So the selection of the locking threshold is a tradeoff 
 
 \section page_mpsk_ar_hard Hard-bit Ambiguity Resolution
-The hard-bit AR block implemented in \ref ccsds_mpsk_ambiguity_resolver_bb is
+The hard-bit AR block implemented in (not implemented in gnuradio 3.7) is
 looking the ASM sequence in an input stream of unpacked bytes (ld(M) information
 bits per byte). The AR threads these unpacked bytes as symbols and not as
 individual bytes in order to be able to create all other possible ambiguities

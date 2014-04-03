@@ -22,31 +22,6 @@ namespace gr {
     	/*! \brief Storage for modulation order. */
     	const unsigned int d_M;
     
-    
-    	/*! \brief Indicator whether the loop has recently received a
-    	 *	frequency_offset tag or not.
-    	 *
-    	 *  \sa d_lo_msg_offset
-    	 *
-    	 *  If \a true, the loop has recently received a frequency_offset tag
-    	 *  and the counter in ccsds_pll_cc::d_lo_msg_offset tells how many more
-    	 *  saples the loop has to process before it should send the next
-    	 *  frequency correction message.
-    	 *
-    	 *  If \a flase, the loop should look for new frequency_offset tags.
-    	 */
-    	//bool d_lo_msg_tag;
-    
-    	/*! \brief Number of samples that need to be processed by the loop
-    	 *	before a new frequency correction message can be send out.
-    	 *
-    	 *  \sa d_lo_msg_tag
-    	 *
-    	 *  ccsds_pll_cc::lo_msg_tag indicates whether this value is valid, or
-    	 *  not.
-    	 */
-    	//unsigned int d_lo_msg_offset;
-    
     	/*! \brief Filter used for smoothing the frequency estimates. */
     	lpf2* d_filter;
     
@@ -97,45 +72,6 @@ namespace gr {
     	 *  \param num Number of samples to process.
     	 */
     	void calc_phases(float *tmp_f, const gr_complex *tmp_c, const unsigned int num);
-    
-    	/*! \brief Checks input stream for possible frequency_offset tags.
-    	 *
-    	 *  \param from Absolute counter of processed samples from which the
-    	 *	tags should be searched. Any tags before this counter are
-    	 *	ignored.
-    	 *  \param num Number os samples that should be searched starting from
-    	 *	\c from.
-    	 *  \sa \ref page_lo_feedback
-    	 *  \sa ccsds_lo_feedback.h
-    	 *
-    	 *  If ccsds_pll_cc::d_lo_msg_tag is \a true the function will return
-    	 *  immediatley. This means that the loop has allready eceived a
-    	 *  frequency_offset tag within the last #PLL_FREQ_UPDATE samples and is
-    	 *  now waiting for the counter to hit zero so a new frequency
-    	 *  correction message can be send.
-    	 *
-    	 *  If ccsds_pll_cc::d_lo_msg_tag is \a false, the funktion will look
-    	 *  for frequency_offset tags in range [from,from+num) and if
-    	 *  any is found the earliest's relative offset to \c from plus
-    	 *  #PLL_FREQ_UPDATE is stored in ccsds_pll_cc::d_lo_msg_offset and
-    	 *  ccsds_pll_cc::d_lo_msg_tag is set to \a true. This will cause the
-    	 *  loop to process another #PLL_FREQ_UPDATE samples before new
-    	 *  frequency correction messages are send.
-    	 */
-    	//void check_lo_tags(const uint64_t from, const unsigned int num);
-    
-    	/*! \brief Send a frequency correction message
-    	 *
-    	 *  \param est Per symbol phase increase (i.e. frequency) estimate in
-    	 *	radians are send out on port "freq" as double.
-    	 *  \sa \ref page_lo_feedback
-    	 *  \sa ccsds_lo_feedback.h
-    	 *
-    	 *  Sends given estimate \c est to output port "freq" according to
-    	 *  \ref page_lo_feedback_msg
-    	 *  \todo document new message passing type of frequency correction
-    	 */
-    	//void send_freq_estimate(double est);
     
     	/*! \brief Rotates complex array according to phase estimates.
     	 *
