@@ -85,7 +85,6 @@ set(GRC_BLOCKS_DIR      ${GR_PKG_DATA_DIR}/grc/blocks)
 ########################################################################
 find_package(GnuradioRuntime)
 find_package(CppUnit)
-#find_package(FFTW3)
 
 # To run a more advanced search for GNU Radio and it's components and
 # versions, use the following. Add any components required to the list
@@ -113,14 +112,12 @@ include_directories(
     ${Boost_INCLUDE_DIRS}
     ${CPPUNIT_INCLUDE_DIRS}
     ${GNURADIO_RUNTIME_INCLUDE_DIRS}
-    #${FFTW3_INCLUDE_DIRS}
 )
 
 link_directories(
     ${Boost_LIBRARY_DIRS}
     ${CPPUNIT_LIBRARY_DIRS}
     ${GNURADIO_RUNTIME_LIBRARY_DIRS}
-    #${FFTW3_LIBRARY_DIRS}
 )
 
 # Set component parameters
