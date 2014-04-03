@@ -39,9 +39,9 @@ add_library(gnuradio-ccsds SHARED
 	reversebits_impl.cc
 	mpsk_mod_bc_impl.cc
 	mpsk_detector_soft_cf_impl.cc
+	conv_encode27_bb_impl.cc
+	conv_encode27_aux.cc
 	randomiser_impl.cc)
-##	conv_encode27_bb_impl.cc
-##	conv_encode27_aux_impl.cc
 ##	mpsk_preamble_cc_impl.cc
 target_link_libraries(gnuradio-ccsds ${Boost_LIBRARIES} ${GNURADIO_RUNTIME_LIBRARIES} fftw3 ticp fec)
 set_target_properties(gnuradio-ccsds PROPERTIES DEFINE_SYMBOL "gnuradio_ccsds_EXPORTS")
@@ -55,7 +55,7 @@ install(TARGETS gnuradio-ccsds
     RUNTIME DESTINATION bin              # .dll file
 )
 
-##add_executable (test_ccsds_conv_encode27_aux test_ccsds_conv_encode27_aux.cc ccsds_conv_encode27_aux.cc) 
+##add_executable (test_ccsds_conv_encode27_aux test_ccsds_conv_encode27_aux.cc conv_encode27_aux.cc) 
 
 ########################################################################
 # Build and register unit test
@@ -67,7 +67,7 @@ set(GR_TEST_TARGET_DEPS gnuradio-ccsds)
 #turn each test cpp file into an executable with an int main() function
 add_definitions(-DBOOST_TEST_DYN_LINK -DBOOST_TEST_MAIN)
 
-##add_executable(qa_ccsds_conv_encode27_aux qa_ccsds_conv_encode27_aux.cc ccsds_conv_encode27_aux.cc)
+##add_executable(qa_ccsds_conv_encode27_aux qa_ccsds_conv_encode27_aux.cc conv_encode27_aux.cc)
 ##target_link_libraries(qa_ccsds_conv_encode27_aux ${Boost_LIBRARIES})
 ##GR_ADD_TEST(qa_ccsds_conv_encode27_aux qa_ccsds_conv_encode27_aux)
 
