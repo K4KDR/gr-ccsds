@@ -34,8 +34,12 @@ namespace gr {
     
     	#if CCSDS_RS_DECODE_VERBOSITY_LEVEL >= CCSDS_RS_DECODE_OUTPUT_DEBUG
     		dbg_file_in 	   = fopen("/tmp/rs_decode_impl_debug_in.dat","w");
+    		dbg_file_in_deinterleaved = fopen("/tmp/rs_decode_impl_debug_in_deinterleaved.dat","w");
     		dbg_file_in_valid  = fopen("/tmp/rs_decode_impl_debug_in_valid.dat","w");
     		dbg_file_out	   = fopen("/tmp/rs_decode_impl_debug_out.dat","w");
+
+		fprintf(dbg_file_in, "# received byte stream, splitted into data frames and combined redundancy part\n");
+		fprintf(dbg_file_in_deinterleaved, "# deinterleaved byte stream as put into the RS decoder, redundancy part separated by whitespaces\n");
     	#endif
     }
     
@@ -46,10 +50,12 @@ namespace gr {
     
     	#if CCSDS_RS_DECODE_VERBOSITY_LEVEL >= CCSDS_RS_DECODE_OUTPUT_DEBUG
     		fflush(dbg_file_in);
+    		fflush(dbg_file_in_deinterleaved);
     		fflush(dbg_file_in_valid);
     		fflush(dbg_file_out);
     
     		fclose(dbg_file_in);
+    		fclose(dbg_file_in_deinterleaved);
     		fclose(dbg_file_in_valid);
     		fclose(dbg_file_out);
     	#endif
@@ -109,10 +115,18 @@ namespace gr {
     
     	#if CCSDS_RS_DECODE_VERBOSITY_LEVEL >= CCSDS_RS_DECODE_OUTPUT_DEBUG
     		// Write input to debug file
-    		for(unsigned int i=0;i<blob_len;i++) {
-    			fprintf(dbg_file_in, "%02X ",data_in[i]);
+
+		// data part
+    		for(unsigned int i=0;i<d_I;i++) {
+			for(unsigned int k=0;k<d_k;k++) {
+    				fprintf(dbg_file_in, "%02X ",data_in[i*d_n+k]);
+			}
+			fprintf(dbg_file_in, "\n");
     		}
-    		fprintf(dbg_file_in, "\n");
+		for(unsigned int i=d_I*d_k;i<d_I*d_n;i++) {
+    			fprintf(dbg_file_in, "%02X ",data_in[i*d_n+k]);
+		}
+    		fprintf(dbg_file_in, "\n\n");
     	#endif
     
     	// start interleaving (1st step)
@@ -122,6 +136,21 @@ namespace gr {
     
     	// decode
     	for(unsigned int i=0;i<d_I;i++) {
+	    	#if CCSDS_RS_DECODE_VERBOSITY_LEVEL >= CCSDS_RS_DECODE_OUTPUT_DEBUG
+	    		// Write deinterleaved input to debug file
+
+			// data part
+			for(unsigned int k=0;k<d_k;k++) {
+    				fprintf(dbg_file_in_deinterleaved, "%02X ",d_buf_in[i*(d_k+d_2E)+k]);
+   	 		}
+    			fprintf(dbg_file_in_deinterleaved, "    ");
+			// redundancy part
+			for(unsigned int k=d_k;k<d_n;k++) {
+    				fprintf(dbg_file_in_deinterleaved, "%02X ",d_buf_in[i*(d_k+d_2E)+k]);
+   	 		}
+    			fprintf(dbg_file_in_deinterleaved, "\n");
+    		#endif
+
     		// no hints about erasures, use no padding
     		int ret = decode_rs_ccsds(&d_buf_in[i*(d_k+d_2E)], NULL, 0, 0);
     		if(ret < 0) {
@@ -143,6 +172,12 @@ namespace gr {
     		}
     	}
     
+    	#if CCSDS_RS_DECODE_VERBOSITY_LEVEL >= CCSDS_RS_DECODE_OUTPUT_DEBUG
+		// Write newline after frame to debug file
+		fprintf(dbg_file_in_deinterleaved, "\n");
+	#endif
+
+
     	// perform interleaving (2nd step)
     	for(unsigned int i=0;i<d_DATA_LEN;i++) {
     		d_buf_out[interl_indx(i, d_I, d_DATA_LEN)] = d_buf_data[i];

@@ -66,6 +66,9 @@ namespace gr {
     		FILE *dbg_file_in;
     
     		/*! \brief File pointer for debugging. */
+    		FILE *dbg_file_in_deinterleaved;
+    
+    		/*! \brief File pointer for debugging. */
     		FILE *dbg_file_in_valid;
     
     		/*! \brief File pointer for debugging. */
