@@ -124,7 +124,7 @@ namespace gr {
 			fprintf(dbg_file_in, "\n");
     		}
 		for(unsigned int i=d_I*d_k;i<d_I*d_n;i++) {
-    			fprintf(dbg_file_in, "%02X ",data_in[i*d_n+k]);
+    			fprintf(dbg_file_in, "%02X ",data_in[i]);
 		}
     		fprintf(dbg_file_in, "\n\n");
     	#endif
