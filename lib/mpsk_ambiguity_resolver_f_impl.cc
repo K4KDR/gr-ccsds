@@ -116,7 +116,12 @@ namespace gr {
     }
     
     float mpsk_ambiguity_resolver_f_impl::check_for_ASM(const float *in, const unsigned int offset) {
-    	float correlation = 0.0f;
+    	//float correlation = 0.0f;
+    	
+	/* ControlPort test
+	 * correlation is exported
+	*/
+	correlation = 0.0f;
     
     	/* correlation without volk
     	for(unsigned int i=0;i<d_ASM_LEN_BITS;i++) {
@@ -669,6 +674,16 @@ namespace gr {
     	// Stream sink, so no output
     	return 0;
     }
-
+	void mpsk_ambiguity_resolver_f_impl::setup_rpc() {
+	#ifdef GR_CTRLPORT
+	add_rpc_variable(
+	rpcbasic_sptr(new rpcbasic_register_get<mpsk_ambiguity_resolver_f, float>(
+	alias(), "correlation",
+	&mpsk_ambiguity_resolver_f::get_correlation,
+	pmt::mp(-1.0f), pmt:mp(1.0f), pmt:mp(0.0f),
+	"", "Get value of correlation", RPC_PRIVILVL_MIN,
+	DISPNULL)));
+	#endif /*GR_CTRLPORT*/
+	} 
   } // namespace ccsds
 } // namespace ccsds

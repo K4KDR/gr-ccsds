@@ -285,6 +285,11 @@ namespace gr {
     	 *	copied from the Tags.
     	 */
     	pmt::pmt_t extractTags(const uint64_t from, const unsigned int len);
+	
+	/* ControlPort test
+	 * export internal variable correlation
+	*/
+	float correlation;
     public:
     	/*!
     	 * \brief Public constructor of the AR
@@ -314,7 +319,12 @@ namespace gr {
     	void forecast(int noutput_items,gr_vector_int &ninput_items_required);
     
     	bool stop(void);
-    
+    	// get correlation is needed for ControlPorts
+	float get_correlation() const { return correlation; }
+	
+	// the function that gives us the Controlport
+	void setup_rpc();
+	
     	int  general_work (int  noutput_items,
     			        gr_vector_int               &ninput_items,
     			        gr_vector_const_void_star   &input_items,
