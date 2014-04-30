@@ -22,6 +22,7 @@
 #ifndef INCLUDED_CCSDS_API_H
 #define INCLUDED_CCSDS_API_H
 
+#include <gnuradio/config.h>
 #include <gnuradio/attributes.h>
 
 #ifdef gnuradio_ccsds_EXPORTS
