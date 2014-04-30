@@ -1,6 +1,7 @@
 #ifndef INCLUDED_CCSDS_MPSK_AMBIGUITY_RESOLVER_F_IMPL_H
 #define INCLUDED_CCSDS_MPSK_AMBIGUITY_RESOLVER_F_IMPL_H
 
+
 #include <ccsds/mpsk_ambiguity_resolver_f.h>
 #include "hexstring_to_binary.h"
 #include "mpsk_constellation.h"
@@ -320,7 +321,7 @@ namespace gr {
     
     	bool stop(void);
     	// get correlation is needed for ControlPorts
-	float get_correlation() const { return correlation; }
+	virtual float get_correlation() { return correlation; }
 	
 	// the function that gives us the Controlport
 	void setup_rpc();

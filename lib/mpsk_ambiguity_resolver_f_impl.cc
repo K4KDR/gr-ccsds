@@ -676,13 +676,16 @@ namespace gr {
     }
 	void mpsk_ambiguity_resolver_f_impl::setup_rpc() {
 	#ifdef GR_CTRLPORT
+	int GR_CTRL;
 	add_rpc_variable(
 	rpcbasic_sptr(new rpcbasic_register_get<mpsk_ambiguity_resolver_f, float>(
 	alias(), "correlation",
 	&mpsk_ambiguity_resolver_f::get_correlation,
-	pmt::mp(-1.0f), pmt:mp(1.0f), pmt:mp(0.0f),
-	"", "Get value of correlation", RPC_PRIVILVL_MIN,
-	DISPNULL)));
+	pmt::mp(-1.0f), pmt::mp(1.0f), pmt::mp(0.0f),
+	"", "Actual correlation of ASM", RPC_PRIVLVL_MIN,
+	DISPTIME|DISPOPTSTRIP)));
+	#else
+	char GR_CTRL_disabled;
 	#endif /*GR_CTRLPORT*/
 	} 
   } // namespace ccsds

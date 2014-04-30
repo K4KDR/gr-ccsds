@@ -38,6 +38,7 @@ namespace gr {
     	typedef boost::shared_ptr<mpsk_ambiguity_resolver_f> sptr;
     	static sptr make(const unsigned int M, std::string ASM, const unsigned int asm_len, const unsigned int threshold, 
 				const float correlation_threshold, const unsigned int frame_length, const unsigned int num_tail_syms=0);
+	virtual float get_correlation(void) = 0;
     };
 
   } // namespace ccsds
