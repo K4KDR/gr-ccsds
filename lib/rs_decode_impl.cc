@@ -11,14 +11,15 @@ namespace gr {
   namespace ccsds {
     
     rs_decode::sptr
-    rs_decode::make(const unsigned int I) {
-        return gnuradio::get_initial_sptr (new rs_decode_impl(I) );
+    rs_decode::make(const unsigned int I, const repr_t representation) {
+        return gnuradio::get_initial_sptr (new rs_decode_impl(I,representation) );
     }
     
-    rs_decode_impl::rs_decode_impl(const unsigned int I)
+    rs_decode_impl::rs_decode_impl(const unsigned int I, const repr_t representation)
       : gr::block ("ccsds_rs_decode",
     	gr::io_signature::make (0, 0, 0),
-    	gr::io_signature::make (0, 0, 0)), d_I(I), d_k(223), d_n(255), d_2E(32), d_DATA_LEN(d_k*d_I), d_IN_LEN(d_DATA_LEN+d_I*d_2E)
+    	gr::io_signature::make (0, 0, 0)), d_I(I), d_k(223), d_n(255), d_2E(32), d_DATA_LEN(d_k*d_I), d_IN_LEN(d_DATA_LEN+d_I*d_2E),
+	d_representation(representation)
     {
     	// create buffers
     	d_buf_in   = new unsigned char[ d_IN_LEN ];
@@ -152,7 +153,15 @@ namespace gr {
     		#endif
 
     		// no hints about erasures, use no padding
-    		int ret = decode_rs_ccsds(&d_buf_in[i*(d_k+d_2E)], NULL, 0, 0);
+		int ret;
+    		if(d_representation == BERLEKAMP) {
+			ret = decode_rs_ccsds(&d_buf_in[i*(d_k+d_2E)], NULL, 0, 0);
+		} else if(d_representation == CONVENTIONAL) {
+			ret = decode_rs_8(&d_buf_in[i*(d_k+d_2E)], NULL, 0, 0);
+		} else {
+			ret = -1;
+	    		fprintf(stderr,"WARNING RS DECODE: invalid representation type %d.\n", d_representation);
+		}
     		if(ret < 0) {
     			// unable to decode, drop this codeblock
     			#if CCSDS_RS_DECODE_VERBOSITY_LEVEL >= CCSDS_RS_DECODE_OUTPUT_FRAMEERR

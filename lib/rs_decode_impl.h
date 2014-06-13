@@ -24,7 +24,7 @@
  *  \sa #CCSDS_RS_DECODE_OUTPUT_NONE
  *  \sa #CCSDS_RS_DECODE_OUTPUT_DEBUG
  */
-#define CCSDS_RS_DECODE_VERBOSITY_LEVEL CCSDS_RS_DECODE_OUTPUT_NONE
+#define CCSDS_RS_DECODE_VERBOSITY_LEVEL CCSDS_RS_DECODE_OUTPUT_FRAMEERR
 
 namespace gr {
   namespace ccsds {
@@ -52,15 +52,18 @@ namespace gr {
     	/*! \brief Number of bytes per codeblock. Value=(k+2E)*I */
     	const unsigned int d_IN_LEN;
     
-    	/*  Storage for the first interleaving stage */
+    	/*!  \brief Storage for the first interleaving stage */
     	unsigned char *d_buf_in;
     
-    	/*  Storage for the second interleaving stage */
+    	/*! \brief Storage for the second interleaving stage */
     	unsigned char *d_buf_data;
     
-    	/*  Storage for the output frames symbols */
+    	/*! \brief Storage for the output frames symbols */
     	unsigned char *d_buf_out;
     
+	/*! \brief Storage for representation type */
+	const repr_t d_representation;
+
     	#if CCSDS_RS_DECODE_VERBOSITY_LEVEL >= CCSDS_RS_DECODE_OUTPUT_DEBUG
     		/*! \brief File pointer for debugging. */
     		FILE *dbg_file_in;
@@ -81,8 +84,10 @@ namespace gr {
     	 *  \brief Public constructor of the RS_Decode block.
     	 *
     	 *  \param I Depth of interleaving
+	 *  \param representation Data representation to use. 0 For Berlekamp
+	 *  (dual basis) representation , 1 for conventional representation.
     	 */
-    	rs_decode_impl(const unsigned int I);
+    	rs_decode_impl(const unsigned int I, const repr_t representation);
 
     	/*! \brief Public deconstructor of the AR */	
     	~rs_decode_impl ();  // public destructor

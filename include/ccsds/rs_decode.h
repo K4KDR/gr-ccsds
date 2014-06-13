@@ -21,7 +21,17 @@ namespace gr {
     {
     public:
     	typedef boost::shared_ptr<rs_decode> sptr;
-    	static sptr make(const unsigned int I);
+
+	enum repr_t {BERLEKAMP = 0, CONVENTIONAL = 1};
+
+	/*!
+	 *  \brief Create RS decoder
+	 *
+	 *  \param I interleaving length
+	 *  \param representation Select the representation to use. 0 for dual basis
+	 *  (Berlekamp) representation and 1 for conventional representation
+	 */
+    	static sptr make(const unsigned int I, const repr_t representation);
     };
 
   } // namespace ccsds
