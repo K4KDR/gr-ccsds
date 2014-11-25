@@ -43,5 +43,6 @@ install(FILES
 	mpsk_mod_bc.h
 	mpsk_detector_soft_cf.h
 	mpsk_preamble_cc.h
+	softbittobit.h
 	DESTINATION include/ccsds
 )

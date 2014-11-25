@@ -37,6 +37,7 @@ install(FILES
 	ccsds_mpsk_mod_bc.xml
 	ccsds_conv_encode27_bb.xml
 	ccsds_mpsk_preamble_cc.xml
+	ccsds_softbittobit.xml
 	DESTINATION share/gnuradio/grc/blocks
 )
 
