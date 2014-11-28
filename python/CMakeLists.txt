@@ -51,3 +51,6 @@ GR_ADD_TEST(qa_rs_chain ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_rs_c
 GR_ADD_TEST(qa_mpsk_ambiguity_resolver_f ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_mpsk_ambiguity_resolver_f.py)
 GR_ADD_TEST(qa_blob_msg_source ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_blob_msg_source.py)
 GR_ADD_TEST(qa_blob_msg_sink ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_blob_msg_sink.py)
+GR_ADD_TEST(qa_softbittobit ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_softbittobit.py)
+GR_ADD_TEST(qa_ccsds_mpsk_mod_bc ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_ccsds_mpsk_mod_bc.py)
+GR_ADD_TEST(qa_ccsds_mpsk_detector_soft_cf ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_ccsds_mpsk_detector_soft_cf.py)
