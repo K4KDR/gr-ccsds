@@ -25,6 +25,8 @@
 #include <gnuradio/io_signature.h>
 #include "simple_bpsk_SNR_qf_impl.h"
 
+#define WINDOW_SIZE 20
+
 namespace gr {
   namespace ccsds {
 
@@ -40,8 +42,8 @@ namespace gr {
      */
     simple_bpsk_SNR_qf_impl::simple_bpsk_SNR_qf_impl()
       : gr::block("simple_bpsk_SNR_qf",
-              gr::io_signature::make(<+MIN_IN+>, <+MAX_IN+>, sizeof(<+ITYPE+>)),
-              gr::io_signature::make(<+MIN_OUT+>, <+MAX_OUT+>, sizeof(<+OTYPE+>)))
+              gr::io_signature::make(1, 1, sizeof(gr_complex)),
+              gr::io_signature::make(1, 1, sizeof(float)))
     {}
 
     /*
@@ -55,6 +57,7 @@ namespace gr {
     simple_bpsk_SNR_qf_impl::forecast (int noutput_items, gr_vector_int &ninput_items_required)
     {
         /* <+forecast+> e.g. ninput_items_required[0] = noutput_items */
+	ninput_items_required[0] = noutput_items * WINDOW_SIZE;
     }
 
     int
@@ -63,8 +66,8 @@ namespace gr {
                        gr_vector_const_void_star &input_items,
                        gr_vector_void_star &output_items)
     {
-        const <+ITYPE*> *in = (const <+ITYPE*> *) input_items[0];
-        <+OTYPE*> *out = (<+OTYPE*> *) output_items[0];
+        const gr_complex *in = (const gr_complex *) input_items[0];
+        float *out = (float *) output_items[0];
 
         // Do <+signal processing+>
         // Tell runtime system how many input items we consumed on

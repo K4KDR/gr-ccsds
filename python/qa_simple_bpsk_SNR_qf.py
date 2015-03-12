@@ -33,9 +33,18 @@ class qa_simple_bpsk_SNR_qf (gr_unittest.TestCase):
 
     def test_001_t (self):
         # set up fg
+        src_data = (1+0j, -1+0j,) # TODO add test sequence
+        expected_ressult = (1) 
+        src = blocks.vector_source_c (src_data)
+        snr = ccsds_simple_bpsk_SNR ()
+        dst = blocks.vector_sink_f ()
+        self.tb.connect(src,snr)
+        self.tb.connect(srn,dst)
+        
         self.tb.run ()
+        result_data = dst.data ()
         # check data
-
+        self.assertFloatTuplesAlmostEqual (expected_result, result_data, 4, 'SNR does not match')
 
 if __name__ == '__main__':
     gr_unittest.run(qa_simple_bpsk_SNR_qf, "qa_simple_bpsk_SNR_qf.xml")

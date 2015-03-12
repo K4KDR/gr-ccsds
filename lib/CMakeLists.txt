@@ -44,7 +44,8 @@ add_library(gnuradio-ccsds SHARED
 	mpsk_preamble_cc_impl.cc
 	randomiser_impl.cc
 	softbittobit_impl.cc
-    simple_bpsk_SNR_qf_impl.cc)
+   	simple_bpsk_SNR_qf_impl.cc
+	)
 target_link_libraries(gnuradio-ccsds ${Boost_LIBRARIES} ${GNURADIO_RUNTIME_LIBRARIES} ticp fec)
 set_target_properties(gnuradio-ccsds PROPERTIES DEFINE_SYMBOL "gnuradio_ccsds_EXPORTS")
 

@@ -44,5 +44,5 @@ install(FILES
 	mpsk_detector_soft_cf.h
 	mpsk_preamble_cc.h
 	softbittobit.h
-    simple_bpsk_SNR_qf.h	DESTINATION include/ccsds
+	simple_bpsk_SNR_qf.h	DESTINATION include/ccsds
 )
