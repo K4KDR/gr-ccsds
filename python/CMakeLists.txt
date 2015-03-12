@@ -54,3 +54,4 @@ GR_ADD_TEST(qa_blob_msg_sink ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa
 GR_ADD_TEST(qa_softbittobit ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_softbittobit.py)
 GR_ADD_TEST(qa_ccsds_mpsk_mod_bc ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_ccsds_mpsk_mod_bc.py)
 GR_ADD_TEST(qa_ccsds_mpsk_detector_soft_cf ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_ccsds_mpsk_detector_soft_cf.py)
+GR_ADD_TEST(qa_simple_bpsk_SNR_qf ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_simple_bpsk_SNR_qf.py)
