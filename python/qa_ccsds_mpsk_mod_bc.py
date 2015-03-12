@@ -20,6 +20,7 @@
 #
 
 from gnuradio import gr, gr_unittest
+from gnuradio import blocks
 import ccsds_swig
 from cmath import rect
 from math import pi, sqrt
@@ -35,9 +36,9 @@ class qa_mpsk_mod_bc (gr_unittest.TestCase):
     def test_mod_bpsk (self):
 	src_data = (0, 1)
 	expected_result = (1+0j, -1+0j)
-	src = gr.vector_source_b (src_data)
+	src = blocks.vector_source_b (src_data)
 	sqr = ccsds_swig.mpsk_mod_bc (2)
-	dst = gr.vector_sink_c ()
+	dst = blocks.vector_sink_c ()
 	self.tb.connect (src, sqr)
 	self.tb.connect (sqr, dst)
 	self.tb.run ()
@@ -53,9 +54,9 @@ class qa_mpsk_mod_bc (gr_unittest.TestCase):
 	expected_result = (1+1j, 1-1j, -1+1j, -1-1j)
 	# scale to unit circle
 	expected_result = tuple(p/sqrt(2.0) for p in expected_result)
-	src = gr.vector_source_b (src_data)
+	src = blocks.vector_source_b (src_data)
 	sqr = ccsds_swig.mpsk_mod_bc (4)
-	dst = gr.vector_sink_c ()
+	dst = blocks.vector_sink_c ()
 	self.tb.connect (src, sqr)
 	self.tb.connect (sqr, dst)
 	self.tb.run ()
@@ -72,9 +73,9 @@ class qa_mpsk_mod_bc (gr_unittest.TestCase):
 	# gray     (0, 1, 3, 2, 6, 7, 5, 4)
 	phases =   (0, 1, 3, 2, 7, 6, 4, 5) # phases *4/pi
 	expected_result = tuple(rect(1.0,p*pi/4.0) for p in phases)
-	src = gr.vector_source_b (src_data)
+	src = blocks.vector_source_b (src_data)
 	sqr = ccsds_swig.mpsk_mod_bc (8)
-	dst = gr.vector_sink_c ()
+	dst = blocks.vector_sink_c ()
 	self.tb.connect (src, sqr)
 	self.tb.connect (sqr, dst)
 	self.tb.run ()
@@ -91,9 +92,9 @@ class qa_mpsk_mod_bc (gr_unittest.TestCase):
 	# gray     (0, 1, 3, 2, 6, 7, 5, 4, 12, 13, 15, 14, 10, 11,  9,  8)
 	phases =   (0, 1, 3, 2, 7, 6, 4, 5, 15, 14, 12, 13,  8,  9, 11, 10) # phases *8/pi
 	expected_result = tuple(rect(1.0,p*pi/8.0) for p in phases)
-	src = gr.vector_source_b (src_data)
+	src = blocks.vector_source_b (src_data)
 	sqr = ccsds_swig.mpsk_mod_bc (16)
-	dst = gr.vector_sink_c ()
+	dst = blocks.vector_sink_c ()
 	self.tb.connect (src, sqr)
 	self.tb.connect (sqr, dst)
 	self.tb.run ()
