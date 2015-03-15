@@ -29,10 +29,10 @@ namespace gr {
     class simple_bpsk_SNR_qf_impl : public simple_bpsk_SNR_qf
     {
      private:
-      // Nothing to declare in this block.
+     const size_t d_WINDOW_SIZE;
 
      public:
-      simple_bpsk_SNR_qf_impl();
+      simple_bpsk_SNR_qf_impl(size_t window_size);
       ~simple_bpsk_SNR_qf_impl();
 
       // Where all the action really happens

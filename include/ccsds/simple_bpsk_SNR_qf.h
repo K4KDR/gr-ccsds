@@ -25,6 +25,7 @@
 #include <ccsds/api.h>
 #include <gnuradio/block.h>
 
+
 namespace gr {
   namespace ccsds {
 
@@ -46,7 +47,7 @@ namespace gr {
        * class. ccsds::simple_bpsk_SNR_qf::make is the public interface for
        * creating new instances.
        */
-      static sptr make();
+      static sptr make(size_t window_size);
     };
 
   } // namespace ccsds

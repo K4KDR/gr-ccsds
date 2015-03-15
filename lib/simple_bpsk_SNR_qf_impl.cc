@@ -24,27 +24,32 @@
 
 #include <gnuradio/io_signature.h>
 #include "simple_bpsk_SNR_qf_impl.h"
-
-#define WINDOW_SIZE 20
+#include <volk/volk.h>
+#include <stdio.h>
 
 namespace gr {
   namespace ccsds {
 
     simple_bpsk_SNR_qf::sptr
-    simple_bpsk_SNR_qf::make()
+    simple_bpsk_SNR_qf::make(size_t window_size)
     {
       return gnuradio::get_initial_sptr
-        (new simple_bpsk_SNR_qf_impl());
+        (new simple_bpsk_SNR_qf_impl(window_size));
     }
 
     /*
      * The private constructor
      */
-    simple_bpsk_SNR_qf_impl::simple_bpsk_SNR_qf_impl()
+    simple_bpsk_SNR_qf_impl::simple_bpsk_SNR_qf_impl(size_t window_size)
       : gr::block("simple_bpsk_SNR_qf",
               gr::io_signature::make(1, 1, sizeof(gr_complex)),
-              gr::io_signature::make(1, 1, sizeof(float)))
-    {}
+              gr::io_signature::make(1, 1, sizeof(float))),
+	d_WINDOW_SIZE(window_size)
+    {
+    	const int alignment_multiple = 
+	  volk_get_alignment() / sizeof(float);
+	set_alignment(std::max(1,alignment_multiple));
+    }
 
     /*
      * Our virtual destructor.
@@ -57,7 +62,7 @@ namespace gr {
     simple_bpsk_SNR_qf_impl::forecast (int noutput_items, gr_vector_int &ninput_items_required)
     {
         /* <+forecast+> e.g. ninput_items_required[0] = noutput_items */
-	ninput_items_required[0] = noutput_items * WINDOW_SIZE;
+	ninput_items_required[0] = noutput_items * d_WINDOW_SIZE;
     }
 
     int
@@ -68,14 +73,42 @@ namespace gr {
     {
         const gr_complex *in = (const gr_complex *) input_items[0];
         float *out = (float *) output_items[0];
+	
+	// number of input items processed
+	size_t nii = ninput_items[0];
+	if (nii > noutput_items * d_WINDOW_SIZE)
+	{
+	nii = noutput_items * d_WINDOW_SIZE;
+	}
 
-        // Do <+signal processing+>
-        // Tell runtime system how many input items we consumed on
+	size_t align = volk_get_alignment();
+	float *real = (float *) volk_malloc(nii * sizeof(float), align);
+	float *imag = (float *) volk_malloc(nii * sizeof(float), align);
+	float *mean_real = (float *) volk_malloc(noutput_items * sizeof(float),align);
+	float sum_real=0;
+
+	// get real part of points
+	volk_32fc_deinterleave_real_32f(real,in,nii);
+	
+	for (int i=0; i < noutput_items; i++)
+	{
+        volk_32f_accumulator_s32f(&sum_real,real,d_WINDOW_SIZE);
+	//(mean_real + i) = sum_real / d_WINDOW_SIZE;
+	*(out + i) = sum_real / d_WINDOW_SIZE;
+	}
+
+	// Tell runtime system how many input items we consumed on
         // each input stream.
-        consume_each (noutput_items);
+        consume_each (nii);
 
+	// free allocated memory
+	volk_free(mean_real);
+	volk_free(real);
+	volk_free(imag);
+
+	printf("window_size: %d\tnout: %d\tnin: %d\n", d_WINDOW_SIZE, noutput_items, nii);
         // Tell runtime system how many output items we produced.
-        return noutput_items;
+        return (noutput_items);
     }
 
   } /* namespace ccsds */
