@@ -30,6 +30,7 @@ namespace gr {
     {
      private:
      const size_t d_WINDOW_SIZE;
+     inline void variance(float *variance, float *inputBuffer, unsigned int num_points);
 
      public:
       simple_bpsk_SNR_qf_impl(size_t window_size);

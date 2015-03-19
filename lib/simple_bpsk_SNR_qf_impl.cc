@@ -65,6 +65,27 @@ namespace gr {
         /* <+forecast+> e.g. ninput_items_required[0] = noutput_items */
 	ninput_items_required[0] = noutput_items * d_WINDOW_SIZE;
     }
+    
+    inline void
+    simple_bpsk_SNR_qf_impl::variance(float *variance, float *inputBuffer, unsigned int num_points)
+    {
+	// numerical critical implementation !! ( but used in volk_32f_stddev_and_mean_32f_x2_generic)
+	float returnValue = 0;
+	float newMean = 0;
+	if(num_points > 0){
+		const float* aPtr = inputBuffer;
+		unsigned int number = 0;
+
+		for(number = 0; number < num_points; number++){
+			returnValue += (*aPtr) * (*aPtr);
+			newMean += *aPtr++;
+		}
+		newMean /= num_points;
+		returnValue /= num_points;
+		returnValue -= (newMean * newMean);
+	}
+	*variance = returnValue;
+    }
 
     int
     simple_bpsk_SNR_qf_impl::general_work (int noutput_items,
@@ -89,12 +110,23 @@ namespace gr {
 	*/
 
 	size_t align = volk_get_alignment();
+
 	float *real_part = (float *) volk_malloc(nii * sizeof(float), align);
+	float *real_part_squared = (float *) volk_malloc(d_WINDOW_SIZE * sizeof(float), align);
 	gr_complex *positive = (gr_complex*) volk_malloc(nii * sizeof(gr_complex), align);
 	gr_complex *mean_free = (gr_complex*) volk_malloc(d_WINDOW_SIZE * sizeof(gr_complex), align);
 	int8_t *sgn_vector = (int8_t *) volk_malloc(nii * sizeof(int8_t), align);
-	float sum_real=0;
+
+	float *snr_real_vector = (float *) volk_malloc(d_WINDOW_SIZE * sizeof(float), align);
+	float *snr_imag_vector = (float *) volk_malloc(d_WINDOW_SIZE * sizeof(float), align);
+	float *snr_magn_vector = (float *) volk_malloc(d_WINDOW_SIZE * sizeof(float), align);
+
+	float var_real=0;
+	float var_imag=0;
+	float var_magn=0;
+
 	float mean_real=0;
+	float squared_mean=0;
 	int8_t sgn=0;
 	const gr_complex minus_one = -1;
 	uint16_t  window_offset = 0;
@@ -104,10 +136,10 @@ namespace gr {
 	// flip negative real part
 	for(size_t i=0; i<nii; i++)
 	{
-		sgn = boost::math::sign(*complexVectorPtr);
-		*(sgn_vector + i) = sgn;	
+		//sgn = boost::math::sign(*complexVectorPtr);
+		*(sgn_vector + i) = boost::math::sign(*complexVectorPtr);	
 		// get the real part of the inputs (see volk_32fc_deinterleave_real_32f_generic implementation)
-		*positiveVectorPtr++ = *complexVectorPtr++ * sgn;
+		*positiveVectorPtr++ = *complexVectorPtr++ * *(sgn_vector + i);
 		// and copy the imaginary part
 		*positiveVectorPtr++ = *complexVectorPtr++;
 	}
@@ -118,16 +150,32 @@ namespace gr {
 	for (int i=0; i < noutput_items; i++)
 	{
 		window_offset = i * d_WINDOW_SIZE;
-        	volk_32f_accumulator_s32f(&sum_real,(real_part + window_offset), d_WINDOW_SIZE);
-		mean_real =sum_real / d_WINDOW_SIZE;
+
+        	volk_32f_accumulator_s32f(&mean_real,(real_part + window_offset), d_WINDOW_SIZE);
+		mean_real =mean_real / d_WINDOW_SIZE;
+
+		// calculate the signal power
+		volk_32f_s32f_power_32f(real_part_squared, real_part, 2, d_WINDOW_SIZE);
+        	volk_32f_accumulator_s32f(&squared_mean, real_part_squared, d_WINDOW_SIZE);
+		squared_mean = squared_mean / d_WINDOW_SIZE;
+
 		for(int j=0; j< d_WINDOW_SIZE;j++)
 		{
 			sgn = *(sgn_vector + window_offset + j);
 			*(mean_free +j)  = *(in + window_offset + j) - (sgn * mean_real);
 		}
+
+		volk_32fc_deinterleave_real_32f(snr_real_vector, mean_free, d_WINDOW_SIZE);
+		volk_32fc_deinterleave_imag_32f(snr_imag_vector, mean_free, d_WINDOW_SIZE);
+		volk_32fc_magnitude_32f(snr_magn_vector, mean_free, d_WINDOW_SIZE);
+
+		variance(&var_real, snr_real_vector, d_WINDOW_SIZE);
+		variance(&var_imag, snr_imag_vector, d_WINDOW_SIZE);
+		variance(&var_magn, snr_magn_vector, d_WINDOW_SIZE);
+		
+		*(out + i) = squared_mean / var_magn;
 	}
 	
-	// debug output
 	
 	// Tell runtime system how many input items we consumed on
         // each input stream.
@@ -137,8 +185,13 @@ namespace gr {
 	volk_free(positive);
 	volk_free(mean_free);
 	volk_free(real_part);
+	volk_free(real_part_squared);
+	volk_free(sgn_vector);
+	volk_free(snr_real_vector);
+	volk_free(snr_imag_vector);
+	volk_free(snr_magn_vector);
 
-	printf("window_size: %lu\tnout: %d\tnin: %lu\tni_given: %d\n", d_WINDOW_SIZE, noutput_items, nii,ninput_items[0]);
+	//printf("window_size: %lu\tnout: %d\tnin: %lu\tni_given: %d\n", d_WINDOW_SIZE, noutput_items, nii,ninput_items[0]);
         // Tell runtime system how many output items we produced.
         return (noutput_items);
     }
