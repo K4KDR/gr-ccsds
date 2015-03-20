@@ -48,7 +48,7 @@ namespace gr {
 	d_WINDOW_SIZE(window_size)
     {
     	const int alignment_multiple = 
-	  volk_get_alignment() / sizeof(float);
+	  volk_get_alignment() / sizeof(gr_complex);
 	set_alignment(std::max(1,alignment_multiple));
     }
 
@@ -67,7 +67,7 @@ namespace gr {
     }
     
     inline void
-    simple_bpsk_SNR_qf_impl::variance(float *variance, float *inputBuffer, unsigned int num_points)
+    simple_bpsk_SNR_qf_impl::variance(float *variance, float *inputBuffer, const unsigned int num_points)
     {
 	// numerical critical implementation !! ( but used in volk_32f_stddev_and_mean_32f_x2_generic)
 	float returnValue = 0;
@@ -155,9 +155,10 @@ namespace gr {
 		mean_real =mean_real / d_WINDOW_SIZE;
 
 		// calculate the signal power
-		volk_32f_s32f_power_32f(real_part_squared, real_part, 2, d_WINDOW_SIZE);
-        	volk_32f_accumulator_s32f(&squared_mean, real_part_squared, d_WINDOW_SIZE);
-		squared_mean = squared_mean / d_WINDOW_SIZE;
+		//volk_32f_s32f_power_32f(real_part_squared + window_offset, real_part, 2, d_WINDOW_SIZE); 
+        	//volk_32f_accumulator_s32f(&squared_mean, real_part_squared, d_WINDOW_SIZE);
+		//squared_mean = squared_mean / d_WINDOW_SIZE;
+		squared_mean = mean_real * mean_real;
 
 		for(int j=0; j< d_WINDOW_SIZE;j++)
 		{
