@@ -29,7 +29,7 @@ namespace gr {
     class simple_bpsk_SNR_qf_impl : public simple_bpsk_SNR_qf
     {
      private:
-     size_t d_WINDOW_SIZE;
+     unsigned int d_WINDOW_SIZE;
      float d_SNR_real, d_SNR_imag, d_SNR_magn;
      
      inline void variance(float *variance, float *inputBuffer, unsigned int num_points);
@@ -42,8 +42,8 @@ namespace gr {
       float SNR_real() const { return d_SNR_real; }
       float SNR_imag() const { return d_SNR_imag; }
       float SNR_magn() const { return d_SNR_magn; }
-      size_t window_size() const { return d_WINDOW_SIZE; }
-      void set_window_size(size_t window_size) { d_WINDOW_SIZE = window_size; } 
+      int window_size() const { return d_WINDOW_SIZE; }
+      void set_window_size(int window_size) { d_WINDOW_SIZE = window_size; } 
       void setup_rpc();
 
       void forecast (int noutput_items, gr_vector_int &ninput_items_required);

@@ -187,6 +187,7 @@ namespace gr {
 	}
 	
 	
+	//printf("Window size: %d\n", d_WINDOW_SIZE);
 	// Tell runtime system how many input items we consumed on
         // each input stream.
         consume_each (nii);
@@ -235,18 +236,18 @@ namespace gr {
         DISPTIME | DISPOPTLOG)));
 
     	add_rpc_variable(
-        rpcbasic_sptr(new rpcbasic_register_get<simple_bpsk_SNR_qf, size_t>(
+        rpcbasic_sptr(new rpcbasic_register_get<simple_bpsk_SNR_qf, int>(
         alias(), "d_WINDOW_SIZE",
         &simple_bpsk_SNR_qf::window_size,
-        pmt::mp(0.0f), pmt::mp(10.0f), pmt::mp(0.0f),
+        pmt::mp(0), pmt::mp(10000), pmt::mp(0),
         "samples", "Window Size", RPC_PRIVLVL_MIN,
         DISPTIME | DISPOPTLOG)));
 
     	add_rpc_variable(
-        rpcbasic_sptr(new rpcbasic_register_set<simple_bpsk_SNR_qf, size_t>(
+        rpcbasic_sptr(new rpcbasic_register_set<simple_bpsk_SNR_qf, int>(
         alias(), "d_WINDOW_SIZE",
         &simple_bpsk_SNR_qf::set_window_size,
-        pmt::mp(0.0f), pmt::mp(0.0f), pmt::mp(0.0f),
+        pmt::mp(0), pmt::mp(10000), pmt::mp(0),
         "samples", "set Window Size", RPC_PRIVLVL_MIN,
         DISPNULL)));
 

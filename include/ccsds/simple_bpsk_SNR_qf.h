@@ -51,8 +51,8 @@ namespace gr {
       virtual float SNR_real() const = 0;
       virtual float SNR_imag() const = 0;
       virtual float SNR_magn() const = 0;
-      virtual size_t window_size() const = 0;
-      virtual void set_window_size(size_t) = 0;
+      virtual int window_size() const = 0;
+      virtual void set_window_size(int) = 0;
     };
 
   } // namespace ccsds
