@@ -30,13 +30,20 @@ namespace gr {
     {
      private:
      const size_t d_WINDOW_SIZE;
+     float d_SNR_real, d_SNR_imag, d_SNR_magn;
+     
      inline void variance(float *variance, float *inputBuffer, unsigned int num_points);
-
+     
      public:
       simple_bpsk_SNR_qf_impl(size_t window_size);
       ~simple_bpsk_SNR_qf_impl();
 
-      // Where all the action really happens
+      // getter function for the controlPorts
+      float SNR_real() const { return d_SNR_real; }
+      float SNR_imag() const { return d_SNR_imag; }
+      float SNR_magn() const { return d_SNR_magn; }
+      void setup_rpc();
+
       void forecast (int noutput_items, gr_vector_int &ninput_items_required);
 
       int general_work(int noutput_items,

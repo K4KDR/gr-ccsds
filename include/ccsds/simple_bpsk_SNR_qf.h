@@ -48,6 +48,9 @@ namespace gr {
        * creating new instances.
        */
       static sptr make(size_t window_size);
+      virtual float SNR_real() const = 0;
+      virtual float SNR_imag() const = 0;
+      virtual float SNR_magn() const = 0;
     };
 
   } // namespace ccsds

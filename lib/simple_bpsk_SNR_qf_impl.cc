@@ -135,6 +135,7 @@ namespace gr {
 
 	const float *complexVectorPtr = (float*) in;
 	float *positiveVectorPtr = (float*) positive;
+	
 	// flip negative real part
 	for(size_t i=0; i<nii; i++)
 	{
@@ -176,9 +177,13 @@ namespace gr {
 		variance(&var_imag, snr_imag_vector, d_WINDOW_SIZE);
 		variance(&var_magn, snr_magn_vector, d_WINDOW_SIZE);
 		
-		*(out + i) = squared_mean / var_magn;
+		d_SNR_real = squared_mean / var_real;
+		d_SNR_imag = squared_mean / var_imag;
+		d_SNR_magn = squared_mean / var_magn;
+		
+		*(out + i) = d_SNR_magn;
 
-		printf("varianve real: %10e\t imag: %10e\t complex: %10e\n", squared_mean / var_real, squared_mean / var_imag,squared_mean /  var_magn);
+		//printf("varianve real: %10e\t imag: %10e\t complex: %10e\n", d_SNR_real, d_SNR_imag, d_SNR_magn);
 	}
 	
 	
@@ -199,6 +204,36 @@ namespace gr {
 	//printf("window_size: %lu\tnout: %d\tnin: %lu\tni_given: %d\n", d_WINDOW_SIZE, noutput_items, nii,ninput_items[0]);
         // Tell runtime system how many output items we produced.
         return (noutput_items);
+    }
+
+    void
+    simple_bpsk_SNR_qf_impl::setup_rpc()
+    {
+    #ifdef GR_CTRLPORT
+    	add_rpc_variable(
+        rpcbasic_sptr(new rpcbasic_register_get<simple_bpsk_SNR_qf, float>(
+        alias(), "SNR_real",
+        &simple_bpsk_SNR_qf::SNR_real,
+        pmt::mp(0.0f), pmt::mp(0.0f), pmt::mp(0.0f),
+        "", "Get the SNR of the real part", RPC_PRIVLVL_MIN,
+        DISPTIME | DISPOPTLOG)));
+
+    	add_rpc_variable(
+        rpcbasic_sptr(new rpcbasic_register_get<simple_bpsk_SNR_qf, float>(
+        alias(), "SNR_imag",
+        &simple_bpsk_SNR_qf::SNR_imag,
+        pmt::mp(0.0f), pmt::mp(0.0f), pmt::mp(0.0f),
+        "", "Get the SNR of the imaginary part", RPC_PRIVLVL_MIN,
+        DISPTIME | DISPOPTLOG)));
+
+    	add_rpc_variable(
+        rpcbasic_sptr(new rpcbasic_register_get<simple_bpsk_SNR_qf, float>(
+        alias(), "SNR_magn",
+        &simple_bpsk_SNR_qf::SNR_magn,
+        pmt::mp(0.0f), pmt::mp(0.0f), pmt::mp(0.0f),
+        "", "Get the complex SNR", RPC_PRIVLVL_MIN,
+        DISPTIME | DISPOPTLOG)));
+    #endif /* GR_CTRLPORT */
     }
 
   } /* namespace ccsds */
