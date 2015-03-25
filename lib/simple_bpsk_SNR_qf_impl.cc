@@ -177,9 +177,9 @@ namespace gr {
 		variance(&var_imag, snr_imag_vector, d_WINDOW_SIZE);
 		variance(&var_magn, snr_magn_vector, d_WINDOW_SIZE);
 		
-		d_SNR_real = squared_mean / var_real;
-		d_SNR_imag = squared_mean / var_imag;
-		d_SNR_magn = squared_mean / var_magn;
+		d_SNR_real = 10 * log10(squared_mean / var_real);
+		d_SNR_imag = 10 * log10(squared_mean / var_imag);
+		d_SNR_magn = 10 * log10(squared_mean / var_magn);
 		
 		*(out + i) = d_SNR_magn;
 
@@ -214,25 +214,42 @@ namespace gr {
         rpcbasic_sptr(new rpcbasic_register_get<simple_bpsk_SNR_qf, float>(
         alias(), "SNR_real",
         &simple_bpsk_SNR_qf::SNR_real,
-        pmt::mp(0.0f), pmt::mp(0.0f), pmt::mp(0.0f),
-        "", "Get the SNR of the real part", RPC_PRIVLVL_MIN,
-        DISPTIME | DISPOPTLOG)));
+        pmt::mp(-100.0f), pmt::mp(100.0f), pmt::mp(10.0f),
+        "dB", "SNR of the real part", RPC_PRIVLVL_MIN,
+        DISPTIME)));
 
     	add_rpc_variable(
         rpcbasic_sptr(new rpcbasic_register_get<simple_bpsk_SNR_qf, float>(
         alias(), "SNR_imag",
         &simple_bpsk_SNR_qf::SNR_imag,
-        pmt::mp(0.0f), pmt::mp(0.0f), pmt::mp(0.0f),
-        "", "Get the SNR of the imaginary part", RPC_PRIVLVL_MIN,
+        pmt::mp(-1000.0f), pmt::mp(1000.0f), pmt::mp(10.0f),
+        "dB", "SNR of the imaginary part", RPC_PRIVLVL_MIN,
         DISPTIME | DISPOPTLOG)));
 
     	add_rpc_variable(
         rpcbasic_sptr(new rpcbasic_register_get<simple_bpsk_SNR_qf, float>(
         alias(), "SNR_magn",
         &simple_bpsk_SNR_qf::SNR_magn,
-        pmt::mp(0.0f), pmt::mp(0.0f), pmt::mp(0.0f),
-        "", "Get the complex SNR", RPC_PRIVLVL_MIN,
+        pmt::mp(-1000.0f), pmt::mp(100.0f), pmt::mp(10.0f),
+        "dB", "complex SNR", RPC_PRIVLVL_MIN,
         DISPTIME | DISPOPTLOG)));
+
+    	add_rpc_variable(
+        rpcbasic_sptr(new rpcbasic_register_get<simple_bpsk_SNR_qf, size_t>(
+        alias(), "d_WINDOW_SIZE",
+        &simple_bpsk_SNR_qf::window_size,
+        pmt::mp(0.0f), pmt::mp(10.0f), pmt::mp(0.0f),
+        "samples", "Window Size", RPC_PRIVLVL_MIN,
+        DISPTIME | DISPOPTLOG)));
+
+    	add_rpc_variable(
+        rpcbasic_sptr(new rpcbasic_register_set<simple_bpsk_SNR_qf, size_t>(
+        alias(), "d_WINDOW_SIZE",
+        &simple_bpsk_SNR_qf::set_window_size,
+        pmt::mp(0.0f), pmt::mp(0.0f), pmt::mp(0.0f),
+        "samples", "set Window Size", RPC_PRIVLVL_MIN,
+        DISPNULL)));
+
     #endif /* GR_CTRLPORT */
     }
 
