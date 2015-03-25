@@ -70,6 +70,7 @@ namespace gr {
     simple_bpsk_SNR_qf_impl::variance(float *variance, float *inputBuffer, const unsigned int num_points)
     {
 	// numerical critical implementation !! ( but used in volk_32f_stddev_and_mean_32f_x2_generic)
+	// NB: since the points are mean free, I don't subtract the mean here in the calculation !!
 	float returnValue = 0;
 	float newMean = 0;
 	if(num_points > 0){
@@ -78,11 +79,12 @@ namespace gr {
 
 		for(number = 0; number < num_points; number++){
 			returnValue += (*aPtr) * (*aPtr);
-			newMean += *aPtr++;
+			//newMean += *aPtr++;
+			*aPtr++;
 		}
-		newMean /= num_points;
+		//newMean /= num_points;
 		returnValue /= num_points;
-		returnValue -= (newMean * newMean);
+		//returnValue -= (newMean * newMean);
 	}
 	*variance = returnValue;
     }
@@ -175,6 +177,8 @@ namespace gr {
 		variance(&var_magn, snr_magn_vector, d_WINDOW_SIZE);
 		
 		*(out + i) = squared_mean / var_magn;
+
+		printf("varianve real: %10e\t imag: %10e\t complex: %10e\n", squared_mean / var_real, squared_mean / var_imag,squared_mean /  var_magn);
 	}
 	
 	
