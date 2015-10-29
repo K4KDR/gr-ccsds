@@ -24,6 +24,5 @@
   simple SNR estimator for bpsk.
   estimates the SNR for $Window Size number of samples
   exports SNR to control port
-  TODO: implement this :)
   </doc>
 </block>

@@ -94,17 +94,17 @@ namespace gr {
 	// number of input items processed
 	size_t nii = noutput_items * d_window_size;
 
-	size_t align = volk_get_alignment();
+	const size_t ALIGN = volk_get_alignment();
 
-	float *real_part = (float *) volk_malloc(nii * sizeof(float), align);
-	float *real_part_squared = (float *) volk_malloc(d_window_size * sizeof(float), align);
-	gr_complex *positive = (gr_complex*) volk_malloc(nii * sizeof(gr_complex), align);
-	gr_complex *mean_free = (gr_complex*) volk_malloc(d_window_size * sizeof(gr_complex), align);
-	int8_t *sgn_vector = (int8_t *) volk_malloc(nii * sizeof(int8_t), align);
+	float *real_part = (float *) volk_malloc(nii * sizeof(float), ALIGN);
+	float *real_part_squared = (float *) volk_malloc(d_window_size * sizeof(float), ALIGN);
+	gr_complex *positive = (gr_complex*) volk_malloc(nii * sizeof(gr_complex), ALIGN);
+	gr_complex *mean_free = (gr_complex*) volk_malloc(d_window_size * sizeof(gr_complex), ALIGN);
+	int8_t *sgn_vector = (int8_t *) volk_malloc(nii * sizeof(int8_t), ALIGN);
 
-	float *snr_real_vector = (float *) volk_malloc(d_window_size * sizeof(float), align);
-	float *snr_imag_vector = (float *) volk_malloc(d_window_size * sizeof(float), align);
-	float *snr_magn_vector = (float *) volk_malloc(d_window_size * sizeof(float), align);
+	float *snr_real_vector = (float *) volk_malloc(d_window_size * sizeof(float), ALIGN);
+	float *snr_imag_vector = (float *) volk_malloc(d_window_size * sizeof(float), ALIGN);
+	float *snr_magn_vector = (float *) volk_malloc(d_window_size * sizeof(float), ALIGN);
 
 	float var_real=0;
 	float var_imag=0;

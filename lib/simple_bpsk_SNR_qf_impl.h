@@ -1,7 +1,5 @@
 /* -*- c++ -*- */
 /* 
- * Copyright 2015 <+YOU OR YOUR COMPANY+>.
- * 
  * This is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3, or (at your option)
@@ -32,6 +30,9 @@ namespace gr {
      unsigned int d_window_size;
      float d_SNR_real, d_SNR_imag, d_SNR_magn;
      
+     /*! \brief computes the variance of a given number of samples with 0 mean
+      */
+
      inline void variance(float *variance, float *inputBuffer, unsigned int num_points);
      
      public:
