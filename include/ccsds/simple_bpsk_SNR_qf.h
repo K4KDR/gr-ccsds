@@ -47,12 +47,12 @@ namespace gr {
        * class. ccsds::simple_bpsk_SNR_qf::make is the public interface for
        * creating new instances.
        */
-      static sptr make(size_t window_size);
-      virtual float SNR_real() const = 0;
-      virtual float SNR_imag() const = 0;
-      virtual float SNR_magn() const = 0;
-      virtual int window_size() const = 0;
-      virtual void set_window_size(int) = 0;
+      static sptr make(unsigned int window_size);
+      virtual float get_SNR_real() const = 0;
+      virtual float get_SNR_imag() const = 0;
+      virtual float get_SNR_magn() const = 0;
+      virtual unsigned int get_window_size() const = 0;
+      virtual void set_window_size(unsigned int) = 0;
     };
 
   } // namespace ccsds

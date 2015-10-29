@@ -1,7 +1,5 @@
 /* -*- c++ -*- */
 /* 
- * Copyright 2015 <+YOU OR YOUR COMPANY+>.
- * 
  * This is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3, or (at your option)
@@ -32,7 +30,7 @@ namespace gr {
   namespace ccsds {
 
     simple_bpsk_SNR_qf::sptr
-    simple_bpsk_SNR_qf::make(size_t window_size)
+    simple_bpsk_SNR_qf::make(unsigned int window_size)
     {
       return gnuradio::get_initial_sptr
         (new simple_bpsk_SNR_qf_impl(window_size));
@@ -41,11 +39,11 @@ namespace gr {
     /*
      * The private constructor
      */
-    simple_bpsk_SNR_qf_impl::simple_bpsk_SNR_qf_impl(size_t window_size)
+    simple_bpsk_SNR_qf_impl::simple_bpsk_SNR_qf_impl(unsigned int window_size)
       : gr::block("simple_bpsk_SNR_qf",
               gr::io_signature::make(1, 1, sizeof(gr_complex)),
               gr::io_signature::make(1, 1, sizeof(float))),
-	d_WINDOW_SIZE(window_size)
+	d_window_size(window_size)
     {
     	const int alignment_multiple = 
 	  volk_get_alignment() / sizeof(gr_complex);
@@ -62,8 +60,7 @@ namespace gr {
     void
     simple_bpsk_SNR_qf_impl::forecast (int noutput_items, gr_vector_int &ninput_items_required)
     {
-        /* <+forecast+> e.g. ninput_items_required[0] = noutput_items */
-	ninput_items_required[0] = noutput_items * d_WINDOW_SIZE;
+	ninput_items_required[0] = noutput_items * d_window_size;
     }
     
     inline void
@@ -72,19 +69,15 @@ namespace gr {
 	// numerical critical implementation !! ( but used in volk_32f_stddev_and_mean_32f_x2_generic)
 	// NB: since the points are mean free, I don't subtract the mean here in the calculation !!
 	float returnValue = 0;
-	float newMean = 0;
 	if(num_points > 0){
 		const float* aPtr = inputBuffer;
 		unsigned int number = 0;
 
 		for(number = 0; number < num_points; number++){
 			returnValue += (*aPtr) * (*aPtr);
-			//newMean += *aPtr++;
 			*aPtr++;
 		}
-		//newMean /= num_points;
 		returnValue /= num_points;
-		//returnValue -= (newMean * newMean);
 	}
 	*variance = returnValue;
     }
@@ -99,29 +92,19 @@ namespace gr {
         float *out = (float *) output_items[0];
 	
 	// number of input items processed
-	size_t nii = noutput_items * d_WINDOW_SIZE;
-
-	/* always more input than output * window_size
-	/
-	size_t nii = ninput_items[0];
-	if (nii > noutput_items * d_WINDOW_SIZE)
-	{
-		//printf("\ntoo output wanted ... reducing\n");
-		nii = noutput_items * d_WINDOW_SIZE;
-	}
-	*/
+	size_t nii = noutput_items * d_window_size;
 
 	size_t align = volk_get_alignment();
 
 	float *real_part = (float *) volk_malloc(nii * sizeof(float), align);
-	float *real_part_squared = (float *) volk_malloc(d_WINDOW_SIZE * sizeof(float), align);
+	float *real_part_squared = (float *) volk_malloc(d_window_size * sizeof(float), align);
 	gr_complex *positive = (gr_complex*) volk_malloc(nii * sizeof(gr_complex), align);
-	gr_complex *mean_free = (gr_complex*) volk_malloc(d_WINDOW_SIZE * sizeof(gr_complex), align);
+	gr_complex *mean_free = (gr_complex*) volk_malloc(d_window_size * sizeof(gr_complex), align);
 	int8_t *sgn_vector = (int8_t *) volk_malloc(nii * sizeof(int8_t), align);
 
-	float *snr_real_vector = (float *) volk_malloc(d_WINDOW_SIZE * sizeof(float), align);
-	float *snr_imag_vector = (float *) volk_malloc(d_WINDOW_SIZE * sizeof(float), align);
-	float *snr_magn_vector = (float *) volk_malloc(d_WINDOW_SIZE * sizeof(float), align);
+	float *snr_real_vector = (float *) volk_malloc(d_window_size * sizeof(float), align);
+	float *snr_imag_vector = (float *) volk_malloc(d_window_size * sizeof(float), align);
+	float *snr_magn_vector = (float *) volk_malloc(d_window_size * sizeof(float), align);
 
 	float var_real=0;
 	float var_imag=0;
@@ -152,30 +135,30 @@ namespace gr {
 	
 	for (int i=0; i < noutput_items; i++)
 	{
-		window_offset = i * d_WINDOW_SIZE;
+		window_offset = i * d_window_size;
 
-        	volk_32f_accumulator_s32f(&mean_real,(real_part + window_offset), d_WINDOW_SIZE);
-		mean_real =mean_real / d_WINDOW_SIZE;
+        	volk_32f_accumulator_s32f(&mean_real,(real_part + window_offset), d_window_size);
+		mean_real =mean_real / d_window_size;
 
 		// calculate the signal power
-		//volk_32f_s32f_power_32f(real_part_squared + window_offset, real_part, 2, d_WINDOW_SIZE); 
-        	//volk_32f_accumulator_s32f(&squared_mean, real_part_squared, d_WINDOW_SIZE);
-		//squared_mean = squared_mean / d_WINDOW_SIZE;
+		//volk_32f_s32f_power_32f(real_part_squared + window_offset, real_part, 2, d_window_size); 
+        	//volk_32f_accumulator_s32f(&squared_mean, real_part_squared, d_window_size);
+		//squared_mean = squared_mean / d_window_size;
 		squared_mean = mean_real * mean_real;
 
-		for(int j=0; j< d_WINDOW_SIZE;j++)
+		for(int j=0; j< d_window_size;j++)
 		{
 			sgn = *(sgn_vector + window_offset + j);
 			*(mean_free +j)  = *(in + window_offset + j) - (sgn * mean_real);
 		}
 
-		volk_32fc_deinterleave_real_32f(snr_real_vector, mean_free, d_WINDOW_SIZE);
-		volk_32fc_deinterleave_imag_32f(snr_imag_vector, mean_free, d_WINDOW_SIZE);
-		volk_32fc_magnitude_32f(snr_magn_vector, mean_free, d_WINDOW_SIZE);
+		volk_32fc_deinterleave_real_32f(snr_real_vector, mean_free, d_window_size);
+		volk_32fc_deinterleave_imag_32f(snr_imag_vector, mean_free, d_window_size);
+		volk_32fc_magnitude_32f(snr_magn_vector, mean_free, d_window_size);
 
-		variance(&var_real, snr_real_vector, d_WINDOW_SIZE);
-		variance(&var_imag, snr_imag_vector, d_WINDOW_SIZE);
-		variance(&var_magn, snr_magn_vector, d_WINDOW_SIZE);
+		variance(&var_real, snr_real_vector, d_window_size);
+		variance(&var_imag, snr_imag_vector, d_window_size);
+		variance(&var_magn, snr_magn_vector, d_window_size);
 		
 		d_SNR_real = 10 * log10(squared_mean / var_real);
 		d_SNR_imag = 10 * log10(squared_mean / var_imag);
@@ -183,11 +166,11 @@ namespace gr {
 		
 		*(out + i) = d_SNR_magn;
 
-		//printf("varianve real: %10e\t imag: %10e\t complex: %10e\n", d_SNR_real, d_SNR_imag, d_SNR_magn);
+		printf("varianve real: %10e\t imag: %10e\t complex: %10e\n", var_real, var_imag, var_magn);
 	}
 	
 	
-	//printf("Window size: %d\n", d_WINDOW_SIZE);
+	//printf("Window size: %d\n", d_window_size);
 	// Tell runtime system how many input items we consumed on
         // each input stream.
         consume_each (nii);
@@ -202,7 +185,7 @@ namespace gr {
 	volk_free(snr_imag_vector);
 	volk_free(snr_magn_vector);
 
-	//printf("window_size: %lu\tnout: %d\tnin: %lu\tni_given: %d\n", d_WINDOW_SIZE, noutput_items, nii,ninput_items[0]);
+	//printf("window_size: %lu\tnout: %d\tnin: %lu\tni_given: %d\n", d_window_size, noutput_items, nii,ninput_items[0]);
         // Tell runtime system how many output items we produced.
         return (noutput_items);
     }
@@ -214,7 +197,7 @@ namespace gr {
     	add_rpc_variable(
         rpcbasic_sptr(new rpcbasic_register_get<simple_bpsk_SNR_qf, float>(
         alias(), "SNR_real",
-        &simple_bpsk_SNR_qf::SNR_real,
+        &simple_bpsk_SNR_qf::get_SNR_real,
         pmt::mp(-100.0f), pmt::mp(100.0f), pmt::mp(10.0f),
         "dB", "SNR of the real part", RPC_PRIVLVL_MIN,
         DISPTIME)));
@@ -222,7 +205,7 @@ namespace gr {
     	add_rpc_variable(
         rpcbasic_sptr(new rpcbasic_register_get<simple_bpsk_SNR_qf, float>(
         alias(), "SNR_imag",
-        &simple_bpsk_SNR_qf::SNR_imag,
+        &simple_bpsk_SNR_qf::get_SNR_imag,
         pmt::mp(-1000.0f), pmt::mp(1000.0f), pmt::mp(10.0f),
         "dB", "SNR of the imaginary part", RPC_PRIVLVL_MIN,
         DISPTIME | DISPOPTLOG)));
@@ -230,22 +213,22 @@ namespace gr {
     	add_rpc_variable(
         rpcbasic_sptr(new rpcbasic_register_get<simple_bpsk_SNR_qf, float>(
         alias(), "SNR_magn",
-        &simple_bpsk_SNR_qf::SNR_magn,
+        &simple_bpsk_SNR_qf::get_SNR_magn,
         pmt::mp(-1000.0f), pmt::mp(100.0f), pmt::mp(10.0f),
         "dB", "complex SNR", RPC_PRIVLVL_MIN,
         DISPTIME | DISPOPTLOG)));
 
     	add_rpc_variable(
-        rpcbasic_sptr(new rpcbasic_register_get<simple_bpsk_SNR_qf, int>(
-        alias(), "d_WINDOW_SIZE",
-        &simple_bpsk_SNR_qf::window_size,
+        rpcbasic_sptr(new rpcbasic_register_get<simple_bpsk_SNR_qf, unsigned int>(
+        alias(), "d_window_size",
+        &simple_bpsk_SNR_qf::get_window_size,
         pmt::mp(0), pmt::mp(10000), pmt::mp(0),
         "samples", "Window Size", RPC_PRIVLVL_MIN,
         DISPTIME | DISPOPTLOG)));
 
     	add_rpc_variable(
-        rpcbasic_sptr(new rpcbasic_register_set<simple_bpsk_SNR_qf, int>(
-        alias(), "d_WINDOW_SIZE",
+        rpcbasic_sptr(new rpcbasic_register_set<simple_bpsk_SNR_qf, unsigned int>(
+        alias(), "d_window_size",
         &simple_bpsk_SNR_qf::set_window_size,
         pmt::mp(0), pmt::mp(10000), pmt::mp(0),
         "samples", "set Window Size", RPC_PRIVLVL_MIN,

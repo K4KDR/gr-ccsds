@@ -29,21 +29,21 @@ namespace gr {
     class simple_bpsk_SNR_qf_impl : public simple_bpsk_SNR_qf
     {
      private:
-     unsigned int d_WINDOW_SIZE;
+     unsigned int d_window_size;
      float d_SNR_real, d_SNR_imag, d_SNR_magn;
      
      inline void variance(float *variance, float *inputBuffer, unsigned int num_points);
      
      public:
-      simple_bpsk_SNR_qf_impl(size_t window_size);
+      simple_bpsk_SNR_qf_impl(unsigned int window_size);
       ~simple_bpsk_SNR_qf_impl();
 
       // getter function for the controlPorts
-      float SNR_real() const { return d_SNR_real; }
-      float SNR_imag() const { return d_SNR_imag; }
-      float SNR_magn() const { return d_SNR_magn; }
-      int window_size() const { return d_WINDOW_SIZE; }
-      void set_window_size(int window_size) { d_WINDOW_SIZE = window_size; } 
+      float get_SNR_real() const { return d_SNR_real; }
+      float get_SNR_imag() const { return d_SNR_imag; }
+      float get_SNR_magn() const { return d_SNR_magn; }
+      unsigned int get_window_size() const { return d_window_size; }
+      void set_window_size(unsigned int window_size) { d_window_size = window_size; } 
       void setup_rpc();
 
       void forecast (int noutput_items, gr_vector_int &ninput_items_required);
