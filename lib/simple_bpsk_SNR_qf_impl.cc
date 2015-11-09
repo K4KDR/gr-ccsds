@@ -30,7 +30,7 @@ namespace gr {
   namespace ccsds {
 
     simple_bpsk_SNR_qf::sptr
-    simple_bpsk_SNR_qf::make(unsigned int window_size)
+    simple_bpsk_SNR_qf::make(unsigned long window_size)
     {
       return gnuradio::get_initial_sptr
         (new simple_bpsk_SNR_qf_impl(window_size));
@@ -39,7 +39,7 @@ namespace gr {
     /*
      * The private constructor
      */
-    simple_bpsk_SNR_qf_impl::simple_bpsk_SNR_qf_impl(unsigned int window_size)
+    simple_bpsk_SNR_qf_impl::simple_bpsk_SNR_qf_impl(unsigned long window_size)
       : gr::block("simple_bpsk_SNR_qf",
               gr::io_signature::make(1, 1, sizeof(gr_complex)),
               gr::io_signature::make(1, 1, sizeof(float))),
@@ -64,16 +64,15 @@ namespace gr {
     }
     
     inline void
-    simple_bpsk_SNR_qf_impl::variance(float *variance, float *inputBuffer, const unsigned int num_points)
+    simple_bpsk_SNR_qf_impl::variance(float *variance, float *inputBuffer, const unsigned long num_points)
     {
 	// numerical critical implementation !! ( but used in volk_32f_stddev_and_mean_32f_x2_generic)
 	// NB: since the points are mean free, I don't subtract the mean here in the calculation !!
 	float returnValue = 0;
 	if(num_points > 0){
 		const float* aPtr = inputBuffer;
-		unsigned int number = 0;
-
-		for(number = 0; number < num_points; number++){
+		
+		for(unsigned long number = 0; number < num_points; number++){
 			returnValue += (*aPtr) * (*aPtr);
 			*aPtr++;
 		}
@@ -114,7 +113,7 @@ namespace gr {
 	float squared_mean=0;
 	int8_t sgn=0;
 	const gr_complex minus_one = -1;
-	uint16_t  window_offset = 0;
+	unsigned long long  window_offset = 0;
 
 	const float *complexVectorPtr = (float*) in;
 	float *positiveVectorPtr = (float*) positive;
@@ -146,7 +145,7 @@ namespace gr {
 		//squared_mean = squared_mean / d_window_size;
 		squared_mean = mean_real * mean_real;
 
-		for(int j=0; j< d_window_size;j++)
+		for(unsigned long j=0; j< d_window_size;j++)
 		{
 			sgn = *(sgn_vector + window_offset + j);
 			*(mean_free +j)  = *(in + window_offset + j) - (sgn * mean_real);
@@ -219,7 +218,7 @@ namespace gr {
         DISPTIME | DISPOPTLOG)));
 
     	add_rpc_variable(
-        rpcbasic_sptr(new rpcbasic_register_get<simple_bpsk_SNR_qf, unsigned int>(
+        rpcbasic_sptr(new rpcbasic_register_get<simple_bpsk_SNR_qf, unsigned long>(
         alias(), "d_window_size",
         &simple_bpsk_SNR_qf::get_window_size,
         pmt::mp(0), pmt::mp(10000), pmt::mp(0),
@@ -227,7 +226,7 @@ namespace gr {
         DISPTIME | DISPOPTLOG)));
 
     	add_rpc_variable(
-        rpcbasic_sptr(new rpcbasic_register_set<simple_bpsk_SNR_qf, unsigned int>(
+        rpcbasic_sptr(new rpcbasic_register_set<simple_bpsk_SNR_qf, unsigned long>(
         alias(), "d_window_size",
         &simple_bpsk_SNR_qf::set_window_size,
         pmt::mp(0), pmt::mp(10000), pmt::mp(0),
