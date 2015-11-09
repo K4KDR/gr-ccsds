@@ -3,50 +3,20 @@
 
 #include <ccsds/conv_decode27.h>
 
-//#define __i386__
 #include <fec.h>
 
-/*
-#define FEC_FUNC_VITERBI27_SET_POLYNOMIAL set_viterbi27_polynomial_sse2
-#define FEC_FUNC_VITERBI27_CREATE create_viterbi27_sse2
-#define FEC_FUNC_VITERBI27_DELETE delete_viterbi27_sse2
-#define FEC_FUNC_VITERBI27_INIT init_viterbi27_sse2
-#define FEC_FUNC_VITERBI27_UPDATE_BLK update_viterbi27_blk_sse2
-#define FEC_FUNC_VITERBI27_CHAINBACK chainback_viterbi27_sse2
-//*/
-
-//*
+// Redefine mapping of decode functions to libfec functions
 #define FEC_FUNC_VITERBI27_SET_POLYNOMIAL set_viterbi27_polynomial_port
 #define FEC_FUNC_VITERBI27_CREATE create_viterbi27_port
 #define FEC_FUNC_VITERBI27_DELETE delete_viterbi27_port
 #define FEC_FUNC_VITERBI27_INIT init_viterbi27_port
 #define FEC_FUNC_VITERBI27_UPDATE_BLK update_viterbi27_blk_port
 #define FEC_FUNC_VITERBI27_CHAINBACK chainback_viterbi27_port
-//*/
-
-/*
-#define FEC_FUNC_VITERBI27_SET_POLYNOMIAL set_viterbi27_polynomial
-#define FEC_FUNC_VITERBI27_CREATE create_viterbi27
-#define FEC_FUNC_VITERBI27_DELETE delete_viterbi27
-#define FEC_FUNC_VITERBI27_INIT init_viterbi27
-#define FEC_FUNC_VITERBI27_UPDATE_BLK update_viterbi27_blk
-#define FEC_FUNC_VITERBI27_CHAINBACK chainback_viterbi27
-//*/
 
 namespace gr {
   namespace ccsds {
 
     void noop(int* /*polys[2]*/) {}
-    /*
-    #include <spiral-viterbi.h>
-
-    #define FEC_FUNC_VITERBI27_SET_POLYNOMIAL ccsds_noop
-    #define FEC_FUNC_VITERBI27_CREATE create_viterbi_SPIRAL
-    #define FEC_FUNC_VITERBI27_DELETE delete_viterbi_SPIRAL
-    #define FEC_FUNC_VITERBI27_INIT init_viterbi_SPIRAL
-    #define FEC_FUNC_VITERBI27_UPDATE_BLK update_viterbi_blk_SPIRAL
-    #define FEC_FUNC_VITERBI27_CHAINBACK chainback_viterbi_SPIRAL
-    //*/
 
     class conv_decode27_impl : public conv_decode27 {
 
