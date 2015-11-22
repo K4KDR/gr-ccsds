@@ -159,13 +159,14 @@ namespace gr {
 		variance(&var_imag, snr_imag_vector, d_window_size);
 		variance(&var_magn, snr_magn_vector, d_window_size);
 		
+		printf("squared mean: %10e\t var_real: %f\n", squared_mean, var_real);
 		d_SNR_real = 10 * log10(squared_mean / var_real);
 		d_SNR_imag = 10 * log10(squared_mean / var_imag);
 		d_SNR_magn = 10 * log10(squared_mean / var_magn);
 		
 		*(out + i) = d_SNR_magn;
 
-		printf("varianve real: %10e\t imag: %10e\t complex: %10e\n", var_real, var_imag, var_magn);
+		//printf("varianve real: %10e\t imag: %10e\t complex: %10e\n", var_real, var_imag, var_magn);
 	}
 	
 	
