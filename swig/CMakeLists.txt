@@ -18,6 +18,14 @@
 # Boston, MA 02110-1301, USA.
 
 ########################################################################
+# Check if there is C++ code at all
+########################################################################
+if(NOT ccsds_sources)
+	MESSAGE(STATUS "No C++ sources... skipping swig/")
+	return()
+endif(NOT ccsds_sources)
+
+########################################################################
 # Include swig generation macros
 ########################################################################
 find_package(SWIG)
@@ -27,9 +35,6 @@ if(NOT SWIG_FOUND OR NOT PYTHONLIBS_FOUND)
 endif()
 include(GrSwig)
 include(GrPython)
-
-set(CMAKE_CXX_FLAGS "")
-set(CMAKE_C_FLAGS "-flax-vector-conversions -msse2")
 
 ########################################################################
 # Setup swig generation

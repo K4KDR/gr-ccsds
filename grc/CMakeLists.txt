@@ -16,6 +16,7 @@
 # along with GNU Radio; see the file COPYING.  If not, write to
 # the Free Software Foundation, Inc., 51 Franklin Street,
 # Boston, MA 02110-1301, USA.
+
 install(FILES
 	ccsds_randomiser.xml
 	ccsds_reversebits.xml
@@ -38,6 +39,5 @@ install(FILES
 	ccsds_conv_encode27_bb.xml
 	ccsds_mpsk_preamble_cc.xml
 	ccsds_softbittobit.xml
-    ccsds_simple_bpsk_SNR_qf.xml	DESTINATION share/gnuradio/grc/blocks
+	ccsds_simple_bpsk_SNR_qf.xml	DESTINATION share/gnuradio/grc/blocks
 )
-
