@@ -92,14 +92,7 @@ namespace gr {
     	}
     
     	#if CCSDS_RS_DECODE_VERBOSITY_LEVEL >= CCSDS_RS_DECODE_OUTPUT_FRAMEERR
-		unsigned long frame_number = 0; // init with zero
-		
-		const uint8_t *frame_number_bin = (const uint8_t *) pmt::blob_data(pmt::dict_ref(hdr, pmt::mp("frame_number"), pmt::make_blob(&frame_number, 4)));
-		
-    		frame_number |= frame_number_bin[0] << 0;
-		frame_number |= frame_number_bin[1] << 8;
-		frame_number |= frame_number_bin[2] << 16;
-		frame_number |= frame_number_bin[3] << 24;
+		const uint64_t frame_number = pmt::to_uint64(pmt::dict_ref(hdr, pmt::mp("frame_number"), pmt::from_uint64(0)));
     	#endif
     
     	const unsigned int blob_len = (unsigned int) pmt::blob_length(msg);

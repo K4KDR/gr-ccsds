@@ -117,7 +117,7 @@ namespace gr {
     	bool d_msg_buffer_fill;
     
     	/*! \brief Counter for the outgoing frames. */
-    	unsigned long d_frame_count;
+    	uint64_t d_frame_count;
     
     	/*! \brief Absolute sample counter when the tags have been updated the last time */
     	uint64_t d_tag_lastupdate;
