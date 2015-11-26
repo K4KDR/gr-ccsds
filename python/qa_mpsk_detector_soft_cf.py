@@ -21,11 +21,11 @@
 
 from gnuradio import gr, gr_unittest
 from gnuradio import blocks
-import ccsds_swig
+import ccsds_swig as ccsds
 from cmath import rect, exp
 from math import pi, sqrt
 
-class qa_mpsk_detector_soft (gr_unittest.TestCase):
+class qa_mpsk_detector_soft_cf (gr_unittest.TestCase):
 
     def setUp (self):
 	self.tb = gr.top_block ()
@@ -37,8 +37,8 @@ class qa_mpsk_detector_soft (gr_unittest.TestCase):
 	src_data = (1+0j, -1+0j, -0.9+0.1j, -0.9+0.1j)
 	expected_result = (0, 1, 1, 1)
 	src = blocks.vector_source_c (src_data)
-	sqr = ccsds_swig.mpsk_detector_soft_cf (2)
-	con = ccsds_swig.softbittobit ()
+	sqr = ccsds.mpsk_detector_soft_cf (2)
+	con = ccsds.softbittobit ()
 	dst = blocks.vector_sink_b ()
 	self.tb.connect (src, sqr)
 	self.tb.connect (sqr, con)
@@ -56,8 +56,8 @@ class qa_mpsk_detector_soft (gr_unittest.TestCase):
 	expected_result = (0,0,     0,1,            1,1,             1,0,             0,0,        0,0,        0,1,         1,0)
 	src = blocks.vector_source_c (src_data)
 	rot = blocks.multiply_const_vcc((exp(-1j*pi/4), ))
-	sqr = ccsds_swig.mpsk_detector_soft_cf (4)
-	con = ccsds_swig.softbittobit ()
+	sqr = ccsds.mpsk_detector_soft_cf (4)
+	con = ccsds.softbittobit ()
 	dst = blocks.vector_sink_b ()
 	self.tb.connect (src, rot)
 	self.tb.connect (rot, sqr)
@@ -76,8 +76,8 @@ class qa_mpsk_detector_soft (gr_unittest.TestCase):
 	expected_result = (0,0)
 	src = blocks.vector_source_c (src_data)
 	rot = blocks.multiply_const_vcc((exp(-1j*pi/4), ))
-	sqr = ccsds_swig.mpsk_detector_soft_cf (4)
-	con = ccsds_swig.softbittobit ()
+	sqr = ccsds.mpsk_detector_soft_cf (4)
+	con = ccsds.softbittobit ()
 	dst = blocks.vector_sink_b ()
 	self.tb.connect (src, rot)
 	self.tb.connect (rot, sqr)
@@ -92,4 +92,4 @@ class qa_mpsk_detector_soft (gr_unittest.TestCase):
 	self.assertFloatTuplesAlmostEqual (expected_result, result_data, 6, 'QPSK constellation does not match')
 
 if __name__ == '__main__':
-    gr_unittest.main ()
+    gr_unittest.run(qa_mpsk_detector_soft_cf, "qa_mpsk_detector_soft_cf.xml")

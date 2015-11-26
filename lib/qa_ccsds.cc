@@ -26,11 +26,13 @@
  */
 
 #include "qa_ccsds.h"
+#include "qa_conv_encode27_aux.h"
 
 CppUnit::TestSuite *
 qa_ccsds::suite()
 {
   CppUnit::TestSuite *s = new CppUnit::TestSuite("ccsds");
-
+  s->addTest(gr::ccsds::qa_conv_encode27_aux::suite());
+  
   return s;
 }

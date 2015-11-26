@@ -88,6 +88,8 @@ include_directories(${CPPUNIT_INCLUDE_DIRS})
 list(APPEND test_ccsds_sources
     ${CMAKE_CURRENT_SOURCE_DIR}/test_ccsds.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/qa_ccsds.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/qa_conv_encode27_aux.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/conv_encode27_aux.cc
 )
 
 add_executable(test-ccsds ${test_ccsds_sources})

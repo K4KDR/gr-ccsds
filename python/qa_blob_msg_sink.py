@@ -28,7 +28,7 @@ import os
 import pmt
 import time
 
-class qa_ccsds_blob_msg_sink (gr_unittest.TestCase):
+class qa_blob_msg_sink (gr_unittest.TestCase):
 
     def setUp (self):
 	self.tb = gr.top_block ()
@@ -100,4 +100,4 @@ class qa_ccsds_blob_msg_sink (gr_unittest.TestCase):
 
 
 if __name__ == '__main__':
-    gr_unittest.main ()
+    gr_unittest.run(qa_blob_msg_sink, "qa_blob_msg_sink.xml")
