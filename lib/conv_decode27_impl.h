@@ -16,8 +16,6 @@
 namespace gr {
   namespace ccsds {
 
-    void noop(int* /*polys[2]*/) {}
-
     class conv_decode27_impl : public conv_decode27 {
 
     private:
@@ -44,13 +42,13 @@ namespace gr {
     	 */
     	const unsigned int d_RATE_NUM_OUT;
     
-    	/* \brief Number of soft bits that come in with one message */
+    	/*! \brief Number of soft bits that come in with one message */
     	const unsigned int d_BLOCK_NUM_BITS_IN;
     
-    	/* \brief Number of soft bits that come in one unpunctured message */
+    	/*! \brief Number of soft bits that come in one unpunctured message */
     	const unsigned int d_BLOCK_NUM_BITS_IN_UNPUNC;
     
-    	/* \brief Number of data bits that go out of this block. */
+    	/*! \brief Number of data bits that go out of this block. */
     	const unsigned int d_BLOCK_NUM_BITS_OUT;
     
     	/*! \brief Last 6 bits of the ASM that are used to generate the first
@@ -131,7 +129,7 @@ namespace gr {
     	conv_decode27_impl(const unsigned char gen_poly_c1, const unsigned char gen_poly_c2, conv_puncturing27::punct_t puncturing_type, const unsigned int block_len, std::string ASM);
     
     	/*! \brief Public deconstructor. */
-    	~conv_decode27_impl(void);  // public destructor
+    	~conv_decode27_impl(void);
     
     	int work(int noutput_items, gr_vector_const_void_star& input_items, gr_vector_void_star& output_items);
     };
