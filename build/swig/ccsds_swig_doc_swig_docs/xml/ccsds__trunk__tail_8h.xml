@@ -1,0 +1,146 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="ccsds__trunk__tail_8h" kind="file">
+    <compoundname>ccsds_trunk_tail.h</compoundname>
+    <includes refid="ccsds__api_8h" local="no">ccsds_api.h</includes>
+    <includes local="no">gr_sync_block.h</includes>
+    <includes local="no">cstdio</includes>
+    <incdepgraph>
+      <node id="341">
+        <label>gruel/attributes.h</label>
+      </node>
+      <node id="342">
+        <label>gr_sync_block.h</label>
+      </node>
+      <node id="340">
+        <label>ccsds_api.h</label>
+        <link refid="ccsds__api_8h"/>
+        <childnode refid="341" relation="include">
+        </childnode>
+      </node>
+      <node id="339">
+        <label>/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_trunk_tail.h</label>
+        <link refid="ccsds_trunk_tail.h"/>
+        <childnode refid="340" relation="include">
+        </childnode>
+        <childnode refid="342" relation="include">
+        </childnode>
+        <childnode refid="343" relation="include">
+        </childnode>
+      </node>
+      <node id="343">
+        <label>cstdio</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="classccsds__trunk__tail" prot="public">ccsds_trunk_tail</innerclass>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="ccsds__trunk__tail_8h_1aa656f65c8fa6d4db2dff60f119a1bc94" prot="public" static="no">
+        <type>boost::shared_ptr&lt; <ref refid="classccsds__trunk__tail" kindref="compound">ccsds_trunk_tail</ref> &gt;</type>
+        <definition>typedef boost::shared_ptr&lt;ccsds_trunk_tail&gt; ccsds_trunk_tail_sptr</definition>
+        <argsstring></argsstring>
+        <name>ccsds_trunk_tail_sptr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_trunk_tail.h" line="22" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_trunk_tail.h" bodystart="9" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="ccsds__trunk__tail_8h_1a2afde6100269a2d172d65940213a39f9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>__GR_ATTR_IMPORT <ref refid="ccsds__trunk__tail_8h_1aa656f65c8fa6d4db2dff60f119a1bc94" kindref="member">ccsds_trunk_tail_sptr</ref></type>
+        <definition>__GR_ATTR_IMPORT ccsds_trunk_tail_sptr ccsds_make_trunk_tail</definition>
+        <argsstring>(const unsigned int trunk_len, const unsigned int frame_len)</argsstring>
+        <name>ccsds_make_trunk_tail</name>
+        <param>
+          <type>const unsigned int</type>
+          <declname>trunk_len</declname>
+        </param>
+        <param>
+          <type>const unsigned int</type>
+          <declname>frame_len</declname>
+        </param>
+        <briefdescription>
+<para>Return a shared_ptr to a new instance of <ref refid="classccsds__trunk__tail" kindref="compound">ccsds_trunk_tail</ref>. </para>        </briefdescription>
+        <detaileddescription>
+<para>Create an instance of <ref refid="classccsds__trunk__tail" kindref="compound">ccsds_trunk_tail</ref> and return it&apos;s shared_ptr.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>trunk_len</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of softbits to trunkate</para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>frame_len</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of a frame (without ASM) in bytes. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Shared pointer to the created block </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_trunk_tail.h" line="34" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>INCLUDED_CCSDS_TRUNK_TAIL_H</highlight></codeline>
+<codeline lineno="2"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>INCLUDED_CCSDS_TRUNK_TAIL_H</highlight></codeline>
+<codeline lineno="3"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="ccsds__api_8h" kindref="compound">ccsds_api.h</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;gr_sync_block.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;cstdio&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9" refid="ccsds__trunk__tail_8h_1aa656f65c8fa6d4db2dff60f119a1bc94" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classccsds__trunk__tail" kindref="compound">ccsds_trunk_tail</ref>;</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="12"><highlight class="comment"><sp/>*<sp/>We<sp/>use<sp/>boost::shared_ptr&apos;s<sp/>instead<sp/>of<sp/>raw<sp/>pointers<sp/>for<sp/>all<sp/>access</highlight></codeline>
+<codeline lineno="13"><highlight class="comment"><sp/>*<sp/>to<sp/>gr_blocks<sp/>(and<sp/>many<sp/>other<sp/>data<sp/>structures).<sp/><sp/>The<sp/>shared_ptr<sp/>gets</highlight></codeline>
+<codeline lineno="14"><highlight class="comment"><sp/>*<sp/>us<sp/>transparent<sp/>reference<sp/>counting,<sp/>which<sp/>greatly<sp/>simplifies<sp/>storage</highlight></codeline>
+<codeline lineno="15"><highlight class="comment"><sp/>*<sp/>management<sp/>issues.<sp/><sp/>This<sp/>is<sp/>especially<sp/>helpful<sp/>in<sp/>our<sp/>hybrid</highlight></codeline>
+<codeline lineno="16"><highlight class="comment"><sp/>*<sp/>C++<sp/>/<sp/>Python<sp/>system.</highlight></codeline>
+<codeline lineno="17"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="18"><highlight class="comment"><sp/>*<sp/>See<sp/>http://www.boost.org/libs/smart_ptr/smart_ptr.htm</highlight></codeline>
+<codeline lineno="19"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="20"><highlight class="comment"><sp/>*<sp/>As<sp/>a<sp/>convention,<sp/>the<sp/>_sptr<sp/>suffix<sp/>indicates<sp/>a<sp/>boost::shared_ptr</highlight></codeline>
+<codeline lineno="21"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/>boost::shared_ptr&lt;ccsds_trunk_tail&gt;<sp/><ref refid="ccsds__trunk__tail_8h_1aa656f65c8fa6d4db2dff60f119a1bc94" kindref="member">ccsds_trunk_tail_sptr</ref>;</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><ref refid="api_8h_1a144137922962dd54ae2e8c1917a7e588" kindref="member">CCSDS_API</ref><sp/><ref refid="ccsds__trunk__tail_8h_1aa656f65c8fa6d4db2dff60f119a1bc94" kindref="member">ccsds_trunk_tail_sptr</ref><sp/><ref refid="ccsds__trunk__tail_8h_1a2afde6100269a2d172d65940213a39f9" kindref="member">ccsds_make_trunk_tail</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>trunk_len,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>frame_len);</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="44" refid="classccsds__trunk__tail" refkind="compound"><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="api_8h_1a144137922962dd54ae2e8c1917a7e588" kindref="member">CCSDS_API</ref><sp/><ref refid="classccsds__trunk__tail" kindref="compound">ccsds_trunk_tail</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/>gr_sync_block</highlight></codeline>
+<codeline lineno="45"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">friend</highlight><highlight class="normal"><sp/><ref refid="api_8h_1a144137922962dd54ae2e8c1917a7e588" kindref="member">CCSDS_API</ref><sp/><ref refid="ccsds__trunk__tail_8h_1aa656f65c8fa6d4db2dff60f119a1bc94" kindref="member">ccsds_trunk_tail_sptr</ref><sp/><ref refid="ccsds__trunk__tail_8h_1a2afde6100269a2d172d65940213a39f9" kindref="member">ccsds_make_trunk_tail</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>trunk_len,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>frame_len);</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"></highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classccsds__trunk__tail" kindref="compound">ccsds_trunk_tail</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>trunk_len,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>frame_len);</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>d_TRUNK_LEN;</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"></highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>d_FRAME_LEN;</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>d_stop;</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"></highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>process_frame(pmt::pmt_t<sp/>msg);</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"></highlight></codeline>
+<codeline lineno="72"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>~<ref refid="classccsds__trunk__tail" kindref="compound">ccsds_trunk_tail</ref><sp/>();<sp/><sp/></highlight><highlight class="comment">//<sp/>public<sp/>destructor</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="75"><highlight class="normal"></highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>work(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>noutput_items,<sp/>gr_vector_const_void_star&amp;<sp/>input_items,<sp/>gr_vector_void_star&amp;<sp/>output_items);</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"></highlight></codeline>
+<codeline lineno="79"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>INCLUDED_CCSDS_TRUNK_TAIL_H<sp/>*/</highlight><highlight class="preprocessor"></highlight></codeline>
+    </programlisting>
+    <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_trunk_tail.h"/>
+  </compounddef>
+</doxygen>

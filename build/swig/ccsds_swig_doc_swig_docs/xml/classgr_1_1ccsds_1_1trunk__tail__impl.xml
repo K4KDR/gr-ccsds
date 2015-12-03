@@ -1,0 +1,218 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="classgr_1_1ccsds_1_1trunk__tail__impl" kind="class" prot="public">
+    <compoundname>gr::ccsds::trunk_tail_impl</compoundname>
+    <basecompoundref refid="classgr_1_1ccsds_1_1trunk__tail" prot="public" virt="non-virtual">gr::ccsds::trunk_tail</basecompoundref>
+    <includes refid="trunk__tail__impl_8h" local="no">trunk_tail_impl.h</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classgr_1_1ccsds_1_1trunk__tail__impl_1af396a9ef664c09517ee3cabc7ec1eb3f" prot="private" static="no" mutable="no">
+        <type>const unsigned int</type>
+        <definition>const unsigned int gr::ccsds::trunk_tail_impl::d_TRUNK_LEN</definition>
+        <argsstring></argsstring>
+        <name>d_TRUNK_LEN</name>
+        <briefdescription>
+<para>Number of softbits to trunkate. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="see"><para>d_TRUNK_LEN </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/trunk_tail_impl.h" line="17" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/lib/trunk_tail_impl.h" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classgr_1_1ccsds_1_1trunk__tail__impl_1a6ec0c7cbaa710dad9c33017cfce5ecd5" prot="private" static="no" mutable="no">
+        <type>const unsigned int</type>
+        <definition>const unsigned int gr::ccsds::trunk_tail_impl::d_FRAME_LEN</definition>
+        <argsstring></argsstring>
+        <name>d_FRAME_LEN</name>
+        <briefdescription>
+<para>Length of a frame (without ASM) in bytes. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/trunk_tail_impl.h" line="20" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/lib/trunk_tail_impl.h" bodystart="20" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classgr_1_1ccsds_1_1trunk__tail__impl_1a639f1e555e77170678802b8f2c944460" prot="private" static="no" mutable="no">
+        <type>const unsigned int</type>
+        <definition>const unsigned int gr::ccsds::trunk_tail_impl::d_BLANC_BITS</definition>
+        <argsstring></argsstring>
+        <name>d_BLANC_BITS</name>
+        <briefdescription>
+<para>number of bits that are uncertain at the end </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/trunk_tail_impl.h" line="23" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/lib/trunk_tail_impl.h" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classgr_1_1ccsds_1_1trunk__tail__impl_1a635c757e1c357da803ffb8e19b9064a1" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool gr::ccsds::trunk_tail_impl::d_stop</definition>
+        <argsstring></argsstring>
+        <name>d_stop</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/trunk_tail_impl.h" line="25" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/lib/trunk_tail_impl.h" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classgr_1_1ccsds_1_1trunk__tail__impl_1a92305492451cf8f4ff6ed8c1419477e3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>gr::ccsds::trunk_tail_impl::trunk_tail_impl</definition>
+        <argsstring>(const unsigned int trunk_len, const unsigned int frame_len, const unsigned int blanc_bits)</argsstring>
+        <name>trunk_tail_impl</name>
+        <param>
+          <type>const unsigned int</type>
+          <declname>trunk_len</declname>
+        </param>
+        <param>
+          <type>const unsigned int</type>
+          <declname>frame_len</declname>
+        </param>
+        <param>
+          <type>const unsigned int</type>
+          <declname>blanc_bits</declname>
+        </param>
+        <briefdescription>
+<para>Public constructor of the Trunk Tail block. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>trunk_len</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of softbits to trunkate</para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>frame_len</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of a frame (without ASM) in bytes.</para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>blanc_bits</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>bit at the end that are uncertain </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/trunk_tail_impl.h" line="37" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classgr_1_1ccsds_1_1trunk__tail__impl_1a889d2eddf957f3aad033068854e7818e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>gr::ccsds::trunk_tail_impl::~trunk_tail_impl</definition>
+        <argsstring>()</argsstring>
+        <name>~trunk_tail_impl</name>
+        <briefdescription>
+<para>Public deconstructor of the AR. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/trunk_tail_impl.h" line="40" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classgr_1_1ccsds_1_1trunk__tail__impl_1a27a1aeedd1d5d25e1a3eacf9cc0b8d4d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gr::ccsds::trunk_tail_impl::process_frame</definition>
+        <argsstring>(pmt::pmt_t msg)</argsstring>
+        <name>process_frame</name>
+        <param>
+          <type>pmt::pmt_t</type>
+          <declname>msg</declname>
+        </param>
+        <briefdescription>
+<para>Asynchronous work function which is processing the queues. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/trunk_tail_impl.h" line="44" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classgr_1_1ccsds_1_1trunk__tail__impl_1ad1741259a6c2383262c03265f9ac101f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int gr::ccsds::trunk_tail_impl::work</definition>
+        <argsstring>(int noutput_items, gr_vector_const_void_star &amp;input_items, gr_vector_void_star &amp;output_items)</argsstring>
+        <name>work</name>
+        <param>
+          <type>int</type>
+          <declname>noutput_items</declname>
+        </param>
+        <param>
+          <type>gr_vector_const_void_star &amp;</type>
+          <declname>input_items</declname>
+        </param>
+        <param>
+          <type>gr_vector_void_star &amp;</type>
+          <declname>output_items</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/trunk_tail_impl.h" line="46" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="393">
+        <label>gr::ccsds::trunk_tail</label>
+        <link refid="classgr_1_1ccsds_1_1trunk__tail"/>
+        <childnode refid="394" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="394">
+        <label>sync_block</label>
+      </node>
+      <node id="392">
+        <label>gr::ccsds::trunk_tail_impl</label>
+        <link refid="classgr_1_1ccsds_1_1trunk__tail__impl"/>
+        <childnode refid="393" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="396">
+        <label>gr::ccsds::trunk_tail</label>
+        <link refid="classgr_1_1ccsds_1_1trunk__tail"/>
+        <childnode refid="397" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="397">
+        <label>sync_block</label>
+      </node>
+      <node id="395">
+        <label>gr::ccsds::trunk_tail_impl</label>
+        <link refid="classgr_1_1ccsds_1_1trunk__tail__impl"/>
+        <childnode refid="396" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/trunk_tail_impl.h" line="11" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/lib/trunk_tail_impl.h" bodystart="10" bodyend="48"/>
+    <listofallmembers>
+      <member refid="classgr_1_1ccsds_1_1trunk__tail__impl_1a639f1e555e77170678802b8f2c944460" prot="private" virt="non-virtual"><scope>gr::ccsds::trunk_tail_impl</scope><name>d_BLANC_BITS</name></member>
+      <member refid="classgr_1_1ccsds_1_1trunk__tail__impl_1a6ec0c7cbaa710dad9c33017cfce5ecd5" prot="private" virt="non-virtual"><scope>gr::ccsds::trunk_tail_impl</scope><name>d_FRAME_LEN</name></member>
+      <member refid="classgr_1_1ccsds_1_1trunk__tail__impl_1a635c757e1c357da803ffb8e19b9064a1" prot="private" virt="non-virtual"><scope>gr::ccsds::trunk_tail_impl</scope><name>d_stop</name></member>
+      <member refid="classgr_1_1ccsds_1_1trunk__tail__impl_1af396a9ef664c09517ee3cabc7ec1eb3f" prot="private" virt="non-virtual"><scope>gr::ccsds::trunk_tail_impl</scope><name>d_TRUNK_LEN</name></member>
+      <member refid="classgr_1_1ccsds_1_1trunk__tail_1a1d2fcbace5e74bc2b33960a23c9a3a8b" prot="public" virt="non-virtual"><scope>gr::ccsds::trunk_tail_impl</scope><name>make</name></member>
+      <member refid="classgr_1_1ccsds_1_1trunk__tail__impl_1a27a1aeedd1d5d25e1a3eacf9cc0b8d4d" prot="public" virt="non-virtual"><scope>gr::ccsds::trunk_tail_impl</scope><name>process_frame</name></member>
+      <member refid="classgr_1_1ccsds_1_1trunk__tail_1a5a815fa58952ae923e3ed3db0574950a" prot="public" virt="non-virtual"><scope>gr::ccsds::trunk_tail_impl</scope><name>sptr</name></member>
+      <member refid="classgr_1_1ccsds_1_1trunk__tail__impl_1a92305492451cf8f4ff6ed8c1419477e3" prot="public" virt="non-virtual"><scope>gr::ccsds::trunk_tail_impl</scope><name>trunk_tail_impl</name></member>
+      <member refid="classgr_1_1ccsds_1_1trunk__tail__impl_1ad1741259a6c2383262c03265f9ac101f" prot="public" virt="non-virtual"><scope>gr::ccsds::trunk_tail_impl</scope><name>work</name></member>
+      <member refid="classgr_1_1ccsds_1_1trunk__tail__impl_1a889d2eddf957f3aad033068854e7818e" prot="public" virt="non-virtual"><scope>gr::ccsds::trunk_tail_impl</scope><name>~trunk_tail_impl</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

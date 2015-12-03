@@ -1,0 +1,93 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="mpsk__detector__soft__cf__impl_8h" kind="file">
+    <compoundname>mpsk_detector_soft_cf_impl.h</compoundname>
+    <includes refid="mpsk__detector__soft__cf_8h" local="no">ccsds/mpsk_detector_soft_cf.h</includes>
+    <includes refid="mpsk__constellation_8h" local="yes">mpsk_constellation.h</includes>
+    <includes local="no">stdio.h</includes>
+    <includes local="no">math.h</includes>
+    <includes local="no">volk/volk.h</includes>
+    <includes local="no">complex.h</includes>
+    <incdepgraph>
+      <node id="612">
+        <label>volk/volk.h</label>
+      </node>
+      <node id="610">
+        <label>stdlib.h</label>
+      </node>
+      <node id="605">
+        <label>gnuradio/attributes.h</label>
+      </node>
+      <node id="602">
+        <label>ccsds/mpsk_detector_soft_cf.h</label>
+        <link refid="mpsk__detector__soft__cf_8h"/>
+        <childnode refid="603" relation="include">
+        </childnode>
+        <childnode refid="606" relation="include">
+        </childnode>
+      </node>
+      <node id="603">
+        <label>ccsds/api.h</label>
+        <link refid="api_8h"/>
+        <childnode refid="604" relation="include">
+        </childnode>
+        <childnode refid="605" relation="include">
+        </childnode>
+      </node>
+      <node id="601">
+        <label>mpsk_detector_soft_cf_impl.h</label>
+        <link refid="mpsk_detector_soft_cf_impl.h"/>
+        <childnode refid="602" relation="include">
+        </childnode>
+        <childnode refid="607" relation="include">
+        </childnode>
+        <childnode refid="609" relation="include">
+        </childnode>
+        <childnode refid="611" relation="include">
+        </childnode>
+        <childnode refid="612" relation="include">
+        </childnode>
+        <childnode refid="613" relation="include">
+        </childnode>
+      </node>
+      <node id="613">
+        <label>complex.h</label>
+      </node>
+      <node id="611">
+        <label>math.h</label>
+      </node>
+      <node id="604">
+        <label>gnuradio/config.h</label>
+      </node>
+      <node id="606">
+        <label>gnuradio/sync_interpolator.h</label>
+      </node>
+      <node id="608">
+        <label>complex</label>
+      </node>
+      <node id="609">
+        <label>stdio.h</label>
+      </node>
+      <node id="607">
+        <label>mpsk_constellation.h</label>
+        <link refid="mpsk__constellation_8h"/>
+        <childnode refid="608" relation="include">
+        </childnode>
+        <childnode refid="609" relation="include">
+        </childnode>
+        <childnode refid="610" relation="include">
+        </childnode>
+        <childnode refid="611" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <innerclass refid="classgr_1_1ccsds_1_1mpsk__detector__soft__cf__impl" prot="public">gr::ccsds::mpsk_detector_soft_cf_impl</innerclass>
+    <innernamespace refid="namespacegr">gr</innernamespace>
+    <innernamespace refid="namespacegr_1_1ccsds">gr::ccsds</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/mpsk_detector_soft_cf_impl.h"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,929 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="classccsds__fll__cc" kind="class" prot="public">
+    <compoundname>ccsds_fll_cc</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">gr_block</basecompoundref>
+    <includes refid="ccsds__fll__cc_8h" local="no">ccsds_fll_cc.h</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classccsds__fll__cc_1a3c751e8b3827c197d1d515bb4c834d40" prot="private" static="no" mutable="no">
+        <type>const unsigned int</type>
+        <definition>const unsigned int ccsds_fll_cc::D_L</definition>
+        <argsstring></argsstring>
+        <name>D_L</name>
+        <briefdescription>
+<para>Storage for observation length. </para>        </briefdescription>
+        <detaileddescription>
+<para>How many samples should be accumulated in order to cancel modulation and smooth estimate. Set by <ref refid="classccsds__fll__cc_1ab6ea040134c65fda2390c7970b0a5721" kindref="member">ccsds_fll_cc::ccsds_fll_cc()</ref> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_fll_cc.h" line="56" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_fll_cc.h" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__fll__cc_1a0bbff88dbab86639f20c6b58f4a695a5" prot="private" static="no" mutable="no">
+        <type>const unsigned int</type>
+        <definition>const unsigned int ccsds_fll_cc::d_POWER</definition>
+        <argsstring></argsstring>
+        <name>d_POWER</name>
+        <briefdescription>
+<para>Storage for modulation removal power. </para>        </briefdescription>
+        <detaileddescription>
+<para>Which power of the input samples should be computed for further processing. If set to 1, the input samples will be used directly. Set by <ref refid="classccsds__fll__cc_1ab6ea040134c65fda2390c7970b0a5721" kindref="member">ccsds_fll_cc::ccsds_fll_cc()</ref> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_fll_cc.h" line="64" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_fll_cc.h" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__fll__cc_1aff3c9c602ace7cfc5f6f1f367345cdc6" prot="private" static="no" mutable="no">
+        <type>gr_msg_queue_sptr</type>
+        <definition>gr_msg_queue_sptr ccsds_fll_cc::d_msgq</definition>
+        <argsstring></argsstring>
+        <name>d_msgq</name>
+        <briefdescription>
+<para>Shared pointer to frequency correction message queue. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="see"><para><ref refid="page_lo_feedback" kindref="compound">Local oscillator frequency correction feedback loop</ref> </para><simplesectsep/><para><ref refid="ccsds__lo__feedback_8h" kindref="compound">ccsds_lo_feedback.h</ref></para></simplesect>
+Shared pointer to the message queue where frequency corrections should be send to. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_fll_cc.h" line="77" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_fll_cc.h" bodystart="77" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__fll__cc_1a20560ff22ba970723ed2deb573f3ecfd" prot="private" static="no" mutable="no">
+        <type>gr_complex</type>
+        <definition>gr_complex ccsds_fll_cc::d_last_sample</definition>
+        <argsstring></argsstring>
+        <name>d_last_sample</name>
+        <briefdescription>
+<para>Buffer for last sample before the current block. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="see"><para><ref refid="classccsds__fll__cc_1a326d27979c9892f73a16552437c7f449" kindref="member">calc_diffs()</ref></para></simplesect>
+To determine the phase difference between the first sample of a block and the previous sample, this sample is buffered here.</para><para>Is initialized to 1+0j by <ref refid="classccsds__fll__cc_1ab6ea040134c65fda2390c7970b0a5721" kindref="member">ccsds_fll_cc::ccsds_fll_cc()</ref>. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_fll_cc.h" line="88" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_fll_cc.h" bodystart="88" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__fll__cc_1acc9c8bce692a6b267e4c00273eeacca0" prot="private" static="no" mutable="no">
+        <type>float</type>
+        <definition>float ccsds_fll_cc::d_lo_freq</definition>
+        <argsstring></argsstring>
+        <name>d_lo_freq</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><xrefsect id="todo_1_todo000011"><xreftitle>Todo</xreftitle><xrefdescription><para>fix frequency feedback loop </para></xrefdescription></xrefsect></para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_fll_cc.h" line="91" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_fll_cc.h" bodystart="91" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__fll__cc_1a30e72800d68b69beecc603d06a0c2c69" prot="private" static="no" mutable="no">
+        <type>float</type>
+        <definition>float ccsds_fll_cc::d_phase</definition>
+        <argsstring></argsstring>
+        <name>d_phase</name>
+        <briefdescription>
+<para>Buffer to store the current phase of the local oscillator, used to correct the detected frequency offset. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="see"><para><ref refid="classccsds__fll__cc_1a25660fe294770fcd0bfe1a1ac362fccb" kindref="member">calc_rotation()</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_fll_cc.h" line="98" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_fll_cc.h" bodystart="98" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__fll__cc_1a9084dc0038575759026b737cd8b6baa8" prot="private" static="no" mutable="no">
+        <type><ref refid="classlpf" kindref="compound">lpf</ref> *</type>
+        <definition>lpf* ccsds_fll_cc::d_filter</definition>
+        <argsstring></argsstring>
+        <name>d_filter</name>
+        <briefdescription>
+<para>Filter to smooth frequency estimates. </para>        </briefdescription>
+        <detaileddescription>
+<para>Linear first order low pass filter to smooth frequency estimates. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_fll_cc.h" line="104" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_fll_cc.h" bodystart="104" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__fll__cc_1a7781bf7ccd68d892bc412edd541c2b0d" prot="private" static="no" mutable="no">
+        <type>FILE *</type>
+        <definition>FILE* ccsds_fll_cc::dbg_file</definition>
+        <argsstring></argsstring>
+        <name>dbg_file</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>/brief File pointer for debugging </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_fll_cc.h" line="264" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_fll_cc.h" bodystart="264" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__fll__cc_1adb9b2d38e0cc3ffd086e6b6e6122abf4" prot="private" static="no" mutable="no">
+        <type>FILE *</type>
+        <definition>FILE* ccsds_fll_cc::dbg_file_pow</definition>
+        <argsstring></argsstring>
+        <name>dbg_file_pow</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>/brief File pointer for debugging </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_fll_cc.h" line="267" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_fll_cc.h" bodystart="267" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__fll__cc_1a9cec2ae9dcee40f9e80c88d840f233c3" prot="private" static="no" mutable="no">
+        <type>FILE *</type>
+        <definition>FILE* ccsds_fll_cc::dbg_file_dif</definition>
+        <argsstring></argsstring>
+        <name>dbg_file_dif</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>/brief File pointer for debugging </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_fll_cc.h" line="270" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_fll_cc.h" bodystart="270" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__fll__cc_1ac9818e91d9e7770850c6579c7628b242" prot="private" static="no" mutable="no">
+        <type>FILE *</type>
+        <definition>FILE* ccsds_fll_cc::dbg_file_sum</definition>
+        <argsstring></argsstring>
+        <name>dbg_file_sum</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>/brief File pointer for debugging </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_fll_cc.h" line="273" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_fll_cc.h" bodystart="273" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__fll__cc_1ac4ac09729f17172ca2b3a0704279d95f" prot="private" static="no" mutable="no">
+        <type>FILE *</type>
+        <definition>FILE* ccsds_fll_cc::dbg_file_tag</definition>
+        <argsstring></argsstring>
+        <name>dbg_file_tag</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>/brief File pointer for debugging </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_fll_cc.h" line="276" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_fll_cc.h" bodystart="276" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__fll__cc_1a45795d7e0f65f977da22930996894ddb" prot="private" static="no" mutable="no">
+        <type>unsigned int</type>
+        <definition>unsigned int ccsds_fll_cc::dbg_count</definition>
+        <argsstring></argsstring>
+        <name>dbg_count</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>/brief Counter for debugging </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_fll_cc.h" line="279" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_fll_cc.h" bodystart="279" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__fll__cc_1a7c3f8952085a703ae47449eaa92b5eeb" prot="private" static="no" mutable="no">
+        <type>unsigned int</type>
+        <definition>unsigned int ccsds_fll_cc::dbg_count_pow</definition>
+        <argsstring></argsstring>
+        <name>dbg_count_pow</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>/brief Counter for debugging </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_fll_cc.h" line="282" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_fll_cc.h" bodystart="282" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__fll__cc_1aa47867cb0f30f7ea7283270da4f1b8ba" prot="private" static="no" mutable="no">
+        <type>unsigned int</type>
+        <definition>unsigned int ccsds_fll_cc::dbg_count_dif</definition>
+        <argsstring></argsstring>
+        <name>dbg_count_dif</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>/brief Counter for debugging </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_fll_cc.h" line="285" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_fll_cc.h" bodystart="285" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__fll__cc_1abae9fe38193a9eff5ea2eb7f26d0e575" prot="private" static="no" mutable="no">
+        <type>unsigned int</type>
+        <definition>unsigned int ccsds_fll_cc::dbg_count_sum</definition>
+        <argsstring></argsstring>
+        <name>dbg_count_sum</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>/brief Counter for debugging </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_fll_cc.h" line="288" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_fll_cc.h" bodystart="288" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__fll__cc_1a35dccdf0d4aeb0f09686033d45ef04f4" prot="private" static="no" mutable="no">
+        <type>unsigned int</type>
+        <definition>unsigned int ccsds_fll_cc::dbg_count_tag</definition>
+        <argsstring></argsstring>
+        <name>dbg_count_tag</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>/brief Counter for debugging </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_fll_cc.h" line="291" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_fll_cc.h" bodystart="291" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__fll__cc_1a68ae21576cea2645fb74809ad1df0169" prot="private" static="no" mutable="no">
+        <type>unsigned int</type>
+        <definition>unsigned int ccsds_fll_cc::dbg_input_toggle</definition>
+        <argsstring></argsstring>
+        <name>dbg_input_toggle</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>/brief Counter for debugging </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_fll_cc.h" line="294" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_fll_cc.h" bodystart="294" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__fll__cc_1ae3ec161415de4a8046f7914d49f89125" prot="private" static="no" mutable="no">
+        <type>float</type>
+        <definition>float ccsds_fll_cc::dbg_last_msg</definition>
+        <argsstring></argsstring>
+        <name>dbg_last_msg</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>/brief Buffer for last send frequency estimate </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_fll_cc.h" line="297" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_fll_cc.h" bodystart="297" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="classccsds__fll__cc_1a7fc035d5a0f52e6c4c42c69fd9e23fbc" prot="private" static="yes" mutable="no">
+        <type>const float</type>
+        <definition>const float ccsds_fll_cc::D_TWOPI</definition>
+        <argsstring></argsstring>
+        <name>D_TWOPI</name>
+        <briefdescription>
+<para>Constant buffer of two pi with float precision. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_fll_cc.h" line="67" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_fll_cc.h" bodystart="67" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="friend">
+      <memberdef kind="friend" id="classccsds__fll__cc_1a699d501de2a552f9bdeb38fbe1aca8e2" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>friend <ref refid="api_8h_1a144137922962dd54ae2e8c1917a7e588" kindref="member">CCSDS_API</ref> ccsds_fll_cc_sptr</type>
+        <definition>CCSDS_API ccsds_fll_cc_sptr ccsds_make_fll_cc</definition>
+        <argsstring>(unsigned int obsv_length, float loop_bw, unsigned int power, gr_msg_queue_sptr msgq)</argsstring>
+        <name>ccsds_make_fll_cc</name>
+        <param>
+          <type>unsigned int</type>
+          <declname>obsv_length</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>loop_bw</declname>
+        </param>
+        <param>
+          <type>unsigned int</type>
+          <declname>power</declname>
+        </param>
+        <param>
+          <type>gr_msg_queue_sptr</type>
+          <declname>msgq</declname>
+        </param>
+        <briefdescription>
+<para>Create a frequency locked loop and return it&apos;s shared pointer. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>obsv_length</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of samples that should be accumulated for a frequency estimate. Higher values are less sensitive to noise, but take more time during which the frequency could change. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>loop_bw</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Loop bandwidth of the loop filter. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>power</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Take the power of the incomming samples for frequency estimation instead of the incomming samples directly to cancel out modulations. For M-PSK modulated signal the M-th power is recommended, while power=1 means take the incomming samples directly (modulations is still canceled out by averaging over <computeroutput>obsv_length</computeroutput> samples). </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>msgq</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Message queue to store new frequency corrections. See <ref refid="page_lo_feedback" kindref="compound">Local oscillator frequency correction feedback loop</ref> for more details. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Shared pointer to the created FLL block. </para></simplesect>
+<simplesect kind="note"><para>Might not work out of the box with the <ref refid="classccsds__local__oscillator__cc" kindref="compound">ccsds_local_oscillator_cc</ref> as it is matched to <ref refid="classccsds__dll__cc" kindref="compound">ccsds_dll_cc</ref> right now. </para></simplesect>
+<xrefsect id="todo_1_todo000009"><xreftitle>Todo</xreftitle><xrefdescription><para>Match frquency corrections to new LO interface </para></xrefdescription></xrefsect></para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_fll_cc.h" line="49" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classccsds__fll__cc_1ab6ea040134c65fda2390c7970b0a5721" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>ccsds_fll_cc::ccsds_fll_cc</definition>
+        <argsstring>(unsigned int obsv_length, float loop_bw, unsigned int power, gr_msg_queue_sptr msgq)</argsstring>
+        <name>ccsds_fll_cc</name>
+        <param>
+          <type>unsigned int</type>
+          <declname>obsv_length</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>loop_bw</declname>
+        </param>
+        <param>
+          <type>unsigned int</type>
+          <declname>power</declname>
+        </param>
+        <param>
+          <type>gr_msg_queue_sptr</type>
+          <declname>msgq</declname>
+        </param>
+        <briefdescription>
+<para>Private constructor for frequency locked loop. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>obsv_length</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of samples that should be accumulated for a frequency estimate. Higher values are less sensitive to noise, but take more time during which the frequency could change. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>loop_bw</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Loop bandwidth of the loop filter. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>power</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Take the power of the incomming samples for frequency estimation instead of the incomming samples directly to cancel out modulations. For M-PSK modulated signal the M-th power is recommended, while <computeroutput>power=1</computeroutput> means take the incomming samples directly (modulations is still canceled out by averaging over <computeroutput>obsv_length</computeroutput> samples). </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>msgq</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Message queue to store new frequency corrections. See <ref refid="page_lo_feedback" kindref="compound">Local oscillator frequency correction feedback loop</ref> for more details.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="see"><para><ref refid="ccsds__fll__cc_8h_1a699d501de2a552f9bdeb38fbe1aca8e2" kindref="member">ccsds_make_fll_cc()</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_fll_cc.h" line="125" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classccsds__fll__cc_1ad7601cbb35308d7b7c5a444d627730ba" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ccsds_fll_cc::calc_power</definition>
+        <argsstring>(gr_complex *out, const gr_complex *in, const unsigned int num)</argsstring>
+        <name>calc_power</name>
+        <param>
+          <type>gr_complex *</type>
+          <declname>out</declname>
+        </param>
+        <param>
+          <type>const gr_complex *</type>
+          <declname>in</declname>
+        </param>
+        <param>
+          <type>const unsigned int</type>
+          <declname>num</declname>
+        </param>
+        <briefdescription>
+<para>take an array of complex samples and compute their power. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>out</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Complex array to store the computed powers. Memory for at least <computeroutput>num</computeroutput> elements must be allocated. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>in</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Complex array of samples to compute the power from. Must contain at least <computeroutput>num</computeroutput> elements. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>num</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of samples to process.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+Take the complex input array <computeroutput>in</computeroutput>, calculate the samplewise power d_POWER and store them in <computeroutput>out</computeroutput>.</para><para><xrefsect id="todo_1_todo000012"><xreftitle>Todo</xreftitle><xrefdescription><para>Check if volk kernel of new GNU radio version computes the right powers and switch back to volk if true. </para></xrefdescription></xrefsect></para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_fll_cc.h" line="141" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classccsds__fll__cc_1a326d27979c9892f73a16552437c7f449" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ccsds_fll_cc::calc_diffs</definition>
+        <argsstring>(gr_complex *tmp_c, const gr_complex *in, const unsigned int num)</argsstring>
+        <name>calc_diffs</name>
+        <param>
+          <type>gr_complex *</type>
+          <declname>tmp_c</declname>
+        </param>
+        <param>
+          <type>const gr_complex *</type>
+          <declname>in</declname>
+        </param>
+        <param>
+          <type>const unsigned int</type>
+          <declname>num</declname>
+        </param>
+        <briefdescription>
+<para>Calculate the samplewise phase difference as a rotator. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>tmp_c</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Aligned complex array in which the differences should be stored. Memory for at least <computeroutput>num</computeroutput> elements must be allocated. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>in</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Complex array of samples which&apos;s differences should be computed. Must contain at least <computeroutput>num</computeroutput> elements. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>num</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of samples to process.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+Implements the delay and multiply frequency error detector tmp_c[k] = in[k] * conj(in[k-1]) where conj( . ) computes the complex conjugate.</para><para>The algorithm assumes a complex sample 1+0j at the very beginning and stores the last sample per block for the next iteration after the first run. This way <computeroutput>num</computeroutput> input samples generate <computeroutput>num</computeroutput> output samples without going out of array bounds.</para><para>This block is using volk, <computeroutput>tmp_c</computeroutput> <bold>must</bold> be aligned, <computeroutput>in</computeroutput> <bold>should</bold> be aligned for better performance. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_fll_cc.h" line="163" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classccsds__fll__cc_1ae9fef8554d05fb34740276689521e2ae" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ccsds_fll_cc::calc_summs</definition>
+        <argsstring>(gr_complex *phasors, unsigned int num)</argsstring>
+        <name>calc_summs</name>
+        <param>
+          <type>gr_complex *</type>
+          <declname>phasors</declname>
+        </param>
+        <param>
+          <type>unsigned int</type>
+          <declname>num</declname>
+        </param>
+        <briefdescription>
+<para>Accumulates blocks of samples from a complex array. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>phasors</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Complex vector of samples that should be accumulated. Must contain at least <computeroutput>num</computeroutput> elements. The accumulated results will be written back into this vector into the first <computeroutput>num/</computeroutput> <computeroutput><ref refid="classccsds__fll__cc_1a3c751e8b3827c197d1d515bb4c834d40" kindref="member">ccsds_fll_cc::D_L</ref></computeroutput> positions. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>num</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of samples to process, must be a multiple of <ref refid="classccsds__fll__cc_1a3c751e8b3827c197d1d515bb4c834d40" kindref="member">ccsds_fll_cc::D_L</ref>.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+Accumulates blocks of <ref refid="classccsds__fll__cc_1a3c751e8b3827c197d1d515bb4c834d40" kindref="member">ccsds_fll_cc::D_L</ref> samples and stores them at the begining of <computeroutput>phasors</computeroutput>. Used to filter out modulations and smooth the frequency estimates. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_fll_cc.h" line="178" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classccsds__fll__cc_1ab096712f41451b4358d01155ed963a31" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ccsds_fll_cc::calc_phases</definition>
+        <argsstring>(float *tmp_f, const gr_complex *tmp_c, const unsigned int num)</argsstring>
+        <name>calc_phases</name>
+        <param>
+          <type>float *</type>
+          <declname>tmp_f</declname>
+        </param>
+        <param>
+          <type>const gr_complex *</type>
+          <declname>tmp_c</declname>
+        </param>
+        <param>
+          <type>const unsigned int</type>
+          <declname>num</declname>
+        </param>
+        <briefdescription>
+<para>Calculates the phases of an array of complex numbers. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>tmp_f</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><bold>Aligned</bold> Array in which the phases should be stored in. Memory must be allocated for at least <computeroutput>num</computeroutput> elements. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>tmp_c</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><bold>Aligned</bold> array of complex samples which&apos;s phases should be calculated. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>num</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of samples to process. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_fll_cc.h" line="188" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classccsds__fll__cc_1a361b842b11d9807368557f8c49bde11c" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ccsds_fll_cc::adjust_phases</definition>
+        <argsstring>(float *phases, unsigned int num)</argsstring>
+        <name>adjust_phases</name>
+        <param>
+          <type>float *</type>
+          <declname>phases</declname>
+        </param>
+        <param>
+          <type>unsigned int</type>
+          <declname>num</declname>
+        </param>
+        <briefdescription>
+<para>Divides array samplewise by d_POWER. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>phases</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Array to process. Must contain at least <computeroutput>num</computeroutput> elements. Results are written back into this array. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>num</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of samples to process.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+By taking the M-th power of the samples the frequency offset between the samples is amplified by a factor of M. In this block this effect is reversed by dividing by d_POWER. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_fll_cc.h" line="200" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classccsds__fll__cc_1ad01ab06dc66cd794e8d264823c99b7ff" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ccsds_fll_cc::get_lo_tags</definition>
+        <argsstring>(float *lo_freqs, const unsigned int num)</argsstring>
+        <name>get_lo_tags</name>
+        <param>
+          <type>float *</type>
+          <declname>lo_freqs</declname>
+        </param>
+        <param>
+          <type>const unsigned int</type>
+          <declname>num</declname>
+        </param>
+        <briefdescription>
+<para>Looks for new lo_frequency tags in blocks and returns their frequency value. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>lo_freqs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Array in which the estimates should be written. Memory for at least <computeroutput>num</computeroutput> elements must be allocated. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>num</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of samples to process.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+/note The current version of <ref refid="classccsds__fll__cc" kindref="compound">ccsds_fll_cc</ref> does not conform to the new lo frequency feedback scheme and needs to be updated. <xrefsect id="todo_1_todo000013"><xreftitle>Todo</xreftitle><xrefdescription><para>Update to new lo frequency feedback scheme. </para></xrefdescription></xrefsect></para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_fll_cc.h" line="213" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classccsds__fll__cc_1a3a15088005a78e9510223b713186d802" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ccsds_fll_cc::fill_freqs</definition>
+        <argsstring>(float *tmp_f, float *tmp_fs, float *tmp_lo, const unsigned int num_out)</argsstring>
+        <name>fill_freqs</name>
+        <param>
+          <type>float *</type>
+          <declname>tmp_f</declname>
+        </param>
+        <param>
+          <type>float *</type>
+          <declname>tmp_fs</declname>
+        </param>
+        <param>
+          <type>float *</type>
+          <declname>tmp_lo</declname>
+        </param>
+        <param>
+          <type>const unsigned int</type>
+          <declname>num_out</declname>
+        </param>
+        <briefdescription>
+<para>Sums up <computeroutput>tmp_fs</computeroutput> and <computeroutput>tmp_lo</computeroutput> elementwise and copies the sum into <computeroutput>tmp_f</computeroutput> <ref refid="classccsds__fll__cc_1a3c751e8b3827c197d1d515bb4c834d40" kindref="member">ccsds_fll_cc::D_L</ref> times each. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>tmp_f</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Array in which to store the sums. Memory must be allocated for at least <computeroutput>num_out</computeroutput> elements. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>tmp_fs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Array with summands. Must contain at least <computeroutput>num_out/</computeroutput> <computeroutput><ref refid="classccsds__fll__cc_1a3c751e8b3827c197d1d515bb4c834d40" kindref="member">ccsds_fll_cc::D_L</ref></computeroutput> elements. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>tmp_lo</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Array with summands. Must contain at least <computeroutput>num_out/</computeroutput> <computeroutput><ref refid="classccsds__fll__cc_1a3c751e8b3827c197d1d515bb4c834d40" kindref="member">ccsds_fll_cc::D_L</ref></computeroutput> elements. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>num_out</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of samples to output.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+By summing over <ref refid="classccsds__fll__cc_1a3c751e8b3827c197d1d515bb4c834d40" kindref="member">ccsds_fll_cc::D_L</ref> samples each we decimated by a rate of <ref refid="classccsds__fll__cc_1a3c751e8b3827c197d1d515bb4c834d40" kindref="member">ccsds_fll_cc::D_L</ref>. While summing up tmp_fs and tmp_lo we repeat them <ref refid="classccsds__fll__cc_1a3c751e8b3827c197d1d515bb4c834d40" kindref="member">ccsds_fll_cc::D_L</ref> times each to return to the original input rate. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_fll_cc.h" line="231" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classccsds__fll__cc_1a1b4ee125292839f349898629d76f863f" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ccsds_fll_cc::send_freq_estimate</definition>
+        <argsstring>(double est)</argsstring>
+        <name>send_freq_estimate</name>
+        <param>
+          <type>double</type>
+          <declname>est</declname>
+        </param>
+        <briefdescription>
+<para>Send a frequency estimate to the asynchronous message queue. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>est</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Frequency estimate to send. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="see"><para><ref refid="page_lo_feedback" kindref="compound">Local oscillator frequency correction feedback loop</ref> </para><simplesectsep/><para><ref refid="ccsds__lo__feedback_8h" kindref="compound">ccsds_lo_feedback.h</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_fll_cc.h" line="239" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classccsds__fll__cc_1a9ba3ecb81dcd1a1e0c100066ded2ebf3" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ccsds_fll_cc::substract_lo_freq</definition>
+        <argsstring>(double *tmp_f, float *tmp_lo, const unsigned int num)</argsstring>
+        <name>substract_lo_freq</name>
+        <param>
+          <type>double *</type>
+          <declname>tmp_f</declname>
+        </param>
+        <param>
+          <type>float *</type>
+          <declname>tmp_lo</declname>
+        </param>
+        <param>
+          <type>const unsigned int</type>
+          <declname>num</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>not needed any more! </para></simplesect>
+<xrefsect id="todo_1_todo000014"><xreftitle>Todo</xreftitle><xrefdescription><para>remove frequency substraction </para></xrefdescription></xrefsect></para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_fll_cc.h" line="244" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classccsds__fll__cc_1a25660fe294770fcd0bfe1a1ac362fccb" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ccsds_fll_cc::calc_rotation</definition>
+        <argsstring>(gr_complex *out, const gr_complex *in, const double *tmp_f, const unsigned int num)</argsstring>
+        <name>calc_rotation</name>
+        <param>
+          <type>gr_complex *</type>
+          <declname>out</declname>
+        </param>
+        <param>
+          <type>const gr_complex *</type>
+          <declname>in</declname>
+        </param>
+        <param>
+          <type>const double *</type>
+          <declname>tmp_f</declname>
+        </param>
+        <param>
+          <type>const unsigned int</type>
+          <declname>num</declname>
+        </param>
+        <briefdescription>
+<para>Rotates complex array according to frequency estimates. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>out</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Complex array to store the rotated samples in. Memory for at least <computeroutput>num</computeroutput> elements must be allocated. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>in</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Complex array of samples to be rotated. Must contain at least <computeroutput>num</computeroutput> elements. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>tmp_f</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Per sample phase increase (i.e. frequency) estimate in radians. Must contain at least <computeroutput>num</computeroutput> elements. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>num</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of samples to process.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+Rotates samplewise by local phase <ref refid="classccsds__fll__cc_1a30e72800d68b69beecc603d06a0c2c69" kindref="member">ccsds_fll_cc::d_phase</ref>, which is increased by the estimates in <computeroutput>tmp_f</computeroutput> after each rotation. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_fll_cc.h" line="259" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classccsds__fll__cc_1a31e30e4ed6efc36c1abb98110f9f73b5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>ccsds_fll_cc::~ccsds_fll_cc</definition>
+        <argsstring>()</argsstring>
+        <name>~ccsds_fll_cc</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_fll_cc.h" line="300" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classccsds__fll__cc_1acd27681d72ee30d3fcb31a3e8de2288d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int ccsds_fll_cc::general_work</definition>
+        <argsstring>(int noutput_items, gr_vector_int &amp;ninput_items, gr_vector_const_void_star &amp;input_items, gr_vector_void_star &amp;output_items)</argsstring>
+        <name>general_work</name>
+        <param>
+          <type>int</type>
+          <declname>noutput_items</declname>
+        </param>
+        <param>
+          <type>gr_vector_int &amp;</type>
+          <declname>ninput_items</declname>
+        </param>
+        <param>
+          <type>gr_vector_const_void_star &amp;</type>
+          <declname>input_items</declname>
+        </param>
+        <param>
+          <type>gr_vector_void_star &amp;</type>
+          <declname>output_items</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_fll_cc.h" line="301" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Frequency locked loop.</para><para>Frequency estimation based on feedforward delay and multiply scheme. Sends frequency estimate to local_oscillator. </para>    </briefdescription>
+    <detaileddescription>
+<para>See also: <ref refid="page_lo_feedback" kindref="compound">Local oscillator frequency correction feedback loop</ref></para><para><xrefsect id="todo_1_todo000010"><xreftitle>Todo</xreftitle><xrefdescription><para>Make sure outer loop is only updated when frequency tags arrive and drop the substraction of the frequecy tag. </para></xrefdescription></xrefsect></para>    </detaileddescription>
+    <inheritancegraph>
+      <node id="65">
+        <label>gr_block</label>
+      </node>
+      <node id="64">
+        <label>ccsds_fll_cc</label>
+        <link refid="classccsds__fll__cc"/>
+        <childnode refid="65" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="68">
+        <label>lpf</label>
+        <link refid="classlpf"/>
+      </node>
+      <node id="67">
+        <label>gr_block</label>
+      </node>
+      <node id="66">
+        <label>ccsds_fll_cc</label>
+        <link refid="classccsds__fll__cc"/>
+        <childnode refid="67" relation="public-inheritance">
+        </childnode>
+        <childnode refid="68" relation="usage">
+          <edgelabel>d_filter</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_fll_cc.h" line="47" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_fll_cc.h" bodystart="46" bodyend="305"/>
+    <listofallmembers>
+      <member refid="classccsds__fll__cc_1a361b842b11d9807368557f8c49bde11c" prot="private" virt="non-virtual"><scope>ccsds_fll_cc</scope><name>adjust_phases</name></member>
+      <member refid="classccsds__fll__cc_1a326d27979c9892f73a16552437c7f449" prot="private" virt="non-virtual"><scope>ccsds_fll_cc</scope><name>calc_diffs</name></member>
+      <member refid="classccsds__fll__cc_1ab096712f41451b4358d01155ed963a31" prot="private" virt="non-virtual"><scope>ccsds_fll_cc</scope><name>calc_phases</name></member>
+      <member refid="classccsds__fll__cc_1ad7601cbb35308d7b7c5a444d627730ba" prot="private" virt="non-virtual"><scope>ccsds_fll_cc</scope><name>calc_power</name></member>
+      <member refid="classccsds__fll__cc_1a25660fe294770fcd0bfe1a1ac362fccb" prot="private" virt="non-virtual"><scope>ccsds_fll_cc</scope><name>calc_rotation</name></member>
+      <member refid="classccsds__fll__cc_1ae9fef8554d05fb34740276689521e2ae" prot="private" virt="non-virtual"><scope>ccsds_fll_cc</scope><name>calc_summs</name></member>
+      <member refid="classccsds__fll__cc_1ab6ea040134c65fda2390c7970b0a5721" prot="private" virt="non-virtual"><scope>ccsds_fll_cc</scope><name>ccsds_fll_cc</name></member>
+      <member refid="classccsds__fll__cc_1a699d501de2a552f9bdeb38fbe1aca8e2" prot="private" virt="non-virtual"><scope>ccsds_fll_cc</scope><name>ccsds_make_fll_cc</name></member>
+      <member refid="classccsds__fll__cc_1a9084dc0038575759026b737cd8b6baa8" prot="private" virt="non-virtual"><scope>ccsds_fll_cc</scope><name>d_filter</name></member>
+      <member refid="classccsds__fll__cc_1a3c751e8b3827c197d1d515bb4c834d40" prot="private" virt="non-virtual"><scope>ccsds_fll_cc</scope><name>D_L</name></member>
+      <member refid="classccsds__fll__cc_1a20560ff22ba970723ed2deb573f3ecfd" prot="private" virt="non-virtual"><scope>ccsds_fll_cc</scope><name>d_last_sample</name></member>
+      <member refid="classccsds__fll__cc_1acc9c8bce692a6b267e4c00273eeacca0" prot="private" virt="non-virtual"><scope>ccsds_fll_cc</scope><name>d_lo_freq</name></member>
+      <member refid="classccsds__fll__cc_1aff3c9c602ace7cfc5f6f1f367345cdc6" prot="private" virt="non-virtual"><scope>ccsds_fll_cc</scope><name>d_msgq</name></member>
+      <member refid="classccsds__fll__cc_1a30e72800d68b69beecc603d06a0c2c69" prot="private" virt="non-virtual"><scope>ccsds_fll_cc</scope><name>d_phase</name></member>
+      <member refid="classccsds__fll__cc_1a0bbff88dbab86639f20c6b58f4a695a5" prot="private" virt="non-virtual"><scope>ccsds_fll_cc</scope><name>d_POWER</name></member>
+      <member refid="classccsds__fll__cc_1a7fc035d5a0f52e6c4c42c69fd9e23fbc" prot="private" virt="non-virtual"><scope>ccsds_fll_cc</scope><name>D_TWOPI</name></member>
+      <member refid="classccsds__fll__cc_1a45795d7e0f65f977da22930996894ddb" prot="private" virt="non-virtual"><scope>ccsds_fll_cc</scope><name>dbg_count</name></member>
+      <member refid="classccsds__fll__cc_1aa47867cb0f30f7ea7283270da4f1b8ba" prot="private" virt="non-virtual"><scope>ccsds_fll_cc</scope><name>dbg_count_dif</name></member>
+      <member refid="classccsds__fll__cc_1a7c3f8952085a703ae47449eaa92b5eeb" prot="private" virt="non-virtual"><scope>ccsds_fll_cc</scope><name>dbg_count_pow</name></member>
+      <member refid="classccsds__fll__cc_1abae9fe38193a9eff5ea2eb7f26d0e575" prot="private" virt="non-virtual"><scope>ccsds_fll_cc</scope><name>dbg_count_sum</name></member>
+      <member refid="classccsds__fll__cc_1a35dccdf0d4aeb0f09686033d45ef04f4" prot="private" virt="non-virtual"><scope>ccsds_fll_cc</scope><name>dbg_count_tag</name></member>
+      <member refid="classccsds__fll__cc_1a7781bf7ccd68d892bc412edd541c2b0d" prot="private" virt="non-virtual"><scope>ccsds_fll_cc</scope><name>dbg_file</name></member>
+      <member refid="classccsds__fll__cc_1a9cec2ae9dcee40f9e80c88d840f233c3" prot="private" virt="non-virtual"><scope>ccsds_fll_cc</scope><name>dbg_file_dif</name></member>
+      <member refid="classccsds__fll__cc_1adb9b2d38e0cc3ffd086e6b6e6122abf4" prot="private" virt="non-virtual"><scope>ccsds_fll_cc</scope><name>dbg_file_pow</name></member>
+      <member refid="classccsds__fll__cc_1ac9818e91d9e7770850c6579c7628b242" prot="private" virt="non-virtual"><scope>ccsds_fll_cc</scope><name>dbg_file_sum</name></member>
+      <member refid="classccsds__fll__cc_1ac4ac09729f17172ca2b3a0704279d95f" prot="private" virt="non-virtual"><scope>ccsds_fll_cc</scope><name>dbg_file_tag</name></member>
+      <member refid="classccsds__fll__cc_1a68ae21576cea2645fb74809ad1df0169" prot="private" virt="non-virtual"><scope>ccsds_fll_cc</scope><name>dbg_input_toggle</name></member>
+      <member refid="classccsds__fll__cc_1ae3ec161415de4a8046f7914d49f89125" prot="private" virt="non-virtual"><scope>ccsds_fll_cc</scope><name>dbg_last_msg</name></member>
+      <member refid="classccsds__fll__cc_1a3a15088005a78e9510223b713186d802" prot="private" virt="non-virtual"><scope>ccsds_fll_cc</scope><name>fill_freqs</name></member>
+      <member refid="classccsds__fll__cc_1acd27681d72ee30d3fcb31a3e8de2288d" prot="public" virt="non-virtual"><scope>ccsds_fll_cc</scope><name>general_work</name></member>
+      <member refid="classccsds__fll__cc_1ad01ab06dc66cd794e8d264823c99b7ff" prot="private" virt="non-virtual"><scope>ccsds_fll_cc</scope><name>get_lo_tags</name></member>
+      <member refid="classccsds__fll__cc_1a1b4ee125292839f349898629d76f863f" prot="private" virt="non-virtual"><scope>ccsds_fll_cc</scope><name>send_freq_estimate</name></member>
+      <member refid="classccsds__fll__cc_1a9ba3ecb81dcd1a1e0c100066ded2ebf3" prot="private" virt="non-virtual"><scope>ccsds_fll_cc</scope><name>substract_lo_freq</name></member>
+      <member refid="classccsds__fll__cc_1a31e30e4ed6efc36c1abb98110f9f73b5" prot="public" virt="non-virtual"><scope>ccsds_fll_cc</scope><name>~ccsds_fll_cc</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

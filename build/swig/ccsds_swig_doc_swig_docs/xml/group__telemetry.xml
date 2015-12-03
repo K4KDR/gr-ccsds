@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="group__telemetry" kind="group">
+    <compoundname>telemetry</compoundname>
+    <title>CCSDS telemetry blocks</title>
+    <innerclass refid="classgr_1_1ccsds_1_1add__asm" prot="public">gr::ccsds::add_asm</innerclass>
+    <innerclass refid="classgr_1_1ccsds_1_1randomiser" prot="public">gr::ccsds::randomiser</innerclass>
+    <innerclass refid="classgr_1_1ccsds_1_1trunk__tail" prot="public">gr::ccsds::trunk_tail</innerclass>
+    <innerclass refid="classccsds__add__asm" prot="public">ccsds_add_asm</innerclass>
+    <innerclass refid="classccsds__randomiser" prot="public">ccsds_randomiser</innerclass>
+    <innerclass refid="classccsds__randomiser__bb" prot="public">ccsds_randomiser_bb</innerclass>
+    <innerclass refid="classccsds__trunk__tail" prot="public">ccsds_trunk_tail</innerclass>
+    <innergroup refid="group__ticp">CCSDS TICP blocks</innergroup>
+    <briefdescription>
+<para>Summary of all blocks used for telemetry frame operations. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

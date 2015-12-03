@@ -1,0 +1,255 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="classccsds__randomiser" kind="class" prot="public">
+    <compoundname>ccsds_randomiser</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">gr_sync_block</basecompoundref>
+    <includes refid="ccsds__randomiser_8h" local="no">ccsds_randomiser.h</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classccsds__randomiser_1a631df0404e6e883aca1896b9f060e927" prot="private" static="no" mutable="no">
+        <type>const uint8_t</type>
+        <definition>const uint8_t ccsds_randomiser::d_POLY</definition>
+        <argsstring></argsstring>
+        <name>d_POLY</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Polynomial to define the LFSR network </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_randomiser.h" line="82" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_randomiser.h" bodystart="82" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__randomiser_1a82123b1f3210fdb02344ee1a75fffd10" prot="private" static="no" mutable="no">
+        <type>const uint8_t</type>
+        <definition>const uint8_t ccsds_randomiser::d_SEED</definition>
+        <argsstring></argsstring>
+        <name>d_SEED</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Initial state of the LFSR </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_randomiser.h" line="85" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_randomiser.h" bodystart="85" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__randomiser_1ac040a95627ae8252454b32a822d31746" prot="private" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t ccsds_randomiser::d_state</definition>
+        <argsstring></argsstring>
+        <name>d_state</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Current state of the LFSR </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_randomiser.h" line="88" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_randomiser.h" bodystart="88" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__randomiser_1a994c8eb9880824c8e88f1435961e1196" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool ccsds_randomiser::d_stop</definition>
+        <argsstring></argsstring>
+        <name>d_stop</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Flag to store whether EOF has been received or not </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_randomiser.h" line="91" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_randomiser.h" bodystart="91" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="friend">
+      <memberdef kind="friend" id="classccsds__randomiser_1a446a1ed5519eb7b1e61fa4af0fa95f2b" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>friend <ref refid="api_8h_1a144137922962dd54ae2e8c1917a7e588" kindref="member">CCSDS_API</ref> ccsds_randomiser_sptr</type>
+        <definition>CCSDS_API ccsds_randomiser_sptr ccsds_make_randomiser</definition>
+        <argsstring>(const uint8_t polynomial, const uint8_t seed)</argsstring>
+        <name>ccsds_make_randomiser</name>
+        <param>
+          <type>const uint8_t</type>
+          <declname>polynomial</declname>
+        </param>
+        <param>
+          <type>const uint8_t</type>
+          <declname>seed</declname>
+        </param>
+        <briefdescription>
+<para>Return a shared_ptr to a new instance of <ref refid="classccsds__randomiser" kindref="compound">ccsds_randomiser</ref>. </para>        </briefdescription>
+        <detaileddescription>
+<para>Create an instance of <ref refid="classccsds__randomiser" kindref="compound">ccsds_randomiser</ref> and return it&apos;s shared_ptr.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>polynomial</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Polynomial that defines the network of the 8 shift registers. The MSB encodes whether the last shift register (which is used for the output) should be used to generate the new input while the LSB encodes whether the first shift register (that holds the input bit of the last step should be used to generate the output. Or in ECSS definition: The MSB holds the coefficient for x^0 up to the LSB which holds coefficient x^7. x^8 is not encoded as it is always set (due to the fact that this is a maximum length 8 bit shift register). The default value is 0x95 which corresponds to the randomiser defined in ECSS with the polynomial representation x^8+x^7+x^5+x^3+x^0. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>seed</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Initial state of the shift registers. MSB corresponds to the last register (which will be the output on the next step). Default to all ones as defined in ECSS. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Shared pointer to the created block </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_randomiser.h" line="62" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classccsds__randomiser_1a6388f303c1baec67f0e37429166f83bf" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>ccsds_randomiser::ccsds_randomiser</definition>
+        <argsstring>(const uint8_t polynomial=0x95, const uint8_t seed=0xFF)</argsstring>
+        <name>ccsds_randomiser</name>
+        <param>
+          <type>const uint8_t</type>
+          <declname>polynomial</declname>
+          <defval>0x95</defval>
+        </param>
+        <param>
+          <type>const uint8_t</type>
+          <declname>seed</declname>
+          <defval>0xFF</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_randomiser.h" line="79" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classccsds__randomiser_1a5e7878d4af29d9c9da46c9e0cb7b4232" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ccsds_randomiser::reset</definition>
+        <argsstring>(void)</argsstring>
+        <name>reset</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Reset LFSR to <computeroutput>d_SEED</computeroutput> state </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_randomiser.h" line="94" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classccsds__randomiser_1a056ecc251a82e0a7f8ae7aa5c08b48dc" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint8_t</type>
+        <definition>uint8_t ccsds_randomiser::get_next_byte</definition>
+        <argsstring>(void)</argsstring>
+        <name>get_next_byte</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Perform 8 updates on the LFSR and return it&apos;s output </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_randomiser.h" line="97" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classccsds__randomiser_1ab83e81f09aa6d4d42b24efc6646a9faa" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ccsds_randomiser::process_frame</definition>
+        <argsstring>(pmt::pmt_t msg)</argsstring>
+        <name>process_frame</name>
+        <param>
+          <type>pmt::pmt_t</type>
+          <declname>msg</declname>
+        </param>
+        <briefdescription>
+<para>Asynchronous work function which is processing the queues. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_randomiser.h" line="100" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classccsds__randomiser_1a668c672b22bba1bcd9fd27a49066afc9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>ccsds_randomiser::~ccsds_randomiser</definition>
+        <argsstring>()</argsstring>
+        <name>~ccsds_randomiser</name>
+        <briefdescription>
+<para>Public deconstructor. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_randomiser.h" line="104" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classccsds__randomiser_1acd6d24aa9407175d5172647c00064291" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int ccsds_randomiser::work</definition>
+        <argsstring>(int noutput_items, gr_vector_const_void_star &amp;input_items, gr_vector_void_star &amp;output_items)</argsstring>
+        <name>work</name>
+        <param>
+          <type>int</type>
+          <declname>noutput_items</declname>
+        </param>
+        <param>
+          <type>gr_vector_const_void_star &amp;</type>
+          <declname>input_items</declname>
+        </param>
+        <param>
+          <type>gr_vector_void_star &amp;</type>
+          <declname>output_items</declname>
+        </param>
+        <briefdescription>
+<para>Dummy work function. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_randomiser.h" line="107" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Combines the input frame with a pseudo random sequence by XOR operation. The pseudo random sequence is generated by an 8-bit linear feedback shift register as defined in ECSS. </para>    </briefdescription>
+    <detaileddescription>
+<para>The block has an input message port named &quot;in&quot; at which new frames can arrive. On arrival a new message is created consisting of the input message XORed with the pseudo random sequence. The LFSR is set to the initial <computeroutput>seed</computeroutput> state before every block.This new message is then queued in the output message port named &quot;out&quot;. </para>    </detaileddescription>
+    <inheritancegraph>
+      <node id="128">
+        <label>gr_sync_block</label>
+      </node>
+      <node id="127">
+        <label>ccsds_randomiser</label>
+        <link refid="classccsds__randomiser"/>
+        <childnode refid="128" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="130">
+        <label>gr_sync_block</label>
+      </node>
+      <node id="129">
+        <label>ccsds_randomiser</label>
+        <link refid="classccsds__randomiser"/>
+        <childnode refid="130" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_randomiser.h" line="60" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_randomiser.h" bodystart="59" bodyend="109"/>
+    <listofallmembers>
+      <member refid="classccsds__randomiser_1a446a1ed5519eb7b1e61fa4af0fa95f2b" prot="private" virt="non-virtual"><scope>ccsds_randomiser</scope><name>ccsds_make_randomiser</name></member>
+      <member refid="classccsds__randomiser_1a6388f303c1baec67f0e37429166f83bf" prot="private" virt="non-virtual"><scope>ccsds_randomiser</scope><name>ccsds_randomiser</name></member>
+      <member refid="classccsds__randomiser_1a631df0404e6e883aca1896b9f060e927" prot="private" virt="non-virtual"><scope>ccsds_randomiser</scope><name>d_POLY</name></member>
+      <member refid="classccsds__randomiser_1a82123b1f3210fdb02344ee1a75fffd10" prot="private" virt="non-virtual"><scope>ccsds_randomiser</scope><name>d_SEED</name></member>
+      <member refid="classccsds__randomiser_1ac040a95627ae8252454b32a822d31746" prot="private" virt="non-virtual"><scope>ccsds_randomiser</scope><name>d_state</name></member>
+      <member refid="classccsds__randomiser_1a994c8eb9880824c8e88f1435961e1196" prot="private" virt="non-virtual"><scope>ccsds_randomiser</scope><name>d_stop</name></member>
+      <member refid="classccsds__randomiser_1a056ecc251a82e0a7f8ae7aa5c08b48dc" prot="private" virt="non-virtual"><scope>ccsds_randomiser</scope><name>get_next_byte</name></member>
+      <member refid="classccsds__randomiser_1ab83e81f09aa6d4d42b24efc6646a9faa" prot="private" virt="non-virtual"><scope>ccsds_randomiser</scope><name>process_frame</name></member>
+      <member refid="classccsds__randomiser_1a5e7878d4af29d9c9da46c9e0cb7b4232" prot="private" virt="non-virtual"><scope>ccsds_randomiser</scope><name>reset</name></member>
+      <member refid="classccsds__randomiser_1acd6d24aa9407175d5172647c00064291" prot="public" virt="non-virtual"><scope>ccsds_randomiser</scope><name>work</name></member>
+      <member refid="classccsds__randomiser_1a668c672b22bba1bcd9fd27a49066afc9" prot="public" virt="non-virtual"><scope>ccsds_randomiser</scope><name>~ccsds_randomiser</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

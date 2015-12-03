@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="dir_0548767a16b353ed00142c7c5d1cf923" kind="dir">
+    <compoundname>/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds</compoundname>
+    <innerdir refid="dir_5afd4d143a139ec624b1ea43cb90c1be">/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include</innerdir>
+    <innerdir refid="dir_bfb05dcb4e3a1e368bb0400fa642d15d">/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/lib</innerdir>
+    <innerdir refid="dir_4fedce6b6f6287ab23d1a500f3a1a930">/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/oldblocks</innerdir>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/"/>
+  </compounddef>
+</doxygen>

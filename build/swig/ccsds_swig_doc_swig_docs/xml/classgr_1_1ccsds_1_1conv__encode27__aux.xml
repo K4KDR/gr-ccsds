@@ -1,0 +1,360 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="classgr_1_1ccsds_1_1conv__encode27__aux" kind="class" prot="public">
+    <compoundname>gr::ccsds::conv_encode27_aux</compoundname>
+    <derivedcompoundref refid="classgr_1_1ccsds_1_1conv__encode27__bb__impl" prot="protected" virt="non-virtual">gr::ccsds::conv_encode27_bb_impl</derivedcompoundref>
+    <includes refid="conv__encode27__aux_8h" local="no">conv_encode27_aux.h</includes>
+      <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classgr_1_1ccsds_1_1conv__encode27__aux_1a38cf8b26d20b24c1b7b45e9e9210cf9a" prot="protected" static="no" mutable="no">
+        <type>const bool</type>
+        <definition>const bool gr::ccsds::conv_encode27_aux::d_INVERT_C1</definition>
+        <argsstring></argsstring>
+        <name>d_INVERT_C1</name>
+        <briefdescription>
+<para>Whether or not the c1 stream should be inverted. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/conv_encode27_aux.h" line="15" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/lib/conv_encode27_aux.h" bodystart="15" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classgr_1_1ccsds_1_1conv__encode27__aux_1a31401755c00376f228a74c24ebfd09e7" prot="protected" static="no" mutable="no">
+        <type>const bool</type>
+        <definition>const bool gr::ccsds::conv_encode27_aux::d_INVERT_C2</definition>
+        <argsstring></argsstring>
+        <name>d_INVERT_C2</name>
+        <briefdescription>
+<para>Whether or not the c2 stream should be inverted. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/conv_encode27_aux.h" line="20" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/lib/conv_encode27_aux.h" bodystart="20" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classgr_1_1ccsds_1_1conv__encode27__aux_1aa65ce3f5e7b2e017f9e5776473b3fdc0" prot="protected" static="no" mutable="no">
+        <type>const unsigned char</type>
+        <definition>const unsigned char gr::ccsds::conv_encode27_aux::d_POLY_C1</definition>
+        <argsstring></argsstring>
+        <name>d_POLY_C1</name>
+        <briefdescription>
+<para>Generator polynomial for stream c1. </para>        </briefdescription>
+        <detaileddescription>
+<para>LSB corresponds to <computeroutput>i</computeroutput>(t-6), MSB-1 corresponds to <computeroutput>i(t)</computeroutput>.</para><para>Default value according to ECSS is 0x79 or 171 </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/conv_encode27_aux.h" line="29" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/lib/conv_encode27_aux.h" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classgr_1_1ccsds_1_1conv__encode27__aux_1ae92915f63ef3a25c6f1df1cbd2523763" prot="protected" static="no" mutable="no">
+        <type>const unsigned char</type>
+        <definition>const unsigned char gr::ccsds::conv_encode27_aux::d_POLY_C2</definition>
+        <argsstring></argsstring>
+        <name>d_POLY_C2</name>
+        <briefdescription>
+<para>Generator polynomial for stream c2. </para>        </briefdescription>
+        <detaileddescription>
+<para>LSB corresponds to <computeroutput>i</computeroutput>(t-6), MSB-1 corresponds to <computeroutput>i(t)</computeroutput>.</para><para>Default value according to ECSS is 0x5B or 133 </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/conv_encode27_aux.h" line="38" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/lib/conv_encode27_aux.h" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classgr_1_1ccsds_1_1conv__encode27__aux_1a81d04b6066830168e2975c301cfbf334" prot="protected" static="no" mutable="no">
+        <type>const <ref refid="namespacegr_1_1ccsds_1_1conv__puncturing27_1a3b70c7c0f0d0da176ee821dd59945ee8" kindref="member">conv_puncturing27::punct_t</ref></type>
+        <definition>const conv_puncturing27::punct_t gr::ccsds::conv_encode27_aux::d_PUNCT_TYPE</definition>
+        <argsstring></argsstring>
+        <name>d_PUNCT_TYPE</name>
+        <briefdescription>
+<para>Which punctured version of the code to use. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/conv_encode27_aux.h" line="41" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/lib/conv_encode27_aux.h" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classgr_1_1ccsds_1_1conv__encode27__aux_1a81a712b4ab70381da8ff729a84507721" prot="protected" static="no" mutable="no">
+        <type>const unsigned int</type>
+        <definition>const unsigned int gr::ccsds::conv_encode27_aux::d_PUNCT_LEN</definition>
+        <argsstring></argsstring>
+        <name>d_PUNCT_LEN</name>
+        <briefdescription>
+<para>Number of bits after which the puncturing pattern repeats. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/conv_encode27_aux.h" line="44" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/lib/conv_encode27_aux.h" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classgr_1_1ccsds_1_1conv__encode27__aux_1a3fc41703424732761d03c4052e66d164" prot="private" static="no" mutable="no">
+        <type>uint16_t</type>
+        <definition>uint16_t gr::ccsds::conv_encode27_aux::d_state</definition>
+        <argsstring></argsstring>
+        <name>d_state</name>
+        <briefdescription>
+<para>State information vector. </para>        </briefdescription>
+        <detaileddescription>
+<para>Counting from 0, starting at the LSB this state contains: bit0 - bit6 : Next input byte (that is not processed yet) bit7 : Current information bit i(t) bit8 : i(t-1) bit9 : i(t-2) bit10 : i(t-3) bit11 : i(t-4) bit12 : i(t-5) bit13 : i(t-6) bit14 : i(t-7) bit15 : Allways zero to esnure no overfloat when shifting the state left. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/conv_encode27_aux.h" line="64" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/lib/conv_encode27_aux.h" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classgr_1_1ccsds_1_1conv__encode27__aux_1ab55c47475423b2de69f0289f05b87874" prot="private" static="no" mutable="no">
+        <type>boost::shared_ptr&lt; bool[]&gt;</type>
+        <definition>boost::shared_ptr&lt;bool[]&gt; gr::ccsds::conv_encode27_aux::d_punct_pattern</definition>
+        <argsstring></argsstring>
+        <name>d_punct_pattern</name>
+        <briefdescription>
+<para>Array of booleans when to keep (true) and when to drop bits. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/conv_encode27_aux.h" line="67" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/lib/conv_encode27_aux.h" bodystart="67" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classgr_1_1ccsds_1_1conv__encode27__aux_1a34603ff0e97be4ea979d60b4a7b07c29" prot="private" static="no" mutable="no">
+        <type>unsigned int</type>
+        <definition>unsigned int gr::ccsds::conv_encode27_aux::d_punct_count</definition>
+        <argsstring></argsstring>
+        <name>d_punct_count</name>
+        <briefdescription>
+<para>Number of bits we already processed in the current puncturing pattern. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/conv_encode27_aux.h" line="73" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/lib/conv_encode27_aux.h" bodystart="73" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classgr_1_1ccsds_1_1conv__encode27__aux_1a8e2bff8b34d4444a29dbc458bdce2bbb" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gr::ccsds::conv_encode27_aux::encode</definition>
+        <argsstring>(uint16_t &amp;output_bits, unsigned char input_byte)</argsstring>
+        <name>encode</name>
+        <param>
+          <type>uint16_t &amp;</type>
+          <declname>output_bits</declname>
+        </param>
+        <param>
+          <type>unsigned char</type>
+          <declname>input_byte</declname>
+        </param>
+        <briefdescription>
+<para>Encode input byte without puncturing. The output are 2 bytes. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>output_bits</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Encoded bitstream (16bits). </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>input_byte</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Unencoded bitstream (8bits). </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/conv_encode27_aux.h" line="83" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classgr_1_1ccsds_1_1conv__encode27__aux_1aff51bfda0c4dec48340bc5d7e56ef484" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gr::ccsds::conv_encode27_aux::puncture</definition>
+        <argsstring>(uint16_t &amp;output_bits, uint8_t &amp;num_out_bits, uint16_t input_bits)</argsstring>
+        <name>puncture</name>
+        <param>
+          <type>uint16_t &amp;</type>
+          <declname>output_bits</declname>
+        </param>
+        <param>
+          <type>uint8_t &amp;</type>
+          <declname>num_out_bits</declname>
+        </param>
+        <param>
+          <type>uint16_t</type>
+          <declname>input_bits</declname>
+        </param>
+        <briefdescription>
+<para>Perfrom puncturing and report how many bits of the output contain valid information bits. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>output_bits</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Encoded and punctured information bits. (<computeroutput>num_out_bits</computeroutput> bits). </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>num_out_bits</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of bits that contain valid information bits in <computeroutput>output_bits</computeroutput>. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>input_bits</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Encoded unpunctured input bitstream (16bits). </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/conv_encode27_aux.h" line="95" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classgr_1_1ccsds_1_1conv__encode27__aux_1a2da1404208ef7f7f2e046262fa235b91" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>gr::ccsds::conv_encode27_aux::conv_encode27_aux</definition>
+        <argsstring>(uint8_t gen_poly_c1=0x79, uint8_t gen_poly_c2=0xDB, conv_puncturing27::punct_t puncturing=conv_puncturing27::NONE)</argsstring>
+        <name>conv_encode27_aux</name>
+        <param>
+          <type>uint8_t</type>
+          <declname>gen_poly_c1</declname>
+          <defval>0x79</defval>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>gen_poly_c2</declname>
+          <defval>0xDB</defval>
+        </param>
+        <param>
+          <type><ref refid="namespacegr_1_1ccsds_1_1conv__puncturing27_1a3b70c7c0f0d0da176ee821dd59945ee8" kindref="member">conv_puncturing27::punct_t</ref></type>
+          <declname>puncturing</declname>
+          <defval><ref refid="namespacegr_1_1ccsds_1_1conv__puncturing27_1a3b70c7c0f0d0da176ee821dd59945ee8aedc352324c9da8fa3b789b1625416dc7" kindref="member">conv_puncturing27::NONE</ref></defval>
+        </param>
+        <briefdescription>
+<para>Constructor for the encoder helper class. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>gen_poly_c1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Generator polynomial for stream c1 (see description below). Default is 0x79 (0x79 and no inversion as defined in ECSS) </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>gen_poly_c2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Generator polynomial for stream c1 (see description below). Default is 0x5B|0x80 (0x5B and inversion as defined in ECSS) </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>puncturing</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Chosen puncturing scheme. Defaults to NONE, which means no puncturing is done.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="see"><para><ref refid="classgr_1_1ccsds_1_1conv__encode27__aux_1aa65ce3f5e7b2e017f9e5776473b3fdc0" kindref="member">d_POLY_C1</ref> </para><simplesectsep/><para><ref refid="classgr_1_1ccsds_1_1conv__encode27__aux_1ae92915f63ef3a25c6f1df1cbd2523763" kindref="member">d_POLY_C2</ref></para></simplesect>
+The generator polynomial is a condensed information about how to combine the shift register outputs and whether or not to invert the output stream.</para><para>If the MSB is set the output stream will be inverted.</para><para>The lower 7 bits encode the actual polynomials. The generator polynomial is masked with 0x7F (set MSB to zero) and the copied into the <computeroutput>d_poly_x</computeroutput> variables. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/conv_encode27_aux.h" line="123" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classgr_1_1ccsds_1_1conv__encode27__aux_1a96b59a86efdb71094498583910fac742" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>gr::ccsds::conv_encode27_aux::~conv_encode27_aux</definition>
+        <argsstring>()</argsstring>
+        <name>~conv_encode27_aux</name>
+        <briefdescription>
+<para>Destructor. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/conv_encode27_aux.h" line="126" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classgr_1_1ccsds_1_1conv__encode27__aux_1a5fab7fa3e975faf5cc89c77701295a5a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gr::ccsds::conv_encode27_aux::encode_punct</definition>
+        <argsstring>(uint16_t &amp;output_bits, uint8_t &amp;num_out_bits, unsigned char input_byte)</argsstring>
+        <name>encode_punct</name>
+        <param>
+          <type>uint16_t &amp;</type>
+          <declname>output_bits</declname>
+        </param>
+        <param>
+          <type>uint8_t &amp;</type>
+          <declname>num_out_bits</declname>
+        </param>
+        <param>
+          <type>unsigned char</type>
+          <declname>input_byte</declname>
+        </param>
+        <briefdescription>
+<para>Encode information byte including puncturing. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>output_bits</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Up to 16 bits which are the output of the encoding and puncturing. The exact number of bits that contain information is written into <computeroutput>num_output_bits</computeroutput> </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>num_out_bits</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of bits in <computeroutput>output_bits</computeroutput> that contain information based on chosen puncturing. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>input_byte</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>8 input bits to encode and puncture. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/conv_encode27_aux.h" line="138" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="176">
+        <label>gr::ccsds::conv_encode27_aux</label>
+        <link refid="classgr_1_1ccsds_1_1conv__encode27__aux"/>
+      </node>
+      <node id="177">
+        <label>gr::ccsds::conv_encode27_bb_impl</label>
+        <link refid="classgr_1_1ccsds_1_1conv__encode27__bb__impl"/>
+        <childnode refid="176" relation="protected-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/conv_encode27_aux.h" line="9" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/lib/conv_encode27_aux.h" bodystart="9" bodyend="139"/>
+    <listofallmembers>
+      <member refid="classgr_1_1ccsds_1_1conv__encode27__aux_1a2da1404208ef7f7f2e046262fa235b91" prot="public" virt="non-virtual"><scope>gr::ccsds::conv_encode27_aux</scope><name>conv_encode27_aux</name></member>
+      <member refid="classgr_1_1ccsds_1_1conv__encode27__aux_1a38cf8b26d20b24c1b7b45e9e9210cf9a" prot="protected" virt="non-virtual"><scope>gr::ccsds::conv_encode27_aux</scope><name>d_INVERT_C1</name></member>
+      <member refid="classgr_1_1ccsds_1_1conv__encode27__aux_1a31401755c00376f228a74c24ebfd09e7" prot="protected" virt="non-virtual"><scope>gr::ccsds::conv_encode27_aux</scope><name>d_INVERT_C2</name></member>
+      <member refid="classgr_1_1ccsds_1_1conv__encode27__aux_1aa65ce3f5e7b2e017f9e5776473b3fdc0" prot="protected" virt="non-virtual"><scope>gr::ccsds::conv_encode27_aux</scope><name>d_POLY_C1</name></member>
+      <member refid="classgr_1_1ccsds_1_1conv__encode27__aux_1ae92915f63ef3a25c6f1df1cbd2523763" prot="protected" virt="non-virtual"><scope>gr::ccsds::conv_encode27_aux</scope><name>d_POLY_C2</name></member>
+      <member refid="classgr_1_1ccsds_1_1conv__encode27__aux_1a34603ff0e97be4ea979d60b4a7b07c29" prot="private" virt="non-virtual"><scope>gr::ccsds::conv_encode27_aux</scope><name>d_punct_count</name></member>
+      <member refid="classgr_1_1ccsds_1_1conv__encode27__aux_1a81a712b4ab70381da8ff729a84507721" prot="protected" virt="non-virtual"><scope>gr::ccsds::conv_encode27_aux</scope><name>d_PUNCT_LEN</name></member>
+      <member refid="classgr_1_1ccsds_1_1conv__encode27__aux_1ab55c47475423b2de69f0289f05b87874" prot="private" virt="non-virtual"><scope>gr::ccsds::conv_encode27_aux</scope><name>d_punct_pattern</name></member>
+      <member refid="classgr_1_1ccsds_1_1conv__encode27__aux_1a81d04b6066830168e2975c301cfbf334" prot="protected" virt="non-virtual"><scope>gr::ccsds::conv_encode27_aux</scope><name>d_PUNCT_TYPE</name></member>
+      <member refid="classgr_1_1ccsds_1_1conv__encode27__aux_1a3fc41703424732761d03c4052e66d164" prot="private" virt="non-virtual"><scope>gr::ccsds::conv_encode27_aux</scope><name>d_state</name></member>
+      <member refid="classgr_1_1ccsds_1_1conv__encode27__aux_1a8e2bff8b34d4444a29dbc458bdce2bbb" prot="protected" virt="non-virtual"><scope>gr::ccsds::conv_encode27_aux</scope><name>encode</name></member>
+      <member refid="classgr_1_1ccsds_1_1conv__encode27__aux_1a5fab7fa3e975faf5cc89c77701295a5a" prot="public" virt="non-virtual"><scope>gr::ccsds::conv_encode27_aux</scope><name>encode_punct</name></member>
+      <member refid="classgr_1_1ccsds_1_1conv__encode27__aux_1aff51bfda0c4dec48340bc5d7e56ef484" prot="protected" virt="non-virtual"><scope>gr::ccsds::conv_encode27_aux</scope><name>puncture</name></member>
+      <member refid="classgr_1_1ccsds_1_1conv__encode27__aux_1a96b59a86efdb71094498583910fac742" prot="public" virt="non-virtual"><scope>gr::ccsds::conv_encode27_aux</scope><name>~conv_encode27_aux</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

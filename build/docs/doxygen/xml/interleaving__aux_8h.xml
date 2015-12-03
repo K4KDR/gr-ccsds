@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="interleaving__aux_8h" kind="file">
+    <compoundname>interleaving_aux.h</compoundname>
+    <innernamespace refid="namespacegr">gr</innernamespace>
+    <innernamespace refid="namespacegr_1_1ccsds">gr::ccsds</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/interleaving_aux.h"/>
+  </compounddef>
+</doxygen>

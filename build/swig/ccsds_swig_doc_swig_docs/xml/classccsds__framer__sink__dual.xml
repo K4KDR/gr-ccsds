@@ -1,0 +1,625 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="classccsds__framer__sink__dual" kind="class" prot="public">
+    <compoundname>ccsds_framer_sink_dual</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">gr_sync_block</basecompoundref>
+    <includes refid="ccsds__framer__sink__dual_8h" local="no">ccsds_framer_sink_dual.h</includes>
+      <sectiondef kind="private-type">
+      <memberdef kind="enum" id="classccsds__framer__sink__dual_1a4e82655862fa5ba82833c74157c23feb" prot="private" static="no">
+        <name>state_t</name>
+        <enumvalue id="classccsds__framer__sink__dual_1a4e82655862fa5ba82833c74157c23febaa9254c0f6462830ffd54d3585186eed5" prot="private">
+          <name>STATE_SYNC_SEARCH</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classccsds__framer__sink__dual_1a4e82655862fa5ba82833c74157c23febab7586ba3639c1fe0252b7c7620bf37ec" prot="private">
+          <name>STATE_LOCKING</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classccsds__framer__sink__dual_1a4e82655862fa5ba82833c74157c23febafaeb4ec9037286be02f9153b39b39cb1" prot="private">
+          <name>STATE_HAVE_SYNC</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_framer_sink_dual.h" line="59" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_framer_sink_dual.h" bodystart="59" bodyend="59"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classccsds__framer__sink__dual_1ac60a35d2c9d23ad81e41fb66fef962c0" prot="private" static="no" mutable="no">
+        <type>gr_msg_queue_sptr</type>
+        <definition>gr_msg_queue_sptr ccsds_framer_sink_dual::d_target_queue</definition>
+        <argsstring></argsstring>
+        <name>d_target_queue</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_framer_sink_dual.h" line="64" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_framer_sink_dual.h" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__framer__sink__dual_1a7bc0722bb523726058b95ecf928035cf" prot="private" static="no" mutable="no">
+        <type>const int</type>
+        <definition>const int ccsds_framer_sink_dual::d_frame_byte_length</definition>
+        <argsstring></argsstring>
+        <name>d_frame_byte_length</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_framer_sink_dual.h" line="65" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_framer_sink_dual.h" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__framer__sink__dual_1a032e2f141f4d07f760ee469c7d7ad8fe" prot="private" static="no" mutable="no">
+        <type>const int</type>
+        <definition>const int ccsds_framer_sink_dual::d_frame_bit_length</definition>
+        <argsstring></argsstring>
+        <name>d_frame_bit_length</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_framer_sink_dual.h" line="66" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_framer_sink_dual.h" bodystart="66" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__framer__sink__dual_1a9759f0df74f2b1bc9d68e023c0a9b05d" prot="private" static="no" mutable="no">
+        <type>const int</type>
+        <definition>const int ccsds_framer_sink_dual::d_asm_byte_length</definition>
+        <argsstring></argsstring>
+        <name>d_asm_byte_length</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_framer_sink_dual.h" line="67" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_framer_sink_dual.h" bodystart="67" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__framer__sink__dual_1aa294a00f5f89ff382dd270b37e3c8713" prot="private" static="no" mutable="no">
+        <type>const int</type>
+        <definition>const int ccsds_framer_sink_dual::d_asm_bit_length</definition>
+        <argsstring></argsstring>
+        <name>d_asm_bit_length</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_framer_sink_dual.h" line="68" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_framer_sink_dual.h" bodystart="68" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__framer__sink__dual_1a5bde14f9392dcd77bc3fd4546a451fe9" prot="private" static="no" mutable="no">
+        <type>const int</type>
+        <definition>const int ccsds_framer_sink_dual::d_sync_lock_diff</definition>
+        <argsstring></argsstring>
+        <name>d_sync_lock_diff</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_framer_sink_dual.h" line="69" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_framer_sink_dual.h" bodystart="69" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__framer__sink__dual_1a8b22d26f6acb82586897094917b46449" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int ccsds_framer_sink_dual::d_count</definition>
+        <argsstring></argsstring>
+        <name>d_count</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_framer_sink_dual.h" line="70" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_framer_sink_dual.h" bodystart="70" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__framer__sink__dual_1ae17795d53884591c5f3b585e696bfc54" prot="private" static="no" mutable="no">
+        <type>unsigned char</type>
+        <definition>unsigned char ccsds_framer_sink_dual::d_byte</definition>
+        <argsstring></argsstring>
+        <name>d_byte</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_framer_sink_dual.h" line="71" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_framer_sink_dual.h" bodystart="71" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__framer__sink__dual_1a61fcec7366352487a517f303f3058e10" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int ccsds_framer_sink_dual::d_frame_counter</definition>
+        <argsstring></argsstring>
+        <name>d_frame_counter</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_framer_sink_dual.h" line="72" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_framer_sink_dual.h" bodystart="72" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__framer__sink__dual_1af45f9868803316385ff8e02dafc29a7d" prot="private" static="no" mutable="no">
+        <type>state_t</type>
+        <definition>state_t ccsds_framer_sink_dual::d_state</definition>
+        <argsstring></argsstring>
+        <name>d_state</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_framer_sink_dual.h" line="76" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_framer_sink_dual.h" bodystart="76" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__framer__sink__dual_1a739f6d0be1bbaf3b6c6213539d5077b8" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool ccsds_framer_sink_dual::b_standard</definition>
+        <argsstring></argsstring>
+        <name>b_standard</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_framer_sink_dual.h" line="78" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_framer_sink_dual.h" bodystart="78" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__framer__sink__dual_1a79f1a40cc6a23d031e9b1079de5e3004" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool ccsds_framer_sink_dual::b_buffering_standard</definition>
+        <argsstring></argsstring>
+        <name>b_buffering_standard</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_framer_sink_dual.h" line="79" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_framer_sink_dual.h" bodystart="79" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__framer__sink__dual_1a2d26035e84b0a773d4fe8b048416f282" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool ccsds_framer_sink_dual::b_buffering_inverse</definition>
+        <argsstring></argsstring>
+        <name>b_buffering_inverse</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_framer_sink_dual.h" line="80" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_framer_sink_dual.h" bodystart="80" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__framer__sink__dual_1af24deb96ffbe06a472686f8610b031de" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool ccsds_framer_sink_dual::b_strip_sync_marker</definition>
+        <argsstring></argsstring>
+        <name>b_strip_sync_marker</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_framer_sink_dual.h" line="82" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_framer_sink_dual.h" bodystart="82" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__framer__sink__dual_1a3c9fc2d3573b9123c7b4b1049bc14168" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int ccsds_framer_sink_dual::d_payload_size</definition>
+        <argsstring></argsstring>
+        <name>d_payload_size</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_framer_sink_dual.h" line="84" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_framer_sink_dual.h" bodystart="84" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__framer__sink__dual_1a548f5d6edd8e206d959a7438a24e6603" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int ccsds_framer_sink_dual::d_packet_size</definition>
+        <argsstring></argsstring>
+        <name>d_packet_size</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_framer_sink_dual.h" line="85" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_framer_sink_dual.h" bodystart="85" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__framer__sink__dual_1a76e5ad8077abd567351cdfc80841af1d" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int ccsds_framer_sink_dual::d_message_bits</definition>
+        <argsstring></argsstring>
+        <name>d_message_bits</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_framer_sink_dual.h" line="87" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_framer_sink_dual.h" bodystart="87" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__framer__sink__dual_1a8e39eb400457c103bd62d611722953a7" prot="private" static="no" mutable="no">
+        <type>unsigned char *</type>
+        <definition>unsigned char* ccsds_framer_sink_dual::d_packed_frame</definition>
+        <argsstring></argsstring>
+        <name>d_packed_frame</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_framer_sink_dual.h" line="89" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_framer_sink_dual.h" bodystart="89" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__framer__sink__dual_1a44a31264a10a8f6a0ac1243f2645dde7" prot="private" static="no" mutable="no">
+        <type>const unsigned char *</type>
+        <definition>const unsigned char* ccsds_framer_sink_dual::d_in</definition>
+        <argsstring></argsstring>
+        <name>d_in</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_framer_sink_dual.h" line="91" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_framer_sink_dual.h" bodystart="91" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__framer__sink__dual_1aaa7782d76e95482f61a8c75520e24b51" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int ccsds_framer_sink_dual::d_packetlen</definition>
+        <argsstring></argsstring>
+        <name>d_packetlen</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_framer_sink_dual.h" line="94" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_framer_sink_dual.h" bodystart="94" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__framer__sink__dual_1ab47f4708ccf7b216dafe380ab11cda6d" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int ccsds_framer_sink_dual::d_packet_whitener_offset</definition>
+        <argsstring></argsstring>
+        <name>d_packet_whitener_offset</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_framer_sink_dual.h" line="95" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_framer_sink_dual.h" bodystart="95" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__framer__sink__dual_1a867d5789bee1d9a7d7fbe37216ee0cc5" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int ccsds_framer_sink_dual::d_packetlen_cnt</definition>
+        <argsstring></argsstring>
+        <name>d_packetlen_cnt</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_framer_sink_dual.h" line="96" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_framer_sink_dual.h" bodystart="96" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="friend">
+      <memberdef kind="friend" id="classccsds__framer__sink__dual_1a527b285ce133a02a4c484a9f814a3ef9" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>friend __GR_ATTR_IMPORT <ref refid="ccsds__framer__sink__dual_8h_1ab45c690d529bdcbd14de93e7046c03e2" kindref="member">ccsds_framer_sink_dual_sptr</ref></type>
+        <definition>__GR_ATTR_IMPORT ccsds_framer_sink_dual_sptr ccsds_make_framer_sink_dual</definition>
+        <argsstring>(gr_msg_queue_sptr target_queue, int framesyms, int sync_marker_syms)</argsstring>
+        <name>ccsds_make_framer_sink_dual</name>
+        <param>
+          <type>gr_msg_queue_sptr</type>
+          <declname>target_queue</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>framesyms</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>sync_marker_syms</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_framer_sink_dual.h" line="56" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="classccsds__framer__sink__dual_1a117cf851a00b21115411683e68eac956" prot="private" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>static int ccsds_framer_sink_dual::bit</definition>
+        <argsstring>(int input)</argsstring>
+        <name>bit</name>
+        <param>
+          <type>int</type>
+          <declname>input</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_framer_sink_dual.h" line="121" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_framer_sink_dual.h" bodystart="121" bodyend="123"/>
+      </memberdef>
+      <memberdef kind="function" id="classccsds__framer__sink__dual_1a622a608e1e0bde83522bcf170e852556" prot="private" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>static int ccsds_framer_sink_dual::inverse_bit</definition>
+        <argsstring>(int input)</argsstring>
+        <name>inverse_bit</name>
+        <param>
+          <type>int</type>
+          <declname>input</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_framer_sink_dual.h" line="124" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_framer_sink_dual.h" bodystart="124" bodyend="126"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classccsds__framer__sink__dual_1a35f92a724635590e7a899f72b49d0b9c" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int ccsds_framer_sink_dual::d_bit</definition>
+        <argsstring>(int input)</argsstring>
+        <name>d_bit</name>
+        <param>
+          <type>int</type>
+          <declname>input</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_framer_sink_dual.h" line="128" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_framer_sink_dual.h" bodystart="128" bodyend="131"/>
+      </memberdef>
+      <memberdef kind="function" id="classccsds__framer__sink__dual_1ad378e42d0befc1566fe61e302df667a3" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool ccsds_framer_sink_dual::check_flag</definition>
+        <argsstring>(unsigned char byte)</argsstring>
+        <name>check_flag</name>
+        <param>
+          <type>unsigned char</type>
+          <declname>byte</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_framer_sink_dual.h" line="132" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_framer_sink_dual.h" bodystart="132" bodyend="135"/>
+      </memberdef>
+      <memberdef kind="function" id="classccsds__framer__sink__dual_1abac0fe999d2b3f5e93f4ab86df669e0f" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void ccsds_framer_sink_dual::forecast</definition>
+        <argsstring>(int, gr_vector_int &amp;ninput_items_required)</argsstring>
+        <name>forecast</name>
+        <param>
+          <type>int</type>
+        </param>
+        <param>
+          <type>gr_vector_int &amp;</type>
+          <declname>ninput_items_required</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_framer_sink_dual.h" line="136" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_framer_sink_dual.h" bodystart="136" bodyend="143"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classccsds__framer__sink__dual_1a3a11b24d947dd4946b1401687f6457b3" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>ccsds_framer_sink_dual::ccsds_framer_sink_dual</definition>
+        <argsstring>(gr_msg_queue_sptr target_queue, int framebytes, int sync_marker_bytes)</argsstring>
+        <name>ccsds_framer_sink_dual</name>
+        <param>
+          <type>gr_msg_queue_sptr</type>
+          <declname>target_queue</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>framebytes</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>sync_marker_bytes</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_framer_sink_dual.h" line="146" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classccsds__framer__sink__dual_1acce12023004ef51afb7bb8887dfcc230" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ccsds_framer_sink_dual::enter_search</definition>
+        <argsstring>()</argsstring>
+        <name>enter_search</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_framer_sink_dual.h" line="148" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classccsds__framer__sink__dual_1a00c377517febaca4047f6c3307144a71" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ccsds_framer_sink_dual::enter_locking</definition>
+        <argsstring>(bool standard)</argsstring>
+        <name>enter_locking</name>
+        <param>
+          <type>bool</type>
+          <declname>standard</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_framer_sink_dual.h" line="149" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classccsds__framer__sink__dual_1a01688abf90c834702579296755a6bf16" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ccsds_framer_sink_dual::enter_have_sync</definition>
+        <argsstring>()</argsstring>
+        <name>enter_have_sync</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_framer_sink_dual.h" line="150" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classccsds__framer__sink__dual_1a2e0e8fb51d507528e1d905a35bb8777c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>ccsds_framer_sink_dual::~ccsds_framer_sink_dual</definition>
+        <argsstring>()</argsstring>
+        <name>~ccsds_framer_sink_dual</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_framer_sink_dual.h" line="153" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classccsds__framer__sink__dual_1a3c5160282dbbe197209dc23d016ccde5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int ccsds_framer_sink_dual::work</definition>
+        <argsstring>(int noutput_items, gr_vector_const_void_star &amp;input_items, gr_vector_void_star &amp;output_items)</argsstring>
+        <name>work</name>
+        <param>
+          <type>int</type>
+          <declname>noutput_items</declname>
+        </param>
+        <param>
+          <type>gr_vector_const_void_star &amp;</type>
+          <declname>input_items</declname>
+        </param>
+        <param>
+          <type>gr_vector_void_star &amp;</type>
+          <declname>output_items</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_framer_sink_dual.h" line="155" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Given 2 parallel streams of bits and access_code flags, assemble TM Frames.</para><para>It is a fact of non-differential BPSK demodulation that an inverted bit stream may be produced. Two parallel gr_correlate_access_code_bb blocks have been setup, one looking for the non-inverted ASM, and the other for the inverted ASM. If the framer sink detects a frame marker on the inverted stream, it inverts the input. </para>    </briefdescription>
+    <detaileddescription>
+<para>There is no stream output, instead the MSB-first packed bytes of the synchronised frame are inserted into a dedicated output queue.</para><para>The input data consists of bytes that have two bits used. Bit 0, the LSB, contains the data bit. Bit 1 if set, indicates that the corresponding bit is the the first bit of the packet. That is, this bit is the first one after the access code. </para>    </detaileddescription>
+    <inheritancegraph>
+      <node id="71">
+        <label>gr_sync_block</label>
+      </node>
+      <node id="70">
+        <label>ccsds_framer_sink_dual</label>
+        <link refid="classccsds__framer__sink__dual"/>
+        <childnode refid="71" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="73">
+        <label>gr_sync_block</label>
+      </node>
+      <node id="72">
+        <label>ccsds_framer_sink_dual</label>
+        <link refid="classccsds__framer__sink__dual"/>
+        <childnode refid="73" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_framer_sink_dual.h" line="54" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_framer_sink_dual.h" bodystart="53" bodyend="159"/>
+    <listofallmembers>
+      <member refid="classccsds__framer__sink__dual_1a2d26035e84b0a773d4fe8b048416f282" prot="private" virt="non-virtual"><scope>ccsds_framer_sink_dual</scope><name>b_buffering_inverse</name></member>
+      <member refid="classccsds__framer__sink__dual_1a79f1a40cc6a23d031e9b1079de5e3004" prot="private" virt="non-virtual"><scope>ccsds_framer_sink_dual</scope><name>b_buffering_standard</name></member>
+      <member refid="classccsds__framer__sink__dual_1a739f6d0be1bbaf3b6c6213539d5077b8" prot="private" virt="non-virtual"><scope>ccsds_framer_sink_dual</scope><name>b_standard</name></member>
+      <member refid="classccsds__framer__sink__dual_1af24deb96ffbe06a472686f8610b031de" prot="private" virt="non-virtual"><scope>ccsds_framer_sink_dual</scope><name>b_strip_sync_marker</name></member>
+      <member refid="classccsds__framer__sink__dual_1a117cf851a00b21115411683e68eac956" prot="private" virt="non-virtual"><scope>ccsds_framer_sink_dual</scope><name>bit</name></member>
+      <member refid="classccsds__framer__sink__dual_1a3a11b24d947dd4946b1401687f6457b3" prot="protected" virt="non-virtual"><scope>ccsds_framer_sink_dual</scope><name>ccsds_framer_sink_dual</name></member>
+      <member refid="classccsds__framer__sink__dual_1a527b285ce133a02a4c484a9f814a3ef9" prot="private" virt="non-virtual"><scope>ccsds_framer_sink_dual</scope><name>ccsds_make_framer_sink_dual</name></member>
+      <member refid="classccsds__framer__sink__dual_1ad378e42d0befc1566fe61e302df667a3" prot="private" virt="non-virtual"><scope>ccsds_framer_sink_dual</scope><name>check_flag</name></member>
+      <member refid="classccsds__framer__sink__dual_1aa294a00f5f89ff382dd270b37e3c8713" prot="private" virt="non-virtual"><scope>ccsds_framer_sink_dual</scope><name>d_asm_bit_length</name></member>
+      <member refid="classccsds__framer__sink__dual_1a9759f0df74f2b1bc9d68e023c0a9b05d" prot="private" virt="non-virtual"><scope>ccsds_framer_sink_dual</scope><name>d_asm_byte_length</name></member>
+      <member refid="classccsds__framer__sink__dual_1a35f92a724635590e7a899f72b49d0b9c" prot="private" virt="non-virtual"><scope>ccsds_framer_sink_dual</scope><name>d_bit</name></member>
+      <member refid="classccsds__framer__sink__dual_1ae17795d53884591c5f3b585e696bfc54" prot="private" virt="non-virtual"><scope>ccsds_framer_sink_dual</scope><name>d_byte</name></member>
+      <member refid="classccsds__framer__sink__dual_1a8b22d26f6acb82586897094917b46449" prot="private" virt="non-virtual"><scope>ccsds_framer_sink_dual</scope><name>d_count</name></member>
+      <member refid="classccsds__framer__sink__dual_1a032e2f141f4d07f760ee469c7d7ad8fe" prot="private" virt="non-virtual"><scope>ccsds_framer_sink_dual</scope><name>d_frame_bit_length</name></member>
+      <member refid="classccsds__framer__sink__dual_1a7bc0722bb523726058b95ecf928035cf" prot="private" virt="non-virtual"><scope>ccsds_framer_sink_dual</scope><name>d_frame_byte_length</name></member>
+      <member refid="classccsds__framer__sink__dual_1a61fcec7366352487a517f303f3058e10" prot="private" virt="non-virtual"><scope>ccsds_framer_sink_dual</scope><name>d_frame_counter</name></member>
+      <member refid="classccsds__framer__sink__dual_1a44a31264a10a8f6a0ac1243f2645dde7" prot="private" virt="non-virtual"><scope>ccsds_framer_sink_dual</scope><name>d_in</name></member>
+      <member refid="classccsds__framer__sink__dual_1a76e5ad8077abd567351cdfc80841af1d" prot="private" virt="non-virtual"><scope>ccsds_framer_sink_dual</scope><name>d_message_bits</name></member>
+      <member refid="classccsds__framer__sink__dual_1a8e39eb400457c103bd62d611722953a7" prot="private" virt="non-virtual"><scope>ccsds_framer_sink_dual</scope><name>d_packed_frame</name></member>
+      <member refid="classccsds__framer__sink__dual_1a548f5d6edd8e206d959a7438a24e6603" prot="private" virt="non-virtual"><scope>ccsds_framer_sink_dual</scope><name>d_packet_size</name></member>
+      <member refid="classccsds__framer__sink__dual_1ab47f4708ccf7b216dafe380ab11cda6d" prot="private" virt="non-virtual"><scope>ccsds_framer_sink_dual</scope><name>d_packet_whitener_offset</name></member>
+      <member refid="classccsds__framer__sink__dual_1aaa7782d76e95482f61a8c75520e24b51" prot="private" virt="non-virtual"><scope>ccsds_framer_sink_dual</scope><name>d_packetlen</name></member>
+      <member refid="classccsds__framer__sink__dual_1a867d5789bee1d9a7d7fbe37216ee0cc5" prot="private" virt="non-virtual"><scope>ccsds_framer_sink_dual</scope><name>d_packetlen_cnt</name></member>
+      <member refid="classccsds__framer__sink__dual_1a3c9fc2d3573b9123c7b4b1049bc14168" prot="private" virt="non-virtual"><scope>ccsds_framer_sink_dual</scope><name>d_payload_size</name></member>
+      <member refid="classccsds__framer__sink__dual_1af45f9868803316385ff8e02dafc29a7d" prot="private" virt="non-virtual"><scope>ccsds_framer_sink_dual</scope><name>d_state</name></member>
+      <member refid="classccsds__framer__sink__dual_1a5bde14f9392dcd77bc3fd4546a451fe9" prot="private" virt="non-virtual"><scope>ccsds_framer_sink_dual</scope><name>d_sync_lock_diff</name></member>
+      <member refid="classccsds__framer__sink__dual_1ac60a35d2c9d23ad81e41fb66fef962c0" prot="private" virt="non-virtual"><scope>ccsds_framer_sink_dual</scope><name>d_target_queue</name></member>
+      <member refid="classccsds__framer__sink__dual_1a01688abf90c834702579296755a6bf16" prot="protected" virt="non-virtual"><scope>ccsds_framer_sink_dual</scope><name>enter_have_sync</name></member>
+      <member refid="classccsds__framer__sink__dual_1a00c377517febaca4047f6c3307144a71" prot="protected" virt="non-virtual"><scope>ccsds_framer_sink_dual</scope><name>enter_locking</name></member>
+      <member refid="classccsds__framer__sink__dual_1acce12023004ef51afb7bb8887dfcc230" prot="protected" virt="non-virtual"><scope>ccsds_framer_sink_dual</scope><name>enter_search</name></member>
+      <member refid="classccsds__framer__sink__dual_1abac0fe999d2b3f5e93f4ab86df669e0f" prot="private" virt="non-virtual"><scope>ccsds_framer_sink_dual</scope><name>forecast</name></member>
+      <member refid="classccsds__framer__sink__dual_1a622a608e1e0bde83522bcf170e852556" prot="private" virt="non-virtual"><scope>ccsds_framer_sink_dual</scope><name>inverse_bit</name></member>
+      <member refid="classccsds__framer__sink__dual_1a4e82655862fa5ba82833c74157c23febafaeb4ec9037286be02f9153b39b39cb1" prot="private" virt="non-virtual"><scope>ccsds_framer_sink_dual</scope><name>STATE_HAVE_SYNC</name></member>
+      <member refid="classccsds__framer__sink__dual_1a4e82655862fa5ba82833c74157c23febab7586ba3639c1fe0252b7c7620bf37ec" prot="private" virt="non-virtual"><scope>ccsds_framer_sink_dual</scope><name>STATE_LOCKING</name></member>
+      <member refid="classccsds__framer__sink__dual_1a4e82655862fa5ba82833c74157c23febaa9254c0f6462830ffd54d3585186eed5" prot="private" virt="non-virtual"><scope>ccsds_framer_sink_dual</scope><name>STATE_SYNC_SEARCH</name></member>
+      <member refid="classccsds__framer__sink__dual_1a4e82655862fa5ba82833c74157c23feb" prot="private" virt="non-virtual"><scope>ccsds_framer_sink_dual</scope><name>state_t</name></member>
+      <member refid="classccsds__framer__sink__dual_1a3c5160282dbbe197209dc23d016ccde5" prot="public" virt="non-virtual"><scope>ccsds_framer_sink_dual</scope><name>work</name></member>
+      <member refid="classccsds__framer__sink__dual_1a2e0e8fb51d507528e1d905a35bb8777c" prot="public" virt="non-virtual"><scope>ccsds_framer_sink_dual</scope><name>~ccsds_framer_sink_dual</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

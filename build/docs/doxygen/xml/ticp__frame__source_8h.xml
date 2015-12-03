@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="ticp__frame__source_8h" kind="file">
+    <compoundname>ticp_frame_source.h</compoundname>
+    <includes refid="api_8h" local="no">ccsds/api.h</includes>
+    <includes local="no">gnuradio/block.h</includes>
+    <includedby refid="ticp__frame__source__impl_8h" local="no">ticp_frame_source_impl.h</includedby>
+    <incdepgraph>
+      <node id="825">
+        <label>gnuradio/attributes.h</label>
+      </node>
+      <node id="822">
+        <label>ticp_frame_source.h</label>
+        <link refid="ticp_frame_source.h"/>
+        <childnode refid="823" relation="include">
+        </childnode>
+        <childnode refid="826" relation="include">
+        </childnode>
+      </node>
+      <node id="823">
+        <label>ccsds/api.h</label>
+        <link refid="api_8h"/>
+        <childnode refid="824" relation="include">
+        </childnode>
+        <childnode refid="825" relation="include">
+        </childnode>
+      </node>
+      <node id="826">
+        <label>gnuradio/block.h</label>
+      </node>
+      <node id="824">
+        <label>gnuradio/config.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="828">
+        <label>ticp_frame_source_impl.h</label>
+        <link refid="ticp__frame__source__impl_8h"/>
+      </node>
+      <node id="827">
+        <label>ticp_frame_source.h</label>
+        <link refid="ticp_frame_source.h"/>
+        <childnode refid="828" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classgr_1_1ccsds_1_1ticp__frame__source" prot="public">gr::ccsds::ticp_frame_source</innerclass>
+    <innernamespace refid="namespacegr">gr</innernamespace>
+    <innernamespace refid="namespacegr_1_1ccsds">gr::ccsds</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/marina/Documents/sdr1/gr-ccsds/include/ccsds/ticp_frame_source.h"/>
+  </compounddef>
+</doxygen>

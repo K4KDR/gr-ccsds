@@ -1,0 +1,302 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="gr-ccsds_2include_2ccsds__time_8h" kind="file">
+    <compoundname>ccsds_time.h</compoundname>
+    <includes local="no">time.h</includes>
+    <includedby refid="ccsds__ticp__frame__source_8h" local="no">/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_ticp_frame_source.h</includedby>
+    <incdepgraph>
+      <node id="332">
+        <label>time.h</label>
+      </node>
+      <node id="331">
+        <label>/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_time.h</label>
+        <link refid="gr-ccsds/include/ccsds_time.h"/>
+        <childnode refid="332" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="333">
+        <label>/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_time.h</label>
+        <link refid="gr-ccsds/include/ccsds_time.h"/>
+        <childnode refid="334" relation="include">
+        </childnode>
+      </node>
+      <node id="334">
+        <label>/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_ticp_frame_source.h</label>
+        <link refid="ccsds__ticp__frame__source_8h"/>
+      </node>
+    </invincdepgraph>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="gr-ccsds_2include_2ccsds__time_8h_1aed9ea78689ecce0b7264c02c7f8a9a54" prot="public" static="no">
+        <name>G</name>
+        <initializer>1000000000</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_time.h" line="6" column="9" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_time.h" bodystart="6" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="gr-ccsds_2include_2ccsds__time_8h_1a52037c938e3c1b126c6277da5ca689d0" prot="public" static="no">
+        <name>M</name>
+        <initializer>1000000</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_time.h" line="7" column="9" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_time.h" bodystart="7" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="gr-ccsds_2include_2ccsds__time_8h_1a97d832ae23af4f215e801e37e4f94254" prot="public" static="no">
+        <name>K</name>
+        <initializer>1000</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_time.h" line="8" column="9" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_time.h" bodystart="8" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="gr-ccsds_2include_2ccsds__time_8h_1a474043993fb11942bed94638c82f291c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>unsigned long</type>
+        <definition>unsigned long ccsds_time_diff_nano</definition>
+        <argsstring>(timeval *a, timeval *b)</argsstring>
+        <name>ccsds_time_diff_nano</name>
+        <param>
+          <type>timeval *</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>timeval *</type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+<para>Returns the difference between the two time instances in nanoseconds. </para>        </briefdescription>
+        <detaileddescription>
+<para>Time a needs to be later than b. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_time.h" line="14" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_time.h" bodystart="14" bodyend="16"/>
+      </memberdef>
+      <memberdef kind="function" id="gr-ccsds_2include_2ccsds__time_8h_1a688655dfedd405b69ee8fface715c939" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double ccsds_time_diff_seconds</definition>
+        <argsstring>(timeval *a, timeval *b)</argsstring>
+        <name>ccsds_time_diff_seconds</name>
+        <param>
+          <type>timeval *</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>timeval *</type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_time.h" line="18" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_time.h" bodystart="18" bodyend="20"/>
+      </memberdef>
+      <memberdef kind="function" id="gr-ccsds_2include_2ccsds__time_8h_1a2910709ab70223461e8d438682985946" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void ccsds_time_add_usecs</definition>
+        <argsstring>(timeval *t, unsigned long diff)</argsstring>
+        <name>ccsds_time_add_usecs</name>
+        <param>
+          <type>timeval *</type>
+          <declname>t</declname>
+        </param>
+        <param>
+          <type>unsigned long</type>
+          <declname>diff</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_time.h" line="22" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_time.h" bodystart="22" bodyend="29"/>
+      </memberdef>
+      <memberdef kind="function" id="gr-ccsds_2include_2ccsds__time_8h_1a734a21e72fad88ea71e0cc66c90143fa" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void ccsds_time_diff_to_timespec</definition>
+        <argsstring>(timespec *spec, unsigned long diff)</argsstring>
+        <name>ccsds_time_diff_to_timespec</name>
+        <param>
+          <type>timespec *</type>
+          <declname>spec</declname>
+        </param>
+        <param>
+          <type>unsigned long</type>
+          <declname>diff</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_time.h" line="31" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_time.h" bodystart="31" bodyend="36"/>
+      </memberdef>
+      <memberdef kind="function" id="gr-ccsds_2include_2ccsds__time_8h_1a9b7c7239b1305876b074a58f3ab34b64" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>unsigned long</type>
+        <definition>unsigned long ccsds_time_to_nano</definition>
+        <argsstring>(timespec *spec)</argsstring>
+        <name>ccsds_time_to_nano</name>
+        <param>
+          <type>timespec *</type>
+          <declname>spec</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_time.h" line="38" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_time.h" bodystart="38" bodyend="40"/>
+      </memberdef>
+      <memberdef kind="function" id="gr-ccsds_2include_2ccsds__time_8h_1a197307b7f8f026f56cb491ee6d13194f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>unsigned long</type>
+        <definition>unsigned long ccsds_time_to_micro</definition>
+        <argsstring>(timeval *t)</argsstring>
+        <name>ccsds_time_to_micro</name>
+        <param>
+          <type>timeval *</type>
+          <declname>t</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_time.h" line="42" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_time.h" bodystart="42" bodyend="44"/>
+      </memberdef>
+      <memberdef kind="function" id="gr-ccsds_2include_2ccsds__time_8h_1a416f8a339060194e12816ac56f1c1317" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void ccsds_time_print_timeval</definition>
+        <argsstring>(timeval *t)</argsstring>
+        <name>ccsds_time_print_timeval</name>
+        <param>
+          <type>timeval *</type>
+          <declname>t</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_time.h" line="46" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_time.h" bodystart="46" bodyend="49"/>
+      </memberdef>
+      <memberdef kind="function" id="gr-ccsds_2include_2ccsds__time_8h_1a989f9ac477011263d70e1540c4e40165" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void ccsds_time_print_timespec</definition>
+        <argsstring>(timespec *t)</argsstring>
+        <name>ccsds_time_print_timespec</name>
+        <param>
+          <type>timespec *</type>
+          <declname>t</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_time.h" line="51" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_time.h" bodystart="51" bodyend="54"/>
+      </memberdef>
+      <memberdef kind="function" id="gr-ccsds_2include_2ccsds__time_8h_1a1b9794e8925eeb1820e052f83eb49a24" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void ccsds_time_reset_timespec</definition>
+        <argsstring>(timespec *spec)</argsstring>
+        <name>ccsds_time_reset_timespec</name>
+        <param>
+          <type>timespec *</type>
+          <declname>spec</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_time.h" line="56" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_time.h" bodystart="56" bodyend="60"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>INCLUDED_CCSDS_TIME_H</highlight></codeline>
+<codeline lineno="2"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>INCLUDED_CCSDS_TIME_H</highlight></codeline>
+<codeline lineno="3"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;time.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6" refid="gr-ccsds_2include_2ccsds__time_8h_1aed9ea78689ecce0b7264c02c7f8a9a54" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>G<sp/>1000000000</highlight></codeline>
+<codeline lineno="7" refid="gr-ccsds_2include_2ccsds__time_8h_1a52037c938e3c1b126c6277da5ca689d0" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>M<sp/>1000000</highlight></codeline>
+<codeline lineno="8" refid="gr-ccsds_2include_2ccsds__time_8h_1a97d832ae23af4f215e801e37e4f94254" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>K<sp/>1000</highlight></codeline>
+<codeline lineno="9"><highlight class="preprocessor"></highlight></codeline>
+<codeline lineno="14" refid="gr-ccsds_2include_2ccsds__time_8h_1a474043993fb11942bed94638c82f291c" refkind="member"><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">long</highlight><highlight class="normal"><sp/><ref refid="gr-ccsds_2include_2ccsds__time_8h_1a474043993fb11942bed94638c82f291c" kindref="member">ccsds_time_diff_nano</ref>(timeval<sp/>*a,<sp/>timeval<sp/>*b)<sp/>{</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>(a-&gt;tv_sec-b-&gt;tv_sec)*<ref refid="gr-ccsds_2include_2ccsds__time_8h_1aed9ea78689ecce0b7264c02c7f8a9a54" kindref="member">G</ref>+(a-&gt;tv_usec-b-&gt;tv_usec)*<ref refid="gr-ccsds_2include_2ccsds__time_8h_1a97d832ae23af4f215e801e37e4f94254" kindref="member">K</ref>;</highlight></codeline>
+<codeline lineno="16"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight></codeline>
+<codeline lineno="18" refid="gr-ccsds_2include_2ccsds__time_8h_1a688655dfedd405b69ee8fface715c939" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="gr-ccsds_2include_2ccsds__time_8h_1a688655dfedd405b69ee8fface715c939" kindref="member">ccsds_time_diff_seconds</ref>(timeval<sp/>*a,<sp/>timeval<sp/>*b)<sp/>{</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>(a-&gt;tv_sec-b-&gt;tv_sec)+(a-&gt;tv_usec-b-&gt;tv_usec)/1e6;</highlight></codeline>
+<codeline lineno="20"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight></codeline>
+<codeline lineno="22" refid="gr-ccsds_2include_2ccsds__time_8h_1a2910709ab70223461e8d438682985946" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="gr-ccsds_2include_2ccsds__time_8h_1a2910709ab70223461e8d438682985946" kindref="member">ccsds_time_add_usecs</ref>(timeval<sp/>*t,<sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">long</highlight><highlight class="normal"><sp/>diff)<sp/>{</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">long</highlight><highlight class="normal"><sp/>usec_sum<sp/>=<sp/>t-&gt;tv_usec+diff;</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>t-&gt;tv_sec<sp/>+=<sp/>usec_sum<sp/>/<sp/><ref refid="gr-ccsds_2include_2ccsds__time_8h_1a52037c938e3c1b126c6277da5ca689d0" kindref="member">M</ref>;</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>t-&gt;tv_usec<sp/>=<sp/>usec_sum<sp/>%<sp/><ref refid="gr-ccsds_2include_2ccsds__time_8h_1a52037c938e3c1b126c6277da5ca689d0" kindref="member">M</ref>;</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>return<sp/>;</highlight></codeline>
+<codeline lineno="29"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight></codeline>
+<codeline lineno="31" refid="gr-ccsds_2include_2ccsds__time_8h_1a734a21e72fad88ea71e0cc66c90143fa" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="gr-ccsds_2include_2ccsds__time_8h_1a734a21e72fad88ea71e0cc66c90143fa" kindref="member">ccsds_time_diff_to_timespec</ref>(timespec<sp/>*spec,<sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">long</highlight><highlight class="normal"><sp/>diff)<sp/>{</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>spec-&gt;tv_sec<sp/><sp/>=<sp/>diff<sp/>/<sp/><ref refid="gr-ccsds_2include_2ccsds__time_8h_1aed9ea78689ecce0b7264c02c7f8a9a54" kindref="member">G</ref>;</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>spec-&gt;tv_nsec<sp/>=<sp/>diff<sp/>%<sp/><ref refid="gr-ccsds_2include_2ccsds__time_8h_1aed9ea78689ecce0b7264c02c7f8a9a54" kindref="member">G</ref>;</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="36"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight></codeline>
+<codeline lineno="38" refid="gr-ccsds_2include_2ccsds__time_8h_1a9b7c7239b1305876b074a58f3ab34b64" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">long</highlight><highlight class="normal"><sp/><ref refid="gr-ccsds_2include_2ccsds__time_8h_1a9b7c7239b1305876b074a58f3ab34b64" kindref="member">ccsds_time_to_nano</ref>(timespec<sp/>*spec)<sp/>{</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>spec-&gt;tv_sec*<ref refid="gr-ccsds_2include_2ccsds__time_8h_1aed9ea78689ecce0b7264c02c7f8a9a54" kindref="member">G</ref>+spec-&gt;tv_nsec;</highlight></codeline>
+<codeline lineno="40"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight></codeline>
+<codeline lineno="42" refid="gr-ccsds_2include_2ccsds__time_8h_1a197307b7f8f026f56cb491ee6d13194f" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">long</highlight><highlight class="normal"><sp/><ref refid="gr-ccsds_2include_2ccsds__time_8h_1a197307b7f8f026f56cb491ee6d13194f" kindref="member">ccsds_time_to_micro</ref>(timeval<sp/>*t)<sp/>{</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>t-&gt;tv_sec*<ref refid="gr-ccsds_2include_2ccsds__time_8h_1a52037c938e3c1b126c6277da5ca689d0" kindref="member">M</ref>+t-&gt;tv_usec;</highlight></codeline>
+<codeline lineno="44"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight></codeline>
+<codeline lineno="46" refid="gr-ccsds_2include_2ccsds__time_8h_1a416f8a339060194e12816ac56f1c1317" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="gr-ccsds_2include_2ccsds__time_8h_1a416f8a339060194e12816ac56f1c1317" kindref="member">ccsds_time_print_timeval</ref>(timeval<sp/>*t)<sp/>{</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;timeval(sec=%ld,<sp/>usec=%ld)&quot;</highlight><highlight class="normal">,t-&gt;tv_sec,t-&gt;tv_usec);</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="49"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight></codeline>
+<codeline lineno="51" refid="gr-ccsds_2include_2ccsds__time_8h_1a989f9ac477011263d70e1540c4e40165" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="gr-ccsds_2include_2ccsds__time_8h_1a989f9ac477011263d70e1540c4e40165" kindref="member">ccsds_time_print_timespec</ref>(timespec<sp/>*t)<sp/>{</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;timeval(sec=%ld,<sp/>nsec=%ld)&quot;</highlight><highlight class="normal">,t-&gt;tv_sec,t-&gt;tv_nsec);</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="54"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight></codeline>
+<codeline lineno="56" refid="gr-ccsds_2include_2ccsds__time_8h_1a1b9794e8925eeb1820e052f83eb49a24" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="gr-ccsds_2include_2ccsds__time_8h_1a1b9794e8925eeb1820e052f83eb49a24" kindref="member">ccsds_time_reset_timespec</ref>(timespec<sp/>*spec)<sp/>{</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>spec-&gt;tv_sec<sp/><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>spec-&gt;tv_nsec<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="60"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"></highlight></codeline>
+<codeline lineno="62"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>INCLUDED_CCSDS_TIME_H<sp/>*/</highlight><highlight class="preprocessor"></highlight></codeline>
+    </programlisting>
+    <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_time.h"/>
+  </compounddef>
+</doxygen>

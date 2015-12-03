@@ -1,0 +1,243 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="ccsds__conv__decode27_8h" kind="file">
+    <compoundname>ccsds_conv_decode27.h</compoundname>
+    <includes refid="ccsds__api_8h" local="no">ccsds_api.h</includes>
+    <includes local="no">gr_sync_block.h</includes>
+    <includes refid="ccsds__conv__encode27__punct_8h" local="no">ccsds_conv_encode27_punct.h</includes>
+    <includes local="no">fec.h</includes>
+    <incdepgraph>
+      <node id="101">
+        <label>fec.h</label>
+      </node>
+      <node id="99">
+        <label>boost/shared_ptr.hpp</label>
+      </node>
+      <node id="96">
+        <label>gruel/attributes.h</label>
+      </node>
+      <node id="97">
+        <label>gr_sync_block.h</label>
+      </node>
+      <node id="95">
+        <label>ccsds_api.h</label>
+        <link refid="ccsds__api_8h"/>
+        <childnode refid="96" relation="include">
+        </childnode>
+      </node>
+      <node id="94">
+        <label>/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_conv_decode27.h</label>
+        <link refid="ccsds_conv_decode27.h"/>
+        <childnode refid="95" relation="include">
+        </childnode>
+        <childnode refid="97" relation="include">
+        </childnode>
+        <childnode refid="98" relation="include">
+        </childnode>
+        <childnode refid="101" relation="include">
+        </childnode>
+      </node>
+      <node id="98">
+        <label>ccsds_conv_encode27_punct.h</label>
+        <link refid="ccsds__conv__encode27__punct_8h"/>
+        <childnode refid="99" relation="include">
+        </childnode>
+        <childnode refid="100" relation="include">
+        </childnode>
+      </node>
+      <node id="100">
+        <label>stdio.h</label>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="ccsds__conv__decode27_8h_1a23b4e54920a5682d9fb407a73e2571e2" prot="public" static="no">
+        <name>FEC_FUNC_VITERBI27_SET_POLYNOMIAL</name>
+        <initializer>set_viterbi27_polynomial_port</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_conv_decode27.h" line="21" column="9" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_conv_decode27.h" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="ccsds__conv__decode27_8h_1ada01a51ca37bf9357263b458e1ce14ae" prot="public" static="no">
+        <name>FEC_FUNC_VITERBI27_CREATE</name>
+        <initializer>create_viterbi27_port</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_conv_decode27.h" line="22" column="9" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_conv_decode27.h" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="ccsds__conv__decode27_8h_1ad3dc1bce18a1c5c0b8417856e0ae07c5" prot="public" static="no">
+        <name>FEC_FUNC_VITERBI27_DELETE</name>
+        <initializer>delete_viterbi27_port</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_conv_decode27.h" line="23" column="9" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_conv_decode27.h" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="ccsds__conv__decode27_8h_1a7a3f4558d9d3daa965147b35bf367ae1" prot="public" static="no">
+        <name>FEC_FUNC_VITERBI27_INIT</name>
+        <initializer>init_viterbi27_port</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_conv_decode27.h" line="24" column="9" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_conv_decode27.h" bodystart="24" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="ccsds__conv__decode27_8h_1a0903bba2daa1030f391724bb3a2ea04d" prot="public" static="no">
+        <name>FEC_FUNC_VITERBI27_UPDATE_BLK</name>
+        <initializer>update_viterbi27_blk_port</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_conv_decode27.h" line="25" column="9" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_conv_decode27.h" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="ccsds__conv__decode27_8h_1a2d0d0d1422026f2c30f80c874f22d22b" prot="public" static="no">
+        <name>FEC_FUNC_VITERBI27_CHAINBACK</name>
+        <initializer>chainback_viterbi27_port</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_conv_decode27.h" line="26" column="9" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_conv_decode27.h" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>INCLUDED_CCSDS_CONV_DECODE27_H</highlight></codeline>
+<codeline lineno="2"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>INCLUDED_CCSDS_CONV_DECODE27_H</highlight></codeline>
+<codeline lineno="3"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="ccsds__api_8h" kindref="compound">ccsds_api.h</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;gr_sync_block.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="ccsds__conv__encode27__punct_8h" kindref="compound">ccsds_conv_encode27_punct.h</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="comment">//#define<sp/>__i386__</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;fec.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="12"><highlight class="comment">#define<sp/>FEC_FUNC_VITERBI27_SET_POLYNOMIAL<sp/>set_viterbi27_polynomial_sse2</highlight></codeline>
+<codeline lineno="13"><highlight class="comment">#define<sp/>FEC_FUNC_VITERBI27_CREATE<sp/>create_viterbi27_sse2</highlight></codeline>
+<codeline lineno="14"><highlight class="comment">#define<sp/>FEC_FUNC_VITERBI27_DELETE<sp/>delete_viterbi27_sse2</highlight></codeline>
+<codeline lineno="15"><highlight class="comment">#define<sp/>FEC_FUNC_VITERBI27_INIT<sp/>init_viterbi27_sse2</highlight></codeline>
+<codeline lineno="16"><highlight class="comment">#define<sp/>FEC_FUNC_VITERBI27_UPDATE_BLK<sp/>update_viterbi27_blk_sse2</highlight></codeline>
+<codeline lineno="17"><highlight class="comment">#define<sp/>FEC_FUNC_VITERBI27_CHAINBACK<sp/>chainback_viterbi27_sse2</highlight></codeline>
+<codeline lineno="18"><highlight class="comment">//*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight><highlight class="comment">//*</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="21" refid="ccsds__conv__decode27_8h_1a23b4e54920a5682d9fb407a73e2571e2" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>FEC_FUNC_VITERBI27_SET_POLYNOMIAL<sp/>set_viterbi27_polynomial_port</highlight></codeline>
+<codeline lineno="22" refid="ccsds__conv__decode27_8h_1ada01a51ca37bf9357263b458e1ce14ae" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>FEC_FUNC_VITERBI27_CREATE<sp/>create_viterbi27_port</highlight></codeline>
+<codeline lineno="23" refid="ccsds__conv__decode27_8h_1ad3dc1bce18a1c5c0b8417856e0ae07c5" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>FEC_FUNC_VITERBI27_DELETE<sp/>delete_viterbi27_port</highlight></codeline>
+<codeline lineno="24" refid="ccsds__conv__decode27_8h_1a7a3f4558d9d3daa965147b35bf367ae1" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>FEC_FUNC_VITERBI27_INIT<sp/>init_viterbi27_port</highlight></codeline>
+<codeline lineno="25" refid="ccsds__conv__decode27_8h_1a0903bba2daa1030f391724bb3a2ea04d" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>FEC_FUNC_VITERBI27_UPDATE_BLK<sp/>update_viterbi27_blk_port</highlight></codeline>
+<codeline lineno="26" refid="ccsds__conv__decode27_8h_1a2d0d0d1422026f2c30f80c874f22d22b" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>FEC_FUNC_VITERBI27_CHAINBACK<sp/>chainback_viterbi27_port</highlight></codeline>
+<codeline lineno="27"><highlight class="preprocessor"></highlight><highlight class="comment">//*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="30"><highlight class="comment">#define<sp/>FEC_FUNC_VITERBI27_SET_POLYNOMIAL<sp/>set_viterbi27_polynomial</highlight></codeline>
+<codeline lineno="31"><highlight class="comment">#define<sp/>FEC_FUNC_VITERBI27_CREATE<sp/>create_viterbi27</highlight></codeline>
+<codeline lineno="32"><highlight class="comment">#define<sp/>FEC_FUNC_VITERBI27_DELETE<sp/>delete_viterbi27</highlight></codeline>
+<codeline lineno="33"><highlight class="comment">#define<sp/>FEC_FUNC_VITERBI27_INIT<sp/>init_viterbi27</highlight></codeline>
+<codeline lineno="34"><highlight class="comment">#define<sp/>FEC_FUNC_VITERBI27_UPDATE_BLK<sp/>update_viterbi27_blk</highlight></codeline>
+<codeline lineno="35"><highlight class="comment">#define<sp/>FEC_FUNC_VITERBI27_CHAINBACK<sp/>chainback_viterbi27</highlight></codeline>
+<codeline lineno="36"><highlight class="comment">//*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>ccsds_noop(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">*<sp/></highlight><highlight class="comment">/*polys[2]*/</highlight><highlight class="normal">)<sp/>{}</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="41"><highlight class="comment">#include<sp/>&lt;spiral-viterbi.h&gt;</highlight></codeline>
+<codeline lineno="42"><highlight class="comment"></highlight></codeline>
+<codeline lineno="43"><highlight class="comment">#define<sp/>FEC_FUNC_VITERBI27_SET_POLYNOMIAL<sp/>ccsds_noop</highlight></codeline>
+<codeline lineno="44"><highlight class="comment">#define<sp/>FEC_FUNC_VITERBI27_CREATE<sp/>create_viterbi_SPIRAL</highlight></codeline>
+<codeline lineno="45"><highlight class="comment">#define<sp/>FEC_FUNC_VITERBI27_DELETE<sp/>delete_viterbi_SPIRAL</highlight></codeline>
+<codeline lineno="46"><highlight class="comment">#define<sp/>FEC_FUNC_VITERBI27_INIT<sp/>init_viterbi_SPIRAL</highlight></codeline>
+<codeline lineno="47"><highlight class="comment">#define<sp/>FEC_FUNC_VITERBI27_UPDATE_BLK<sp/>update_viterbi_blk_SPIRAL</highlight></codeline>
+<codeline lineno="48"><highlight class="comment">#define<sp/>FEC_FUNC_VITERBI27_CHAINBACK<sp/>chainback_viterbi_SPIRAL</highlight></codeline>
+<codeline lineno="49"><highlight class="comment">//*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">ccsds_conv_decode27;</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight></codeline>
+<codeline lineno="53"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/>boost::shared_ptr&lt;ccsds_conv_decode27&gt;<sp/>ccsds_conv_decode27_sptr;</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><ref refid="api_8h_1a144137922962dd54ae2e8c1917a7e588" kindref="member">CCSDS_API</ref><sp/>ccsds_conv_decode27_sptr<sp/>ccsds_make_conv_decode27<sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>gen_poly_c1,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>gen_poly_c2,<sp/><ref refid="namespaceccsds__conv__encode27__punct_1a0343875299f35174336f08026c698335" kindref="member">ccsds_conv_encode27_punct::punct_t</ref><sp/>puncturing_type,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>block_len,<sp/>std::string<sp/>ASM);</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"></highlight></codeline>
+<codeline lineno="101"><highlight class="keyword">class<sp/></highlight><highlight class="normal">ccsds_conv_decode27<sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/>gr_sync_block<sp/>{</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"></highlight></codeline>
+<codeline lineno="103"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">friend</highlight><highlight class="normal"><sp/><ref refid="api_8h_1a144137922962dd54ae2e8c1917a7e588" kindref="member">CCSDS_API</ref><sp/>ccsds_conv_decode27_sptr<sp/>ccsds_make_conv_decode27(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>gen_poly_c1,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>gen_poly_c2,<sp/><ref refid="namespaceccsds__conv__encode27__punct_1a0343875299f35174336f08026c698335" kindref="member">ccsds_conv_encode27_punct::punct_t</ref><sp/>puncturing_type,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>block_len,<sp/>std::string<sp/>ASM);</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"></highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/>boost::shared_ptr&lt;float[]&gt;<sp/>softbits_sptr;</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"></highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ccsds_conv_decode27(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>gen_poly_c1,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>gen_poly_c2,<sp/><ref refid="namespaceccsds__conv__encode27__punct_1a0343875299f35174336f08026c698335" kindref="member">ccsds_conv_encode27_punct::punct_t</ref><sp/>puncturing_type,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>block_len,<sp/>std::string<sp/>ASM);</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"></highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="namespaceccsds__conv__encode27__punct_1a0343875299f35174336f08026c698335" kindref="member">ccsds_conv_encode27_punct::punct_t</ref><sp/>d_PUNCT_TYPE;</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"></highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>d_RATE_NUM_IN;</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"></highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>*d_viterbi;</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"></highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>d_RATE_NUM_OUT;</highlight></codeline>
+<codeline lineno="152"><highlight class="normal"></highlight></codeline>
+<codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>\brief<sp/>Number<sp/>of<sp/>soft<sp/>bits<sp/>that<sp/>come<sp/>in<sp/>with<sp/>one<sp/>message<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="154"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>d_BLOCK_NUM_BITS_IN;</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"></highlight></codeline>
+<codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>\brief<sp/>Number<sp/>of<sp/>soft<sp/>bits<sp/>that<sp/>come<sp/>in<sp/>one<sp/>unpunctured<sp/>message<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="157"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>d_BLOCK_NUM_BITS_IN_UNPUNC;</highlight></codeline>
+<codeline lineno="158"><highlight class="normal"></highlight></codeline>
+<codeline lineno="159"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>\brief<sp/>Number<sp/>of<sp/>data<sp/>bits<sp/>that<sp/>go<sp/>out<sp/>of<sp/>this<sp/>block.<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="160"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>d_BLOCK_NUM_BITS_OUT;</highlight></codeline>
+<codeline lineno="161"><highlight class="normal"></highlight></codeline>
+<codeline lineno="165"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>d_START_STATE;</highlight></codeline>
+<codeline lineno="166"><highlight class="normal"></highlight></codeline>
+<codeline lineno="170"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>d_TERM_STATE;</highlight></codeline>
+<codeline lineno="171"><highlight class="normal"></highlight></codeline>
+<codeline lineno="173"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*d_buffer;</highlight></codeline>
+<codeline lineno="174"><highlight class="normal"></highlight></codeline>
+<codeline lineno="175"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>boost::shared_ptr&lt;bool[]&gt;<sp/>d_punct_pattern;</highlight></codeline>
+<codeline lineno="176"><highlight class="normal"></highlight></codeline>
+<codeline lineno="177"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>d_PATTERN_LEN;</highlight></codeline>
+<codeline lineno="178"><highlight class="normal"></highlight></codeline>
+<codeline lineno="188"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>unpuncture_and_convert(</highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*out,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*in);</highlight></codeline>
+<codeline lineno="189"><highlight class="normal"></highlight></codeline>
+<codeline lineno="197"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>convert_poly(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint8_t<sp/>in);</highlight></codeline>
+<codeline lineno="198"><highlight class="normal"></highlight></codeline>
+<codeline lineno="199"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>process_message(pmt::pmt_t<sp/>msg_in);</highlight></codeline>
+<codeline lineno="200"><highlight class="normal"></highlight></codeline>
+<codeline lineno="201"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>get_rate_in(<ref refid="namespaceccsds__conv__encode27__punct_1a0343875299f35174336f08026c698335" kindref="member">ccsds_conv_encode27_punct::punct_t</ref><sp/>puncturing_type);</highlight></codeline>
+<codeline lineno="202"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>get_rate_out(<ref refid="namespaceccsds__conv__encode27__punct_1a0343875299f35174336f08026c698335" kindref="member">ccsds_conv_encode27_punct::punct_t</ref><sp/>puncturing_type);</highlight></codeline>
+<codeline lineno="203"><highlight class="normal"></highlight></codeline>
+<codeline lineno="204"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>get_num_inputs_req(<ref refid="namespaceccsds__conv__encode27__punct_1a0343875299f35174336f08026c698335" kindref="member">ccsds_conv_encode27_punct::punct_t</ref><sp/>puncturing_type,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>num_out);</highlight></codeline>
+<codeline lineno="205"><highlight class="normal"></highlight></codeline>
+<codeline lineno="207"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>get_start_state(std::string<sp/>ASM);</highlight></codeline>
+<codeline lineno="208"><highlight class="normal"></highlight></codeline>
+<codeline lineno="210"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>get_term_state(std::string<sp/>ASM);</highlight></codeline>
+<codeline lineno="211"><highlight class="normal"></highlight></codeline>
+<codeline lineno="212"><highlight class="normal"></highlight></codeline>
+<codeline lineno="213"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="214"><highlight class="normal"></highlight></codeline>
+<codeline lineno="216"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>~ccsds_conv_decode27(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">);<sp/><sp/></highlight><highlight class="comment">//<sp/>public<sp/>destructor</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="217"><highlight class="normal"></highlight></codeline>
+<codeline lineno="218"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>work(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>noutput_items,<sp/>gr_vector_const_void_star&amp;<sp/>input_items,<sp/>gr_vector_void_star&amp;<sp/>output_items);</highlight></codeline>
+<codeline lineno="219"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="220"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>INCLUDED_CCSDS_CONV_DECODE27_H<sp/>*/</highlight><highlight class="preprocessor"></highlight></codeline>
+    </programlisting>
+    <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_conv_decode27.h"/>
+  </compounddef>
+</doxygen>

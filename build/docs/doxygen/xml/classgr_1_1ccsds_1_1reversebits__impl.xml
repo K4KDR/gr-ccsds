@@ -1,0 +1,203 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="classgr_1_1ccsds_1_1reversebits__impl" kind="class" prot="public">
+    <compoundname>gr::ccsds::reversebits_impl</compoundname>
+    <basecompoundref refid="classgr_1_1ccsds_1_1reversebits" prot="public" virt="non-virtual">gr::ccsds::reversebits</basecompoundref>
+    <includes refid="reversebits__impl_8h" local="no">reversebits_impl.h</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classgr_1_1ccsds_1_1reversebits__impl_1a954597414359c4b38099d3769d258f44" prot="private" static="no" mutable="no">
+        <type>const unsigned int</type>
+        <definition>const unsigned int gr::ccsds::reversebits_impl::d_MSG_LEN</definition>
+        <argsstring></argsstring>
+        <name>d_MSG_LEN</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Message length </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/reversebits_impl.h" line="12" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/lib/reversebits_impl.h" bodystart="12" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classgr_1_1ccsds_1_1reversebits__impl_1a2b7b989d0d9248141ade94d16d566454" prot="private" static="no" mutable="no">
+        <type>const std::vector&lt; unsigned int &gt;</type>
+        <definition>const std::vector&lt;unsigned int&gt; gr::ccsds::reversebits_impl::d_POSITIONS</definition>
+        <argsstring></argsstring>
+        <name>d_POSITIONS</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Initial state of the LFSR </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/reversebits_impl.h" line="15" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/lib/reversebits_impl.h" bodystart="15" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classgr_1_1ccsds_1_1reversebits__impl_1a46938b03ec91741c71f2df82bc001bde" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool gr::ccsds::reversebits_impl::d_stop</definition>
+        <argsstring></argsstring>
+        <name>d_stop</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Flag to store whether EOF has been received or not </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/reversebits_impl.h" line="18" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/lib/reversebits_impl.h" bodystart="18" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classgr_1_1ccsds_1_1reversebits__impl_1a56f8a52edc621c1736258d32bd7e54c0" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>unsigned char</type>
+        <definition>unsigned char gr::ccsds::reversebits_impl::reverse_bits</definition>
+        <argsstring>(const unsigned char in)</argsstring>
+        <name>reverse_bits</name>
+        <param>
+          <type>const unsigned char</type>
+          <declname>in</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/reversebits_impl.h" line="21" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classgr_1_1ccsds_1_1reversebits__impl_1a1f11a245a56f09bc0849fd944cc8b766" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gr::ccsds::reversebits_impl::process_frame</definition>
+        <argsstring>(pmt::pmt_t msg)</argsstring>
+        <name>process_frame</name>
+        <param>
+          <type>pmt::pmt_t</type>
+          <declname>msg</declname>
+        </param>
+        <briefdescription>
+<para>Asynchronous work function which is processing the queues. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/reversebits_impl.h" line="24" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classgr_1_1ccsds_1_1reversebits__impl_1ade813a107b2c967ba76971575b087e8b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>gr::ccsds::reversebits_impl::reversebits_impl</definition>
+        <argsstring>(const unsigned int msg_length, const std::vector&lt; unsigned int &gt; &amp;reverse_indices)</argsstring>
+        <name>reversebits_impl</name>
+        <param>
+          <type>const unsigned int</type>
+          <declname>msg_length</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; unsigned int &gt; &amp;</type>
+          <declname>reverse_indices</declname>
+        </param>
+        <briefdescription>
+<para>Public deconstructor. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/reversebits_impl.h" line="28" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classgr_1_1ccsds_1_1reversebits__impl_1abd6497b8cd50441dc99cbc1effe7b39b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>gr::ccsds::reversebits_impl::~reversebits_impl</definition>
+        <argsstring>()</argsstring>
+        <name>~reversebits_impl</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/reversebits_impl.h" line="29" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classgr_1_1ccsds_1_1reversebits__impl_1aa1fab980d9c82b7e9bbd87ec2f78fe77" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int gr::ccsds::reversebits_impl::work</definition>
+        <argsstring>(int noutput_items, gr_vector_const_void_star &amp;input_items, gr_vector_void_star &amp;output_items)</argsstring>
+        <name>work</name>
+        <param>
+          <type>int</type>
+          <declname>noutput_items</declname>
+        </param>
+        <param>
+          <type>gr_vector_const_void_star &amp;</type>
+          <declname>input_items</declname>
+        </param>
+        <param>
+          <type>gr_vector_void_star &amp;</type>
+          <declname>output_items</declname>
+        </param>
+        <briefdescription>
+<para>Dummy work function. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/reversebits_impl.h" line="32" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="326">
+        <label>gr::ccsds::reversebits</label>
+        <link refid="classgr_1_1ccsds_1_1reversebits"/>
+        <childnode refid="327" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="327">
+        <label>sync_block</label>
+      </node>
+      <node id="325">
+        <label>gr::ccsds::reversebits_impl</label>
+        <link refid="classgr_1_1ccsds_1_1reversebits__impl"/>
+        <childnode refid="326" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="329">
+        <label>gr::ccsds::reversebits</label>
+        <link refid="classgr_1_1ccsds_1_1reversebits"/>
+        <childnode refid="330" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="331">
+        <label>std::vector&lt; unsigned int &gt;</label>
+      </node>
+      <node id="330">
+        <label>sync_block</label>
+      </node>
+      <node id="328">
+        <label>gr::ccsds::reversebits_impl</label>
+        <link refid="classgr_1_1ccsds_1_1reversebits__impl"/>
+        <childnode refid="329" relation="public-inheritance">
+        </childnode>
+        <childnode refid="331" relation="usage">
+          <edgelabel>d_POSITIONS</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/reversebits_impl.h" line="9" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/lib/reversebits_impl.h" bodystart="8" bodyend="34"/>
+    <listofallmembers>
+      <member refid="classgr_1_1ccsds_1_1reversebits__impl_1a954597414359c4b38099d3769d258f44" prot="private" virt="non-virtual"><scope>gr::ccsds::reversebits_impl</scope><name>d_MSG_LEN</name></member>
+      <member refid="classgr_1_1ccsds_1_1reversebits__impl_1a2b7b989d0d9248141ade94d16d566454" prot="private" virt="non-virtual"><scope>gr::ccsds::reversebits_impl</scope><name>d_POSITIONS</name></member>
+      <member refid="classgr_1_1ccsds_1_1reversebits__impl_1a46938b03ec91741c71f2df82bc001bde" prot="private" virt="non-virtual"><scope>gr::ccsds::reversebits_impl</scope><name>d_stop</name></member>
+      <member refid="classgr_1_1ccsds_1_1reversebits_1a28875169f9952166864029da89a1836d" prot="public" virt="non-virtual"><scope>gr::ccsds::reversebits_impl</scope><name>make</name></member>
+      <member refid="classgr_1_1ccsds_1_1reversebits__impl_1a1f11a245a56f09bc0849fd944cc8b766" prot="private" virt="non-virtual"><scope>gr::ccsds::reversebits_impl</scope><name>process_frame</name></member>
+      <member refid="classgr_1_1ccsds_1_1reversebits__impl_1a56f8a52edc621c1736258d32bd7e54c0" prot="private" virt="non-virtual"><scope>gr::ccsds::reversebits_impl</scope><name>reverse_bits</name></member>
+      <member refid="classgr_1_1ccsds_1_1reversebits__impl_1ade813a107b2c967ba76971575b087e8b" prot="public" virt="non-virtual"><scope>gr::ccsds::reversebits_impl</scope><name>reversebits_impl</name></member>
+      <member refid="classgr_1_1ccsds_1_1reversebits_1a373404236e4f465b553694aad49b525b" prot="public" virt="non-virtual"><scope>gr::ccsds::reversebits_impl</scope><name>sptr</name></member>
+      <member refid="classgr_1_1ccsds_1_1reversebits__impl_1aa1fab980d9c82b7e9bbd87ec2f78fe77" prot="public" virt="non-virtual"><scope>gr::ccsds::reversebits_impl</scope><name>work</name></member>
+      <member refid="classgr_1_1ccsds_1_1reversebits__impl_1abd6497b8cd50441dc99cbc1effe7b39b" prot="public" virt="non-virtual"><scope>gr::ccsds::reversebits_impl</scope><name>~reversebits_impl</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

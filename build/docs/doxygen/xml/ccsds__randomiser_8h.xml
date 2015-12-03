@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="ccsds__randomiser_8h" kind="file">
+    <compoundname>ccsds_randomiser.h</compoundname>
+    <includes refid="ccsds__api_8h" local="no">ccsds_api.h</includes>
+    <includes local="no">gr_sync_block.h</includes>
+    <includes local="no">string</includes>
+    <incdepgraph>
+      <node id="344">
+        <label>gruel/attributes.h</label>
+      </node>
+      <node id="345">
+        <label>gr_sync_block.h</label>
+      </node>
+      <node id="343">
+        <label>ccsds_api.h</label>
+        <link refid="ccsds__api_8h"/>
+        <childnode refid="344" relation="include">
+        </childnode>
+      </node>
+      <node id="346">
+        <label>string</label>
+      </node>
+      <node id="342">
+        <label>ccsds_randomiser.h</label>
+        <link refid="ccsds_randomiser.h"/>
+        <childnode refid="343" relation="include">
+        </childnode>
+        <childnode refid="345" relation="include">
+        </childnode>
+        <childnode refid="346" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <innerclass refid="classccsds__randomiser" prot="public">ccsds_randomiser</innerclass>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="ccsds__randomiser_8h_1a525ec7978ca784ccafab45054c5fb851" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="api_8h_1a144137922962dd54ae2e8c1917a7e588" kindref="member">CCSDS_API</ref> ccsds_randomiser_sptr</type>
+        <definition>CCSDS_API ccsds_randomiser_sptr ccsds_make_randomiser</definition>
+        <argsstring>(const uint8_t polynomial=0x95, const uint8_t seed=0xFF)</argsstring>
+        <name>ccsds_make_randomiser</name>
+        <param>
+          <type>const uint8_t</type>
+          <declname>polynomial</declname>
+          <defval>0x95</defval>
+        </param>
+        <param>
+          <type>const uint8_t</type>
+          <declname>seed</declname>
+          <defval>0xFF</defval>
+        </param>
+        <briefdescription>
+<para>Return a shared_ptr to a new instance of <ref refid="classccsds__randomiser" kindref="compound">ccsds_randomiser</ref>. </para>        </briefdescription>
+        <detaileddescription>
+<para>Create an instance of <ref refid="classccsds__randomiser" kindref="compound">ccsds_randomiser</ref> and return it&apos;s shared_ptr.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>polynomial</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Polynomial that defines the network of the 8 shift registers. The MSB encodes whether the last shift register (which is used for the output) should be used to generate the new input while the LSB encodes whether the first shift register (that holds the input bit of the last step should be used to generate the output. Or in ECSS definition: The MSB holds the coefficient for x^0 up to the LSB which holds coefficient x^7. x^8 is not encoded as it is always set (due to the fact that this is a maximum length 8 bit shift register). The default value is 0x95 which corresponds to the randomiser defined in ECSS with the polynomial representation x^8+x^7+x^5+x^3+x^0. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>seed</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Initial state of the shift registers. MSB corresponds to the last register (which will be the output on the next step). Default to all ones as defined in ECSS. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Shared pointer to the created block </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_randomiser.h" line="44" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_randomiser.h"/>
+  </compounddef>
+</doxygen>

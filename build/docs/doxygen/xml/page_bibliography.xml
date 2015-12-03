@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="page_bibliography" kind="page">
+    <compoundname>page_bibliography</compoundname>
+    <title>Bibliography and References</title>
+    <detaileddescription>
+<sect1 id="page_bibliography_1bib_mengali">
+<title>Mengali &amp; D&apos;Andrea</title>
+<para><emphasis>Umberto Mengali and Aldo N. D&apos;Andrea</emphasis></para><para><bold>Synchronization Techniques for Digital Receivers</bold></para><para>1997 Plenum Press, New York <htmlonly> 
+        &lt;hr /&gt;
+</htmlonly></para></sect1>
+<sect1 id="page_bibliography_1bib_gnuradio_links">
+<title>GNU Radio links</title>
+<para><bold>GNU Radio C++ API</bold></para><para><ulink url="http://gnuradio.org/doc/doxygen/index.html">http://gnuradio.org/doc/doxygen/index.html</ulink></para><para><bold>How to debug python blocks with a debugger</bold></para><para><ulink url="http://gnuradio.org/redmine/projects/gnuradio/wiki/TutorialsDebugging#Tutorial-Using-gdb-with-Pythonic-GR-applications">http://gnuradio.org/redmine/projects/gnuradio/wiki/TutorialsDebugging#Tutorial-Using-gdb-with-Pythonic-GR-applications</ulink></para><para><bold>How to use doxygen Markup in GNU Radio</bold></para><para><ulink url="http://gnuradio.org/redmine/projects/gnuradio/wiki/Development#How-is-the-code-documented">http://gnuradio.org/redmine/projects/gnuradio/wiki/Development#How-is-the-code-documented</ulink> <htmlonly> 
+        &lt;hr /&gt;
+</htmlonly></para></sect1>
+<sect1 id="page_bibliography_1bib_doxygen_links">
+<title>Doxygen links</title>
+<para><bold>Doxygen commands referrence</bold></para><para><ulink url="http://www.stack.nl/~dimitri/doxygen/commands.html">http://www.stack.nl/~dimitri/doxygen/commands.html</ulink></para><para><htmlonly> 
+        &lt;!-- Create huge vertical whitespace, so anchors to this page allways center at the anchored section --&gt;
+        &lt;div style=&quot;height: 1000px;&quot;&gt;&lt;br /&gt;&lt;/div&gt;
+</htmlonly> <ref refid="page_bibliography" kindref="compound">Bibliography and References</ref> </para></sect1>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

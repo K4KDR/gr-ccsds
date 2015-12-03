@@ -1,0 +1,168 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="ccsds__randomiser_8h" kind="file">
+    <compoundname>ccsds_randomiser.h</compoundname>
+    <includes refid="ccsds__api_8h" local="no">ccsds_api.h</includes>
+    <includes local="no">gr_sync_block.h</includes>
+    <includes local="no">string</includes>
+    <incdepgraph>
+      <node id="259">
+        <label>gruel/attributes.h</label>
+      </node>
+      <node id="260">
+        <label>gr_sync_block.h</label>
+      </node>
+      <node id="258">
+        <label>ccsds_api.h</label>
+        <link refid="ccsds__api_8h"/>
+        <childnode refid="259" relation="include">
+        </childnode>
+      </node>
+      <node id="261">
+        <label>string</label>
+      </node>
+      <node id="257">
+        <label>/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_randomiser.h</label>
+        <link refid="ccsds_randomiser.h"/>
+        <childnode refid="258" relation="include">
+        </childnode>
+        <childnode refid="260" relation="include">
+        </childnode>
+        <childnode refid="261" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <innerclass refid="classccsds__randomiser" prot="public">ccsds_randomiser</innerclass>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="ccsds__randomiser_8h_1a4d6a07652c8a02277b0d3ecdbdf89607" prot="public" static="no">
+        <type>boost::shared_ptr&lt; <ref refid="classccsds__randomiser" kindref="compound">ccsds_randomiser</ref> &gt;</type>
+        <definition>typedef boost::shared_ptr&lt;ccsds_randomiser&gt; ccsds_randomiser_sptr</definition>
+        <argsstring></argsstring>
+        <name>ccsds_randomiser_sptr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_randomiser.h" line="22" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_randomiser.h" bodystart="9" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="ccsds__randomiser_8h_1ad2b660867f3db5a9d67965501a64e8ec" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>__GR_ATTR_IMPORT <ref refid="ccsds__randomiser_8h_1a4d6a07652c8a02277b0d3ecdbdf89607" kindref="member">ccsds_randomiser_sptr</ref></type>
+        <definition>__GR_ATTR_IMPORT ccsds_randomiser_sptr ccsds_make_randomiser</definition>
+        <argsstring>(const uint8_t polynomial=0x95, const uint8_t seed=0xFF)</argsstring>
+        <name>ccsds_make_randomiser</name>
+        <param>
+          <type>const uint8_t</type>
+          <declname>polynomial</declname>
+          <defval>0x95</defval>
+        </param>
+        <param>
+          <type>const uint8_t</type>
+          <declname>seed</declname>
+          <defval>0xFF</defval>
+        </param>
+        <briefdescription>
+<para>Return a shared_ptr to a new instance of <ref refid="classccsds__randomiser" kindref="compound">ccsds_randomiser</ref>. </para>        </briefdescription>
+        <detaileddescription>
+<para>Create an instance of <ref refid="classccsds__randomiser" kindref="compound">ccsds_randomiser</ref> and return it&apos;s shared_ptr.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>polynomial</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Polynomial that defines the network of the 8 shift registers. The MSB encodes whether the last shift register (which is used for the output) should be used to generate the new input while the LSB encodes whether the first shift register (that holds the input bit of the last step should be used to generate the output. Or in ECSS definition: The MSB holds the coefficient for x^0 up to the LSB which holds coefficient x^7. x^8 is not encoded as it is always set (due to the fact that this is a maximum length 8 bit shift register). The default value is 0x95 which corresponds to the randomiser defined in ECSS with the polynomial representation x^8+x^7+x^5+x^3+x^0. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>seed</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Initial state of the shift registers. MSB corresponds to the last register (which will be the output on the next step). Default to all ones as defined in ECSS. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Shared pointer to the created block </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_randomiser.h" line="44" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>INCLUDED_CCSDS_RANDOMIZER_H</highlight></codeline>
+<codeline lineno="2"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>INCLUDED_CCSDS_RANDOMIZER_H</highlight></codeline>
+<codeline lineno="3"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="ccsds__api_8h" kindref="compound">ccsds_api.h</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;gr_sync_block.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;string&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9" refid="ccsds__randomiser_8h_1a4d6a07652c8a02277b0d3ecdbdf89607" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classccsds__randomiser" kindref="compound">ccsds_randomiser</ref>;</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="12"><highlight class="comment"><sp/>*<sp/>We<sp/>use<sp/>boost::shared_ptr&apos;s<sp/>instead<sp/>of<sp/>raw<sp/>pointers<sp/>for<sp/>all<sp/>access</highlight></codeline>
+<codeline lineno="13"><highlight class="comment"><sp/>*<sp/>to<sp/>gr_blocks<sp/>(and<sp/>many<sp/>other<sp/>data<sp/>structures).<sp/><sp/>The<sp/>shared_ptr<sp/>gets</highlight></codeline>
+<codeline lineno="14"><highlight class="comment"><sp/>*<sp/>us<sp/>transparent<sp/>reference<sp/>counting,<sp/>which<sp/>greatly<sp/>simplifies<sp/>storage</highlight></codeline>
+<codeline lineno="15"><highlight class="comment"><sp/>*<sp/>management<sp/>issues.<sp/><sp/>This<sp/>is<sp/>especially<sp/>helpful<sp/>in<sp/>our<sp/>hybrid</highlight></codeline>
+<codeline lineno="16"><highlight class="comment"><sp/>*<sp/>C++<sp/>/<sp/>Python<sp/>system.</highlight></codeline>
+<codeline lineno="17"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="18"><highlight class="comment"><sp/>*<sp/>See<sp/>http://www.boost.org/libs/smart_ptr/smart_ptr.htm</highlight></codeline>
+<codeline lineno="19"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="20"><highlight class="comment"><sp/>*<sp/>As<sp/>a<sp/>convention,<sp/>the<sp/>_sptr<sp/>suffix<sp/>indicates<sp/>a<sp/>boost::shared_ptr</highlight></codeline>
+<codeline lineno="21"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/>boost::shared_ptr&lt;ccsds_randomiser&gt;<sp/><ref refid="ccsds__randomiser_8h_1a4d6a07652c8a02277b0d3ecdbdf89607" kindref="member">ccsds_randomiser_sptr</ref>;</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><ref refid="api_8h_1a144137922962dd54ae2e8c1917a7e588" kindref="member">CCSDS_API</ref><sp/><ref refid="ccsds__randomiser_8h_1a4d6a07652c8a02277b0d3ecdbdf89607" kindref="member">ccsds_randomiser_sptr</ref><sp/><ref refid="ccsds__randomiser_8h_1ad2b660867f3db5a9d67965501a64e8ec" kindref="member">ccsds_make_randomiser</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint8_t<sp/>polynomial=0x95,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint8_t<sp/>seed=0xFF);</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight></codeline>
+<codeline lineno="59" refid="classccsds__randomiser" refkind="compound"><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="api_8h_1a144137922962dd54ae2e8c1917a7e588" kindref="member">CCSDS_API</ref><sp/><ref refid="classccsds__randomiser" kindref="compound">ccsds_randomiser</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/>gr_sync_block</highlight></codeline>
+<codeline lineno="60"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">friend</highlight><highlight class="normal"><sp/><ref refid="api_8h_1a144137922962dd54ae2e8c1917a7e588" kindref="member">CCSDS_API</ref><sp/><ref refid="ccsds__randomiser_8h_1a4d6a07652c8a02277b0d3ecdbdf89607" kindref="member">ccsds_randomiser_sptr</ref><sp/><ref refid="ccsds__randomiser_8h_1ad2b660867f3db5a9d67965501a64e8ec" kindref="member">ccsds_make_randomiser</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint8_t<sp/>polynomial,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint8_t<sp/>seed);</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/><sp/>\brief<sp/>Constructor<sp/>of<sp/>the<sp/>block<sp/>based<sp/>pseudo<sp/>(de)randomiser.</highlight></codeline>
+<codeline lineno="64"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="65"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/><sp/>\param<sp/>polynomial<sp/>Polynomial<sp/>that<sp/>defines<sp/>the<sp/>network<sp/>of<sp/>the<sp/>8<sp/>shift</highlight></codeline>
+<codeline lineno="66"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>registers.<sp/>The<sp/>MSB<sp/>encodes<sp/>whether<sp/>the<sp/>last<sp/>shift<sp/>register<sp/>(which<sp/>is</highlight></codeline>
+<codeline lineno="67"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>used<sp/>for<sp/>the<sp/>output)<sp/>should<sp/>be<sp/>used<sp/>to<sp/>generate<sp/>the<sp/>new<sp/>input<sp/>while<sp/>the</highlight></codeline>
+<codeline lineno="68"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>LSB<sp/>encodes<sp/>whether<sp/>the<sp/>first<sp/>shift<sp/>register<sp/>(that<sp/>holds<sp/>the<sp/>input<sp/>bit</highlight></codeline>
+<codeline lineno="69"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>of<sp/>the<sp/>last<sp/>step<sp/>should<sp/>be<sp/>used<sp/>to<sp/>generate<sp/>the<sp/>output.<sp/>Or<sp/>in<sp/>ECSS</highlight></codeline>
+<codeline lineno="70"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>definition:<sp/>The<sp/>MSB<sp/>holds<sp/>the<sp/>coefficient<sp/>for<sp/>x^0<sp/>up<sp/>to<sp/>the<sp/>LSB<sp/>which</highlight></codeline>
+<codeline lineno="71"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>holds<sp/>coefficient<sp/>x^7.<sp/>x^8<sp/>is<sp/>not<sp/>encoded<sp/>as<sp/>it<sp/>is<sp/>always<sp/>set<sp/>(due<sp/>to</highlight></codeline>
+<codeline lineno="72"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>the<sp/>fact<sp/>that<sp/>this<sp/>is<sp/>a<sp/>maximum<sp/>length<sp/>8<sp/>bit<sp/>shift<sp/>register).</highlight></codeline>
+<codeline lineno="73"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>The<sp/>default<sp/>value<sp/>is<sp/>0x95<sp/>which<sp/>corresponds<sp/>to<sp/>the<sp/>randomiser<sp/>defined<sp/>in</highlight></codeline>
+<codeline lineno="74"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>ECSS<sp/>with<sp/>the<sp/>polynomial<sp/>representation<sp/>x^8+x^7+x^5+x^3+x^0.</highlight></codeline>
+<codeline lineno="75"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/><sp/>\param<sp/>seed<sp/>Initial<sp/>state<sp/>of<sp/>the<sp/>shift<sp/>registers.<sp/>MSB<sp/>corresponds<sp/>to<sp/>the</highlight></codeline>
+<codeline lineno="76"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>last<sp/>register<sp/>(which<sp/>will<sp/>be<sp/>the<sp/>output<sp/>on<sp/>the<sp/>next<sp/>step).<sp/>Default<sp/>to</highlight></codeline>
+<codeline lineno="77"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>all<sp/>ones<sp/>as<sp/>defined<sp/>in<sp/>ECSS.</highlight></codeline>
+<codeline lineno="78"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classccsds__randomiser" kindref="compound">ccsds_randomiser</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint8_t<sp/>polynomial=0x95,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint8_t<sp/>seed=0xFF);</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint8_t<sp/>d_POLY;</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"></highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint8_t<sp/>d_SEED;</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"></highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint8_t<sp/>d_state;</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"></highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>d_stop;</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"></highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>reset(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"></highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint8_t<sp/>get_next_byte(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"></highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>process_frame(pmt::pmt_t<sp/>msg);</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"></highlight></codeline>
+<codeline lineno="102"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>~<ref refid="classccsds__randomiser" kindref="compound">ccsds_randomiser</ref><sp/>();</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"></highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>work(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>noutput_items,<sp/>gr_vector_const_void_star&amp;<sp/>input_items,<sp/>gr_vector_void_star&amp;<sp/>output_items);</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"></highlight></codeline>
+<codeline lineno="109"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>INCLUDED_CCSDS_RANDOMIZER_H<sp/>*/</highlight><highlight class="preprocessor"></highlight></codeline>
+    </programlisting>
+    <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_randomiser.h"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="group__sender" kind="group">
+    <compoundname>sender</compoundname>
+    <title>CCSDS sender blocks</title>
+    <innerclass refid="classccsds__mpsk__mod__bc" prot="public">ccsds_mpsk_mod_bc</innerclass>
+    <innerclass refid="classccsds__mpsk__preamble__cc" prot="public">ccsds_mpsk_preamble_cc</innerclass>
+    <innernamespace refid="namespacegr">gr</innernamespace>
+    <briefdescription>
+<para>Summary of all blocks used for modulating and sending a CCSDS conformant signal. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

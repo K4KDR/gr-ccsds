@@ -1,0 +1,34 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/ccsds/conv_puncturing27.h
+boost/shared_ptr.hpp
+-
+stdio.h
+-
+
+/home/marina/Documents/sdr1/gr-ccsds/lib/conv_encode27_aux.cc
+conv_encode27_aux.h
+/home/marina/Documents/sdr1/gr-ccsds/lib/conv_encode27_aux.h
+stdio.h
+-
+
+/home/marina/Documents/sdr1/gr-ccsds/lib/conv_encode27_aux.h
+stdint.h
+-
+ccsds/conv_puncturing27.h
+-
+
+/home/marina/Documents/sdr1/gr-ccsds/lib/qa_ccsds_conv_encode27_aux.cc
+boost/test/unit_test.hpp
+-
+conv_encode27_aux.h
+/home/marina/Documents/sdr1/gr-ccsds/lib/conv_encode27_aux.h
+stdio.h
+-
+

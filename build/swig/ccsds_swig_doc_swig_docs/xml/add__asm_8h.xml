@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="add__asm_8h" kind="file">
+    <compoundname>add_asm.h</compoundname>
+    <includes refid="api_8h" local="no">ccsds/api.h</includes>
+    <includes local="no">gnuradio/sync_block.h</includes>
+    <includes local="no">string</includes>
+    <includedby refid="add__asm__impl_8h" local="yes">/home/marina/Documents/sdr1/gr-ccsds/lib/add_asm_impl.h</includedby>
+    <incdepgraph>
+      <node id="372">
+        <label>gnuradio/sync_block.h</label>
+      </node>
+      <node id="373">
+        <label>string</label>
+      </node>
+      <node id="371">
+        <label>gnuradio/attributes.h</label>
+      </node>
+      <node id="368">
+        <label>/home/marina/Documents/sdr1/gr-ccsds/include/ccsds/add_asm.h</label>
+        <link refid="add_asm.h"/>
+        <childnode refid="369" relation="include">
+        </childnode>
+        <childnode refid="372" relation="include">
+        </childnode>
+        <childnode refid="373" relation="include">
+        </childnode>
+      </node>
+      <node id="369">
+        <label>ccsds/api.h</label>
+        <link refid="api_8h"/>
+        <childnode refid="370" relation="include">
+        </childnode>
+        <childnode refid="371" relation="include">
+        </childnode>
+      </node>
+      <node id="370">
+        <label>gnuradio/config.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="374">
+        <label>/home/marina/Documents/sdr1/gr-ccsds/include/ccsds/add_asm.h</label>
+        <link refid="add_asm.h"/>
+        <childnode refid="375" relation="include">
+        </childnode>
+      </node>
+      <node id="375">
+        <label>/home/marina/Documents/sdr1/gr-ccsds/lib/add_asm_impl.h</label>
+        <link refid="add__asm__impl_8h"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classgr_1_1ccsds_1_1add__asm" prot="public">gr::ccsds::add_asm</innerclass>
+    <innernamespace refid="namespacegr">gr</innernamespace>
+    <innernamespace refid="namespacegr_1_1ccsds">gr::ccsds</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>INCLUDED_CCSDS_ADD_ASM_H</highlight></codeline>
+<codeline lineno="2"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>INCLUDED_CCSDS_ADD_ASM_H</highlight></codeline>
+<codeline lineno="3"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="api_8h" kindref="compound">ccsds/api.h</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;gnuradio/sync_block.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;string&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9" refid="namespacegr" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">gr<sp/>{</highlight></codeline>
+<codeline lineno="10" refid="namespacegr_1_1ccsds" refkind="compound"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">ccsds<sp/>{</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="23" refid="classgr_1_1ccsds_1_1add__asm" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="api_8h_1a144137922962dd54ae2e8c1917a7e588" kindref="member">CCSDS_API</ref><sp/><ref refid="classgr_1_1ccsds_1_1add__asm" kindref="compound">add_asm</ref><sp/>:<sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/>gr::sync_block</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="26" refid="classgr_1_1ccsds_1_1add__asm_1abeab04d4f9612548467139622e2a7a75" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/>boost::shared_ptr&lt;add_asm&gt;<sp/><ref refid="classgr_1_1ccsds_1_1add__asm_1abeab04d4f9612548467139622e2a7a75" kindref="member">sptr</ref>;</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="classgr_1_1ccsds_1_1add__asm_1abeab04d4f9612548467139622e2a7a75" kindref="member">sptr</ref><sp/>make(std::string<sp/>ASM,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>frame_len);</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/>}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>ccsds</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>gr</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>INCLUDED_CCSDS_ADD_ASM_H<sp/>*/</highlight><highlight class="preprocessor"></highlight></codeline>
+    </programlisting>
+    <location file="/home/marina/Documents/sdr1/gr-ccsds/include/ccsds/add_asm.h"/>
+  </compounddef>
+</doxygen>

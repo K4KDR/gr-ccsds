@@ -1,0 +1,166 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="classccsds__mpsk__mod__bc" kind="class" prot="public">
+    <compoundname>ccsds_mpsk_mod_bc</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">gr_sync_block</basecompoundref>
+    <includes refid="ccsds__mpsk__mod__bc_8h" local="no">ccsds_mpsk_mod_bc.h</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classccsds__mpsk__mod__bc_1a316e9eea0cdd6b009897e9b7fbc9f562" prot="private" static="no" mutable="no">
+        <type>unsigned int</type>
+        <definition>unsigned int ccsds_mpsk_mod_bc::d_M</definition>
+        <argsstring></argsstring>
+        <name>d_M</name>
+        <briefdescription>
+<para>Storage for the modulation order. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_mpsk_mod_bc.h" line="37" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_mpsk_mod_bc.h" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__mpsk__mod__bc_1af54397f83d23f43b247f82d169114466" prot="private" static="no" mutable="no">
+        <type>gr_complex *</type>
+        <definition>gr_complex* ccsds_mpsk_mod_bc::d_constellation</definition>
+        <argsstring></argsstring>
+        <name>d_constellation</name>
+        <briefdescription>
+<para>Storage for precomputed constellation. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_mpsk_mod_bc.h" line="40" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_mpsk_mod_bc.h" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="friend">
+      <memberdef kind="friend" id="classccsds__mpsk__mod__bc_1a746039957f6cbb1543c439c3ca1684b8" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>friend <ref refid="api_8h_1a144137922962dd54ae2e8c1917a7e588" kindref="member">CCSDS_API</ref> ccsds_mpsk_mod_bc_sptr</type>
+        <definition>CCSDS_API ccsds_mpsk_mod_bc_sptr ccsds_make_mpsk_mod_bc</definition>
+        <argsstring>(unsigned int M)</argsstring>
+        <name>ccsds_make_mpsk_mod_bc</name>
+        <param>
+          <type>unsigned int</type>
+          <declname>M</declname>
+        </param>
+        <briefdescription>
+<para>Create a M-PSK modulator and return it&apos;s shared pointer. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>M</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Modulation order. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Shared pointer of the generated M-PSK modulator. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_mpsk_mod_bc.h" line="28" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classccsds__mpsk__mod__bc_1a5bfb9f5c2febfa23e347136352017369" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>ccsds_mpsk_mod_bc::ccsds_mpsk_mod_bc</definition>
+        <argsstring>(unsigned int M)</argsstring>
+        <name>ccsds_mpsk_mod_bc</name>
+        <param>
+          <type>unsigned int</type>
+          <declname>M</declname>
+        </param>
+        <briefdescription>
+<para>Private constructor for the M-PSK modulator. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>M</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Modulation order. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_mpsk_mod_bc.h" line="34" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classccsds__mpsk__mod__bc_1a32ca20ec78248d07e714f15d6ba03d9c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>ccsds_mpsk_mod_bc::~ccsds_mpsk_mod_bc</definition>
+        <argsstring>()</argsstring>
+        <name>~ccsds_mpsk_mod_bc</name>
+        <briefdescription>
+<para>Public deconstructor. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_mpsk_mod_bc.h" line="44" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classccsds__mpsk__mod__bc_1abf9508230533107d6ce25b3adddb058e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int ccsds_mpsk_mod_bc::work</definition>
+        <argsstring>(int noutput_items, gr_vector_const_void_star &amp;input_items, gr_vector_void_star &amp;output_items)</argsstring>
+        <name>work</name>
+        <param>
+          <type>int</type>
+          <declname>noutput_items</declname>
+        </param>
+        <param>
+          <type>gr_vector_const_void_star &amp;</type>
+          <declname>input_items</declname>
+        </param>
+        <param>
+          <type>gr_vector_void_star &amp;</type>
+          <declname>output_items</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_mpsk_mod_bc.h" line="46" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>M-PSK modulator.</para><para>On construction a constellation array is generated. This constellation is later used to map the individual data bits to symbols. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="106">
+        <label>ccsds_mpsk_mod_bc</label>
+        <link refid="classccsds__mpsk__mod__bc"/>
+        <childnode refid="107" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="107">
+        <label>gr_sync_block</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="108">
+        <label>ccsds_mpsk_mod_bc</label>
+        <link refid="classccsds__mpsk__mod__bc"/>
+        <childnode refid="109" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="109">
+        <label>gr_sync_block</label>
+      </node>
+    </collaborationgraph>
+    <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_mpsk_mod_bc.h" line="26" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_mpsk_mod_bc.h" bodystart="25" bodyend="49"/>
+    <listofallmembers>
+      <member refid="classccsds__mpsk__mod__bc_1a746039957f6cbb1543c439c3ca1684b8" prot="private" virt="non-virtual"><scope>ccsds_mpsk_mod_bc</scope><name>ccsds_make_mpsk_mod_bc</name></member>
+      <member refid="classccsds__mpsk__mod__bc_1a5bfb9f5c2febfa23e347136352017369" prot="private" virt="non-virtual"><scope>ccsds_mpsk_mod_bc</scope><name>ccsds_mpsk_mod_bc</name></member>
+      <member refid="classccsds__mpsk__mod__bc_1af54397f83d23f43b247f82d169114466" prot="private" virt="non-virtual"><scope>ccsds_mpsk_mod_bc</scope><name>d_constellation</name></member>
+      <member refid="classccsds__mpsk__mod__bc_1a316e9eea0cdd6b009897e9b7fbc9f562" prot="private" virt="non-virtual"><scope>ccsds_mpsk_mod_bc</scope><name>d_M</name></member>
+      <member refid="classccsds__mpsk__mod__bc_1abf9508230533107d6ce25b3adddb058e" prot="public" virt="non-virtual"><scope>ccsds_mpsk_mod_bc</scope><name>work</name></member>
+      <member refid="classccsds__mpsk__mod__bc_1a32ca20ec78248d07e714f15d6ba03d9c" prot="public" virt="non-virtual"><scope>ccsds_mpsk_mod_bc</scope><name>~ccsds_mpsk_mod_bc</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="ccsds__lo__feedback_8h" kind="file">
+    <compoundname>ccsds_lo_feedback.h</compoundname>
+    <includes local="no">gruel/pmt.h</includes>
+    <incdepgraph>
+      <node id="173">
+        <label>/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_lo_feedback.h</label>
+        <link refid="ccsds_lo_feedback.h"/>
+        <childnode refid="174" relation="include">
+        </childnode>
+      </node>
+      <node id="174">
+        <label>gruel/pmt.h</label>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="ccsds__lo__feedback_8h_1a8047f6d4280e138a25f9c4f468e485e3" prot="public" static="no">
+        <name>MSG_FREQ_TYPE</name>
+        <initializer>0</initializer>
+        <briefdescription>
+<para>Message type used for sending frequency corrections to the local oscillator. </para>        </briefdescription>
+        <detaileddescription>
+<para>Arbitrary chosen type number to be used for sending frequency correction values to the local oscillator. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_lo_feedback.h" line="23" column="9" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_lo_feedback.h" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="ccsds__lo__feedback_8h_1a6fd68ae69a03d13692abee47fc14192f" prot="public" static="no">
+        <name>MSG_FREQ_ARG2</name>
+        <initializer>-1.42</initializer>
+        <briefdescription>
+<para>Value used for message&apos;s <computeroutput>arg2</computeroutput> when sending frequency corrections to the local oscillator. </para>        </briefdescription>
+        <detaileddescription>
+<para>Arbitrary chosen number to be used for sending frequency correction values to the local oscillator. This value is checked by the local oscillator and the message is discarded if <computeroutput>arg2</computeroutput> does not match. (Sanity check) </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_lo_feedback.h" line="32" column="9" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_lo_feedback.h" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="ccsds__lo__feedback_8h_1ae80db84a582acbbeb8287f71f6adca31" prot="public" static="no" mutable="no">
+        <type>const pmt::pmt_t</type>
+        <definition>const pmt::pmt_t LO_TAG_KEY</definition>
+        <argsstring></argsstring>
+        <name>LO_TAG_KEY</name>
+        <initializer>= pmt::mp(&quot;freq_offset&quot;)</initializer>
+        <briefdescription>
+<para>Key to be used by the frequency offset tag send by the local oscillator. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_lo_feedback.h" line="37" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_lo_feedback.h" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Defines all parameters for the frequency feedback loop. </para>    </briefdescription>
+    <detaileddescription>
+<para>Defines the parameters to be used by the frequency correction messages and the frequency offset tags used by <ref refid="classccsds__local__oscillator__cc" kindref="compound">ccsds_local_oscillator_cc</ref>.</para><para>See <ref refid="page_lo_feedback" kindref="compound">Local oscillator frequency correction feedback loop</ref> for more details. </para>    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>INCLUDED_CCSDS_LO_FEEDBACK_H</highlight></codeline>
+<codeline lineno="2"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>INCLUDED_CCSDS_LO_FEEDBACK_H</highlight></codeline>
+<codeline lineno="3"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;gruel/pmt.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight></codeline>
+<codeline lineno="23" refid="ccsds__lo__feedback_8h_1a8047f6d4280e138a25f9c4f468e485e3" refkind="member"><highlight class="preprocessor">#define<sp/>MSG_FREQ_TYPE<sp/>0</highlight></codeline>
+<codeline lineno="24"><highlight class="preprocessor"></highlight></codeline>
+<codeline lineno="32" refid="ccsds__lo__feedback_8h_1a6fd68ae69a03d13692abee47fc14192f" refkind="member"><highlight class="preprocessor">#define<sp/>MSG_FREQ_ARG2<sp/>-1.42</highlight></codeline>
+<codeline lineno="33"><highlight class="preprocessor"></highlight></codeline>
+<codeline lineno="37" refid="ccsds__lo__feedback_8h_1ae80db84a582acbbeb8287f71f6adca31" refkind="member"><highlight class="keyword">const</highlight><highlight class="normal"><sp/>pmt::pmt_t<sp/><ref refid="ccsds__lo__feedback_8h_1ae80db84a582acbbeb8287f71f6adca31" kindref="member">LO_TAG_KEY</ref><sp/>=<sp/>pmt::mp(</highlight><highlight class="stringliteral">&quot;freq_offset&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>INCLUDED_CCSDS_LO_FEEDBACK_H<sp/>*/</highlight><highlight class="preprocessor"></highlight></codeline>
+    </programlisting>
+    <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_lo_feedback.h"/>
+  </compounddef>
+</doxygen>

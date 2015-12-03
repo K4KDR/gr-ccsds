@@ -1,0 +1,269 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="classccsds__add__asm" kind="class" prot="public">
+    <compoundname>ccsds_add_asm</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">gr_sync_block</basecompoundref>
+    <includes refid="ccsds__add__asm_8h" local="no">ccsds_add_asm.h</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classccsds__add__asm_1abf9e5eb71f4943df8efa5871ce2d8799" prot="private" static="no" mutable="no">
+        <type>const unsigned int</type>
+        <definition>const unsigned int ccsds_add_asm::d_ASM_LEN</definition>
+        <argsstring></argsstring>
+        <name>d_ASM_LEN</name>
+        <briefdescription>
+<para>Length of ASM in bytes. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="see"><para><ref refid="classccsds__add__asm_1a3c114896a577d70d5ea3c1479db89763" kindref="member">d_ASM</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_add_asm.h" line="64" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_add_asm.h" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__add__asm_1af1c5f1cf82adf469c10df0e1d3253850" prot="private" static="no" mutable="no">
+        <type>const unsigned int</type>
+        <definition>const unsigned int ccsds_add_asm::d_FRAME_LEN</definition>
+        <argsstring></argsstring>
+        <name>d_FRAME_LEN</name>
+        <briefdescription>
+<para>Length of a frame (without ASM) in bytes. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_add_asm.h" line="67" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_add_asm.h" bodystart="67" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__add__asm_1a3c114896a577d70d5ea3c1479db89763" prot="private" static="no" mutable="no">
+        <type>unsigned char *</type>
+        <definition>unsigned char* ccsds_add_asm::d_ASM</definition>
+        <argsstring></argsstring>
+        <name>d_ASM</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_add_asm.h" line="73" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_add_asm.h" bodystart="73" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__add__asm_1afb5f9f9092947bb8d6bea9024e61924b" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool ccsds_add_asm::d_stop</definition>
+        <argsstring></argsstring>
+        <name>d_stop</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_add_asm.h" line="75" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_add_asm.h" bodystart="75" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="friend">
+      <memberdef kind="friend" id="classccsds__add__asm_1addb97584c9092a27198832a17ba05b72" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>friend <ref refid="api_8h_1a144137922962dd54ae2e8c1917a7e588" kindref="member">CCSDS_API</ref> ccsds_add_asm_sptr</type>
+        <definition>CCSDS_API ccsds_add_asm_sptr ccsds_make_add_asm</definition>
+        <argsstring>(std::string ASM, const unsigned int frame_len)</argsstring>
+        <name>ccsds_make_add_asm</name>
+        <param>
+          <type>std::string</type>
+          <declname>ASM</declname>
+        </param>
+        <param>
+          <type>const unsigned int</type>
+          <declname>frame_len</declname>
+        </param>
+        <briefdescription>
+<para>Return a shared_ptr to a new instance of <ref refid="classccsds__add__asm" kindref="compound">ccsds_add_asm</ref>. </para>        </briefdescription>
+        <detaileddescription>
+<para>Create an instance of <ref refid="classccsds__add__asm" kindref="compound">ccsds_add_asm</ref> and return it&apos;s shared_ptr.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ASM</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>String containing the attached sync marker to look for in hexadecimal representation. Must be of even length. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>frame_len</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of a frame (without ASM) in bytes. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Shared pointer to the created block </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_add_asm.h" line="49" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classccsds__add__asm_1ac9899ac614d2962e8bc20a9a23eaf4ca" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>ccsds_add_asm::ccsds_add_asm</definition>
+        <argsstring>(std::string ASM, const unsigned int frame_len)</argsstring>
+        <name>ccsds_add_asm</name>
+        <param>
+          <type>std::string</type>
+          <declname>ASM</declname>
+        </param>
+        <param>
+          <type>const unsigned int</type>
+          <declname>frame_len</declname>
+        </param>
+        <briefdescription>
+<para>Public constructor of the add ASM block. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ASM</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>String containing the attached sync marker to look for in hexadecimal representation. Must be of even length. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>frame_len</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of a frame (without ASM) in bytes. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_add_asm.h" line="58" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classccsds__add__asm_1a953734cfe3daee1d2e5de2ba4a6977cc" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ccsds_add_asm::process_frame</definition>
+        <argsstring>(pmt::pmt_t msg)</argsstring>
+        <name>process_frame</name>
+        <param>
+          <type>pmt::pmt_t</type>
+          <declname>msg</declname>
+        </param>
+        <briefdescription>
+<para>Asynchronous work function which is processing the queues. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_add_asm.h" line="78" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classccsds__add__asm_1a568553f97757fcd31e76fe71232014aa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>ccsds_add_asm::~ccsds_add_asm</definition>
+        <argsstring>()</argsstring>
+        <name>~ccsds_add_asm</name>
+        <briefdescription>
+<para>Public deconstructor of the AR. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_add_asm.h" line="82" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classccsds__add__asm_1a37b7270694374d67996641990400a56c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool ccsds_add_asm::start</definition>
+        <argsstring>(void)</argsstring>
+        <name>start</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_add_asm.h" line="84" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classccsds__add__asm_1a82a39cc867db13611e7b68c4ff0250ee" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool ccsds_add_asm::stop</definition>
+        <argsstring>(void)</argsstring>
+        <name>stop</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_add_asm.h" line="85" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classccsds__add__asm_1ab3227625b4d1f6ddb965bb71510fffb1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int ccsds_add_asm::work</definition>
+        <argsstring>(int noutput_items, gr_vector_const_void_star &amp;input_items, gr_vector_void_star &amp;output_items)</argsstring>
+        <name>work</name>
+        <param>
+          <type>int</type>
+          <declname>noutput_items</declname>
+        </param>
+        <param>
+          <type>gr_vector_const_void_star &amp;</type>
+          <declname>input_items</declname>
+        </param>
+        <param>
+          <type>gr_vector_void_star &amp;</type>
+          <declname>output_items</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_add_asm.h" line="87" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Takes a frame and adds a sync marker in front of it. </para>    </briefdescription>
+    <detaileddescription>
+<para>The block has an input message port named &quot;in&quot; at which new frames can arrive. On arrival a new message is created consisting of the ASM sequence followed by the data of the incomming message. This new message is then queued in the output message port named &quot;out&quot;. </para>    </detaileddescription>
+    <inheritancegraph>
+      <node id="34">
+        <label>ccsds_add_asm</label>
+        <link refid="classccsds__add__asm"/>
+        <childnode refid="35" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="35">
+        <label>gr_sync_block</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="36">
+        <label>ccsds_add_asm</label>
+        <link refid="classccsds__add__asm"/>
+        <childnode refid="37" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="37">
+        <label>gr_sync_block</label>
+      </node>
+    </collaborationgraph>
+    <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_add_asm.h" line="47" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_add_asm.h" bodystart="46" bodyend="89"/>
+    <listofallmembers>
+      <member refid="classccsds__add__asm_1ac9899ac614d2962e8bc20a9a23eaf4ca" prot="private" virt="non-virtual"><scope>ccsds_add_asm</scope><name>ccsds_add_asm</name></member>
+      <member refid="classccsds__add__asm_1addb97584c9092a27198832a17ba05b72" prot="private" virt="non-virtual"><scope>ccsds_add_asm</scope><name>ccsds_make_add_asm</name></member>
+      <member refid="classccsds__add__asm_1a3c114896a577d70d5ea3c1479db89763" prot="private" virt="non-virtual"><scope>ccsds_add_asm</scope><name>d_ASM</name></member>
+      <member refid="classccsds__add__asm_1abf9e5eb71f4943df8efa5871ce2d8799" prot="private" virt="non-virtual"><scope>ccsds_add_asm</scope><name>d_ASM_LEN</name></member>
+      <member refid="classccsds__add__asm_1af1c5f1cf82adf469c10df0e1d3253850" prot="private" virt="non-virtual"><scope>ccsds_add_asm</scope><name>d_FRAME_LEN</name></member>
+      <member refid="classccsds__add__asm_1afb5f9f9092947bb8d6bea9024e61924b" prot="private" virt="non-virtual"><scope>ccsds_add_asm</scope><name>d_stop</name></member>
+      <member refid="classccsds__add__asm_1a953734cfe3daee1d2e5de2ba4a6977cc" prot="private" virt="non-virtual"><scope>ccsds_add_asm</scope><name>process_frame</name></member>
+      <member refid="classccsds__add__asm_1a37b7270694374d67996641990400a56c" prot="public" virt="non-virtual"><scope>ccsds_add_asm</scope><name>start</name></member>
+      <member refid="classccsds__add__asm_1a82a39cc867db13611e7b68c4ff0250ee" prot="public" virt="non-virtual"><scope>ccsds_add_asm</scope><name>stop</name></member>
+      <member refid="classccsds__add__asm_1ab3227625b4d1f6ddb965bb71510fffb1" prot="public" virt="non-virtual"><scope>ccsds_add_asm</scope><name>work</name></member>
+      <member refid="classccsds__add__asm_1a568553f97757fcd31e76fe71232014aa" prot="public" virt="non-virtual"><scope>ccsds_add_asm</scope><name>~ccsds_add_asm</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

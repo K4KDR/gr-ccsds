@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="dir_97aefd0d527b934f1d99a682da8fe6a9" kind="dir">
+    <compoundname>lib</compoundname>
+    <innerfile refid="add__asm__impl_8h">add_asm_impl.h</innerfile>
+    <innerfile refid="blob__msg__sink__b__impl_8h">blob_msg_sink_b_impl.h</innerfile>
+    <innerfile refid="blob__msg__source__b__impl_8h">blob_msg_source_b_impl.h</innerfile>
+    <innerfile refid="lib_2ccsds__time_8h">lib/ccsds_time.h</innerfile>
+    <innerfile refid="conv__decode27__impl_8h">conv_decode27_impl.h</innerfile>
+    <innerfile refid="conv__encode27__aux_8h">conv_encode27_aux.h</innerfile>
+    <innerfile refid="conv__encode27__bb__impl_8h">conv_encode27_bb_impl.h</innerfile>
+    <innerfile refid="discriminator__impl_8h">discriminator_impl.h</innerfile>
+    <innerfile refid="dll__cc__impl_8h">dll_cc_impl.h</innerfile>
+    <innerfile refid="hexstring__to__binary_8h">hexstring_to_binary.h</innerfile>
+    <innerfile refid="interleaving__aux_8h">interleaving_aux.h</innerfile>
+    <innerfile refid="lpf2_8h">lpf2.h</innerfile>
+    <innerfile refid="mpsk__ambiguity__resolver__f__impl_8h">mpsk_ambiguity_resolver_f_impl.h</innerfile>
+    <innerfile refid="mpsk__constellation_8h">mpsk_constellation.h</innerfile>
+    <innerfile refid="mpsk__detector__soft__cf__impl_8h">mpsk_detector_soft_cf_impl.h</innerfile>
+    <innerfile refid="mpsk__mod__bc__impl_8h">mpsk_mod_bc_impl.h</innerfile>
+    <innerfile refid="mpsk__preamble__cc__impl_8h">mpsk_preamble_cc_impl.h</innerfile>
+    <innerfile refid="msg__null__src__impl_8h">msg_null_src_impl.h</innerfile>
+    <innerfile refid="pll__cc__impl_8h">pll_cc_impl.h</innerfile>
+    <innerfile refid="randomiser__impl_8h">randomiser_impl.h</innerfile>
+    <innerfile refid="reversebits__impl_8h">reversebits_impl.h</innerfile>
+    <innerfile refid="rs__decode__impl_8h">rs_decode_impl.h</innerfile>
+    <innerfile refid="rs__encode__impl_8h">rs_encode_impl.h</innerfile>
+    <innerfile refid="simple__bpsk__SNR__qf__impl_8h">simple_bpsk_SNR_qf_impl.h</innerfile>
+    <innerfile refid="softbits__msg__to__bytes__b__impl_8h">softbits_msg_to_bytes_b_impl.h</innerfile>
+    <innerfile refid="softbittobit__impl_8h">softbittobit_impl.h</innerfile>
+    <innerfile refid="ticp__frame__sink__impl_8h">ticp_frame_sink_impl.h</innerfile>
+    <innerfile refid="ticp__frame__source__impl_8h">ticp_frame_source_impl.h</innerfile>
+    <innerfile refid="trunk__tail__impl_8h">trunk_tail_impl.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/"/>
+  </compounddef>
+</doxygen>

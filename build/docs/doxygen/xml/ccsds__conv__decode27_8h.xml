@@ -1,0 +1,126 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="ccsds__conv__decode27_8h" kind="file">
+    <compoundname>ccsds_conv_decode27.h</compoundname>
+    <includes refid="ccsds__api_8h" local="no">ccsds_api.h</includes>
+    <includes local="no">gr_sync_block.h</includes>
+    <includes refid="ccsds__conv__encode27__punct_8h" local="no">ccsds_conv_encode27_punct.h</includes>
+    <includes local="no">fec.h</includes>
+    <incdepgraph>
+      <node id="177">
+        <label>fec.h</label>
+      </node>
+      <node id="175">
+        <label>boost/shared_ptr.hpp</label>
+      </node>
+      <node id="172">
+        <label>gruel/attributes.h</label>
+      </node>
+      <node id="173">
+        <label>gr_sync_block.h</label>
+      </node>
+      <node id="171">
+        <label>ccsds_api.h</label>
+        <link refid="ccsds__api_8h"/>
+        <childnode refid="172" relation="include">
+        </childnode>
+      </node>
+      <node id="170">
+        <label>ccsds_conv_decode27.h</label>
+        <link refid="ccsds_conv_decode27.h"/>
+        <childnode refid="171" relation="include">
+        </childnode>
+        <childnode refid="173" relation="include">
+        </childnode>
+        <childnode refid="174" relation="include">
+        </childnode>
+        <childnode refid="177" relation="include">
+        </childnode>
+      </node>
+      <node id="174">
+        <label>ccsds_conv_encode27_punct.h</label>
+        <link refid="ccsds__conv__encode27__punct_8h"/>
+        <childnode refid="175" relation="include">
+        </childnode>
+        <childnode refid="176" relation="include">
+        </childnode>
+      </node>
+      <node id="176">
+        <label>stdio.h</label>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="ccsds__conv__decode27_8h_1a23b4e54920a5682d9fb407a73e2571e2" prot="public" static="no">
+        <name>FEC_FUNC_VITERBI27_SET_POLYNOMIAL</name>
+        <initializer>set_viterbi27_polynomial_port</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_conv_decode27.h" line="21" column="9" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_conv_decode27.h" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="ccsds__conv__decode27_8h_1ada01a51ca37bf9357263b458e1ce14ae" prot="public" static="no">
+        <name>FEC_FUNC_VITERBI27_CREATE</name>
+        <initializer>create_viterbi27_port</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_conv_decode27.h" line="22" column="9" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_conv_decode27.h" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="ccsds__conv__decode27_8h_1ad3dc1bce18a1c5c0b8417856e0ae07c5" prot="public" static="no">
+        <name>FEC_FUNC_VITERBI27_DELETE</name>
+        <initializer>delete_viterbi27_port</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_conv_decode27.h" line="23" column="9" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_conv_decode27.h" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="ccsds__conv__decode27_8h_1a7a3f4558d9d3daa965147b35bf367ae1" prot="public" static="no">
+        <name>FEC_FUNC_VITERBI27_INIT</name>
+        <initializer>init_viterbi27_port</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_conv_decode27.h" line="24" column="9" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_conv_decode27.h" bodystart="24" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="ccsds__conv__decode27_8h_1a0903bba2daa1030f391724bb3a2ea04d" prot="public" static="no">
+        <name>FEC_FUNC_VITERBI27_UPDATE_BLK</name>
+        <initializer>update_viterbi27_blk_port</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_conv_decode27.h" line="25" column="9" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_conv_decode27.h" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="ccsds__conv__decode27_8h_1a2d0d0d1422026f2c30f80c874f22d22b" prot="public" static="no">
+        <name>FEC_FUNC_VITERBI27_CHAINBACK</name>
+        <initializer>chainback_viterbi27_port</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_conv_decode27.h" line="26" column="9" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_conv_decode27.h" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_conv_decode27.h"/>
+  </compounddef>
+</doxygen>

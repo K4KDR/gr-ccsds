@@ -1,0 +1,107 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="namespaceccsds__conv__encode27__punct" kind="namespace">
+    <compoundname>ccsds_conv_encode27_punct</compoundname>
+      <sectiondef kind="enum">
+      <memberdef kind="enum" id="namespaceccsds__conv__encode27__punct_1a0343875299f35174336f08026c698335" prot="public" static="no">
+        <name>punct_t</name>
+        <enumvalue id="namespaceccsds__conv__encode27__punct_1a0343875299f35174336f08026c698335a66b1d25f3e21adbe61d35c5fe37955a8" prot="public">
+          <name>NONE</name>
+          <initializer>=0</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaceccsds__conv__encode27__punct_1a0343875299f35174336f08026c698335a1c31e7cdf333ac5cf787de8d8a18a572" prot="public">
+          <name>ECSS_23</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaceccsds__conv__encode27__punct_1a0343875299f35174336f08026c698335a959813b65ae1bae791eccfcfb1f61ea8" prot="public">
+          <name>ECSS_34</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaceccsds__conv__encode27__punct_1a0343875299f35174336f08026c698335a3263f0a4d8309bd89dffe805008badc7" prot="public">
+          <name>ECSS_56</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaceccsds__conv__encode27__punct_1a0343875299f35174336f08026c698335a6afdaf84880df61a3a5b024912b04939" prot="public">
+          <name>ECSS_78</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Enum of supported puncturing schemes. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_conv_encode27_punct.h" line="11" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_conv_encode27_punct.h" bodystart="11" bodyend="11"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="namespaceccsds__conv__encode27__punct_1ab42606e6e01f51960cfe782f2c266e66" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>unsigned int</type>
+        <definition>unsigned int ccsds_conv_encode27_punct::get_pattern_len</definition>
+        <argsstring>(const punct_t punct)</argsstring>
+        <name>get_pattern_len</name>
+        <param>
+          <type>const <ref refid="namespaceccsds__conv__encode27__punct_1a0343875299f35174336f08026c698335" kindref="member">punct_t</ref></type>
+          <declname>punct</declname>
+        </param>
+        <briefdescription>
+<para>Helper function to determine the length after which the puncturing pattern repeats. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_conv_encode27_punct.h" line="17" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_conv_encode27_punct.h" bodystart="17" bodyend="29"/>
+        <references refid="namespaceccsds__conv__encode27__punct_1a0343875299f35174336f08026c698335a1c31e7cdf333ac5cf787de8d8a18a572" compoundref="ccsds__conv__encode27__punct_8h" startline="11">ECSS_23</references>
+        <references refid="namespaceccsds__conv__encode27__punct_1a0343875299f35174336f08026c698335a959813b65ae1bae791eccfcfb1f61ea8" compoundref="ccsds__conv__encode27__punct_8h" startline="11">ECSS_34</references>
+        <references refid="namespaceccsds__conv__encode27__punct_1a0343875299f35174336f08026c698335a3263f0a4d8309bd89dffe805008badc7" compoundref="ccsds__conv__encode27__punct_8h" startline="11">ECSS_56</references>
+        <references refid="namespaceccsds__conv__encode27__punct_1a0343875299f35174336f08026c698335a6afdaf84880df61a3a5b024912b04939" compoundref="ccsds__conv__encode27__punct_8h" startline="11">ECSS_78</references>
+        <references refid="namespaceccsds__conv__encode27__punct_1a0343875299f35174336f08026c698335a66b1d25f3e21adbe61d35c5fe37955a8" compoundref="ccsds__conv__encode27__punct_8h" startline="11">NONE</references>
+        <referencedby refid="namespaceccsds__conv__encode27__punct_1a5ac0e512745ec91aafb626c125e67ad7" compoundref="ccsds__conv__encode27__punct_8h" startline="36" endline="84">get_pattern</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="namespaceccsds__conv__encode27__punct_1a5ac0e512745ec91aafb626c125e67ad7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>boost::shared_ptr&lt; bool[]&gt;</type>
+        <definition>boost::shared_ptr&lt;bool[]&gt; ccsds_conv_encode27_punct::get_pattern</definition>
+        <argsstring>(const punct_t punct)</argsstring>
+        <name>get_pattern</name>
+        <param>
+          <type>const <ref refid="namespaceccsds__conv__encode27__punct_1a0343875299f35174336f08026c698335" kindref="member">punct_t</ref></type>
+          <declname>punct</declname>
+        </param>
+        <briefdescription>
+<para>Helper function to fill the puncturing pattern item. Memory for the number of elements returned by <computeroutput>ccsds_conv_encode27_aux_get_punct_len</computeroutput> for the same puncturing type must be allocated for <computeroutput>pattern</computeroutput>. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_conv_encode27_punct.h" line="36" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_conv_encode27_punct.h" bodystart="36" bodyend="84"/>
+        <references refid="namespaceccsds__conv__encode27__punct_1a0343875299f35174336f08026c698335a1c31e7cdf333ac5cf787de8d8a18a572" compoundref="ccsds__conv__encode27__punct_8h" startline="11">ECSS_23</references>
+        <references refid="namespaceccsds__conv__encode27__punct_1a0343875299f35174336f08026c698335a959813b65ae1bae791eccfcfb1f61ea8" compoundref="ccsds__conv__encode27__punct_8h" startline="11">ECSS_34</references>
+        <references refid="namespaceccsds__conv__encode27__punct_1a0343875299f35174336f08026c698335a3263f0a4d8309bd89dffe805008badc7" compoundref="ccsds__conv__encode27__punct_8h" startline="11">ECSS_56</references>
+        <references refid="namespaceccsds__conv__encode27__punct_1a0343875299f35174336f08026c698335a6afdaf84880df61a3a5b024912b04939" compoundref="ccsds__conv__encode27__punct_8h" startline="11">ECSS_78</references>
+        <references refid="namespaceccsds__conv__encode27__punct_1ab42606e6e01f51960cfe782f2c266e66" compoundref="ccsds__conv__encode27__punct_8h" startline="17" endline="29">get_pattern_len</references>
+        <references refid="namespaceccsds__conv__encode27__punct_1a0343875299f35174336f08026c698335a66b1d25f3e21adbe61d35c5fe37955a8" compoundref="ccsds__conv__encode27__punct_8h" startline="11">NONE</references>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_conv_encode27_punct.h" line="7" column="1"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,424 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="classccsds__local__oscillator__cc" kind="class" prot="public">
+    <compoundname>ccsds_local_oscillator_cc</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">gr_sync_block</basecompoundref>
+    <includes refid="ccsds__local__oscillator__cc_8h" local="no">ccsds_local_oscillator_cc.h</includes>
+      <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="classccsds__local__oscillator__cc_1a1364832b93b1574085675d9f3807a888" prot="private" static="yes" mutable="no">
+        <type>const double</type>
+        <definition>const double ccsds_local_oscillator_cc::d_TWOPI</definition>
+        <argsstring></argsstring>
+        <name>d_TWOPI</name>
+        <briefdescription>
+<para>2pi with double precision </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_local_oscillator_cc.h" line="37" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_local_oscillator_cc.h" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classccsds__local__oscillator__cc_1adf75f0138a7eebeac760982bd473606f" prot="private" static="no" mutable="no">
+        <type>const unsigned int</type>
+        <definition>const unsigned int ccsds_local_oscillator_cc::d_L</definition>
+        <argsstring></argsstring>
+        <name>d_L</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_local_oscillator_cc.h" line="40" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_local_oscillator_cc.h" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__local__oscillator__cc_1ac8c3685b31d26ed94df453a13cbed3e7" prot="private" static="no" mutable="no">
+        <type>const unsigned int</type>
+        <definition>const unsigned int ccsds_local_oscillator_cc::d_OSF</definition>
+        <argsstring></argsstring>
+        <name>d_OSF</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_local_oscillator_cc.h" line="43" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_local_oscillator_cc.h" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__local__oscillator__cc_1a0b9ca587b5c4e9a3997bcbbc723b5a0c" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double ccsds_local_oscillator_cc::d_phase</definition>
+        <argsstring></argsstring>
+        <name>d_phase</name>
+        <briefdescription>
+<para>Current phase of the local oscillator. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_local_oscillator_cc.h" line="46" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_local_oscillator_cc.h" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__local__oscillator__cc_1a8889e49c38587fd75082a62a997d7134" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double ccsds_local_oscillator_cc::d_phase_incr</definition>
+        <argsstring></argsstring>
+        <name>d_phase_incr</name>
+        <briefdescription>
+<para>Current estimated phase increase per sample (i.e. the current frequency estimate) </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_local_oscillator_cc.h" line="51" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_local_oscillator_cc.h" bodystart="51" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__local__oscillator__cc_1a6173f34c85d2e77495297780b47e96fa" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double ccsds_local_oscillator_cc::d_last_phase_incr</definition>
+        <argsstring></argsstring>
+        <name>d_last_phase_incr</name>
+        <briefdescription>
+<para>Last estimated phase increase per sample (i.e. the last frequency estimate) </para>        </briefdescription>
+        <detaileddescription>
+<para>Used for linear interpolation between two frequency estimated to avoid frequency jumps </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_local_oscillator_cc.h" line="59" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_local_oscillator_cc.h" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__local__oscillator__cc_1a149584693ec9c436c3bbb42d64316637" prot="private" static="no" mutable="no">
+        <type>float</type>
+        <definition>float ccsds_local_oscillator_cc::d_tmp_cos</definition>
+        <argsstring></argsstring>
+        <name>d_tmp_cos</name>
+        <briefdescription>
+<para>temporary storage for cosine calculation in the rotator </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="see"><para>calc_rotation() </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_local_oscillator_cc.h" line="65" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_local_oscillator_cc.h" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__local__oscillator__cc_1afe8e72399d6988e2af265ebf00e2d9ff" prot="private" static="no" mutable="no">
+        <type>float</type>
+        <definition>float ccsds_local_oscillator_cc::d_tmp_sin</definition>
+        <argsstring></argsstring>
+        <name>d_tmp_sin</name>
+        <briefdescription>
+<para>temporary storage for sine calculation in the rotator </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="see"><para>calc_rotation() </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_local_oscillator_cc.h" line="71" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_local_oscillator_cc.h" bodystart="71" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__local__oscillator__cc_1a1d13387a2fab132cb53d4ea4a80470a6" prot="private" static="no" mutable="no">
+        <type>FILE *</type>
+        <definition>FILE* ccsds_local_oscillator_cc::dbg_file</definition>
+        <argsstring></argsstring>
+        <name>dbg_file</name>
+        <briefdescription>
+<para>File pointer for debugging. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_local_oscillator_cc.h" line="74" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_local_oscillator_cc.h" bodystart="74" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__local__oscillator__cc_1a7d6f393eee8b366b45ac5e1c69a9ca71" prot="private" static="no" mutable="no">
+        <type>FILE *</type>
+        <definition>FILE* ccsds_local_oscillator_cc::dbg_file_msg</definition>
+        <argsstring></argsstring>
+        <name>dbg_file_msg</name>
+        <briefdescription>
+<para>File pointer for debugging. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_local_oscillator_cc.h" line="77" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_local_oscillator_cc.h" bodystart="77" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__local__oscillator__cc_1a99675eae8444bb6096299e988167aff2" prot="private" static="no" mutable="no">
+        <type>unsigned int</type>
+        <definition>unsigned int ccsds_local_oscillator_cc::dbg_count</definition>
+        <argsstring></argsstring>
+        <name>dbg_count</name>
+        <briefdescription>
+<para>Counter for debugging. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_local_oscillator_cc.h" line="80" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_local_oscillator_cc.h" bodystart="80" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__local__oscillator__cc_1a7be4c122c7a731c9ea8fef27efb8a2a9" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool ccsds_local_oscillator_cc::dbg_toggle</definition>
+        <argsstring></argsstring>
+        <name>dbg_toggle</name>
+        <briefdescription>
+<para>Block toggle for debugging. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_local_oscillator_cc.h" line="83" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_local_oscillator_cc.h" bodystart="83" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="friend">
+      <memberdef kind="friend" id="classccsds__local__oscillator__cc_1aa4fff9c217cacd6cce394a6f55d2694c" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>friend __GR_ATTR_IMPORT <ref refid="ccsds__local__oscillator__cc_8h_1a874a9cc891ba3473c65dd81473d95616" kindref="member">ccsds_local_oscillator_cc_sptr</ref></type>
+        <definition>__GR_ATTR_IMPORT ccsds_local_oscillator_cc_sptr ccsds_make_local_oscillator_cc</definition>
+        <argsstring>(unsigned int block_length, unsigned int osf)</argsstring>
+        <name>ccsds_make_local_oscillator_cc</name>
+        <param>
+          <type>unsigned int</type>
+          <declname>block_length</declname>
+        </param>
+        <param>
+          <type>unsigned int</type>
+          <declname>osf</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_local_oscillator_cc.h" line="34" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classccsds__local__oscillator__cc_1a3e07bc5701073b9ae48c55b6bc47c491" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>ccsds_local_oscillator_cc::ccsds_local_oscillator_cc</definition>
+        <argsstring>(unsigned int block_length, unsigned int osf)</argsstring>
+        <name>ccsds_local_oscillator_cc</name>
+        <param>
+          <type>unsigned int</type>
+          <declname>block_length</declname>
+        </param>
+        <param>
+          <type>unsigned int</type>
+          <declname>osf</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_local_oscillator_cc.h" line="94" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classccsds__local__oscillator__cc_1afd8c14e494969f10d377491b446679f2" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void ccsds_local_oscillator_cc::wrap_phase</definition>
+        <argsstring>(void)</argsstring>
+        <name>wrap_phase</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Keep d_phase in range [-pi,pi]. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_local_oscillator_cc.h" line="97" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classccsds__local__oscillator__cc_1a6ed5ddc84bfeb238c3b7989713190ae0" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ccsds_local_oscillator_cc::process_messages</definition>
+        <argsstring>(pmt::pmt_t msg_in)</argsstring>
+        <name>process_messages</name>
+        <param>
+          <type>pmt::pmt_t</type>
+          <declname>msg_in</declname>
+        </param>
+        <briefdescription>
+<para>Look for new frequency corrections and update the per sample phase increase. </para>        </briefdescription>
+        <detaileddescription>
+<para>Get new message from d_msgq and check for valid frequency update messages.</para><para><simplesect kind="see"><para><ref refid="ccsds__lo__feedback_8h" kindref="compound">ccsds_lo_feedback.h</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_local_oscillator_cc.h" line="107" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classccsds__local__oscillator__cc_1a087e4a6c9367d2a10ef3d10c8ee7a725" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ccsds_local_oscillator_cc::add_tag</definition>
+        <argsstring>(void)</argsstring>
+        <name>add_tag</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Attach a stream tag with the current per symbol frequency estimate to the first sample in the current input block. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_local_oscillator_cc.h" line="112" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classccsds__local__oscillator__cc_1ac44284f9ca412a64fc36f1628b155f04" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ccsds_local_oscillator_cc::calc_rotation</definition>
+        <argsstring>(gr_complex *out, const gr_complex *in, const double phase_incr, const double phase_incr_slope, const unsigned int num)</argsstring>
+        <name>calc_rotation</name>
+        <param>
+          <type>gr_complex *</type>
+          <declname>out</declname>
+        </param>
+        <param>
+          <type>const gr_complex *</type>
+          <declname>in</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>phase_incr</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>phase_incr_slope</declname>
+        </param>
+        <param>
+          <type>const unsigned int</type>
+          <declname>num</declname>
+        </param>
+        <briefdescription>
+<para>Rotate the sample vector with current frequency estimate. </para>        </briefdescription>
+        <detaileddescription>
+<para>Rotate the complex input vector with the local phase d_phase, and a linear changing phase increase with constant slope and offset interpolated between d_phase_incr and d_last_phase_incr.</para><para>The phase increase from sample i to i+1 is phase[i+1] = phase[i] + phase_incr + i*phase_incr_slope</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>out</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Complex array to which the rotated samples should be written. Memory for at least num elements must be allocated. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>in</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Complex array of samples that should be rotated. Must contain at least num elements. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>phase_incr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Constant per sample phase increase, i.e. frequency estimate. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>phase_incr_slope</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Slope with which the per sample phase increase is changed during this block. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>num</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of samples to process. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_local_oscillator_cc.h" line="133" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classccsds__local__oscillator__cc_1adbe6648e366c7534495848d20b7499fa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>ccsds_local_oscillator_cc::~ccsds_local_oscillator_cc</definition>
+        <argsstring>()</argsstring>
+        <name>~ccsds_local_oscillator_cc</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_local_oscillator_cc.h" line="137" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classccsds__local__oscillator__cc_1a3235d26987767cdce242f7ac782bfdf6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int ccsds_local_oscillator_cc::work</definition>
+        <argsstring>(int noutput_items, gr_vector_const_void_star &amp;input_items, gr_vector_void_star &amp;output_items)</argsstring>
+        <name>work</name>
+        <param>
+          <type>int</type>
+          <declname>noutput_items</declname>
+        </param>
+        <param>
+          <type>gr_vector_const_void_star &amp;</type>
+          <declname>input_items</declname>
+        </param>
+        <param>
+          <type>gr_vector_void_star &amp;</type>
+          <declname>output_items</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_local_oscillator_cc.h" line="138" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Local oscillator controlled by asynchronous frequency corrections</para><para>Oscillates with an internal frequency (initially zero) that can be tuned by asynchronous frequency correction messages. Every time a new frequency is used a stream tag with the new frequency is attatched to the sample stream. </para>    </briefdescription>
+    <detaileddescription>
+<para>Frequency corrections are taken on the input port &quot;freq&quot;. </para>    </detaileddescription>
+    <inheritancegraph>
+      <node id="74">
+        <label>ccsds_local_oscillator_cc</label>
+        <link refid="classccsds__local__oscillator__cc"/>
+        <childnode refid="75" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="75">
+        <label>gr_sync_block</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="76">
+        <label>ccsds_local_oscillator_cc</label>
+        <link refid="classccsds__local__oscillator__cc"/>
+        <childnode refid="77" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="77">
+        <label>gr_sync_block</label>
+      </node>
+    </collaborationgraph>
+    <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_local_oscillator_cc.h" line="32" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_local_oscillator_cc.h" bodystart="31" bodyend="141"/>
+    <listofallmembers>
+      <member refid="classccsds__local__oscillator__cc_1a087e4a6c9367d2a10ef3d10c8ee7a725" prot="private" virt="non-virtual"><scope>ccsds_local_oscillator_cc</scope><name>add_tag</name></member>
+      <member refid="classccsds__local__oscillator__cc_1ac44284f9ca412a64fc36f1628b155f04" prot="private" virt="non-virtual"><scope>ccsds_local_oscillator_cc</scope><name>calc_rotation</name></member>
+      <member refid="classccsds__local__oscillator__cc_1a3e07bc5701073b9ae48c55b6bc47c491" prot="private" virt="non-virtual"><scope>ccsds_local_oscillator_cc</scope><name>ccsds_local_oscillator_cc</name></member>
+      <member refid="classccsds__local__oscillator__cc_1aa4fff9c217cacd6cce394a6f55d2694c" prot="private" virt="non-virtual"><scope>ccsds_local_oscillator_cc</scope><name>ccsds_make_local_oscillator_cc</name></member>
+      <member refid="classccsds__local__oscillator__cc_1adf75f0138a7eebeac760982bd473606f" prot="private" virt="non-virtual"><scope>ccsds_local_oscillator_cc</scope><name>d_L</name></member>
+      <member refid="classccsds__local__oscillator__cc_1a6173f34c85d2e77495297780b47e96fa" prot="private" virt="non-virtual"><scope>ccsds_local_oscillator_cc</scope><name>d_last_phase_incr</name></member>
+      <member refid="classccsds__local__oscillator__cc_1ac8c3685b31d26ed94df453a13cbed3e7" prot="private" virt="non-virtual"><scope>ccsds_local_oscillator_cc</scope><name>d_OSF</name></member>
+      <member refid="classccsds__local__oscillator__cc_1a0b9ca587b5c4e9a3997bcbbc723b5a0c" prot="private" virt="non-virtual"><scope>ccsds_local_oscillator_cc</scope><name>d_phase</name></member>
+      <member refid="classccsds__local__oscillator__cc_1a8889e49c38587fd75082a62a997d7134" prot="private" virt="non-virtual"><scope>ccsds_local_oscillator_cc</scope><name>d_phase_incr</name></member>
+      <member refid="classccsds__local__oscillator__cc_1a149584693ec9c436c3bbb42d64316637" prot="private" virt="non-virtual"><scope>ccsds_local_oscillator_cc</scope><name>d_tmp_cos</name></member>
+      <member refid="classccsds__local__oscillator__cc_1afe8e72399d6988e2af265ebf00e2d9ff" prot="private" virt="non-virtual"><scope>ccsds_local_oscillator_cc</scope><name>d_tmp_sin</name></member>
+      <member refid="classccsds__local__oscillator__cc_1a1364832b93b1574085675d9f3807a888" prot="private" virt="non-virtual"><scope>ccsds_local_oscillator_cc</scope><name>d_TWOPI</name></member>
+      <member refid="classccsds__local__oscillator__cc_1a99675eae8444bb6096299e988167aff2" prot="private" virt="non-virtual"><scope>ccsds_local_oscillator_cc</scope><name>dbg_count</name></member>
+      <member refid="classccsds__local__oscillator__cc_1a1d13387a2fab132cb53d4ea4a80470a6" prot="private" virt="non-virtual"><scope>ccsds_local_oscillator_cc</scope><name>dbg_file</name></member>
+      <member refid="classccsds__local__oscillator__cc_1a7d6f393eee8b366b45ac5e1c69a9ca71" prot="private" virt="non-virtual"><scope>ccsds_local_oscillator_cc</scope><name>dbg_file_msg</name></member>
+      <member refid="classccsds__local__oscillator__cc_1a7be4c122c7a731c9ea8fef27efb8a2a9" prot="private" virt="non-virtual"><scope>ccsds_local_oscillator_cc</scope><name>dbg_toggle</name></member>
+      <member refid="classccsds__local__oscillator__cc_1a6ed5ddc84bfeb238c3b7989713190ae0" prot="private" virt="non-virtual"><scope>ccsds_local_oscillator_cc</scope><name>process_messages</name></member>
+      <member refid="classccsds__local__oscillator__cc_1a3235d26987767cdce242f7ac782bfdf6" prot="public" virt="non-virtual"><scope>ccsds_local_oscillator_cc</scope><name>work</name></member>
+      <member refid="classccsds__local__oscillator__cc_1afd8c14e494969f10d377491b446679f2" prot="private" virt="non-virtual"><scope>ccsds_local_oscillator_cc</scope><name>wrap_phase</name></member>
+      <member refid="classccsds__local__oscillator__cc_1adbe6648e366c7534495848d20b7499fa" prot="public" virt="non-virtual"><scope>ccsds_local_oscillator_cc</scope><name>~ccsds_local_oscillator_cc</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

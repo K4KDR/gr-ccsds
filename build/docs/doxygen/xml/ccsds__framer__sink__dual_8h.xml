@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="ccsds__framer__sink__dual_8h" kind="file">
+    <compoundname>ccsds_framer_sink_dual.h</compoundname>
+    <includes refid="ccsds__api_8h" local="no">ccsds_api.h</includes>
+    <includes local="no">gr_sync_block.h</includes>
+    <includes local="no">gr_msg_queue.h</includes>
+    <incdepgraph>
+      <node id="243">
+        <label>gruel/attributes.h</label>
+      </node>
+      <node id="244">
+        <label>gr_sync_block.h</label>
+      </node>
+      <node id="245">
+        <label>gr_msg_queue.h</label>
+      </node>
+      <node id="242">
+        <label>ccsds_api.h</label>
+        <link refid="ccsds__api_8h"/>
+        <childnode refid="243" relation="include">
+        </childnode>
+      </node>
+      <node id="241">
+        <label>ccsds_framer_sink_dual.h</label>
+        <link refid="ccsds_framer_sink_dual.h"/>
+        <childnode refid="242" relation="include">
+        </childnode>
+        <childnode refid="244" relation="include">
+        </childnode>
+        <childnode refid="245" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <innerclass refid="classccsds__framer__sink__dual" prot="public">ccsds_framer_sink_dual</innerclass>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="ccsds__framer__sink__dual_8h_1a8e1d9669e55f9fd57f27266fe6d70bef" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="api_8h_1a144137922962dd54ae2e8c1917a7e588" kindref="member">CCSDS_API</ref> ccsds_framer_sink_dual_sptr</type>
+        <definition>CCSDS_API ccsds_framer_sink_dual_sptr ccsds_make_framer_sink_dual</definition>
+        <argsstring>(gr_msg_queue_sptr target_queue, int framesyms, int sync_marker_syms)</argsstring>
+        <name>ccsds_make_framer_sink_dual</name>
+        <param>
+          <type>gr_msg_queue_sptr</type>
+          <declname>target_queue</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>framesyms</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>sync_marker_syms</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_framer_sink_dual.h" line="32" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_framer_sink_dual.h"/>
+  </compounddef>
+</doxygen>

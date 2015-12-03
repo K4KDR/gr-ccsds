@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="randomiser_8h" kind="file">
+    <compoundname>randomiser.h</compoundname>
+    <includes refid="api_8h" local="no">ccsds/api.h</includes>
+    <includes local="no">gnuradio/sync_block.h</includes>
+    <includedby refid="randomiser__impl_8h" local="no">randomiser_impl.h</includedby>
+    <incdepgraph>
+      <node id="698">
+        <label>gnuradio/sync_block.h</label>
+      </node>
+      <node id="697">
+        <label>gnuradio/attributes.h</label>
+      </node>
+      <node id="695">
+        <label>ccsds/api.h</label>
+        <link refid="api_8h"/>
+        <childnode refid="696" relation="include">
+        </childnode>
+        <childnode refid="697" relation="include">
+        </childnode>
+      </node>
+      <node id="696">
+        <label>gnuradio/config.h</label>
+      </node>
+      <node id="694">
+        <label>randomiser.h</label>
+        <link refid="randomiser.h"/>
+        <childnode refid="695" relation="include">
+        </childnode>
+        <childnode refid="698" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="700">
+        <label>randomiser_impl.h</label>
+        <link refid="randomiser__impl_8h"/>
+      </node>
+      <node id="699">
+        <label>randomiser.h</label>
+        <link refid="randomiser.h"/>
+        <childnode refid="700" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classgr_1_1ccsds_1_1randomiser" prot="public">gr::ccsds::randomiser</innerclass>
+    <innernamespace refid="namespacegr">gr</innernamespace>
+    <innernamespace refid="namespacegr_1_1ccsds">gr::ccsds</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/marina/Documents/sdr1/gr-ccsds/include/ccsds/randomiser.h"/>
+  </compounddef>
+</doxygen>

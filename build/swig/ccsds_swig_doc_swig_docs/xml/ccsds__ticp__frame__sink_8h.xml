@@ -1,0 +1,238 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="ccsds__ticp__frame__sink_8h" kind="file">
+    <compoundname>ccsds_ticp_frame_sink.h</compoundname>
+    <includes refid="ccsds__api_8h" local="no">ccsds_api.h</includes>
+    <includes local="no">gr_block.h</includes>
+    <includes local="no">string</includes>
+    <includes local="no">vector</includes>
+    <includes local="no">map</includes>
+    <includes local="no">ticp/TicpServer.hpp</includes>
+    <includes local="no">boost/thread.hpp</includes>
+    <includes local="no">boost/shared_ptr.hpp</includes>
+    <includes local="no">queue</includes>
+    <incdepgraph>
+      <node id="317">
+        <label>queue</label>
+      </node>
+      <node id="316">
+        <label>boost/shared_ptr.hpp</label>
+      </node>
+      <node id="309">
+        <label>gruel/attributes.h</label>
+      </node>
+      <node id="314">
+        <label>ticp/TicpServer.hpp</label>
+      </node>
+      <node id="308">
+        <label>ccsds_api.h</label>
+        <link refid="ccsds__api_8h"/>
+        <childnode refid="309" relation="include">
+        </childnode>
+      </node>
+      <node id="311">
+        <label>string</label>
+      </node>
+      <node id="313">
+        <label>map</label>
+      </node>
+      <node id="315">
+        <label>boost/thread.hpp</label>
+      </node>
+      <node id="310">
+        <label>gr_block.h</label>
+      </node>
+      <node id="312">
+        <label>vector</label>
+      </node>
+      <node id="307">
+        <label>/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_ticp_frame_sink.h</label>
+        <link refid="ccsds_ticp_frame_sink.h"/>
+        <childnode refid="308" relation="include">
+        </childnode>
+        <childnode refid="310" relation="include">
+        </childnode>
+        <childnode refid="311" relation="include">
+        </childnode>
+        <childnode refid="312" relation="include">
+        </childnode>
+        <childnode refid="313" relation="include">
+        </childnode>
+        <childnode refid="314" relation="include">
+        </childnode>
+        <childnode refid="315" relation="include">
+        </childnode>
+        <childnode refid="316" relation="include">
+        </childnode>
+        <childnode refid="317" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <innerclass refid="classccsds__ticp__frame__sink" prot="public">ccsds_ticp_frame_sink</innerclass>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="ccsds__ticp__frame__sink_8h_1a5c30533534844a0df5c6d783be77d66f" prot="public" static="no">
+        <type>boost::shared_ptr&lt; <ref refid="classccsds__ticp__frame__sink" kindref="compound">ccsds_ticp_frame_sink</ref> &gt;</type>
+        <definition>typedef boost::shared_ptr&lt;ccsds_ticp_frame_sink&gt; ccsds_ticp_frame_sink_sptr</definition>
+        <argsstring></argsstring>
+        <name>ccsds_ticp_frame_sink_sptr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_ticp_frame_sink.h" line="29" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_ticp_frame_sink.h" bodystart="16" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="ccsds__ticp__frame__sink_8h_1a4b40602f9fb1d7b6dd9f34644faf98e8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>__GR_ATTR_IMPORT <ref refid="ccsds__ticp__frame__sink_8h_1a5c30533534844a0df5c6d783be77d66f" kindref="member">ccsds_ticp_frame_sink_sptr</ref></type>
+        <definition>__GR_ATTR_IMPORT ccsds_ticp_frame_sink_sptr ccsds_make_ticp_frame_sink</definition>
+        <argsstring>(unsigned int port, const unsigned int frame_length, const uint8_t data_type, std::vector&lt; std::string &gt; map_names, std::vector&lt; uint8_t &gt; map_types)</argsstring>
+        <name>ccsds_make_ticp_frame_sink</name>
+        <param>
+          <type>unsigned int</type>
+          <declname>port</declname>
+        </param>
+        <param>
+          <type>const unsigned int</type>
+          <declname>frame_length</declname>
+        </param>
+        <param>
+          <type>const uint8_t</type>
+          <declname>data_type</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; std::string &gt;</type>
+          <declname>map_names</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; uint8_t &gt;</type>
+          <declname>map_types</declname>
+        </param>
+        <briefdescription>
+<para>Return a shared_ptr to a new instance of <ref refid="classccsds__ticp__frame__sink" kindref="compound">ccsds_ticp_frame_sink</ref>. </para>        </briefdescription>
+        <detaileddescription>
+<para>Create an instance of <ref refid="classccsds__ticp__frame__sink" kindref="compound">ccsds_ticp_frame_sink</ref> and return it&apos;s shared_ptr.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>port</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Port of the TicpServer </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>frame_length</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of a frame in bytes. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>data_type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Type of the dataset which&apos;s data should be used for the actuall output data. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>map_names</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vector of names from the PDU header that should be used. Can be empty. Must have the same length as map_types. All elements in this vector must be unique. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>map_types</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vector of datatypes that should be used when inserting metadata intp the TICP protocol. Can be empty. Must have the same length as map_names. All elements in this vector must be unique. * </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Shared pointer to the created TICP frame sink. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_ticp_frame_sink.h" line="47" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>INCLUDED_CCSDS_TICP_FRAME_SINK_H</highlight></codeline>
+<codeline lineno="2"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>INCLUDED_CCSDS_TICP_FRAME_SINK_H</highlight></codeline>
+<codeline lineno="3"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="ccsds__api_8h" kindref="compound">ccsds_api.h</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;gr_block.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;string&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;vector&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;map&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;ticp/TicpServer.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;boost/thread.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;boost/shared_ptr.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;queue&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="comment">//<sp/>#define<sp/>CCSDS_TICP_FRAME_SINK_DEBUG</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight></codeline>
+<codeline lineno="16" refid="ccsds__ticp__frame__sink_8h_1a5c30533534844a0df5c6d783be77d66f" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classccsds__ticp__frame__sink" kindref="compound">ccsds_ticp_frame_sink</ref>;</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="19"><highlight class="comment"><sp/>*<sp/>We<sp/>use<sp/>boost::shared_ptr&apos;s<sp/>instead<sp/>of<sp/>raw<sp/>pointers<sp/>for<sp/>all<sp/>access</highlight></codeline>
+<codeline lineno="20"><highlight class="comment"><sp/>*<sp/>to<sp/>gr_blocks<sp/>(and<sp/>many<sp/>other<sp/>data<sp/>structures).<sp/><sp/>The<sp/>shared_ptr<sp/>gets</highlight></codeline>
+<codeline lineno="21"><highlight class="comment"><sp/>*<sp/>us<sp/>transparent<sp/>reference<sp/>counting,<sp/>which<sp/>greatly<sp/>simplifies<sp/>storage</highlight></codeline>
+<codeline lineno="22"><highlight class="comment"><sp/>*<sp/>management<sp/>issues.<sp/><sp/>This<sp/>is<sp/>especially<sp/>helpful<sp/>in<sp/>our<sp/>hybrid</highlight></codeline>
+<codeline lineno="23"><highlight class="comment"><sp/>*<sp/>C++<sp/>/<sp/>Python<sp/>system.</highlight></codeline>
+<codeline lineno="24"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="25"><highlight class="comment"><sp/>*<sp/>See<sp/>http://www.boost.org/libs/smart_ptr/smart_ptr.htm</highlight></codeline>
+<codeline lineno="26"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="27"><highlight class="comment"><sp/>*<sp/>As<sp/>a<sp/>convention,<sp/>the<sp/>_sptr<sp/>suffix<sp/>indicates<sp/>a<sp/>boost::shared_ptr</highlight></codeline>
+<codeline lineno="28"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/>boost::shared_ptr&lt;ccsds_ticp_frame_sink&gt;<sp/><ref refid="ccsds__ticp__frame__sink_8h_1a5c30533534844a0df5c6d783be77d66f" kindref="member">ccsds_ticp_frame_sink_sptr</ref>;</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><ref refid="api_8h_1a144137922962dd54ae2e8c1917a7e588" kindref="member">CCSDS_API</ref><sp/><ref refid="ccsds__ticp__frame__sink_8h_1a5c30533534844a0df5c6d783be77d66f" kindref="member">ccsds_ticp_frame_sink_sptr</ref><sp/><ref refid="ccsds__ticp__frame__sink_8h_1a4b40602f9fb1d7b6dd9f34644faf98e8" kindref="member">ccsds_make_ticp_frame_sink</ref>(</highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>port,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>frame_length,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint8_t<sp/>data_type,<sp/>std::vector&lt;std::string&gt;<sp/>map_names,<sp/>std::vector&lt;uint8_t&gt;<sp/>map_types);</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"></highlight></codeline>
+<codeline lineno="54" refid="classccsds__ticp__frame__sink" refkind="compound"><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="api_8h_1a144137922962dd54ae2e8c1917a7e588" kindref="member">CCSDS_API</ref><sp/><ref refid="classccsds__ticp__frame__sink" kindref="compound">ccsds_ticp_frame_sink</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/>gr_block</highlight></codeline>
+<codeline lineno="55"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">friend</highlight><highlight class="normal"><sp/><ref refid="api_8h_1a144137922962dd54ae2e8c1917a7e588" kindref="member">CCSDS_API</ref><sp/><ref refid="ccsds__ticp__frame__sink_8h_1a5c30533534844a0df5c6d783be77d66f" kindref="member">ccsds_ticp_frame_sink_sptr</ref><sp/><ref refid="ccsds__ticp__frame__sink_8h_1a4b40602f9fb1d7b6dd9f34644faf98e8" kindref="member">ccsds_make_ticp_frame_sink</ref>(</highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>port,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>frame_length,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint8_t<sp/>data_type,<sp/>std::vector&lt;std::string&gt;<sp/>map_names,<sp/>std::vector&lt;uint8_t&gt;<sp/>map_types);</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"></highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classccsds__ticp__frame__sink" kindref="compound">ccsds_ticp_frame_sink</ref>(</highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>port,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>frame_length,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint8_t<sp/>data_type,<sp/>std::vector&lt;std::string&gt;<sp/>map_names,<sp/>std::vector&lt;uint8_t&gt;<sp/>map_types);</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>d_FRAME_LEN;</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"></highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint8_t<sp/>d_DATA_TYPE;</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"></highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::queue&lt;ticp::data_v2_t&gt;<sp/>d_queue;</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"></highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>boost::mutex<sp/>d_mutex;</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"></highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>boost::condition_variable<sp/>d_condition_var;</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"></highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>boost::shared_ptr&lt;<sp/>ticp::Server&lt;ticp::data_v2_t&gt;<sp/>&gt;<sp/>d_ticp_sptr;</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"></highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::map&lt;std::string,<sp/>uint8_t&gt;<sp/>d_metadata_map;</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"></highlight></codeline>
+<codeline lineno="96"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#ifdef<sp/>CCSDS_TICP_FRAME_SINK_DEBUG</highlight></codeline>
+<codeline lineno="97"><highlight class="preprocessor"></highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>FILE<sp/>*dbg_file;</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"></highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>dbg_count;</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#endif</highlight></codeline>
+<codeline lineno="103"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">long</highlight><highlight class="normal"><sp/>d_frame_count;</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"></highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>ticp::data_v2_t<sp/>getFrame(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"></highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>process_message(pmt::pmt_t<sp/>msg_in);</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"></highlight></codeline>
+<codeline lineno="116"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>~<ref refid="classccsds__ticp__frame__sink" kindref="compound">ccsds_ticp_frame_sink</ref><sp/>();<sp/><sp/></highlight><highlight class="comment">//<sp/>public<sp/>destructor</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="119"><highlight class="normal"></highlight></codeline>
+<codeline lineno="120"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>INCLUDED_CCSDS_TICP_FRAME_SINK_H<sp/>*/</highlight><highlight class="preprocessor"></highlight></codeline>
+    </programlisting>
+    <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_ticp_frame_sink.h"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="classgr_1_1ccsds_1_1mpsk__preamble__cc" kind="class" prot="public">
+    <compoundname>gr::ccsds::mpsk_preamble_cc</compoundname>
+    <basecompoundref prot="public" virt="virtual">block</basecompoundref>
+    <derivedcompoundref refid="classgr_1_1ccsds_1_1mpsk__preamble__cc__impl" prot="public" virt="non-virtual">gr::ccsds::mpsk_preamble_cc_impl</derivedcompoundref>
+    <includes refid="mpsk__preamble__cc_8h" local="no">mpsk_preamble_cc.h</includes>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classgr_1_1ccsds_1_1mpsk__preamble__cc_1af3fa223b3f3c5558119303b22a323a6b" prot="public" static="no">
+        <type>boost::shared_ptr&lt; <ref refid="classgr_1_1ccsds_1_1mpsk__preamble__cc" kindref="compound">mpsk_preamble_cc</ref> &gt;</type>
+        <definition>typedef boost::shared_ptr&lt;mpsk_preamble_cc&gt; gr::ccsds::mpsk_preamble_cc::sptr</definition>
+        <argsstring></argsstring>
+        <name>sptr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/include/ccsds/mpsk_preamble_cc.h" line="28" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/include/ccsds/mpsk_preamble_cc.h" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classgr_1_1ccsds_1_1mpsk__preamble__cc_1ae6740d07c48dd59e514e5f6a054624e0" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classgr_1_1ccsds_1_1mpsk__preamble__cc_1af3fa223b3f3c5558119303b22a323a6b" kindref="member">sptr</ref></type>
+        <definition>static sptr gr::ccsds::mpsk_preamble_cc::make</definition>
+        <argsstring>(const unsigned int num_symbols)</argsstring>
+        <name>make</name>
+        <param>
+          <type>const unsigned int</type>
+          <declname>num_symbols</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/include/ccsds/mpsk_preamble_cc.h" line="29" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="255">
+        <label>gr::ccsds::mpsk_preamble_cc</label>
+        <link refid="classgr_1_1ccsds_1_1mpsk__preamble__cc"/>
+        <childnode refid="256" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="256">
+        <label>block</label>
+      </node>
+      <node id="257">
+        <label>gr::ccsds::mpsk_preamble_cc_impl</label>
+        <link refid="classgr_1_1ccsds_1_1mpsk__preamble__cc__impl"/>
+        <childnode refid="255" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="258">
+        <label>gr::ccsds::mpsk_preamble_cc</label>
+        <link refid="classgr_1_1ccsds_1_1mpsk__preamble__cc"/>
+        <childnode refid="259" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="259">
+        <label>block</label>
+      </node>
+    </collaborationgraph>
+    <location file="/home/marina/Documents/sdr1/gr-ccsds/include/ccsds/mpsk_preamble_cc.h" line="26" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/include/ccsds/mpsk_preamble_cc.h" bodystart="25" bodyend="30"/>
+    <listofallmembers>
+      <member refid="classgr_1_1ccsds_1_1mpsk__preamble__cc_1ae6740d07c48dd59e514e5f6a054624e0" prot="public" virt="non-virtual"><scope>gr::ccsds::mpsk_preamble_cc</scope><name>make</name></member>
+      <member refid="classgr_1_1ccsds_1_1mpsk__preamble__cc_1af3fa223b3f3c5558119303b22a323a6b" prot="public" virt="non-virtual"><scope>gr::ccsds::mpsk_preamble_cc</scope><name>sptr</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

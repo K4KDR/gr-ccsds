@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="dir_5afd4d143a139ec624b1ea43cb90c1be" kind="dir">
+    <compoundname>include</compoundname>
+    <innerfile refid="ccsds_8h">ccsds.h</innerfile>
+    <innerfile refid="ccsds__add__asm_8h">ccsds_add_asm.h</innerfile>
+    <innerfile refid="ccsds__api_8h">ccsds_api.h</innerfile>
+    <innerfile refid="ccsds__asm__operator_8h">ccsds_asm_operator.h</innerfile>
+    <innerfile refid="ccsds__blob__msg__sink__b_8h">ccsds_blob_msg_sink_b.h</innerfile>
+    <innerfile refid="ccsds__blob__msg__source__b_8h">ccsds_blob_msg_source_b.h</innerfile>
+    <innerfile refid="ccsds__conv__decode27_8h">ccsds_conv_decode27.h</innerfile>
+    <innerfile refid="ccsds__conv__encode_8h">ccsds_conv_encode.h</innerfile>
+    <innerfile refid="ccsds__conv__encode27__aux_8h">ccsds_conv_encode27_aux.h</innerfile>
+    <innerfile refid="ccsds__conv__encode27__bb_8h">ccsds_conv_encode27_bb.h</innerfile>
+    <innerfile refid="ccsds__conv__encode27__punct_8h">ccsds_conv_encode27_punct.h</innerfile>
+    <innerfile refid="ccsds__crc16_8h">ccsds_crc16.h</innerfile>
+    <innerfile refid="ccsds__dll__cc_8h">ccsds_dll_cc.h</innerfile>
+    <innerfile refid="ccsds__fll__cc_8h">ccsds_fll_cc.h</innerfile>
+    <innerfile refid="ccsds__frame__sync__b_8h">ccsds_frame_sync_b.h</innerfile>
+    <innerfile refid="ccsds__framer__sink__dual_8h">ccsds_framer_sink_dual.h</innerfile>
+    <innerfile refid="ccsds__interleaving__aux_8h">ccsds_interleaving_aux.h</innerfile>
+    <innerfile refid="ccsds__lo__feedback_8h">ccsds_lo_feedback.h</innerfile>
+    <innerfile refid="ccsds__local__oscillator__cc_8h">ccsds_local_oscillator_cc.h</innerfile>
+    <innerfile refid="ccsds__lpf_8h">ccsds_lpf.h</innerfile>
+    <innerfile refid="ccsds__lpf2_8h">ccsds_lpf2.h</innerfile>
+    <innerfile refid="ccsds__moving__average_8h">ccsds_moving_average.h</innerfile>
+    <innerfile refid="ccsds__mpsk__ambiguity__resolver__bb_8h">ccsds_mpsk_ambiguity_resolver_bb.h</innerfile>
+    <innerfile refid="ccsds__mpsk__ambiguity__resolver__f_8h">ccsds_mpsk_ambiguity_resolver_f.h</innerfile>
+    <innerfile refid="ccsds__mpsk__demod2__cb_8h">ccsds_mpsk_demod2_cb.h</innerfile>
+    <innerfile refid="ccsds__mpsk__demod__cb_8h">ccsds_mpsk_demod_cb.h</innerfile>
+    <innerfile refid="ccsds__mpsk__detector__soft__cf_8h">ccsds_mpsk_detector_soft_cf.h</innerfile>
+    <innerfile refid="ccsds__mpsk__mod__bc_8h">ccsds_mpsk_mod_bc.h</innerfile>
+    <innerfile refid="ccsds__mpsk__preamble__cc_8h">ccsds_mpsk_preamble_cc.h</innerfile>
+    <innerfile refid="ccsds__msg__copy_8h">ccsds_msg_copy.h</innerfile>
+    <innerfile refid="ccsds__msg__null__src_8h">ccsds_msg_null_src.h</innerfile>
+    <innerfile refid="ccsds__pll__cc_8h">ccsds_pll_cc.h</innerfile>
+    <innerfile refid="ccsds__randomiser_8h">ccsds_randomiser.h</innerfile>
+    <innerfile refid="ccsds__randomiser__bb_8h">ccsds_randomiser_bb.h</innerfile>
+    <innerfile refid="ccsds__rs__decode_8h">ccsds_rs_decode.h</innerfile>
+    <innerfile refid="ccsds__rs__decode__bb_8h">ccsds_rs_decode_bb.h</innerfile>
+    <innerfile refid="ccsds__rs__encode_8h">ccsds_rs_encode.h</innerfile>
+    <innerfile refid="ccsds__softbits__msg__to__bytes__b_8h">ccsds_softbits_msg_to_bytes_b.h</innerfile>
+    <innerfile refid="ccsds__sym__to__softbits__bb_8h">ccsds_sym_to_softbits_bb.h</innerfile>
+    <innerfile refid="ccsds__sym__to__softbits__bf_8h">ccsds_sym_to_softbits_bf.h</innerfile>
+    <innerfile refid="ccsds__ticp__frame__sink_8h">ccsds_ticp_frame_sink.h</innerfile>
+    <innerfile refid="ccsds__ticp__frame__source_8h">ccsds_ticp_frame_source.h</innerfile>
+    <innerfile refid="gr-ccsds_2include_2ccsds__time_8h">gr-ccsds/include/ccsds_time.h</innerfile>
+    <innerfile refid="ccsds__trunk__tail_8h">ccsds_trunk_tail.h</innerfile>
+    <innerfile refid="ccsds__viterbi27__bb_8h">ccsds_viterbi27_bb.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="classgr_1_1ccsds_1_1discriminator__impl" kind="class" prot="public">
+    <compoundname>gr::ccsds::discriminator_impl</compoundname>
+    <basecompoundref refid="classgr_1_1ccsds_1_1discriminator" prot="public" virt="non-virtual">gr::ccsds::discriminator</basecompoundref>
+    <includes refid="discriminator__impl_8h" local="no">discriminator_impl.h</includes>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classgr_1_1ccsds_1_1discriminator__impl_1ad337d0a5c308b517b74df7596a4eba01" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>gr::ccsds::discriminator_impl::discriminator_impl</definition>
+        <argsstring>(int status, std::string frame)</argsstring>
+        <name>discriminator_impl</name>
+        <param>
+          <type>int</type>
+          <declname>status</declname>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>frame</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/discriminator_impl.h" line="35" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classgr_1_1ccsds_1_1discriminator__impl_1aa6139d3e8639fc793ae37cd04fdda945" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>gr::ccsds::discriminator_impl::~discriminator_impl</definition>
+        <argsstring>()</argsstring>
+        <name>~discriminator_impl</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/discriminator_impl.h" line="36" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classgr_1_1ccsds_1_1discriminator__impl_1ac20a69eb590638545efd3c721836d953" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int gr::ccsds::discriminator_impl::work</definition>
+        <argsstring>(int noutput_items, gr_vector_const_void_star &amp;input_items, gr_vector_void_star &amp;output_items)</argsstring>
+        <name>work</name>
+        <param>
+          <type>int</type>
+          <declname>noutput_items</declname>
+        </param>
+        <param>
+          <type>gr_vector_const_void_star &amp;</type>
+          <declname>input_items</declname>
+        </param>
+        <param>
+          <type>gr_vector_void_star &amp;</type>
+          <declname>output_items</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/discriminator_impl.h" line="39" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="198">
+        <label>gr::ccsds::discriminator</label>
+        <link refid="classgr_1_1ccsds_1_1discriminator"/>
+        <childnode refid="199" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="197">
+        <label>gr::ccsds::discriminator_impl</label>
+        <link refid="classgr_1_1ccsds_1_1discriminator__impl"/>
+        <childnode refid="198" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="199">
+        <label>gr::sync_interpolator</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="201">
+        <label>gr::ccsds::discriminator</label>
+        <link refid="classgr_1_1ccsds_1_1discriminator"/>
+        <childnode refid="202" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="200">
+        <label>gr::ccsds::discriminator_impl</label>
+        <link refid="classgr_1_1ccsds_1_1discriminator__impl"/>
+        <childnode refid="201" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="202">
+        <label>gr::sync_interpolator</label>
+      </node>
+    </collaborationgraph>
+    <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/discriminator_impl.h" line="30" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/lib/discriminator_impl.h" bodystart="29" bodyend="42"/>
+    <listofallmembers>
+      <member refid="classgr_1_1ccsds_1_1discriminator__impl_1ad337d0a5c308b517b74df7596a4eba01" prot="public" virt="non-virtual"><scope>gr::ccsds::discriminator_impl</scope><name>discriminator_impl</name></member>
+      <member refid="classgr_1_1ccsds_1_1discriminator_1a338bc6f576ace984d19942828a2f99ad" prot="public" virt="non-virtual"><scope>gr::ccsds::discriminator_impl</scope><name>make</name></member>
+      <member refid="classgr_1_1ccsds_1_1discriminator_1a81d340d04afa4ea75f7a17867d168813" prot="public" virt="non-virtual"><scope>gr::ccsds::discriminator_impl</scope><name>sptr</name></member>
+      <member refid="classgr_1_1ccsds_1_1discriminator__impl_1ac20a69eb590638545efd3c721836d953" prot="public" virt="non-virtual"><scope>gr::ccsds::discriminator_impl</scope><name>work</name></member>
+      <member refid="classgr_1_1ccsds_1_1discriminator__impl_1aa6139d3e8639fc793ae37cd04fdda945" prot="public" virt="non-virtual"><scope>gr::ccsds::discriminator_impl</scope><name>~discriminator_impl</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

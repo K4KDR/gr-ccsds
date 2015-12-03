@@ -1,0 +1,661 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="namespacegr_1_1ccsds" kind="namespace">
+    <compoundname>gr::ccsds</compoundname>
+    <innerclass refid="classgr_1_1ccsds_1_1add__asm" prot="public">gr::ccsds::add_asm</innerclass>
+    <innerclass refid="classgr_1_1ccsds_1_1blob__msg__sink__b" prot="public">gr::ccsds::blob_msg_sink_b</innerclass>
+    <innerclass refid="classgr_1_1ccsds_1_1blob__msg__source__b" prot="public">gr::ccsds::blob_msg_source_b</innerclass>
+    <innerclass refid="classgr_1_1ccsds_1_1conv__decode27" prot="public">gr::ccsds::conv_decode27</innerclass>
+    <innerclass refid="classgr_1_1ccsds_1_1conv__encode27__bb" prot="public">gr::ccsds::conv_encode27_bb</innerclass>
+    <innerclass refid="classgr_1_1ccsds_1_1discriminator" prot="public">gr::ccsds::discriminator</innerclass>
+    <innerclass refid="classgr_1_1ccsds_1_1dll__cc" prot="public">gr::ccsds::dll_cc</innerclass>
+    <innerclass refid="classgr_1_1ccsds_1_1mpsk__ambiguity__resolver__f" prot="public">gr::ccsds::mpsk_ambiguity_resolver_f</innerclass>
+    <innerclass refid="classgr_1_1ccsds_1_1mpsk__detector__soft__cf" prot="public">gr::ccsds::mpsk_detector_soft_cf</innerclass>
+    <innerclass refid="classgr_1_1ccsds_1_1mpsk__mod__bc" prot="public">gr::ccsds::mpsk_mod_bc</innerclass>
+    <innerclass refid="classgr_1_1ccsds_1_1mpsk__preamble__cc" prot="public">gr::ccsds::mpsk_preamble_cc</innerclass>
+    <innerclass refid="classgr_1_1ccsds_1_1msg__null__src" prot="public">gr::ccsds::msg_null_src</innerclass>
+    <innerclass refid="classgr_1_1ccsds_1_1pll__cc" prot="public">gr::ccsds::pll_cc</innerclass>
+    <innerclass refid="classgr_1_1ccsds_1_1randomiser" prot="public">gr::ccsds::randomiser</innerclass>
+    <innerclass refid="classgr_1_1ccsds_1_1reversebits" prot="public">gr::ccsds::reversebits</innerclass>
+    <innerclass refid="classgr_1_1ccsds_1_1rs__decode" prot="public">gr::ccsds::rs_decode</innerclass>
+    <innerclass refid="classgr_1_1ccsds_1_1rs__encode" prot="public">gr::ccsds::rs_encode</innerclass>
+    <innerclass refid="classgr_1_1ccsds_1_1simple__bpsk__SNR__qf" prot="public">gr::ccsds::simple_bpsk_SNR_qf</innerclass>
+    <innerclass refid="classgr_1_1ccsds_1_1softbits__msg__to__bytes__b" prot="public">gr::ccsds::softbits_msg_to_bytes_b</innerclass>
+    <innerclass refid="classgr_1_1ccsds_1_1softbittobit" prot="public">gr::ccsds::softbittobit</innerclass>
+    <innerclass refid="classgr_1_1ccsds_1_1ticp__frame__sink" prot="public">gr::ccsds::ticp_frame_sink</innerclass>
+    <innerclass refid="classgr_1_1ccsds_1_1ticp__frame__source" prot="public">gr::ccsds::ticp_frame_source</innerclass>
+    <innerclass refid="classgr_1_1ccsds_1_1trunk__tail" prot="public">gr::ccsds::trunk_tail</innerclass>
+    <innerclass refid="classgr_1_1ccsds_1_1add__asm__impl" prot="public">gr::ccsds::add_asm_impl</innerclass>
+    <innerclass refid="classgr_1_1ccsds_1_1blob__msg__sink__b__impl" prot="public">gr::ccsds::blob_msg_sink_b_impl</innerclass>
+    <innerclass refid="classgr_1_1ccsds_1_1blob__msg__source__b__impl" prot="public">gr::ccsds::blob_msg_source_b_impl</innerclass>
+    <innerclass refid="classgr_1_1ccsds_1_1conv__encode27__aux" prot="public">gr::ccsds::conv_encode27_aux</innerclass>
+    <innerclass refid="classgr_1_1ccsds_1_1conv__encode27__bb__impl" prot="public">gr::ccsds::conv_encode27_bb_impl</innerclass>
+    <innerclass refid="classgr_1_1ccsds_1_1discriminator__impl" prot="public">gr::ccsds::discriminator_impl</innerclass>
+    <innerclass refid="classgr_1_1ccsds_1_1dll__cc__impl" prot="public">gr::ccsds::dll_cc_impl</innerclass>
+    <innerclass refid="classgr_1_1ccsds_1_1lpf2" prot="public">gr::ccsds::lpf2</innerclass>
+    <innerclass refid="classgr_1_1ccsds_1_1mpsk__ambiguity__resolver__f__impl" prot="public">gr::ccsds::mpsk_ambiguity_resolver_f_impl</innerclass>
+    <innerclass refid="classgr_1_1ccsds_1_1mpsk__detector__soft__cf__impl" prot="public">gr::ccsds::mpsk_detector_soft_cf_impl</innerclass>
+    <innerclass refid="classgr_1_1ccsds_1_1mpsk__mod__bc__impl" prot="public">gr::ccsds::mpsk_mod_bc_impl</innerclass>
+    <innerclass refid="classgr_1_1ccsds_1_1mpsk__preamble__cc__impl" prot="public">gr::ccsds::mpsk_preamble_cc_impl</innerclass>
+    <innerclass refid="classgr_1_1ccsds_1_1msg__null__src__impl" prot="public">gr::ccsds::msg_null_src_impl</innerclass>
+    <innerclass refid="classgr_1_1ccsds_1_1pll__cc__impl" prot="public">gr::ccsds::pll_cc_impl</innerclass>
+    <innerclass refid="classgr_1_1ccsds_1_1randomiser__impl" prot="public">gr::ccsds::randomiser_impl</innerclass>
+    <innerclass refid="classgr_1_1ccsds_1_1reversebits__impl" prot="public">gr::ccsds::reversebits_impl</innerclass>
+    <innerclass refid="classgr_1_1ccsds_1_1rs__decode__impl" prot="public">gr::ccsds::rs_decode_impl</innerclass>
+    <innerclass refid="classgr_1_1ccsds_1_1rs__encode__impl" prot="public">gr::ccsds::rs_encode_impl</innerclass>
+    <innerclass refid="classgr_1_1ccsds_1_1simple__bpsk__SNR__qf__impl" prot="public">gr::ccsds::simple_bpsk_SNR_qf_impl</innerclass>
+    <innerclass refid="classgr_1_1ccsds_1_1softbits__msg__to__bytes__b__impl" prot="public">gr::ccsds::softbits_msg_to_bytes_b_impl</innerclass>
+    <innerclass refid="classgr_1_1ccsds_1_1softbittobit__impl" prot="public">gr::ccsds::softbittobit_impl</innerclass>
+    <innerclass refid="classgr_1_1ccsds_1_1ticp__frame__sink__impl" prot="public">gr::ccsds::ticp_frame_sink_impl</innerclass>
+    <innerclass refid="classgr_1_1ccsds_1_1ticp__frame__source__impl" prot="public">gr::ccsds::ticp_frame_source_impl</innerclass>
+    <innerclass refid="classgr_1_1ccsds_1_1trunk__tail__impl" prot="public">gr::ccsds::trunk_tail_impl</innerclass>
+    <innernamespace refid="namespacegr_1_1ccsds_1_1conv__puncturing27">gr::ccsds::conv_puncturing27</innernamespace>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="namespacegr_1_1ccsds_1aac0249060553ce620568b15ed40bd8df" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>unsigned long</type>
+        <definition>unsigned long gr::ccsds::time_diff_nano</definition>
+        <argsstring>(timeval *a, timeval *b)</argsstring>
+        <name>time_diff_nano</name>
+        <param>
+          <type>timeval *</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>timeval *</type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+<para>Returns the difference between the two time instances in nanoseconds. </para>        </briefdescription>
+        <detaileddescription>
+<para>Time a needs to be later than b. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/ccsds_time.h" line="17" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/lib/ccsds_time.h" bodystart="17" bodyend="19"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacegr_1_1ccsds_1a97c59e154fad3fa03a65124d52185746" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double gr::ccsds::time_diff_seconds</definition>
+        <argsstring>(timeval *a, timeval *b)</argsstring>
+        <name>time_diff_seconds</name>
+        <param>
+          <type>timeval *</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>timeval *</type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/ccsds_time.h" line="21" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/lib/ccsds_time.h" bodystart="21" bodyend="23"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacegr_1_1ccsds_1a84ac4f7c02fb9d46236ef13e16641607" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void gr::ccsds::time_add_usecs</definition>
+        <argsstring>(timeval *t, unsigned long diff)</argsstring>
+        <name>time_add_usecs</name>
+        <param>
+          <type>timeval *</type>
+          <declname>t</declname>
+        </param>
+        <param>
+          <type>unsigned long</type>
+          <declname>diff</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/ccsds_time.h" line="25" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/lib/ccsds_time.h" bodystart="25" bodyend="32"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacegr_1_1ccsds_1aa1dfd7260ecc1e01169f8ed7b082a622" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void gr::ccsds::time_diff_to_timespec</definition>
+        <argsstring>(timespec *spec, unsigned long diff)</argsstring>
+        <name>time_diff_to_timespec</name>
+        <param>
+          <type>timespec *</type>
+          <declname>spec</declname>
+        </param>
+        <param>
+          <type>unsigned long</type>
+          <declname>diff</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/ccsds_time.h" line="34" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/lib/ccsds_time.h" bodystart="34" bodyend="39"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacegr_1_1ccsds_1a9bfba57a871d8b6929daec9dd33b58fb" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>unsigned long</type>
+        <definition>unsigned long gr::ccsds::time_to_nano</definition>
+        <argsstring>(timespec *spec)</argsstring>
+        <name>time_to_nano</name>
+        <param>
+          <type>timespec *</type>
+          <declname>spec</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/ccsds_time.h" line="41" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/lib/ccsds_time.h" bodystart="41" bodyend="43"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacegr_1_1ccsds_1a1cdb9245eb238d1a7168fa417c750b65" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>unsigned long</type>
+        <definition>unsigned long gr::ccsds::time_to_micro</definition>
+        <argsstring>(timeval *t)</argsstring>
+        <name>time_to_micro</name>
+        <param>
+          <type>timeval *</type>
+          <declname>t</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/ccsds_time.h" line="45" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/lib/ccsds_time.h" bodystart="45" bodyend="47"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacegr_1_1ccsds_1a925df25c35ee41d83f9cfb2160ef2953" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void gr::ccsds::time_print_timeval</definition>
+        <argsstring>(timeval *t)</argsstring>
+        <name>time_print_timeval</name>
+        <param>
+          <type>timeval *</type>
+          <declname>t</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/ccsds_time.h" line="49" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/lib/ccsds_time.h" bodystart="49" bodyend="52"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacegr_1_1ccsds_1a420742d9cfe349a5c03324f1681717d8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void gr::ccsds::time_print_timespec</definition>
+        <argsstring>(timespec *t)</argsstring>
+        <name>time_print_timespec</name>
+        <param>
+          <type>timespec *</type>
+          <declname>t</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/ccsds_time.h" line="54" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/lib/ccsds_time.h" bodystart="54" bodyend="57"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacegr_1_1ccsds_1a3bda110412ee30caf3e2fdb1bb3e15ed" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void gr::ccsds::time_reset_timespec</definition>
+        <argsstring>(timespec *spec)</argsstring>
+        <name>time_reset_timespec</name>
+        <param>
+          <type>timespec *</type>
+          <declname>spec</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/ccsds_time.h" line="59" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/lib/ccsds_time.h" bodystart="59" bodyend="63"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacegr_1_1ccsds_1a2f2646ab87347fe6ba3a494063fe8d6a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>unsigned char</type>
+        <definition>unsigned char gr::ccsds::hex2bin</definition>
+        <argsstring>(char hex)</argsstring>
+        <name>hex2bin</name>
+        <param>
+          <type>char</type>
+          <declname>hex</declname>
+        </param>
+        <briefdescription>
+<para>Converts hexadecimal value into decimal one. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>hex</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Hexadecimal value to convert. Must be in range from &apos;0&apos;-&apos;9&apos;, &apos;A&apos;-&apos;F&apos;, or &apos;a&apos;-&apos;f&apos; </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Decimal value in range 0-15 </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/hexstring_to_binary.h" line="16" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/lib/hexstring_to_binary.h" bodystart="16" bodyend="44"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacegr_1_1ccsds_1ac793bf172926364b86a4ec3eb828b812" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void gr::ccsds::hexstring_to_binary</definition>
+        <argsstring>(const std::string *str, unsigned char *bin)</argsstring>
+        <name>hexstring_to_binary</name>
+        <param>
+          <type>const std::string *</type>
+          <declname>str</declname>
+        </param>
+        <param>
+          <type>unsigned char *</type>
+          <declname>bin</declname>
+        </param>
+        <briefdescription>
+<para>Converts a hexadecimal string to an array of unsigned chars (bytes). </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>str</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>String to convert. Must be of even length as two hexadecimal symbols describe one byte. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>bin</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Array of bytes where the binary representation should be stored. Memory for at least <computeroutput>str.length()/2</computeroutput> elements must be aligned. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/hexstring_to_binary.h" line="54" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/lib/hexstring_to_binary.h" bodystart="54" bodyend="72"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacegr_1_1ccsds_1a77b593edd536689a935b58d86c1f071b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>unsigned int</type>
+        <definition>unsigned int gr::ccsds::interl_indx</definition>
+        <argsstring>(const unsigned int index, const unsigned int interleaving_depth, const unsigned int num_elements)</argsstring>
+        <name>interl_indx</name>
+        <param>
+          <type>const unsigned int</type>
+          <declname>index</declname>
+        </param>
+        <param>
+          <type>const unsigned int</type>
+          <declname>interleaving_depth</declname>
+        </param>
+        <param>
+          <type>const unsigned int</type>
+          <declname>num_elements</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/interleaving_aux.h" line="7" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/lib/interleaving_aux.h" bodystart="7" bodyend="21"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacegr_1_1ccsds_1a29a94a339d4294816c0ef81542199c65" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classgr_1_1ccsds_1_1lpf2" kindref="compound">lpf2</ref> *</type>
+        <definition>lpf2* gr::ccsds::ccsds_make_lpf2</definition>
+        <argsstring>(const double loop_bw, const double damping_factor_squared, const double s_slope)</argsstring>
+        <name>ccsds_make_lpf2</name>
+        <param>
+          <type>const double</type>
+          <declname>loop_bw</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>damping_factor_squared</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>s_slope</declname>
+        </param>
+        <briefdescription>
+<para>Create a linear second order low pass filter and return it&apos;s shared pointer. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>loop_bw</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Bandwidth of the loop. Used to compute the loop stepsizes. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>damping_factor_squared</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Squared value of the loop&apos;s damping factor. Used to compute the loop stepsizes. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>s_slope</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Estimated slope of the S-curve of the error detector at the origin. Used to compute the loop stepsizes. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Shared pointer of the created filter.</para></simplesect>
+The loop stepsizes gamma and rho are given by the following formulas: [<ref refid="page_bibliography_1bib_mengali" kindref="member">Mengali &amp; D&apos;Andrea</ref> p. 220 ff.] <programlisting><codeline><highlight class="normal">loop_bw<sp/>=<sp/>(<sp/>2*rho<sp/>+<sp/>gamma*s_slope*(2+rho)<sp/>)<sp/>/<sp/>(<sp/>8<sp/>-<sp/>2*gamma*s_slope*(2+rho)<sp/>)<sp/><sp/>(5.3.92)</highlight></codeline>
+<codeline><highlight class="normal">damping_factor<sp/>=<sp/>(<sp/>(1+rho)*sqrt(gamma*s_slope)<sp/>)<sp/>/<sp/>(<sp/>2*sqrt(rho))<sp/><sp/>(5.3.86)</highlight></codeline>
+</programlisting></para><para>The stepsize rho can not be computed in explicit form and is computed with Newton&apos;s method by solving the root of the following polynomial: <programlisting><codeline><highlight class="normal">f(rho)<sp/>=<sp/>rho^3<sp/>+<sp/>a<sp/>*<sp/>rho^2<sp/>+<sp/>b<sp/>*<sp/>rho<sp/>+<sp/>c<sp/>!=<sp/>0<sp/></highlight></codeline>
+</programlisting> with <programlisting><codeline><highlight class="normal">a<sp/>=<sp/>-<sp/>4*loop_bw<sp/>+<sp/>4*loop_bw*damping_factor_squared<sp/>+<sp/>2<sp/>+<sp/>2*damping_factor_squared</highlight></codeline>
+<codeline><highlight class="normal">b<sp/>=<sp/>-<sp/>8*loop_bw<sp/>+<sp/>8*loop_bw*damping_factor_squared<sp/>+<sp/>1<sp/>+<sp/>4*damping_factor_squared</highlight></codeline>
+<codeline><highlight class="normal">c<sp/>=<sp/>-<sp/>4*loop_bw</highlight></codeline>
+</programlisting></para><para>Given rho, gamma is computed in closed form as <programlisting><codeline><highlight class="normal">gamma<sp/>=<sp/>(<sp/>4*damping_factor_squared*rho<sp/>)<sp/>/<sp/>(<sp/>s_slope<sp/>*<sp/>(1+rho)^2<sp/>)<sp/></highlight></codeline>
+</programlisting> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/lpf2.h" line="41" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacegr_1_1ccsds_1a197a45213ff3da49fa5b148231bd6b87" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classgr_1_1ccsds_1_1lpf2" kindref="compound">lpf2</ref> *</type>
+        <definition>lpf2* gr::ccsds::ccsds_make_lpf2</definition>
+        <argsstring>(double loop_bw)</argsstring>
+        <name>ccsds_make_lpf2</name>
+        <param>
+          <type>double</type>
+          <declname>loop_bw</declname>
+        </param>
+        <briefdescription>
+<para>Creates a linear second order low pass filter and return it&apos;s shared pointer. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>loop_bw</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Bandwidth of the loop. Used to calculate loop stepsizes. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Shared pointer of the created filter. </para></simplesect>
+<simplesect kind="see"><para><ref refid="namespacegr_1_1ccsds_1a29a94a339d4294816c0ef81542199c65" kindref="member">ccsds_make_lpf2(const double loop_bw, const double damping_factor_squared, const double s_slope)</ref></para></simplesect>
+Call to <ref refid="namespacegr_1_1ccsds_1a29a94a339d4294816c0ef81542199c65" kindref="member">ccsds_make_lpf2(const double loop_bw, const double damping_factor_squared, const double s_slope)</ref> with the given loop bandwidth, a damping factor of sqrt(0.5) (critically damped) and a S-curve slope of 1.0 (assuming the error detector is an unscaled and unbiased estimator). </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/lpf2.h" line="55" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacegr_1_1ccsds_1aa025bf45d7342a113e64dd48a92c984c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>unsigned int</type>
+        <definition>unsigned int gr::ccsds::togray</definition>
+        <argsstring>(const unsigned int binary)</argsstring>
+        <name>togray</name>
+        <param>
+          <type>const unsigned int</type>
+          <declname>binary</declname>
+        </param>
+        <briefdescription>
+<para>Converts binary number into corresponding gray coded number. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>binary</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Binary coded number to transform into a gray coded number. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Gray coded number</para></simplesect>
+Code from <ulink url="http://en.wikipedia.org/wiki/Grey_code#Converting_to_and_from_Gray_code">http://en.wikipedia.org/wiki/Grey_code#Converting_to_and_from_Gray_code</ulink> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/mpsk_constellation.h" line="19" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/lib/mpsk_constellation.h" bodystart="19" bodyend="21"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacegr_1_1ccsds_1a6e18a37d1d3f6c4f7cf6c6af305d7fc4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>unsigned int</type>
+        <definition>unsigned int gr::ccsds::tobinary</definition>
+        <argsstring>(unsigned int num)</argsstring>
+        <name>tobinary</name>
+        <param>
+          <type>unsigned int</type>
+          <declname>num</declname>
+        </param>
+        <briefdescription>
+<para>Converts gray coded number into corresponding binary number. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>num</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Gray coded number to transform into a binary number. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Binary coded number</para></simplesect>
+Code from <ulink url="http://en.wikipedia.org/wiki/Grey_code#Converting_to_and_from_Gray_code">http://en.wikipedia.org/wiki/Grey_code#Converting_to_and_from_Gray_code</ulink> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/mpsk_constellation.h" line="30" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/lib/mpsk_constellation.h" bodystart="30" bodyend="38"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacegr_1_1ccsds_1a2713517321a35e15f6cc8a94c7a32f0f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>gr_complex *</type>
+        <definition>gr_complex* gr::ccsds::make_psk_const</definition>
+        <argsstring>(unsigned int M)</argsstring>
+        <name>make_psk_const</name>
+        <param>
+          <type>unsigned int</type>
+          <declname>M</declname>
+        </param>
+        <briefdescription>
+<para>Create general M-PSK constellation. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>M</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Modulation order. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Pointer to array of <computeroutput>M</computeroutput> constellation elements, allocated with new. This array must be deallocated with delete[] after usage.</para></simplesect>
+Gray coded M-PSK constellation starting with zero symbol on the real axis and rotating counterclockwise afterwards. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/mpsk_constellation.h" line="50" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/lib/mpsk_constellation.h" bodystart="50" bodyend="79"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacegr_1_1ccsds_1aacfbb753d8fda68426002d1953128239" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>gr_complex *</type>
+        <definition>gr_complex* gr::ccsds::make_qpsk_const</definition>
+        <argsstring>(void)</argsstring>
+        <name>make_qpsk_const</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Create QPSK constellation according to ECSS-E-ST-50-05C. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Pointer to array of 4 constellation elements, allocated with new. This array must be deallocated with delete[] after usage.</para></simplesect>
+In contrast to the general M-PSK constellation above, ECSS QPSK mapping is in reverse direction and rotated by 45 degree, so this constellation is created manually.</para><para>According to ECSS-E-ST-50-05C Rev.2 from 4th October 2011, Figure 6-3 </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/mpsk_constellation.h" line="94" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/lib/mpsk_constellation.h" bodystart="94" bodyend="107"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacegr_1_1ccsds_1abb1272003a20c7d3e29549e29c6f97a0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>gr_complex *</type>
+        <definition>gr_complex* gr::ccsds::make_mpsk_const</definition>
+        <argsstring>(unsigned int M)</argsstring>
+        <name>make_mpsk_const</name>
+        <param>
+          <type>unsigned int</type>
+          <declname>M</declname>
+        </param>
+        <briefdescription>
+<para>Convenience wrapper to generate a ECSS compatible M-PSK constellation. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>M</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Modulation order. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Pointer to array of <computeroutput>M</computeroutput> constellation elements, allocated with new. This array must be deallocated with delete[] after usage. </para></simplesect>
+<simplesect kind="see"><para>make_psk_cons </para><simplesectsep/><para><ref refid="namespacegr_1_1ccsds_1aacfbb753d8fda68426002d1953128239" kindref="member">make_qpsk_const</ref></para></simplesect>
+Create a M-PSK constellation. For M=4 i.e. QPSK <ref refid="namespacegr_1_1ccsds_1aacfbb753d8fda68426002d1953128239" kindref="member">make_qpsk_const</ref>, otherwise <ref refid="namespacegr_1_1ccsds_1a2713517321a35e15f6cc8a94c7a32f0f" kindref="member">make_psk_const</ref> is called </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/mpsk_constellation.h" line="122" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/lib/mpsk_constellation.h" bodystart="122" bodyend="129"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacegr_1_1ccsds_1a50446c85a317814b5c61c9f4d6e65ac7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>unsigned char *</type>
+        <definition>unsigned char* gr::ccsds::make_psk_map</definition>
+        <argsstring>(unsigned int M)</argsstring>
+        <name>make_psk_map</name>
+        <param>
+          <type>unsigned int</type>
+          <declname>M</declname>
+        </param>
+        <briefdescription>
+<para>Create general M-PSK mapping. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>M</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Modulation order. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Pointer to array of <computeroutput>M</computeroutput> constellation bits, allocated with new. This array must be deallocated with delete[] after usage.</para></simplesect>
+M-PSK constellation mapping with binary coded index and gray coded output. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/mpsk_constellation.h" line="140" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/lib/mpsk_constellation.h" bodystart="140" bodyend="159"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacegr_1_1ccsds_1a9a8be99b9f397fdc32e373338b4dcc2a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>unsigned char *</type>
+        <definition>unsigned char* gr::ccsds::make_qpsk_map</definition>
+        <argsstring>(void)</argsstring>
+        <name>make_qpsk_map</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Create QPSK constellation mapping according to ECSS-E-ST-50-05C. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Pointer to array of 4 elements, mapping binary indices to gray coded bits. This array is allocated with new and must be deallocated with delete[] after usage.</para></simplesect>
+In contrast to the general M-PSK mapping above, ECSS QPSK mapping is in reverse direction and rotated by 45 degree, so this constellation is created manually.</para><para>According to ECSS-E-ST-50-05C Rev.2 from 4th October 2011, Figure 6-3 </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/mpsk_constellation.h" line="174" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/lib/mpsk_constellation.h" bodystart="174" bodyend="184"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacegr_1_1ccsds_1a714be7364865bb92601beeb605d3057d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>unsigned char *</type>
+        <definition>unsigned char* gr::ccsds::make_mpsk_map</definition>
+        <argsstring>(unsigned int M)</argsstring>
+        <name>make_mpsk_map</name>
+        <param>
+          <type>unsigned int</type>
+          <declname>M</declname>
+        </param>
+        <briefdescription>
+<para>Convenience wrapper to generate a ECSS compatible M-PSK constellation mapping. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>M</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Modulation order. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Pointer to array of <computeroutput>M</computeroutput> elements, mapping binary constellation indices to gray coded bits. This array is allocated with new and must be deallocated with delete[] after usage.</para></simplesect>
+<simplesect kind="see"><para>make_psk_cons </para><simplesectsep/><para><ref refid="namespacegr_1_1ccsds_1aacfbb753d8fda68426002d1953128239" kindref="member">make_qpsk_const</ref></para></simplesect>
+Create a M-PSK constellation mapping. For M=4 i.e. QPSK <ref refid="namespacegr_1_1ccsds_1a9a8be99b9f397fdc32e373338b4dcc2a" kindref="member">make_qpsk_map</ref>, otherwise <ref refid="namespacegr_1_1ccsds_1a50446c85a317814b5c61c9f4d6e65ac7" kindref="member">make_psk_map</ref> is called </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/mpsk_constellation.h" line="201" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/lib/mpsk_constellation.h" bodystart="201" bodyend="207"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacegr_1_1ccsds_1a470a7677f3da6f1fae66eb0fd76c2dd9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>unsigned char *</type>
+        <definition>unsigned char* gr::ccsds::make_psk_rev_map</definition>
+        <argsstring>(unsigned int M)</argsstring>
+        <name>make_psk_rev_map</name>
+        <param>
+          <type>unsigned int</type>
+          <declname>M</declname>
+        </param>
+        <briefdescription>
+<para>Create general reverse M-PSK mapping. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>M</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Modulation order. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Pointer to array of <computeroutput>M</computeroutput> constellation bits, allocated with new. This array must be deallocated with delete[] after usage.</para></simplesect>
+Reverse M-PSK constellation mapping with gray coded index and binary coded output. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/mpsk_constellation.h" line="219" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/lib/mpsk_constellation.h" bodystart="219" bodyend="238"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacegr_1_1ccsds_1a113cb1303a4aa95142d3eb21f23f2d54" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>unsigned char *</type>
+        <definition>unsigned char* gr::ccsds::make_qpsk_rev_map</definition>
+        <argsstring>(void)</argsstring>
+        <name>make_qpsk_rev_map</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Create reverse QPSK constellation mapping according to ECSS-E-ST-50-05C. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Pointer to array of 4 elements, mapping gray coded indices to binary coded bits. This array is allocated with new and must be deallocated with delete[] after usage.</para></simplesect>
+In contrast to the general reverse M-PSK mapping above, ECSS QPSK mapping is in reverse direction and rotated by 45 degree, so this mapping is created manually.</para><para>According to ECSS-E-ST-50-05C Rev.2 from 4th October 2011, Figure 6-3 </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/mpsk_constellation.h" line="253" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/lib/mpsk_constellation.h" bodystart="253" bodyend="263"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacegr_1_1ccsds_1a27f2d03a3fcb49b4b9692e2ea4a5e6aa" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>unsigned char *</type>
+        <definition>unsigned char* gr::ccsds::make_mpsk_rev_map</definition>
+        <argsstring>(unsigned int M)</argsstring>
+        <name>make_mpsk_rev_map</name>
+        <param>
+          <type>unsigned int</type>
+          <declname>M</declname>
+        </param>
+        <briefdescription>
+<para>Convenience wrapper to generate a ECSS compatible reverse M-PSK constellation mapping. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>M</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Modulation order. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Pointer to array of <computeroutput>M</computeroutput> elements, mapping cray coded bits to binary coded constellation indices. This array is allocated with new and must be deallocated with delete[] after usage.</para></simplesect>
+<simplesect kind="see"><para>make_psk_cons </para><simplesectsep/><para><ref refid="namespacegr_1_1ccsds_1aacfbb753d8fda68426002d1953128239" kindref="member">make_qpsk_const</ref></para></simplesect>
+Create a reverse M-PSK constellation mapping. For M=4 i.e. QPSK <ref refid="namespacegr_1_1ccsds_1a113cb1303a4aa95142d3eb21f23f2d54" kindref="member">make_qpsk_rev_map</ref>, otherwise <ref refid="namespacegr_1_1ccsds_1a470a7677f3da6f1fae66eb0fd76c2dd9" kindref="member">make_psk_rev_map</ref> is called </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/mpsk_constellation.h" line="280" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/lib/mpsk_constellation.h" bodystart="280" bodyend="286"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/marina/Documents/sdr1/gr-ccsds/include/ccsds/add_asm.h" line="10" column="1"/>
+  </compounddef>
+</doxygen>

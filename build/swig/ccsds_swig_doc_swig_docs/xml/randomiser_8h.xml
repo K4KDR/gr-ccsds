@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="randomiser_8h" kind="file">
+    <compoundname>randomiser.h</compoundname>
+    <includes refid="api_8h" local="no">ccsds/api.h</includes>
+    <includes local="no">gnuradio/sync_block.h</includes>
+    <includedby refid="randomiser__impl_8h" local="no">/home/marina/Documents/sdr1/gr-ccsds/lib/randomiser_impl.h</includedby>
+    <incdepgraph>
+      <node id="529">
+        <label>gnuradio/sync_block.h</label>
+      </node>
+      <node id="528">
+        <label>gnuradio/attributes.h</label>
+      </node>
+      <node id="526">
+        <label>ccsds/api.h</label>
+        <link refid="api_8h"/>
+        <childnode refid="527" relation="include">
+        </childnode>
+        <childnode refid="528" relation="include">
+        </childnode>
+      </node>
+      <node id="527">
+        <label>gnuradio/config.h</label>
+      </node>
+      <node id="525">
+        <label>/home/marina/Documents/sdr1/gr-ccsds/include/ccsds/randomiser.h</label>
+        <link refid="randomiser.h"/>
+        <childnode refid="526" relation="include">
+        </childnode>
+        <childnode refid="529" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="531">
+        <label>/home/marina/Documents/sdr1/gr-ccsds/lib/randomiser_impl.h</label>
+        <link refid="randomiser__impl_8h"/>
+      </node>
+      <node id="530">
+        <label>/home/marina/Documents/sdr1/gr-ccsds/include/ccsds/randomiser.h</label>
+        <link refid="randomiser.h"/>
+        <childnode refid="531" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classgr_1_1ccsds_1_1randomiser" prot="public">gr::ccsds::randomiser</innerclass>
+    <innernamespace refid="namespacegr">gr</innernamespace>
+    <innernamespace refid="namespacegr_1_1ccsds">gr::ccsds</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>INCLUDED_CCSDS_RANDOMIZER_H</highlight></codeline>
+<codeline lineno="2"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>INCLUDED_CCSDS_RANDOMIZER_H</highlight></codeline>
+<codeline lineno="3"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="api_8h" kindref="compound">ccsds/api.h</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;gnuradio/sync_block.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">gr<sp/>{</highlight></codeline>
+<codeline lineno="8"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">ccsds<sp/>{</highlight></codeline>
+<codeline lineno="22" refid="classgr_1_1ccsds_1_1randomiser" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="api_8h_1a144137922962dd54ae2e8c1917a7e588" kindref="member">CCSDS_API</ref><sp/><ref refid="classgr_1_1ccsds_1_1randomiser" kindref="compound">randomiser</ref><sp/>:<sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/>gr::sync_block</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="25" refid="classgr_1_1ccsds_1_1randomiser_1a7d4c2c227239ce221fb223e3667daf7f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/>boost::shared_ptr&lt;randomiser&gt;<sp/><ref refid="classgr_1_1ccsds_1_1randomiser_1a7d4c2c227239ce221fb223e3667daf7f" kindref="member">sptr</ref>;</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="27"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>We<sp/>use<sp/>boost::shared_ptr&apos;s<sp/>instead<sp/>of<sp/>raw<sp/>pointers<sp/>for<sp/>all<sp/>access</highlight></codeline>
+<codeline lineno="28"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>to<sp/>gr_blocks<sp/>(and<sp/>many<sp/>other<sp/>data<sp/>structures).<sp/><sp/>The<sp/>shared_ptr<sp/>gets</highlight></codeline>
+<codeline lineno="29"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>us<sp/>transparent<sp/>reference<sp/>counting,<sp/>which<sp/>greatly<sp/>simplifies<sp/>storage</highlight></codeline>
+<codeline lineno="30"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>management<sp/>issues.<sp/><sp/>This<sp/>is<sp/>especially<sp/>helpful<sp/>in<sp/>our<sp/>hybrid</highlight></codeline>
+<codeline lineno="31"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>C++<sp/>/<sp/>Python<sp/>system.</highlight></codeline>
+<codeline lineno="32"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="33"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>See<sp/>http://www.boost.org/libs/smart_ptr/smart_ptr.htm</highlight></codeline>
+<codeline lineno="34"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="35"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>As<sp/>a<sp/>convention,<sp/>the<sp/>_sptr<sp/>suffix<sp/>indicates<sp/>a<sp/>boost::shared_ptr</highlight></codeline>
+<codeline lineno="36"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/>static<sp/>sptr<sp/>make(const<sp/>uint8_t<sp/>polynomial=0x95,<sp/>const<sp/>uint8_t<sp/>seed=0xFF);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="classgr_1_1ccsds_1_1randomiser_1a7d4c2c227239ce221fb223e3667daf7f" kindref="member">sptr</ref><sp/>make(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint8_t<sp/>polynomial,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint8_t<sp/>seed);</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"></highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/>}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>ccsds</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="63"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>gr</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="64"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>INCLUDED_CCSDS_RANDOMIZER_H<sp/>*/</highlight><highlight class="preprocessor"></highlight></codeline>
+    </programlisting>
+    <location file="/home/marina/Documents/sdr1/gr-ccsds/include/ccsds/randomiser.h"/>
+  </compounddef>
+</doxygen>

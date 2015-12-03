@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="group__filter" kind="group">
+    <compoundname>filter</compoundname>
+    <title>CCSDS filter blocks</title>
+    <innerclass refid="classlpf" prot="public">lpf</innerclass>
+    <innerclass refid="classlpf2" prot="public">lpf2</innerclass>
+    <innerclass refid="classmoving__average" prot="public">moving_average</innerclass>
+    <briefdescription>
+<para>Blocks used for filtering. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

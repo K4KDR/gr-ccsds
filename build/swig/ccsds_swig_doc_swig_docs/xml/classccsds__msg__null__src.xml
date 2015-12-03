@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="classccsds__msg__null__src" kind="class" prot="public">
+    <compoundname>ccsds_msg_null_src</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">gr_block</basecompoundref>
+    <includes refid="ccsds__msg__null__src_8h" local="no">ccsds_msg_null_src.h</includes>
+      <sectiondef kind="friend">
+      <memberdef kind="friend" id="classccsds__msg__null__src_1a53517abea8fb9130c3210b7209f2649a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>friend __GR_ATTR_IMPORT <ref refid="ccsds__msg__null__src_8h_1a4b061020349b8418bca639a000406caf" kindref="member">ccsds_msg_null_src_sptr</ref></type>
+        <definition>__GR_ATTR_IMPORT ccsds_msg_null_src_sptr ccsds_make_msg_null_src</definition>
+        <argsstring>(bool dummy)</argsstring>
+        <name>ccsds_make_msg_null_src</name>
+        <param>
+          <type>bool</type>
+          <declname>dummy</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_msg_null_src.h" line="23" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classccsds__msg__null__src_1ae990173b0b41f5ebf165bbbb422c118e" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>ccsds_msg_null_src::ccsds_msg_null_src</definition>
+        <argsstring>(bool dummy=false)</argsstring>
+        <name>ccsds_msg_null_src</name>
+        <param>
+          <type>bool</type>
+          <declname>dummy</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+<para>Private constructor. Define a outgoing port witht the name <computeroutput>out</computeroutput>. Otherwise do nothing. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_msg_null_src.h" line="29" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Defines a message out port that is never used. This block can be used to connect asynchronous blocks to the flowgraph and then pass in messages to them directly from the python code. </para>    </briefdescription>
+    <detaileddescription>
+<para>This block should only be used in QA code. </para>    </detaileddescription>
+    <inheritancegraph>
+      <node id="111">
+        <label>gr_block</label>
+      </node>
+      <node id="110">
+        <label>ccsds_msg_null_src</label>
+        <link refid="classccsds__msg__null__src"/>
+        <childnode refid="111" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="113">
+        <label>gr_block</label>
+      </node>
+      <node id="112">
+        <label>ccsds_msg_null_src</label>
+        <link refid="classccsds__msg__null__src"/>
+        <childnode refid="113" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_msg_null_src.h" line="21" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_msg_null_src.h" bodystart="20" bodyend="30"/>
+    <listofallmembers>
+      <member refid="classccsds__msg__null__src_1a53517abea8fb9130c3210b7209f2649a" prot="public" virt="non-virtual"><scope>ccsds_msg_null_src</scope><name>ccsds_make_msg_null_src</name></member>
+      <member refid="classccsds__msg__null__src_1ae990173b0b41f5ebf165bbbb422c118e" prot="private" virt="non-virtual"><scope>ccsds_msg_null_src</scope><name>ccsds_msg_null_src</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

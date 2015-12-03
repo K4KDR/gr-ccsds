@@ -1,0 +1,859 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="classccsds__dll__cc" kind="class" prot="public">
+    <compoundname>ccsds_dll_cc</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">gr_block</basecompoundref>
+    <includes refid="ccsds__dll__cc_8h" local="no">ccsds_dll_cc.h</includes>
+      <sectiondef kind="private-type">
+      <memberdef kind="enum" id="classccsds__dll__cc_1a32d94cca485eabe23c285593855df4bf" prot="private" static="no">
+        <name>INTERP</name>
+        <enumvalue id="classccsds__dll__cc_1a32d94cca485eabe23c285593855df4bfad8a30e4f98632a28dc71b4f21deedc1a" prot="private">
+          <name>PREV</name>
+          <initializer>=0</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classccsds__dll__cc_1a32d94cca485eabe23c285593855df4bfa7f7d12a0d24e8f5d6e23b481cb7fb954" prot="private">
+          <name>INTM</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classccsds__dll__cc_1a32d94cca485eabe23c285593855df4bfa26e1b41456dc7debf9a1ed20c16584d2" prot="private">
+          <name>CURR</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classccsds__dll__cc_1a32d94cca485eabe23c285593855df4bfaa114d92e0b8bbd368f2310dece4b76d5" prot="private">
+          <name>INTERP_COUNT</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Enum used to name the samples in d_last_interp. </para>        </briefdescription>
+        <detaileddescription>
+<para>Index names for elements in d_last_interp starting from zero so the last dummy element equals to the ammount of elements in the enum </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_dll_cc.h" line="91" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_dll_cc.h" bodystart="91" bodyend="95"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classccsds__dll__cc_1ae64bcb8b8d072079a54d7b4497b7ad88" prot="private" static="no" mutable="no">
+        <type>const unsigned int</type>
+        <definition>const unsigned int ccsds_dll_cc::d_OSF</definition>
+        <argsstring></argsstring>
+        <name>d_OSF</name>
+        <briefdescription>
+<para>Oversampling factor as specified in the constructor. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_dll_cc.h" line="75" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_dll_cc.h" bodystart="75" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__dll__cc_1a132ae882f768ee5233da9674c1fcd633" prot="private" static="no" mutable="no">
+        <type>const float</type>
+        <definition>const float ccsds_dll_cc::d_OSF_HALF</definition>
+        <argsstring></argsstring>
+        <name>d_OSF_HALF</name>
+        <briefdescription>
+<para>Half oversampling factor to obtain the intermediate sample points for the Gardner TED. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_dll_cc.h" line="80" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_dll_cc.h" bodystart="80" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__dll__cc_1a86054d8f8d81e0987608e063b8599c29" prot="private" static="no" mutable="no">
+        <type>const float</type>
+        <definition>const float ccsds_dll_cc::d_GAMMA</definition>
+        <argsstring></argsstring>
+        <name>d_GAMMA</name>
+        <briefdescription>
+<para>Loop stepsize as specified in the constructor. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_dll_cc.h" line="83" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_dll_cc.h" bodystart="83" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__dll__cc_1ac6ad95423f4fd0e972c95dc7e53d2ea2" prot="private" static="no" mutable="no">
+        <type>gr_complex</type>
+        <definition>gr_complex ccsds_dll_cc::d_last_interp[INTERP_COUNT]</definition>
+        <argsstring>[INTERP_COUNT]</argsstring>
+        <name>d_last_interp</name>
+        <briefdescription>
+<para>Storage for interpolated samples. </para>        </briefdescription>
+        <detaileddescription>
+<para>Storage for the last interpolated samples to be re-used by the Gardner TED </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_dll_cc.h" line="102" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_dll_cc.h" bodystart="102" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__dll__cc_1a7f30c487b4482d3c602960b1f122f452" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool ccsds_dll_cc::d_init</definition>
+        <argsstring></argsstring>
+        <name>d_init</name>
+        <briefdescription>
+<para>Indicator if the loop has been initialized yet. </para>        </briefdescription>
+        <detaileddescription>
+<para>Set to false by the constructor and set to true by the general_work function once the initial interpolants have been obtained. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_dll_cc.h" line="109" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_dll_cc.h" bodystart="109" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__dll__cc_1ad9ad59f7c0bee7a2f7a8987141ff7db0" prot="private" static="no" mutable="no">
+        <type>float</type>
+        <definition>float ccsds_dll_cc::d_tau_hat</definition>
+        <argsstring></argsstring>
+        <name>d_tau_hat</name>
+        <briefdescription>
+<para>Storage for the current accumulated timing error. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_dll_cc.h" line="112" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_dll_cc.h" bodystart="112" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__dll__cc_1abfff5d6fb87364384fe5836c64942daf" prot="private" static="no" mutable="no">
+        <type>float</type>
+        <definition>float ccsds_dll_cc::d_gamma_eps</definition>
+        <argsstring></argsstring>
+        <name>d_gamma_eps</name>
+        <briefdescription>
+<para>Storage for the current timing error scaled by the stepsize. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_dll_cc.h" line="115" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_dll_cc.h" bodystart="115" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__dll__cc_1a171a5dd59d6a23f99c4828411ad060bf" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int ccsds_dll_cc::d_l</definition>
+        <argsstring></argsstring>
+        <name>d_l</name>
+        <briefdescription>
+<para>Storage for the current basepoint index. </para>        </briefdescription>
+        <detaileddescription>
+<para>The index of the basepoint sample in the input vector. The next interpolant lies between (or on top of) this sample and the following one. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_dll_cc.h" line="123" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_dll_cc.h" bodystart="123" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__dll__cc_1a4fe56c706b07481956156484865f8aba" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double ccsds_dll_cc::d_mu</definition>
+        <argsstring></argsstring>
+        <name>d_mu</name>
+        <briefdescription>
+<para>Storage for the current fractional index . </para>        </briefdescription>
+        <detaileddescription>
+<para>The fractional index is in the range [0,1) and shows where in between the basepoint sample and the following sample the interpolation shall be done. A fractional index of 0 means the interpolant is equal to the basepoint sample while 0.5 means the interpolated sample lies exactly in the middle between the basepoint sample and the following sample. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_dll_cc.h" line="134" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_dll_cc.h" bodystart="134" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__dll__cc_1a0e08f9dd66d70aec04b332bbc678d021" prot="private" static="no" mutable="no">
+        <type>float *</type>
+        <definition>float* ccsds_dll_cc::d_real</definition>
+        <argsstring></argsstring>
+        <name>d_real</name>
+        <briefdescription>
+<para>Storage for complex to real conversion. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_dll_cc.h" line="137" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_dll_cc.h" bodystart="137" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__dll__cc_1a5592595db284b93ba4a310fed78e3a02" prot="private" static="no" mutable="no">
+        <type>float *</type>
+        <definition>float* ccsds_dll_cc::d_imag</definition>
+        <argsstring></argsstring>
+        <name>d_imag</name>
+        <briefdescription>
+<para>Storage for complex to real conversion. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_dll_cc.h" line="139" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_dll_cc.h" bodystart="139" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__dll__cc_1a15c36526833207485c1075ca8fa6ca28" prot="private" static="no" mutable="no">
+        <type>uint64_t</type>
+        <definition>uint64_t ccsds_dll_cc::d_tag_count</definition>
+        <argsstring></argsstring>
+        <name>d_tag_count</name>
+        <briefdescription>
+<para>Storage for counting samples for stream tag propagation. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_dll_cc.h" line="142" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_dll_cc.h" bodystart="142" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__dll__cc_1a95acbc21acae482f3708f20eaa5b4d9c" prot="private" static="no" mutable="no">
+        <type>FILE *</type>
+        <definition>FILE* ccsds_dll_cc::dbg_file_o</definition>
+        <argsstring></argsstring>
+        <name>dbg_file_o</name>
+        <briefdescription>
+<para>File pointer for debugging. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_dll_cc.h" line="145" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_dll_cc.h" bodystart="145" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__dll__cc_1ab1bfa7f98f3b9cb28f7a38124ef7eddf" prot="private" static="no" mutable="no">
+        <type>FILE *</type>
+        <definition>FILE* ccsds_dll_cc::dbg_file_s</definition>
+        <argsstring></argsstring>
+        <name>dbg_file_s</name>
+        <briefdescription>
+<para>File pointer for debugging. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_dll_cc.h" line="147" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_dll_cc.h" bodystart="147" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__dll__cc_1a7620e783578539a774f0efbbef87807a" prot="private" static="no" mutable="no">
+        <type>FILE *</type>
+        <definition>FILE* ccsds_dll_cc::dbg_file_i</definition>
+        <argsstring></argsstring>
+        <name>dbg_file_i</name>
+        <briefdescription>
+<para>File pointer for debugging. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_dll_cc.h" line="149" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_dll_cc.h" bodystart="149" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__dll__cc_1a327e884c0a472536c5cd00da4988cbfe" prot="private" static="no" mutable="no">
+        <type>FILE *</type>
+        <definition>FILE* ccsds_dll_cc::dbg_file_t</definition>
+        <argsstring></argsstring>
+        <name>dbg_file_t</name>
+        <briefdescription>
+<para>File pointer for debugging. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_dll_cc.h" line="151" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_dll_cc.h" bodystart="151" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__dll__cc_1ab42e4ddebc4d1adc42ba912d4a9c82a7" prot="private" static="no" mutable="no">
+        <type>unsigned int</type>
+        <definition>unsigned int ccsds_dll_cc::dbg_count</definition>
+        <argsstring></argsstring>
+        <name>dbg_count</name>
+        <briefdescription>
+<para>Counter for debugging. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_dll_cc.h" line="153" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_dll_cc.h" bodystart="153" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__dll__cc_1ac05d3399f66b38b0d472b43dad0c5b9b" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool ccsds_dll_cc::dbg_toggle</definition>
+        <argsstring></argsstring>
+        <name>dbg_toggle</name>
+        <briefdescription>
+<para>Block toggle for debugging. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_dll_cc.h" line="155" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_dll_cc.h" bodystart="155" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="friend">
+      <memberdef kind="friend" id="classccsds__dll__cc_1aafd805aff9ab1e4ae7f0a3b2a57bef6c" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>friend __GR_ATTR_IMPORT <ref refid="ccsds__dll__cc_8h_1a941c383522cab6be43f1d981f73e6cf7" kindref="member">ccsds_dll_cc_sptr</ref></type>
+        <definition>__GR_ATTR_IMPORT ccsds_dll_cc_sptr ccsds_make_dll_cc</definition>
+        <argsstring>(unsigned int osf, float gamma)</argsstring>
+        <name>ccsds_make_dll_cc</name>
+        <param>
+          <type>unsigned int</type>
+          <declname>osf</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>gamma</declname>
+        </param>
+        <briefdescription>
+<para>Return a shared_ptr to a new instance of <ref refid="classccsds__dll__cc" kindref="compound">ccsds_dll_cc</ref>. </para>        </briefdescription>
+        <detaileddescription>
+<para>Create an instance of <ref refid="classccsds__dll__cc" kindref="compound">ccsds_dll_cc</ref> and return it&apos;s shared_ptr.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>osf</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Signal oversampling factor. A factor of two means that two samples contain one symbol. The oversampling factor also defines the decimation factor of this block. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>gamma</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Block&apos;s filter stepsize. Each estimated timing error will be multiplied by gamma and then added to the Delay estimate. A high value (&lt;=1) will allow the loop to follow timing changes very quickly (instantly for 1), but be very sensitive to noise, while lower values will reduce the noise impact but will take longer to settle for a certain delay</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Shared pointer to the created DLL block </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_dll_cc.h" line="56" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classccsds__dll__cc_1a80748aeb9aecb5ddfeadb2e23d075ed6" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>ccsds_dll_cc::ccsds_dll_cc</definition>
+        <argsstring>(unsigned int osf, float gamma)</argsstring>
+        <name>ccsds_dll_cc</name>
+        <param>
+          <type>unsigned int</type>
+          <declname>osf</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>gamma</declname>
+        </param>
+        <briefdescription>
+<para>Private constructor of the DLL. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>osf</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Signal oversampling factor. A factor of two means that two samples contain one symbol. The oversampling factor also defines the decimation factor of this block. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>gamma</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Block&apos;s filter stepsize. Each estimated timing error will be multiplied by gamma and then added to the Delay estimate. A high value (&lt;=1) will allow the loop to follow timing changes very quickly (instantly for 1), but be very sensitive to noise, while lower values will reduce the noise impact but will take longer to settle for a certain delay Constructs a DLL block with the given oversampling factor and loop stepsize. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_dll_cc.h" line="72" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classccsds__dll__cc_1a3ec27ba4f5e46a26413ae9d3111668be" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float ccsds_dll_cc::get_frac</definition>
+        <argsstring>(float value)</argsstring>
+        <name>get_frac</name>
+        <param>
+          <type>float</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>Return fractional part of the value. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Input value from which the fractional part should be determined. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Fractional part of value in the range [0,1) </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_dll_cc.h" line="164" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classccsds__dll__cc_1a74cad52b763bfc104268b930ee260380" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int ccsds_dll_cc::get_int</definition>
+        <argsstring>(float value)</argsstring>
+        <name>get_int</name>
+        <param>
+          <type>float</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>Return integral part of the value. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Input value from which the integral part should be determined. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Integral part of value </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_dll_cc.h" line="171" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classccsds__dll__cc_1a88f36b25dd50623a99025b5167b516ed" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ccsds_dll_cc::to_real</definition>
+        <argsstring>(float *out, const gr_complex *in, const unsigned int num)</argsstring>
+        <name>to_real</name>
+        <param>
+          <type>float *</type>
+          <declname>out</declname>
+        </param>
+        <param>
+          <type>const gr_complex *</type>
+          <declname>in</declname>
+        </param>
+        <param>
+          <type>const unsigned int</type>
+          <declname>num</declname>
+        </param>
+        <briefdescription>
+<para>Calculate real components from complex array. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>out</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to array where the real components should be stored. Memory needs to be allocated for at least num elements. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>in</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to array of complex numbers which&apos;s real components should be calculated. Must contain at least num complex numbers. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>num</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of elements to process in the arrays. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_dll_cc.h" line="181" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classccsds__dll__cc_1a1cc267071ceabfbf27283d674d2ee2ca" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ccsds_dll_cc::to_imag</definition>
+        <argsstring>(float *out, const gr_complex *in, const unsigned int num)</argsstring>
+        <name>to_imag</name>
+        <param>
+          <type>float *</type>
+          <declname>out</declname>
+        </param>
+        <param>
+          <type>const gr_complex *</type>
+          <declname>in</declname>
+        </param>
+        <param>
+          <type>const unsigned int</type>
+          <declname>num</declname>
+        </param>
+        <briefdescription>
+<para>Calculate imaginary components from complex array. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>out</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to array where the imaginary components should be stored. Memory needs to be allocated for at least num elements. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>in</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to array of complex numbers which&apos;s imaginary components should be calculated. Must contain at least num complex numbers. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>num</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of elements to process in the arrays. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_dll_cc.h" line="191" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classccsds__dll__cc_1aac4ae1454bddbb24a92082807ddfbef8" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ccsds_dll_cc::to_real4</definition>
+        <argsstring>(float *out, const gr_complex *in)</argsstring>
+        <name>to_real4</name>
+        <param>
+          <type>float *</type>
+          <declname>out</declname>
+        </param>
+        <param>
+          <type>const gr_complex *</type>
+          <declname>in</declname>
+        </param>
+        <briefdescription>
+<para>Calculate real components from complex 4-element array. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>out</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to array where the real components should be stored. Memory needs to be allocated for 4 elements. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>in</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to array of complex numbers which&apos;s real components should be calculated. Must contain at least 4 complex numbers. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_dll_cc.h" line="200" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classccsds__dll__cc_1a8929cd0a606589b9c85baf0729b1d38b" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ccsds_dll_cc::to_imag4</definition>
+        <argsstring>(float *out, const gr_complex *in)</argsstring>
+        <name>to_imag4</name>
+        <param>
+          <type>float *</type>
+          <declname>out</declname>
+        </param>
+        <param>
+          <type>const gr_complex *</type>
+          <declname>in</declname>
+        </param>
+        <briefdescription>
+<para>Calculate imaginary components from complex 4-element array. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>out</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to array where the imaginary components should be stored. Memory needs to be allocated for 4 elements. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>in</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to array of complex numbers which&apos;s imaginary components should be calculated. Must contain at least 4 complex numbers. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_dll_cc.h" line="209" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classccsds__dll__cc_1a35bbe5bed217d6fbd0fa8c38b7ecc8b7" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>float</type>
+        <definition>float ccsds_dll_cc::interpolate_value</definition>
+        <argsstring>(const float *y, float mu)</argsstring>
+        <name>interpolate_value</name>
+        <param>
+          <type>const float *</type>
+          <declname>y</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>mu</declname>
+        </param>
+        <briefdescription>
+<para>Calculate cubic interpolant. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>y</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Array with DLL_INTERP_NUMSAMPS data points. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>mu</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Fractional index ot the interpolation point in range [0,1) </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Interpolated value</para></simplesect>
+Calculate cubic interpolant between the second and thrid data point based on the fractional index. If mu is 0 the interpolant is equal to the second data point, if mu is 0.5 the interpolation point is exactly in the middle between the second and the third data point. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_dll_cc.h" line="221" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classccsds__dll__cc_1a5fde3374e7330ddfde97b31fb0102c2d" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>gr_complex</type>
+        <definition>gr_complex ccsds_dll_cc::interpolate_cvalue</definition>
+        <argsstring>(const gr_complex *y, float mu)</argsstring>
+        <name>interpolate_cvalue</name>
+        <param>
+          <type>const gr_complex *</type>
+          <declname>y</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>mu</declname>
+        </param>
+        <briefdescription>
+<para>Calculate cubic interpolant if a complex number. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>y</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Array with DLL_INTERP_NUMSAMPS complex data points. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>mu</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Fractional index ot the interpolation point in range [0,1) </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Interpolated value</para></simplesect>
+Calls interpolate_value for the real and imaginary component and reassambles interpolants back to a complex sample. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_dll_cc.h" line="231" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classccsds__dll__cc_1a75eec0d989c04057543559beed0643f3" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float ccsds_dll_cc::gardner</definition>
+        <argsstring>(gr_complex previous, gr_complex intermediate, gr_complex current)</argsstring>
+        <name>gardner</name>
+        <param>
+          <type>gr_complex</type>
+          <declname>previous</declname>
+        </param>
+        <param>
+          <type>gr_complex</type>
+          <declname>intermediate</declname>
+        </param>
+        <param>
+          <type>gr_complex</type>
+          <declname>current</declname>
+        </param>
+        <briefdescription>
+<para>Calculate a timing error from the last three interpolants. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>previous</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Previous interpolated symbol. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>intermediate</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Interpolated sample between last and current symbol. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>current</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Current interpolated symbol. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Current timing error estimation</para></simplesect>
+Gardner passband timing error estimation based on the last two interpolated symbols and an intermediate sample from between.</para><para>e[k] = re{ [ y(kT-T+tau[k-1]) - y(kT+tau[k]) ] y*(kT-T/2+tau[k]) } </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_dll_cc.h" line="246" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classccsds__dll__cc_1ad63bf342bec85e5362f8aa63dde54e93" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ccsds_dll_cc::propagate_tags</definition>
+        <argsstring>(const unsigned int num_in)</argsstring>
+        <name>propagate_tags</name>
+        <param>
+          <type>const unsigned int</type>
+          <declname>num_in</declname>
+        </param>
+        <briefdescription>
+<para>Propagates stream tags of the current block to the decimated output stream. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>num_in</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of samples read during this block operation.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<xrefsect id="todo_1_todo000009"><xreftitle>Todo</xreftitle><xrefdescription><para>Tag propagation is done with a fixed rate conversion. For higher timing accuracy use the timing estimations for rate conversion. </para></xrefdescription></xrefsect></para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_dll_cc.h" line="256" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classccsds__dll__cc_1a77c8a30faf9c34a692a5cfa61d328e28" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>ccsds_dll_cc::~ccsds_dll_cc</definition>
+        <argsstring>()</argsstring>
+        <name>~ccsds_dll_cc</name>
+        <briefdescription>
+<para>Public deconstructor of the DLL. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_dll_cc.h" line="260" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classccsds__dll__cc_1af22be3bf3f38fd005ddb43eadd2b6f25" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ccsds_dll_cc::forecast</definition>
+        <argsstring>(int noutput_items, gr_vector_int &amp;ninput_items_required)</argsstring>
+        <name>forecast</name>
+        <param>
+          <type>int</type>
+          <declname>noutput_items</declname>
+        </param>
+        <param>
+          <type>gr_vector_int &amp;</type>
+          <declname>ninput_items_required</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_dll_cc.h" line="262" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classccsds__dll__cc_1a2fa2e5e5178ad8a49a6328d4ae28a9f0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int ccsds_dll_cc::general_work</definition>
+        <argsstring>(int noutput_items, gr_vector_int &amp;ninput_items, gr_vector_const_void_star &amp;input_items, gr_vector_void_star &amp;output_items)</argsstring>
+        <name>general_work</name>
+        <param>
+          <type>int</type>
+          <declname>noutput_items</declname>
+        </param>
+        <param>
+          <type>gr_vector_int &amp;</type>
+          <declname>ninput_items</declname>
+        </param>
+        <param>
+          <type>gr_vector_const_void_star &amp;</type>
+          <declname>input_items</declname>
+        </param>
+        <param>
+          <type>gr_vector_void_star &amp;</type>
+          <declname>output_items</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_dll_cc.h" line="264" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Delay locked loop decimating from sample- to symbolrate</para><para>Delay estimation based on the Gardner passband timing error detector. The synchronous samples are obtained by cubic interpolation. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="58">
+        <label>ccsds_dll_cc</label>
+        <link refid="classccsds__dll__cc"/>
+        <childnode refid="59" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="59">
+        <label>gr_block</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="60">
+        <label>ccsds_dll_cc</label>
+        <link refid="classccsds__dll__cc"/>
+        <childnode refid="61" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="61">
+        <label>gr_block</label>
+      </node>
+    </collaborationgraph>
+    <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_dll_cc.h" line="54" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_dll_cc.h" bodystart="53" bodyend="267"/>
+    <listofallmembers>
+      <member refid="classccsds__dll__cc_1a80748aeb9aecb5ddfeadb2e23d075ed6" prot="private" virt="non-virtual"><scope>ccsds_dll_cc</scope><name>ccsds_dll_cc</name></member>
+      <member refid="classccsds__dll__cc_1aafd805aff9ab1e4ae7f0a3b2a57bef6c" prot="private" virt="non-virtual"><scope>ccsds_dll_cc</scope><name>ccsds_make_dll_cc</name></member>
+      <member refid="classccsds__dll__cc_1a32d94cca485eabe23c285593855df4bfa26e1b41456dc7debf9a1ed20c16584d2" prot="private" virt="non-virtual"><scope>ccsds_dll_cc</scope><name>CURR</name></member>
+      <member refid="classccsds__dll__cc_1a86054d8f8d81e0987608e063b8599c29" prot="private" virt="non-virtual"><scope>ccsds_dll_cc</scope><name>d_GAMMA</name></member>
+      <member refid="classccsds__dll__cc_1abfff5d6fb87364384fe5836c64942daf" prot="private" virt="non-virtual"><scope>ccsds_dll_cc</scope><name>d_gamma_eps</name></member>
+      <member refid="classccsds__dll__cc_1a5592595db284b93ba4a310fed78e3a02" prot="private" virt="non-virtual"><scope>ccsds_dll_cc</scope><name>d_imag</name></member>
+      <member refid="classccsds__dll__cc_1a7f30c487b4482d3c602960b1f122f452" prot="private" virt="non-virtual"><scope>ccsds_dll_cc</scope><name>d_init</name></member>
+      <member refid="classccsds__dll__cc_1a171a5dd59d6a23f99c4828411ad060bf" prot="private" virt="non-virtual"><scope>ccsds_dll_cc</scope><name>d_l</name></member>
+      <member refid="classccsds__dll__cc_1ac6ad95423f4fd0e972c95dc7e53d2ea2" prot="private" virt="non-virtual"><scope>ccsds_dll_cc</scope><name>d_last_interp</name></member>
+      <member refid="classccsds__dll__cc_1a4fe56c706b07481956156484865f8aba" prot="private" virt="non-virtual"><scope>ccsds_dll_cc</scope><name>d_mu</name></member>
+      <member refid="classccsds__dll__cc_1ae64bcb8b8d072079a54d7b4497b7ad88" prot="private" virt="non-virtual"><scope>ccsds_dll_cc</scope><name>d_OSF</name></member>
+      <member refid="classccsds__dll__cc_1a132ae882f768ee5233da9674c1fcd633" prot="private" virt="non-virtual"><scope>ccsds_dll_cc</scope><name>d_OSF_HALF</name></member>
+      <member refid="classccsds__dll__cc_1a0e08f9dd66d70aec04b332bbc678d021" prot="private" virt="non-virtual"><scope>ccsds_dll_cc</scope><name>d_real</name></member>
+      <member refid="classccsds__dll__cc_1a15c36526833207485c1075ca8fa6ca28" prot="private" virt="non-virtual"><scope>ccsds_dll_cc</scope><name>d_tag_count</name></member>
+      <member refid="classccsds__dll__cc_1ad9ad59f7c0bee7a2f7a8987141ff7db0" prot="private" virt="non-virtual"><scope>ccsds_dll_cc</scope><name>d_tau_hat</name></member>
+      <member refid="classccsds__dll__cc_1ab42e4ddebc4d1adc42ba912d4a9c82a7" prot="private" virt="non-virtual"><scope>ccsds_dll_cc</scope><name>dbg_count</name></member>
+      <member refid="classccsds__dll__cc_1a7620e783578539a774f0efbbef87807a" prot="private" virt="non-virtual"><scope>ccsds_dll_cc</scope><name>dbg_file_i</name></member>
+      <member refid="classccsds__dll__cc_1a95acbc21acae482f3708f20eaa5b4d9c" prot="private" virt="non-virtual"><scope>ccsds_dll_cc</scope><name>dbg_file_o</name></member>
+      <member refid="classccsds__dll__cc_1ab1bfa7f98f3b9cb28f7a38124ef7eddf" prot="private" virt="non-virtual"><scope>ccsds_dll_cc</scope><name>dbg_file_s</name></member>
+      <member refid="classccsds__dll__cc_1a327e884c0a472536c5cd00da4988cbfe" prot="private" virt="non-virtual"><scope>ccsds_dll_cc</scope><name>dbg_file_t</name></member>
+      <member refid="classccsds__dll__cc_1ac05d3399f66b38b0d472b43dad0c5b9b" prot="private" virt="non-virtual"><scope>ccsds_dll_cc</scope><name>dbg_toggle</name></member>
+      <member refid="classccsds__dll__cc_1af22be3bf3f38fd005ddb43eadd2b6f25" prot="public" virt="non-virtual"><scope>ccsds_dll_cc</scope><name>forecast</name></member>
+      <member refid="classccsds__dll__cc_1a75eec0d989c04057543559beed0643f3" prot="private" virt="non-virtual"><scope>ccsds_dll_cc</scope><name>gardner</name></member>
+      <member refid="classccsds__dll__cc_1a2fa2e5e5178ad8a49a6328d4ae28a9f0" prot="public" virt="non-virtual"><scope>ccsds_dll_cc</scope><name>general_work</name></member>
+      <member refid="classccsds__dll__cc_1a3ec27ba4f5e46a26413ae9d3111668be" prot="private" virt="non-virtual"><scope>ccsds_dll_cc</scope><name>get_frac</name></member>
+      <member refid="classccsds__dll__cc_1a74cad52b763bfc104268b930ee260380" prot="private" virt="non-virtual"><scope>ccsds_dll_cc</scope><name>get_int</name></member>
+      <member refid="classccsds__dll__cc_1a32d94cca485eabe23c285593855df4bf" prot="private" virt="non-virtual"><scope>ccsds_dll_cc</scope><name>INTERP</name></member>
+      <member refid="classccsds__dll__cc_1a32d94cca485eabe23c285593855df4bfaa114d92e0b8bbd368f2310dece4b76d5" prot="private" virt="non-virtual"><scope>ccsds_dll_cc</scope><name>INTERP_COUNT</name></member>
+      <member refid="classccsds__dll__cc_1a5fde3374e7330ddfde97b31fb0102c2d" prot="private" virt="non-virtual"><scope>ccsds_dll_cc</scope><name>interpolate_cvalue</name></member>
+      <member refid="classccsds__dll__cc_1a35bbe5bed217d6fbd0fa8c38b7ecc8b7" prot="private" virt="non-virtual"><scope>ccsds_dll_cc</scope><name>interpolate_value</name></member>
+      <member refid="classccsds__dll__cc_1a32d94cca485eabe23c285593855df4bfa7f7d12a0d24e8f5d6e23b481cb7fb954" prot="private" virt="non-virtual"><scope>ccsds_dll_cc</scope><name>INTM</name></member>
+      <member refid="classccsds__dll__cc_1a32d94cca485eabe23c285593855df4bfad8a30e4f98632a28dc71b4f21deedc1a" prot="private" virt="non-virtual"><scope>ccsds_dll_cc</scope><name>PREV</name></member>
+      <member refid="classccsds__dll__cc_1ad63bf342bec85e5362f8aa63dde54e93" prot="private" virt="non-virtual"><scope>ccsds_dll_cc</scope><name>propagate_tags</name></member>
+      <member refid="classccsds__dll__cc_1a1cc267071ceabfbf27283d674d2ee2ca" prot="private" virt="non-virtual"><scope>ccsds_dll_cc</scope><name>to_imag</name></member>
+      <member refid="classccsds__dll__cc_1a8929cd0a606589b9c85baf0729b1d38b" prot="private" virt="non-virtual"><scope>ccsds_dll_cc</scope><name>to_imag4</name></member>
+      <member refid="classccsds__dll__cc_1a88f36b25dd50623a99025b5167b516ed" prot="private" virt="non-virtual"><scope>ccsds_dll_cc</scope><name>to_real</name></member>
+      <member refid="classccsds__dll__cc_1aac4ae1454bddbb24a92082807ddfbef8" prot="private" virt="non-virtual"><scope>ccsds_dll_cc</scope><name>to_real4</name></member>
+      <member refid="classccsds__dll__cc_1a77c8a30faf9c34a692a5cfa61d328e28" prot="public" virt="non-virtual"><scope>ccsds_dll_cc</scope><name>~ccsds_dll_cc</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

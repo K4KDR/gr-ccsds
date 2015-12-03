@@ -1,0 +1,180 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="ccsds__lpf2_8h" kind="file">
+    <compoundname>ccsds_lpf2.h</compoundname>
+    <includes local="no">stdio.h</includes>
+    <includedby refid="ccsds__pll__cc_8h" local="no">/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_pll_cc.h</includedby>
+    <incdepgraph>
+      <node id="185">
+        <label>/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_lpf2.h</label>
+        <link refid="ccsds_lpf2.h"/>
+        <childnode refid="186" relation="include">
+        </childnode>
+      </node>
+      <node id="186">
+        <label>stdio.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="188">
+        <label>/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_pll_cc.h</label>
+        <link refid="ccsds__pll__cc_8h"/>
+      </node>
+      <node id="187">
+        <label>/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_lpf2.h</label>
+        <link refid="ccsds_lpf2.h"/>
+        <childnode refid="188" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classlpf2" prot="public">lpf2</innerclass>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="ccsds__lpf2_8h_1aa54f27bf92c65d6cdf3cb504ab38e650" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classlpf2" kindref="compound">lpf2</ref> *</type>
+        <definition>lpf2* ccsds_make_lpf2</definition>
+        <argsstring>(const double loop_bw, const double damping_factor_squared, const double s_slope)</argsstring>
+        <name>ccsds_make_lpf2</name>
+        <param>
+          <type>const double</type>
+          <declname>loop_bw</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>damping_factor_squared</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>s_slope</declname>
+        </param>
+        <briefdescription>
+<para>Create a linear second order low pass filter and return it&apos;s shared pointer. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>loop_bw</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Bandwidth of the loop. Used to compute the loop stepsizes. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>damping_factor_squared</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Squared value of the loop&apos;s damping factor. Used to compute the loop stepsizes. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>s_slope</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Estimated slope of the S-curve of the error detector at the origin. Used to compute the loop stepsizes. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Shared pointer of the created filter.</para></simplesect>
+The loop stepsizes gamma and rho are given by the following formulas: [<ref refid="page_bibliography_1bib_mengali" kindref="member">Mengali &amp; D&apos;Andrea</ref> p. 220 ff.] <programlisting><codeline><highlight class="normal">loop_bw<sp/>=<sp/>(<sp/>2*rho<sp/>+<sp/>gamma*s_slope*(2+rho)<sp/>)<sp/>/<sp/>(<sp/>8<sp/>-<sp/>2*gamma*s_slope*(2+rho)<sp/>)<sp/><sp/>(5.3.92)</highlight></codeline>
+<codeline><highlight class="normal">damping_factor<sp/>=<sp/>(<sp/>(1+rho)*sqrt(gamma*s_slope)<sp/>)<sp/>/<sp/>(<sp/>2*sqrt(rho))<sp/><sp/>(5.3.86)</highlight></codeline>
+</programlisting></para><para>The stepsize rho can not be computed in explicit form and is computed with Newton&apos;s method by solving the root of the following polynomial: <programlisting><codeline><highlight class="normal">f(rho)<sp/>=<sp/>rho^3<sp/>+<sp/>a<sp/>*<sp/>rho^2<sp/>+<sp/>b<sp/>*<sp/>rho<sp/>+<sp/>c<sp/>!=<sp/>0<sp/></highlight></codeline>
+</programlisting> with <programlisting><codeline><highlight class="normal">a<sp/>=<sp/>-<sp/>4*loop_bw<sp/>+<sp/>4*loop_bw*damping_factor_squared<sp/>+<sp/>2<sp/>+<sp/>2*damping_factor_squared</highlight></codeline>
+<codeline><highlight class="normal">b<sp/>=<sp/>-<sp/>8*loop_bw<sp/>+<sp/>8*loop_bw*damping_factor_squared<sp/>+<sp/>1<sp/>+<sp/>4*damping_factor_squared</highlight></codeline>
+<codeline><highlight class="normal">c<sp/>=<sp/>-<sp/>4*loop_bw</highlight></codeline>
+</programlisting></para><para>Given rho, gamma is computed in closed form as <programlisting><codeline><highlight class="normal">gamma<sp/>=<sp/>(<sp/>4*damping_factor_squared*rho<sp/>)<sp/>/<sp/>(<sp/>s_slope<sp/>*<sp/>(1+rho)^2<sp/>)<sp/></highlight></codeline>
+</programlisting> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_lpf2.h" line="38" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="ccsds__lpf2_8h_1a9e549cea4357af232f9978582715de22" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classlpf2" kindref="compound">lpf2</ref> *</type>
+        <definition>lpf2* ccsds_make_lpf2</definition>
+        <argsstring>(double loop_bw)</argsstring>
+        <name>ccsds_make_lpf2</name>
+        <param>
+          <type>double</type>
+          <declname>loop_bw</declname>
+        </param>
+        <briefdescription>
+<para>Creates a linear second order low pass filter and return it&apos;s shared pointer. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>loop_bw</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Bandwidth of the loop. Used to calculate loop stepsizes. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Shared pointer of the created filter. </para></simplesect>
+<simplesect kind="see"><para><ref refid="ccsds__lpf2_8h_1aa54f27bf92c65d6cdf3cb504ab38e650" kindref="member">ccsds_make_lpf2(const double loop_bw, const double damping_factor_squared, const double s_slope)</ref></para></simplesect>
+Call to <ref refid="ccsds__lpf2_8h_1aa54f27bf92c65d6cdf3cb504ab38e650" kindref="member">ccsds_make_lpf2(const double loop_bw, const double damping_factor_squared, const double s_slope)</ref> with the given loop bandwidth, a damping factor of sqrt(0.5) (critically damped) and a S-curve slope of 1.0 (assuming the error detector is an unscaled and unbiased estimator). </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_lpf2.h" line="52" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>INCLUDED_LPF2_H</highlight></codeline>
+<codeline lineno="2"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>INCLUDED_LPF2_H</highlight></codeline>
+<codeline lineno="3"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdio.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classlpf2" kindref="compound">lpf2</ref>;</highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><ref refid="classlpf2" kindref="compound">lpf2</ref><sp/>*<sp/><ref refid="ccsds__lpf2_8h_1aa54f27bf92c65d6cdf3cb504ab38e650" kindref="member">ccsds_make_lpf2</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>loop_bw,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>damping_factor_squared,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>s_slope);</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><ref refid="classlpf2" kindref="compound">lpf2</ref><sp/>*<sp/><ref refid="ccsds__lpf2_8h_1aa54f27bf92c65d6cdf3cb504ab38e650" kindref="member">ccsds_make_lpf2</ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>loop_bw);</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"></highlight></codeline>
+<codeline lineno="58" refid="classlpf2" refkind="compound"><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classlpf2" kindref="compound">lpf2</ref></highlight></codeline>
+<codeline lineno="59"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">friend</highlight><highlight class="normal"><sp/><ref refid="classlpf2" kindref="compound">lpf2</ref><sp/>*<sp/><ref refid="classlpf2_1aa54f27bf92c65d6cdf3cb504ab38e650" kindref="member">ccsds_make_lpf2</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>loop_bw,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>damping_factor_squared,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>s_slope);</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"></highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><sp/>RHO;</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"></highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>GAMMA;</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"></highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>RHOB;</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"></highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>d_phi;</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"></highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>d_xi;</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"></highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>d_ephi;</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"></highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>FILE<sp/>*debugFile;</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"></highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>debug_count;</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"></highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classlpf2" kindref="compound">lpf2</ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><sp/>gamma,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><sp/>rho);<sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>private<sp/>constructor</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="108"><highlight class="normal"></highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>wrap(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>in,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>max);</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"></highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>filter_step(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>in);</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"></highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>filter_step_wrapped(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>in,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>wrap_max);</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="143"><highlight class="normal"></highlight></codeline>
+<codeline lineno="144"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classlpf2_1aef2286580d74ff662de0f648d816a9f4" kindref="member">~lpf2</ref>();<sp/><sp/></highlight><highlight class="comment">//<sp/>public<sp/>destructor</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="147"><highlight class="normal"></highlight></codeline>
+<codeline lineno="158"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classlpf2_1ae2b031c19a79269b8b2c6daa495ad5ca" kindref="member">filter</ref>(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*values,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>n);</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"></highlight></codeline>
+<codeline lineno="171"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classlpf2_1ae2b031c19a79269b8b2c6daa495ad5ca" kindref="member">filter</ref>(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*out,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*in,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>n);</highlight></codeline>
+<codeline lineno="172"><highlight class="normal"></highlight></codeline>
+<codeline lineno="184"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classlpf2_1ae2b031c19a79269b8b2c6daa495ad5ca" kindref="member">filter</ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>*out,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*in,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>n);</highlight></codeline>
+<codeline lineno="185"><highlight class="normal"></highlight></codeline>
+<codeline lineno="200"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classlpf2_1aca209c7b1fb4bfb893d034b0d7bb835c" kindref="member">filter_wrapped</ref>(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*values,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*freq_est,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>wrap_max,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>n);</highlight></codeline>
+<codeline lineno="201"><highlight class="normal"></highlight></codeline>
+<codeline lineno="209"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classlpf2_1a4a399e3f6f13657fd3b05aed37416a7c" kindref="member">get_freq_estimate</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="210"><highlight class="normal"></highlight></codeline>
+<codeline lineno="211"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="212"><highlight class="normal"></highlight></codeline>
+<codeline lineno="213"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>INCLUDED_LPF2_H<sp/>*/</highlight><highlight class="preprocessor"></highlight></codeline>
+    </programlisting>
+    <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_lpf2.h"/>
+  </compounddef>
+</doxygen>

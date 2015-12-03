@@ -1,0 +1,111 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="ccsds__ticp__frame__source__b_8h" kind="file">
+    <compoundname>ccsds_ticp_frame_source_b.h</compoundname>
+    <includes refid="ccsds__api_8h" local="no">ccsds_api.h</includes>
+    <includes local="no">gr_block.h</includes>
+    <includes local="no">string</includes>
+    <includes local="no">ticp/TicpClient.hpp</includes>
+    <incdepgraph>
+      <node id="418">
+        <label>gruel/attributes.h</label>
+      </node>
+      <node id="416">
+        <label>ccsds_ticp_frame_source_b.h</label>
+        <link refid="ccsds_ticp_frame_source_b.h"/>
+        <childnode refid="417" relation="include">
+        </childnode>
+        <childnode refid="419" relation="include">
+        </childnode>
+        <childnode refid="420" relation="include">
+        </childnode>
+        <childnode refid="421" relation="include">
+        </childnode>
+      </node>
+      <node id="417">
+        <label>ccsds_api.h</label>
+        <link refid="ccsds__api_8h"/>
+        <childnode refid="418" relation="include">
+        </childnode>
+      </node>
+      <node id="420">
+        <label>string</label>
+      </node>
+      <node id="421">
+        <label>ticp/TicpClient.hpp</label>
+      </node>
+      <node id="419">
+        <label>gr_block.h</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="classccsds__ticp__frame__source__b" prot="public">ccsds_ticp_frame_source_b</innerclass>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="ccsds__ticp__frame__source__b_8h_1ac148935f4adad77eb1969477d9cd6aab" prot="public" static="no">
+        <name>TICP_FRAME_SOURCE_B_DEBUG</name>
+        <initializer>0</initializer>
+        <briefdescription>
+<para>If set to one, dump data to debug file. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/oldblocks/ccsds_ticp_frame_source_b.h" line="11" column="9" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/oldblocks/ccsds_ticp_frame_source_b.h" bodystart="11" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="ccsds__ticp__frame__source__b_8h_1a98913c05598ce878ca892d61f6cdbc95" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="api_8h_1a144137922962dd54ae2e8c1917a7e588" kindref="member">CCSDS_API</ref> ccsds_ticp_frame_source_b_sptr</type>
+        <definition>CCSDS_API ccsds_ticp_frame_source_b_sptr ccsds_make_ticp_frame_source_b</definition>
+        <argsstring>(std::string hostname, unsigned int port, const unsigned int frame_length)</argsstring>
+        <name>ccsds_make_ticp_frame_source_b</name>
+        <param>
+          <type>std::string</type>
+          <declname>hostname</declname>
+        </param>
+        <param>
+          <type>unsigned int</type>
+          <declname>port</declname>
+        </param>
+        <param>
+          <type>const unsigned int</type>
+          <declname>frame_length</declname>
+        </param>
+        <briefdescription>
+<para>Return a shared_ptr to a new instance of <ref refid="classccsds__ticp__frame__source__b" kindref="compound">ccsds_ticp_frame_source_b</ref>. </para>        </briefdescription>
+        <detaileddescription>
+<para>Create an instance of <ref refid="classccsds__ticp__frame__source__b" kindref="compound">ccsds_ticp_frame_source_b</ref> and return it&apos;s shared_ptr.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>hostname</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Hostname of the TicpServer from which to get the data. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>port</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Port of the TicpServer </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>frame_length</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of a frame in bytes. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Shared pointer to the created AR block </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/oldblocks/ccsds_ticp_frame_source_b.h" line="43" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/oldblocks/ccsds_ticp_frame_source_b.h"/>
+  </compounddef>
+</doxygen>

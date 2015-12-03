@@ -1,0 +1,113 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="blob__msg__source__b__impl_8h" kind="file">
+    <compoundname>blob_msg_source_b_impl.h</compoundname>
+    <includes refid="blob__msg__source__b_8h" local="no">ccsds/blob_msg_source_b.h</includes>
+    <includes local="no">queue</includes>
+    <includes local="no">cstdio</includes>
+    <includes local="yes">asynchronous_start.hpp</includes>
+    <includes local="no">boost/thread.hpp</includes>
+    <incdepgraph>
+      <node id="613">
+        <label>ccsds/blob_msg_source_b.h</label>
+        <link refid="blob__msg__source__b_8h"/>
+        <childnode refid="614" relation="include">
+        </childnode>
+        <childnode refid="617" relation="include">
+        </childnode>
+      </node>
+      <node id="618">
+        <label>queue</label>
+      </node>
+      <node id="617">
+        <label>gnuradio/sync_block.h</label>
+      </node>
+      <node id="621">
+        <label>boost/thread.hpp</label>
+      </node>
+      <node id="616">
+        <label>gnuradio/attributes.h</label>
+      </node>
+      <node id="619">
+        <label>cstdio</label>
+      </node>
+      <node id="614">
+        <label>ccsds/api.h</label>
+        <link refid="api_8h"/>
+        <childnode refid="615" relation="include">
+        </childnode>
+        <childnode refid="616" relation="include">
+        </childnode>
+      </node>
+      <node id="615">
+        <label>gnuradio/config.h</label>
+      </node>
+      <node id="612">
+        <label>/home/marina/Documents/sdr1/gr-ccsds/lib/blob_msg_source_b_impl.h</label>
+        <link refid="blob_msg_source_b_impl.h"/>
+        <childnode refid="613" relation="include">
+        </childnode>
+        <childnode refid="618" relation="include">
+        </childnode>
+        <childnode refid="619" relation="include">
+        </childnode>
+        <childnode refid="620" relation="include">
+        </childnode>
+        <childnode refid="621" relation="include">
+        </childnode>
+      </node>
+      <node id="620">
+        <label>asynchronous_start.hpp</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="classgr_1_1ccsds_1_1blob__msg__source__b__impl" prot="public">gr::ccsds::blob_msg_source_b_impl</innerclass>
+    <innernamespace refid="namespacegr">gr</innernamespace>
+    <innernamespace refid="namespacegr_1_1ccsds">gr::ccsds</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>INCLUDED_CCSDS_BLOB_MSG_SOURCE_B_IMPL_H</highlight></codeline>
+<codeline lineno="2"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>INCLUDED_CCSDS_BLOB_MSG_SOURCE_B_IMPL_H</highlight></codeline>
+<codeline lineno="3"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="blob__msg__source__b_8h" kindref="compound">ccsds/blob_msg_source_b.h</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;queue&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;cstdio&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;asynchronous_start.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">gr<sp/>{</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">ccsds<sp/>{</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"><sp/><sp/></highlight></codeline>
+<codeline lineno="12" refid="classgr_1_1ccsds_1_1blob__msg__source__b__impl" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classgr_1_1ccsds_1_1blob__msg__source__b__impl" kindref="compound">blob_msg_source_b_impl</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classgr_1_1ccsds_1_1blob__msg__source__b" kindref="compound">blob_msg_source_b</ref></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>d_BLOB_LEN;</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::queue&lt;unsigned<sp/>char&gt;<sp/>d_queue;</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>d_stop;</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>asynchronous_start<sp/>d_astart;</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>process_message(pmt::pmt_t<sp/>msg_in);</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classgr_1_1ccsds_1_1blob__msg__source__b__impl_1a59d701fe6a4ab20f55d235aebae96169" kindref="member">blob_msg_source_b_impl</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>blob_len);</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classgr_1_1ccsds_1_1blob__msg__source__b__impl_1a08360c83b5697630ae499aeede592793" kindref="member">~blob_msg_source_b_impl</ref><sp/>();<sp/><sp/></highlight><highlight class="comment">//<sp/>public<sp/>destructor</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classgr_1_1ccsds_1_1blob__msg__source__b__impl_1a33a831e27299703ab3447eeb1f20f801" kindref="member">start</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classgr_1_1ccsds_1_1blob__msg__source__b__impl_1ad25b90103678dc9e0b2ec78fa0ab01a5" kindref="member">stop</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classgr_1_1ccsds_1_1blob__msg__source__b__impl_1a7e79b941d70642a04cf0cccb9ca5a989" kindref="member">work</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>noutput_items,<sp/>gr_vector_const_void_star&amp;<sp/>input_items,<sp/>gr_vector_void_star&amp;<sp/>output_items);</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/>}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>ccsds</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="54"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>gr</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>INCLUDED_CCSDS_MSG_BLOB_SOURCE_B_IMPL_H<sp/>*/</highlight><highlight class="preprocessor"></highlight></codeline>
+    </programlisting>
+    <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/blob_msg_source_b_impl.h"/>
+  </compounddef>
+</doxygen>

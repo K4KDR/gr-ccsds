@@ -1,0 +1,168 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="ccsds__randomiser__bb_8h" kind="file">
+    <compoundname>ccsds_randomiser_bb.h</compoundname>
+    <includes refid="ccsds__api_8h" local="no">ccsds_api.h</includes>
+    <includes local="no">gr_sync_block.h</includes>
+    <includes local="yes">gri_lfsr.h</includes>
+    <includes local="no">gr_msg_queue.h</includes>
+    <incdepgraph>
+      <node id="267">
+        <label>gri_lfsr.h</label>
+      </node>
+      <node id="265">
+        <label>gruel/attributes.h</label>
+      </node>
+      <node id="266">
+        <label>gr_sync_block.h</label>
+      </node>
+      <node id="268">
+        <label>gr_msg_queue.h</label>
+      </node>
+      <node id="264">
+        <label>ccsds_api.h</label>
+        <link refid="ccsds__api_8h"/>
+        <childnode refid="265" relation="include">
+        </childnode>
+      </node>
+      <node id="263">
+        <label>/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_randomiser_bb.h</label>
+        <link refid="ccsds_randomiser_bb.h"/>
+        <childnode refid="264" relation="include">
+        </childnode>
+        <childnode refid="266" relation="include">
+        </childnode>
+        <childnode refid="267" relation="include">
+        </childnode>
+        <childnode refid="268" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <innerclass refid="classccsds__randomiser__bb" prot="public">ccsds_randomiser_bb</innerclass>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="ccsds__randomiser__bb_8h_1a37d73fb6c74a79a571d16e3b60bfb45a" prot="public" static="no">
+        <type>boost::shared_ptr&lt; <ref refid="classccsds__randomiser__bb" kindref="compound">ccsds_randomiser_bb</ref> &gt;</type>
+        <definition>typedef boost::shared_ptr&lt;ccsds_randomiser_bb&gt; ccsds_randomiser_bb_sptr</definition>
+        <argsstring></argsstring>
+        <name>ccsds_randomiser_bb_sptr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_randomiser_bb.h" line="31" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_randomiser_bb.h" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="ccsds__randomiser__bb_8h_1a3c52ba3ec7494a77e385f49ddc964d82" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>__GR_ATTR_IMPORT <ref refid="ccsds__randomiser__bb_8h_1a37d73fb6c74a79a571d16e3b60bfb45a" kindref="member">ccsds_randomiser_bb_sptr</ref></type>
+        <definition>__GR_ATTR_IMPORT ccsds_randomiser_bb_sptr ccsds_make_randomiser_bb</definition>
+        <argsstring>(gr_msg_queue_sptr output_queue, int frame_bits, int mask, int seed, int len)</argsstring>
+        <name>ccsds_make_randomiser_bb</name>
+        <param>
+          <type>gr_msg_queue_sptr</type>
+          <declname>output_queue</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>frame_bits</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>mask</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>seed</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>len</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_randomiser_bb.h" line="33" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">/*<sp/>-*-<sp/>c++<sp/>-*-<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="3"><highlight class="comment"><sp/>*<sp/>Copyright<sp/>2012</highlight></codeline>
+<codeline lineno="4"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="5"><highlight class="comment"><sp/>*<sp/>This<sp/>file<sp/>is<sp/>part<sp/>of<sp/>GNU<sp/>Radio</highlight></codeline>
+<codeline lineno="6"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="7"><highlight class="comment"><sp/>*<sp/>GNU<sp/>Radio<sp/>is<sp/>free<sp/>software;<sp/>you<sp/>can<sp/>redistribute<sp/>it<sp/>and/or<sp/>modify</highlight></codeline>
+<codeline lineno="8"><highlight class="comment"><sp/>*<sp/>it<sp/>under<sp/>the<sp/>terms<sp/>of<sp/>the<sp/>GNU<sp/>General<sp/>Public<sp/>License<sp/>as<sp/>published<sp/>by</highlight></codeline>
+<codeline lineno="9"><highlight class="comment"><sp/>*<sp/>the<sp/>Free<sp/>Software<sp/>Foundation;<sp/>either<sp/>version<sp/>3,<sp/>or<sp/>(at<sp/>your<sp/>option)</highlight></codeline>
+<codeline lineno="10"><highlight class="comment"><sp/>*<sp/>any<sp/>later<sp/>version.</highlight></codeline>
+<codeline lineno="11"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="12"><highlight class="comment"><sp/>*<sp/>GNU<sp/>Radio<sp/>is<sp/>distributed<sp/>in<sp/>the<sp/>hope<sp/>that<sp/>it<sp/>will<sp/>be<sp/>useful,</highlight></codeline>
+<codeline lineno="13"><highlight class="comment"><sp/>*<sp/>but<sp/>WITHOUT<sp/>ANY<sp/>WARRANTY;<sp/>without<sp/>even<sp/>the<sp/>implied<sp/>warranty<sp/>of</highlight></codeline>
+<codeline lineno="14"><highlight class="comment"><sp/>*<sp/>MERCHANTABILITY<sp/>or<sp/>FITNESS<sp/>FOR<sp/>A<sp/>PARTICULAR<sp/>PURPOSE.<sp/><sp/>See<sp/>the</highlight></codeline>
+<codeline lineno="15"><highlight class="comment"><sp/>*<sp/>GNU<sp/>General<sp/>Public<sp/>License<sp/>for<sp/>more<sp/>details.</highlight></codeline>
+<codeline lineno="16"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="17"><highlight class="comment"><sp/>*<sp/>You<sp/>should<sp/>have<sp/>received<sp/>a<sp/>copy<sp/>of<sp/>the<sp/>GNU<sp/>General<sp/>Public<sp/>License</highlight></codeline>
+<codeline lineno="18"><highlight class="comment"><sp/>*<sp/>along<sp/>with<sp/>GNU<sp/>Radio;<sp/>see<sp/>the<sp/>file<sp/>COPYING.<sp/><sp/>If<sp/>not,<sp/>write<sp/>to</highlight></codeline>
+<codeline lineno="19"><highlight class="comment"><sp/>*<sp/>the<sp/>Free<sp/>Software<sp/>Foundation,<sp/>Inc.,<sp/>51<sp/>Franklin<sp/>Street,</highlight></codeline>
+<codeline lineno="20"><highlight class="comment"><sp/>*<sp/>Boston,<sp/>MA<sp/>02110-1301,<sp/>USA.</highlight></codeline>
+<codeline lineno="21"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>INCLUDED_ccsds_randomiser_BB_H</highlight></codeline>
+<codeline lineno="23"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>INCLUDED_ccsds_randomiser_BB_H</highlight></codeline>
+<codeline lineno="24"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="ccsds__api_8h" kindref="compound">ccsds_api.h</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;gr_sync_block.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;gri_lfsr.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;gr_msg_queue.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight></codeline>
+<codeline lineno="30" refid="ccsds__randomiser__bb_8h_1a37d73fb6c74a79a571d16e3b60bfb45a" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classccsds__randomiser__bb" kindref="compound">ccsds_randomiser_bb</ref>;</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/>boost::shared_ptr&lt;ccsds_randomiser_bb&gt;<sp/><ref refid="ccsds__randomiser__bb_8h_1a37d73fb6c74a79a571d16e3b60bfb45a" kindref="member">ccsds_randomiser_bb_sptr</ref>;</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><ref refid="api_8h_1a144137922962dd54ae2e8c1917a7e588" kindref="member">CCSDS_API</ref><sp/><ref refid="ccsds__randomiser__bb_8h_1a37d73fb6c74a79a571d16e3b60bfb45a" kindref="member">ccsds_randomiser_bb_sptr</ref><sp/><ref refid="ccsds__randomiser__bb_8h_1a3c52ba3ec7494a77e385f49ddc964d82" kindref="member">ccsds_make_randomiser_bb</ref>(gr_msg_queue_sptr<sp/>output_queue,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>frame_bits,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>mask,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>seed,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>len);</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight></codeline>
+<codeline lineno="60" refid="classccsds__randomiser__bb" refkind="compound"><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="api_8h_1a144137922962dd54ae2e8c1917a7e588" kindref="member">CCSDS_API</ref><sp/><ref refid="classccsds__randomiser__bb" kindref="compound">ccsds_randomiser_bb</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/>gr_sync_block</highlight></codeline>
+<codeline lineno="61"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">friend</highlight><highlight class="normal"><sp/><ref refid="api_8h_1a144137922962dd54ae2e8c1917a7e588" kindref="member">CCSDS_API</ref><sp/><ref refid="ccsds__randomiser__bb_8h_1a37d73fb6c74a79a571d16e3b60bfb45a" kindref="member">ccsds_randomiser_bb_sptr</ref><sp/></highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="ccsds__randomiser__bb_8h_1a3c52ba3ec7494a77e385f49ddc964d82" kindref="member">ccsds_make_randomiser_bb</ref>(gr_msg_queue_sptr<sp/>output_queue,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>frame_bits,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>mask,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>seed,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>len);</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"></highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>gr_msg_queue_sptr<sp/>d_output_queue;</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>gri_lfsr<sp/>d_lfsr;</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>d_bits;</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>d_count;</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>d_byte;</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>d_frame_bits;</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>d_frame_bytes;</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>d_frame_counter;</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*d_packed_frame;</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"></highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classccsds__randomiser__bb" kindref="compound">ccsds_randomiser_bb</ref>(gr_msg_queue_sptr<sp/>output_queue,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>frame_bits,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>mask,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>seed,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>len);</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>forecast<sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>noutput_items,<sp/>gr_vector_int<sp/>&amp;ninput_items_required)</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>num_frames<sp/>=<sp/>std::max(noutput_items/d_frame_bits,<sp/>1);</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"></highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>make<sp/>sure<sp/>that<sp/>we<sp/>get<sp/>at<sp/>least<sp/>one<sp/>frame<sp/>per<sp/>input<sp/>buffer</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>ninputs<sp/>=<sp/>ninput_items_required.size<sp/>();</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>ninputs;<sp/>i++)</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ninput_items_required[i]<sp/>=<sp/>d_frame_bits*num_frames;</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"></highlight></codeline>
+<codeline lineno="87"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>work(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>noutput_items,</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>gr_vector_const_void_star<sp/>&amp;input_items,</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>gr_vector_void_star<sp/>&amp;output_items);</highlight></codeline>
+<codeline lineno="91"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"></highlight></codeline>
+<codeline lineno="93"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>INCLUDED_ccsds_randomiser_BB_H<sp/>*/</highlight><highlight class="preprocessor"></highlight></codeline>
+    </programlisting>
+    <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_randomiser_bb.h"/>
+  </compounddef>
+</doxygen>

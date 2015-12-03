@@ -1,0 +1,463 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="classccsds__ticp__frame__source" kind="class" prot="public">
+    <compoundname>ccsds_ticp_frame_source</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">gr_block</basecompoundref>
+    <includes refid="ccsds__ticp__frame__source_8h" local="no">ccsds_ticp_frame_source.h</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classccsds__ticp__frame__source_1aa2e61836730ed5284333456f255eba4c" prot="private" static="no" mutable="no">
+        <type>const unsigned int</type>
+        <definition>const unsigned int ccsds_ticp_frame_source::d_FRAME_LEN</definition>
+        <argsstring></argsstring>
+        <name>d_FRAME_LEN</name>
+        <briefdescription>
+<para>Length of a frame in bytes. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_ticp_frame_source.h" line="95" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_ticp_frame_source.h" bodystart="95" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__ticp__frame__source_1a43554f5fd17e4173a19fbedda81058fb" prot="private" static="no" mutable="no">
+        <type>const uint8_t</type>
+        <definition>const uint8_t ccsds_ticp_frame_source::d_DATA_TYPE</definition>
+        <argsstring></argsstring>
+        <name>d_DATA_TYPE</name>
+        <briefdescription>
+<para>Type of the dataset&apos;s data that should be used as PDU payload. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_ticp_frame_source.h" line="98" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_ticp_frame_source.h" bodystart="98" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__ticp__frame__source_1ab043580c1e4bca9354f73fe046dffa27" prot="private" static="no" mutable="no">
+        <type>const double</type>
+        <definition>const double ccsds_ticp_frame_source::d_FRAME_RATE</definition>
+        <argsstring></argsstring>
+        <name>d_FRAME_RATE</name>
+        <briefdescription>
+<para>Maximum frame rate in frames per second. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_ticp_frame_source.h" line="101" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_ticp_frame_source.h" bodystart="101" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__ticp__frame__source_1a8da71b27a2c5366159f4534d7beb3c71" prot="private" static="no" mutable="no">
+        <type>const bool</type>
+        <definition>const bool ccsds_ticp_frame_source::d_RATE_CONTROL</definition>
+        <argsstring></argsstring>
+        <name>d_RATE_CONTROL</name>
+        <briefdescription>
+<para>Flag whether or not to apply rate control. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_ticp_frame_source.h" line="104" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_ticp_frame_source.h" bodystart="104" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__ticp__frame__source_1acee14442038d3cdf4f5f1d79e4bae12a" prot="private" static="no" mutable="no">
+        <type>const unsigned long</type>
+        <definition>const unsigned long ccsds_ticp_frame_source::d_TIME_PER_FRAME</definition>
+        <argsstring></argsstring>
+        <name>d_TIME_PER_FRAME</name>
+        <briefdescription>
+<para>Time in nanoseconds a frame needs for transmission. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_ticp_frame_source.h" line="107" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_ticp_frame_source.h" bodystart="107" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__ticp__frame__source_1a6329acda8eaba8e283536e990020bc52" prot="private" static="no" mutable="no">
+        <type>std::map&lt; uint8_t, std::string &gt;</type>
+        <definition>std::map&lt;uint8_t, std::string&gt; ccsds_ticp_frame_source::d_metadata_map</definition>
+        <argsstring></argsstring>
+        <name>d_metadata_map</name>
+        <briefdescription>
+<para>Map to store the metadata mapping in. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_ticp_frame_source.h" line="113" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_ticp_frame_source.h" bodystart="113" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__ticp__frame__source_1a6a3a3eb5f6d8c4f5116770b707d7b22a" prot="private" static="no" mutable="no">
+        <type>timeval</type>
+        <definition>timeval ccsds_ticp_frame_source::d_rate_time_ref</definition>
+        <argsstring></argsstring>
+        <name>d_rate_time_ref</name>
+        <briefdescription>
+<para>Time instance to which the frame counter refers. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_ticp_frame_source.h" line="116" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_ticp_frame_source.h" bodystart="116" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__ticp__frame__source_1a54a84f298ff45da60a69642db0a30848" prot="private" static="no" mutable="no">
+        <type>unsigned int</type>
+        <definition>unsigned int ccsds_ticp_frame_source::d_rate_frame_count</definition>
+        <argsstring></argsstring>
+        <name>d_rate_frame_count</name>
+        <briefdescription>
+<para>Number of frames that have been transmitted since <computeroutput>d_rate_time_ref</computeroutput>. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_ticp_frame_source.h" line="122" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_ticp_frame_source.h" bodystart="122" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__ticp__frame__source_1a7a0257d13fc54d779442cb30925e6468" prot="private" static="no" mutable="no">
+        <type>boost::mutex</type>
+        <definition>boost::mutex ccsds_ticp_frame_source::d_mutex</definition>
+        <argsstring></argsstring>
+        <name>d_mutex</name>
+        <briefdescription>
+<para>Mutex to lock access on <computeroutput>d_stop</computeroutput> between GNURadio and this block&apos;s worker thread. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="see"><para><ref refid="classccsds__ticp__frame__source_1a3b37e3b3ccc9a5ffebe46288dc561728" kindref="member">d_stop</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_ticp_frame_source.h" line="129" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_ticp_frame_source.h" bodystart="129" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__ticp__frame__source_1a3b37e3b3ccc9a5ffebe46288dc561728" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool ccsds_ticp_frame_source::d_stop</definition>
+        <argsstring></argsstring>
+        <name>d_stop</name>
+        <briefdescription>
+<para>Flag to indicate the worker thread to stop working. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="see"><para><ref refid="classccsds__ticp__frame__source_1a7a0257d13fc54d779442cb30925e6468" kindref="member">d_mutex</ref></para></simplesect>
+Access to this flag is controled by <computeroutput>d_mutex</computeroutput>. Default is <emphasis>false</emphasis>, if <emphasis>true</emphasis> the worker thread will return. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_ticp_frame_source.h" line="138" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_ticp_frame_source.h" bodystart="138" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__ticp__frame__source_1a7f88fc5888a8278a3721b365887c2810" prot="private" static="no" mutable="no">
+        <type>boost::shared_ptr&lt; boost::thread &gt;</type>
+        <definition>boost::shared_ptr&lt;boost::thread&gt; ccsds_ticp_frame_source::d_worker_thread</definition>
+        <argsstring></argsstring>
+        <name>d_worker_thread</name>
+        <briefdescription>
+<para>Reference to the worker thread. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_ticp_frame_source.h" line="141" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_ticp_frame_source.h" bodystart="141" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__ticp__frame__source_1a6ff3f78792a6685e8b2faeca83c1928c" prot="private" static="no" mutable="no">
+        <type>unsigned long</type>
+        <definition>unsigned long ccsds_ticp_frame_source::d_frame_count</definition>
+        <argsstring></argsstring>
+        <name>d_frame_count</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_ticp_frame_source.h" line="157" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_ticp_frame_source.h" bodystart="157" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__ticp__frame__source_1ae733e66511233385634aa1d775283f73" prot="private" static="no" mutable="no">
+        <type>asynchronous_start</type>
+        <definition>asynchronous_start ccsds_ticp_frame_source::d_astart</definition>
+        <argsstring></argsstring>
+        <name>d_astart</name>
+        <briefdescription>
+<para>workarround to ensure we only start transmitting, when the flowgraph is started. </para>        </briefdescription>
+        <detaileddescription>
+<para><xrefsect id="todo_1_todo000019"><xreftitle>Todo</xreftitle><xrefdescription><para>reove workarround </para></xrefdescription></xrefsect></para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_ticp_frame_source.h" line="167" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_ticp_frame_source.h" bodystart="167" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="friend">
+      <memberdef kind="friend" id="classccsds__ticp__frame__source_1ac6c859a1672f78bd839287eb60c72790" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>friend <ref refid="api_8h_1a144137922962dd54ae2e8c1917a7e588" kindref="member">CCSDS_API</ref> ccsds_ticp_frame_source_sptr</type>
+        <definition>CCSDS_API ccsds_ticp_frame_source_sptr ccsds_make_ticp_frame_source</definition>
+        <argsstring>(std::string hostname, unsigned int port, const unsigned int frame_length, const uint8_t data_type, std::vector&lt; std::string &gt; map_names, std::vector&lt; uint8_t &gt; map_types, const double frame_rate)</argsstring>
+        <name>ccsds_make_ticp_frame_source</name>
+        <param>
+          <type>std::string</type>
+          <declname>hostname</declname>
+        </param>
+        <param>
+          <type>unsigned int</type>
+          <declname>port</declname>
+        </param>
+        <param>
+          <type>const unsigned int</type>
+          <declname>frame_length</declname>
+        </param>
+        <param>
+          <type>const uint8_t</type>
+          <declname>data_type</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; std::string &gt;</type>
+          <declname>map_names</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; uint8_t &gt;</type>
+          <declname>map_types</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>frame_rate</declname>
+        </param>
+        <briefdescription>
+<para>Return a shared_ptr to a new instance of <ref refid="classccsds__ticp__frame__source" kindref="compound">ccsds_ticp_frame_source</ref>. </para>        </briefdescription>
+        <detaileddescription>
+<para>Create an instance of <ref refid="classccsds__ticp__frame__source" kindref="compound">ccsds_ticp_frame_source</ref> and return it&apos;s shared_ptr.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>hostname</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Hostname of the TicpServer from which to get the data. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>port</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Port of the TicpServer </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>frame_length</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of a frame in bytes. should be copied to. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>data_type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Type of the dataset which&apos;s data should be used for the actuall output data. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>map_names</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vector of names that should be used for the PDU header metadata identifier. Can be empty. Must have the same length as map_types. All elements in this vector must be unique. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>map_types</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vector of datatypes that should be extracted into the PDU header. Can be empty. Must have the same length as map_names. All elements in this vector must be unique. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>frame_rate</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Rate in frames per second at which new frames should be requested from the TICP server. This provides an upper bound for the frame rate, based on the data received from the TICP server the actual rate can be lower. If set to 0.0, no rate limitation is applied and the frames are read in and send out as fast as possible. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Shared pointer to the created AR block </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_ticp_frame_source.h" line="69" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classccsds__ticp__frame__source_1ad813acadd28f3eab880c086498f689ce" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>ccsds_ticp_frame_source::ccsds_ticp_frame_source</definition>
+        <argsstring>(std::string hostname, unsigned int port, const unsigned int frame_length, const uint8_t data_type, std::vector&lt; std::string &gt; map_names, std::vector&lt; uint8_t &gt; map_types, const double frame_rate=0.0)</argsstring>
+        <name>ccsds_ticp_frame_source</name>
+        <param>
+          <type>std::string</type>
+          <declname>hostname</declname>
+        </param>
+        <param>
+          <type>unsigned int</type>
+          <declname>port</declname>
+        </param>
+        <param>
+          <type>const unsigned int</type>
+          <declname>frame_length</declname>
+        </param>
+        <param>
+          <type>const uint8_t</type>
+          <declname>data_type</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; std::string &gt;</type>
+          <declname>map_names</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; uint8_t &gt;</type>
+          <declname>map_types</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>frame_rate</declname>
+          <defval>0.0</defval>
+        </param>
+        <briefdescription>
+<para>Private constructor of the TICP frame source. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>hostname</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Hostname of the TicpServer from which to get the data. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>port</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Port of the TicpServer </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>frame_length</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of a frame in bytes. should be copied to. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>data_type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Type of the dataset which&apos;s data should be used for the actuall output data. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>map_names</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vector of names that should be used for the PDU header metadata identifier. Can be empty. Must have the same length as map_types. All elements in this vector must be unique. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>map_types</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vector of datatypes that should be extracted into the PDU header. Can be empty. Must have the same length as map_names. All elements in this vector must be unique. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>frame_rate</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Rate in frames per second at which new frames should be requested from the TICP server. This provides an upper bound for the frame rate, based on the data received from the TICP server the actual rate can be lower. If set to 0.0, no rate limitation is applied and the frames are read in and send out as fast as possible. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_ticp_frame_source.h" line="92" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classccsds__ticp__frame__source_1ad2d004226802713c3189c3e182413aa0" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ccsds_ticp_frame_source::asynchronous_work</definition>
+        <argsstring>(void)</argsstring>
+        <name>asynchronous_work</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Asynchronous work function which is processing the queues. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_ticp_frame_source.h" line="170" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classccsds__ticp__frame__source_1ac59e4e5f915919b2e10f5e0eb9650958" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>ccsds_ticp_frame_source::~ccsds_ticp_frame_source</definition>
+        <argsstring>()</argsstring>
+        <name>~ccsds_ticp_frame_source</name>
+        <briefdescription>
+<para>Public deconstructor of the ticp frame source. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_ticp_frame_source.h" line="174" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Reads frames from a TicpServer and outputs it as a stream. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="169">
+        <label>gr_block</label>
+      </node>
+      <node id="168">
+        <label>ccsds_ticp_frame_source</label>
+        <link refid="classccsds__ticp__frame__source"/>
+        <childnode refid="169" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="171">
+        <label>gr_block</label>
+      </node>
+      <node id="170">
+        <label>ccsds_ticp_frame_source</label>
+        <link refid="classccsds__ticp__frame__source"/>
+        <childnode refid="171" relation="public-inheritance">
+        </childnode>
+        <childnode refid="172" relation="usage">
+          <edgelabel>d_metadata_map</edgelabel>
+        </childnode>
+      </node>
+      <node id="174">
+        <label>std::basic_string&lt; char &gt;</label>
+      </node>
+      <node id="172">
+        <label>std::map&lt; uint8_t, std::string &gt;</label>
+        <childnode refid="173" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+      <node id="173">
+        <label>std::string</label>
+        <childnode refid="174" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_ticp_frame_source.h" line="67" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_ticp_frame_source.h" bodystart="66" bodyend="175"/>
+    <listofallmembers>
+      <member refid="classccsds__ticp__frame__source_1ad2d004226802713c3189c3e182413aa0" prot="private" virt="non-virtual"><scope>ccsds_ticp_frame_source</scope><name>asynchronous_work</name></member>
+      <member refid="classccsds__ticp__frame__source_1ac6c859a1672f78bd839287eb60c72790" prot="private" virt="non-virtual"><scope>ccsds_ticp_frame_source</scope><name>ccsds_make_ticp_frame_source</name></member>
+      <member refid="classccsds__ticp__frame__source_1ad813acadd28f3eab880c086498f689ce" prot="private" virt="non-virtual"><scope>ccsds_ticp_frame_source</scope><name>ccsds_ticp_frame_source</name></member>
+      <member refid="classccsds__ticp__frame__source_1ae733e66511233385634aa1d775283f73" prot="private" virt="non-virtual"><scope>ccsds_ticp_frame_source</scope><name>d_astart</name></member>
+      <member refid="classccsds__ticp__frame__source_1a43554f5fd17e4173a19fbedda81058fb" prot="private" virt="non-virtual"><scope>ccsds_ticp_frame_source</scope><name>d_DATA_TYPE</name></member>
+      <member refid="classccsds__ticp__frame__source_1a6ff3f78792a6685e8b2faeca83c1928c" prot="private" virt="non-virtual"><scope>ccsds_ticp_frame_source</scope><name>d_frame_count</name></member>
+      <member refid="classccsds__ticp__frame__source_1aa2e61836730ed5284333456f255eba4c" prot="private" virt="non-virtual"><scope>ccsds_ticp_frame_source</scope><name>d_FRAME_LEN</name></member>
+      <member refid="classccsds__ticp__frame__source_1ab043580c1e4bca9354f73fe046dffa27" prot="private" virt="non-virtual"><scope>ccsds_ticp_frame_source</scope><name>d_FRAME_RATE</name></member>
+      <member refid="classccsds__ticp__frame__source_1a6329acda8eaba8e283536e990020bc52" prot="private" virt="non-virtual"><scope>ccsds_ticp_frame_source</scope><name>d_metadata_map</name></member>
+      <member refid="classccsds__ticp__frame__source_1a7a0257d13fc54d779442cb30925e6468" prot="private" virt="non-virtual"><scope>ccsds_ticp_frame_source</scope><name>d_mutex</name></member>
+      <member refid="classccsds__ticp__frame__source_1a8da71b27a2c5366159f4534d7beb3c71" prot="private" virt="non-virtual"><scope>ccsds_ticp_frame_source</scope><name>d_RATE_CONTROL</name></member>
+      <member refid="classccsds__ticp__frame__source_1a54a84f298ff45da60a69642db0a30848" prot="private" virt="non-virtual"><scope>ccsds_ticp_frame_source</scope><name>d_rate_frame_count</name></member>
+      <member refid="classccsds__ticp__frame__source_1a6a3a3eb5f6d8c4f5116770b707d7b22a" prot="private" virt="non-virtual"><scope>ccsds_ticp_frame_source</scope><name>d_rate_time_ref</name></member>
+      <member refid="classccsds__ticp__frame__source_1a3b37e3b3ccc9a5ffebe46288dc561728" prot="private" virt="non-virtual"><scope>ccsds_ticp_frame_source</scope><name>d_stop</name></member>
+      <member refid="classccsds__ticp__frame__source_1acee14442038d3cdf4f5f1d79e4bae12a" prot="private" virt="non-virtual"><scope>ccsds_ticp_frame_source</scope><name>d_TIME_PER_FRAME</name></member>
+      <member refid="classccsds__ticp__frame__source_1a7f88fc5888a8278a3721b365887c2810" prot="private" virt="non-virtual"><scope>ccsds_ticp_frame_source</scope><name>d_worker_thread</name></member>
+      <member refid="classccsds__ticp__frame__source_1ac59e4e5f915919b2e10f5e0eb9650958" prot="public" virt="non-virtual"><scope>ccsds_ticp_frame_source</scope><name>~ccsds_ticp_frame_source</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

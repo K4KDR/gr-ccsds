@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="ticp__frame__source__impl_8h" kind="file">
+    <compoundname>ticp_frame_source_impl.h</compoundname>
+    <includes refid="ticp__frame__source_8h" local="no">ccsds/ticp_frame_source.h</includes>
+    <includes local="no">string</includes>
+    <includes local="no">ticp/TicpClient.hpp</includes>
+    <includes local="no">boost/thread.hpp</includes>
+    <includes local="no">boost/shared_ptr.hpp</includes>
+    <includes local="yes">asynchronous_start.hpp</includes>
+    <includes refid="lib_2ccsds__time_8h" local="yes">ccsds_time.h</includes>
+    <incdepgraph>
+      <node id="829">
+        <label>ticp_frame_source_impl.h</label>
+        <link refid="ticp_frame_source_impl.h"/>
+        <childnode refid="830" relation="include">
+        </childnode>
+        <childnode refid="835" relation="include">
+        </childnode>
+        <childnode refid="836" relation="include">
+        </childnode>
+        <childnode refid="837" relation="include">
+        </childnode>
+        <childnode refid="838" relation="include">
+        </childnode>
+        <childnode refid="839" relation="include">
+        </childnode>
+        <childnode refid="840" relation="include">
+        </childnode>
+      </node>
+      <node id="838">
+        <label>boost/shared_ptr.hpp</label>
+      </node>
+      <node id="835">
+        <label>string</label>
+      </node>
+      <node id="837">
+        <label>boost/thread.hpp</label>
+      </node>
+      <node id="833">
+        <label>gnuradio/attributes.h</label>
+      </node>
+      <node id="836">
+        <label>ticp/TicpClient.hpp</label>
+      </node>
+      <node id="830">
+        <label>ccsds/ticp_frame_source.h</label>
+        <link refid="ticp__frame__source_8h"/>
+        <childnode refid="831" relation="include">
+        </childnode>
+        <childnode refid="834" relation="include">
+        </childnode>
+      </node>
+      <node id="831">
+        <label>ccsds/api.h</label>
+        <link refid="api_8h"/>
+        <childnode refid="832" relation="include">
+        </childnode>
+        <childnode refid="833" relation="include">
+        </childnode>
+      </node>
+      <node id="834">
+        <label>gnuradio/block.h</label>
+      </node>
+      <node id="840">
+        <label>ccsds_time.h</label>
+        <link refid="lib_2ccsds__time_8h"/>
+        <childnode refid="841" relation="include">
+        </childnode>
+      </node>
+      <node id="841">
+        <label>time.h</label>
+      </node>
+      <node id="832">
+        <label>gnuradio/config.h</label>
+      </node>
+      <node id="839">
+        <label>asynchronous_start.hpp</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="classgr_1_1ccsds_1_1ticp__frame__source__impl" prot="public">gr::ccsds::ticp_frame_source_impl</innerclass>
+    <innernamespace refid="namespacegr">gr</innernamespace>
+    <innernamespace refid="namespacegr_1_1ccsds">gr::ccsds</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/ticp_frame_source_impl.h"/>
+  </compounddef>
+</doxygen>

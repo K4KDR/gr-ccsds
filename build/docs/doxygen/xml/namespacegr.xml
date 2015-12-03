@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="namespacegr" kind="namespace">
+    <compoundname>gr</compoundname>
+    <innernamespace refid="namespacegr_1_1ccsds">gr::ccsds</innernamespace>
+    <briefdescription>
+<para>Reads frames from message input port &quot;in&quot; and outputs it to a TicpClient. </para>    </briefdescription>
+    <detaileddescription>
+<para>If set to one, dump data to debug file.</para><para>Reads frames of softbits from message input port &quot;in&quot; and outputs the corresponding hard decisions in a packed byte.</para><para>Append a M-PSK preamble before the input stream.</para><para>M-PSK modulator.</para><para>On construction a constellation array is generated. This constellation is later used to map the individual data bits to symbols.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>num</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of preamble symbols.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+Outputs <computeroutput>num</computeroutput> preamble symbols, before the input stream is copied to the output stream. This can be used to let the receiver synchronize before sending frames. This way even the first transmitted frame can be received and decoded.</para><para>The preable consists of alternating BPSK symbols (starting with 1+0j). BPSK symbols are also part of any other M-PSK constellation where M is a power of two and thus works for all M-PSK receivers.</para><para>Print out warnings about missing metadata header mappings, otherwise be silent</para><para>If defined the work function stops after sourcing at least the defined number of bytes. </para>    </detaileddescription>
+    <location file="/home/marina/Documents/sdr1/gr-ccsds/include/ccsds/add_asm.h" line="9" column="1"/>
+  </compounddef>
+</doxygen>

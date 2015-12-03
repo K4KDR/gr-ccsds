@@ -1,0 +1,277 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="classccsds__mpsk__demod__cb" kind="class" prot="public">
+    <compoundname>ccsds_mpsk_demod_cb</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">gr_sync_block</basecompoundref>
+    <includes refid="ccsds__mpsk__demod__cb_8h" local="no">ccsds_mpsk_demod_cb.h</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classccsds__mpsk__demod__cb_1a30dbeec583d90a92961a95ba5b365cc6" prot="private" static="no" mutable="no">
+        <type>unsigned int</type>
+        <definition>unsigned int ccsds_mpsk_demod_cb::d_M</definition>
+        <argsstring></argsstring>
+        <name>d_M</name>
+        <briefdescription>
+<para>Modulation order. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_mpsk_demod_cb.h" line="56" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_mpsk_demod_cb.h" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__mpsk__demod__cb_1a1b162853889a6ef42c604f6c28f21ef9" prot="private" static="no" mutable="no">
+        <type>gr_complex *</type>
+        <definition>gr_complex* ccsds_mpsk_demod_cb::d_constellation</definition>
+        <argsstring></argsstring>
+        <name>d_constellation</name>
+        <briefdescription>
+<para>Pointer to the precomputed constellation. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_mpsk_demod_cb.h" line="59" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_mpsk_demod_cb.h" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__mpsk__demod__cb_1adeb41dbf5a414ceac7b6bf52c8107852" prot="private" static="no" mutable="no">
+        <type>char(ccsds_mpsk_demod_cb::*</type>
+        <definition>char(ccsds_mpsk_demod_cb:: * ccsds_mpsk_demod_cb::detect_symbol)(gr_complex symbol)</definition>
+        <argsstring>)(gr_complex symbol)</argsstring>
+        <name>detect_symbol</name>
+        <briefdescription>
+<para>Function pointer to the used detector function, based on the modulation order. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="see"><para>detect_bpsk_symbol </para><simplesectsep/><para>detect_qpsk_symbol </para><simplesectsep/><para>detect_mpsk_symbol </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_mpsk_demod_cb.h" line="116" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_mpsk_demod_cb.h" bodystart="116" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="friend">
+      <memberdef kind="friend" id="classccsds__mpsk__demod__cb_1aca8be47111ca623d28b8d746b4ae8d1e" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>friend __GR_ATTR_IMPORT <ref refid="ccsds__mpsk__demod__cb_8h_1a2ea492e5d452d26f9fe6a3d0466c6818" kindref="member">ccsds_mpsk_demod_cb_sptr</ref></type>
+        <definition>__GR_ATTR_IMPORT ccsds_mpsk_demod_cb_sptr ccsds_make_mpsk_demod_cb</definition>
+        <argsstring>(unsigned int M)</argsstring>
+        <name>ccsds_make_mpsk_demod_cb</name>
+        <param>
+          <type>unsigned int</type>
+          <declname>M</declname>
+        </param>
+        <briefdescription>
+<para>Create an M-PSK demodulator and return it&apos;s shared pointer. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>M</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Modulation order of the M-PSK signal. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Shared pointer of the created demodulator. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_mpsk_demod_cb.h" line="37" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classccsds__mpsk__demod__cb_1aaeff97b3124276fb7ce019a0dfca4e34" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>ccsds_mpsk_demod_cb::ccsds_mpsk_demod_cb</definition>
+        <argsstring>(unsigned int M)</argsstring>
+        <name>ccsds_mpsk_demod_cb</name>
+        <param>
+          <type>unsigned int</type>
+          <declname>M</declname>
+        </param>
+        <briefdescription>
+<para>Private constructor of the M-PSK demodulator. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>M</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Modulation order of the M-PSK signal. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="see"><para><ref refid="classccsds__mpsk__demod2__cb" kindref="compound">ccsds_mpsk_demod2_cb</ref> </para><simplesectsep/><para>ccsds_mpsk_demod_cb::detect_bpsk_symbol </para><simplesectsep/><para>ccsds_mpsk_demod_cb::detect_qpsk_symbol </para><simplesectsep/><para>ccsds_mpsk_demod_cb::detect_mpsk_symbol</para></simplesect>
+Demodulate M-PSK modulated symbols back to data bits. This demodulator has an optimized detector for BPSK and QPSK. For other modulation orders it created a constellation and compares this constellation to the received sample to get a nearest enighbour decision. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_mpsk_demod_cb.h" line="53" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classccsds__mpsk__demod__cb_1a5389935693c5c1191b0f87efbfd4250c" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>char</type>
+        <definition>char ccsds_mpsk_demod_cb::detect_bpsk_symbol</definition>
+        <argsstring>(gr_complex symbol)</argsstring>
+        <name>detect_bpsk_symbol</name>
+        <param>
+          <type>gr_complex</type>
+          <declname>symbol</declname>
+        </param>
+        <briefdescription>
+<para>Optimized BPSK detector. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>symbol</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Symbol to demodulate. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Detected data bits.</para></simplesect>
+BPSK detector based on the decision border on the Quadrature component axis.</para><para><programlisting><codeline><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>(real(symbol)<sp/>&gt;<sp/>0)<sp/>?<sp/>0<sp/>:<sp/>1;<sp/></highlight></codeline>
+</programlisting> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_mpsk_demod_cb.h" line="71" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classccsds__mpsk__demod__cb_1a957ffab119b5072702177532a25d69d9" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>char</type>
+        <definition>char ccsds_mpsk_demod_cb::detect_qpsk_symbol</definition>
+        <argsstring>(gr_complex symbol)</argsstring>
+        <name>detect_qpsk_symbol</name>
+        <param>
+          <type>gr_complex</type>
+          <declname>symbol</declname>
+        </param>
+        <briefdescription>
+<para>Optimized QPSK detector. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>symbol</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Symbol to demodulate. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Detected data bits.</para></simplesect>
+QPSK detector based on the two angle bisectors as decision borders.</para><para><programlisting><codeline><highlight class="keywordflow">if</highlight><highlight class="normal">(imag(symbol)&gt;real(symbol))<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(real(symbol)&gt;-imag(symbol))<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>1;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>3;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal">}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(real(symbol)&gt;-imag(symbol))<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>0;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>2;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+</programlisting> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_mpsk_demod_cb.h" line="96" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classccsds__mpsk__demod__cb_1a8b90e7a2101a95300aa2b6e49af19250" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>char</type>
+        <definition>char ccsds_mpsk_demod_cb::detect_mpsk_symbol</definition>
+        <argsstring>(gr_complex symbol)</argsstring>
+        <name>detect_mpsk_symbol</name>
+        <param>
+          <type>gr_complex</type>
+          <declname>symbol</declname>
+        </param>
+        <briefdescription>
+<para>Detect general M-PSK modulated symbol. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>symbol</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Symbol to demodulate.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+The constructor <ref refid="classccsds__mpsk__demod__cb" kindref="compound">ccsds_mpsk_demod_cb()</ref> generates a M-PSK constellation. For each sample the symbol with the minimum distance to the constellation symbol is chosen from the precomputed constellation. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_mpsk_demod_cb.h" line="107" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classccsds__mpsk__demod__cb_1a04c3937614985d444bbdc8114c2e4a6a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>ccsds_mpsk_demod_cb::~ccsds_mpsk_demod_cb</definition>
+        <argsstring>()</argsstring>
+        <name>~ccsds_mpsk_demod_cb</name>
+        <briefdescription>
+<para>Public deconstructor. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_mpsk_demod_cb.h" line="121" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classccsds__mpsk__demod__cb_1a6719d7d160a3a96dd21de32bb55e9abe" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int ccsds_mpsk_demod_cb::work</definition>
+        <argsstring>(int noutput_items, gr_vector_const_void_star &amp;input_items, gr_vector_void_star &amp;output_items)</argsstring>
+        <name>work</name>
+        <param>
+          <type>int</type>
+          <declname>noutput_items</declname>
+        </param>
+        <param>
+          <type>gr_vector_const_void_star &amp;</type>
+          <declname>input_items</declname>
+        </param>
+        <param>
+          <type>gr_vector_void_star &amp;</type>
+          <declname>output_items</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_mpsk_demod_cb.h" line="123" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>M-PSK demodulator. </para>    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="see"><para>ccsds_mpsk_demod_cb::detect_bpsk_symbol </para><simplesectsep/><para>ccsds_mpsk_demod_cb::detect_qpsk_symbol </para><simplesectsep/><para>ccsds_mpsk_demod_cb::detect_mpsk_symbol</para></simplesect>
+M-PSK demodulation based on nearest neighbour principle.</para><para>For M=2 and M=4 detection is done by algorithmic decision borders.</para><para>For all other modulation orders a constellation is generated and for every every sample the symbol with the minimum distance to the constellation symbol is chosen from the precomputed constellation. </para>    </detaileddescription>
+    <inheritancegraph>
+      <node id="91">
+        <label>gr_sync_block</label>
+      </node>
+      <node id="90">
+        <label>ccsds_mpsk_demod_cb</label>
+        <link refid="classccsds__mpsk__demod__cb"/>
+        <childnode refid="91" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="93">
+        <label>gr_sync_block</label>
+      </node>
+      <node id="92">
+        <label>ccsds_mpsk_demod_cb</label>
+        <link refid="classccsds__mpsk__demod__cb"/>
+        <childnode refid="93" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_mpsk_demod_cb.h" line="35" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_mpsk_demod_cb.h" bodystart="34" bodyend="126"/>
+    <listofallmembers>
+      <member refid="classccsds__mpsk__demod__cb_1aca8be47111ca623d28b8d746b4ae8d1e" prot="private" virt="non-virtual"><scope>ccsds_mpsk_demod_cb</scope><name>ccsds_make_mpsk_demod_cb</name></member>
+      <member refid="classccsds__mpsk__demod__cb_1aaeff97b3124276fb7ce019a0dfca4e34" prot="private" virt="non-virtual"><scope>ccsds_mpsk_demod_cb</scope><name>ccsds_mpsk_demod_cb</name></member>
+      <member refid="classccsds__mpsk__demod__cb_1a1b162853889a6ef42c604f6c28f21ef9" prot="private" virt="non-virtual"><scope>ccsds_mpsk_demod_cb</scope><name>d_constellation</name></member>
+      <member refid="classccsds__mpsk__demod__cb_1a30dbeec583d90a92961a95ba5b365cc6" prot="private" virt="non-virtual"><scope>ccsds_mpsk_demod_cb</scope><name>d_M</name></member>
+      <member refid="classccsds__mpsk__demod__cb_1a5389935693c5c1191b0f87efbfd4250c" prot="private" virt="non-virtual"><scope>ccsds_mpsk_demod_cb</scope><name>detect_bpsk_symbol</name></member>
+      <member refid="classccsds__mpsk__demod__cb_1a8b90e7a2101a95300aa2b6e49af19250" prot="private" virt="non-virtual"><scope>ccsds_mpsk_demod_cb</scope><name>detect_mpsk_symbol</name></member>
+      <member refid="classccsds__mpsk__demod__cb_1a957ffab119b5072702177532a25d69d9" prot="private" virt="non-virtual"><scope>ccsds_mpsk_demod_cb</scope><name>detect_qpsk_symbol</name></member>
+      <member refid="classccsds__mpsk__demod__cb_1adeb41dbf5a414ceac7b6bf52c8107852" prot="private" virt="non-virtual"><scope>ccsds_mpsk_demod_cb</scope><name>detect_symbol</name></member>
+      <member refid="classccsds__mpsk__demod__cb_1a6719d7d160a3a96dd21de32bb55e9abe" prot="public" virt="non-virtual"><scope>ccsds_mpsk_demod_cb</scope><name>work</name></member>
+      <member refid="classccsds__mpsk__demod__cb_1a04c3937614985d444bbdc8114c2e4a6a" prot="public" virt="non-virtual"><scope>ccsds_mpsk_demod_cb</scope><name>~ccsds_mpsk_demod_cb</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="lib_2ccsds__time_8h" kind="file">
+    <compoundname>lib/ccsds_time.h</compoundname>
+    <includes local="no">time.h</includes>
+    <includedby refid="ticp__frame__source__impl_8h" local="yes">ticp_frame_source_impl.h</includedby>
+    <incdepgraph>
+      <node id="427">
+        <label>ccsds_time.h</label>
+        <link refid="lib/ccsds_time.h"/>
+        <childnode refid="428" relation="include">
+        </childnode>
+      </node>
+      <node id="428">
+        <label>time.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="430">
+        <label>ticp_frame_source_impl.h</label>
+        <link refid="ticp__frame__source__impl_8h"/>
+      </node>
+      <node id="429">
+        <label>ccsds_time.h</label>
+        <link refid="lib/ccsds_time.h"/>
+        <childnode refid="430" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innernamespace refid="namespacegr">gr</innernamespace>
+    <innernamespace refid="namespacegr_1_1ccsds">gr::ccsds</innernamespace>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="lib_2ccsds__time_8h_1aed9ea78689ecce0b7264c02c7f8a9a54" prot="public" static="no">
+        <name>G</name>
+        <initializer>1000000000</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/ccsds_time.h" line="6" column="9" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/lib/ccsds_time.h" bodystart="6" bodyend="-1"/>
+        <referencedby refid="namespacegr_1_1ccsds_1aac0249060553ce620568b15ed40bd8df" compoundref="lib_2ccsds__time_8h" startline="17" endline="19">gr::ccsds::time_diff_nano</referencedby>
+        <referencedby refid="namespacegr_1_1ccsds_1aa1dfd7260ecc1e01169f8ed7b082a622" compoundref="lib_2ccsds__time_8h" startline="34" endline="39">gr::ccsds::time_diff_to_timespec</referencedby>
+        <referencedby refid="namespacegr_1_1ccsds_1a9bfba57a871d8b6929daec9dd33b58fb" compoundref="lib_2ccsds__time_8h" startline="41" endline="43">gr::ccsds::time_to_nano</referencedby>
+      </memberdef>
+      <memberdef kind="define" id="lib_2ccsds__time_8h_1a52037c938e3c1b126c6277da5ca689d0" prot="public" static="no">
+        <name>M</name>
+        <initializer>1000000</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/ccsds_time.h" line="7" column="9" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/lib/ccsds_time.h" bodystart="7" bodyend="-1"/>
+        <referencedby refid="namespacegr_1_1ccsds_1a84ac4f7c02fb9d46236ef13e16641607" compoundref="lib_2ccsds__time_8h" startline="25" endline="32">gr::ccsds::time_add_usecs</referencedby>
+        <referencedby refid="namespacegr_1_1ccsds_1a1cdb9245eb238d1a7168fa417c750b65" compoundref="lib_2ccsds__time_8h" startline="45" endline="47">gr::ccsds::time_to_micro</referencedby>
+      </memberdef>
+      <memberdef kind="define" id="lib_2ccsds__time_8h_1a97d832ae23af4f215e801e37e4f94254" prot="public" static="no">
+        <name>K</name>
+        <initializer>1000</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/ccsds_time.h" line="8" column="9" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/lib/ccsds_time.h" bodystart="8" bodyend="-1"/>
+        <referencedby refid="namespacegr_1_1ccsds_1aac0249060553ce620568b15ed40bd8df" compoundref="lib_2ccsds__time_8h" startline="17" endline="19">gr::ccsds::time_diff_nano</referencedby>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/ccsds_time.h"/>
+  </compounddef>
+</doxygen>

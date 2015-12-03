@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="reversebits_8h" kind="file">
+    <compoundname>reversebits.h</compoundname>
+    <includes refid="api_8h" local="no">ccsds/api.h</includes>
+    <includes local="no">gnuradio/sync_block.h</includes>
+    <includedby refid="reversebits__impl_8h" local="no">reversebits_impl.h</includedby>
+    <incdepgraph>
+      <node id="708">
+        <label>reversebits.h</label>
+        <link refid="reversebits.h"/>
+        <childnode refid="709" relation="include">
+        </childnode>
+        <childnode refid="712" relation="include">
+        </childnode>
+      </node>
+      <node id="712">
+        <label>gnuradio/sync_block.h</label>
+      </node>
+      <node id="711">
+        <label>gnuradio/attributes.h</label>
+      </node>
+      <node id="709">
+        <label>ccsds/api.h</label>
+        <link refid="api_8h"/>
+        <childnode refid="710" relation="include">
+        </childnode>
+        <childnode refid="711" relation="include">
+        </childnode>
+      </node>
+      <node id="710">
+        <label>gnuradio/config.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="713">
+        <label>reversebits.h</label>
+        <link refid="reversebits.h"/>
+        <childnode refid="714" relation="include">
+        </childnode>
+      </node>
+      <node id="714">
+        <label>reversebits_impl.h</label>
+        <link refid="reversebits__impl_8h"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classgr_1_1ccsds_1_1reversebits" prot="public">gr::ccsds::reversebits</innerclass>
+    <innernamespace refid="namespacegr">gr</innernamespace>
+    <innernamespace refid="namespacegr_1_1ccsds">gr::ccsds</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/marina/Documents/sdr1/gr-ccsds/include/ccsds/reversebits.h"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="group__receiver" kind="group">
+    <compoundname>receiver</compoundname>
+    <title>CCSDS receiver blocks</title>
+    <innerclass refid="classccsds__asm__operator" prot="public">ccsds_asm_operator</innerclass>
+    <innerclass refid="classccsds__frame__sync__b" prot="public">ccsds_frame_sync_b</innerclass>
+    <innerclass refid="classccsds__framer__sink__dual" prot="public">ccsds_framer_sink_dual</innerclass>
+    <innerclass refid="classccsds__mpsk__demod2__cb" prot="public">ccsds_mpsk_demod2_cb</innerclass>
+    <innerclass refid="classccsds__mpsk__demod__cb" prot="public">ccsds_mpsk_demod_cb</innerclass>
+    <innerclass refid="classccsds__mpsk__detector__soft__cf" prot="public">ccsds_mpsk_detector_soft_cf</innerclass>
+    <innerclass refid="classgr_1_1ccsds_1_1mpsk__detector__soft__cf" prot="public">gr::ccsds::mpsk_detector_soft_cf</innerclass>
+    <innergroup refid="group__synchronization">CCSDS synchronization blocks</innergroup>
+    <briefdescription>
+<para>Summary of all blocks used for demodulating and receiving a CCSDS conformant signal. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

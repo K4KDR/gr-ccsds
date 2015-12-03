@@ -1,0 +1,267 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="classgr_1_1ccsds_1_1rs__decode__impl" kind="class" prot="public">
+    <compoundname>gr::ccsds::rs_decode_impl</compoundname>
+    <basecompoundref refid="classgr_1_1ccsds_1_1rs__decode" prot="public" virt="non-virtual">gr::ccsds::rs_decode</basecompoundref>
+    <includes refid="rs__decode__impl_8h" local="no">rs_decode_impl.h</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classgr_1_1ccsds_1_1rs__decode__impl_1ab57f063599181a8a57f0499ced041674" prot="private" static="no" mutable="no">
+        <type>const unsigned int</type>
+        <definition>const unsigned int gr::ccsds::rs_decode_impl::d_I</definition>
+        <argsstring></argsstring>
+        <name>d_I</name>
+        <briefdescription>
+<para>Depth of interleaving. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/rs_decode_impl.h" line="38" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/lib/rs_decode_impl.h" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classgr_1_1ccsds_1_1rs__decode__impl_1adf0c2c2a370b0823dd13015c6f0d1200" prot="private" static="no" mutable="no">
+        <type>const unsigned int</type>
+        <definition>const unsigned int gr::ccsds::rs_decode_impl::d_k</definition>
+        <argsstring></argsstring>
+        <name>d_k</name>
+        <briefdescription>
+<para>Number of information symbols per codeword. Value=223. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/rs_decode_impl.h" line="41" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/lib/rs_decode_impl.h" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classgr_1_1ccsds_1_1rs__decode__impl_1afc834433d541e1002f3b4b70a440c041" prot="private" static="no" mutable="no">
+        <type>const unsigned int</type>
+        <definition>const unsigned int gr::ccsds::rs_decode_impl::d_n</definition>
+        <argsstring></argsstring>
+        <name>d_n</name>
+        <briefdescription>
+<para>Number of symbols per codeword. Value=255. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/rs_decode_impl.h" line="44" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/lib/rs_decode_impl.h" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classgr_1_1ccsds_1_1rs__decode__impl_1a053db8980a4aa25c7d1659bc8d8885b7" prot="private" static="no" mutable="no">
+        <type>const unsigned int</type>
+        <definition>const unsigned int gr::ccsds::rs_decode_impl::d_2E</definition>
+        <argsstring></argsstring>
+        <name>d_2E</name>
+        <briefdescription>
+<para>Number of parity check symbols per codeword. Value=32. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/rs_decode_impl.h" line="47" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/lib/rs_decode_impl.h" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classgr_1_1ccsds_1_1rs__decode__impl_1a347e1546c384a3002b693b4b4fd549fd" prot="private" static="no" mutable="no">
+        <type>const unsigned int</type>
+        <definition>const unsigned int gr::ccsds::rs_decode_impl::d_DATA_LEN</definition>
+        <argsstring></argsstring>
+        <name>d_DATA_LEN</name>
+        <briefdescription>
+<para>Number of data bytes per codeblock. Value=k*I. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/rs_decode_impl.h" line="50" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/lib/rs_decode_impl.h" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classgr_1_1ccsds_1_1rs__decode__impl_1adb83109ba2e626fcf6d70d40eab67091" prot="private" static="no" mutable="no">
+        <type>const unsigned int</type>
+        <definition>const unsigned int gr::ccsds::rs_decode_impl::d_IN_LEN</definition>
+        <argsstring></argsstring>
+        <name>d_IN_LEN</name>
+        <briefdescription>
+<para>Number of bytes per codeblock. Value=(k+2E)*I. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/rs_decode_impl.h" line="53" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/lib/rs_decode_impl.h" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classgr_1_1ccsds_1_1rs__decode__impl_1a16c358a0ec279fb3abd06290a27c7830" prot="private" static="no" mutable="no">
+        <type>unsigned char *</type>
+        <definition>unsigned char* gr::ccsds::rs_decode_impl::d_buf_in</definition>
+        <argsstring></argsstring>
+        <name>d_buf_in</name>
+        <briefdescription>
+<para>Storage for the first interleaving stage. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/rs_decode_impl.h" line="56" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/lib/rs_decode_impl.h" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classgr_1_1ccsds_1_1rs__decode__impl_1ab2376adfc66cdb7d9dce218195c58664" prot="private" static="no" mutable="no">
+        <type>unsigned char *</type>
+        <definition>unsigned char* gr::ccsds::rs_decode_impl::d_buf_data</definition>
+        <argsstring></argsstring>
+        <name>d_buf_data</name>
+        <briefdescription>
+<para>Storage for the second interleaving stage. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/rs_decode_impl.h" line="59" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/lib/rs_decode_impl.h" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classgr_1_1ccsds_1_1rs__decode__impl_1a928148645916b25e86f989b5e8f8bd59" prot="private" static="no" mutable="no">
+        <type>unsigned char *</type>
+        <definition>unsigned char* gr::ccsds::rs_decode_impl::d_buf_out</definition>
+        <argsstring></argsstring>
+        <name>d_buf_out</name>
+        <briefdescription>
+<para>Storage for the output frames symbols. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/rs_decode_impl.h" line="62" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/lib/rs_decode_impl.h" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classgr_1_1ccsds_1_1rs__decode__impl_1a5e1d480f91cf8acc49a072259cd0b21d" prot="private" static="no" mutable="no">
+        <type>const <ref refid="classgr_1_1ccsds_1_1rs__decode_1ae5220eabbdc2193dc31727b04ee2a436" kindref="member">repr_t</ref></type>
+        <definition>const repr_t gr::ccsds::rs_decode_impl::d_representation</definition>
+        <argsstring></argsstring>
+        <name>d_representation</name>
+        <briefdescription>
+<para>Storage for representation type. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/rs_decode_impl.h" line="65" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/lib/rs_decode_impl.h" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classgr_1_1ccsds_1_1rs__decode__impl_1afa8b7eca79bdb36626b78b49bca39829" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>gr::ccsds::rs_decode_impl::rs_decode_impl</definition>
+        <argsstring>(const unsigned int I, const repr_t representation)</argsstring>
+        <name>rs_decode_impl</name>
+        <param>
+          <type>const unsigned int</type>
+          <declname>I</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classgr_1_1ccsds_1_1rs__decode_1ae5220eabbdc2193dc31727b04ee2a436" kindref="member">repr_t</ref></type>
+          <declname>representation</declname>
+        </param>
+        <briefdescription>
+<para>Public constructor of the RS_Decode block. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>I</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Depth of interleaving </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>representation</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Data representation to use. 0 For Berlekamp (dual basis) representation , 1 for conventional representation. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/rs_decode_impl.h" line="90" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classgr_1_1ccsds_1_1rs__decode__impl_1a6b8afe4fb55b471579df49f438b3364b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>gr::ccsds::rs_decode_impl::~rs_decode_impl</definition>
+        <argsstring>()</argsstring>
+        <name>~rs_decode_impl</name>
+        <briefdescription>
+<para>Public deconstructor of the AR. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/rs_decode_impl.h" line="93" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classgr_1_1ccsds_1_1rs__decode__impl_1a0fc73ac02032417d27d4093a916c4ced" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gr::ccsds::rs_decode_impl::process_frame</definition>
+        <argsstring>(pmt::pmt_t msg)</argsstring>
+        <name>process_frame</name>
+        <param>
+          <type>pmt::pmt_t</type>
+          <declname>msg</declname>
+        </param>
+        <briefdescription>
+<para>Asynchronous work function which is processing the queues. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/rs_decode_impl.h" line="96" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="315">
+        <label>gr::ccsds::rs_decode_impl</label>
+        <link refid="classgr_1_1ccsds_1_1rs__decode__impl"/>
+        <childnode refid="316" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="316">
+        <label>gr::ccsds::rs_decode</label>
+        <link refid="classgr_1_1ccsds_1_1rs__decode"/>
+        <childnode refid="317" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="317">
+        <label>block</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="318">
+        <label>gr::ccsds::rs_decode_impl</label>
+        <link refid="classgr_1_1ccsds_1_1rs__decode__impl"/>
+        <childnode refid="319" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="319">
+        <label>gr::ccsds::rs_decode</label>
+        <link refid="classgr_1_1ccsds_1_1rs__decode"/>
+        <childnode refid="320" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="320">
+        <label>block</label>
+      </node>
+    </collaborationgraph>
+    <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/rs_decode_impl.h" line="33" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/lib/rs_decode_impl.h" bodystart="32" bodyend="98"/>
+    <listofallmembers>
+      <member refid="classgr_1_1ccsds_1_1rs__decode_1ae5220eabbdc2193dc31727b04ee2a436a095dcc8199c9621e0f35188eb5a5878b" prot="public" virt="non-virtual"><scope>gr::ccsds::rs_decode_impl</scope><name>BERLEKAMP</name></member>
+      <member refid="classgr_1_1ccsds_1_1rs__decode_1ae5220eabbdc2193dc31727b04ee2a436a2d026994d0d829c411fdd1040b188155" prot="public" virt="non-virtual"><scope>gr::ccsds::rs_decode_impl</scope><name>CONVENTIONAL</name></member>
+      <member refid="classgr_1_1ccsds_1_1rs__decode__impl_1a053db8980a4aa25c7d1659bc8d8885b7" prot="private" virt="non-virtual"><scope>gr::ccsds::rs_decode_impl</scope><name>d_2E</name></member>
+      <member refid="classgr_1_1ccsds_1_1rs__decode__impl_1ab2376adfc66cdb7d9dce218195c58664" prot="private" virt="non-virtual"><scope>gr::ccsds::rs_decode_impl</scope><name>d_buf_data</name></member>
+      <member refid="classgr_1_1ccsds_1_1rs__decode__impl_1a16c358a0ec279fb3abd06290a27c7830" prot="private" virt="non-virtual"><scope>gr::ccsds::rs_decode_impl</scope><name>d_buf_in</name></member>
+      <member refid="classgr_1_1ccsds_1_1rs__decode__impl_1a928148645916b25e86f989b5e8f8bd59" prot="private" virt="non-virtual"><scope>gr::ccsds::rs_decode_impl</scope><name>d_buf_out</name></member>
+      <member refid="classgr_1_1ccsds_1_1rs__decode__impl_1a347e1546c384a3002b693b4b4fd549fd" prot="private" virt="non-virtual"><scope>gr::ccsds::rs_decode_impl</scope><name>d_DATA_LEN</name></member>
+      <member refid="classgr_1_1ccsds_1_1rs__decode__impl_1ab57f063599181a8a57f0499ced041674" prot="private" virt="non-virtual"><scope>gr::ccsds::rs_decode_impl</scope><name>d_I</name></member>
+      <member refid="classgr_1_1ccsds_1_1rs__decode__impl_1adb83109ba2e626fcf6d70d40eab67091" prot="private" virt="non-virtual"><scope>gr::ccsds::rs_decode_impl</scope><name>d_IN_LEN</name></member>
+      <member refid="classgr_1_1ccsds_1_1rs__decode__impl_1adf0c2c2a370b0823dd13015c6f0d1200" prot="private" virt="non-virtual"><scope>gr::ccsds::rs_decode_impl</scope><name>d_k</name></member>
+      <member refid="classgr_1_1ccsds_1_1rs__decode__impl_1afc834433d541e1002f3b4b70a440c041" prot="private" virt="non-virtual"><scope>gr::ccsds::rs_decode_impl</scope><name>d_n</name></member>
+      <member refid="classgr_1_1ccsds_1_1rs__decode__impl_1a5e1d480f91cf8acc49a072259cd0b21d" prot="private" virt="non-virtual"><scope>gr::ccsds::rs_decode_impl</scope><name>d_representation</name></member>
+      <member refid="classgr_1_1ccsds_1_1rs__decode_1a518fc310797fcf106a0c94dd4bb0055a" prot="public" virt="non-virtual"><scope>gr::ccsds::rs_decode_impl</scope><name>make</name></member>
+      <member refid="classgr_1_1ccsds_1_1rs__decode__impl_1a0fc73ac02032417d27d4093a916c4ced" prot="public" virt="non-virtual"><scope>gr::ccsds::rs_decode_impl</scope><name>process_frame</name></member>
+      <member refid="classgr_1_1ccsds_1_1rs__decode_1ae5220eabbdc2193dc31727b04ee2a436" prot="public" virt="non-virtual"><scope>gr::ccsds::rs_decode_impl</scope><name>repr_t</name></member>
+      <member refid="classgr_1_1ccsds_1_1rs__decode__impl_1afa8b7eca79bdb36626b78b49bca39829" prot="public" virt="non-virtual"><scope>gr::ccsds::rs_decode_impl</scope><name>rs_decode_impl</name></member>
+      <member refid="classgr_1_1ccsds_1_1rs__decode_1acb2d7533f488a8c2a6f21b5ebe265f98" prot="public" virt="non-virtual"><scope>gr::ccsds::rs_decode_impl</scope><name>sptr</name></member>
+      <member refid="classgr_1_1ccsds_1_1rs__decode__impl_1a6b8afe4fb55b471579df49f438b3364b" prot="public" virt="non-virtual"><scope>gr::ccsds::rs_decode_impl</scope><name>~rs_decode_impl</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,323 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="classccsds__randomiser__bb" kind="class" prot="public">
+    <compoundname>ccsds_randomiser_bb</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">gr_sync_block</basecompoundref>
+    <includes refid="ccsds__randomiser__bb_8h" local="no">ccsds_randomiser_bb.h</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classccsds__randomiser__bb_1acc2e127834e9d8283a8d7efd0d50da9d" prot="private" static="no" mutable="no">
+        <type>gr_msg_queue_sptr</type>
+        <definition>gr_msg_queue_sptr ccsds_randomiser_bb::d_output_queue</definition>
+        <argsstring></argsstring>
+        <name>d_output_queue</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_randomiser_bb.h" line="65" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_randomiser_bb.h" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__randomiser__bb_1a889d3deda12078c47c5bcfe6c3676568" prot="private" static="no" mutable="no">
+        <type>gri_lfsr</type>
+        <definition>gri_lfsr ccsds_randomiser_bb::d_lfsr</definition>
+        <argsstring></argsstring>
+        <name>d_lfsr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_randomiser_bb.h" line="66" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_randomiser_bb.h" bodystart="66" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__randomiser__bb_1a9711f57bc17485d39b0948755e4b0cbf" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int ccsds_randomiser_bb::d_bits</definition>
+        <argsstring></argsstring>
+        <name>d_bits</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_randomiser_bb.h" line="67" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_randomiser_bb.h" bodystart="67" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__randomiser__bb_1a53f69c0218f5e2d1a44547cc446f2938" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int ccsds_randomiser_bb::d_count</definition>
+        <argsstring></argsstring>
+        <name>d_count</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_randomiser_bb.h" line="68" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_randomiser_bb.h" bodystart="68" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__randomiser__bb_1a310605577c8e4cc16bc0a40b16f15abf" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int ccsds_randomiser_bb::d_byte</definition>
+        <argsstring></argsstring>
+        <name>d_byte</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_randomiser_bb.h" line="69" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_randomiser_bb.h" bodystart="69" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__randomiser__bb_1a2bb84746766be54574f003b8bedca698" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int ccsds_randomiser_bb::d_frame_bits</definition>
+        <argsstring></argsstring>
+        <name>d_frame_bits</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_randomiser_bb.h" line="70" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_randomiser_bb.h" bodystart="70" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__randomiser__bb_1a9750e624143848b5763e34c9cc541569" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int ccsds_randomiser_bb::d_frame_bytes</definition>
+        <argsstring></argsstring>
+        <name>d_frame_bytes</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_randomiser_bb.h" line="71" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_randomiser_bb.h" bodystart="71" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__randomiser__bb_1aa617d0ad77bff9e450dbed7b1395c02e" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int ccsds_randomiser_bb::d_frame_counter</definition>
+        <argsstring></argsstring>
+        <name>d_frame_counter</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_randomiser_bb.h" line="72" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_randomiser_bb.h" bodystart="72" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__randomiser__bb_1a4b0345e90dc4b987cd37dd55c5aec238" prot="private" static="no" mutable="no">
+        <type>unsigned char *</type>
+        <definition>unsigned char* ccsds_randomiser_bb::d_packed_frame</definition>
+        <argsstring></argsstring>
+        <name>d_packed_frame</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_randomiser_bb.h" line="73" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_randomiser_bb.h" bodystart="73" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="friend">
+      <memberdef kind="friend" id="classccsds__randomiser__bb_1afc3a618cf69568ced90b968cca11d013" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>friend <ref refid="api_8h_1a144137922962dd54ae2e8c1917a7e588" kindref="member">CCSDS_API</ref> ccsds_randomiser_bb_sptr</type>
+        <definition>CCSDS_API ccsds_randomiser_bb_sptr ccsds_make_randomiser_bb</definition>
+        <argsstring>(gr_msg_queue_sptr output_queue, int frame_bits, int mask, int seed, int len)</argsstring>
+        <name>ccsds_make_randomiser_bb</name>
+        <param>
+          <type>gr_msg_queue_sptr</type>
+          <declname>output_queue</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>frame_bits</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>mask</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>seed</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>len</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_randomiser_bb.h" line="63" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classccsds__randomiser__bb_1aded02bc69b5b6f804b923be585b51431" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>ccsds_randomiser_bb::ccsds_randomiser_bb</definition>
+        <argsstring>(gr_msg_queue_sptr output_queue, int frame_bits, int mask, int seed, int len)</argsstring>
+        <name>ccsds_randomiser_bb</name>
+        <param>
+          <type>gr_msg_queue_sptr</type>
+          <declname>output_queue</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>frame_bits</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>mask</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>seed</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>len</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_randomiser_bb.h" line="75" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classccsds__randomiser__bb_1ab079f0975907a0cb9829a91284737550" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void ccsds_randomiser_bb::forecast</definition>
+        <argsstring>(int noutput_items, gr_vector_int &amp;ninput_items_required)</argsstring>
+        <name>forecast</name>
+        <param>
+          <type>int</type>
+          <declname>noutput_items</declname>
+        </param>
+        <param>
+          <type>gr_vector_int &amp;</type>
+          <declname>ninput_items_required</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_randomiser_bb.h" line="77" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_randomiser_bb.h" bodystart="77" bodyend="85"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classccsds__randomiser__bb_1a1e72e889de2a7e29ff1cc477a11d89c0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int ccsds_randomiser_bb::work</definition>
+        <argsstring>(int noutput_items, gr_vector_const_void_star &amp;input_items, gr_vector_void_star &amp;output_items)</argsstring>
+        <name>work</name>
+        <param>
+          <type>int</type>
+          <declname>noutput_items</declname>
+        </param>
+        <param>
+          <type>gr_vector_const_void_star &amp;</type>
+          <declname>input_items</declname>
+        </param>
+        <param>
+          <type>gr_vector_void_star &amp;</type>
+          <declname>output_items</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_randomiser_bb.h" line="88" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>De/randomise a TM Frame using an LFSR. </para>    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>output_queue</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The message queue where to output individual messages (frames) after processing </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>frame_bits</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The size of the frame in bits </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>mask</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Polynomial mask for LFSR </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>seed</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Initial shift register contents </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>len</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Shift register length</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+The input is a stream of unpacked bits that represent the encoded frames only, i.e. the ASMs have been removed from the stream, and are synchronised on the first bit of the frame.</para><para>There is no stream output, instead the bits of the decoded frame are packed and inserted into a dedicated output queue.</para><para>The scrambler works by XORing the LSBs of the incoming bit stream by the output of the LFSR. After &apos;frame_bits&apos; bits have been processed, the shift register is reset to the seed value. This allows processing fixed length frames according to CCSDS recommendations.</para><para>The gnuradio-core gri_lfsr has a bug in that can be worked-around by defining the length of the shift register (in the &apos;len&apos; parameter) to be one less than its actual length </para>    </detaileddescription>
+    <inheritancegraph>
+      <node id="132">
+        <label>gr_sync_block</label>
+      </node>
+      <node id="131">
+        <label>ccsds_randomiser_bb</label>
+        <link refid="classccsds__randomiser__bb"/>
+        <childnode refid="132" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="134">
+        <label>gr_sync_block</label>
+      </node>
+      <node id="133">
+        <label>ccsds_randomiser_bb</label>
+        <link refid="classccsds__randomiser__bb"/>
+        <childnode refid="134" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_randomiser_bb.h" line="61" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_randomiser_bb.h" bodystart="60" bodyend="91"/>
+    <listofallmembers>
+      <member refid="classccsds__randomiser__bb_1afc3a618cf69568ced90b968cca11d013" prot="private" virt="non-virtual"><scope>ccsds_randomiser_bb</scope><name>ccsds_make_randomiser_bb</name></member>
+      <member refid="classccsds__randomiser__bb_1aded02bc69b5b6f804b923be585b51431" prot="private" virt="non-virtual"><scope>ccsds_randomiser_bb</scope><name>ccsds_randomiser_bb</name></member>
+      <member refid="classccsds__randomiser__bb_1a9711f57bc17485d39b0948755e4b0cbf" prot="private" virt="non-virtual"><scope>ccsds_randomiser_bb</scope><name>d_bits</name></member>
+      <member refid="classccsds__randomiser__bb_1a310605577c8e4cc16bc0a40b16f15abf" prot="private" virt="non-virtual"><scope>ccsds_randomiser_bb</scope><name>d_byte</name></member>
+      <member refid="classccsds__randomiser__bb_1a53f69c0218f5e2d1a44547cc446f2938" prot="private" virt="non-virtual"><scope>ccsds_randomiser_bb</scope><name>d_count</name></member>
+      <member refid="classccsds__randomiser__bb_1a2bb84746766be54574f003b8bedca698" prot="private" virt="non-virtual"><scope>ccsds_randomiser_bb</scope><name>d_frame_bits</name></member>
+      <member refid="classccsds__randomiser__bb_1a9750e624143848b5763e34c9cc541569" prot="private" virt="non-virtual"><scope>ccsds_randomiser_bb</scope><name>d_frame_bytes</name></member>
+      <member refid="classccsds__randomiser__bb_1aa617d0ad77bff9e450dbed7b1395c02e" prot="private" virt="non-virtual"><scope>ccsds_randomiser_bb</scope><name>d_frame_counter</name></member>
+      <member refid="classccsds__randomiser__bb_1a889d3deda12078c47c5bcfe6c3676568" prot="private" virt="non-virtual"><scope>ccsds_randomiser_bb</scope><name>d_lfsr</name></member>
+      <member refid="classccsds__randomiser__bb_1acc2e127834e9d8283a8d7efd0d50da9d" prot="private" virt="non-virtual"><scope>ccsds_randomiser_bb</scope><name>d_output_queue</name></member>
+      <member refid="classccsds__randomiser__bb_1a4b0345e90dc4b987cd37dd55c5aec238" prot="private" virt="non-virtual"><scope>ccsds_randomiser_bb</scope><name>d_packed_frame</name></member>
+      <member refid="classccsds__randomiser__bb_1ab079f0975907a0cb9829a91284737550" prot="private" virt="non-virtual"><scope>ccsds_randomiser_bb</scope><name>forecast</name></member>
+      <member refid="classccsds__randomiser__bb_1a1e72e889de2a7e29ff1cc477a11d89c0" prot="public" virt="non-virtual"><scope>ccsds_randomiser_bb</scope><name>work</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

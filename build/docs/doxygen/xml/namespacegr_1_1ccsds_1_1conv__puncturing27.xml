@@ -1,0 +1,107 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="namespacegr_1_1ccsds_1_1conv__puncturing27" kind="namespace">
+    <compoundname>gr::ccsds::conv_puncturing27</compoundname>
+      <sectiondef kind="enum">
+      <memberdef kind="enum" id="namespacegr_1_1ccsds_1_1conv__puncturing27_1a3b70c7c0f0d0da176ee821dd59945ee8" prot="public" static="no">
+        <name>punct_t</name>
+        <enumvalue id="namespacegr_1_1ccsds_1_1conv__puncturing27_1a3b70c7c0f0d0da176ee821dd59945ee8aedc352324c9da8fa3b789b1625416dc7" prot="public">
+          <name>NONE</name>
+          <initializer>=0</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacegr_1_1ccsds_1_1conv__puncturing27_1a3b70c7c0f0d0da176ee821dd59945ee8abc3ba608b6db61a0d82fc452a37ef67f" prot="public">
+          <name>ECSS_23</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacegr_1_1ccsds_1_1conv__puncturing27_1a3b70c7c0f0d0da176ee821dd59945ee8a46774898f75d3b6b68d11edd76b18dc2" prot="public">
+          <name>ECSS_34</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacegr_1_1ccsds_1_1conv__puncturing27_1a3b70c7c0f0d0da176ee821dd59945ee8a703f7574e925732e1b3f7c0ceda4b054" prot="public">
+          <name>ECSS_56</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacegr_1_1ccsds_1_1conv__puncturing27_1a3b70c7c0f0d0da176ee821dd59945ee8acdb1c482f586943473ec07fe09d02a42" prot="public">
+          <name>ECSS_78</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Enum of supported puncturing schemes. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/include/ccsds/conv_puncturing27.h" line="13" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/include/ccsds/conv_puncturing27.h" bodystart="13" bodyend="13"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="namespacegr_1_1ccsds_1_1conv__puncturing27_1a5d43d365dc3d9fa0639312ca432e813a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>unsigned int</type>
+        <definition>unsigned int gr::ccsds::conv_puncturing27::get_pattern_len</definition>
+        <argsstring>(const punct_t punct)</argsstring>
+        <name>get_pattern_len</name>
+        <param>
+          <type>const <ref refid="namespacegr_1_1ccsds_1_1conv__puncturing27_1a3b70c7c0f0d0da176ee821dd59945ee8" kindref="member">punct_t</ref></type>
+          <declname>punct</declname>
+        </param>
+        <briefdescription>
+<para>Helper function to determine the length after which the puncturing pattern repeats. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/include/ccsds/conv_puncturing27.h" line="19" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/include/ccsds/conv_puncturing27.h" bodystart="19" bodyend="31"/>
+        <references refid="namespacegr_1_1ccsds_1_1conv__puncturing27_1a3b70c7c0f0d0da176ee821dd59945ee8abc3ba608b6db61a0d82fc452a37ef67f" compoundref="conv__puncturing27_8h" startline="13">ECSS_23</references>
+        <references refid="namespacegr_1_1ccsds_1_1conv__puncturing27_1a3b70c7c0f0d0da176ee821dd59945ee8a46774898f75d3b6b68d11edd76b18dc2" compoundref="conv__puncturing27_8h" startline="13">ECSS_34</references>
+        <references refid="namespacegr_1_1ccsds_1_1conv__puncturing27_1a3b70c7c0f0d0da176ee821dd59945ee8a703f7574e925732e1b3f7c0ceda4b054" compoundref="conv__puncturing27_8h" startline="13">ECSS_56</references>
+        <references refid="namespacegr_1_1ccsds_1_1conv__puncturing27_1a3b70c7c0f0d0da176ee821dd59945ee8acdb1c482f586943473ec07fe09d02a42" compoundref="conv__puncturing27_8h" startline="13">ECSS_78</references>
+        <references refid="namespacegr_1_1ccsds_1_1conv__puncturing27_1a3b70c7c0f0d0da176ee821dd59945ee8aedc352324c9da8fa3b789b1625416dc7" compoundref="conv__puncturing27_8h" startline="13">NONE</references>
+        <referencedby refid="namespacegr_1_1ccsds_1_1conv__puncturing27_1a1f3c56baa50a44f9dfdbf21a3a67e69b" compoundref="conv__puncturing27_8h" startline="38" endline="86">get_pattern</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="namespacegr_1_1ccsds_1_1conv__puncturing27_1a1f3c56baa50a44f9dfdbf21a3a67e69b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>boost::shared_ptr&lt; bool[]&gt;</type>
+        <definition>boost::shared_ptr&lt;bool[]&gt; gr::ccsds::conv_puncturing27::get_pattern</definition>
+        <argsstring>(const punct_t punct)</argsstring>
+        <name>get_pattern</name>
+        <param>
+          <type>const <ref refid="namespacegr_1_1ccsds_1_1conv__puncturing27_1a3b70c7c0f0d0da176ee821dd59945ee8" kindref="member">punct_t</ref></type>
+          <declname>punct</declname>
+        </param>
+        <briefdescription>
+<para>Helper function to fill the puncturing pattern item. Memory for the number of elements returned by <computeroutput>ccsds_conv_encode27_aux_get_punct_len</computeroutput> for the same puncturing type must be allocated for <computeroutput>pattern</computeroutput>. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/include/ccsds/conv_puncturing27.h" line="38" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/include/ccsds/conv_puncturing27.h" bodystart="38" bodyend="86"/>
+        <references refid="namespacegr_1_1ccsds_1_1conv__puncturing27_1a3b70c7c0f0d0da176ee821dd59945ee8abc3ba608b6db61a0d82fc452a37ef67f" compoundref="conv__puncturing27_8h" startline="13">ECSS_23</references>
+        <references refid="namespacegr_1_1ccsds_1_1conv__puncturing27_1a3b70c7c0f0d0da176ee821dd59945ee8a46774898f75d3b6b68d11edd76b18dc2" compoundref="conv__puncturing27_8h" startline="13">ECSS_34</references>
+        <references refid="namespacegr_1_1ccsds_1_1conv__puncturing27_1a3b70c7c0f0d0da176ee821dd59945ee8a703f7574e925732e1b3f7c0ceda4b054" compoundref="conv__puncturing27_8h" startline="13">ECSS_56</references>
+        <references refid="namespacegr_1_1ccsds_1_1conv__puncturing27_1a3b70c7c0f0d0da176ee821dd59945ee8acdb1c482f586943473ec07fe09d02a42" compoundref="conv__puncturing27_8h" startline="13">ECSS_78</references>
+        <references refid="namespacegr_1_1ccsds_1_1conv__puncturing27_1a5d43d365dc3d9fa0639312ca432e813a" compoundref="conv__puncturing27_8h" startline="19" endline="31">get_pattern_len</references>
+        <references refid="namespacegr_1_1ccsds_1_1conv__puncturing27_1a3b70c7c0f0d0da176ee821dd59945ee8aedc352324c9da8fa3b789b1625416dc7" compoundref="conv__puncturing27_8h" startline="13">NONE</references>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/marina/Documents/sdr1/gr-ccsds/include/ccsds/conv_puncturing27.h" line="9" column="1"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,134 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="ccsds__rs__decode_8h" kind="file">
+    <compoundname>ccsds_rs_decode.h</compoundname>
+    <includes refid="ccsds__api_8h" local="no">ccsds_api.h</includes>
+    <includes local="no">gr_block.h</includes>
+    <includes local="no">string</includes>
+    <includes local="no">fec.h</includes>
+    <incdepgraph>
+      <node id="360">
+        <label>fec.h</label>
+      </node>
+      <node id="357">
+        <label>gruel/attributes.h</label>
+      </node>
+      <node id="356">
+        <label>ccsds_api.h</label>
+        <link refid="ccsds__api_8h"/>
+        <childnode refid="357" relation="include">
+        </childnode>
+      </node>
+      <node id="359">
+        <label>string</label>
+      </node>
+      <node id="355">
+        <label>ccsds_rs_decode.h</label>
+        <link refid="ccsds_rs_decode.h"/>
+        <childnode refid="356" relation="include">
+        </childnode>
+        <childnode refid="358" relation="include">
+        </childnode>
+        <childnode refid="359" relation="include">
+        </childnode>
+        <childnode refid="360" relation="include">
+        </childnode>
+      </node>
+      <node id="358">
+        <label>gr_block.h</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="classccsds__rs__decode" prot="public">ccsds_rs_decode</innerclass>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="ccsds__rs__decode_8h_1a86cd668ca77ad47c51145f053632b949" prot="public" static="no">
+        <name>CCSDS_RS_DECODE_OUTPUT_NONE</name>
+        <initializer>0</initializer>
+        <briefdescription>
+<para>Verbosity level: Do not output. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_rs_decode.h" line="13" column="9" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_rs_decode.h" bodystart="13" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="ccsds__rs__decode_8h_1ac6a36c0262a2975602b7bea39cc268ab" prot="public" static="no">
+        <name>CCSDS_RS_DECODE_OUTPUT_FRAMEERR</name>
+        <initializer>1</initializer>
+        <briefdescription>
+<para>Verbosity level: Do output debug information. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_rs_decode.h" line="16" column="9" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_rs_decode.h" bodystart="16" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="ccsds__rs__decode_8h_1ab7a583a509ad57a47c06e134367094c8" prot="public" static="no">
+        <name>CCSDS_RS_DECODE_OUTPUT_FRAMEINFO</name>
+        <initializer>2</initializer>
+        <briefdescription>
+<para>Verbosity level: Do output debug information. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_rs_decode.h" line="19" column="9" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_rs_decode.h" bodystart="19" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="ccsds__rs__decode_8h_1ab3052a94f47a7eec45a6417ac09ec9d8" prot="public" static="no">
+        <name>CCSDS_RS_DECODE_OUTPUT_DEBUG</name>
+        <initializer>3</initializer>
+        <briefdescription>
+<para>Verbosity level: Do output debug information. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_rs_decode.h" line="22" column="9" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_rs_decode.h" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="ccsds__rs__decode_8h_1a52c7ab289754ca5ffb784eb0614eb4a2" prot="public" static="no">
+        <name>CCSDS_RS_DECODE_VERBOSITY_LEVEL</name>
+        <initializer><ref refid="rs__decode__impl_8h_1a86cd668ca77ad47c51145f053632b949" kindref="member">CCSDS_RS_DECODE_OUTPUT_NONE</ref></initializer>
+        <briefdescription>
+<para>Level of verbosity of this block. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="see"><para><ref refid="ccsds__rs__decode_8h_1a86cd668ca77ad47c51145f053632b949" kindref="member">CCSDS_RS_DECODE_OUTPUT_NONE</ref> </para><simplesectsep/><para><ref refid="ccsds__rs__decode_8h_1ab3052a94f47a7eec45a6417ac09ec9d8" kindref="member">CCSDS_RS_DECODE_OUTPUT_DEBUG</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_rs_decode.h" line="29" column="9" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_rs_decode.h" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="ccsds__rs__decode_8h_1ad28fea624da7d5526d7f4da220558a5e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="api_8h_1a144137922962dd54ae2e8c1917a7e588" kindref="member">CCSDS_API</ref> ccsds_rs_decode_sptr</type>
+        <definition>CCSDS_API ccsds_rs_decode_sptr ccsds_make_rs_decode</definition>
+        <argsstring>(const unsigned int I)</argsstring>
+        <name>ccsds_make_rs_decode</name>
+        <param>
+          <type>const unsigned int</type>
+          <declname>I</declname>
+        </param>
+        <briefdescription>
+<para>Return a shared_ptr to a new instance of <ref refid="classccsds__rs__decode" kindref="compound">ccsds_rs_decode</ref>. </para>        </briefdescription>
+        <detaileddescription>
+<para>Create an instance of <ref refid="classccsds__rs__decode" kindref="compound">ccsds_rs_decode</ref> and return it&apos;s shared_ptr.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>I</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>depth of interleaving. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Shared pointer to the created block </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_rs_decode.h" line="54" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_rs_decode.h"/>
+  </compounddef>
+</doxygen>

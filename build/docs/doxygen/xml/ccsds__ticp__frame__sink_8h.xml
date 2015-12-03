@@ -1,0 +1,150 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="ccsds__ticp__frame__sink_8h" kind="file">
+    <compoundname>ccsds_ticp_frame_sink.h</compoundname>
+    <includes refid="ccsds__api_8h" local="no">ccsds_api.h</includes>
+    <includes local="no">gr_block.h</includes>
+    <includes local="no">string</includes>
+    <includes local="no">vector</includes>
+    <includes local="no">map</includes>
+    <includes local="no">ticp/TicpServer.hpp</includes>
+    <includes local="no">boost/thread.hpp</includes>
+    <includes local="no">boost/shared_ptr.hpp</includes>
+    <includes local="no">queue</includes>
+    <incdepgraph>
+      <node id="402">
+        <label>queue</label>
+      </node>
+      <node id="401">
+        <label>boost/shared_ptr.hpp</label>
+      </node>
+      <node id="394">
+        <label>gruel/attributes.h</label>
+      </node>
+      <node id="399">
+        <label>ticp/TicpServer.hpp</label>
+      </node>
+      <node id="393">
+        <label>ccsds_api.h</label>
+        <link refid="ccsds__api_8h"/>
+        <childnode refid="394" relation="include">
+        </childnode>
+      </node>
+      <node id="396">
+        <label>string</label>
+      </node>
+      <node id="398">
+        <label>map</label>
+      </node>
+      <node id="400">
+        <label>boost/thread.hpp</label>
+      </node>
+      <node id="395">
+        <label>gr_block.h</label>
+      </node>
+      <node id="397">
+        <label>vector</label>
+      </node>
+      <node id="392">
+        <label>ccsds_ticp_frame_sink.h</label>
+        <link refid="ccsds_ticp_frame_sink.h"/>
+        <childnode refid="393" relation="include">
+        </childnode>
+        <childnode refid="395" relation="include">
+        </childnode>
+        <childnode refid="396" relation="include">
+        </childnode>
+        <childnode refid="397" relation="include">
+        </childnode>
+        <childnode refid="398" relation="include">
+        </childnode>
+        <childnode refid="399" relation="include">
+        </childnode>
+        <childnode refid="400" relation="include">
+        </childnode>
+        <childnode refid="401" relation="include">
+        </childnode>
+        <childnode refid="402" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <innerclass refid="classccsds__ticp__frame__sink" prot="public">ccsds_ticp_frame_sink</innerclass>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="ccsds__ticp__frame__sink_8h_1a0c2598e76b0fce591d19d7c856aceb6c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="api_8h_1a144137922962dd54ae2e8c1917a7e588" kindref="member">CCSDS_API</ref> ccsds_ticp_frame_sink_sptr</type>
+        <definition>CCSDS_API ccsds_ticp_frame_sink_sptr ccsds_make_ticp_frame_sink</definition>
+        <argsstring>(unsigned int port, const unsigned int frame_length, const uint8_t data_type, std::vector&lt; std::string &gt; map_names, std::vector&lt; uint8_t &gt; map_types)</argsstring>
+        <name>ccsds_make_ticp_frame_sink</name>
+        <param>
+          <type>unsigned int</type>
+          <declname>port</declname>
+        </param>
+        <param>
+          <type>const unsigned int</type>
+          <declname>frame_length</declname>
+        </param>
+        <param>
+          <type>const uint8_t</type>
+          <declname>data_type</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; std::string &gt;</type>
+          <declname>map_names</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; uint8_t &gt;</type>
+          <declname>map_types</declname>
+        </param>
+        <briefdescription>
+<para>Return a shared_ptr to a new instance of <ref refid="classccsds__ticp__frame__sink" kindref="compound">ccsds_ticp_frame_sink</ref>. </para>        </briefdescription>
+        <detaileddescription>
+<para>Create an instance of <ref refid="classccsds__ticp__frame__sink" kindref="compound">ccsds_ticp_frame_sink</ref> and return it&apos;s shared_ptr.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>port</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Port of the TicpServer </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>frame_length</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of a frame in bytes. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>data_type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Type of the dataset which&apos;s data should be used for the actuall output data. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>map_names</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vector of names from the PDU header that should be used. Can be empty. Must have the same length as map_types. All elements in this vector must be unique. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>map_types</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vector of datatypes that should be used when inserting metadata intp the TICP protocol. Can be empty. Must have the same length as map_names. All elements in this vector must be unique. * </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Shared pointer to the created TICP frame sink. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_ticp_frame_sink.h" line="47" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_ticp_frame_sink.h"/>
+  </compounddef>
+</doxygen>

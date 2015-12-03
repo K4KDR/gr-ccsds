@@ -1,0 +1,107 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="classgr_1_1ccsds_1_1softbittobit__impl" kind="class" prot="public">
+    <compoundname>gr::ccsds::softbittobit_impl</compoundname>
+    <basecompoundref refid="classgr_1_1ccsds_1_1softbittobit" prot="public" virt="non-virtual">gr::ccsds::softbittobit</basecompoundref>
+    <includes refid="softbittobit__impl_8h" local="no">softbittobit_impl.h</includes>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classgr_1_1ccsds_1_1softbittobit__impl_1a8ff7b0976f480442df0b0fea2d114c4b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>gr::ccsds::softbittobit_impl::softbittobit_impl</definition>
+        <argsstring>()</argsstring>
+        <name>softbittobit_impl</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/softbittobit_impl.h" line="35" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classgr_1_1ccsds_1_1softbittobit__impl_1a8e021d803072806df0811651ac2c616a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>gr::ccsds::softbittobit_impl::~softbittobit_impl</definition>
+        <argsstring>()</argsstring>
+        <name>~softbittobit_impl</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/softbittobit_impl.h" line="36" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classgr_1_1ccsds_1_1softbittobit__impl_1a0a5d405262873f81c2f25f4d51ef3da9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int gr::ccsds::softbittobit_impl::work</definition>
+        <argsstring>(int noutput_items, gr_vector_const_void_star &amp;input_items, gr_vector_void_star &amp;output_items)</argsstring>
+        <name>work</name>
+        <param>
+          <type>int</type>
+          <declname>noutput_items</declname>
+        </param>
+        <param>
+          <type>gr_vector_const_void_star &amp;</type>
+          <declname>input_items</declname>
+        </param>
+        <param>
+          <type>gr_vector_void_star &amp;</type>
+          <declname>output_items</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/softbittobit_impl.h" line="39" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="359">
+        <label>gr::ccsds::softbittobit_impl</label>
+        <link refid="classgr_1_1ccsds_1_1softbittobit__impl"/>
+        <childnode refid="360" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="360">
+        <label>gr::ccsds::softbittobit</label>
+        <link refid="classgr_1_1ccsds_1_1softbittobit"/>
+        <childnode refid="361" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="361">
+        <label>sync_block</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="362">
+        <label>gr::ccsds::softbittobit_impl</label>
+        <link refid="classgr_1_1ccsds_1_1softbittobit__impl"/>
+        <childnode refid="363" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="363">
+        <label>gr::ccsds::softbittobit</label>
+        <link refid="classgr_1_1ccsds_1_1softbittobit"/>
+        <childnode refid="364" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="364">
+        <label>sync_block</label>
+      </node>
+    </collaborationgraph>
+    <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/softbittobit_impl.h" line="30" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/lib/softbittobit_impl.h" bodystart="29" bodyend="42"/>
+    <listofallmembers>
+      <member refid="classgr_1_1ccsds_1_1softbittobit_1ae7a0ae869d2c2475139fc2861460ae77" prot="public" virt="non-virtual"><scope>gr::ccsds::softbittobit_impl</scope><name>make</name></member>
+      <member refid="classgr_1_1ccsds_1_1softbittobit__impl_1a8ff7b0976f480442df0b0fea2d114c4b" prot="public" virt="non-virtual"><scope>gr::ccsds::softbittobit_impl</scope><name>softbittobit_impl</name></member>
+      <member refid="classgr_1_1ccsds_1_1softbittobit_1ac8b1c6e477d00a9e60c05fdb3f7c8c1e" prot="public" virt="non-virtual"><scope>gr::ccsds::softbittobit_impl</scope><name>sptr</name></member>
+      <member refid="classgr_1_1ccsds_1_1softbittobit__impl_1a0a5d405262873f81c2f25f4d51ef3da9" prot="public" virt="non-virtual"><scope>gr::ccsds::softbittobit_impl</scope><name>work</name></member>
+      <member refid="classgr_1_1ccsds_1_1softbittobit__impl_1a8e021d803072806df0811651ac2c616a" prot="public" virt="non-virtual"><scope>gr::ccsds::softbittobit_impl</scope><name>~softbittobit_impl</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

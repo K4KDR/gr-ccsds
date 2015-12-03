@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="classgr_1_1ccsds_1_1reversebits" kind="class" prot="public">
+    <compoundname>gr::ccsds::reversebits</compoundname>
+    <basecompoundref prot="public" virt="virtual">sync_block</basecompoundref>
+    <derivedcompoundref refid="classgr_1_1ccsds_1_1reversebits__impl" prot="public" virt="non-virtual">gr::ccsds::reversebits_impl</derivedcompoundref>
+    <includes refid="reversebits_8h" local="no">reversebits.h</includes>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classgr_1_1ccsds_1_1reversebits_1a373404236e4f465b553694aad49b525b" prot="public" static="no">
+        <type>boost::shared_ptr&lt; <ref refid="classgr_1_1ccsds_1_1reversebits" kindref="compound">reversebits</ref> &gt;</type>
+        <definition>typedef boost::shared_ptr&lt;reversebits&gt; gr::ccsds::reversebits::sptr</definition>
+        <argsstring></argsstring>
+        <name>sptr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/include/ccsds/reversebits.h" line="23" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/include/ccsds/reversebits.h" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classgr_1_1ccsds_1_1reversebits_1a28875169f9952166864029da89a1836d" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classgr_1_1ccsds_1_1reversebits_1a373404236e4f465b553694aad49b525b" kindref="member">sptr</ref></type>
+        <definition>static sptr gr::ccsds::reversebits::make</definition>
+        <argsstring>(const unsigned int msg_length, const std::vector&lt; unsigned int &gt; &amp;reverse_indices)</argsstring>
+        <name>make</name>
+        <param>
+          <type>const unsigned int</type>
+          <declname>msg_length</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; unsigned int &gt; &amp;</type>
+          <declname>reverse_indices</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/include/ccsds/reversebits.h" line="36" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>reverses bit order in selected bytes of the input message. </para>    </briefdescription>
+    <detaileddescription>
+<para>The block has an input message port named &quot;in&quot; at which new frames can arrive. On arrival a new message is created consisting of the input message but were selected bytes have a reverse order. So if the byte started with MSB it will now start with the LSB. This new message is then queued in the output message port named &quot;out&quot;. </para>    </detaileddescription>
+    <inheritancegraph>
+      <node id="299">
+        <label>gr::ccsds::reversebits</label>
+        <link refid="classgr_1_1ccsds_1_1reversebits"/>
+        <childnode refid="300" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="300">
+        <label>sync_block</label>
+      </node>
+      <node id="301">
+        <label>gr::ccsds::reversebits_impl</label>
+        <link refid="classgr_1_1ccsds_1_1reversebits__impl"/>
+        <childnode refid="299" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="302">
+        <label>gr::ccsds::reversebits</label>
+        <link refid="classgr_1_1ccsds_1_1reversebits"/>
+        <childnode refid="303" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="303">
+        <label>sync_block</label>
+      </node>
+    </collaborationgraph>
+    <location file="/home/marina/Documents/sdr1/gr-ccsds/include/ccsds/reversebits.h" line="21" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/include/ccsds/reversebits.h" bodystart="20" bodyend="50"/>
+    <listofallmembers>
+      <member refid="classgr_1_1ccsds_1_1reversebits_1a28875169f9952166864029da89a1836d" prot="public" virt="non-virtual"><scope>gr::ccsds::reversebits</scope><name>make</name></member>
+      <member refid="classgr_1_1ccsds_1_1reversebits_1a373404236e4f465b553694aad49b525b" prot="public" virt="non-virtual"><scope>gr::ccsds::reversebits</scope><name>sptr</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

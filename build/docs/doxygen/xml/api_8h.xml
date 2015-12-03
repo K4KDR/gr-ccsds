@@ -1,0 +1,347 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="api_8h" kind="file">
+    <compoundname>api.h</compoundname>
+    <includes local="no">gnuradio/config.h</includes>
+    <includes local="no">gnuradio/attributes.h</includes>
+    <includedby refid="add__asm_8h" local="no">add_asm.h</includedby>
+    <includedby refid="blob__msg__sink__b_8h" local="no">blob_msg_sink_b.h</includedby>
+    <includedby refid="blob__msg__source__b_8h" local="no">blob_msg_source_b.h</includedby>
+    <includedby refid="conv__decode27_8h" local="no">conv_decode27.h</includedby>
+    <includedby refid="conv__encode27__bb_8h" local="no">conv_encode27_bb.h</includedby>
+    <includedby refid="discriminator_8h" local="no">discriminator.h</includedby>
+    <includedby refid="dll__cc_8h" local="no">dll_cc.h</includedby>
+    <includedby refid="mpsk__ambiguity__resolver__f_8h" local="no">mpsk_ambiguity_resolver_f.h</includedby>
+    <includedby refid="mpsk__detector__soft__cf_8h" local="no">mpsk_detector_soft_cf.h</includedby>
+    <includedby refid="mpsk__mod__bc_8h" local="no">mpsk_mod_bc.h</includedby>
+    <includedby refid="mpsk__preamble__cc_8h" local="no">mpsk_preamble_cc.h</includedby>
+    <includedby refid="msg__null__src_8h" local="no">msg_null_src.h</includedby>
+    <includedby refid="pll__cc_8h" local="no">pll_cc.h</includedby>
+    <includedby refid="randomiser_8h" local="no">randomiser.h</includedby>
+    <includedby refid="reversebits_8h" local="no">reversebits.h</includedby>
+    <includedby refid="rs__decode_8h" local="no">rs_decode.h</includedby>
+    <includedby refid="rs__encode_8h" local="no">rs_encode.h</includedby>
+    <includedby refid="simple__bpsk__SNR__qf_8h" local="no">simple_bpsk_SNR_qf.h</includedby>
+    <includedby refid="softbits__msg__to__bytes__b_8h" local="no">softbits_msg_to_bytes_b.h</includedby>
+    <includedby refid="softbittobit_8h" local="no">softbittobit.h</includedby>
+    <includedby refid="ticp__frame__sink_8h" local="no">ticp_frame_sink.h</includedby>
+    <includedby refid="ticp__frame__source_8h" local="no">ticp_frame_source.h</includedby>
+    <includedby refid="trunk__tail_8h" local="no">trunk_tail.h</includedby>
+    <incdepgraph>
+      <node id="18">
+        <label>gnuradio/attributes.h</label>
+      </node>
+      <node id="16">
+        <label>api.h</label>
+        <link refid="api.h"/>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+      </node>
+      <node id="17">
+        <label>gnuradio/config.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="24">
+        <label>blob_msg_source_b.h</label>
+        <link refid="blob__msg__source__b_8h"/>
+        <childnode refid="25" relation="include">
+        </childnode>
+      </node>
+      <node id="63">
+        <label>ticp_frame_source_impl.h</label>
+        <link refid="ticp__frame__source__impl_8h"/>
+      </node>
+      <node id="35">
+        <label>mpsk_ambiguity_resolver_f_impl.h</label>
+        <link refid="mpsk__ambiguity__resolver__f__impl_8h"/>
+      </node>
+      <node id="23">
+        <label>blob_msg_sink_b_impl.h</label>
+        <link refid="blob__msg__sink__b__impl_8h"/>
+      </node>
+      <node id="48">
+        <label>reversebits.h</label>
+        <link refid="reversebits_8h"/>
+        <childnode refid="49" relation="include">
+        </childnode>
+      </node>
+      <node id="59">
+        <label>softbittobit_impl.h</label>
+        <link refid="softbittobit__impl_8h"/>
+      </node>
+      <node id="26">
+        <label>conv_decode27.h</label>
+        <link refid="conv__decode27_8h"/>
+        <childnode refid="27" relation="include">
+        </childnode>
+      </node>
+      <node id="40">
+        <label>mpsk_preamble_cc.h</label>
+        <link refid="mpsk__preamble__cc_8h"/>
+        <childnode refid="41" relation="include">
+        </childnode>
+      </node>
+      <node id="42">
+        <label>msg_null_src.h</label>
+        <link refid="msg__null__src_8h"/>
+        <childnode refid="43" relation="include">
+        </childnode>
+      </node>
+      <node id="44">
+        <label>pll_cc.h</label>
+        <link refid="pll__cc_8h"/>
+        <childnode refid="45" relation="include">
+        </childnode>
+      </node>
+      <node id="22">
+        <label>blob_msg_sink_b.h</label>
+        <link refid="blob__msg__sink__b_8h"/>
+        <childnode refid="23" relation="include">
+        </childnode>
+      </node>
+      <node id="50">
+        <label>rs_decode.h</label>
+        <link refid="rs__decode_8h"/>
+        <childnode refid="51" relation="include">
+        </childnode>
+      </node>
+      <node id="47">
+        <label>randomiser_impl.h</label>
+        <link refid="randomiser__impl_8h"/>
+      </node>
+      <node id="53">
+        <label>rs_encode_impl.h</label>
+        <link refid="rs__encode__impl_8h"/>
+      </node>
+      <node id="58">
+        <label>softbittobit.h</label>
+        <link refid="softbittobit_8h"/>
+        <childnode refid="59" relation="include">
+        </childnode>
+      </node>
+      <node id="36">
+        <label>mpsk_detector_soft_cf.h</label>
+        <link refid="mpsk__detector__soft__cf_8h"/>
+        <childnode refid="37" relation="include">
+        </childnode>
+      </node>
+      <node id="31">
+        <label>discriminator_impl.h</label>
+        <link refid="discriminator__impl_8h"/>
+      </node>
+      <node id="27">
+        <label>conv_decode27_impl.h</label>
+        <link refid="conv__decode27__impl_8h"/>
+      </node>
+      <node id="39">
+        <label>mpsk_mod_bc_impl.h</label>
+        <link refid="mpsk__mod__bc__impl_8h"/>
+      </node>
+      <node id="51">
+        <label>rs_decode_impl.h</label>
+        <link refid="rs__decode__impl_8h"/>
+      </node>
+      <node id="62">
+        <label>ticp_frame_source.h</label>
+        <link refid="ticp__frame__source_8h"/>
+        <childnode refid="63" relation="include">
+        </childnode>
+      </node>
+      <node id="61">
+        <label>ticp_frame_sink_impl.h</label>
+        <link refid="ticp__frame__sink__impl_8h"/>
+      </node>
+      <node id="20">
+        <label>add_asm.h</label>
+        <link refid="add__asm_8h"/>
+        <childnode refid="21" relation="include">
+        </childnode>
+      </node>
+      <node id="30">
+        <label>discriminator.h</label>
+        <link refid="discriminator_8h"/>
+        <childnode refid="31" relation="include">
+        </childnode>
+      </node>
+      <node id="29">
+        <label>conv_encode27_bb_impl.h</label>
+        <link refid="conv__encode27__bb__impl_8h"/>
+      </node>
+      <node id="41">
+        <label>mpsk_preamble_cc_impl.h</label>
+        <link refid="mpsk__preamble__cc__impl_8h"/>
+      </node>
+      <node id="19">
+        <label>api.h</label>
+        <link refid="api.h"/>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+        <childnode refid="42" relation="include">
+        </childnode>
+        <childnode refid="44" relation="include">
+        </childnode>
+        <childnode refid="46" relation="include">
+        </childnode>
+        <childnode refid="48" relation="include">
+        </childnode>
+        <childnode refid="50" relation="include">
+        </childnode>
+        <childnode refid="52" relation="include">
+        </childnode>
+        <childnode refid="54" relation="include">
+        </childnode>
+        <childnode refid="56" relation="include">
+        </childnode>
+        <childnode refid="58" relation="include">
+        </childnode>
+        <childnode refid="60" relation="include">
+        </childnode>
+        <childnode refid="62" relation="include">
+        </childnode>
+        <childnode refid="64" relation="include">
+        </childnode>
+      </node>
+      <node id="33">
+        <label>dll_cc_impl.h</label>
+        <link refid="dll__cc__impl_8h"/>
+      </node>
+      <node id="60">
+        <label>ticp_frame_sink.h</label>
+        <link refid="ticp__frame__sink_8h"/>
+        <childnode refid="61" relation="include">
+        </childnode>
+      </node>
+      <node id="37">
+        <label>mpsk_detector_soft_cf_impl.h</label>
+        <link refid="mpsk__detector__soft__cf__impl_8h"/>
+      </node>
+      <node id="56">
+        <label>softbits_msg_to_bytes_b.h</label>
+        <link refid="softbits__msg__to__bytes__b_8h"/>
+        <childnode refid="57" relation="include">
+        </childnode>
+      </node>
+      <node id="21">
+        <label>add_asm_impl.h</label>
+        <link refid="add__asm__impl_8h"/>
+      </node>
+      <node id="52">
+        <label>rs_encode.h</label>
+        <link refid="rs__encode_8h"/>
+        <childnode refid="53" relation="include">
+        </childnode>
+      </node>
+      <node id="32">
+        <label>dll_cc.h</label>
+        <link refid="dll__cc_8h"/>
+        <childnode refid="33" relation="include">
+        </childnode>
+      </node>
+      <node id="34">
+        <label>mpsk_ambiguity_resolver_f.h</label>
+        <link refid="mpsk__ambiguity__resolver__f_8h"/>
+        <childnode refid="35" relation="include">
+        </childnode>
+      </node>
+      <node id="54">
+        <label>simple_bpsk_SNR_qf.h</label>
+        <link refid="simple__bpsk__SNR__qf_8h"/>
+        <childnode refid="55" relation="include">
+        </childnode>
+      </node>
+      <node id="55">
+        <label>simple_bpsk_SNR_qf_impl.h</label>
+        <link refid="simple__bpsk__SNR__qf__impl_8h"/>
+      </node>
+      <node id="25">
+        <label>blob_msg_source_b_impl.h</label>
+        <link refid="blob__msg__source__b__impl_8h"/>
+      </node>
+      <node id="38">
+        <label>mpsk_mod_bc.h</label>
+        <link refid="mpsk__mod__bc_8h"/>
+        <childnode refid="39" relation="include">
+        </childnode>
+      </node>
+      <node id="43">
+        <label>msg_null_src_impl.h</label>
+        <link refid="msg__null__src__impl_8h"/>
+      </node>
+      <node id="45">
+        <label>pll_cc_impl.h</label>
+        <link refid="pll__cc__impl_8h"/>
+      </node>
+      <node id="65">
+        <label>trunk_tail_impl.h</label>
+        <link refid="trunk__tail__impl_8h"/>
+      </node>
+      <node id="46">
+        <label>randomiser.h</label>
+        <link refid="randomiser_8h"/>
+        <childnode refid="47" relation="include">
+        </childnode>
+      </node>
+      <node id="64">
+        <label>trunk_tail.h</label>
+        <link refid="trunk__tail_8h"/>
+        <childnode refid="65" relation="include">
+        </childnode>
+      </node>
+      <node id="49">
+        <label>reversebits_impl.h</label>
+        <link refid="reversebits__impl_8h"/>
+      </node>
+      <node id="57">
+        <label>softbits_msg_to_bytes_b_impl.h</label>
+        <link refid="softbits__msg__to__bytes__b__impl_8h"/>
+      </node>
+      <node id="28">
+        <label>conv_encode27_bb.h</label>
+        <link refid="conv__encode27__bb_8h"/>
+        <childnode refid="29" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="api_8h_1a144137922962dd54ae2e8c1917a7e588" prot="public" static="no">
+        <name>CCSDS_API</name>
+        <initializer>__GR_ATTR_IMPORT</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/include/ccsds/api.h" line="31" column="12" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/include/ccsds/api.h" bodystart="31" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/marina/Documents/sdr1/gr-ccsds/include/ccsds/api.h"/>
+  </compounddef>
+</doxygen>

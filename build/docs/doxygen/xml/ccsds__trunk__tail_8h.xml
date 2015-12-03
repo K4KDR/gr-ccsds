@@ -1,0 +1,81 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="ccsds__trunk__tail_8h" kind="file">
+    <compoundname>ccsds_trunk_tail.h</compoundname>
+    <includes refid="ccsds__api_8h" local="no">ccsds_api.h</includes>
+    <includes local="no">gr_sync_block.h</includes>
+    <includes local="no">cstdio</includes>
+    <incdepgraph>
+      <node id="433">
+        <label>gruel/attributes.h</label>
+      </node>
+      <node id="434">
+        <label>gr_sync_block.h</label>
+      </node>
+      <node id="432">
+        <label>ccsds_api.h</label>
+        <link refid="ccsds__api_8h"/>
+        <childnode refid="433" relation="include">
+        </childnode>
+      </node>
+      <node id="431">
+        <label>ccsds_trunk_tail.h</label>
+        <link refid="ccsds_trunk_tail.h"/>
+        <childnode refid="432" relation="include">
+        </childnode>
+        <childnode refid="434" relation="include">
+        </childnode>
+        <childnode refid="435" relation="include">
+        </childnode>
+      </node>
+      <node id="435">
+        <label>cstdio</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="classccsds__trunk__tail" prot="public">ccsds_trunk_tail</innerclass>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="ccsds__trunk__tail_8h_1ad3122f14e27a3c4fdf9a8c5cc52fd429" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="api_8h_1a144137922962dd54ae2e8c1917a7e588" kindref="member">CCSDS_API</ref> ccsds_trunk_tail_sptr</type>
+        <definition>CCSDS_API ccsds_trunk_tail_sptr ccsds_make_trunk_tail</definition>
+        <argsstring>(const unsigned int trunk_len, const unsigned int frame_len)</argsstring>
+        <name>ccsds_make_trunk_tail</name>
+        <param>
+          <type>const unsigned int</type>
+          <declname>trunk_len</declname>
+        </param>
+        <param>
+          <type>const unsigned int</type>
+          <declname>frame_len</declname>
+        </param>
+        <briefdescription>
+<para>Return a shared_ptr to a new instance of <ref refid="classccsds__trunk__tail" kindref="compound">ccsds_trunk_tail</ref>. </para>        </briefdescription>
+        <detaileddescription>
+<para>Create an instance of <ref refid="classccsds__trunk__tail" kindref="compound">ccsds_trunk_tail</ref> and return it&apos;s shared_ptr.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>trunk_len</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of softbits to trunkate</para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>frame_len</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of a frame (without ASM) in bytes. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Shared pointer to the created block </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_trunk_tail.h" line="34" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_trunk_tail.h"/>
+  </compounddef>
+</doxygen>

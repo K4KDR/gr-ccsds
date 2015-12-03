@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="mpsk__detector__soft__cf_8h" kind="file">
+    <compoundname>mpsk_detector_soft_cf.h</compoundname>
+    <includes refid="api_8h" local="no">ccsds/api.h</includes>
+    <includes local="no">gnuradio/sync_interpolator.h</includes>
+    <includedby refid="mpsk__detector__soft__cf__impl_8h" local="no">mpsk_detector_soft_cf_impl.h</includedby>
+    <incdepgraph>
+      <node id="597">
+        <label>gnuradio/attributes.h</label>
+      </node>
+      <node id="594">
+        <label>mpsk_detector_soft_cf.h</label>
+        <link refid="mpsk_detector_soft_cf.h"/>
+        <childnode refid="595" relation="include">
+        </childnode>
+        <childnode refid="598" relation="include">
+        </childnode>
+      </node>
+      <node id="595">
+        <label>ccsds/api.h</label>
+        <link refid="api_8h"/>
+        <childnode refid="596" relation="include">
+        </childnode>
+        <childnode refid="597" relation="include">
+        </childnode>
+      </node>
+      <node id="596">
+        <label>gnuradio/config.h</label>
+      </node>
+      <node id="598">
+        <label>gnuradio/sync_interpolator.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="599">
+        <label>mpsk_detector_soft_cf.h</label>
+        <link refid="mpsk_detector_soft_cf.h"/>
+        <childnode refid="600" relation="include">
+        </childnode>
+      </node>
+      <node id="600">
+        <label>mpsk_detector_soft_cf_impl.h</label>
+        <link refid="mpsk__detector__soft__cf__impl_8h"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classgr_1_1ccsds_1_1mpsk__detector__soft__cf" prot="public">gr::ccsds::mpsk_detector_soft_cf</innerclass>
+    <innernamespace refid="namespacegr">gr</innernamespace>
+    <innernamespace refid="namespacegr_1_1ccsds">gr::ccsds</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/marina/Documents/sdr1/gr-ccsds/include/ccsds/mpsk_detector_soft_cf.h"/>
+  </compounddef>
+</doxygen>

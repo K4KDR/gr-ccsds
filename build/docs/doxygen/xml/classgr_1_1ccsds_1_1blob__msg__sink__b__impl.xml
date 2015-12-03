@@ -1,0 +1,182 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="classgr_1_1ccsds_1_1blob__msg__sink__b__impl" kind="class" prot="public">
+    <compoundname>gr::ccsds::blob_msg_sink_b_impl</compoundname>
+    <basecompoundref refid="classgr_1_1ccsds_1_1blob__msg__sink__b" prot="public" virt="non-virtual">gr::ccsds::blob_msg_sink_b</basecompoundref>
+    <includes refid="blob__msg__sink__b__impl_8h" local="no">blob_msg_sink_b_impl.h</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classgr_1_1ccsds_1_1blob__msg__sink__b__impl_1a66eca9a083ef293873255c0e99e47111" prot="private" static="no" mutable="no">
+        <type>const unsigned int</type>
+        <definition>const unsigned int gr::ccsds::blob_msg_sink_b_impl::d_BLOB_LEN</definition>
+        <argsstring></argsstring>
+        <name>d_BLOB_LEN</name>
+        <briefdescription>
+<para>Private constructor of the TICP frame sink. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>blob_len</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of a BLOB in bytes.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+Length of BLOBs in bytes </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/blob_msg_sink_b_impl.h" line="19" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/lib/blob_msg_sink_b_impl.h" bodystart="19" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classgr_1_1ccsds_1_1blob__msg__sink__b__impl_1a115f52fd2534ceae8a37b30281a5c11c" prot="private" static="no" mutable="no">
+        <type>unsigned char *</type>
+        <definition>unsigned char* gr::ccsds::blob_msg_sink_b_impl::d_buffer</definition>
+        <argsstring></argsstring>
+        <name>d_buffer</name>
+        <briefdescription>
+<para>Buffer for <computeroutput>d_BLOB_LEN</computeroutput> incomming samples. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="see"><para><ref refid="classgr_1_1ccsds_1_1blob__msg__sink__b__impl_1a66eca9a083ef293873255c0e99e47111" kindref="member">d_BLOB_LEN</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/blob_msg_sink_b_impl.h" line="26" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/lib/blob_msg_sink_b_impl.h" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classgr_1_1ccsds_1_1blob__msg__sink__b__impl_1a1cd6c2289d585587cd58a7ebabf30613" prot="private" static="no" mutable="no">
+        <type>unsigned int</type>
+        <definition>unsigned int gr::ccsds::blob_msg_sink_b_impl::d_buffer_count</definition>
+        <argsstring></argsstring>
+        <name>d_buffer_count</name>
+        <briefdescription>
+<para>Counter for the number of elements in <computeroutput>d_buffer</computeroutput>. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="see"><para><ref refid="classgr_1_1ccsds_1_1blob__msg__sink__b__impl_1a115f52fd2534ceae8a37b30281a5c11c" kindref="member">d_buffer</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/blob_msg_sink_b_impl.h" line="33" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/lib/blob_msg_sink_b_impl.h" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classgr_1_1ccsds_1_1blob__msg__sink__b__impl_1ab6ce95c1a741a0cf7b773f5ff2367d03" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>gr::ccsds::blob_msg_sink_b_impl::blob_msg_sink_b_impl</definition>
+        <argsstring>(const unsigned int blob_len)</argsstring>
+        <name>blob_msg_sink_b_impl</name>
+        <param>
+          <type>const unsigned int</type>
+          <declname>blob_len</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/blob_msg_sink_b_impl.h" line="36" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classgr_1_1ccsds_1_1blob__msg__sink__b__impl_1ae2d973e71df0d54ed4cd015c4c60865e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>gr::ccsds::blob_msg_sink_b_impl::~blob_msg_sink_b_impl</definition>
+        <argsstring>()</argsstring>
+        <name>~blob_msg_sink_b_impl</name>
+        <briefdescription>
+<para>Public deconstructor of the ticp frame sink. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/blob_msg_sink_b_impl.h" line="38" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classgr_1_1ccsds_1_1blob__msg__sink__b__impl_1a5af5349788ae6e7c6b31398c4a5ff9f6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool gr::ccsds::blob_msg_sink_b_impl::stop</definition>
+        <argsstring>(void)</argsstring>
+        <name>stop</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/blob_msg_sink_b_impl.h" line="40" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classgr_1_1ccsds_1_1blob__msg__sink__b__impl_1abcf0c8f17f97d1057aad5e971103a7e2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int gr::ccsds::blob_msg_sink_b_impl::work</definition>
+        <argsstring>(int noutput_items, gr_vector_const_void_star &amp;input_items, gr_vector_void_star &amp;output_items)</argsstring>
+        <name>work</name>
+        <param>
+          <type>int</type>
+          <declname>noutput_items</declname>
+        </param>
+        <param>
+          <type>gr_vector_const_void_star &amp;</type>
+          <declname>input_items</declname>
+        </param>
+        <param>
+          <type>gr_vector_void_star &amp;</type>
+          <declname>output_items</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/blob_msg_sink_b_impl.h" line="42" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="18">
+        <label>sync_block</label>
+      </node>
+      <node id="17">
+        <label>gr::ccsds::blob_msg_sink_b</label>
+        <link refid="classgr_1_1ccsds_1_1blob__msg__sink__b"/>
+        <childnode refid="18" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="16">
+        <label>gr::ccsds::blob_msg_sink_b_impl</label>
+        <link refid="classgr_1_1ccsds_1_1blob__msg__sink__b__impl"/>
+        <childnode refid="17" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="21">
+        <label>sync_block</label>
+      </node>
+      <node id="20">
+        <label>gr::ccsds::blob_msg_sink_b</label>
+        <link refid="classgr_1_1ccsds_1_1blob__msg__sink__b"/>
+        <childnode refid="21" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="19">
+        <label>gr::ccsds::blob_msg_sink_b_impl</label>
+        <link refid="classgr_1_1ccsds_1_1blob__msg__sink__b__impl"/>
+        <childnode refid="20" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/blob_msg_sink_b_impl.h" line="10" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/lib/blob_msg_sink_b_impl.h" bodystart="9" bodyend="45"/>
+    <listofallmembers>
+      <member refid="classgr_1_1ccsds_1_1blob__msg__sink__b__impl_1ab6ce95c1a741a0cf7b773f5ff2367d03" prot="public" virt="non-virtual"><scope>gr::ccsds::blob_msg_sink_b_impl</scope><name>blob_msg_sink_b_impl</name></member>
+      <member refid="classgr_1_1ccsds_1_1blob__msg__sink__b__impl_1a66eca9a083ef293873255c0e99e47111" prot="private" virt="non-virtual"><scope>gr::ccsds::blob_msg_sink_b_impl</scope><name>d_BLOB_LEN</name></member>
+      <member refid="classgr_1_1ccsds_1_1blob__msg__sink__b__impl_1a115f52fd2534ceae8a37b30281a5c11c" prot="private" virt="non-virtual"><scope>gr::ccsds::blob_msg_sink_b_impl</scope><name>d_buffer</name></member>
+      <member refid="classgr_1_1ccsds_1_1blob__msg__sink__b__impl_1a1cd6c2289d585587cd58a7ebabf30613" prot="private" virt="non-virtual"><scope>gr::ccsds::blob_msg_sink_b_impl</scope><name>d_buffer_count</name></member>
+      <member refid="classgr_1_1ccsds_1_1blob__msg__sink__b_1aff492aae169b8f46dae6caa569e0a64b" prot="public" virt="non-virtual"><scope>gr::ccsds::blob_msg_sink_b_impl</scope><name>make</name></member>
+      <member refid="classgr_1_1ccsds_1_1blob__msg__sink__b_1a54b7988adb2212bf5b75765e73779fbf" prot="public" virt="non-virtual"><scope>gr::ccsds::blob_msg_sink_b_impl</scope><name>sptr</name></member>
+      <member refid="classgr_1_1ccsds_1_1blob__msg__sink__b__impl_1a5af5349788ae6e7c6b31398c4a5ff9f6" prot="public" virt="non-virtual"><scope>gr::ccsds::blob_msg_sink_b_impl</scope><name>stop</name></member>
+      <member refid="classgr_1_1ccsds_1_1blob__msg__sink__b__impl_1abcf0c8f17f97d1057aad5e971103a7e2" prot="public" virt="non-virtual"><scope>gr::ccsds::blob_msg_sink_b_impl</scope><name>work</name></member>
+      <member refid="classgr_1_1ccsds_1_1blob__msg__sink__b__impl_1ae2d973e71df0d54ed4cd015c4c60865e" prot="public" virt="non-virtual"><scope>gr::ccsds::blob_msg_sink_b_impl</scope><name>~blob_msg_sink_b_impl</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

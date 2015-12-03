@@ -1,0 +1,125 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="ccsds__mpsk__detector__soft__cf_8h" kind="file">
+    <compoundname>ccsds_mpsk_detector_soft_cf.h</compoundname>
+    <includes refid="ccsds__api_8h" local="no">ccsds_api.h</includes>
+    <includes local="no">gr_sync_interpolator.h</includes>
+    <includes local="no">gr_complex.h</includes>
+    <incdepgraph>
+      <node id="223">
+        <label>gruel/attributes.h</label>
+      </node>
+      <node id="224">
+        <label>gr_sync_interpolator.h</label>
+      </node>
+      <node id="222">
+        <label>ccsds_api.h</label>
+        <link refid="ccsds__api_8h"/>
+        <childnode refid="223" relation="include">
+        </childnode>
+      </node>
+      <node id="225">
+        <label>gr_complex.h</label>
+      </node>
+      <node id="221">
+        <label>/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_mpsk_detector_soft_cf.h</label>
+        <link refid="ccsds_mpsk_detector_soft_cf.h"/>
+        <childnode refid="222" relation="include">
+        </childnode>
+        <childnode refid="224" relation="include">
+        </childnode>
+        <childnode refid="225" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <innerclass refid="classccsds__mpsk__detector__soft__cf" prot="public">ccsds_mpsk_detector_soft_cf</innerclass>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="ccsds__mpsk__detector__soft__cf_8h_1a45caaf11dfbe7e8e0c2858e799d4e002" prot="public" static="no">
+        <type>boost::shared_ptr&lt; <ref refid="classccsds__mpsk__detector__soft__cf" kindref="compound">ccsds_mpsk_detector_soft_cf</ref> &gt;</type>
+        <definition>typedef boost::shared_ptr&lt;ccsds_mpsk_detector_soft_cf&gt; ccsds_mpsk_detector_soft_cf_sptr</definition>
+        <argsstring></argsstring>
+        <name>ccsds_mpsk_detector_soft_cf_sptr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_mpsk_detector_soft_cf.h" line="10" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_mpsk_detector_soft_cf.h" bodystart="8" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="ccsds__mpsk__detector__soft__cf_8h_1af204ffe47789c3fee809c73a9db2336e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>__GR_ATTR_IMPORT <ref refid="ccsds__mpsk__detector__soft__cf_8h_1a45caaf11dfbe7e8e0c2858e799d4e002" kindref="member">ccsds_mpsk_detector_soft_cf_sptr</ref></type>
+        <definition>__GR_ATTR_IMPORT ccsds_mpsk_detector_soft_cf_sptr ccsds_make_mpsk_detector_soft_cf</definition>
+        <argsstring>(const unsigned int M)</argsstring>
+        <name>ccsds_make_mpsk_detector_soft_cf</name>
+        <param>
+          <type>const unsigned int</type>
+          <declname>M</declname>
+        </param>
+        <briefdescription>
+<para>Create an M-PSK softbit detector and return it&apos;s shared pointer. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>M</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Modulation order of the M-PSK signal. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Shared pointer of the created detector. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_mpsk_detector_soft_cf.h" line="17" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>INCLUDED_CCSDS_MPSK_DETECTOR_SOFT_CF_H</highlight></codeline>
+<codeline lineno="2"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>INCLUDED_CCSDS_MPSK_DETECTOR_SOFT_CF_H</highlight></codeline>
+<codeline lineno="3"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="ccsds__api_8h" kindref="compound">ccsds_api.h</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;gr_sync_interpolator.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;gr_complex.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8" refid="ccsds__mpsk__detector__soft__cf_8h_1a45caaf11dfbe7e8e0c2858e799d4e002" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classccsds__mpsk__detector__soft__cf" kindref="compound">ccsds_mpsk_detector_soft_cf</ref>;</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/>boost::shared_ptr&lt;ccsds_mpsk_detector_soft_cf&gt;<sp/><ref refid="ccsds__mpsk__detector__soft__cf_8h_1a45caaf11dfbe7e8e0c2858e799d4e002" kindref="member">ccsds_mpsk_detector_soft_cf_sptr</ref>;</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><ref refid="api_8h_1a144137922962dd54ae2e8c1917a7e588" kindref="member">CCSDS_API</ref><sp/><ref refid="ccsds__mpsk__detector__soft__cf_8h_1a45caaf11dfbe7e8e0c2858e799d4e002" kindref="member">ccsds_mpsk_detector_soft_cf_sptr</ref><sp/><ref refid="ccsds__mpsk__detector__soft__cf_8h_1af204ffe47789c3fee809c73a9db2336e" kindref="member">ccsds_make_mpsk_detector_soft_cf</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="gr-ccsds_2include_2ccsds__time_8h_1a52037c938e3c1b126c6277da5ca689d0" kindref="member">M</ref>);</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight></codeline>
+<codeline lineno="40" refid="classccsds__mpsk__detector__soft__cf" refkind="compound"><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="api_8h_1a144137922962dd54ae2e8c1917a7e588" kindref="member">CCSDS_API</ref><sp/><ref refid="classccsds__mpsk__detector__soft__cf" kindref="compound">ccsds_mpsk_detector_soft_cf</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/>gr_sync_interpolator</highlight></codeline>
+<codeline lineno="41"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">friend</highlight><highlight class="normal"><sp/><ref refid="api_8h_1a144137922962dd54ae2e8c1917a7e588" kindref="member">CCSDS_API</ref><sp/><ref refid="ccsds__mpsk__detector__soft__cf_8h_1a45caaf11dfbe7e8e0c2858e799d4e002" kindref="member">ccsds_mpsk_detector_soft_cf_sptr</ref><sp/><ref refid="ccsds__mpsk__detector__soft__cf_8h_1af204ffe47789c3fee809c73a9db2336e" kindref="member">ccsds_make_mpsk_detector_soft_cf</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="gr-ccsds_2include_2ccsds__time_8h_1a52037c938e3c1b126c6277da5ca689d0" kindref="member">M</ref>);</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classccsds__mpsk__detector__soft__cf" kindref="compound">ccsds_mpsk_detector_soft_cf</ref><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>M);<sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>private<sp/>constructor</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="53"><highlight class="normal"></highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>d_M;</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>d_ldM;</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"></highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>d_TWOPI;</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"></highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*map;</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"></highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>get_ldM(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>M);</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"></highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>~<ref refid="classccsds__mpsk__detector__soft__cf" kindref="compound">ccsds_mpsk_detector_soft_cf</ref><sp/>();</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//void<sp/>forecast(int<sp/>noutput_items,<sp/>gr_vector_int<sp/>&amp;ninput_items_required);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="74"><highlight class="normal"></highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>work<sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>noutput_items,<sp/>gr_vector_const_void_star<sp/>&amp;input_items,<sp/>gr_vector_void_star<sp/>&amp;output_items);</highlight></codeline>
+<codeline lineno="76"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"></highlight></codeline>
+<codeline lineno="78"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>INCLUDED_CCSDS_MPSK_DETECTOR_SOFT_CF_H<sp/>*/</highlight><highlight class="preprocessor"></highlight></codeline>
+    </programlisting>
+    <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_mpsk_detector_soft_cf.h"/>
+  </compounddef>
+</doxygen>

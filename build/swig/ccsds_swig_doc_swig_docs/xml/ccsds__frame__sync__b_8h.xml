@@ -1,0 +1,302 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="ccsds__frame__sync__b_8h" kind="file">
+    <compoundname>ccsds_frame_sync_b.h</compoundname>
+    <includes refid="ccsds__api_8h" local="no">ccsds_api.h</includes>
+    <includes refid="ccsds__asm__operator_8h" local="no">ccsds_asm_operator.h</includes>
+    <includes local="no">gr_block.h</includes>
+    <includes local="no">string</includes>
+    <includes local="no">gr_msg_queue.h</includes>
+    <incdepgraph>
+      <node id="156">
+        <label>gruel/attributes.h</label>
+      </node>
+      <node id="163">
+        <label>gr_msg_queue.h</label>
+      </node>
+      <node id="160">
+        <label>cmath</label>
+      </node>
+      <node id="155">
+        <label>ccsds_api.h</label>
+        <link refid="ccsds__api_8h"/>
+        <childnode refid="156" relation="include">
+        </childnode>
+      </node>
+      <node id="162">
+        <label>string</label>
+      </node>
+      <node id="154">
+        <label>/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_frame_sync_b.h</label>
+        <link refid="ccsds_frame_sync_b.h"/>
+        <childnode refid="155" relation="include">
+        </childnode>
+        <childnode refid="157" relation="include">
+        </childnode>
+        <childnode refid="161" relation="include">
+        </childnode>
+        <childnode refid="162" relation="include">
+        </childnode>
+        <childnode refid="163" relation="include">
+        </childnode>
+      </node>
+      <node id="157">
+        <label>ccsds_asm_operator.h</label>
+        <link refid="ccsds__asm__operator_8h"/>
+        <childnode refid="158" relation="include">
+        </childnode>
+        <childnode refid="159" relation="include">
+        </childnode>
+        <childnode refid="160" relation="include">
+        </childnode>
+      </node>
+      <node id="159">
+        <label>cstdio</label>
+      </node>
+      <node id="161">
+        <label>gr_block.h</label>
+      </node>
+      <node id="158">
+        <label>cstring</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="classccsds__frame__sync__b" prot="public">ccsds_frame_sync_b</innerclass>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="ccsds__frame__sync__b_8h_1a5e3eef1f1dc2387a637d7bd3d3ac8b79" prot="public" static="no">
+        <name>CCSDS_FS_OUTPUT_NONE</name>
+        <initializer>0</initializer>
+        <briefdescription>
+<para>Verbosity level: Do not output anything. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_frame_sync_b.h" line="12" column="9" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_frame_sync_b.h" bodystart="12" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="ccsds__frame__sync__b_8h_1a577d7f448a7c7299dc71166e98bedce5" prot="public" static="no">
+        <name>CCSDS_FS_OUTPUT_STATE</name>
+        <initializer>1</initializer>
+        <briefdescription>
+<para>Verbosity level: Do output state information. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_frame_sync_b.h" line="15" column="9" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_frame_sync_b.h" bodystart="15" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="ccsds__frame__sync__b_8h_1a2162869bd1bf52c5fad01272ccef77cd" prot="public" static="no">
+        <name>CCSDS_FS_OUTPUT_FILE</name>
+        <initializer>2</initializer>
+        <briefdescription>
+<para>Verbosity level: Do output into debug file. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_frame_sync_b.h" line="18" column="9" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_frame_sync_b.h" bodystart="18" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="ccsds__frame__sync__b_8h_1a6eb937a0fcd898ff5e23c1aadf42d46b" prot="public" static="no">
+        <name>CCSDS_FS_OUTPUT_DEBUG</name>
+        <initializer>3</initializer>
+        <briefdescription>
+<para>Verbosity level: Do output debug information. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_frame_sync_b.h" line="21" column="9" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_frame_sync_b.h" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="ccsds__frame__sync__b_8h_1a12f06e4b15b140841d6e8c9c60559f20" prot="public" static="no">
+        <name>CCSDS_FS_VERBOSITY_LEVEL</name>
+        <initializer><ref refid="ccsds__frame__sync__b_8h_1a2162869bd1bf52c5fad01272ccef77cd" kindref="member">CCSDS_FS_OUTPUT_FILE</ref></initializer>
+        <briefdescription>
+<para>Level of verbosity of this block. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="see"><para><ref refid="ccsds__frame__sync__b_8h_1a5e3eef1f1dc2387a637d7bd3d3ac8b79" kindref="member">CCSDS_FS_OUTPUT_NONE</ref> </para><simplesectsep/><para><ref refid="ccsds__frame__sync__b_8h_1a577d7f448a7c7299dc71166e98bedce5" kindref="member">CCSDS_FS_OUTPUT_STATE</ref> </para><simplesectsep/><para><ref refid="ccsds__frame__sync__b_8h_1a6eb937a0fcd898ff5e23c1aadf42d46b" kindref="member">CCSDS_FS_OUTPUT_DEBUG</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_frame_sync_b.h" line="30" column="9" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_frame_sync_b.h" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="ccsds__frame__sync__b_8h_1a99eaa4db4db6a4a03b4ca6a4143b1a45" prot="public" static="no">
+        <type>boost::shared_ptr&lt; <ref refid="classccsds__frame__sync__b" kindref="compound">ccsds_frame_sync_b</ref> &gt;</type>
+        <definition>typedef boost::shared_ptr&lt;ccsds_frame_sync_b&gt; ccsds_frame_sync_b_sptr</definition>
+        <argsstring></argsstring>
+        <name>ccsds_frame_sync_b_sptr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_frame_sync_b.h" line="45" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_frame_sync_b.h" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="ccsds__frame__sync__b_8h_1a0063ad28193037f52d6c96c78aa28134" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>__GR_ATTR_IMPORT <ref refid="ccsds__frame__sync__b_8h_1a99eaa4db4db6a4a03b4ca6a4143b1a45" kindref="member">ccsds_frame_sync_b_sptr</ref></type>
+        <definition>__GR_ATTR_IMPORT ccsds_frame_sync_b_sptr ccsds_make_frame_sync_b</definition>
+        <argsstring>(std::string ASM, unsigned int threshold, const unsigned int ber_threshold, const unsigned int frame_length)</argsstring>
+        <name>ccsds_make_frame_sync_b</name>
+        <param>
+          <type>std::string</type>
+          <declname>ASM</declname>
+        </param>
+        <param>
+          <type>unsigned int</type>
+          <declname>threshold</declname>
+        </param>
+        <param>
+          <type>const unsigned int</type>
+          <declname>ber_threshold</declname>
+        </param>
+        <param>
+          <type>const unsigned int</type>
+          <declname>frame_length</declname>
+        </param>
+        <briefdescription>
+<para>Return a shared_ptr to a new instance of <ref refid="classccsds__frame__sync__b" kindref="compound">ccsds_frame_sync_b</ref>. </para>        </briefdescription>
+        <detaileddescription>
+<para>Create an instance of <ref refid="classccsds__frame__sync__b" kindref="compound">ccsds_frame_sync_b</ref> and return it&apos;s shared_ptr.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ASM</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>String containing the attached sync marker to look for in hexadecimal representation. Must be of even length. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>threshold</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of ASM losses to enter full search again. If set to one, a full search is performed every time an ASM is lost. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ber_threshold</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Maximum number of bit errors between a sequence and the ASM to consider the sequence matching. If threshold equals zero the sequence must be an exact copy of the ASM. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>frame_length</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of a frame (without ASM) in bytes. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Shared pointer to the created AR block </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_frame_sync_b.h" line="62" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>INCLUDED_CCSDS_FRAME_SYNC_B_H</highlight></codeline>
+<codeline lineno="2"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>INCLUDED_CCSDS_FRAME_SYNC_B_H</highlight></codeline>
+<codeline lineno="3"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="ccsds__api_8h" kindref="compound">ccsds_api.h</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="ccsds__asm__operator_8h" kindref="compound">ccsds_asm_operator.h</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;gr_block.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;string&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;gr_msg_queue.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12" refid="ccsds__frame__sync__b_8h_1a5e3eef1f1dc2387a637d7bd3d3ac8b79" refkind="member"><highlight class="preprocessor">#define<sp/>CCSDS_FS_OUTPUT_NONE<sp/>0</highlight></codeline>
+<codeline lineno="13"><highlight class="preprocessor"></highlight></codeline>
+<codeline lineno="15" refid="ccsds__frame__sync__b_8h_1a577d7f448a7c7299dc71166e98bedce5" refkind="member"><highlight class="preprocessor">#define<sp/>CCSDS_FS_OUTPUT_STATE<sp/>1</highlight></codeline>
+<codeline lineno="16"><highlight class="preprocessor"></highlight></codeline>
+<codeline lineno="18" refid="ccsds__frame__sync__b_8h_1a2162869bd1bf52c5fad01272ccef77cd" refkind="member"><highlight class="preprocessor">#define<sp/>CCSDS_FS_OUTPUT_FILE<sp/>2</highlight></codeline>
+<codeline lineno="19"><highlight class="preprocessor"></highlight></codeline>
+<codeline lineno="21" refid="ccsds__frame__sync__b_8h_1a6eb937a0fcd898ff5e23c1aadf42d46b" refkind="member"><highlight class="preprocessor">#define<sp/>CCSDS_FS_OUTPUT_DEBUG<sp/>3</highlight></codeline>
+<codeline lineno="22"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight></codeline>
+<codeline lineno="30" refid="ccsds__frame__sync__b_8h_1a12f06e4b15b140841d6e8c9c60559f20" refkind="member"><highlight class="preprocessor">#define<sp/>CCSDS_FS_VERBOSITY_LEVEL<sp/>CCSDS_FS_OUTPUT_FILE</highlight></codeline>
+<codeline lineno="31"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="32" refid="ccsds__frame__sync__b_8h_1a99eaa4db4db6a4a03b4ca6a4143b1a45" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classccsds__frame__sync__b" kindref="compound">ccsds_frame_sync_b</ref>;</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="35"><highlight class="comment"><sp/>*<sp/>We<sp/>use<sp/>boost::shared_ptr&apos;s<sp/>instead<sp/>of<sp/>raw<sp/>pointers<sp/>for<sp/>all<sp/>access</highlight></codeline>
+<codeline lineno="36"><highlight class="comment"><sp/>*<sp/>to<sp/>gr_blocks<sp/>(and<sp/>many<sp/>other<sp/>data<sp/>structures).<sp/><sp/>The<sp/>shared_ptr<sp/>gets</highlight></codeline>
+<codeline lineno="37"><highlight class="comment"><sp/>*<sp/>us<sp/>transparent<sp/>reference<sp/>counting,<sp/>which<sp/>greatly<sp/>simplifies<sp/>storage</highlight></codeline>
+<codeline lineno="38"><highlight class="comment"><sp/>*<sp/>management<sp/>issues.<sp/><sp/>This<sp/>is<sp/>especially<sp/>helpful<sp/>in<sp/>our<sp/>hybrid</highlight></codeline>
+<codeline lineno="39"><highlight class="comment"><sp/>*<sp/>C++<sp/>/<sp/>Python<sp/>system.</highlight></codeline>
+<codeline lineno="40"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="41"><highlight class="comment"><sp/>*<sp/>See<sp/>http://www.boost.org/libs/smart_ptr/smart_ptr.htm</highlight></codeline>
+<codeline lineno="42"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="43"><highlight class="comment"><sp/>*<sp/>As<sp/>a<sp/>convention,<sp/>the<sp/>_sptr<sp/>suffix<sp/>indicates<sp/>a<sp/>boost::shared_ptr</highlight></codeline>
+<codeline lineno="44"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/>boost::shared_ptr&lt;ccsds_frame_sync_b&gt;<sp/><ref refid="ccsds__frame__sync__b_8h_1a99eaa4db4db6a4a03b4ca6a4143b1a45" kindref="member">ccsds_frame_sync_b_sptr</ref>;</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><ref refid="api_8h_1a144137922962dd54ae2e8c1917a7e588" kindref="member">CCSDS_API</ref><sp/><ref refid="ccsds__frame__sync__b_8h_1a99eaa4db4db6a4a03b4ca6a4143b1a45" kindref="member">ccsds_frame_sync_b_sptr</ref><sp/><ref refid="ccsds__frame__sync__b_8h_1a0063ad28193037f52d6c96c78aa28134" kindref="member">ccsds_make_frame_sync_b</ref>(std::string<sp/>ASM,<sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>threshold,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>ber_threshold,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>frame_length);</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"></highlight></codeline>
+<codeline lineno="80" refid="classccsds__frame__sync__b" refkind="compound"><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="api_8h_1a144137922962dd54ae2e8c1917a7e588" kindref="member">CCSDS_API</ref><sp/><ref refid="classccsds__frame__sync__b" kindref="compound">ccsds_frame_sync_b</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/>gr_block</highlight></codeline>
+<codeline lineno="81"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">friend</highlight><highlight class="normal"><sp/><ref refid="api_8h_1a144137922962dd54ae2e8c1917a7e588" kindref="member">CCSDS_API</ref><sp/><ref refid="ccsds__frame__sync__b_8h_1a99eaa4db4db6a4a03b4ca6a4143b1a45" kindref="member">ccsds_frame_sync_b_sptr</ref><sp/><ref refid="ccsds__frame__sync__b_8h_1a0063ad28193037f52d6c96c78aa28134" kindref="member">ccsds_make_frame_sync_b</ref>(std::string<sp/>ASM,<sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>threshold,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>ber_threshold,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>frame_length);</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"></highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classccsds__frame__sync__b" kindref="compound">ccsds_frame_sync_b</ref>(std::string<sp/>ASM,<sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>threshold,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>ber_threshold,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>frame_length);</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/>d_STATE<sp/>{</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>STATE_SEARCH=0,</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>STATE_LOCK};</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"></highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>d_STATE<sp/>d_state;</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"></highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classccsds__asm__operator" kindref="compound">ccsds_asm_operator</ref><sp/>*d_asm_operator;</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"></highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>d_ASM_LEN;</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"></highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>d_THRESHOLD;</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"></highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>d_BER_THRESHOLD;</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"></highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>d_FRAME_LEN;</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"></highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>d_SEARCH_LEN;</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"></highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>d_COPY_LEN;</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"></highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>d_count;</highlight></codeline>
+<codeline lineno="152"><highlight class="normal"></highlight></codeline>
+<codeline lineno="159"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>d_offset_bytes;</highlight></codeline>
+<codeline lineno="160"><highlight class="normal"></highlight></codeline>
+<codeline lineno="168"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>d_offset_bits;</highlight></codeline>
+<codeline lineno="169"><highlight class="normal"></highlight></codeline>
+<codeline lineno="170"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#if<sp/>CCSDS_FS_VERBOSITY_LEVEL<sp/>&gt;=<sp/>CCSDS_FS_OUTPUT_FILE</highlight></codeline>
+<codeline lineno="171"><highlight class="preprocessor"></highlight></codeline>
+<codeline lineno="172"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>FILE<sp/>*dbg_file_in;</highlight></codeline>
+<codeline lineno="173"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>FILE<sp/>*dbg_file_instream;</highlight></codeline>
+<codeline lineno="174"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>FILE<sp/>*dbg_file_out;</highlight></codeline>
+<codeline lineno="175"><highlight class="normal"></highlight></codeline>
+<codeline lineno="177"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>dbg_count;</highlight></codeline>
+<codeline lineno="178"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#endif</highlight></codeline>
+<codeline lineno="179"><highlight class="preprocessor"></highlight></codeline>
+<codeline lineno="186"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>get_bytes_required(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="187"><highlight class="normal"></highlight></codeline>
+<codeline lineno="188"><highlight class="normal"></highlight></codeline>
+<codeline lineno="189"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="191"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>~<ref refid="classccsds__frame__sync__b" kindref="compound">ccsds_frame_sync_b</ref><sp/>();<sp/><sp/></highlight><highlight class="comment">//<sp/>public<sp/>destructor</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="192"><highlight class="normal"></highlight></codeline>
+<codeline lineno="193"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>forecast(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>noutput_items,gr_vector_int<sp/>&amp;ninput_items_required);</highlight></codeline>
+<codeline lineno="194"><highlight class="normal"></highlight></codeline>
+<codeline lineno="195"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>stop(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="196"><highlight class="normal"></highlight></codeline>
+<codeline lineno="197"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><sp/>general_work<sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>noutput_items,</highlight></codeline>
+<codeline lineno="198"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>gr_vector_int<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;ninput_items,</highlight></codeline>
+<codeline lineno="199"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>gr_vector_const_void_star<sp/><sp/><sp/>&amp;input_items,</highlight></codeline>
+<codeline lineno="200"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>gr_vector_void_star<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;output_items);};</highlight></codeline>
+<codeline lineno="201"><highlight class="normal"></highlight></codeline>
+<codeline lineno="202"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>INCLUDED_CCSDS_FRAME_SYNC_B_H<sp/>*/</highlight><highlight class="preprocessor"></highlight></codeline>
+    </programlisting>
+    <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_frame_sync_b.h"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="blob__msg__sink__b_8h" kind="file">
+    <compoundname>blob_msg_sink_b.h</compoundname>
+    <includes refid="api_8h" local="no">ccsds/api.h</includes>
+    <includes local="no">gnuradio/sync_block.h</includes>
+    <includedby refid="blob__msg__sink__b__impl_8h" local="no">blob_msg_sink_b_impl.h</includedby>
+    <incdepgraph>
+      <node id="70">
+        <label>blob_msg_sink_b.h</label>
+        <link refid="blob_msg_sink_b.h"/>
+        <childnode refid="71" relation="include">
+        </childnode>
+        <childnode refid="74" relation="include">
+        </childnode>
+      </node>
+      <node id="74">
+        <label>gnuradio/sync_block.h</label>
+      </node>
+      <node id="73">
+        <label>gnuradio/attributes.h</label>
+      </node>
+      <node id="71">
+        <label>ccsds/api.h</label>
+        <link refid="api_8h"/>
+        <childnode refid="72" relation="include">
+        </childnode>
+        <childnode refid="73" relation="include">
+        </childnode>
+      </node>
+      <node id="72">
+        <label>gnuradio/config.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="76">
+        <label>blob_msg_sink_b_impl.h</label>
+        <link refid="blob__msg__sink__b__impl_8h"/>
+      </node>
+      <node id="75">
+        <label>blob_msg_sink_b.h</label>
+        <link refid="blob_msg_sink_b.h"/>
+        <childnode refid="76" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classgr_1_1ccsds_1_1blob__msg__sink__b" prot="public">gr::ccsds::blob_msg_sink_b</innerclass>
+    <innernamespace refid="namespacegr">gr</innernamespace>
+    <innernamespace refid="namespacegr_1_1ccsds">gr::ccsds</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/marina/Documents/sdr1/gr-ccsds/include/ccsds/blob_msg_sink_b.h"/>
+  </compounddef>
+</doxygen>

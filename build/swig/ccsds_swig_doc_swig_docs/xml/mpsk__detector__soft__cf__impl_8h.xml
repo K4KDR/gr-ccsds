@@ -1,0 +1,134 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="mpsk__detector__soft__cf__impl_8h" kind="file">
+    <compoundname>mpsk_detector_soft_cf_impl.h</compoundname>
+    <includes refid="mpsk__detector__soft__cf_8h" local="no">ccsds/mpsk_detector_soft_cf.h</includes>
+    <includes refid="mpsk__constellation_8h" local="yes">mpsk_constellation.h</includes>
+    <includes local="no">stdio.h</includes>
+    <includes local="no">math.h</includes>
+    <includes local="no">volk/volk.h</includes>
+    <includes local="no">complex.h</includes>
+    <incdepgraph>
+      <node id="720">
+        <label>volk/volk.h</label>
+      </node>
+      <node id="718">
+        <label>stdlib.h</label>
+      </node>
+      <node id="713">
+        <label>gnuradio/attributes.h</label>
+      </node>
+      <node id="710">
+        <label>ccsds/mpsk_detector_soft_cf.h</label>
+        <link refid="mpsk__detector__soft__cf_8h"/>
+        <childnode refid="711" relation="include">
+        </childnode>
+        <childnode refid="714" relation="include">
+        </childnode>
+      </node>
+      <node id="711">
+        <label>ccsds/api.h</label>
+        <link refid="api_8h"/>
+        <childnode refid="712" relation="include">
+        </childnode>
+        <childnode refid="713" relation="include">
+        </childnode>
+      </node>
+      <node id="709">
+        <label>/home/marina/Documents/sdr1/gr-ccsds/lib/mpsk_detector_soft_cf_impl.h</label>
+        <link refid="mpsk_detector_soft_cf_impl.h"/>
+        <childnode refid="710" relation="include">
+        </childnode>
+        <childnode refid="715" relation="include">
+        </childnode>
+        <childnode refid="717" relation="include">
+        </childnode>
+        <childnode refid="719" relation="include">
+        </childnode>
+        <childnode refid="720" relation="include">
+        </childnode>
+        <childnode refid="721" relation="include">
+        </childnode>
+      </node>
+      <node id="721">
+        <label>complex.h</label>
+      </node>
+      <node id="719">
+        <label>math.h</label>
+      </node>
+      <node id="712">
+        <label>gnuradio/config.h</label>
+      </node>
+      <node id="714">
+        <label>gnuradio/sync_interpolator.h</label>
+      </node>
+      <node id="716">
+        <label>complex</label>
+      </node>
+      <node id="717">
+        <label>stdio.h</label>
+      </node>
+      <node id="715">
+        <label>mpsk_constellation.h</label>
+        <link refid="mpsk__constellation_8h"/>
+        <childnode refid="716" relation="include">
+        </childnode>
+        <childnode refid="717" relation="include">
+        </childnode>
+        <childnode refid="718" relation="include">
+        </childnode>
+        <childnode refid="719" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <innerclass refid="classgr_1_1ccsds_1_1mpsk__detector__soft__cf__impl" prot="public">gr::ccsds::mpsk_detector_soft_cf_impl</innerclass>
+    <innernamespace refid="namespacegr">gr</innernamespace>
+    <innernamespace refid="namespacegr_1_1ccsds">gr::ccsds</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>INCLUDED_CCSDS_MPSK_DETECTOR_SOFT_CF_IMPL_H</highlight></codeline>
+<codeline lineno="2"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>INCLUDED_CCSDS_MPSK_DETECTOR_SOFT_CF_IMPL_H</highlight></codeline>
+<codeline lineno="3"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="mpsk__detector__soft__cf_8h" kindref="compound">ccsds/mpsk_detector_soft_cf.h</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="mpsk__constellation_8h" kindref="compound">mpsk_constellation.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdio.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;math.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;volk/volk.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;complex.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">gr<sp/>{</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">ccsds<sp/>{</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight></codeline>
+<codeline lineno="14" refid="classgr_1_1ccsds_1_1mpsk__detector__soft__cf__impl" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classgr_1_1ccsds_1_1mpsk__detector__soft__cf__impl" kindref="compound">mpsk_detector_soft_cf_impl</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classgr_1_1ccsds_1_1mpsk__detector__soft__cf" kindref="compound">mpsk_detector_soft_cf</ref></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>d_M;</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>d_ldM;</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>d_TWOPI;</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*map;</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>get_ldM(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="gr-ccsds_2include_2ccsds__time_8h_1a52037c938e3c1b126c6277da5ca689d0" kindref="member">M</ref>);</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classgr_1_1ccsds_1_1mpsk__detector__soft__cf__impl_1acb5b4adcfe4b5abc8dc2c12cf5c1fded" kindref="member">mpsk_detector_soft_cf_impl</ref><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>M);<sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>public<sp/>constructor</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classgr_1_1ccsds_1_1mpsk__detector__soft__cf__impl_1ad5ba62089a39a690c24445f29c6cc354" kindref="member">~mpsk_detector_soft_cf_impl</ref><sp/>();</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classgr_1_1ccsds_1_1mpsk__detector__soft__cf__impl_1ab2d578308b4785335cc64c88cfc63a55" kindref="member">work</ref><sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>noutput_items,<sp/>gr_vector_const_void_star<sp/>&amp;input_items,<sp/>gr_vector_void_star<sp/>&amp;output_items);</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/>}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>ccsds</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="51"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>gr</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight></codeline>
+<codeline lineno="53"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>INCLUDED_CCSDS_MPSK_DETECTOR_SOFT_CF_IMPL_H<sp/>*/</highlight><highlight class="preprocessor"></highlight></codeline>
+    </programlisting>
+    <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/mpsk_detector_soft_cf_impl.h"/>
+  </compounddef>
+</doxygen>

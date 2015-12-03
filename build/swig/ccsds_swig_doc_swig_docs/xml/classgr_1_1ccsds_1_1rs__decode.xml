@@ -1,0 +1,128 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="classgr_1_1ccsds_1_1rs__decode" kind="class" prot="public">
+    <compoundname>gr::ccsds::rs_decode</compoundname>
+    <basecompoundref prot="public" virt="virtual">block</basecompoundref>
+    <derivedcompoundref refid="classgr_1_1ccsds_1_1rs__decode__impl" prot="public" virt="non-virtual">gr::ccsds::rs_decode_impl</derivedcompoundref>
+    <includes refid="rs__decode_8h" local="no">rs_decode.h</includes>
+      <sectiondef kind="public-type">
+      <memberdef kind="enum" id="classgr_1_1ccsds_1_1rs__decode_1ae5220eabbdc2193dc31727b04ee2a436" prot="public" static="no">
+        <name>repr_t</name>
+        <enumvalue id="classgr_1_1ccsds_1_1rs__decode_1ae5220eabbdc2193dc31727b04ee2a436a095dcc8199c9621e0f35188eb5a5878b" prot="public">
+          <name>BERLEKAMP</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classgr_1_1ccsds_1_1rs__decode_1ae5220eabbdc2193dc31727b04ee2a436a2d026994d0d829c411fdd1040b188155" prot="public">
+          <name>CONVENTIONAL</name>
+          <initializer>= 1</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/include/ccsds/rs_decode.h" line="25" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/include/ccsds/rs_decode.h" bodystart="25" bodyend="25"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classgr_1_1ccsds_1_1rs__decode_1acb2d7533f488a8c2a6f21b5ebe265f98" prot="public" static="no">
+        <type>boost::shared_ptr&lt; <ref refid="classgr_1_1ccsds_1_1rs__decode" kindref="compound">rs_decode</ref> &gt;</type>
+        <definition>typedef boost::shared_ptr&lt;rs_decode&gt; gr::ccsds::rs_decode::sptr</definition>
+        <argsstring></argsstring>
+        <name>sptr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/include/ccsds/rs_decode.h" line="23" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/include/ccsds/rs_decode.h" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classgr_1_1ccsds_1_1rs__decode_1a518fc310797fcf106a0c94dd4bb0055a" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classgr_1_1ccsds_1_1rs__decode_1acb2d7533f488a8c2a6f21b5ebe265f98" kindref="member">sptr</ref></type>
+        <definition>static sptr gr::ccsds::rs_decode::make</definition>
+        <argsstring>(const unsigned int I, const repr_t representation)</argsstring>
+        <name>make</name>
+        <param>
+          <type>const unsigned int</type>
+          <declname>I</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classgr_1_1ccsds_1_1rs__decode_1ae5220eabbdc2193dc31727b04ee2a436" kindref="member">repr_t</ref></type>
+          <declname>representation</declname>
+        </param>
+        <briefdescription>
+<para>Create RS decoder. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>I</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>interleaving length </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>representation</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Select the representation to use. 0 for dual basis (Berlekamp) representation and 1 for conventional representation </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/include/ccsds/rs_decode.h" line="34" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Takes the transmitted codeblock and generates the frame out of it, or drops it, if recovery is not possible. </para>    </briefdescription>
+    <detaileddescription>
+<para>The block has an input message port named &quot;in&quot; at which codeblocks of length <computeroutput>255*I</computeroutput> bytes are received. On reception the data codeblock is interleaved and decoded. The generated frame consisting of <computeroutput>223*I</computeroutput> bytes is then queued in the output message port named &quot;out&quot; or dropped if it can&apos;t be decoded. </para>    </detaileddescription>
+    <inheritancegraph>
+      <node id="312">
+        <label>gr::ccsds::rs_decode_impl</label>
+        <link refid="classgr_1_1ccsds_1_1rs__decode__impl"/>
+        <childnode refid="310" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="310">
+        <label>gr::ccsds::rs_decode</label>
+        <link refid="classgr_1_1ccsds_1_1rs__decode"/>
+        <childnode refid="311" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="311">
+        <label>block</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="313">
+        <label>gr::ccsds::rs_decode</label>
+        <link refid="classgr_1_1ccsds_1_1rs__decode"/>
+        <childnode refid="314" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="314">
+        <label>block</label>
+      </node>
+    </collaborationgraph>
+    <location file="/home/marina/Documents/sdr1/gr-ccsds/include/ccsds/rs_decode.h" line="21" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/include/ccsds/rs_decode.h" bodystart="20" bodyend="35"/>
+    <listofallmembers>
+      <member refid="classgr_1_1ccsds_1_1rs__decode_1ae5220eabbdc2193dc31727b04ee2a436a095dcc8199c9621e0f35188eb5a5878b" prot="public" virt="non-virtual"><scope>gr::ccsds::rs_decode</scope><name>BERLEKAMP</name></member>
+      <member refid="classgr_1_1ccsds_1_1rs__decode_1ae5220eabbdc2193dc31727b04ee2a436a2d026994d0d829c411fdd1040b188155" prot="public" virt="non-virtual"><scope>gr::ccsds::rs_decode</scope><name>CONVENTIONAL</name></member>
+      <member refid="classgr_1_1ccsds_1_1rs__decode_1a518fc310797fcf106a0c94dd4bb0055a" prot="public" virt="non-virtual"><scope>gr::ccsds::rs_decode</scope><name>make</name></member>
+      <member refid="classgr_1_1ccsds_1_1rs__decode_1ae5220eabbdc2193dc31727b04ee2a436" prot="public" virt="non-virtual"><scope>gr::ccsds::rs_decode</scope><name>repr_t</name></member>
+      <member refid="classgr_1_1ccsds_1_1rs__decode_1acb2d7533f488a8c2a6f21b5ebe265f98" prot="public" virt="non-virtual"><scope>gr::ccsds::rs_decode</scope><name>sptr</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="indexpage" kind="page">
+    <compoundname>index</compoundname>
+    <title>CCSDS Signal Processing blocks</title>
+    <innerpage refid="page_mpsk_receiver">M-PSK demodulation chain</innerpage>
+    <innerpage refid="page_mpsk_sender">M-PSK modulation chain</innerpage>
+    <innerpage refid="page_bibliography">Bibliography and References</innerpage>
+    <innerpage refid="page_mpsk_receiver">M-PSK demodulation chain</innerpage>
+    <innerpage refid="page_mpsk_sender">M-PSK modulation chain</innerpage>
+    <innerpage refid="page_bibliography">Bibliography and References</innerpage>
+    <detaileddescription>
+<sect1 id="index_1Introduction">
+<title>Introduction</title>
+<para>This package provides signal processing blocks used for sending and receiving signals conforming to the Standards by the Consultative Committee for Space Data Systems (CCSDS).</para></sect1>
+<sect1 id="index_1Installation">
+<title>Installation</title>
+<sect2 id="index_1Build">
+<title>Build</title>
+<para>The package is distributed as an out of tree module and can be installed using cmake. <programlisting><codeline><highlight class="normal">cd<sp/>gr-ccsds</highlight></codeline>
+<codeline><highlight class="normal">mkdir<sp/>build</highlight></codeline>
+<codeline><highlight class="normal">cd<sp/>build</highlight></codeline>
+<codeline><highlight class="normal">cmake<sp/>../</highlight></codeline>
+<codeline><highlight class="normal">make</highlight></codeline>
+<codeline><highlight class="normal">make<sp/>test</highlight></codeline>
+<codeline><highlight class="normal">sudo<sp/>make<sp/>install</highlight></codeline>
+</programlisting></para></sect2>
+<sect2 id="index_1Usage">
+<title>Usage</title>
+<para>To use the CCSDS blocks, the Python namespaces is in ccsds, which would be normally imported as:</para><para><programlisting><codeline><highlight class="keyword">import</highlight><highlight class="normal"><sp/>ccsds</highlight></codeline>
+</programlisting></para><para>See this Doxygen documentation for details about the blocks available in this package.</para><para>A quick listing of the details can be found in Python after importing by using:</para><para><programlisting><codeline><highlight class="normal">help(ccsds)</highlight></codeline>
+</programlisting></para></sect2>
+</sect1>
+<sect1 id="index_1Modules">
+<title>Modules</title>
+<para><ref refid="page_mpsk_receiver" kindref="compound">M-PSK demodulation chain</ref> <ref refid="page_mpsk_sender" kindref="compound">M-PSK modulation chain</ref></para></sect1>
+<sect1 id="index_1Bibliography">
+<title>Bibliography</title>
+<para><ref refid="page_bibliography" kindref="compound">Bibliography and References</ref> </para></sect1>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

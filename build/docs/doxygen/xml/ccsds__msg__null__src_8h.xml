@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="ccsds__msg__null__src_8h" kind="file">
+    <compoundname>ccsds_msg_null_src.h</compoundname>
+    <includes refid="ccsds__api_8h" local="no">ccsds_api.h</includes>
+    <includes local="no">gr_block.h</includes>
+    <incdepgraph>
+      <node id="331">
+        <label>gruel/attributes.h</label>
+      </node>
+      <node id="330">
+        <label>ccsds_api.h</label>
+        <link refid="ccsds__api_8h"/>
+        <childnode refid="331" relation="include">
+        </childnode>
+      </node>
+      <node id="332">
+        <label>gr_block.h</label>
+      </node>
+      <node id="329">
+        <label>ccsds_msg_null_src.h</label>
+        <link refid="ccsds_msg_null_src.h"/>
+        <childnode refid="330" relation="include">
+        </childnode>
+        <childnode refid="332" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <innerclass refid="classccsds__msg__null__src" prot="public">ccsds_msg_null_src</innerclass>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="ccsds__msg__null__src_8h_1a39f4f06e7e8e36509ceacf0292dac01e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="api_8h_1a144137922962dd54ae2e8c1917a7e588" kindref="member">CCSDS_API</ref> ccsds_msg_null_src_sptr</type>
+        <definition>CCSDS_API ccsds_msg_null_src_sptr ccsds_make_msg_null_src</definition>
+        <argsstring>(bool dummy=false)</argsstring>
+        <name>ccsds_make_msg_null_src</name>
+        <param>
+          <type>bool</type>
+          <declname>dummy</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_msg_null_src.h" line="12" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_msg_null_src.h"/>
+  </compounddef>
+</doxygen>

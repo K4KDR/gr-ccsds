@@ -1,0 +1,228 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="ccsds__framer__sink__dual_8h" kind="file">
+    <compoundname>ccsds_framer_sink_dual.h</compoundname>
+    <includes refid="ccsds__api_8h" local="no">ccsds_api.h</includes>
+    <includes local="no">gr_sync_block.h</includes>
+    <includes local="no">gr_msg_queue.h</includes>
+    <incdepgraph>
+      <node id="167">
+        <label>gruel/attributes.h</label>
+      </node>
+      <node id="168">
+        <label>gr_sync_block.h</label>
+      </node>
+      <node id="169">
+        <label>gr_msg_queue.h</label>
+      </node>
+      <node id="166">
+        <label>ccsds_api.h</label>
+        <link refid="ccsds__api_8h"/>
+        <childnode refid="167" relation="include">
+        </childnode>
+      </node>
+      <node id="165">
+        <label>/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_framer_sink_dual.h</label>
+        <link refid="ccsds_framer_sink_dual.h"/>
+        <childnode refid="166" relation="include">
+        </childnode>
+        <childnode refid="168" relation="include">
+        </childnode>
+        <childnode refid="169" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <innerclass refid="classccsds__framer__sink__dual" prot="public">ccsds_framer_sink_dual</innerclass>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="ccsds__framer__sink__dual_8h_1ab45c690d529bdcbd14de93e7046c03e2" prot="public" static="no">
+        <type>boost::shared_ptr&lt; <ref refid="classccsds__framer__sink__dual" kindref="compound">ccsds_framer_sink_dual</ref> &gt;</type>
+        <definition>typedef boost::shared_ptr&lt;ccsds_framer_sink_dual&gt; ccsds_framer_sink_dual_sptr</definition>
+        <argsstring></argsstring>
+        <name>ccsds_framer_sink_dual_sptr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_framer_sink_dual.h" line="29" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_framer_sink_dual.h" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="ccsds__framer__sink__dual_8h_1a527b285ce133a02a4c484a9f814a3ef9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>__GR_ATTR_IMPORT <ref refid="ccsds__framer__sink__dual_8h_1ab45c690d529bdcbd14de93e7046c03e2" kindref="member">ccsds_framer_sink_dual_sptr</ref></type>
+        <definition>__GR_ATTR_IMPORT ccsds_framer_sink_dual_sptr ccsds_make_framer_sink_dual</definition>
+        <argsstring>(gr_msg_queue_sptr target_queue, int framesyms, int sync_marker_syms)</argsstring>
+        <name>ccsds_make_framer_sink_dual</name>
+        <param>
+          <type>gr_msg_queue_sptr</type>
+          <declname>target_queue</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>framesyms</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>sync_marker_syms</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_framer_sink_dual.h" line="32" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">/*<sp/>-*-<sp/>c++<sp/>-*-<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="comment">/*<sp/></highlight></codeline>
+<codeline lineno="3"><highlight class="comment"><sp/>*<sp/>Copyright<sp/>2012<sp/>&lt;+YOU<sp/>OR<sp/>YOUR<sp/>COMPANY+&gt;.</highlight></codeline>
+<codeline lineno="4"><highlight class="comment"><sp/>*<sp/></highlight></codeline>
+<codeline lineno="5"><highlight class="comment"><sp/>*<sp/>This<sp/>is<sp/>free<sp/>software;<sp/>you<sp/>can<sp/>redistribute<sp/>it<sp/>and/or<sp/>modify</highlight></codeline>
+<codeline lineno="6"><highlight class="comment"><sp/>*<sp/>it<sp/>under<sp/>the<sp/>terms<sp/>of<sp/>the<sp/>GNU<sp/>General<sp/>Public<sp/>License<sp/>as<sp/>published<sp/>by</highlight></codeline>
+<codeline lineno="7"><highlight class="comment"><sp/>*<sp/>the<sp/>Free<sp/>Software<sp/>Foundation;<sp/>either<sp/>version<sp/>3,<sp/>or<sp/>(at<sp/>your<sp/>option)</highlight></codeline>
+<codeline lineno="8"><highlight class="comment"><sp/>*<sp/>any<sp/>later<sp/>version.</highlight></codeline>
+<codeline lineno="9"><highlight class="comment"><sp/>*<sp/></highlight></codeline>
+<codeline lineno="10"><highlight class="comment"><sp/>*<sp/>This<sp/>software<sp/>is<sp/>distributed<sp/>in<sp/>the<sp/>hope<sp/>that<sp/>it<sp/>will<sp/>be<sp/>useful,</highlight></codeline>
+<codeline lineno="11"><highlight class="comment"><sp/>*<sp/>but<sp/>WITHOUT<sp/>ANY<sp/>WARRANTY;<sp/>without<sp/>even<sp/>the<sp/>implied<sp/>warranty<sp/>of</highlight></codeline>
+<codeline lineno="12"><highlight class="comment"><sp/>*<sp/>MERCHANTABILITY<sp/>or<sp/>FITNESS<sp/>FOR<sp/>A<sp/>PARTICULAR<sp/>PURPOSE.<sp/><sp/>See<sp/>the</highlight></codeline>
+<codeline lineno="13"><highlight class="comment"><sp/>*<sp/>GNU<sp/>General<sp/>Public<sp/>License<sp/>for<sp/>more<sp/>details.</highlight></codeline>
+<codeline lineno="14"><highlight class="comment"><sp/>*<sp/></highlight></codeline>
+<codeline lineno="15"><highlight class="comment"><sp/>*<sp/>You<sp/>should<sp/>have<sp/>received<sp/>a<sp/>copy<sp/>of<sp/>the<sp/>GNU<sp/>General<sp/>Public<sp/>License</highlight></codeline>
+<codeline lineno="16"><highlight class="comment"><sp/>*<sp/>along<sp/>with<sp/>this<sp/>software;<sp/>see<sp/>the<sp/>file<sp/>COPYING.<sp/><sp/>If<sp/>not,<sp/>write<sp/>to</highlight></codeline>
+<codeline lineno="17"><highlight class="comment"><sp/>*<sp/>the<sp/>Free<sp/>Software<sp/>Foundation,<sp/>Inc.,<sp/>51<sp/>Franklin<sp/>Street,</highlight></codeline>
+<codeline lineno="18"><highlight class="comment"><sp/>*<sp/>Boston,<sp/>MA<sp/>02110-1301,<sp/>USA.</highlight></codeline>
+<codeline lineno="19"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>INCLUDED_CCSDS_FRAMER_SINK_DUAL_H</highlight></codeline>
+<codeline lineno="22"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>INCLUDED_CCSDS_FRAMER_SINK_DUAL_H</highlight></codeline>
+<codeline lineno="23"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="ccsds__api_8h" kindref="compound">ccsds_api.h</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;gr_sync_block.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;gr_msg_queue.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight></codeline>
+<codeline lineno="28" refid="ccsds__framer__sink__dual_8h_1ab45c690d529bdcbd14de93e7046c03e2" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classccsds__framer__sink__dual" kindref="compound">ccsds_framer_sink_dual</ref>;</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/>boost::shared_ptr&lt;ccsds_framer_sink_dual&gt;<sp/><ref refid="ccsds__framer__sink__dual_8h_1ab45c690d529bdcbd14de93e7046c03e2" kindref="member">ccsds_framer_sink_dual_sptr</ref>;</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><ref refid="api_8h_1a144137922962dd54ae2e8c1917a7e588" kindref="member">CCSDS_API</ref><sp/><ref refid="ccsds__framer__sink__dual_8h_1ab45c690d529bdcbd14de93e7046c03e2" kindref="member">ccsds_framer_sink_dual_sptr</ref></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><ref refid="ccsds__framer__sink__dual_8h_1a527b285ce133a02a4c484a9f814a3ef9" kindref="member">ccsds_make_framer_sink_dual</ref><sp/>(gr_msg_queue_sptr<sp/>target_queue,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>framesyms,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>sync_marker_syms);</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight></codeline>
+<codeline lineno="53" refid="classccsds__framer__sink__dual" refkind="compound"><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="api_8h_1a144137922962dd54ae2e8c1917a7e588" kindref="member">CCSDS_API</ref><sp/><ref refid="classccsds__framer__sink__dual" kindref="compound">ccsds_framer_sink_dual</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/>gr_sync_block</highlight></codeline>
+<codeline lineno="54"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">friend</highlight><highlight class="normal"><sp/><ref refid="api_8h_1a144137922962dd54ae2e8c1917a7e588" kindref="member">CCSDS_API</ref><sp/><ref refid="ccsds__framer__sink__dual_8h_1ab45c690d529bdcbd14de93e7046c03e2" kindref="member">ccsds_framer_sink_dual_sptr</ref></highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><ref refid="ccsds__framer__sink__dual_8h_1a527b285ce133a02a4c484a9f814a3ef9" kindref="member">ccsds_make_framer_sink_dual</ref><sp/>(gr_msg_queue_sptr<sp/>target_queue,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>framesyms,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>sync_marker_syms);</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/>state_t<sp/>{STATE_SYNC_SEARCH,<sp/>STATE_LOCKING,<sp/>STATE_HAVE_SYNC};</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/></highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>static<sp/>const<sp/>int<sp/>MAX_PKT_LEN<sp/><sp/><sp/><sp/>=<sp/>4096;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>static<sp/>const<sp/>int<sp/>HEADERBITLEN<sp/><sp/><sp/>=<sp/>32;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="63"><highlight class="normal"></highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/>gr_msg_queue_sptr<sp/><sp/>d_target_queue;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>where<sp/>to<sp/>send<sp/>the<sp/>packet<sp/>when<sp/>received</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>d_frame_byte_length;</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>d_frame_bit_length;</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>d_asm_byte_length;</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>d_asm_bit_length;</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>d_sync_lock_diff;</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>d_count;</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>d_byte;</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>d_frame_counter;</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="74"><highlight class="normal"></highlight></codeline>
+<codeline lineno="75"><highlight class="normal"></highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/>state_t<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>d_state;</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"></highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><sp/>b_standard;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>flag<sp/>to<sp/>identify<sp/>if<sp/>the<sp/>standard<sp/>stream<sp/>is<sp/>being<sp/>used.<sp/>if<sp/>false,<sp/>the<sp/>inverted<sp/>stream<sp/>is<sp/>used<sp/>instead</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>b_buffering_standard;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Buffer<sp/>the<sp/>standard<sp/>input<sp/>until<sp/>sync<sp/>marker<sp/>is<sp/>confirmed</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>b_buffering_inverse;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Buffer<sp/>the<sp/>standard<sp/>input<sp/>until<sp/>sync<sp/>marker<sp/>is<sp/>confirmed</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="81"><highlight class="normal"></highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>b_strip_sync_marker;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>If<sp/>set<sp/>to<sp/>true,<sp/>the<sp/>synchronization<sp/>marker<sp/>is<sp/>not<sp/>streamed</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="83"><highlight class="normal"></highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>d_payload_size;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>The<sp/>payload<sp/>size</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>d_packet_size;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>The<sp/>frame<sp/>size,<sp/>which<sp/>is<sp/>the<sp/>sum<sp/>of<sp/>the<sp/>payload<sp/>plus<sp/>the<sp/>frame<sp/>sync<sp/>marker</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="86"><highlight class="normal"></highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>d_message_bits;</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>unsigned<sp/>char<sp/><sp/><sp/><sp/><sp/><sp/>*d_packet;<sp/>//[MAX_PKT_LEN];<sp/><sp/><sp/><sp/><sp/>//<sp/>assembled<sp/>payload</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*d_packed_frame;<sp/></highlight><highlight class="comment">//[MAX_PKT_LEN];</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>unsigned<sp/>char<sp/><sp/><sp/><sp/><sp/><sp/>*d_buffer_inverse;<sp/>//[MAX_PKT_LEN];</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*d_in;</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/></highlight></codeline>
+<codeline lineno="93"><highlight class="normal"></highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>d_packetlen;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>length<sp/>of<sp/>packet</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>d_packet_whitener_offset;<sp/><sp/></highlight><highlight class="comment">//<sp/>offset<sp/>into<sp/>whitener<sp/>string<sp/>to<sp/>use</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>d_packetlen_cnt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>how<sp/>many<sp/>so<sp/>far</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="97"><highlight class="normal"></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="98"><highlight class="comment"><sp/><sp/>struct<sp/>input_stream<sp/>{</highlight></codeline>
+<codeline lineno="99"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>state_t<sp/>state;</highlight></codeline>
+<codeline lineno="100"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>bool<sp/>buffering;</highlight></codeline>
+<codeline lineno="101"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>int<sp/>buffer_byte_count;</highlight></codeline>
+<codeline lineno="102"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>int<sp/>sync_lock_diff;</highlight></codeline>
+<codeline lineno="103"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>unsigned<sp/>char<sp/>buffer_byte;</highlight></codeline>
+<codeline lineno="104"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>unsigned<sp/>int<sp/>buffer_byte_index;</highlight></codeline>
+<codeline lineno="105"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>unsigned<sp/>char<sp/>*packet;<sp/>//<sp/>assembled<sp/>payload</highlight></codeline>
+<codeline lineno="106"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>unsigned<sp/>char<sp/>*buffer;<sp/></highlight></codeline>
+<codeline lineno="107"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>unsigned<sp/>char<sp/>*in;</highlight></codeline>
+<codeline lineno="108"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="109"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>void<sp/>reset()<sp/>{</highlight></codeline>
+<codeline lineno="110"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>buffering<sp/>=<sp/>false;</highlight></codeline>
+<codeline lineno="111"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>buffer_byte_count<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="112"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>sync_lock_diff<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="113"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>buffer_byte<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="114"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>buffer_byte_index<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="115"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>memset(buffer,0,d_packet_size)</highlight></codeline>
+<codeline lineno="116"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="117"><highlight class="comment"><sp/><sp/>};</highlight></codeline>
+<codeline lineno="118"><highlight class="comment"><sp/><sp/>struct<sp/>input_stream<sp/>d_standard;</highlight></codeline>
+<codeline lineno="119"><highlight class="comment"><sp/><sp/>struct<sp/>input_stream<sp/>d_inverse;</highlight></codeline>
+<codeline lineno="120"><highlight class="comment">*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>bit<sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>input)<sp/>{</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>input<sp/>&amp;<sp/>0x1;</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>inverse_bit<sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>input)<sp/>{</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>(input<sp/>^<sp/>0x1)<sp/>&amp;<sp/>0x1;</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>static<sp/>int<sp/>(*d_bit)(int);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>d_bit<sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>input)<sp/>{</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(b_buffering_inverse)<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>inverse_bit(input);</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>bit(input);</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>check_flag<sp/>(</highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>byte)<sp/>{</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(byte<sp/>&amp;<sp/>0x2)<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>forecast<sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/></highlight><highlight class="comment">/*noutput_items*/</highlight><highlight class="normal">,<sp/>gr_vector_int<sp/>&amp;ninput_items_required)</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>make<sp/>sure<sp/>all<sp/>inputs<sp/>have<sp/>noutput_items<sp/>available</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/>ninputs<sp/>=<sp/>ninput_items_required.size<sp/>();</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>ninputs;<sp/>i++)</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>we<sp/>want<sp/>at<sp/>least<sp/>one<sp/>frame<sp/>per<sp/>input<sp/>buffer</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/>ninput_items_required[i]<sp/>=<sp/>2<sp/>*<sp/>d_frame_bit_length<sp/>+<sp/>d_asm_bit_length;</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/></highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/><ref refid="classccsds__framer__sink__dual" kindref="compound">ccsds_framer_sink_dual</ref>(gr_msg_queue_sptr<sp/>target_queue,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>framebytes,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>sync_marker_bytes);</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"></highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>enter_search();</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>enter_locking(</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>standard);</highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>enter_have_sync();</highlight></codeline>
+<codeline lineno="151"><highlight class="normal"></highlight></codeline>
+<codeline lineno="152"><highlight class="normal"><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="153"><highlight class="normal"><sp/><sp/>~<ref refid="classccsds__framer__sink__dual" kindref="compound">ccsds_framer_sink_dual</ref>();</highlight></codeline>
+<codeline lineno="154"><highlight class="normal"></highlight></codeline>
+<codeline lineno="155"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>work(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>noutput_items,</highlight></codeline>
+<codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>gr_vector_const_void_star<sp/>&amp;input_items,</highlight></codeline>
+<codeline lineno="157"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>gr_vector_void_star<sp/>&amp;output_items);</highlight></codeline>
+<codeline lineno="158"><highlight class="normal"></highlight></codeline>
+<codeline lineno="159"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="160"><highlight class="normal"></highlight></codeline>
+<codeline lineno="161"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>INCLUDED_CCSDS_FRAMER_SINK_DUAL_H<sp/>*/</highlight><highlight class="preprocessor"></highlight></codeline>
+    </programlisting>
+    <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_framer_sink_dual.h"/>
+  </compounddef>
+</doxygen>

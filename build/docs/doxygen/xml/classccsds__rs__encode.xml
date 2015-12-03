@@ -1,0 +1,284 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="classccsds__rs__encode" kind="class" prot="public">
+    <compoundname>ccsds_rs_encode</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">gr_block</basecompoundref>
+    <includes refid="ccsds__rs__encode_8h" local="no">ccsds_rs_encode.h</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classccsds__rs__encode_1abe386755411dc3c11bfdbcaa50ee47a5" prot="private" static="no" mutable="no">
+        <type>const unsigned int</type>
+        <definition>const unsigned int ccsds_rs_encode::d_I</definition>
+        <argsstring></argsstring>
+        <name>d_I</name>
+        <briefdescription>
+<para>Depth of interleaving. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_rs_encode.h" line="60" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_rs_encode.h" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__rs__encode_1ab192cb1c7ae781b25ed96fae3382ab44" prot="private" static="no" mutable="no">
+        <type>const unsigned int</type>
+        <definition>const unsigned int ccsds_rs_encode::d_k</definition>
+        <argsstring></argsstring>
+        <name>d_k</name>
+        <briefdescription>
+<para>Number of information symbols per codeword. Value=223. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_rs_encode.h" line="63" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_rs_encode.h" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__rs__encode_1a667c5af15b79f78debfcab75f0b53703" prot="private" static="no" mutable="no">
+        <type>const unsigned int</type>
+        <definition>const unsigned int ccsds_rs_encode::d_n</definition>
+        <argsstring></argsstring>
+        <name>d_n</name>
+        <briefdescription>
+<para>Number of symbols per codeword. Value=255. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_rs_encode.h" line="66" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_rs_encode.h" bodystart="66" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__rs__encode_1a633304c9d402d32ff0bbfed5e7b1c024" prot="private" static="no" mutable="no">
+        <type>const unsigned int</type>
+        <definition>const unsigned int ccsds_rs_encode::d_2E</definition>
+        <argsstring></argsstring>
+        <name>d_2E</name>
+        <briefdescription>
+<para>Number of parity check symbols per codeword. Value=32. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_rs_encode.h" line="69" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_rs_encode.h" bodystart="69" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__rs__encode_1a1ada457b8fba87a2b7379a7c340bd323" prot="private" static="no" mutable="no">
+        <type>const unsigned int</type>
+        <definition>const unsigned int ccsds_rs_encode::d_DATA_LEN</definition>
+        <argsstring></argsstring>
+        <name>d_DATA_LEN</name>
+        <briefdescription>
+<para>Number of data bytes per codeblock. Value=k*I. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_rs_encode.h" line="72" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_rs_encode.h" bodystart="72" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__rs__encode_1a3419d78fac2031045d0089f03f29f0ec" prot="private" static="no" mutable="no">
+        <type>const unsigned int</type>
+        <definition>const unsigned int ccsds_rs_encode::d_PARITY_LEN</definition>
+        <argsstring></argsstring>
+        <name>d_PARITY_LEN</name>
+        <briefdescription>
+<para>Number of parity bytes per codeblock. Value=2E*I. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_rs_encode.h" line="75" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_rs_encode.h" bodystart="75" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__rs__encode_1a39d3709973336ca43d982b89b9b43de1" prot="private" static="no" mutable="no">
+        <type>const unsigned int</type>
+        <definition>const unsigned int ccsds_rs_encode::d_OUT_LEN</definition>
+        <argsstring></argsstring>
+        <name>d_OUT_LEN</name>
+        <briefdescription>
+<para>Number of bytes per codeblock. Value=(k+2E)*I. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_rs_encode.h" line="78" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_rs_encode.h" bodystart="78" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__rs__encode_1a362c609933c7742d3afc958bfefde4a4" prot="private" static="no" mutable="no">
+        <type>unsigned char *</type>
+        <definition>unsigned char* ccsds_rs_encode::d_buf_data</definition>
+        <argsstring></argsstring>
+        <name>d_buf_data</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_rs_encode.h" line="81" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_rs_encode.h" bodystart="81" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__rs__encode_1ace0b25ef54f46ad65b415b885f4ff911" prot="private" static="no" mutable="no">
+        <type>unsigned char *</type>
+        <definition>unsigned char* ccsds_rs_encode::d_buf_parity</definition>
+        <argsstring></argsstring>
+        <name>d_buf_parity</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_rs_encode.h" line="84" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_rs_encode.h" bodystart="84" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__rs__encode_1a6e467a78a511a459e4001b5f06e7a38f" prot="private" static="no" mutable="no">
+        <type>unsigned char *</type>
+        <definition>unsigned char* ccsds_rs_encode::d_buf_parity2</definition>
+        <argsstring></argsstring>
+        <name>d_buf_parity2</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_rs_encode.h" line="87" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_rs_encode.h" bodystart="87" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classccsds__rs__encode_1ae07eb2789d8b6e0d828c180803649cac" prot="private" static="no" mutable="no">
+        <type>unsigned char *</type>
+        <definition>unsigned char* ccsds_rs_encode::d_buf_out</definition>
+        <argsstring></argsstring>
+        <name>d_buf_out</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_rs_encode.h" line="90" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_rs_encode.h" bodystart="90" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="friend">
+      <memberdef kind="friend" id="classccsds__rs__encode_1aafa7eb8ce4afbbca56f37ba5ea292f00" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>friend <ref refid="api_8h_1a144137922962dd54ae2e8c1917a7e588" kindref="member">CCSDS_API</ref> ccsds_rs_encode_sptr</type>
+        <definition>CCSDS_API ccsds_rs_encode_sptr ccsds_make_rs_encode</definition>
+        <argsstring>(const unsigned int I)</argsstring>
+        <name>ccsds_make_rs_encode</name>
+        <param>
+          <type>const unsigned int</type>
+          <declname>I</declname>
+        </param>
+        <briefdescription>
+<para>Return a shared_ptr to a new instance of <ref refid="classccsds__rs__encode" kindref="compound">ccsds_rs_encode</ref>. </para>        </briefdescription>
+        <detaileddescription>
+<para>Create an instance of <ref refid="classccsds__rs__encode" kindref="compound">ccsds_rs_encode</ref> and return it&apos;s shared_ptr.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>I</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>depth of interleaving. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Shared pointer to the created block </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_rs_encode.h" line="50" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classccsds__rs__encode_1a5fe31808ec15976514c93cbaaf28288f" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>ccsds_rs_encode::ccsds_rs_encode</definition>
+        <argsstring>(const unsigned int I)</argsstring>
+        <name>ccsds_rs_encode</name>
+        <param>
+          <type>const unsigned int</type>
+          <declname>I</declname>
+        </param>
+        <briefdescription>
+<para>Public constructor of the add ASM block. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>I</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Depth of interleaving </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_rs_encode.h" line="57" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classccsds__rs__encode_1aac5a97eb1048ef1f39f9f71ff8ef988d" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ccsds_rs_encode::process_frame</definition>
+        <argsstring>(pmt::pmt_t msg)</argsstring>
+        <name>process_frame</name>
+        <param>
+          <type>pmt::pmt_t</type>
+          <declname>msg</declname>
+        </param>
+        <briefdescription>
+<para>Asynchronous work function which is processing the queues. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_rs_encode.h" line="93" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classccsds__rs__encode_1a957c2e8ca62db4484541f418a180652b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>ccsds_rs_encode::~ccsds_rs_encode</definition>
+        <argsstring>()</argsstring>
+        <name>~ccsds_rs_encode</name>
+        <briefdescription>
+<para>Public deconstructor of the AR. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_rs_encode.h" line="97" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Takes I frames and generates the transmitted codeblock out of it. </para>    </briefdescription>
+    <detaileddescription>
+<para>The block has an input message port named &quot;in&quot; at which frames of length <computeroutput>223*I</computeroutput> bytes are received. On reception the frames are interleaved and encoded. The generated codeblock consisting of <computeroutput>255*I</computeroutput> bytes is then queued in the output message port named &quot;out&quot;. </para>    </detaileddescription>
+    <inheritancegraph>
+      <node id="144">
+        <label>gr_block</label>
+      </node>
+      <node id="143">
+        <label>ccsds_rs_encode</label>
+        <link refid="classccsds__rs__encode"/>
+        <childnode refid="144" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="146">
+        <label>gr_block</label>
+      </node>
+      <node id="145">
+        <label>ccsds_rs_encode</label>
+        <link refid="classccsds__rs__encode"/>
+        <childnode refid="146" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_rs_encode.h" line="48" column="1" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_rs_encode.h" bodystart="47" bodyend="99"/>
+    <listofallmembers>
+      <member refid="classccsds__rs__encode_1aafa7eb8ce4afbbca56f37ba5ea292f00" prot="private" virt="non-virtual"><scope>ccsds_rs_encode</scope><name>ccsds_make_rs_encode</name></member>
+      <member refid="classccsds__rs__encode_1a5fe31808ec15976514c93cbaaf28288f" prot="private" virt="non-virtual"><scope>ccsds_rs_encode</scope><name>ccsds_rs_encode</name></member>
+      <member refid="classccsds__rs__encode_1a633304c9d402d32ff0bbfed5e7b1c024" prot="private" virt="non-virtual"><scope>ccsds_rs_encode</scope><name>d_2E</name></member>
+      <member refid="classccsds__rs__encode_1a362c609933c7742d3afc958bfefde4a4" prot="private" virt="non-virtual"><scope>ccsds_rs_encode</scope><name>d_buf_data</name></member>
+      <member refid="classccsds__rs__encode_1ae07eb2789d8b6e0d828c180803649cac" prot="private" virt="non-virtual"><scope>ccsds_rs_encode</scope><name>d_buf_out</name></member>
+      <member refid="classccsds__rs__encode_1ace0b25ef54f46ad65b415b885f4ff911" prot="private" virt="non-virtual"><scope>ccsds_rs_encode</scope><name>d_buf_parity</name></member>
+      <member refid="classccsds__rs__encode_1a6e467a78a511a459e4001b5f06e7a38f" prot="private" virt="non-virtual"><scope>ccsds_rs_encode</scope><name>d_buf_parity2</name></member>
+      <member refid="classccsds__rs__encode_1a1ada457b8fba87a2b7379a7c340bd323" prot="private" virt="non-virtual"><scope>ccsds_rs_encode</scope><name>d_DATA_LEN</name></member>
+      <member refid="classccsds__rs__encode_1abe386755411dc3c11bfdbcaa50ee47a5" prot="private" virt="non-virtual"><scope>ccsds_rs_encode</scope><name>d_I</name></member>
+      <member refid="classccsds__rs__encode_1ab192cb1c7ae781b25ed96fae3382ab44" prot="private" virt="non-virtual"><scope>ccsds_rs_encode</scope><name>d_k</name></member>
+      <member refid="classccsds__rs__encode_1a667c5af15b79f78debfcab75f0b53703" prot="private" virt="non-virtual"><scope>ccsds_rs_encode</scope><name>d_n</name></member>
+      <member refid="classccsds__rs__encode_1a39d3709973336ca43d982b89b9b43de1" prot="private" virt="non-virtual"><scope>ccsds_rs_encode</scope><name>d_OUT_LEN</name></member>
+      <member refid="classccsds__rs__encode_1a3419d78fac2031045d0089f03f29f0ec" prot="private" virt="non-virtual"><scope>ccsds_rs_encode</scope><name>d_PARITY_LEN</name></member>
+      <member refid="classccsds__rs__encode_1aac5a97eb1048ef1f39f9f71ff8ef988d" prot="private" virt="non-virtual"><scope>ccsds_rs_encode</scope><name>process_frame</name></member>
+      <member refid="classccsds__rs__encode_1a957c2e8ca62db4484541f418a180652b" prot="public" virt="non-virtual"><scope>ccsds_rs_encode</scope><name>~ccsds_rs_encode</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,1 @@
+/usr/bin/c++  -fPIC    -shared -Wl,-soname,_ccsds_swig.so -o _ccsds_swig.so CMakeFiles/_ccsds_swig.dir/ccsds_swigPYTHON_wrap.cxx.o -lpython2.7 ../lib/libgnuradio-ccsds.so -lboost_filesystem -lboost_system /usr/local/lib/libgnuradio-runtime.so -lticp -lfec -Wl,-rpath,/home/marina/Documents/sdr1/gr-ccsds/build/lib:/usr/local/lib: 

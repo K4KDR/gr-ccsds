@@ -1,0 +1,183 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="ccsds__mpsk__ambiguity__resolver__bb_8h" kind="file">
+    <compoundname>ccsds_mpsk_ambiguity_resolver_bb.h</compoundname>
+    <includes refid="ccsds__api_8h" local="no">ccsds_api.h</includes>
+    <includes local="no">gr_sync_block.h</includes>
+    <includes local="no">string</includes>
+    <includes refid="ccsds__asm__operator_8h" local="yes">ccsds_asm_operator.h</includes>
+    <incdepgraph>
+      <node id="272">
+        <label>gruel/attributes.h</label>
+      </node>
+      <node id="273">
+        <label>gr_sync_block.h</label>
+      </node>
+      <node id="278">
+        <label>cmath</label>
+      </node>
+      <node id="271">
+        <label>ccsds_api.h</label>
+        <link refid="ccsds__api_8h"/>
+        <childnode refid="272" relation="include">
+        </childnode>
+      </node>
+      <node id="274">
+        <label>string</label>
+      </node>
+      <node id="270">
+        <label>ccsds_mpsk_ambiguity_resolver_bb.h</label>
+        <link refid="ccsds_mpsk_ambiguity_resolver_bb.h"/>
+        <childnode refid="271" relation="include">
+        </childnode>
+        <childnode refid="273" relation="include">
+        </childnode>
+        <childnode refid="274" relation="include">
+        </childnode>
+        <childnode refid="275" relation="include">
+        </childnode>
+      </node>
+      <node id="275">
+        <label>ccsds_asm_operator.h</label>
+        <link refid="ccsds__asm__operator_8h"/>
+        <childnode refid="276" relation="include">
+        </childnode>
+        <childnode refid="277" relation="include">
+        </childnode>
+        <childnode refid="278" relation="include">
+        </childnode>
+      </node>
+      <node id="277">
+        <label>cstdio</label>
+      </node>
+      <node id="276">
+        <label>cstring</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="classccsds__mpsk__ambiguity__resolver__bb" prot="public">ccsds_mpsk_ambiguity_resolver_bb</innerclass>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="ccsds__mpsk__ambiguity__resolver__bb_8h_1a447ae3e289e30341f998e11662f17b2a" prot="public" static="no">
+        <name>CCSDS_AR_OUTPUT_NONE</name>
+        <initializer>0</initializer>
+        <briefdescription>
+<para>Verbosity level: Do not output anything. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_mpsk_ambiguity_resolver_bb.h" line="10" column="9" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_mpsk_ambiguity_resolver_bb.h" bodystart="10" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="ccsds__mpsk__ambiguity__resolver__bb_8h_1aadc6c196ae58784a0d43cf7b09d6a823" prot="public" static="no">
+        <name>CCSDS_AR_OUTPUT_STATE</name>
+        <initializer>1</initializer>
+        <briefdescription>
+<para>Verbosity level: Do output state information. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_mpsk_ambiguity_resolver_bb.h" line="13" column="9" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_mpsk_ambiguity_resolver_bb.h" bodystart="13" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="ccsds__mpsk__ambiguity__resolver__bb_8h_1af8a3856e5717445b34b884478d37aede" prot="public" static="no">
+        <name>CCSDS_AR_OUTPUT_DEBUG</name>
+        <initializer>2</initializer>
+        <briefdescription>
+<para>Verbosity level: Do output debug information. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_mpsk_ambiguity_resolver_bb.h" line="16" column="9" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_mpsk_ambiguity_resolver_bb.h" bodystart="16" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="ccsds__mpsk__ambiguity__resolver__bb_8h_1a0b598f45628c2c8774806b2ce7f3932b" prot="public" static="no">
+        <name>CCSDS_AR_VERBOSITY_LEVEL</name>
+        <initializer><ref refid="ccsds__mpsk__ambiguity__resolver__bb_8h_1a447ae3e289e30341f998e11662f17b2a" kindref="member">CCSDS_AR_OUTPUT_NONE</ref></initializer>
+        <briefdescription>
+<para>Level of verbosity of this block. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="see"><para><ref refid="ccsds__mpsk__ambiguity__resolver__bb_8h_1a447ae3e289e30341f998e11662f17b2a" kindref="member">CCSDS_AR_OUTPUT_NONE</ref> </para><simplesectsep/><para><ref refid="ccsds__mpsk__ambiguity__resolver__bb_8h_1aadc6c196ae58784a0d43cf7b09d6a823" kindref="member">CCSDS_AR_OUTPUT_STATE</ref> </para><simplesectsep/><para><ref refid="ccsds__mpsk__ambiguity__resolver__bb_8h_1af8a3856e5717445b34b884478d37aede" kindref="member">CCSDS_AR_OUTPUT_DEBUG</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_mpsk_ambiguity_resolver_bb.h" line="24" column="9" bodyfile="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_mpsk_ambiguity_resolver_bb.h" bodystart="24" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="ccsds__mpsk__ambiguity__resolver__bb_8h_1a3fd0893201ffe3f77a98c7f2d9fb2fe4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="api_8h_1a144137922962dd54ae2e8c1917a7e588" kindref="member">CCSDS_API</ref> ccsds_mpsk_ambiguity_resolver_bb_sptr</type>
+        <definition>CCSDS_API ccsds_mpsk_ambiguity_resolver_bb_sptr ccsds_make_mpsk_ambiguity_resolver_bb</definition>
+        <argsstring>(const unsigned int M, std::string ASM, unsigned int threshold, const unsigned int ber_threshold, const unsigned int frame_length)</argsstring>
+        <name>ccsds_make_mpsk_ambiguity_resolver_bb</name>
+        <param>
+          <type>const unsigned int</type>
+          <declname>M</declname>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>ASM</declname>
+        </param>
+        <param>
+          <type>unsigned int</type>
+          <declname>threshold</declname>
+        </param>
+        <param>
+          <type>const unsigned int</type>
+          <declname>ber_threshold</declname>
+        </param>
+        <param>
+          <type>const unsigned int</type>
+          <declname>frame_length</declname>
+        </param>
+        <briefdescription>
+<para>Return a shared_ptr to a new instance of <ref refid="classccsds__mpsk__ambiguity__resolver__bb" kindref="compound">ccsds_mpsk_ambiguity_resolver_bb</ref>. </para>        </briefdescription>
+        <detaileddescription>
+<para>Create an instance of <ref refid="classccsds__mpsk__ambiguity__resolver__bb" kindref="compound">ccsds_mpsk_ambiguity_resolver_bb</ref> and return it&apos;s shared_ptr.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>M</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Modulation order. Determins how many parallel streams to watch. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ASM</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>String containing the attached sync marker to look for in hexadecimal representation. Must be of even length. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>threshold</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of ASM losses to enter full search again. If set to one, a full search is performed every time an ASM is lost. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ber_threshold</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Maximum number of bit errors that may occur between a sequence and the ASM to still consider the sequence as an ASM. If set to zero, sequence must match the ASM exactly. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>frame_length</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of a frame (without ASM) in bytes. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Shared pointer to the created AR block </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_mpsk_ambiguity_resolver_bb.h" line="57" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/marina/Documents/sdr1/gr-ccsds/gr-ccsds/include/ccsds_mpsk_ambiguity_resolver_bb.h"/>
+  </compounddef>
+</doxygen>

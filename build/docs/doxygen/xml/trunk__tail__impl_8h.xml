@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="trunk__tail__impl_8h" kind="file">
+    <compoundname>trunk_tail_impl.h</compoundname>
+    <includes refid="trunk__tail_8h" local="no">ccsds/trunk_tail.h</includes>
+    <includes local="no">cstdio</includes>
+    <incdepgraph>
+      <node id="855">
+        <label>gnuradio/sync_block.h</label>
+      </node>
+      <node id="854">
+        <label>gnuradio/attributes.h</label>
+      </node>
+      <node id="856">
+        <label>cstdio</label>
+      </node>
+      <node id="852">
+        <label>ccsds/api.h</label>
+        <link refid="api_8h"/>
+        <childnode refid="853" relation="include">
+        </childnode>
+        <childnode refid="854" relation="include">
+        </childnode>
+      </node>
+      <node id="853">
+        <label>gnuradio/config.h</label>
+      </node>
+      <node id="850">
+        <label>trunk_tail_impl.h</label>
+        <link refid="trunk_tail_impl.h"/>
+        <childnode refid="851" relation="include">
+        </childnode>
+        <childnode refid="856" relation="include">
+        </childnode>
+      </node>
+      <node id="851">
+        <label>ccsds/trunk_tail.h</label>
+        <link refid="trunk__tail_8h"/>
+        <childnode refid="852" relation="include">
+        </childnode>
+        <childnode refid="855" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <innerclass refid="classgr_1_1ccsds_1_1trunk__tail__impl" prot="public">gr::ccsds::trunk_tail_impl</innerclass>
+    <innernamespace refid="namespacegr">gr</innernamespace>
+    <innernamespace refid="namespacegr_1_1ccsds">gr::ccsds</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/marina/Documents/sdr1/gr-ccsds/lib/trunk_tail_impl.h"/>
+  </compounddef>
+</doxygen>
