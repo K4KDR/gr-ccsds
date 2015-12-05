@@ -25,7 +25,7 @@ import ccsds_swig as ccsds
 import os
 import math
 
-class qa_ccsds_mpsk_ambiguity_resolver_f (gr_unittest.TestCase):
+class qa_mpsk_ambiguity_resolver_f (gr_unittest.TestCase):
 
 	def setUp (self):
 		self.tb = gr.top_block ()
@@ -282,4 +282,4 @@ class qa_ccsds_mpsk_ambiguity_resolver_f (gr_unittest.TestCase):
 	#'''
 
 if __name__ == '__main__':
-	gr_unittest.main ()
+	gr_unittest.run(qa_mpsk_ambiguity_resolver_f, "qa_mpsk_ambiguity_resolver_f.xml")

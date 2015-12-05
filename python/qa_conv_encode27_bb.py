@@ -20,10 +20,11 @@
 #
 
 from gnuradio import gr, gr_unittest
-import ccsds_swig
+from gnuradio import blocks
+import ccsds_swig as ccsds
 import os
 
-class qa_ccsds_conv_encode27_bb (gr_unittest.TestCase):
+class qa_conv_encode27_bb (gr_unittest.TestCase):
 
 	def setUp (self):
 		self.tb = gr.top_block ()
@@ -38,9 +39,9 @@ class qa_ccsds_conv_encode27_bb (gr_unittest.TestCase):
 		##################################################
 		# Blocks
 		##################################################
-		self.src = gr.vector_source_b(src_data, False)
-		self.snk = gr.vector_sink_b(1)
-		self.encoder = ccsds_swig.conv_encode27_bb(poly_c1, poly_c2, punct_t)
+		self.src = blocks.vector_source_b(src_data, False)
+		self.snk = blocks.vector_sink_b(1)
+		self.encoder = ccsds.conv_encode27_bb(poly_c1, poly_c2, punct_t)
 	
 		##################################################
 		# Connections
@@ -82,21 +83,21 @@ class qa_ccsds_conv_encode27_bb (gr_unittest.TestCase):
 	def test_zeros_r12(self):
 		src_data = (0x00,0x00,0x00,0x00)
 		exp_data = (0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55)
-		self.runBlock(src_data,exp_data,0x79,0xDB,ccsds_swig.NONE)
+		self.runBlock(src_data,exp_data,0x79,0xDB,ccsds.NONE)
 	#'''
 
 	#'''
 	def test_ones_r12(self):
 		src_data = (0xFF,0xFF,0xFF,0xFF)
 		exp_data = (0x8C,0x1A,0xAA,0xAA,0xAA,0xAA,0xAA,0xAA)
-		self.runBlock(src_data,exp_data,0x79,0xDB,ccsds_swig.NONE)
+		self.runBlock(src_data,exp_data,0x79,0xDB,ccsds.NONE)
 	#'''
 
 	#'''
 	def test_asm_r12(self):
 		src_data = (0x1A,0xCF,0xFC,0x1D)
 		exp_data = (0x56,0x08,0x1C,0x97,0x1A,0xA7,0x3D,0x3E)
-		self.runBlock(src_data,exp_data,0x79,0xDB,ccsds_swig.NONE)
+		self.runBlock(src_data,exp_data,0x79,0xDB,ccsds.NONE)
 	#'''
 
 
@@ -109,14 +110,14 @@ class qa_ccsds_conv_encode27_bb (gr_unittest.TestCase):
 	def test_zeros_r23(self):
 		src_data = (0x00,0x00,0x00,0x00)
 		exp_data = (0x00,0x00,0x00,0x00,0x00,0x00)
-		self.runBlock(src_data,exp_data,0x79,0x5B,ccsds_swig.ECSS_23)
+		self.runBlock(src_data,exp_data,0x79,0x5B,ccsds.ECSS_23)
 	#'''
 
 	#'''
 	def test_asm_r23(self):
 		src_data = (0x1A,0xCF,0xFC,0x1D)
 		exp_data = (0x05,0xF5,0x70,0x5F,0x85,0x15)
-		self.runBlock(src_data,exp_data,0x79,0x5B,ccsds_swig.ECSS_23)
+		self.runBlock(src_data,exp_data,0x79,0x5B,ccsds.ECSS_23)
 	#'''
 
 	##################################################
@@ -127,14 +128,14 @@ class qa_ccsds_conv_encode27_bb (gr_unittest.TestCase):
 	def test_zeros_r34(self):
 		src_data = (0x00,0x00,0x00)
 		exp_data = (0x00,0x00,0x00,0x00)
-		self.runBlock(src_data,exp_data,0x79,0x5B,ccsds_swig.ECSS_34)
+		self.runBlock(src_data,exp_data,0x79,0x5B,ccsds.ECSS_34)
 	#'''
 
 	#'''
 	def test_asm_r34(self):
 		src_data = (0x1A,0xCF,0xFC,0x1D,0x00,0x00)
 		exp_data = (0x0E,0xE0,0xCA,0xFD,0x53,0xA7,0x60,0x00)
-		self.runBlock(src_data,exp_data,0x79,0x5B,ccsds_swig.ECSS_34)
+		self.runBlock(src_data,exp_data,0x79,0x5B,ccsds.ECSS_34)
 	#'''
 
 
@@ -146,14 +147,14 @@ class qa_ccsds_conv_encode27_bb (gr_unittest.TestCase):
 	def test_zeros_r56(self):
 		src_data = (0x00,0x00,0x00,0x00,0x00)
 		exp_data = (0x00,0x00,0x00,0x00,0x00,0x00)
-		self.runBlock(src_data,exp_data,0x79,0x5B,ccsds_swig.ECSS_56)
+		self.runBlock(src_data,exp_data,0x79,0x5B,ccsds.ECSS_56)
 	#'''
 
 	#'''
 	def test_asm_r56(self):
 		src_data = (0x1A,0xCF,0xFC,0x1D,0x00)
 		exp_data = (0x09,0xAB,0x2B,0xE2,0x3A,0xBC)
-		self.runBlock(src_data,exp_data,0x79,0x5B,ccsds_swig.ECSS_56)
+		self.runBlock(src_data,exp_data,0x79,0x5B,ccsds.ECSS_56)
 	#'''
 
 
@@ -166,17 +167,17 @@ class qa_ccsds_conv_encode27_bb (gr_unittest.TestCase):
 	def test_zeros_r78(self):
 		src_data = (0x00,0x00,0x00,0x00,0x00,0x00,0x00)
 		exp_data = (0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00)
-		self.runBlock(src_data,exp_data,0x79,0x5B,ccsds_swig.ECSS_78)
+		self.runBlock(src_data,exp_data,0x79,0x5B,ccsds.ECSS_78)
 	#'''
 
 	#'''
 	def test_asm_r78(self):
 		src_data = (0x1A,0xCF,0xFC,0x1D,0x00,0x00,0x00)
 		exp_data = (0x0B,0x62,0x17,0xCC,0x4A,0xF0,0x00,0x00)
-		self.runBlock(src_data,exp_data,0x79,0x5B,ccsds_swig.ECSS_78)
+		self.runBlock(src_data,exp_data,0x79,0x5B,ccsds.ECSS_78)
 	#'''
 
 
 
 if __name__ == '__main__':
-	gr_unittest.main ()
+	gr_unittest.run(qa_conv_encode27_bb, "qa_conv_encode27_bb.xml")

@@ -27,7 +27,7 @@ import numpy
 import os
 import pmt
 
-class qa_ccsds_blob_msg_source (gr_unittest.TestCase):
+class qa_blob_msg_source (gr_unittest.TestCase):
 
     def setUp (self):
 	self.tb = gr.top_block ()
@@ -99,4 +99,4 @@ class qa_ccsds_blob_msg_source (gr_unittest.TestCase):
 
 
 if __name__ == '__main__':
-    gr_unittest.main ()
+    gr_unittest.run(qa_blob_msg_source, "qa_blob_msg_source.xml")

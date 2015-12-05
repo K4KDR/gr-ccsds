@@ -46,10 +46,10 @@ namespace gr {
     	 *  with 0x79 for c1 and 0x5B for c2. Together with the MSB for the inversion of
     	 *  c2 the compact polynomials are 0x79 and 0xDB.
     	 */
-    	conv_encode27_bb_impl(const unsigned char gen_poly_c1, const unsigned char gen_poly_c2, conv_puncturing27::punct_t puncturing_type);   // public constructor
+    	conv_encode27_bb_impl(const unsigned char gen_poly_c1, const unsigned char gen_poly_c2, conv_puncturing27::punct_t puncturing_type);
 
     	/*! \brief Public deconstructor. */
-    	~conv_encode27_bb_impl();  // public destructor
+    	~conv_encode27_bb_impl();
     
     	void forecast(int noutput_items, gr_vector_int &ninput_items_required);
     

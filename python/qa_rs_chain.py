@@ -27,7 +27,7 @@ import numpy
 import random
 import time
 
-class qa_ccsds_rs_chain (gr_unittest.TestCase):
+class qa_rs_chain (gr_unittest.TestCase):
 
 	def setUp (self):
 		self.tb = gr.top_block ()
@@ -45,7 +45,7 @@ class qa_ccsds_rs_chain (gr_unittest.TestCase):
 		self.src = blocks.vector_source_b(data, False)
 		self.snk = blocks.vector_sink_b(1)
 		self.encoder = ccsds.rs_encode(I)
-		self.decoder = ccsds.rs_decode(I)
+		self.decoder = ccsds.rs_decode(I, int(0))
 		self.blob_source = ccsds.blob_msg_source_b(223*I)
 		self.blob_sink = ccsds.blob_msg_sink_b(223*I)
 
@@ -234,4 +234,4 @@ class qa_ccsds_rs_chain (gr_unittest.TestCase):
 
 
 if __name__ == '__main__':
-	gr_unittest.main ()
+	gr_unittest.run(qa_rs_chain, "qa_rs_chain.xml")

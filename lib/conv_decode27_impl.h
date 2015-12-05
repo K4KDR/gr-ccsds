@@ -3,50 +3,18 @@
 
 #include <ccsds/conv_decode27.h>
 
-//#define __i386__
 #include <fec.h>
 
-/*
-#define FEC_FUNC_VITERBI27_SET_POLYNOMIAL set_viterbi27_polynomial_sse2
-#define FEC_FUNC_VITERBI27_CREATE create_viterbi27_sse2
-#define FEC_FUNC_VITERBI27_DELETE delete_viterbi27_sse2
-#define FEC_FUNC_VITERBI27_INIT init_viterbi27_sse2
-#define FEC_FUNC_VITERBI27_UPDATE_BLK update_viterbi27_blk_sse2
-#define FEC_FUNC_VITERBI27_CHAINBACK chainback_viterbi27_sse2
-//*/
-
-//*
+// Redefine mapping of decode functions to libfec functions
 #define FEC_FUNC_VITERBI27_SET_POLYNOMIAL set_viterbi27_polynomial_port
 #define FEC_FUNC_VITERBI27_CREATE create_viterbi27_port
 #define FEC_FUNC_VITERBI27_DELETE delete_viterbi27_port
 #define FEC_FUNC_VITERBI27_INIT init_viterbi27_port
 #define FEC_FUNC_VITERBI27_UPDATE_BLK update_viterbi27_blk_port
 #define FEC_FUNC_VITERBI27_CHAINBACK chainback_viterbi27_port
-//*/
-
-/*
-#define FEC_FUNC_VITERBI27_SET_POLYNOMIAL set_viterbi27_polynomial
-#define FEC_FUNC_VITERBI27_CREATE create_viterbi27
-#define FEC_FUNC_VITERBI27_DELETE delete_viterbi27
-#define FEC_FUNC_VITERBI27_INIT init_viterbi27
-#define FEC_FUNC_VITERBI27_UPDATE_BLK update_viterbi27_blk
-#define FEC_FUNC_VITERBI27_CHAINBACK chainback_viterbi27
-//*/
 
 namespace gr {
   namespace ccsds {
-
-    void noop(int* /*polys[2]*/) {}
-    /*
-    #include <spiral-viterbi.h>
-
-    #define FEC_FUNC_VITERBI27_SET_POLYNOMIAL ccsds_noop
-    #define FEC_FUNC_VITERBI27_CREATE create_viterbi_SPIRAL
-    #define FEC_FUNC_VITERBI27_DELETE delete_viterbi_SPIRAL
-    #define FEC_FUNC_VITERBI27_INIT init_viterbi_SPIRAL
-    #define FEC_FUNC_VITERBI27_UPDATE_BLK update_viterbi_blk_SPIRAL
-    #define FEC_FUNC_VITERBI27_CHAINBACK chainback_viterbi_SPIRAL
-    //*/
 
     class conv_decode27_impl : public conv_decode27 {
 
@@ -74,13 +42,13 @@ namespace gr {
     	 */
     	const unsigned int d_RATE_NUM_OUT;
     
-    	/* \brief Number of soft bits that come in with one message */
+    	/*! \brief Number of soft bits that come in with one message */
     	const unsigned int d_BLOCK_NUM_BITS_IN;
     
-    	/* \brief Number of soft bits that come in one unpunctured message */
+    	/*! \brief Number of soft bits that come in one unpunctured message */
     	const unsigned int d_BLOCK_NUM_BITS_IN_UNPUNC;
     
-    	/* \brief Number of data bits that go out of this block. */
+    	/*! \brief Number of data bits that go out of this block. */
     	const unsigned int d_BLOCK_NUM_BITS_OUT;
     
     	/*! \brief Last 6 bits of the ASM that are used to generate the first
@@ -161,7 +129,7 @@ namespace gr {
     	conv_decode27_impl(const unsigned char gen_poly_c1, const unsigned char gen_poly_c2, conv_puncturing27::punct_t puncturing_type, const unsigned int block_len, std::string ASM);
     
     	/*! \brief Public deconstructor. */
-    	~conv_decode27_impl(void);  // public destructor
+    	~conv_decode27_impl(void);
     
     	int work(int noutput_items, gr_vector_const_void_star& input_items, gr_vector_void_star& output_items);
     };

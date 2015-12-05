@@ -1,4 +1,6 @@
-# Copyright 2011 Free Software Foundation, Inc.
+# Copyright 2011,2012 Free Software Foundation, Inc.
+#
+# This file is part of GNU Radio
 #
 # GNU Radio is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -19,8 +21,12 @@
 # Setup library
 ########################################################################
 include(GrPlatform) #define LIB_SUFFIX
-add_library(gnuradio-ccsds SHARED
-	add_asm_impl.cc
+
+include_directories(${Boost_INCLUDE_DIR})
+link_directories(${Boost_LIBRARY_DIRS})
+
+list(APPEND ccsds_sources
+    add_asm_impl.cc
 	msg_null_src_impl.cc
 	ticp_frame_source_impl.cc
 	asynchronous_start.cc
@@ -45,9 +51,23 @@ add_library(gnuradio-ccsds SHARED
 	randomiser_impl.cc
 	softbittobit_impl.cc
    	simple_bpsk_SNR_qf_impl.cc
-	)
-target_link_libraries(gnuradio-ccsds ${Boost_LIBRARIES} ${GNURADIO_RUNTIME_LIBRARIES} ticp fec)
+)
+
+set(ccsds_sources "${ccsds_sources}" PARENT_SCOPE)
+if(NOT ccsds_sources)
+	MESSAGE(STATUS "No C++ sources... skipping lib/")
+	return()
+endif(NOT ccsds_sources)
+
+add_library(gnuradio-ccsds SHARED ${ccsds_sources})
+target_link_libraries(gnuradio-ccsds ${Boost_LIBRARIES} ${GNURADIO_ALL_LIBRARIES} ticp fec)
 set_target_properties(gnuradio-ccsds PROPERTIES DEFINE_SYMBOL "gnuradio_ccsds_EXPORTS")
+
+if(APPLE)
+    set_target_properties(gnuradio-ccsds PROPERTIES
+        INSTALL_NAME_DIR "${CMAKE_INSTALL_PREFIX}/lib"
+    )
+endif(APPLE)
 
 ########################################################################
 # Install built library files
@@ -58,22 +78,28 @@ install(TARGETS gnuradio-ccsds
     RUNTIME DESTINATION bin              # .dll file
 )
 
-
 ########################################################################
 # Build and register unit test
 ########################################################################
-find_package(Boost COMPONENTS unit_test_framework system)
-
 include(GrTest)
-set(GR_TEST_TARGET_DEPS gnuradio-ccsds)
-#turn each test cpp file into an executable with an int main() function
-add_definitions(-DBOOST_TEST_DYN_LINK -DBOOST_TEST_MAIN)
 
-add_executable(qa_ccsds_conv_encode27_aux qa_ccsds_conv_encode27_aux.cc conv_encode27_aux.cc)
-target_link_libraries(qa_ccsds_conv_encode27_aux ${Boost_LIBRARIES})
-GR_ADD_TEST(qa_ccsds_conv_encode27_aux qa_ccsds_conv_encode27_aux)
+include_directories(${CPPUNIT_INCLUDE_DIRS})
 
+list(APPEND test_ccsds_sources
+    ${CMAKE_CURRENT_SOURCE_DIR}/test_ccsds.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/qa_ccsds.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/qa_conv_encode27_aux.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/conv_encode27_aux.cc
+)
 
-##add_executable(qa_ccsds_asm_operator qa_ccsds_asm_operator.cc)
-##target_link_libraries(qa_ccsds_asm_operator ${Boost_LIBRARIES})
-##GR_ADD_TEST(qa_ccsds_asm_operator qa_ccsds_asm_operator)
+add_executable(test-ccsds ${test_ccsds_sources})
+
+target_link_libraries(
+  test-ccsds
+  ${GNURADIO_RUNTIME_LIBRARIES}
+  ${Boost_LIBRARIES}
+  ${CPPUNIT_LIBRARIES}
+  gnuradio-ccsds
+)
+
+GR_ADD_TEST(test_ccsds test-ccsds)

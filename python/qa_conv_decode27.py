@@ -20,15 +20,16 @@
 #
 
 from gnuradio import gr, gr_unittest
-import ccsds_swig
+from gnuradio import blocks
+import ccsds_swig as ccsds
 import random
 import numpy
 import os
-from gruel import pmt
+import pmt
 import time
 import math
 
-class qa_ccsds_conv_decode27(gr_unittest.TestCase):
+class qa_conv_decode27(gr_unittest.TestCase):
 
 	def setUp (self):
 		self.tb = gr.top_block ()
@@ -39,17 +40,17 @@ class qa_ccsds_conv_decode27(gr_unittest.TestCase):
 	def to_hex(self, dec):
 		return '0x%02X' % (dec)
 
-    	def runExperiment(self, messages_in, messages_out_exp,poly1=0x79,poly2=0xDB,punct=ccsds_swig.NONE,ASM='1ACFFC1D'):
-		print 'Blocked waiting for GDB attach (pid = %d)' % (os.getpid(),)
-		raw_input ('Press Enter to continue: ')
+    	def runExperiment(self, messages_in, messages_out_exp,poly1=0x79,poly2=0xDB,punct=ccsds.NONE,ASM='1ACFFC1D'):
+		#print 'Blocked waiting for GDB attach (pid = %d)' % (os.getpid(),)
+		#raw_input ('Press Enter to continue: ')
 
 
 		##################################################
 		# Blocks
 		##################################################
-		self.null_src = ccsds_swig.msg_null_src()
-		self.decoder = ccsds_swig.conv_decode27(poly1, poly2, punct, len(messages_out_exp[0])*8, ASM)
-		self.dbg = gr.message_debug()
+		self.null_src = ccsds.msg_null_src()
+		self.decoder = ccsds.conv_decode27(poly1, poly2, punct, len(messages_out_exp[0])*8, ASM)
+		self.dbg = blocks.message_debug()
 
 		##################################################
 		# Asynch Message Connections
@@ -62,19 +63,19 @@ class qa_ccsds_conv_decode27(gr_unittest.TestCase):
 		self.tb.start()
 
 		block = self.decoder.to_basic_block()
-		port = pmt.pmt_intern("in")
+		port = pmt.intern("in")
 
 		num_messages = 0
 		
 		for i in xrange(len(messages_in)) :
-			msg_in = pmt.pmt_make_f32vector(len(messages_in[i]), 0.0)
+			msg_in = pmt.make_f32vector(len(messages_in[i]), 0.0)
 			for j in xrange(len(messages_in[i])) :
-				pmt.pmt_f32vector_set(msg_in, j, messages_in[i][j])
+				pmt.f32vector_set(msg_in, j, messages_in[i][j])
 
-			meta = pmt.pmt_make_dict()
-			meta = pmt.pmt_dict_add(meta, pmt.pmt_intern("frame_number"), pmt.pmt_from_long(i))
+			meta = pmt.make_dict()
+			meta = pmt.dict_add(meta, pmt.intern("frame_number"), pmt.from_long(i))
 			
-			block._post( port, pmt.pmt_cons(meta, msg_in) )
+			block._post( port, pmt.cons(meta, msg_in) )
 			num_messages = num_messages+1
 		
 		block._post( port, pmt.PMT_EOF )
@@ -92,20 +93,20 @@ class qa_ccsds_conv_decode27(gr_unittest.TestCase):
 		
 		# test for EOF
 		eof_msg = self.dbg.get_message(num_messages)
-		self.assertEqual (pmt.pmt_is_eof_object(eof_msg), True, 'EOF block not at expected position')
+		self.assertEqual (pmt.is_eof_object(eof_msg), True, 'EOF block not at expected position')
 
 		# test the blobs
 		for i in xrange(len(messages_out_exp)):
 			dbg_msg_in = self.dbg.get_message(i)
-			dbg_msg = pmt.pmt_cdr(dbg_msg_in)
-			dbg_hdr = pmt.pmt_car(dbg_msg_in)
+			dbg_msg = pmt.cdr(dbg_msg_in)
+			dbg_hdr = pmt.car(dbg_msg_in)
 
-			dbg_frame_num = int(pmt.pmt_to_long(pmt.pmt_dict_ref(dbg_hdr, pmt.pmt_intern("frame_number"), pmt.pmt_from_long(num_messages+100))))
+			dbg_frame_num = int(pmt.to_long(pmt.dict_ref(dbg_hdr, pmt.intern("frame_number"), pmt.from_long(num_messages+100))))
 
 			self.assertEqual (i, dbg_frame_num, 'Frame number %d does not match the expected %d' %	(dbg_frame_num, i))
 
 			dbg_data = []
-			[dbg_data.append(pmt.pmt_u8vector_ref(dbg_msg, j)) for j in xrange(pmt.pmt_length(dbg_msg))]
+			[dbg_data.append(pmt.u8vector_ref(dbg_msg, j)) for j in xrange(pmt.length(dbg_msg))]
 			dbg_data = tuple(dbg_data)
 
 			out_hex = map(self.to_hex,dbg_data)
@@ -117,7 +118,7 @@ class qa_ccsds_conv_decode27(gr_unittest.TestCase):
 						(i+1, num_messages, out_hex, exp_hex, out_str, exp_str))
 
 
-    	def runChainExperiment(self, poly1=0x79,poly2=0xDB,punct=ccsds_swig.NONE):
+    	def runChainExperiment(self, poly1=0x79,poly2=0xDB,punct=ccsds.NONE):
 		##################################################
 		# Variables
 		##################################################
@@ -143,32 +144,32 @@ class qa_ccsds_conv_decode27(gr_unittest.TestCase):
 		[data_in.append(byte) for byte in [0x1A, 0xCF, 0xFC, 0x1D]] #ASM
 
 		#provide encoded ASM sequence
-		asm_enc = {	ccsds_swig.NONE:	{ "asm":'81C971AA73D3E0', "asm_len": 52, "tail_len":12 }, # Rate 1/2
-				ccsds_swig.ECSS_23:	{ "asm":'EAE0BF0A2A'    , "asm_len": 39, "tail_len": 9 }, # Rate 2/3
-				ccsds_swig.ECSS_34:	{ "asm":'E0CAFD53A0'    , "asm_len": 35, "tail_len": 8 }, # Rate 3/4
-				ccsds_swig.ECSS_56:	{ "asm":'AB2BE23A'      , "asm_len": 31, "tail_len": 8 }, # Rate 5/6
-				ccsds_swig.ECSS_78:	{ "asm":'B10BE624'      , "asm_len": 30, "tail_len": 7 }  # Rate 7/8
+		asm_enc = {	ccsds.NONE:	{ "asm":'81C971AA73D3E0', "asm_len": 52, "tail_len":12 }, # Rate 1/2
+				ccsds.ECSS_23:	{ "asm":'EAE0BF0A2A'    , "asm_len": 39, "tail_len": 9 }, # Rate 2/3
+				ccsds.ECSS_34:	{ "asm":'E0CAFD53A0'    , "asm_len": 35, "tail_len": 8 }, # Rate 3/4
+				ccsds.ECSS_56:	{ "asm":'AB2BE23A'      , "asm_len": 31, "tail_len": 8 }, # Rate 5/6
+				ccsds.ECSS_78:	{ "asm":'B10BE624'      , "asm_len": 30, "tail_len": 7 }  # Rate 7/8
 			  }
 		
-		frame_len_sym = {	ccsds_swig.NONE:	int(2.0/1.0*frame_len_byte),
-					ccsds_swig.ECSS_23:	int(3.0/2.0*frame_len_byte),
-					ccsds_swig.ECSS_34:	int(4.0/3.0*frame_len_byte),
-					ccsds_swig.ECSS_56:	int(6.0/5.0*frame_len_byte),
-					ccsds_swig.ECSS_78:	int(8.0/7.0*frame_len_byte)
+		frame_len_sym = {	ccsds.NONE:	int(2.0/1.0*frame_len_byte),
+					ccsds.ECSS_23:	int(3.0/2.0*frame_len_byte),
+					ccsds.ECSS_34:	int(4.0/3.0*frame_len_byte),
+					ccsds.ECSS_56:	int(6.0/5.0*frame_len_byte),
+					ccsds.ECSS_78:	int(8.0/7.0*frame_len_byte)
 				}
 
 
 		##################################################
 		# Blocks
 		##################################################
-		self.src = gr.vector_source_b(data_in, False)
-		self.encoder = ccsds_swig.conv_encode27_bb(poly1, poly2, punct)
-		self.packed_to_unpacked = gr.packed_to_unpacked_bb(ldM, gr.GR_MSB_FIRST)
-		self.mod = ccsds_swig.mpsk_mod_bc(M)
-		self.demod = ccsds_swig.mpsk_detector_soft_cf(M)
-		self.ar = ccsds_swig.mpsk_ambiguity_resolver_f(M,asm_enc[punct]['asm'],asm_enc[punct]['asm_len'],1,0.8,frame_len_sym[punct],asm_enc[punct]['tail_len'])
-		self.decoder = ccsds_swig.conv_decode27(poly1, poly2, punct, frame_len_byte*8,'1ACFFC1D')
-		self.dbg = gr.message_debug()
+		self.src = blocks.vector_source_b(data_in, False)
+		self.encoder = ccsds.conv_encode27_bb(poly1, poly2, punct)
+		self.packed_to_unpacked = blocks.packed_to_unpacked_bb(ldM, gr.GR_MSB_FIRST)
+		self.mod = ccsds.mpsk_mod_bc(M)
+		self.demod = ccsds.mpsk_detector_soft_cf(M)
+		self.ar = ccsds.mpsk_ambiguity_resolver_f(M,asm_enc[punct]['asm'],asm_enc[punct]['asm_len'],1,0.8,frame_len_sym[punct],asm_enc[punct]['tail_len'])
+		self.decoder = ccsds.conv_decode27(poly1, poly2, punct, frame_len_byte*8,'1ACFFC1D')
+		self.dbg = blocks.message_debug()
 		
 		##################################################
 		# Connections
@@ -201,19 +202,19 @@ class qa_ccsds_conv_decode27(gr_unittest.TestCase):
 		
 		# test for EOF
 		eof_msg = self.dbg.get_message(num_frames)
-		self.assertEqual (pmt.pmt_is_eof_object(eof_msg), True, 'EOF block not at expected position')
+		self.assertEqual (pmt.is_eof_object(eof_msg), True, 'EOF block not at expected position')
 
 		for i in xrange(num_frames) :
 			dbg_msg_in = self.dbg.get_message(i)
-			dbg_msg = pmt.pmt_cdr(dbg_msg_in)
-			dbg_hdr = pmt.pmt_car(dbg_msg_in)
-
-			dbg_frame_num = int(pmt.pmt_to_long(pmt.pmt_dict_ref(dbg_hdr, pmt.pmt_intern("frame_number"), pmt.pmt_from_long(self.dbg.num_messages()+100))))
+			dbg_msg = pmt.cdr(dbg_msg_in)
+			dbg_hdr = pmt.car(dbg_msg_in)
+			
+			dbg_frame_num = int(pmt.to_uint64(pmt.dict_ref(dbg_hdr, pmt.intern("frame_number"), pmt.from_long(self.dbg.num_messages()+99999))))
 
 			self.assertEqual (i+1, dbg_frame_num, 'Frame number %d does not match the expected %d' %	(dbg_frame_num, i+1))
 
 			dbg_data = []
-			[dbg_data.append(pmt.pmt_u8vector_ref(dbg_msg, j)) for j in xrange(pmt.pmt_length(dbg_msg))]
+			[dbg_data.append(pmt.u8vector_ref(dbg_msg, j)) for j in xrange(pmt.length(dbg_msg))]
 			dbg_data = tuple(dbg_data)
 
 			out_hex = map(self.to_hex,dbg_data)
@@ -232,7 +233,7 @@ class qa_ccsds_conv_decode27(gr_unittest.TestCase):
 	# Rate 1/2
 	##################################################
 
-	'''
+	#'''
 	def test_1block_r12(self) :
 		messages_in = [  [  	 1.0,-1.0,-1.0, 1.0,-1.0, 1.0, 1.0,-1.0,  -1.0,-1.0,-1.0, 1.0, 1.0, 1.0, 1.0, 1.0,   # 0xCA (with dependency on end of ASM (0x1D)
 					 1.0,-1.0, 1.0, 1.0, 1.0,-1.0,-1.0,-1.0,  -1.0, 1.0,-1.0,-1.0, 1.0, 1.0,-1.0,-1.0,   # 0x0F
@@ -244,7 +245,7 @@ class qa_ccsds_conv_decode27(gr_unittest.TestCase):
 		self.runExperiment(messages_in, messages_out_exp)
 	#'''
 
-	'''
+	#'''
 	def test_1block_r12_ber(self) :
 		messages_in = [  [  	 1.0,-1.0,-1.0, 1.0,-1.0, 1.0, 1.0,-1.0,  -1.0,-1.0,-1.0, 1.0, 1.0, 1.0, 1.0, 1.0,   # 0xCA (with dependency on end of ASM (0x1D)
 					 1.0,-1.0, 1.0, 1.0, 1.0,-1.0,-1.0,-1.0,  -1.0, 1.0,-1.0,-1.0, 1.0, 1.0,-1.0,-1.0,   # 0x0F
@@ -257,7 +258,7 @@ class qa_ccsds_conv_decode27(gr_unittest.TestCase):
 		self.runExperiment(messages_in, messages_out_exp)
 	#'''
 
-	'''
+	#'''
 	def test_1block_r12_c2noinvert(self) :
 		messages_in = [  [	 1.0, 1.0,-1.0,-1.0,-1.0,-1.0, 1.0, 1.0,   -1.0, 1.0,-1.0,-1.0, 1.0,-1.0, 1.0,-1.0,   # 0xCS (with dependency on end of ASM (0x1D)
 					 1.0, 1.0, 1.0,-1.0, 1.0, 1.0,-1.0, 1.0,   -1.0,-1.0,-1.0, 1.0, 1.0,-1.0,-1.0, 1.0,   # 0x0F
@@ -266,10 +267,10 @@ class qa_ccsds_conv_decode27(gr_unittest.TestCase):
 		messages_in = tuple(map(tuple,messages_in))
 
 		messages_out_exp = ( (0xCA, 0x0F), )
-		self.runExperiment(messages_in, messages_out_exp,poly1=0x79,poly2=0x5B,punct=ccsds_swig.NONE)
+		self.runExperiment(messages_in, messages_out_exp,poly1=0x79,poly2=0x5B,punct=ccsds.NONE)
 	#'''
 
-	'''
+	#'''
 	def test_1block_r12_c2noinvert_ber(self) :
 		messages_in = [  [	 1.0, 1.0,-1.0,-1.0,-1.0,-1.0, 1.0, 1.0,   -1.0, 1.0,-1.0,-1.0, 1.0,-1.0, 1.0,-1.0,   # 0xCS (with dependency on end of ASM (0x1D)
 					 1.0, 1.0, 1.0,-1.0, 1.0, 1.0,-1.0, 1.0,   -1.0,-1.0,-1.0, 1.0, 1.0,-1.0,-1.0, 1.0,   # 0x0F
@@ -279,14 +280,14 @@ class qa_ccsds_conv_decode27(gr_unittest.TestCase):
 		messages_in = tuple(map(tuple,messages_in))
 
 		messages_out_exp = ( (0xCA, 0x0F), )
-		self.runExperiment(messages_in, messages_out_exp,poly1=0x79,poly2=0x5B,punct=ccsds_swig.NONE)
+		self.runExperiment(messages_in, messages_out_exp,poly1=0x79,poly2=0x5B,punct=ccsds.NONE)
 	#'''
 
 	##################################################
 	# Rate 2/3
 	##################################################
 
-	'''
+	#'''
 	def test_1block_r23(self) :
 		messages_in = [  [	 1.0, 1.0,     -1.0,-1.0,-1.0,      1.0,   -1.0, 1.0,     -1.0, 1.0,-1.0,     -1.0,   # 0xCS (with dependency on end of ASM (0x1D)
 					 1.0, 1.0,     -1.0, 1.0, 1.0,      1.0,   -1.0,-1.0,      1.0, 1.0,-1.0,      1.0,   # 0x0F
@@ -295,10 +296,10 @@ class qa_ccsds_conv_decode27(gr_unittest.TestCase):
 		messages_in = tuple(map(tuple,messages_in))
 
 		messages_out_exp = ( (0xCA, 0x0F), )
-		self.runExperiment(messages_in, messages_out_exp,poly1=0x79,poly2=0x5B,punct=ccsds_swig.ECSS_23)
+		self.runExperiment(messages_in, messages_out_exp,poly1=0x79,poly2=0x5B,punct=ccsds.ECSS_23)
 	#'''
 
-	'''
+	#'''
 	def test_1block_r23_ber(self) :
 		messages_in = [  [	 1.0, 1.0,     -1.0,-1.0,-1.0,      1.0,   -1.0, 1.0,     -1.0, 1.0,-1.0,     -1.0,   # 0xCS (with dependency on end of ASM (0x1D)
 					 1.0, 1.0,     -1.0, 1.0, 1.0,      1.0,   -1.0,-1.0,      1.0, 1.0,-1.0,      1.0,   # 0x0F
@@ -308,7 +309,7 @@ class qa_ccsds_conv_decode27(gr_unittest.TestCase):
 		messages_in = tuple(map(tuple,messages_in))
 
 		messages_out_exp = ( (0xCA, 0x0F), )
-		self.runExperiment(messages_in, messages_out_exp,poly1=0x79,poly2=0x5B,punct=ccsds_swig.ECSS_23)
+		self.runExperiment(messages_in, messages_out_exp,poly1=0x79,poly2=0x5B,punct=ccsds.ECSS_23)
 	#'''
 
 	
@@ -316,7 +317,7 @@ class qa_ccsds_conv_decode27(gr_unittest.TestCase):
 	# Rate 3/4
 	##################################################
 
-	'''
+	#'''
 	def test_1block_r34(self) :
 		messages_in = [  [	 1.0, 1.0,     -1.0,-1.0,      1.0, 1.0,         1.0,-1.0,      1.0,-1.0,     -1.0,   # 0xCS (with dependency on end of ASM (0x1D)
 					 1.0,      1.0,-1.0,      1.0,-1.0,        -1.0,-1.0,      1.0, 1.0,     -1.0, 1.0,   # 0x0F
@@ -325,10 +326,10 @@ class qa_ccsds_conv_decode27(gr_unittest.TestCase):
 		messages_in = tuple(map(tuple,messages_in))
 
 		messages_out_exp = ( (0xCA, 0x0F), )
-		self.runExperiment(messages_in, messages_out_exp,poly1=0x79,poly2=0x5B,punct=ccsds_swig.ECSS_34)
+		self.runExperiment(messages_in, messages_out_exp,poly1=0x79,poly2=0x5B,punct=ccsds.ECSS_34)
 	#'''
 
-	'''
+	#'''
 	def test_1block_r34_ber(self) :
 		messages_in = [  [	 1.0, 1.0,     -1.0,-1.0,      1.0, 1.0,         1.0,-1.0,      1.0,-1.0,     -1.0,   # 0xCS (with dependency on end of ASM (0x1D)
 					 1.0,      1.0,-1.0,      1.0,-1.0,        -1.0,-1.0,      1.0, 1.0,     -1.0, 1.0,   # 0x0F
@@ -338,7 +339,7 @@ class qa_ccsds_conv_decode27(gr_unittest.TestCase):
 		messages_in = tuple(map(tuple,messages_in))
 
 		messages_out_exp = ( (0xCA, 0x0F), )
-		self.runExperiment(messages_in, messages_out_exp,poly1=0x79,poly2=0x5B,punct=ccsds_swig.ECSS_34)
+		self.runExperiment(messages_in, messages_out_exp,poly1=0x79,poly2=0x5B,punct=ccsds.ECSS_34)
 	#'''
 
 
@@ -346,7 +347,7 @@ class qa_ccsds_conv_decode27(gr_unittest.TestCase):
 	# Rate 5/6
 	##################################################
 
-	'''
+	#'''
 	def test_1block_r56(self) :
 		messages_in = [  [	 1.0, 1.0,     -1.0,-1.0,           1.0,   -1.0,     -1.0,-1.0,     -1.0, 1.0,        # 0xCS (with dependency on end of ASM (0x1D)
 					      1.0, 1.0,      1.0, 1.0,      1.0,   -1.0,           1.0, 1.0,     -1.0, 1.0,   # 0x0F
@@ -355,10 +356,10 @@ class qa_ccsds_conv_decode27(gr_unittest.TestCase):
 		messages_in = tuple(map(tuple,messages_in))
 
 		messages_out_exp = ( (0xCA, 0x0F), )
-		self.runExperiment(messages_in, messages_out_exp,poly1=0x79,poly2=0x5B,punct=ccsds_swig.ECSS_56)
+		self.runExperiment(messages_in, messages_out_exp,poly1=0x79,poly2=0x5B,punct=ccsds.ECSS_56)
 	#'''
 
-	'''
+	#'''
 	def test_1block_r56_ber(self) :
 		messages_in = [  [	 1.0, 1.0,     -1.0,-1.0,           1.0,   -1.0,     -1.0,-1.0,     -1.0, 1.0,        # 0xCS (with dependency on end of ASM (0x1D)
 					      1.0, 1.0,      1.0, 1.0,      1.0,   -1.0,           1.0, 1.0,     -1.0, 1.0,   # 0x0F
@@ -368,14 +369,14 @@ class qa_ccsds_conv_decode27(gr_unittest.TestCase):
 		messages_in = tuple(map(tuple,messages_in))
 
 		messages_out_exp = ( (0xCA, 0x0F), )
-		self.runExperiment(messages_in, messages_out_exp,poly1=0x79,poly2=0x5B,punct=ccsds_swig.ECSS_56)
+		self.runExperiment(messages_in, messages_out_exp,poly1=0x79,poly2=0x5B,punct=ccsds.ECSS_56)
 	#'''
 
 	##################################################
 	# Rate 7/8
 	##################################################
 
-	'''
+	#'''
 	def test_1block_r78(self) :
 		messages_in = [  [	 1.0, 1.0,     -1.0,     -1.0,      1.0,   -1.0,          -1.0, 1.0,      1.0,-1.0,   # 0xCS (with dependency on end of ASM (0x1D)
 					      1.0,     -1.0,      1.0,-1.0,             -1.0,-1.0,      1.0,-1.0,      1.0,   # 0x0F
@@ -384,10 +385,10 @@ class qa_ccsds_conv_decode27(gr_unittest.TestCase):
 		messages_in = tuple(map(tuple,messages_in))
 
 		messages_out_exp = ( (0xCA, 0x0F), )
-		self.runExperiment(messages_in, messages_out_exp,poly1=0x79,poly2=0x5B,punct=ccsds_swig.ECSS_78)
+		self.runExperiment(messages_in, messages_out_exp,poly1=0x79,poly2=0x5B,punct=ccsds.ECSS_78)
 	#'''
 
-	'''
+	#'''
 	def test_1block_r78_ber(self) :
 		messages_in = [  [	 1.0, 1.0,     -1.0,     -1.0,      1.0,   -1.0,          -1.0, 1.0,      1.0,-1.0,   # 0xCS (with dependency on end of ASM (0x1D)
 					      1.0,     -1.0,      1.0,-1.0,             -1.0,-1.0,      1.0,-1.0,      1.0,   # 0x0F
@@ -397,7 +398,7 @@ class qa_ccsds_conv_decode27(gr_unittest.TestCase):
 		messages_in = tuple(map(tuple,messages_in))
 
 		messages_out_exp = ( (0xCA, 0x0F), )
-		self.runExperiment(messages_in, messages_out_exp,poly1=0x79,poly2=0x5B,punct=ccsds_swig.ECSS_78)
+		self.runExperiment(messages_in, messages_out_exp,poly1=0x79,poly2=0x5B,punct=ccsds.ECSS_78)
 	#'''
 
 
@@ -407,12 +408,16 @@ class qa_ccsds_conv_decode27(gr_unittest.TestCase):
 
 	#'''
 	def test_chain_r12(self) :
-		self.runChainExperiment(poly1=0x79,poly2=0xDB,punct=ccsds_swig.NONE)
+		self.runChainExperiment(poly1=0x79,poly2=0xDB,punct=ccsds.NONE)
 	#'''
 
+	# TODO
+	# rate 2/3 chain test fails, probably puncturing implementation is wrong/disabled
+	# in either the encoder or the decoder. Ignored for now, as puncturing is not
+	# fully supported
 	'''
 	def test_chain_r23(self) :
-		self.runChainExperiment(poly1=0x79,poly2=0x5B,punct=ccsds_swig.ECSS_23)
+		self.runChainExperiment(poly1=0x79,poly2=0x5B,punct=ccsds.ECSS_23)
 	#'''
 
 	##
@@ -420,4 +425,4 @@ class qa_ccsds_conv_decode27(gr_unittest.TestCase):
 	## unpuncturing is synchronized
 	##
 if __name__ == '__main__':
-	gr_unittest.main ()
+	gr_unittest.run(qa_conv_decode27, "qa_conv_decode27.xml")
