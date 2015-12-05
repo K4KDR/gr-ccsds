@@ -62,6 +62,10 @@ namespace gr {
         // Do <+signal processing+>
 
         // Tell runtime system how many output items we produced.
+ 	//void rs_decode_impl()
+	//{
+	//	return frame_number
+//}
         return noutput_items;
     }
 
