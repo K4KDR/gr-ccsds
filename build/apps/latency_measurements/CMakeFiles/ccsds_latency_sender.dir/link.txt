@@ -1,1 +1,0 @@
-/usr/bin/c++       CMakeFiles/ccsds_latency_sender.dir/ccsds_latency_sender.cpp.o  -o ccsds_latency_sender -rdynamic -lticp -lboost_system -lboost_thread 
