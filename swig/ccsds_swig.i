@@ -14,8 +14,6 @@
 #include "ccsds/reversebits.h"
 #include "ccsds/msg_null_src.h"
 #include "ccsds/add_asm.h"
-#include "ccsds/ticp_frame_source.h"
-#include "ccsds/ticp_frame_sink.h"
 #include "ccsds/trunk_tail.h"
 #include "ccsds/pll_cc.h"
 #include "ccsds/dll_cc.h"
@@ -47,12 +45,6 @@ GR_SWIG_BLOCK_MAGIC2(ccsds,msg_null_src);
 
 %include "ccsds/add_asm.h"
 GR_SWIG_BLOCK_MAGIC2(ccsds,add_asm);
-
-%include "ccsds/ticp_frame_source.h"
-GR_SWIG_BLOCK_MAGIC2(ccsds,ticp_frame_source);
-
-%include "ccsds/ticp_frame_sink.h"
-GR_SWIG_BLOCK_MAGIC2(ccsds,ticp_frame_sink);
 
 %include "ccsds/trunk_tail.h"
 GR_SWIG_BLOCK_MAGIC2(ccsds,trunk_tail);

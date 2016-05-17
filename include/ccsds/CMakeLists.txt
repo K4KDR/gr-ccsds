@@ -26,8 +26,6 @@ install(FILES
 	reversebits.h
 	msg_null_src.h
 	add_asm.h
-	ticp_frame_source.h
-	ticp_frame_sink.h
 	trunk_tail.h
 	pll_cc.h
 	dll_cc.h

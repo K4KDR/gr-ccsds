@@ -26,11 +26,9 @@ include_directories(${Boost_INCLUDE_DIR})
 link_directories(${Boost_LIBRARY_DIRS})
 
 list(APPEND ccsds_sources
-    add_asm_impl.cc
-	msg_null_src_impl.cc
-	ticp_frame_source_impl.cc
 	asynchronous_start.cc
-	ticp_frame_sink_impl.cc
+	add_asm_impl.cc
+	msg_null_src_impl.cc
 	trunk_tail_impl.cc
 	lpf2.cc
 	pll_cc_impl.cc
@@ -60,7 +58,7 @@ if(NOT ccsds_sources)
 endif(NOT ccsds_sources)
 
 add_library(gnuradio-ccsds SHARED ${ccsds_sources})
-target_link_libraries(gnuradio-ccsds ${Boost_LIBRARIES} ${GNURADIO_ALL_LIBRARIES} ticp fec)
+target_link_libraries(gnuradio-ccsds ${Boost_LIBRARIES} ${GNURADIO_ALL_LIBRARIES} fec)
 set_target_properties(gnuradio-ccsds PROPERTIES DEFINE_SYMBOL "gnuradio_ccsds_EXPORTS")
 
 if(APPLE)
