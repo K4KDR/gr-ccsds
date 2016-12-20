@@ -6,8 +6,11 @@
 //load generated python docstrings
 %include "ccsds_swig_doc.i"
 
-// Puncturing definitions
+// Puncturing definitions for convolutional coding
 %include "ccsds/conv_puncturing27.h"
+
+// Puncturing/systematics definitions for LDPC
+%include "ccsds/ldpc.h"
 
 %{
 #include "ccsds/randomiser.h"
@@ -30,6 +33,8 @@
 #include "ccsds/mpsk_preamble_cc.h"
 #include "ccsds/softbittobit.h"
 #include "ccsds/simple_bpsk_SNR_qf.h"
+#include "ccsds/ldpc_encoder.h"
+#include "ccsds/ldpc_decoder.h"
 %}
 
 
@@ -93,3 +98,8 @@ GR_SWIG_BLOCK_MAGIC2(ccsds, softbittobit);
 
 %include "ccsds/simple_bpsk_SNR_qf.h"
 GR_SWIG_BLOCK_MAGIC2(ccsds, simple_bpsk_SNR_qf);
+
+%include "ccsds/ldpc_encoder.h"
+GR_SWIG_BLOCK_MAGIC2(ccsds, ldpc_encoder);
+%include "ccsds/ldpc_decoder.h"
+GR_SWIG_BLOCK_MAGIC2(ccsds, ldpc_decoder);
