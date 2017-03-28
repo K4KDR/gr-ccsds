@@ -23,6 +23,7 @@
 install(FILES
 	api.h
 	randomiser.h
+	randomiser_softbits.h
 	reversebits.h
 	msg_null_src.h
 	add_asm.h

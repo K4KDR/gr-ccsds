@@ -14,6 +14,7 @@
 
 %{
 #include "ccsds/randomiser.h"
+#include "ccsds/randomiser_softbits.h"
 #include "ccsds/reversebits.h"
 #include "ccsds/msg_null_src.h"
 #include "ccsds/add_asm.h"
@@ -41,6 +42,9 @@
 
 %include "ccsds/randomiser.h"
 GR_SWIG_BLOCK_MAGIC2(ccsds,randomiser);
+
+%include "ccsds/randomiser_softbits.h"
+GR_SWIG_BLOCK_MAGIC2(ccsds,randomiser_softbits);
 
 %include "ccsds/reversebits.h"
 GR_SWIG_BLOCK_MAGIC2(ccsds,reversebits);

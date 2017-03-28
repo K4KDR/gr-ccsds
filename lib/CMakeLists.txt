@@ -46,6 +46,7 @@ list(APPEND ccsds_sources
 	conv_encode27_aux.cc
 	mpsk_preamble_cc_impl.cc
 	randomiser_impl.cc
+	randomiser_softbits_impl.cc
 	softbittobit_impl.cc
    	simple_bpsk_SNR_qf_impl.cc
 	ldpc_encoder_impl.cc
