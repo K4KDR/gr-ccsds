@@ -116,23 +116,22 @@ namespace gr {
     }
     
     float mpsk_ambiguity_resolver_f_impl::check_for_ASM(const float *in, const unsigned int offset) {
-    	//float correlation = 0.0f;
+    	float correlation = 0.0f;
     	
 	/* ControlPort test
 	 * correlation is exported
 	*/
-	correlation = 0.0f;
+	//correlation = 0.0f;
     
-    	/* correlation without volk
+    	//* correlation without volk
     	for(unsigned int i=0;i<d_ASM_LEN_BITS;i++) {
-    		//TODO use volk for multiplication
     		correlation += d_ASM[i] * in[i+offset];
     	}
     	// normalization
     	correlation /= d_ASM_LEN_BITS;
-    	*/
+    	//*/
     
-    	//* correlation with volk
+    	/* correlation with volk
     
     	// copy input into aligned memory
     	memcpy(d_tmp_fv, &in[offset], d_ASM_LEN_BITS*sizeof(float));
