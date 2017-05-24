@@ -23,6 +23,19 @@
 
 #include <ccsds/ldpc_decoder.h>
 
+/*! \brief Verbosity level: Do not output anything */
+#define CCSDS_LDPC_DEC_OUTPUT_NONE 0
+
+/*! \brief Verbosity level: Do output decoding summary */
+#define CCSDS_LDPC_DEC_OUTPUT_SUMMARY 1
+
+/*! \brief Level of verbosity of this block.
+ *
+ *  \sa #CCSDS_LDPC_DEC_OUTPUT_NONE
+ *  \sa #CCSDS_LDPC_DEC_OUTPUT_SUMMARY
+ */
+#define CCSDS_LDPC_DEC_VERBOSITY_LEVEL CCSDS_LDPC_DEC_NONE
+
 namespace gr {
   namespace ccsds {
 

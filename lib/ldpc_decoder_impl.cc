@@ -141,8 +141,9 @@ namespace gr {
         ldpc::decoder::metadata_t meta;
         this->d_decoder->decode(data_out, data_in, &meta);
         
+#if CCSDS_LDPC_DEC_VERBOSITY_LEVEL >= CCSDS_LDPC_DEC_OUTPUT_SUMMARY
         printf("LDPC DECODER: Decoding %s after %lu iterations. %lu bits corrected.\n", meta.success ? "SUCCESSFULL" : "FAILED", meta.num_iterations, meta.num_corrected);
-
+#endif
         
     	// create output message data
     	pmt::pmt_t msg_out_data = pmt::make_f32vector(K, 0.0f);
