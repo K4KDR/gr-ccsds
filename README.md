@@ -7,7 +7,7 @@ The gr-ccsds module requires a GNURadio install, as well as the fec library from
 You can download the base library from Phil Karns website: http://ka9q.net/code/fec
 Or directly download the library from the command line with
 ````
-wget -quiet http://ka9q.net/code/fec/fec-3.0.1.tar.bz2;
+wget --quiet http://ka9q.net/code/fec/fec-3.0.1.tar.bz2;
 ````
 
 In order to use libfec with GNURadio on modern systems two patches are needed.
@@ -17,7 +17,7 @@ and it will disable all attempts to detect and run assembly code (which is for 3
 
 It can be downloaded from the command line with
 ````
-wget -quiet http://lodge.glasgownet.com/bitsnbobs/kg_fec-3.0.1.patch
+wget --quiet http://lodge.glasgownet.com/bitsnbobs/kg_fec-3.0.1.patch
 ````
 
 The second patch if from us and will insert the `extern "C" { ... }` block around the header file to be able to use this C library from within C++.
