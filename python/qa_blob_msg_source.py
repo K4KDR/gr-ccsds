@@ -91,11 +91,11 @@ class qa_blob_msg_source (gr_unittest.TestCase):
 
     # send one huge BLOB
     def test_one_large(self):
-	self.runExperiment(1, 100000)
+	self.runExperiment(1, 10000)
 
     # send many small BLOB
     def test_many_small(self):
-	self.runExperiment(100000, 1)
+	self.runExperiment(10000, 1)
 
 
 if __name__ == '__main__':
