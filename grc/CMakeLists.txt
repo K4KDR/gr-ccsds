@@ -23,6 +23,8 @@ install(FILES
 	ccsds_msg_null_src.xml
 	ccsds_blob_msg_source_b.xml
 	ccsds_blob_msg_sink_b.xml
+	ccsds_softbit_msg_source_f.xml
+	ccsds_softbit_msg_sink_f.xml
 	ccsds_conv_decode27.xml
 	ccsds_mpsk_ambiguity_resolver_f.xml
 	ccsds_rs_encode.xml

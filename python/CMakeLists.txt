@@ -45,6 +45,8 @@ set(GR_TEST_PYTHON_DIRS ${CMAKE_BINARY_DIR}/swig)
 
 GR_ADD_TEST(qa_blob_msg_sink ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_blob_msg_sink.py)
 GR_ADD_TEST(qa_blob_msg_source ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_blob_msg_source.py)
+GR_ADD_TEST(qa_softbit_msg_sink ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_softbit_msg_sink.py)
+GR_ADD_TEST(qa_softbit_msg_source ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_softbit_msg_source.py)
 GR_ADD_TEST(qa_conv_decode27 ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_conv_decode27.py)
 GR_ADD_TEST(qa_conv_encode27_bb ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_conv_encode27_bb.py)
 GR_ADD_TEST(qa_mpsk_ambiguity_resolver_f ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_mpsk_ambiguity_resolver_f.py)

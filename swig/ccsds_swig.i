@@ -23,6 +23,8 @@
 #include "ccsds/dll_cc.h"
 #include "ccsds/blob_msg_sink_b.h"
 #include "ccsds/blob_msg_source_b.h"
+#include "ccsds/softbit_msg_sink_f.h"
+#include "ccsds/softbit_msg_source_f.h"
 #include "ccsds/softbits_msg_to_bytes_b.h"
 #include "ccsds/rs_encode.h"
 #include "ccsds/rs_decode.h"
@@ -69,6 +71,12 @@ GR_SWIG_BLOCK_MAGIC2(ccsds,blob_msg_sink_b);
 
 %include "ccsds/blob_msg_source_b.h"
 GR_SWIG_BLOCK_MAGIC2(ccsds,blob_msg_source_b);
+
+%include "ccsds/softbit_msg_sink_f.h"
+GR_SWIG_BLOCK_MAGIC2(ccsds,softbit_msg_sink_f);
+
+%include "ccsds/softbit_msg_source_f.h"
+GR_SWIG_BLOCK_MAGIC2(ccsds,softbit_msg_source_f);
 
 %include "ccsds/softbits_msg_to_bytes_b.h"
 GR_SWIG_BLOCK_MAGIC2(ccsds,softbits_msg_to_bytes_b);

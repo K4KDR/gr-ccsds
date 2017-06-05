@@ -34,6 +34,8 @@ list(APPEND ccsds_sources
 	dll_cc_impl.cc
 	blob_msg_sink_b_impl.cc
 	blob_msg_source_b_impl.cc
+	softbit_msg_sink_f_impl.cc
+	softbit_msg_source_f_impl.cc
 	softbits_msg_to_bytes_b_impl.cc
 	rs_encode_impl.cc
 	rs_decode_impl.cc

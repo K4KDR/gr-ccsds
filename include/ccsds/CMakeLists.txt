@@ -32,6 +32,8 @@ install(FILES
 	dll_cc.h
 	blob_msg_sink_b.h
 	blob_msg_source_b.h
+	softbit_msg_sink_f.h
+	softbit_msg_source_f.h
 	softbits_msg_to_bytes_b.h
 	rs_encode.h
 	rs_decode.h
