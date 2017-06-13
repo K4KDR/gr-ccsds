@@ -57,9 +57,25 @@ list(APPEND ccsds_sources
 
 set(ccsds_sources "${ccsds_sources}" PARENT_SCOPE)
 if(NOT ccsds_sources)
-	MESSAGE(STATUS "No C++ sources... skipping lib/")
+	MESSAGE(FATAL_ERROR "No C++ sources")
 	return()
 endif(NOT ccsds_sources)
+
+# Check for FEC library
+MESSAGE(STATUS "Checking for FEC library")
+find_package( FEC )
+if(NOT LIBFEC_FOUND)
+	MESSAGE(FATAL_ERROR "FEC library not found")
+	return()
+endif(NOT LIBLDPC_FOUND)
+
+# Check for LDPC library
+MESSAGE(STATUS "Checking for LDPC library")
+find_package( LDPC )
+if(NOT LIBLDPC_FOUND)
+	MESSAGE(FATAL_ERROR "LDPC library not found")
+	return()
+endif(NOT LIBLDPC_FOUND)
 
 add_library(gnuradio-ccsds SHARED ${ccsds_sources})
 target_link_libraries(gnuradio-ccsds ${Boost_LIBRARIES} ${GNURADIO_ALL_LIBRARIES} fec ldpc)

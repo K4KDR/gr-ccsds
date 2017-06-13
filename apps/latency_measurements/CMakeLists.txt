@@ -45,5 +45,5 @@ if ( LIBTICP_FOUND )
 	)
 
 else()
-	MESSAGE( STATUS "TICP library NOT found, NOT building latency testing applications" )
+	MESSAGE( STATUS "optional TICP library NOT found, NOT building (optional) latency testing applications" )
 endif()

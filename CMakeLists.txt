@@ -20,7 +20,8 @@
 ########################################################################
 # Project setup
 ########################################################################
-cmake_minimum_required(VERSION 2.6)
+cmake_minimum_required(VERSION 3.1)
+cmake_policy(VERSION 2.6)
 project(gr-ccsds CXX C)
 enable_testing()
 
