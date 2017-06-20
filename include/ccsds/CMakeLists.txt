@@ -48,5 +48,6 @@ install(FILES
 	simple_bpsk_SNR_qf.h
 	ldpc.h
 	ldpc_encoder.h
-	ldpc_decoder.h DESTINATION include/ccsds
+	ldpc_decoder.h
+	message_info.h	DESTINATION include/ccsds
 )

@@ -38,6 +38,7 @@
 #include "ccsds/simple_bpsk_SNR_qf.h"
 #include "ccsds/ldpc_encoder.h"
 #include "ccsds/ldpc_decoder.h"
+#include "ccsds/message_info.h"
 %}
 
 
@@ -115,3 +116,5 @@ GR_SWIG_BLOCK_MAGIC2(ccsds, simple_bpsk_SNR_qf);
 GR_SWIG_BLOCK_MAGIC2(ccsds, ldpc_encoder);
 %include "ccsds/ldpc_decoder.h"
 GR_SWIG_BLOCK_MAGIC2(ccsds, ldpc_decoder);
+%include "ccsds/message_info.h"
+GR_SWIG_BLOCK_MAGIC2(ccsds, message_info);

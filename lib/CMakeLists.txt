@@ -53,6 +53,7 @@ list(APPEND ccsds_sources
    	simple_bpsk_SNR_qf_impl.cc
 	ldpc_encoder_impl.cc
 	ldpc_decoder_impl.cc
+    	message_info_impl.cc
 )
 
 set(ccsds_sources "${ccsds_sources}" PARENT_SCOPE)
@@ -80,6 +81,7 @@ endif(NOT LIBLDPC_FOUND)
 add_library(gnuradio-ccsds SHARED ${ccsds_sources})
 target_link_libraries(gnuradio-ccsds ${Boost_LIBRARIES} ${GNURADIO_ALL_LIBRARIES} fec ldpc)
 set_target_properties(gnuradio-ccsds PROPERTIES DEFINE_SYMBOL "gnuradio_ccsds_EXPORTS")
+target_compile_features(gnuradio-ccsds PRIVATE cxx_generalized_initializers)
 
 if(APPLE)
     set_target_properties(gnuradio-ccsds PROPERTIES
