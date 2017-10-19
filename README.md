@@ -1,7 +1,18 @@
 # GNURadio out-of-tree module for CCSDS/ECSS compatible reception/transmission
 
+## Quick Install instructions
+Requirements:
+- GNURadio
+- libfec
+- libldpc
+
+Build:
+- cmake
+- make
+- make install
+
 ## Install instructions
-The gr-ccsds module requires a GNURadio install, as well as the fec library from Phil Karn, KA9Q.
+The gr-ccsds module requires a GNURadio install, as well as the fec library from Phil Karn, KA9Q and the LDPC library from https://gitlab.lrz.de/sdr/ldpc.
 
 ### libfec install instructions
 You can download the base library from Phil Karns website: http://ka9q.net/code/fec
