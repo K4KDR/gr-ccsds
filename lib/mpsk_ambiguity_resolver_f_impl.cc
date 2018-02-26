@@ -305,10 +305,25 @@ namespace gr {
     		// additional time passed in fractional seconds since last update
     		const double passed_frac = (samples_diff % (uint64_t)rate) / rate;
     
-    		// time tag of last update in seconds
-    		uint64_t time_sec = pmt::to_double(pmt::car( d_tag_buffer["rx_time"] ));
-    		// time tag of last update in additional fractional seconds
-    		double time_frac  = pmt::to_uint64(pmt::cdr( d_tag_buffer["rx_time"] ));
+		uint64_t time_sec;
+		double time_frac;
+		if(pmt::is_pair(d_tag_buffer["rx_time"])) {
+		      // time tag of last update in seconds
+		      time_frac  = pmt::to_uint64(pmt::car( d_tag_buffer["rx_time"] ));    
+		      // time tag of last update in additional fractional seconds
+		      time_frac = pmt::to_double(pmt::cdr( d_tag_buffer["rx_time"] ));
+		} else if(pmt::is_tuple(d_tag_buffer["rx_time"])) {
+		      if(pmt::length(d_tag_buffer["rx_time"]) == (size_t) 2) {
+			    // time tag of last update in seconds
+			    time_sec = pmt::to_double(pmt::tuple_ref( d_tag_buffer["rx_time"], 1 ));
+			    // time tag of last update in additional fractional seconds
+			    time_frac  = pmt::to_uint64(pmt::tuple_ref( d_tag_buffer["rx_time"], 0 ));
+		      } else {
+			    fprintf(stderr,"ERROR AR: time tag has %lu elements. 2 were expected.\n", pmt::length(d_tag_buffer["rx_time"]));
+		      }
+		} else {
+		      fprintf(stderr,"ERROR AR: time tag has wrong format.\n");
+		}
     
     		// update fractional time passed
     		time_frac += passed_frac;
