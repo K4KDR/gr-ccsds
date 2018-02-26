@@ -4,7 +4,7 @@
     <key>ccsds_message_info</key>
     <category>[ccsds]</category>
     <import>import ccsds</import>
-    <make>ccsds.message_info($mode)</make>
+    <make>ccsds.message_info($prefix, $mode)</make>
     <param>
         <name>Prefix</name>
         <key>prefix</key>
