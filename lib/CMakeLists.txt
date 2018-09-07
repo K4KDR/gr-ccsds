@@ -53,7 +53,8 @@ list(APPEND ccsds_sources
    	simple_bpsk_SNR_qf_impl.cc
 	ldpc_encoder_impl.cc
 	ldpc_decoder_impl.cc
-    	message_info_impl.cc
+	message_info_impl.cc
+	soft_to_hard_message_impl.cc
 )
 
 set(ccsds_sources "${ccsds_sources}" PARENT_SCOPE)

@@ -39,6 +39,7 @@
 #include "ccsds/ldpc_encoder.h"
 #include "ccsds/ldpc_decoder.h"
 #include "ccsds/message_info.h"
+#include "ccsds/soft_to_hard_message.h"
 %}
 
 
@@ -118,3 +119,5 @@ GR_SWIG_BLOCK_MAGIC2(ccsds, ldpc_encoder);
 GR_SWIG_BLOCK_MAGIC2(ccsds, ldpc_decoder);
 %include "ccsds/message_info.h"
 GR_SWIG_BLOCK_MAGIC2(ccsds, message_info);
+%include "ccsds/soft_to_hard_message.h"
+GR_SWIG_BLOCK_MAGIC2(ccsds, soft_to_hard_message);

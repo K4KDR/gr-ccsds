@@ -25,33 +25,12 @@ Systems (CCSDS).
 
 It's documentation is done in doxygen and is installed under $PREFIX/doc/gr-ccsds
 '''
-
-# ----------------------------------------------------------------
-# Temporary workaround for ticket:181 (swig+python problem)
-import sys
-_RTLD_GLOBAL = 0
+# import swig generated symbols into the satcomlab namespace
 try:
-    from dl import RTLD_GLOBAL as _RTLD_GLOBAL
+	# this might fail if the module is python-only
+	from ccsds_swig import *
 except ImportError:
-    try:
-	from DLFCN import RTLD_GLOBAL as _RTLD_GLOBAL
-    except ImportError:
 	pass
-
-if _RTLD_GLOBAL != 0:
-    _dlopenflags = sys.getdlopenflags()
-    sys.setdlopenflags(_dlopenflags|_RTLD_GLOBAL)
-# ----------------------------------------------------------------
-
-
-# import swig generated symbols into the ccsds namespace
-from ccsds_swig import *
 
 # import any pure python here
 #
-
-# ----------------------------------------------------------------
-# Tail of workaround
-if _RTLD_GLOBAL != 0:
-    sys.setdlopenflags(_dlopenflags)      # Restore original flags
-# ----------------------------------------------------------------

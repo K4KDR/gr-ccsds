@@ -59,3 +59,4 @@ GR_ADD_TEST(qa_simple_bpsk_SNR_qf ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DI
 GR_ADD_TEST(qa_softbittobit ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_softbittobit.py)
 GR_ADD_TEST(qa_ldpc_encoder ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_ldpc_encoder.py)
 GR_ADD_TEST(qa_ldpc_decoder ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_ldpc_decoder.py)
+GR_ADD_TEST(qa_soft_to_hard_message ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_soft_to_hard_message.py)

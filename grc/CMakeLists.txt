@@ -42,5 +42,6 @@ install(FILES
 	ccsds_simple_bpsk_SNR_qf.xml
 	ccsds_ldpc_encoder.xml
 	ccsds_ldpc_decoder.xml
-	ccsds_message_info.xml	DESTINATION share/gnuradio/grc/blocks
+	ccsds_message_info.xml
+	ccsds_soft_to_hard_message.xml	DESTINATION share/gnuradio/grc/blocks
 )
