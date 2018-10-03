@@ -9,5 +9,3 @@ in this package. A quick listing of the details can be found in Python
 after importing by using: 
 
     help(ccsds)
-
-huhu2

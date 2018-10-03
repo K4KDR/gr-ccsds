@@ -25,7 +25,9 @@ Systems (CCSDS).
 
 It's documentation is done in doxygen and is installed under $PREFIX/doc/gr-ccsds
 '''
-# import swig generated symbols into the satcomlab namespace
+from __future__ import unicode_literals
+
+# import swig generated symbols into the ccsds namespace
 try:
 	# this might fail if the module is python-only
 	from ccsds_swig import *
