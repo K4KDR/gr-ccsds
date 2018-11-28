@@ -35,4 +35,5 @@ except ImportError:
 	pass
 
 # import any pure python here
+import ccsds.util
 #
