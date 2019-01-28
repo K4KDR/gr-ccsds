@@ -21,7 +21,7 @@
 
 from gnuradio import gr, gr_unittest
 from gnuradio import blocks
-import ccsds.ccsds_swig as ccsds
+import ccsds_swig as ccsds
 import pmt
 import time
 
