@@ -46,5 +46,7 @@ install(FILES
 	ccsds_ldpc_decoder.xml
 	ccsds_message_info.xml
 	ccsds_soft_to_hard_message.xml
+	ccsds_doppler_correction_cc_file.xml
+    	ccsds_doppler_correction_cc.xml
 	DESTINATION share/gnuradio/grc/blocks
 )

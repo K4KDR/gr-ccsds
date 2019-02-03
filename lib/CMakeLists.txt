@@ -27,6 +27,11 @@ include_directories(${Boost_INCLUDE_DIR})
 link_directories(${Boost_LIBRARY_DIRS})
 
 list(APPEND ccsds_sources
+	sgp4/sgp4ext.cpp
+	sgp4/sgp4unit.cpp
+	sgp4/sgp4tle.cpp
+	orbit_aux.cc
+	orbit_range_interp.cc
 	asynchronous_start.cc
 	add_asm_impl.cc
 	msg_null_src_impl.cc
@@ -57,6 +62,7 @@ list(APPEND ccsds_sources
 	ldpc_decoder_impl.cc
 	message_info_impl.cc
 	soft_to_hard_message_impl.cc
+	doppler_correction_cc_impl.cc
 )
 
 set(ccsds_sources "${ccsds_sources}" PARENT_SCOPE)
@@ -81,8 +87,12 @@ if(NOT LIBLDPC_FOUND)
 	return()
 endif(NOT LIBLDPC_FOUND)
 
+find_library(FEC_LIB fec)
+find_library(LDPC_LIB ldpc)
+find_library(CURLPP_LIB curlpp)
+find_library(CURL_LIB curl)
 add_library(gnuradio-ccsds SHARED ${ccsds_sources})
-target_link_libraries(gnuradio-ccsds ${Boost_LIBRARIES} ${GNURADIO_ALL_LIBRARIES} fec ldpc)
+target_link_libraries(gnuradio-ccsds ${Boost_LIBRARIES} ${GNURADIO_ALL_LIBRARIES} ${FEC_LIB} ${LDPC_LIB} ${CURLPP_LIB} ${CURL_LIB})
 set_target_properties(gnuradio-ccsds PROPERTIES DEFINE_SYMBOL "gnuradio_ccsds_EXPORTS")
 target_compile_features(gnuradio-ccsds PRIVATE cxx_generalized_initializers)
 
@@ -110,9 +120,17 @@ list(APPEND test_ccsds_sources
     ${CMAKE_CURRENT_SOURCE_DIR}/qa_ccsds.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/qa_conv_encode27_aux.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/conv_encode27_aux.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/qa_orbit_aux.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/orbit_aux.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/orbit_range_interp.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/qa_orbit_range_interp.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/sgp4/sgp4ext.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/sgp4/sgp4unit.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/sgp4/sgp4tle.cpp
 )
 
 add_executable(test-ccsds ${test_ccsds_sources})
+target_compile_features(test-ccsds PRIVATE cxx_generalized_initializers)
 
 target_link_libraries(
   test-ccsds

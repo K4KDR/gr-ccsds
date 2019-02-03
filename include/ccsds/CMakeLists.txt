@@ -51,6 +51,7 @@ install(FILES
 	ldpc_encoder.h
 	ldpc_decoder.h
 	message_info.h
-	soft_to_hard_message.h	
+	soft_to_hard_message.h
+	doppler_correction_cc.h
 	DESTINATION include/ccsds
 )

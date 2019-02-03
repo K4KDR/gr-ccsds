@@ -21,6 +21,23 @@
 
 import math
 
+def getTleFromFile(filename, satname):
+  out = []
+  with open(filename, 'r') as f:
+    flag = False
+    satname_clean = str(satname).rstrip().lower()
+    
+    for line in f:
+      if line.rstrip().lower() == satname_clean:
+        flag = True
+      
+      if flag:
+        if len(out) >= 3:
+          return out
+        out.append(line.rstrip())
+    
+  raise KeyError('Cannot find satellite \'%s\' in %s' % (satname, filename))
+
 def num2str(n):
   prefixes = {
     -12: 'p',

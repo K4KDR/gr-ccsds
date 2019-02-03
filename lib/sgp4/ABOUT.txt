@@ -1,0 +1,13 @@
+The files in this folder are auxilliary files to compute satellite positions
+based on two line elements (TLE).
+
+They are based on the AIAA paper 2006-6753 "Revisiting Spacetrack Report #3" by
+David A. Vallado, Paul Crawford, Richard Hujsak and T. S. Kelso available at 
+https://celestrak.com/publications/AIAA/2006-6753/
+
+The files sgp4ext.cpp, sgp4ext.h, sgp4unit.cpp and sgp4unit.h are direct copies
+of the cpp implementation that is available on the link above. The files
+sgp4tle.cpp and sgp4tle.h are striped down versions of the sgp4io.cpp and
+sgp4io.h files from the link above, where the user input functions as well as
+the prolonged TLE readings (used for the verification mode) have been removed
+to allow an automated processing without any user interaction.
