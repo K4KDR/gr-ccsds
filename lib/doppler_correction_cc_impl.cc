@@ -104,6 +104,7 @@ namespace gr {
 
     bool doppler_correction_cc_impl::start() {
       d_range.setStartTimeNow();
+      return true;
     }
     
     int
