@@ -17,7 +17,7 @@ namespace {
     Vector3(std::array<double, 3> v) : x(v[0]), y(v[1]), z(v[2]) {}
     constexpr Vector3(double x, double y, double z) : x(x), y(y), z(z) {}
     
-    constexpr Vector3 operator + (Vector3 const &other) {
+    constexpr Vector3 operator + (Vector3 const &other) const {
       return {this->x+other.x, this->y+other.y, this->z+other.z};
     }
     
@@ -28,11 +28,11 @@ namespace {
       return {this->x*scalar, this->y*scalar, this->z*scalar};
     }
     
-    constexpr double magnitude() const {
+    double magnitude() const {
       return sqrt(this->x*this->x + this->y*this->y + this->z*this->z);
     }
     
-    constexpr Vector3 normalise(Vector3 const &vec) const {
+    Vector3 normalise(Vector3 const &vec) const {
       return vec*(1.0/vec.magnitude());
     }
     
