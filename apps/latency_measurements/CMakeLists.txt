@@ -32,10 +32,10 @@ if ( LIBTICP_FOUND )
 	MESSAGE( STATUS "TICP library found, building latency testing applications" )
 	
 	add_executable (ccsds_latency_sender ccsds_latency_sender.cpp)
-	target_link_libraries(ccsds_latency_sender ticp ${Boost_SYSTEM_LIBRARY} ${Boost_THREAD_LIBRARY})
+	target_link_libraries(ccsds_latency_sender ticp ${Boost_SYSTEM_LIBRARY} ${Boost_THREAD_LIBRARY} pthread)
 	
 	add_executable (ccsds_latency_receiver ccsds_latency_receiver.cpp)
-	target_link_libraries(ccsds_latency_receiver ticp ${Boost_SYSTEM_LIBRARY} ${Boost_THREAD_LIBRARY})
+	target_link_libraries(ccsds_latency_receiver ticp ${Boost_SYSTEM_LIBRARY} ${Boost_THREAD_LIBRARY} pthread)
 	
 	install(
 		TARGETS
