@@ -2,7 +2,7 @@
 #define INCLUDED_CCSDS_MSG_NULL_SRC_H
 
 #include <ccsds/api.h>
-#include <gnuradio/block.h>
+#include <gnuradio/sync_block.h>
 
 
 namespace gr {
@@ -16,7 +16,7 @@ namespace gr {
      *  This block should only be used in QA code.
      *	\ingroup ccsds
      */
-    class CCSDS_API msg_null_src : virtual public gr::block
+    class CCSDS_API msg_null_src : virtual public gr::sync_block
     {
     public:
       typedef boost::shared_ptr<msg_null_src> sptr;
