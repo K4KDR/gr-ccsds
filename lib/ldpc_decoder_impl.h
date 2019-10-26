@@ -48,8 +48,11 @@ namespace gr {
       /** Pointer to LDPC decoder */
       ldpc::decoder *d_decoder;
 
+      /** Store flag on whether or not invalid frames should be returned */
+      const bool d_drop_invalid_frames;
+
      public:
-      ldpc_decoder_impl(const char *parity_file, sys_t systype, punct_t puncttype, uint64_t num_punct, std::vector<size_t> punct_pos);
+      ldpc_decoder_impl(const char *parity_file, sys_t systype, punct_t puncttype, uint64_t num_punct, std::vector<size_t> punct_pos, bool drop_invalid_frames);
       ~ldpc_decoder_impl();
 
       void process_frame(pmt::pmt_t msg_in);

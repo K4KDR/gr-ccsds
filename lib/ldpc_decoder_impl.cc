@@ -24,24 +24,26 @@
 
 #include <gnuradio/io_signature.h>
 #include "ldpc_decoder_impl.h"
+#include "ldpc_decoder_common.h"
 
 namespace gr {
   namespace ccsds {
 
     ldpc_decoder::sptr
-    ldpc_decoder::make(const char *parity_file, sys_t systype, punct_t puncttype, uint64_t num_punct, std::vector<size_t> punct_pos)
+    ldpc_decoder::make(const char *parity_file, sys_t systype, punct_t puncttype, uint64_t num_punct, std::vector<size_t> punct_pos, bool drop_invalid_frames)
     {
       return gnuradio::get_initial_sptr
-        (new ldpc_decoder_impl(parity_file, systype, puncttype, num_punct, punct_pos));
+        (new ldpc_decoder_impl(parity_file, systype, puncttype, num_punct, punct_pos, drop_invalid_frames));
     }
 
     /*
      * The private constructor
      */
-    ldpc_decoder_impl::ldpc_decoder_impl(const char *parity_file, sys_t systype, punct_t puncttype, uint64_t num_punct, std::vector<size_t> punct_pos)
+    ldpc_decoder_impl::ldpc_decoder_impl(const char *parity_file, sys_t systype, punct_t puncttype, uint64_t num_punct, std::vector<size_t> punct_pos, bool drop_invalid_frames)
       : gr::sync_block("ldpc_decoder",
               gr::io_signature::make(0, 0, sizeof(uint8_t)),
-              gr::io_signature::make(0, 0, sizeof(uint8_t)))
+              gr::io_signature::make(0, 0, sizeof(uint8_t))),
+        d_drop_invalid_frames(drop_invalid_frames)
     {
         uint64_t *punct_pos_in = NULL;
         bool punct_pos_in_allocated = false;
@@ -97,7 +99,7 @@ namespace gr {
     		return;
     	}
     
-    	const pmt::pmt_t hdr = pmt::car(msg_in);
+    	pmt::pmt_t hdr = pmt::car(msg_in);
     	const pmt::pmt_t msg = pmt::cdr(msg_in);
     
     	// check that input header is a dictionary
@@ -140,10 +142,17 @@ namespace gr {
     	// decode
         ldpc::decoder::metadata_t meta;
         this->d_decoder->decode(data_out, data_in, &meta);
+        //this->d_decoder->decode(data_out, data_in, &meta,"/tmp/dec_out.bin"); // Create debug output
         
 #if CCSDS_LDPC_DEC_VERBOSITY_LEVEL >= CCSDS_LDPC_DEC_OUTPUT_SUMMARY
         printf("LDPC DECODER: Decoding %s after %lu iterations. %lu bits corrected.\n", meta.success ? "SUCCESSFULL" : "FAILED", meta.num_iterations, meta.num_corrected);
 #endif
+
+        if (meta.success == false && d_drop_invalid_frames) {
+            return;
+        }
+
+        ldpc_common::attachMetadata(hdr, &meta);
         
     	// create output message data
     	pmt::pmt_t msg_out_data = pmt::make_f32vector(K, 0.0f);

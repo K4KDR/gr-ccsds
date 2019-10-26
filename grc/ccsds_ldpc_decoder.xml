@@ -4,7 +4,7 @@
   <key>ccsds_ldpc_decoder</key>
   <category>CCSDS/Channelcoding</category>
   <import>import ccsds</import>
-  <make>ccsds.ldpc_decoder($par_file, $systype.fcn, $puncttype.fcn, $num_punct, tuple($punct_pos))</make>
+  <make>ccsds.ldpc_decoder($par_file, $systype.fcn, $puncttype.fcn, $num_punct, tuple($punct_pos), $drop_invalid)</make>
 
   <param>
     <name>Paritycheck matrix</name>
@@ -70,7 +70,21 @@
     <value>[]</value>
     <type>int_vector</type>
   </param>
-  
+  <param>
+    <name>Drop invalid frames</name>
+    <key>drop_invalid</key>
+    <value>False</value>
+    <type>enum</type>
+    <option>
+      <name>Yes</name>
+      <key>True</key>
+    </option>
+    <option>
+      <name>No</name>
+      <key>False</key>
+    </option>
+  </param>
+
   <check>$num_punct >= 0</check>
   
   <sink>

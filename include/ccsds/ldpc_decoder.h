@@ -49,7 +49,7 @@ namespace gr {
        * class. ccsds::ldpc_decoder::make is the public interface for
        * creating new instances.
        */
-      static sptr make(const char *parity_file, sys_t systype, punct_t puncttype, uint64_t num_punct, std::vector<size_t> punct_pos);
+      static sptr make(const char *parity_file, sys_t systype, punct_t puncttype, uint64_t num_punct, std::vector<size_t> punct_pos, bool drop_invalid_frames);
     };
 
   } // namespace ccsds
