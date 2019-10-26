@@ -124,15 +124,25 @@ namespace gr {
     		if(d_MODE == COMPACT) {
                 s << len << " Bytes payload.";
             } else if(d_MODE == FULL) {
-                s << pmt::write_string(msg);
-                s << "-------------------------\n";
+                s << "ASCII: \n";
+                s << pmt::write_string(msg) << "\n";
+                s << ".........................\n";
+                s << "HEX: \n";
+                const std::vector<uint8_t> bytes = pmt::u8vector_elements(msg);
+                for(auto byte : bytes) {
+                    const uint8_t byte_high = (byte & 0xF0) >> 4;
+                    const uint8_t byte_low  = (byte & 0x0F) >> 0;
+                    constexpr char hex_chars[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
+                    s << "0x" << hex_chars[byte_high] << hex_chars[byte_high] << " ";
+                }
+                s << "\n-------------------------\n";
             }
     	} else if(pmt::is_f32vector(msg)) {
             len = pmt::length(msg);
     		if(d_MODE == COMPACT) {
                 s << len << " Softbits payload.";
             } else if(d_MODE == FULL) {
-                s << pmt::write_string(msg);
+                s << pmt::write_string(msg) << "\n";
                 s << "-------------------------\n";
             }
         } else {
@@ -140,7 +150,7 @@ namespace gr {
     		if(d_MODE == COMPACT) {
                 s << len << " elements payload.";
             } else if(d_MODE == FULL) {
-                s << pmt::write_string(msg);
+                s << pmt::write_string(msg) << "\n";
                 s << "-------------------------\n";
             }
         }
