@@ -2,9 +2,9 @@
 
 ## Quick Install instructions
 Requirements:
-- GNURadio
-- libfec
-- libldpc
+- GNURadio (http://git.gnuradio.org/git/gnuradio.git contains git submodules)
+- libfec (http://ka9q.net/code/fec/ see notes below)
+- libldpc (https://gitlab.lrz.de/sdr/ldpc)
 
 Build:
 - cmake
