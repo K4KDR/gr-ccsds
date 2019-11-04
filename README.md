@@ -3,91 +3,36 @@
 ## Quick Install instructions
 Requirements:
 - GNURadio (http://git.gnuradio.org/git/gnuradio.git contains git submodules)
+
+Dependencies:
 - libfec (http://ka9q.net/code/fec/ see notes below)
 - libldpc (https://gitlab.lrz.de/sdr/ldpc)
 
+The dependencies can be automatically downloaded and build alongside gr-ccsds by providing the cmake option `-DCCSDS_BUILD_DEPS=On`
+
 Build:
-- cmake
+- cd gr-ccsds
+- mkdir build && cd build
+- cmake -DCCSDS_BUILD_DEPS=On ../
 - make
-- make install
+- sudo make install
 
 ## Install instructions
-The gr-ccsds module requires a GNURadio install, as well as the fec library from Phil Karn, KA9Q and the LDPC library from https://gitlab.lrz.de/sdr/ldpc.
+The gr-ccsds module requires a GNURadio install, as well as the fec library from Phil Karn, KA9Q and the LDPC library.
 
-### libfec install instructions
-You can download the base library from Phil Karns website: http://ka9q.net/code/fec
-Or directly download the library from the command line with
-````
-wget --quiet http://ka9q.net/code/fec/fec-3.0.1.tar.bz2;
-````
+By default only the gr-ccsds module is build. Its dependencies are expected to be installed to a system path already.
 
-In order to use libfec with GNURadio on modern systems two patches are needed.
+CMake can be configured to download and install all dependencies (or a few of them) along with gr-ccsds. The flag `CCSDS_DEPS_<DEPENDENCY>=On/Off` enabled or disables this behavior. The default value for all dependencies can be set by the option `CCSDS_BUILD_DEPS`, which in turn defaults to Off (i.e. no dependencies are build). If `CCSDS_BUILD_DEPS` is set to On individual dependencies can still be used from the system paths by explicitly disabling this component with `CCSDS_DEPS_<DEPENDENCY>=Off`.
 
-The first one is from http://lodge.glasgownet.com/2011/11/07/making-opendab-fec-and-the-psion-wavefinder-work-on-x64/
-and it will disable all attempts to detect and run assembly code (which is for 32bit processors and thus incompatible)
+### fec install instructions
+Whether or not the fec library should be downloaded and installed along gr-ccsds can be controlled by the cmake option `CCSDS_DEPS_FEC=On/Off`.
 
-It can be downloaded from the command line with
-````
-wget --quiet http://lodge.glasgownet.com/bitsnbobs/kg_fec-3.0.1.patch
-````
+The instructions on how to install the library by hand is described [here](ka9q_fec.md).
 
-The second patch if from us and will insert the `extern "C" { ... }` block around the header file to be able to use this C library from within C++.
-Save the following code into a file called `extern_c_header.patch`
-````
-diff -Naur fec-3.0.1-origpatch/fec.h fec-3.0.1/fec.h
---- fec-3.0.1-origpatch/fec.h	2013-02-28 10:30:42.175998400 +0100
-+++ fec-3.0.1/fec.h	2013-02-28 10:32:48.987994820 +0100
-@@ -6,6 +6,11 @@
- #ifndef _FEC_H_
- #define _FEC_H_
- 
-+#ifdef __cplusplus
-+extern "C"
-+{
-+#endif
-+
- /* r=1/2 k=7 convolutional encoder polynomials
-  * The NASA-DSN convention is to use V27POLYA inverted, then V27POLYB
-  * The CCSDS/NASA-GSFC convention is to use V27POLYB, then V27POLYA inverted
-@@ -341,6 +346,10 @@
- 
- int cpu_features(void);
- 
-+#ifdef __cplusplus
-+} /* END extern "C" */
-+#endif
-+
- #endif /* _FEC_H_ */
- 
- 
+### ldpc install instructions
+Whether or not the ldpc library should be downloaded and installed along gr-ccsds can be controlled by the cmake option `CCSDS_DEPS_LDPC=On/Off`.
 
-````
-
-Make sure you have the fec archive and the two patches in the cwd. Their md5sums should be
-````
-52846b9eac4080e68ade7d2bd13eb504  fec-3.0.1.tar.bz2
-78eee9c211fc2a8ca4d11c515f7fe194  kg_fec-3.0.1.patch
-7cb15410de10125f2ba69593a295029e  extern_c_header.patch
-````
-
-Extract libfec
-````
-tar -xjf fec-3.0.1.tar.bz2
-cd fec-3.0.1
-````
-
-Apply patches
-````
-patch < ../kg_fec-3.0.1.patch
-patch < ../extern_c_header.patch
-````
-
-Install
-````
-./configure --prefix=/usr/local
-make
-sudo make install
-````
+The instructions on how to install the library by hand is described in the library repository https://gitlab.lrz.de/sdr/ldpc
 
 ### gr-ccsds install instructions
 The build process is controlled by Cmake.

@@ -21,7 +21,7 @@
 ########################################################################
 # Project setup
 ########################################################################
-cmake_minimum_required(VERSION 2.6)
+cmake_minimum_required(VERSION 3.10)
 project(gr-ccsds CXX C)
 enable_testing()
 
@@ -67,10 +67,7 @@ endif()
 ########################################################################
 # Compiler specific setup
 ########################################################################
-if(CMAKE_COMPILER_IS_GNUCXX AND NOT WIN32)
-    #http://gcc.gnu.org/wiki/Visibility
-    add_definitions(-fvisibility=hidden)
-endif()
+set(CMAKE_CXX_VISIBILITY_PRESET hidden)
 
 ########################################################################
 # Find boost

@@ -71,23 +71,46 @@ if(NOT ccsds_sources)
 	return()
 endif(NOT ccsds_sources)
 
-# Check for FEC library
-MESSAGE(STATUS "Checking for FEC library")
-find_package( FEC )
-if(NOT LIBFEC_FOUND)
-	MESSAGE(FATAL_ERROR "FEC library not found")
-	return()
-endif(NOT LIBFEC_FOUND)
+########################################################################
+# Declare third party dependencies
+########################################################################
+include(ccsdsAddDependency)
 
-# Check for LDPC library
-MESSAGE(STATUS "Checking for LDPC library")
-find_package( LDPC )
-if(NOT LIBLDPC_FOUND)
-	MESSAGE(FATAL_ERROR "LDPC library not found")
-	return()
-endif(NOT LIBLDPC_FOUND)
+option(CCSDS_BUILD_DEPS "Download and build external dependencies (default value for all dependencies, can be overridden by CCSDS_DEPS_<COMPONENT>=On/Off)" Off)
+
+if(CCSDS_BUILD_DEPS)
+    message(STATUS "CCSDS_BUILD_DEPS is enabled")
+    message(STATUS "  Dependencies will be download from git submodules and be build along gr-ccsds")
+    message(STATUS "  Disable automatic download and building")
+    message(STATUS "    for all components with -DCCSDS_BUILD_DEPS=Off")
+    message(STATUS "    for individual components with -DCCSDS_DEPS_<COMPONENT>=Off")
+else()
+    message(STATUS "CCSDS_BUILD_DEPS is disabled.")
+    message(STATUS "  All dependencies must be installed to the system prior to running CMake.")
+    message(STATUS "  Enable automatic download and building")
+    message(STATUS "    for all dependencies with -DCCSDS_BUILD_DEPS=On")
+    message(STATUS "    for individual components with -DCCSDS_DEPS_<COMPONENT>=On")
+endif()
+
+ccsds_add_dependency(
+    NAME "fec"
+    DESCRIPTION "Phil Karn's (ka9q) fec library"
+    DEFAULT_VALUE ${CCSDS_BUILD_DEPS}
+)
+
+ccsds_add_dependency(
+    NAME "ldpc"
+    DESCRIPTION "LDPC library"
+    DEFAULT_VALUE ${CCSDS_BUILD_DEPS}
+)
+
+
+########################################################################
+# Create library and set properties
+########################################################################
+
 add_library(gnuradio-ccsds SHARED ${ccsds_sources})
-target_link_libraries(gnuradio-ccsds ${Boost_LIBRARIES} ${GNURADIO_ALL_LIBRARIES} ${FEC_LIB} ${LDPC_LIB})
+target_link_libraries(gnuradio-ccsds PUBLIC ${Boost_LIBRARIES} ${GNURADIO_ALL_LIBRARIES} fec::fec ldpc::ldpc)
 set_target_properties(gnuradio-ccsds PROPERTIES DEFINE_SYMBOL "gnuradio_ccsds_EXPORTS")
 target_compile_features(gnuradio-ccsds PRIVATE cxx_generalized_initializers)
 
@@ -96,6 +119,19 @@ if(APPLE)
         INSTALL_NAME_DIR "${CMAKE_INSTALL_PREFIX}/lib"
     )
 endif(APPLE)
+
+option(CCSDS_ENABLE_WARNINGS "Enable compiler warnings when building gnuradio-ccsds" Off)
+
+if(CCSDS_ENABLE_WARNINGS)
+    target_compile_options(gnuradio-ccsds
+        PRIVATE
+            $<$<OR:$<C_COMPILER_ID:Clang>,$<C_COMPILER_ID:AppleClang>,$<C_COMPILER_ID:GNU>>:
+                -Werror -pedantic-errors -Wall -Wextra -Wconversion -Wsign-conversion>
+            $<$<C_COMPILER_ID:MSVC>:
+                /WX /W4>
+    )
+endif()
+
 
 ########################################################################
 # Install built library files
