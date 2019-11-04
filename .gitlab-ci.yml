@@ -1,0 +1,92 @@
+stages:
+    - Compile
+    - Test
+    - Test install
+
+variables:
+    IMAGE_PREFIX: "gitlab.lrz.de:5005/sdr/docker-images/"
+
+cache:
+    key: extern-${CI_COMMIT_REF_SLUG}-${CI_JOB_NAME}
+    paths:
+        - extern/*
+
+.tmpl_build: &tmpl_build
+    tags: [build]
+    dependencies: []
+    stage: Compile
+    script:
+        - mkdir build
+        - cd build
+        - cmake -DCCSDS_BUILD_DEPS=On -DCMAKE_INSTALL_PREFIX=/usr/local ../
+        - make
+    artifacts:
+        paths:
+            - build
+
+.tmpl_test: &tmpl_test
+    stage: Test
+    tags: [test]
+    script:
+        - cd build
+        - make test
+
+.tmpl_install: &tmpl_install
+    stage: Test install
+    tags: [test]
+    script:
+        - cd build
+        - make install
+
+########################################################################################################################
+#####
+#####  Stage: Compile
+#####
+########################################################################################################################
+
+Clang Build:
+    <<: *tmpl_build
+    image: "${IMAGE_PREFIX}alpine-clang-gnuradio"
+
+GCC Build:
+    <<: *tmpl_build
+    image: "${IMAGE_PREFIX}alpine-gcc-gnuradio"
+
+
+########################################################################################################################
+#####
+#####  Stage: Test
+#####
+########################################################################################################################
+
+Clang Test:
+    <<: *tmpl_test
+    image: "${IMAGE_PREFIX}alpine-clang-gnuradio"
+    dependencies: [Clang Build]
+    needs: [Clang Build]
+
+GCC Test:
+    <<: *tmpl_test
+    image: "${IMAGE_PREFIX}alpine-gcc-gnuradio"
+    dependencies: [GCC Build]
+    needs: [GCC Build]
+
+
+########################################################################################################################
+#####
+#####  Stage: Test
+#####
+########################################################################################################################
+
+Clang Install:
+    <<: *tmpl_install
+    image: "${IMAGE_PREFIX}alpine-clang-gnuradio"
+    dependencies: [Clang Build]
+    needs: [Clang Build]
+
+GCC Install:
+    <<: *tmpl_install
+    image: "${IMAGE_PREFIX}alpine-gcc-gnuradio"
+    dependencies: [GCC Build]
+    needs: [GCC Build]
+
