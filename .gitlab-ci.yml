@@ -5,6 +5,7 @@ stages:
 
 variables:
     IMAGE_PREFIX: "gitlab.lrz.de:5005/sdr/docker-images/"
+    GIT_SUBMODULE_STRATEGY: recursive
 
 cache:
     key: extern-${CI_COMMIT_REF_SLUG}-${CI_JOB_NAME}
