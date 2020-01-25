@@ -32,9 +32,9 @@ def getTleFromFile(filename, satname):
         flag = True
       
       if flag:
+        out.append(line.rstrip())
         if len(out) >= 3:
           return out
-        out.append(line.rstrip())
     
   raise KeyError('Cannot find satellite \'%s\' in %s' % (satname, filename))
 
