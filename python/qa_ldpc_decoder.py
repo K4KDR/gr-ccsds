@@ -42,7 +42,7 @@ class qa_ldpc_decoder (gr_unittest.TestCase):
         # Blocks
         ##################################################
         self.null_src = ccsds.msg_null_src()
-        self.decoder = ccsds.ldpc_decoder(paritychecks, systype, puncttype, num_punct, punct_pos)
+        self.decoder = ccsds.ldpc_decoder(paritychecks, systype, puncttype, num_punct, punct_pos, True)
         self.dbg = blocks.message_debug()
 
         ##################################################
@@ -120,7 +120,11 @@ class qa_ldpc_decoder (gr_unittest.TestCase):
         messages_out_exp = (message_out_exp,)*NUM_REP
         
         # TODO Build common path for code definition files
-        self.runTest(messages_in, messages_out_exp, '/home/v1tzl1/work/MOVE/LDPC/code/codes/AR4JA_r12_k1024n.a', ccsds.LDPC_SYS_FRONT, ccsds.LDPC_PUNCT_BACK, 512, [])
+        codec = '/home/v1tzl1/work/MOVE/LDPC/code/codes/AR4JA_r12_k1024n.a'
+        if not os.path.isfile(codec):
+            print('Cannot find codec file at %s, skipping test' % cdec)
+            return
+        self.runTest(messages_in, messages_out_exp, codec, ccsds.LDPC_SYS_FRONT, ccsds.LDPC_PUNCT_BACK, 512, [])
 
 if __name__ == '__main__':
     gr_unittest.run(qa_ldpc_decoder, "qa_ldpc_decoder.xml")
