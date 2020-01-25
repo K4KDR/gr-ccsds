@@ -124,7 +124,7 @@ class qa_ldpc_encoder (gr_unittest.TestCase):
         # TODO Build common path for code definition files
         codec = '/home/v1tzl1/work/MOVE/LDPC/code/codes/gAR4JA_r12_k1024n.gen'
         if not os.path.isfile(codec):
-            print('Cannot find codec file at %s, skipping test' % cdec)
+            print('Cannot find codec file at %s, skipping test' % codec)
             return
         self.runTest(messages_in, messages_out_exp, codec, ccsds.LDPC_SYS_FRONT, ccsds.LDPC_PUNCT_BACK, 512, [])
 
