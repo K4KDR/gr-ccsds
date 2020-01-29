@@ -75,8 +75,8 @@ namespace gr {
         d_scale(2.0*M_PI*(frequency/299792.458)),  // to be multiplied with ranges in km
         d_blocksize(blocksize),
         d_range(tles[0], tles[1], lla, sampl_rate, 1.0/t_update) {
-      const int _alignment = volk_get_alignment();
-      set_alignment(std::max(1lu,_alignment/sizeof(gr_complex)));
+      const size_t _alignment = volk_get_alignment();
+      set_alignment(std::max(static_cast<size_t>(1),_alignment/sizeof(gr_complex)));
       
       // Set output_mulitple after alignment, because alignment sets it back, but make sure we are not losing alignment
       if (d_blocksize % alignment() != 0) {

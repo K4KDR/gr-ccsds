@@ -100,7 +100,7 @@ namespace gr {
         CPPUNIT_ASSERT_EQUAL_MESSAGE(
           "Computed position vector returned more than one time instance",
           pos.size(),
-          1lu
+          static_cast<size_t>(1)
         );
         
         // Check X
