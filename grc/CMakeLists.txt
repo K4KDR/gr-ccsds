@@ -49,5 +49,6 @@ install(FILES
 	ccsds_doppler_correction_cc_file.xml
     	ccsds_doppler_correction_cc.xml
 	ccsds_tag_storage.xml
+	ccsds_constellation_ccsds.xml
 	DESTINATION share/gnuradio/grc/blocks
 )

@@ -64,6 +64,9 @@ list(APPEND ccsds_sources
 	soft_to_hard_message_impl.cc
 	doppler_correction_cc_impl.cc
 	tag_storage_impl.cc
+	constellation_ccsds_bpsk.cc
+	constellation_ccsds_qpsk.cc
+	constellation_ccsds_qpsk_axis.cc
 )
 
 set(ccsds_sources "${ccsds_sources}" PARENT_SCOPE)
@@ -159,6 +162,11 @@ list(APPEND test_ccsds_sources
     ${CMAKE_CURRENT_SOURCE_DIR}/sgp4/sgp4ext.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/sgp4/sgp4unit.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/sgp4/sgp4tle.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/constellation_ccsds_bpsk.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/constellation_ccsds_qpsk.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/qa_constellation_ccsds_bpsk.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/qa_constellation_ccsds_qpsk.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/qa_constellation_ccsds_qpsk_axis.cc
 )
 
 add_executable(test-ccsds ${test_ccsds_sources})

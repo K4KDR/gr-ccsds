@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<block>
+  <name>Constellation (CCSDS)</name>
+  <key>variable_constellation_ccsds</key>
+  <category>ccsds</category>
+  <import>import ccsds</import>
+  <var_make>self.$(id) = $id = ccsds.constellation_ccsds_$(type)().base()</var_make>
+  <var_value>ccsds.constellation_ccsds_$(type)()</var_value>
+  <make></make>
+  
+  <param>
+	  <name>Constellation Type</name>
+	  <key>type</key>
+	  <type>enum</type>
+	  <option>
+		  <name>BPSK</name>
+		  <key>bpsk</key>
+	  </option>
+	  <option>
+		  <name>QPSK</name>
+		  <key>qpsk</key>
+	  </option>
+  </param>
+</block>

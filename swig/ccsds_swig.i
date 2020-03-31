@@ -1,5 +1,6 @@
 /* -*- c++ -*- */
 
+#define DIGITAL_API
 #define CCSDS_API
 
 %include "gnuradio.i"			// the common stuff
@@ -46,6 +47,10 @@
 #include "ccsds/soft_to_hard_message.h"
 #include "ccsds/doppler_correction_cc.h"
 #include "ccsds/tag_storage.h"
+#include "gnuradio/digital/constellation.h"
+#include "ccsds/constellation_ccsds_bpsk.h"
+#include "ccsds/constellation_ccsds_qpsk.h"
+#include "ccsds/constellation_ccsds_qpsk_axis.h"
 %}
 
 
@@ -131,3 +136,10 @@ GR_SWIG_BLOCK_MAGIC2(ccsds, soft_to_hard_message);
 GR_SWIG_BLOCK_MAGIC2(ccsds, doppler_correction_cc);
 %include "ccsds/tag_storage.h"
 GR_SWIG_BLOCK_MAGIC2(ccsds, tag_storage);
+
+%include "gnuradio/digital/constellation.h"
+%include "ccsds/constellation_ccsds_bpsk.h"
+%include "ccsds/constellation_ccsds_qpsk.h"
+%include "ccsds/constellation_ccsds_qpsk_axis.h"
+
+%include "ccsds_constellation.i"

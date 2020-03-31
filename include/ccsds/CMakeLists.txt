@@ -54,5 +54,8 @@ install(FILES
 	soft_to_hard_message.h
 	doppler_correction_cc.h
 	tag_storage.h
+	constellation_ccsds_bpsk.h
+	constellation_ccsds_qpsk.h
+	constellation_ccsds_qpsk_axis.h
 	DESTINATION include/ccsds
 )

@@ -30,6 +30,9 @@
 #include "qa_conv_encode27_aux.h"
 #include "qa_orbit_aux.h"
 #include "qa_orbit_range_interp.h"
+#include "qa_constellation_ccsds_bpsk.h"
+#include "qa_constellation_ccsds_qpsk.h"
+#include "qa_constellation_ccsds_qpsk_axis.h"
 
 CppUnit::TestSuite *
 qa_ccsds::suite()
@@ -38,6 +41,9 @@ qa_ccsds::suite()
   s->addTest(gr::ccsds::qa_conv_encode27_aux::suite());
   s->addTest(gr::ccsds::qa_orbit_aux::suite());
   s->addTest(gr::ccsds::qa_orbit_range_interp::suite());
-  
+  s->addTest(gr::ccsds::qa::constellation::bpsk::suite());
+  s->addTest(gr::ccsds::qa::constellation::qpsk::suite());
+  s->addTest(gr::ccsds::qa::constellation::qpsk_axis::suite());
+
   return s;
 }
