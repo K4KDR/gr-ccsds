@@ -112,7 +112,7 @@ namespace gr {
     	
     	if(d_MODE == FULL) {
             s << "-- Header ---------------\n";
-            s << pmt::write_string(hdr);
+            s << pmt::write_string(hdr) << "\n";
             s << "-- Body -----------------\n";
         } else if(d_MODE == COMPACT) {
             s << pmt::length(pmt::dict_keys(hdr)) << " Header entries, ";
@@ -124,16 +124,16 @@ namespace gr {
     		if(d_MODE == COMPACT) {
                 s << len << " Bytes payload.";
             } else if(d_MODE == FULL) {
-                s << "ASCII: \n";
+                s << "ASCII (" << len << " elements): \n";
                 s << pmt::write_string(msg) << "\n";
                 s << ".........................\n";
-                s << "HEX: \n";
                 const std::vector<uint8_t> bytes = pmt::u8vector_elements(msg);
+                s << "HEX (" << bytes.size() << " bytes): \n";
                 for(auto byte : bytes) {
                     const uint8_t byte_high = (byte & 0xF0) >> 4;
                     const uint8_t byte_low  = (byte & 0x0F) >> 0;
                     constexpr char hex_chars[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
-                    s << "0x" << hex_chars[byte_high] << hex_chars[byte_high] << " ";
+                    s << "0x" << hex_chars[byte_high] << hex_chars[byte_low] << " ";
                 }
                 s << "\n-------------------------\n";
             }
@@ -162,9 +162,9 @@ namespace gr {
     }
     
     int
-    message_info_impl::work(int noutput_items,
-        gr_vector_const_void_star &input_items,
-        gr_vector_void_star &output_items)
+    message_info_impl::work(int /*noutput_items*/,
+        gr_vector_const_void_star &/*input_items*/,
+        gr_vector_void_star &/*output_items*/)
     {
       return (this->d_eof_recv ? -1 : 0);
     }

@@ -28,8 +28,14 @@
 namespace gr {
   namespace ccsds {
 
+    enum mode_t {
+      SILENT = 0,
+      COMPACT = 10,
+      FULL = 20}
+    ;
+    
     /*!
-     * \brief <+description of block+>
+     * \brief Block that prints out PDUs
      * \ingroup ccsds
      *
      */
@@ -37,8 +43,6 @@ namespace gr {
     {
      public:
       typedef boost::shared_ptr<message_info> sptr;
-      
-      enum mode_t {SILENT = 0, COMPACT = 10, FULL = 20};
       
       /*!
        * \brief Return a shared_ptr to a new instance of ccsds::message_info.

@@ -13,6 +13,9 @@
 // Puncturing/systematics definitions for LDPC
 %include "ccsds/ldpc.h"
 
+// Message info constants
+%include "ccsds/message_info.h"
+
 %{
 #include "ccsds/randomiser.h"
 #include "ccsds/randomiser_softbits.h"
