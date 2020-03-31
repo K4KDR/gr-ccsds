@@ -66,6 +66,15 @@ list(APPEND ccsds_sources
 	constellation_ccsds_bpsk.cc
 	constellation_ccsds_qpsk.cc
 	constellation_ccsds_qpsk_axis.cc
+	frame_sync_config_impl.cc
+	frame_generation_config_impl.cc
+	frame_sync_impl.cc
+	frame_sync_buffer.cc
+	asm_header.cc
+	snr.cc
+	snr_interpolation.cc
+	snr_est.cc
+	asm_position.cc
 )
 
 set(ccsds_sources "${ccsds_sources}" PARENT_SCOPE)
@@ -113,7 +122,7 @@ ccsds_add_dependency(
 ########################################################################
 
 add_library(gnuradio-ccsds SHARED ${ccsds_sources})
-target_link_libraries(gnuradio-ccsds PUBLIC ${Boost_LIBRARIES} ${GNURADIO_ALL_LIBRARIES} fec::fec ldpc::ldpc)
+target_link_libraries(gnuradio-ccsds PUBLIC ${Boost_LIBRARIES} ${GNURADIO_ALL_LIBRARIES} ${VOLK_LIBRARIES} fec::fec ldpc::ldpc)
 set_target_properties(gnuradio-ccsds PROPERTIES DEFINE_SYMBOL "gnuradio_ccsds_EXPORTS")
 target_compile_features(gnuradio-ccsds PRIVATE cxx_generalized_initializers)
 
@@ -166,6 +175,9 @@ list(APPEND test_ccsds_sources
     ${CMAKE_CURRENT_SOURCE_DIR}/qa_constellation_ccsds_bpsk.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/qa_constellation_ccsds_qpsk.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/qa_constellation_ccsds_qpsk_axis.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/frame_sync_buffer.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/qa_frame_sync_buffer.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/qa_frame_sync_config.cc
 )
 
 add_executable(test-ccsds ${test_ccsds_sources})

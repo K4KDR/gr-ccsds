@@ -50,6 +50,14 @@
 #include "ccsds/constellation_ccsds_bpsk.h"
 #include "ccsds/constellation_ccsds_qpsk.h"
 #include "ccsds/constellation_ccsds_qpsk_axis.h"
+#include "ccsds/snr.h"
+#include "ccsds/snr_interpolation.h"
+#include "ccsds/frame_sync_config.h"
+#include "ccsds/frame_generation_config.h"
+#include "ccsds/asm_header.h"
+#include "ccsds/asm_position.h"
+#include "ccsds/snr_est.h"
+#include "ccsds/frame_sync.h"
 %}
 
 
@@ -139,3 +147,23 @@ GR_SWIG_BLOCK_MAGIC2(ccsds, tag_storage);
 %include "ccsds/constellation_ccsds_qpsk_axis.h"
 
 %include "ccsds_constellation.i"
+
+%include "ccsds/snr.h"
+%include "ccsds/snr_interpolation.h"
+
+%include "ccsds/frame_sync_config.h"
+%include "ccsds/frame_generation_config.h"
+%include "ccsds_frame_config.i"
+
+%include "ccsds/asm_header.h"
+%include "ccsds/asm_position.h"
+%template(asm_position_list_sptr) boost::shared_ptr<gr::ccsds::asm_position_list>;
+%pythoncode %{
+asm_position_list_sptr.__repr__ = lambda self: self.to_string()
+asm_position_list = asm_position_list.make;
+%}
+
+%include "ccsds/snr_est.h"
+
+%include "ccsds/frame_sync.h"
+GR_SWIG_BLOCK_MAGIC2(ccsds, frame_sync);

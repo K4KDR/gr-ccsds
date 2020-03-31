@@ -62,6 +62,7 @@ install(
     FILES
     ccsds_swig.i
     ccsds_constellation.i
+    ccsds_frame_config.i
     ${CMAKE_CURRENT_BINARY_DIR}/ccsds_swig_doc.i
     DESTINATION ${GR_INCLUDE_DIR}/ccsds/swig
 )

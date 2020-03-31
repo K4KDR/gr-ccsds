@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<block>
+	<name>Frame Generation Config</name>
+	<key>variable_frame_generation_config</key>
+	<category>[ccsds]</category>
+	<import>import ccsds</import>
+	<var_make>self.$(id) = $id = ccsds.frame_generation_config($numbefore, $numafter, $thresholdprimary, $thresholdsecondary)</var_make>
+	<var_value>ccsds.frame_generation_config($numbefore, $numafter, $thresholdprimary, $thresholdsecondary)</var_value>
+	<make></make>
+	<param>
+		<name>Num before</name>
+		<key>numbefore</key>
+		<value>0</value>
+		<type>int</type>
+	</param>
+	<param>
+		<name>Num after</name>
+		<key>numafter</key>
+		<value>0</value>
+		<type>int</type>
+	</param>
+	<param>
+		<name>Primary threshold</name>
+		<key>thresholdprimary</key>
+		<value>0.0</value>
+		<type>real</type>
+	</param>
+	<param>
+		<name>Secondary threshold</name>
+		<key>thresholdsecondary</key>
+		<value>0.0</value>
+		<type>real</type>
+	</param>
+</block>

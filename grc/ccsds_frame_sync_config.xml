@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<block>
+	<name>Frame Sync. Config</name>
+	<key>variable_frame_sync_config</key>
+	<category>[ccsds]</category>
+	<import>import ccsds</import>
+	<var_make>self.$(id) = $id = ccsds.frame_sync_config($constellation, $sync_marker, $sync_num_bits, $payload_len_bits, $head_num_bits, $tail_num_bits)</var_make>
+	<make></make>
+	<param>
+		<name>Constellation</name>
+		<key>constellation</key>
+		<value></value>
+		<type>raw</type>
+	</param>
+	<param>
+		<name>Sync Marker (hex)</name>
+		<key>sync_marker</key>
+		<value>'1ACFFC1D'</value>
+		<type>string</type>
+	</param>
+	<param>
+		<name>Sync marker length (bits)</name>
+		<key>sync_num_bits</key>
+		<value>32</value>
+		<type>int</type>
+	</param>
+	<param>
+		<name>Payload length (bits)</name>
+		<key>payload_len_bits</key>
+		<value>4*255*8</value>
+		<type>int</type>
+	</param>
+	<param>
+		<name>Copy # of bits before frame</name>
+		<key>num_head_bits</key>
+		<value>0</value>
+		<type>int</type>
+	</param>
+	<param>
+		<name>Copy # of bits after frame</name>
+		<key>num_tail_bits</key>
+		<value>0</value>
+		<type>int</type>
+	</param>
+</block>

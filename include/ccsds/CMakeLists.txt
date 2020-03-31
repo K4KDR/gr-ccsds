@@ -57,5 +57,13 @@ install(FILES
 	constellation_ccsds_qpsk.h
 	constellation_ccsds_qpsk_axis.h
 	softbits.h
+	frame_sync.h
+	frame_sync_config.h
+	frame_generation_config.h
+	asm_header.h
+	asm_position.h
+	snr.h
+	snr_interpolation.h
+	snr_est.h
 	DESTINATION include/ccsds
 )

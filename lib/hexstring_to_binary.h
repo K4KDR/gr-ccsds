@@ -2,6 +2,7 @@
 #define INCLUDED_CCSDS_HEXSTRING_TO_BINARY_H
 
 #include <cstdio>
+#include <vector>
 
 namespace gr {
   namespace ccsds {
@@ -70,6 +71,59 @@ inline void hexstring_to_binary(const std::string *str, unsigned char *bin) {
 
 	return;
 }
+
+namespace byteutils {
+	template <typename T> inline std::vector<T> unpack_bytes(const std::vector<T> &bytes, size_t num_bits_per_symbol, size_t num_symbols_total) {
+		size_t num_bits_read = 0u;
+		size_t num_bits_collected = 0u;
+		size_t num_symbols_collected = 0u;
+		std::vector<T> unpacked_bytes(num_symbols_total);
+		T tmp = 0u;
+		for (uint8_t byte : bytes) {
+			num_bits_read = 0u;
+			
+			while(num_bits_read <= 7u) {
+				// read bit
+				const T bit = (byte>>(7-num_bits_read++)) & 0x01;
+				tmp = (tmp << 1) | bit;
+				num_bits_collected++;
+				
+				if (num_bits_collected >= num_bits_per_symbol) {
+					unpacked_bytes[num_symbols_collected++] = tmp;
+					tmp = 0u;
+					num_bits_collected = 0u;
+
+					if (num_symbols_collected == num_symbols_total) {
+						return unpacked_bytes;
+					}
+				}
+			}
+		}
+
+		assert(false && "Logic error, should not reach this.");
+		return {};
+    }
+
+	inline std::vector<uint8_t> decode_hex(const std::string &hex) {
+		assert(hex.length() % 2u == 0u);
+		
+		const char *const c_str = hex.c_str();
+		const size_t num_bytes = hex.length()/2u;
+		std::vector<uint8_t> bytes(num_bytes);
+		for (size_t i=0u; i<num_bytes; i++) {
+			bytes[i] = (hex2bin(c_str[2u*i]) << 4) | hex2bin(c_str[2u*i+1u]);
+		}
+		return bytes;
+	}
+
+	inline std::vector<uint8_t> decode_hex_to_bits(const std::string &hex, size_t num_bits_per_symbol, size_t num_symbols) {
+		std::vector<uint8_t> bytes = decode_hex(hex);
+
+		assert(bytes.size()*8 >= num_symbols*num_bits_per_symbol);
+		return unpack_bytes<uint8_t>(bytes, num_bits_per_symbol, num_symbols);
+	}
+}
+	
 
   } // namespace ccsds
 } // namespace gr
