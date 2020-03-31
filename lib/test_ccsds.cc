@@ -34,14 +34,18 @@
 #include <fstream>
 
 int
-main (int argc, char **argv)
+main (int /*argc*/, char ** /*argv*/)
 {
   CppUnit::TextTestRunner runner;
   std::ofstream xmlfile(get_unittest_path("ccsds.xml").c_str());
-  CppUnit::XmlOutputter *xmlout = new CppUnit::XmlOutputter(&runner.result(), xmlfile);
 
   runner.addTest(qa_ccsds::suite());
-  runner.setOutputter(xmlout);
+
+  constexpr bool output_to_stdout = false;
+  if (!output_to_stdout) {
+    CppUnit::XmlOutputter *xmlout = new CppUnit::XmlOutputter(&runner.result(), xmlfile);
+    runner.setOutputter(xmlout);
+  }
 
   bool was_successful = runner.run("", false);
 
