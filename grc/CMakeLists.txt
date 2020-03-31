@@ -48,5 +48,6 @@ install(FILES
 	ccsds_soft_to_hard_message.xml
 	ccsds_doppler_correction_cc_file.xml
     	ccsds_doppler_correction_cc.xml
+	ccsds_tag_storage.xml
 	DESTINATION share/gnuradio/grc/blocks
 )

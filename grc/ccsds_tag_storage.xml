@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<block>
+  <name>Tag Storage</name>
+  <key>ccsds_tag_storage</key>
+  <category>[ccsds]</category>
+  <import>import ccsds</import>
+  <make>ccsds.tag_storage()</make>
+  <sink>
+    <name>in</name>
+    <type>complex</type>
+  </sink>
+</block>

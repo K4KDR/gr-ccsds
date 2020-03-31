@@ -63,6 +63,7 @@ list(APPEND ccsds_sources
 	message_info_impl.cc
 	soft_to_hard_message_impl.cc
 	doppler_correction_cc_impl.cc
+	tag_storage_impl.cc
 )
 
 set(ccsds_sources "${ccsds_sources}" PARENT_SCOPE)

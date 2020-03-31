@@ -53,5 +53,6 @@ install(FILES
 	message_info.h
 	soft_to_hard_message.h
 	doppler_correction_cc.h
+	tag_storage.h
 	DESTINATION include/ccsds
 )

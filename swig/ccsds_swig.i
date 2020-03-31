@@ -45,6 +45,7 @@
 #include "ccsds/message_info.h"
 #include "ccsds/soft_to_hard_message.h"
 #include "ccsds/doppler_correction_cc.h"
+#include "ccsds/tag_storage.h"
 %}
 
 
@@ -128,3 +129,5 @@ GR_SWIG_BLOCK_MAGIC2(ccsds, message_info);
 GR_SWIG_BLOCK_MAGIC2(ccsds, soft_to_hard_message);
 %include "ccsds/doppler_correction_cc.h"
 GR_SWIG_BLOCK_MAGIC2(ccsds, doppler_correction_cc);
+%include "ccsds/tag_storage.h"
+GR_SWIG_BLOCK_MAGIC2(ccsds, tag_storage);
