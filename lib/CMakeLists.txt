@@ -57,7 +57,6 @@ list(APPEND ccsds_sources
 	randomiser_impl.cc
 	randomiser_softbits_impl.cc
 	softbittobit_impl.cc
-   	simple_bpsk_SNR_qf_impl.cc
 	ldpc_encoder_impl.cc
 	ldpc_decoder_impl.cc
 	message_info_impl.cc

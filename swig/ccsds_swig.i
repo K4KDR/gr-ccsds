@@ -40,7 +40,6 @@
 #include "ccsds/conv_encode27_bb.h"
 #include "ccsds/mpsk_preamble_cc.h"
 #include "ccsds/softbittobit.h"
-#include "ccsds/simple_bpsk_SNR_qf.h"
 #include "ccsds/ldpc_encoder.h"
 #include "ccsds/ldpc_decoder.h"
 #include "ccsds/message_info.h"
@@ -120,9 +119,6 @@ GR_SWIG_BLOCK_MAGIC2(ccsds,mpsk_preamble_cc);
 
 %include "ccsds/softbittobit.h"
 GR_SWIG_BLOCK_MAGIC2(ccsds, softbittobit);
-
-%include "ccsds/simple_bpsk_SNR_qf.h"
-GR_SWIG_BLOCK_MAGIC2(ccsds, simple_bpsk_SNR_qf);
 
 %include "ccsds/ldpc_encoder.h"
 GR_SWIG_BLOCK_MAGIC2(ccsds, ldpc_encoder);

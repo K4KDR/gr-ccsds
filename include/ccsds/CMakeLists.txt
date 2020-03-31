@@ -46,7 +46,6 @@ install(FILES
 	mpsk_detector_soft_cf.h
 	mpsk_preamble_cc.h
 	softbittobit.h
-	simple_bpsk_SNR_qf.h
 	ldpc.h
 	ldpc_encoder.h
 	ldpc_decoder.h

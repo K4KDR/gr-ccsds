@@ -41,7 +41,6 @@ install(FILES
 	ccsds_conv_encode27_bb.xml
 	ccsds_mpsk_preamble_cc.xml
 	ccsds_softbittobit.xml
-	ccsds_simple_bpsk_SNR_qf.xml
 	ccsds_ldpc_encoder.xml
 	ccsds_ldpc_decoder.xml
 	ccsds_message_info.xml
