@@ -22,8 +22,11 @@
 #include "config.h"
 #endif
 
-#include <gnuradio/io_signature.h>
 #include "softbittobit_impl.h"
+
+#include <ccsds/softbits.h>
+
+#include <gnuradio/io_signature.h>
 
 namespace gr {
   namespace ccsds {
@@ -59,10 +62,9 @@ namespace gr {
         const float *in = (const float *) input_items[0];
         char *out = (char *) output_items[0];
 
-	for (int i=0; i<noutput_items; i++) {
-	  *out++=(*(in++)>=0.0?1:0);
-	}
-        // Do <+signal processing+>
+	      for (int i=0; i<noutput_items; i++) {
+	        out[i] = softbits::hard_decision(in[i]);
+	      }
 
         // Tell runtime system how many output items we produced.
         return noutput_items;

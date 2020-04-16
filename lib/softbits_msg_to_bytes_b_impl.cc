@@ -3,6 +3,9 @@
 #endif
 
 #include "softbits_msg_to_bytes_b_impl.h"
+
+#include <ccsds/softbits.h>
+
 #include <gnuradio/io_signature.h>
 
 
@@ -78,10 +81,10 @@ namespace gr {
     		// go through all bits of the current byte
     		for(unsigned int j=0;j<8;j++) {
     			// convert soft bit to hard decision
-    			const bool bit = (8*i+j < num_bits) ? (pmt::f32vector_ref(msg,i*8+j) > 0) : 0;
+    			const uint8_t bit = (8*i+j < num_bits) ? softbits::hard_decision(pmt::f32vector_ref(msg,i*8+j)) : 0u;
     
     			// add bit to output
-    			byte = (byte<<1) | (bit ? 0x01 : 0x00);
+    			byte = (byte<<1) | bit;
     		}
     
     		d_queue.push(byte);

@@ -3,6 +3,8 @@
 #endif
 
 #include <mpsk_ambiguity_resolver_f_impl.h>
+#include <ccsds/softbits.h>
+
 #include <gnuradio/io_signature.h>
 
 namespace gr {
@@ -552,7 +554,9 @@ namespace gr {
     					const unsigned int to_copy = std::min(d_FRAME_LEN_BITS+d_NUM_TAIL_SYMS-d_msg_buffer_count, to_buffer-d_offset_bits);
     
     					for(unsigned int i=0;i<to_copy;i++) {
-    						pmt::f32vector_set(d_msg_buffer, d_msg_buffer_count+i, in_syms[i+d_offset_bits]);
+    						// guess a noise power (since we don't know it). Use 0.1 which corresponds to 10 dB
+							const float llr_one = softbits::create_from_sample(in_syms[i+d_offset_bits], 0.1f);
+    						pmt::f32vector_set(d_msg_buffer, d_msg_buffer_count+i, llr_one);
     					}
     					d_msg_buffer_count += to_copy;
     

@@ -128,14 +128,8 @@ namespace gr {
     	// Message is f32_vector
     	float data_in[M_punct];
         for(size_t i=0; i<M_punct; i++) {
-            data_in[i] = pmt::f32vector_ref(msg, i);
-            
-            // Convert CCSDS softbit (-1.0 => secure 0, 1.0 => secure 1) to probability of having received a one (assuming anise sigma of 0.5
-            data_in[i] = 0.5f+0.5f*std::tanh(data_in[i]/0.25);
-            
-            // Convert probability of one to LLR
-            data_in[i] = std::log10( (1.0f-data_in[i])/data_in[i] );
-            
+            // LLRs are based on probabilities of 1, libLDPC uses LLRs based on zeros, invert here
+            data_in[i] = - pmt::f32vector_ref(msg, i);
         }
         float data_out[K];
         
@@ -157,8 +151,8 @@ namespace gr {
     	// create output message data
     	pmt::pmt_t msg_out_data = pmt::make_f32vector(K, 0.0f);
         for(size_t i=0; i<K; i++) {
-            // Convert LLRs back to CCSDS softbits
-            data_out[i] = -std::tanh(data_out[i]);
+            // Convert LLRs back to one based LLRs
+            data_out[i] = - data_out[i];
             
             pmt::f32vector_set(msg_out_data, i, data_out[i]);
         }

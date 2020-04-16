@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include <boost/scoped_array.hpp>
 #include "hexstring_to_binary.h"
+#include <ccsds/softbits.h>
 
 namespace gr {
   namespace ccsds {
@@ -214,8 +215,10 @@ namespace gr {
     	//
     
     	// Fill buffer with unpunctured and converted bytes
-    	size_t num_softbits = d_BLOCK_NUM_BITS_IN;
-    	unpuncture_and_convert(d_buffer, pmt::f32vector_elements(msg, num_softbits));
+    	size_t num_softbits;
+    	const float *softbits_in = pmt::f32vector_elements(msg, num_softbits);
+    	assert(num_softbits == d_BLOCK_NUM_BITS_IN);
+    	unpuncture_and_convert(d_buffer, softbits_in);
     
     	/// init decoder
     	FEC_FUNC_VITERBI27_INIT(d_viterbi, d_START_STATE);
@@ -246,18 +249,13 @@ namespace gr {
     	return;
     }
     
-    inline unsigned char convert_softbit_fb(const float softbit) {
-    	const float new_val = round(softbit * 127.5f + 127.5);
-    	return (unsigned char) std::max(0.0f, std::min(255.0f, new_val));
-    }
-    
     void conv_decode27_impl::unpuncture_and_convert(unsigned char *out, const float *in) {
     	
     	if(d_PUNCT_TYPE == conv_puncturing27::NONE) {
     		// No unpuncturing, just conversion
     
     		for(unsigned int i=0;i<d_BLOCK_NUM_BITS_IN_UNPUNC;i++) {
-    			out[i] = convert_softbit_fb(in[i]);
+    			out[i] = softbits::map_to_uint8(in[i]);
     		}
     
     		return;
@@ -267,13 +265,14 @@ namespace gr {
     
     		unsigned int punct_count = 0;
     		unsigned int in_count = 0;
-    
+    		const uint8_t kNeutralElement = softbits::map_to_uint8(0.0);
+
     		for(unsigned int i=0;i<d_BLOCK_NUM_BITS_IN_UNPUNC;i++) {
     
     			// bit (true), or erasure (false)
     			const bool action = d_punct_pattern[punct_count];
     
-    			out[i]    = action ? convert_softbit_fb(in[in_count]) : 128u;
+    			out[i]    = action ? softbits::map_to_uint8(in[in_count]) : kNeutralElement;
     			in_count += action ? 1u : 0u;
     
     			punct_count = (punct_count+1) % d_PATTERN_LEN;

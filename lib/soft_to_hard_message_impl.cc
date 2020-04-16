@@ -22,8 +22,12 @@
 #include "config.h"
 #endif
 
+#include <ccsds/softbits.h>
+
 #include <gnuradio/io_signature.h>
 #include "soft_to_hard_message_impl.h"
+
+#include <cassert>
 
 namespace gr {
   namespace ccsds {
@@ -114,16 +118,21 @@ namespace gr {
         return;
       }
       
+      assert(num_bits_in % 8 == 0);
       const size_t num_bytes_out = num_bits_in/8u;
       pmt::pmt_t msg_bytes = pmt::make_u8vector(num_bytes_out, 0x00);
       
-      const float *softbit_values = pmt::f32vector_elements(msg, const_cast<size_t&>(num_bits_in));
-      uint8_t *byte_values = pmt::u8vector_writable_elements(
-                                                                msg_bytes,
-                                                                const_cast<size_t&>(num_bytes_out));
+      size_t num_elements_softbits;
+      const float *softbit_values = pmt::f32vector_elements(msg, num_elements_softbits);
+      assert(num_elements_softbits == num_bits_in);
+
+      size_t num_elements_bytes;
+      uint8_t *byte_values = pmt::u8vector_writable_elements(msg_bytes, num_elements_bytes);
+      assert(num_elements_bytes == num_bytes_out);
+
       for(size_t i=0; i<num_bytes_out; i++) {
         for(size_t j=0; j<8; j++) {
-          byte_values[i] |= ((softbit_values[8*i+j]>=0.0f) ? 1 : 0) << (7-j);
+          byte_values[i] |= softbits::hard_decision(softbit_values[8*i+j]) << (7-j);
         }
       }
     

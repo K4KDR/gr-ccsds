@@ -56,5 +56,6 @@ install(FILES
 	constellation_ccsds_bpsk.h
 	constellation_ccsds_qpsk.h
 	constellation_ccsds_qpsk_axis.h
+	softbits.h
 	DESTINATION include/ccsds
 )
