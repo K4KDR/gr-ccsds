@@ -131,6 +131,9 @@ namespace gr {
     	d_TERM_STATE(get_term_state(ASM)),
     	d_PATTERN_LEN(conv_puncturing27::get_pattern_len(d_PUNCT_TYPE))
     {
+		if (puncturing_type != conv_puncturing27::NONE ) {
+			printf("WARNING: The puncturing/unpuncturing for the convolutonal codes is not fully supported and is expected to have bugs.\n");
+		}
     	// Allocate buffer memory to store a complete depunctured soft byte sequence plus the 12 tail symbols
     	d_buffer = new unsigned char[d_BLOCK_NUM_BITS_IN_UNPUNC];
     
