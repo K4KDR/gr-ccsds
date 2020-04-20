@@ -58,8 +58,11 @@ class qa_blob_msg_sink (gr_unittest.TestCase):
 	# start flowgraph
 	self.tb.start()
 
-	while(self.dbg.num_messages() < num_blobs+1):
+	timeout = 50
+	while(self.dbg.num_messages() < num_blobs+1 and timeout > 0):
 		time.sleep(0.1)
+		timeout -= 1
+	self.assertTrue(timeout > 0, 'Test timed out')
 		
 	self.tb.stop()
 	self.tb.wait()
