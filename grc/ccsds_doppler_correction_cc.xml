@@ -7,7 +7,7 @@
   <make>ccsds.doppler_correction_cc($tles, $sampl_rate, $t_update, $frequency, $lla, $blocksize)</make>
   <param>
     <name>TLE lines</name>
-    <key>tle1</key>
+    <key>tles</key>
     <type>raw</type>
   </param>
   <param>
