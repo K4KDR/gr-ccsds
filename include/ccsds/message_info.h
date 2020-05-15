@@ -29,9 +29,10 @@ namespace gr {
   namespace ccsds {
 
     enum mode_t {
-      SILENT = 0,
-      COMPACT = 10,
-      FULL = 20}
+      MESSAGE_INFO_SILENT = 0,
+      MESSAGE_INFO_COMPACT = 10,
+      MESSAGE_INFO_HEADER_ONLY = 15,
+      MESSAGE_INFO_FULL = 20}
     ;
     
     /*!

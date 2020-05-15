@@ -66,7 +66,7 @@ namespace gr {
     	}
     
         // Do not make any printouts in silent mode
-        if(d_MODE == SILENT) {
+        if(d_MODE == MESSAGE_INFO_SILENT) {
             return;
         }
         
@@ -110,20 +110,20 @@ namespace gr {
     		return;
     	}
     	
-    	if(d_MODE == FULL) {
+    	if(d_MODE == MESSAGE_INFO_FULL || d_MODE == MESSAGE_INFO_HEADER_ONLY) {
             s << "-- Header ---------------\n";
             s << pmt::write_string(hdr) << "\n";
             s << "-- Body -----------------\n";
-        } else if(d_MODE == COMPACT) {
+        } else if(d_MODE == MESSAGE_INFO_COMPACT) {
             s << pmt::length(pmt::dict_keys(hdr)) << " Header entries, ";
         }
         
         size_t len;
         if(pmt::is_blob(msg)) {
             len = pmt::blob_length(msg);
-    		if(d_MODE == COMPACT) {
+    		if(d_MODE == MESSAGE_INFO_COMPACT || d_MODE == MESSAGE_INFO_HEADER_ONLY) {
                 s << len << " Bytes payload.";
-            } else if(d_MODE == FULL) {
+            } else if(d_MODE == MESSAGE_INFO_FULL) {
                 s << "ASCII (" << len << " elements): \n";
                 s << pmt::write_string(msg) << "\n";
                 s << ".........................\n";
@@ -139,17 +139,17 @@ namespace gr {
             }
     	} else if(pmt::is_f32vector(msg)) {
             len = pmt::length(msg);
-    		if(d_MODE == COMPACT) {
+    		if(d_MODE == MESSAGE_INFO_COMPACT || d_MODE == MESSAGE_INFO_HEADER_ONLY) {
                 s << len << " Softbits payload.";
-            } else if(d_MODE == FULL) {
+            } else if(d_MODE == MESSAGE_INFO_FULL) {
                 s << pmt::write_string(msg) << "\n";
                 s << "-------------------------\n";
             }
         } else {
             len = pmt::length(msg);
-    		if(d_MODE == COMPACT) {
+    		if(d_MODE == MESSAGE_INFO_COMPACT || d_MODE == MESSAGE_INFO_HEADER_ONLY) {
                 s << len << " elements payload.";
-            } else if(d_MODE == FULL) {
+            } else if(d_MODE == MESSAGE_INFO_FULL) {
                 s << pmt::write_string(msg) << "\n";
                 s << "-------------------------\n";
             }

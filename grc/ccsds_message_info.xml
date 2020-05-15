@@ -13,22 +13,22 @@
     <param>
 		<name>Mode</name>
 		<key>mode</key>
-		<value>10</value>
+		<value>ccsds.MESSAGE_INFO_COMPACT</value>
 		<type>enum</type>
 		<option>
 			<name>Silent</name>
-			<key>0</key>
-			<opt>fcn:0</opt>
+			<key>ccsds.MESSAGE_INFO_SILENT</key>
+			<opt>fcn:ccsds.MESSAGE_INFO_SILENT</opt>
 		</option>
 		<option>
 			<name>Compact</name>
-			<key>10</key>
-			<opt>fcn:10</opt>
+			<key>ccsds.MESSAGE_INFO_COMPACT</key>
+			<opt>fcn:ccsds.MESSAGE_INFO_COMPACT</opt>
 		</option>
 		<option>
 			<name>Full</name>
-			<key>20</key>
-			<opt>fcn:20</opt>
+			<key>ccsds.MESSAGE_INFO_FULL</key>
+			<opt>fcn:ccsds.MESSAGE_INFO_FULL</opt>
 		</option>
 	</param>
     <sink>
