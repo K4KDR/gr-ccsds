@@ -4,3 +4,6 @@
 [submodule "extern/fec"]
 	path = extern/fec
 	url = ../../sdr/libfec.git
+[submodule "extern/fmt"]
+	path = extern/fmt
+	url = https://github.com/fmtlib/fmt.git

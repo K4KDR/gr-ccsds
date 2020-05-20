@@ -116,13 +116,23 @@ ccsds_add_dependency(
     DEFAULT_VALUE ${CCSDS_BUILD_DEPS}
 )
 
+set(FMT_INSTALL ON CACHE BOOL "Install {fmt}")
+set(FMT_TEST OFF CACHE BOOL "Disable testing for {fmt}")
+set(FMT_FUZZ OFF CACHE BOOL "Disable fuzzing for {fmt}")
+set(FMT_CUDA_TEST OFF CACHE BOOL "Disable CUDA testing for {fmt}")
+ccsds_add_dependency(
+    NAME "fmt"
+    DESCRIPTION "{fmt} library"
+    DEFAULT_VALUE ${CCSDS_BUILD_DEPS}
+)
+
 
 ########################################################################
 # Create library and set properties
 ########################################################################
 
 add_library(gnuradio-ccsds SHARED ${ccsds_sources})
-target_link_libraries(gnuradio-ccsds PUBLIC ${Boost_LIBRARIES} ${GNURADIO_ALL_LIBRARIES} ${VOLK_LIBRARIES} fec::fec ldpc::ldpc)
+target_link_libraries(gnuradio-ccsds PUBLIC ${Boost_LIBRARIES} ${GNURADIO_ALL_LIBRARIES} ${VOLK_LIBRARIES} fec::fec ldpc::ldpc PRIVATE fmt::fmt)
 set_target_properties(gnuradio-ccsds PROPERTIES DEFINE_SYMBOL "gnuradio_ccsds_EXPORTS")
 target_compile_features(gnuradio-ccsds PRIVATE cxx_generalized_initializers)
 
@@ -185,10 +195,12 @@ target_compile_features(test-ccsds PRIVATE cxx_generalized_initializers)
 
 target_link_libraries(
   test-ccsds
+PUBLIC
   ${GNURADIO_RUNTIME_LIBRARIES}
   ${Boost_LIBRARIES}
   ${CPPUNIT_LIBRARIES}
   gnuradio-ccsds
+  fmt::fmt
 )
 
 GR_ADD_TEST(test_ccsds test-ccsds)
