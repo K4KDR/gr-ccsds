@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include <boost/scoped_array.hpp>
 #include "hexstring_to_binary.h"
+#include "ccsds_utils.h"
 #include <ccsds/softbits.h>
 
 namespace gr {
@@ -201,7 +202,12 @@ namespace gr {
     	}
     
     	// check that input has the expected length
-    	if(pmt::length(msg) != d_BLOCK_NUM_BITS_IN) {
+		const size_t num_bits = pmt::length(msg);
+		if (num_bits == d_BLOCK_NUM_BITS_IN) {
+			// everything is as expected
+		} else if (num_bits == utils::divide_floor(num_bits, 8u)*8u) {
+			// we got a few extra bits so that the total number of bits fits into an integer number of bytes. Do not warn in this case.
+		} else  {
     		fprintf(stderr,"WARNING CONV DECODE27: expecting message of %u floats, got %lu, skipping.\n",d_BLOCK_NUM_BITS_IN,(long unsigned int)pmt::length(msg));
     		return;
     	}
@@ -220,7 +226,7 @@ namespace gr {
     	// Fill buffer with unpunctured and converted bytes
     	size_t num_softbits;
     	const float *softbits_in = pmt::f32vector_elements(msg, num_softbits);
-    	assert(num_softbits == d_BLOCK_NUM_BITS_IN);
+    	assert(num_softbits >= d_BLOCK_NUM_BITS_IN);
     	unpuncture_and_convert(d_buffer, softbits_in);
     
     	/// init decoder
