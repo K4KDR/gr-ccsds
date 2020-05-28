@@ -3,6 +3,7 @@
 #endif
 
 #include "mpsk_detector_soft_cf_impl.h"
+#include <ccsds/softbits.h>
 #include <gnuradio/io_signature.h>
 
 
@@ -10,18 +11,19 @@ namespace gr {
   namespace ccsds {
 
     mpsk_detector_soft_cf::sptr
-    mpsk_detector_soft_cf::make (const unsigned int M)
+    mpsk_detector_soft_cf::make (const unsigned int M, float phase_offset_points)
     {
-        return gnuradio::get_initial_sptr (new mpsk_detector_soft_cf_impl (M));
+        return gnuradio::get_initial_sptr (new mpsk_detector_soft_cf_impl (M, phase_offset_points));
     }
     
-    mpsk_detector_soft_cf_impl::mpsk_detector_soft_cf_impl (const unsigned int M) 
+    mpsk_detector_soft_cf_impl::mpsk_detector_soft_cf_impl (const unsigned int M, float phase_offset_points) 
     	: gr::sync_interpolator("mpsk_detector_soft_cf",
     	  gr::io_signature::make (1, 1, sizeof (gr_complex)),
     	  gr::io_signature::make (1, 1, sizeof (float)),get_ldM(M)),
     	d_M(M),
     	d_ldM(get_ldM(M)),
-    	d_TWOPI(2.0*M_PI)
+    	d_TWOPI(2.0*M_PI),
+		d_PHASE_OFFSET_RAD(phase_offset_points*2.0f*M_PI/static_cast<float>(M))
     {
     	if(d_M > 256) {
     		fprintf(stderr,"ERROR MPSK DETECTOR SOFT: modulation order M=%d to high (maximum 256).\n",d_M);
@@ -76,53 +78,26 @@ namespace gr {
     		return 0;
     	}
     
-    	if(!is_unaligned() && false) {
-    		// input is aligned, use aligned call directly
-    		volk_32fc_s32f_atan2_32f_a(tmp_angle, in, 1.0f, num_in);
+		// input is aligned, use aligned call directly
+		volk_32fc_s32f_atan2_32f(tmp_angle, in, 1.0f, num_in);
     
-    		volk_32fc_magnitude_squared_32f_a(tmp_mag, in, num_in);
-    		
-    	} else {
-    		// unaligned, copy input to aligned buffer
-    
-    		// allocate buffer
-    		gr_complex *tmp_c = (gr_complex*)volk_malloc(num_in*sizeof(gr_complex), volk_get_alignment());
-    		if(tmp_c == 0) {
-    			fprintf(stderr,"ERROR MPSK DETECTOR SOFT: allocation of memory failed\n");
-    			exit(EXIT_FAILURE);
-    			return 0;
-    		}
-    
-    		// copy data to buffer
-    		memcpy(tmp_c, in, num_in*sizeof(gr_complex));
-    
-    		// process data
-    		volk_32fc_s32f_atan2_32f_a(tmp_angle, tmp_c, 1.0f, num_in);
-    
-    		// free buffer
-    		volk_free(tmp_c);
-    
-    		// process magnitude
-    		volk_32fc_magnitude_squared_32f_u(tmp_mag, in, num_in);
-    	}		
-    
+		volk_32fc_magnitude_squared_32f(tmp_mag, in, num_in);
+    	
     	// preprocessing for whole vector is completed now, create the single
     	// bits out of phase and magnitude information 
     
-    	const float add = 1.0f/d_M;
-    	const float factor = (float)d_M / 2.0f;
-    
+		const float shift = d_TWOPI / static_cast<float>(d_M) / 2.0f;  // shift by half  of the angle spanning the decision area so we can floor to the correct result
+    	const float factor = static_cast<float>(d_M) / d_TWOPI;
+		
     	// go trough all symbols
     	for(unsigned int i=0;i<num_in;i++) {
-    		const float tmp = (std::fmod(tmp_angle[i]+d_TWOPI,d_TWOPI)/M_PI + add ) * factor;
+			const float tmp = std::fmod(tmp_angle[i]+d_TWOPI-d_PHASE_OFFSET_RAD+shift,d_TWOPI) * factor;
     		
-    		uint8_t sym_bits = map[(unsigned int) std::floor(tmp)%d_M];
-    		
+			uint8_t sym_bits = map[(unsigned int) std::floor(tmp)%d_M];
     		for(unsigned int j=0;j<d_ldM;j++) {
     			const bool bit = (sym_bits>>(d_ldM-1-j)) & 0x01;
-    		
-    			out[i*d_ldM+j] = (bit ? 1.0f : -1.0f) * std::min(tmp_mag[i], 1.0f);
-    		}
+    			out[i*d_ldM+j] = softbits::create_from_sample(bit ? tmp_mag[i] : -tmp_mag[i]);
+			}
     	}
     
     	volk_free(tmp_angle);

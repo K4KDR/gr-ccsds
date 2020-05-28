@@ -24,6 +24,9 @@ namespace gr {
     
     	/*! \brief Precomputed constant for 2pi with float precision. */
     	const float d_TWOPI;
+
+		/*! \brief Phase offset of first constellation point in radians. */
+		const float d_PHASE_OFFSET_RAD;
     
     	/*! \brief Array to map binary constellation points to gray coded data
     	 *	bits.
@@ -36,11 +39,12 @@ namespace gr {
     	/*! \brief Public constructor of the M-PSK soft bit detector
     	 *
     	 *  \param M Modulation order of the M-PSK signal.
+		 *  \param phase_offset_points Phase offset in relative distances between consecutive constellation points
     	 *
     	 *  Detects data bits from M-PSK modulated symbols. This block detects
     	 *  the data bits by a non linear transformation of the sample's phase.
     	 */
-    	mpsk_detector_soft_cf_impl (const unsigned int M);   // public constructor
+    	mpsk_detector_soft_cf_impl (const unsigned int M, float phase_offset_points);   // public constructor
     
     	~mpsk_detector_soft_cf_impl ();
     
