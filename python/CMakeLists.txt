@@ -55,6 +55,7 @@ GR_ADD_TEST(qa_mpsk_ambiguity_resolver_f ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SO
 GR_ADD_TEST(qa_mpsk_ambiguity_resolver_chain ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_mpsk_ambiguity_resolver_chain.py)
 GR_ADD_TEST(qa_mpsk_detector_soft_cf ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_mpsk_detector_soft_cf.py)
 GR_ADD_TEST(qa_mpsk_mod_bc ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_mpsk_mod_bc.py)
+GR_ADD_TEST(qa_mpsk_mod_demod_chain ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_mpsk_mod_demod_chain.py)
 GR_ADD_TEST(qa_randomiser ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_randomiser.py)
 GR_ADD_TEST(qa_reversebits ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_reversebits.py)
 GR_ADD_TEST(qa_rs_chain ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_rs_chain.py)
