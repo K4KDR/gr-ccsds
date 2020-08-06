@@ -35,6 +35,7 @@
 #include "qa_constellation_ccsds_qpsk_axis.h"
 #include "qa_frame_sync_buffer.h"
 #include "qa_frame_sync_config.h"
+#include "qa_softbits.h"
 
 CppUnit::TestSuite *
 qa_ccsds::suite()
@@ -48,6 +49,7 @@ qa_ccsds::suite()
   s->addTest(gr::ccsds::qa::constellation::qpsk_axis::suite());
   s->addTest(gr::ccsds::qa_frame_sync_buffer::suite());
   s->addTest(gr::ccsds::qa_frame_sync_config::suite());
+  s->addTest(gr::ccsds::qa_softbits::suite());
 
   return s;
 }
