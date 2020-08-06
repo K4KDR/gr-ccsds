@@ -151,7 +151,7 @@ if(CCSDS_ENABLE_WARNINGS)
     target_compile_options(gnuradio-ccsds
         PRIVATE
             $<$<OR:$<C_COMPILER_ID:Clang>,$<C_COMPILER_ID:AppleClang>,$<C_COMPILER_ID:GNU>>:
-                -Werror -pedantic-errors -Wall -Wextra -Wconversion -Wsign-conversion>
+                -Werror -pedantic-errors -Wall -Wextra -Wconversion -Wsign-conversion -Wuseless-cast>
             $<$<C_COMPILER_ID:MSVC>:
                 /WX /W4>
     )
@@ -207,6 +207,16 @@ PUBLIC
   gnuradio-ccsds
   fmt::fmt
 )
+
+if(CCSDS_ENABLE_WARNINGS)
+    target_compile_options(test-ccsds
+         PRIVATE
+             $<$<OR:$<C_COMPILER_ID:Clang>,$<C_COMPILER_ID:AppleClang>,$<C_COMPILER_ID:GNU>>:
+                 -Werror -pedantic-errors -Wall -Wextra -Wconversion -Wsign-conversion -Wuseless-cast>
+             $<$<C_COMPILER_ID:MSVC>:
+                 /WX /W4>
+     )
+ endif()
 
 GR_ADD_TEST(test_ccsds test-ccsds)
 
