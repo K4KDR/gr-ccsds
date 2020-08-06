@@ -36,6 +36,7 @@
 #include "qa_frame_sync_buffer.h"
 #include "qa_frame_sync_config.h"
 #include "qa_softbits.h"
+#include "qa_utils.h"
 
 CppUnit::TestSuite *
 qa_ccsds::suite()
@@ -50,6 +51,7 @@ qa_ccsds::suite()
   s->addTest(gr::ccsds::qa_frame_sync_buffer::suite());
   s->addTest(gr::ccsds::qa_frame_sync_config::suite());
   s->addTest(gr::ccsds::qa_softbits::suite());
+  s->addTest(gr::ccsds::qa_utils::suite());
 
   return s;
 }

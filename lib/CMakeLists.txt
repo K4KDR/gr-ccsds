@@ -192,6 +192,7 @@ list(APPEND test_ccsds_sources
     ${CMAKE_CURRENT_SOURCE_DIR}/qa_frame_sync_buffer.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/qa_frame_sync_config.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/qa_softbits.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/qa_utils.cc
 )
 
 add_executable(test-ccsds ${test_ccsds_sources})
