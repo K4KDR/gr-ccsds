@@ -58,6 +58,9 @@
 #include "ccsds/asm_position.h"
 #include "ccsds/snr_est.h"
 #include "ccsds/frame_sync.h"
+#include "ccsds/pack_bit_to_bytes.h"
+#include "ccsds/block_prefix_bb.h"
+#include "ccsds/byte_to_softbits_bf.h"
 %}
 
 
@@ -167,3 +170,9 @@ asm_position_list = asm_position_list.make;
 
 %include "ccsds/frame_sync.h"
 GR_SWIG_BLOCK_MAGIC2(ccsds, frame_sync);
+%include "ccsds/pack_bit_to_bytes.h"
+GR_SWIG_BLOCK_MAGIC2(ccsds, pack_bit_to_bytes);
+%include "ccsds/block_prefix_bb.h"
+GR_SWIG_BLOCK_MAGIC2(ccsds, block_prefix_bb);
+%include "ccsds/byte_to_softbits_bf.h"
+GR_SWIG_BLOCK_MAGIC2(ccsds, byte_to_softbits_bf);

@@ -65,5 +65,8 @@ install(FILES
 	snr.h
 	snr_interpolation.h
 	snr_est.h
+	pack_bit_to_bytes.h
+	block_prefix_bb.h
+	byte_to_softbits_bf.h
 	DESTINATION include/ccsds
 )

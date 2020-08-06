@@ -63,3 +63,6 @@ GR_ADD_TEST(qa_soft_to_hard_message ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_
 GR_ADD_TEST(qa_tag_storage ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_tag_storage.py)
 GR_ADD_TEST(qa_softbits_msg_to_bytes_b ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_softbits_msg_to_bytes_b.py)
 GR_ADD_TEST(qa_frame_sync ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_frame_sync.py)
+GR_ADD_TEST(qa_pack_bit_to_bytes ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_pack_bit_to_bytes.py)
+GR_ADD_TEST(qa_block_prefix_bb ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_block_prefix_bb.py)
+GR_ADD_TEST(qa_byte_to_softbits_bf ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_byte_to_softbits_bf.py)

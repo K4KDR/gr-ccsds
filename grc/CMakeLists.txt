@@ -53,5 +53,8 @@ install(FILES
 	ccsds_frame_sync_config_concatenated.xml
 	ccsds_frame_generation_config.xml
 	ccsds_frame_sync.xml
+	ccsds_pack_bit_to_bytes.xml
+	ccsds_block_prefix_bb.xml
+	ccsds_byte_to_softbits_bf.xml
 	DESTINATION share/gnuradio/grc/blocks
 )

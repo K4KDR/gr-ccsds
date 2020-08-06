@@ -75,6 +75,9 @@ list(APPEND ccsds_sources
 	snr_interpolation.cc
 	snr_est.cc
 	asm_position.cc
+	pack_bit_to_bytes_impl.cc
+	block_prefix_bb_impl.cc
+	byte_to_softbits_bf_impl.cc
 )
 
 set(ccsds_sources "${ccsds_sources}" PARENT_SCOPE)

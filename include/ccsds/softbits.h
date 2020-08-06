@@ -92,6 +92,18 @@ namespace gr {
           return 2.0*symbol/noise_power;
         }
 
+        /**
+         * \brief Create softbit from bit value, assuming the symbol has a magnitude of 1.
+         * 
+         * \param bit The bit to encode (True = 1, False = 0)
+         * \param noise_power Noise power (variance)
+         * 
+         * \return LLR Softbit
+         */
+        static constexpr float create_from_bit(bool bit, float noise_power) {
+          return create_from_sample(bit ? 1.0f : -1.0f, noise_power);
+        }
+
     };
 
   } // namespace ccsds
