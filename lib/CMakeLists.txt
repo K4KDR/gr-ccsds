@@ -91,7 +91,7 @@ endif(NOT ccsds_sources)
 ########################################################################
 include(ccsdsAddDependency)
 
-option(CCSDS_BUILD_DEPS "Download and build external dependencies (default value for all dependencies, can be overridden by CCSDS_DEPS_<COMPONENT>=On/Off)" Off)
+option(CCSDS_BUILD_DEPS "Download and build external dependencies (default value for all dependencies, can be overridden by CCSDS_DEPS_<COMPONENT>=On/Off)" On)
 
 if(CCSDS_BUILD_DEPS)
     message(STATUS "CCSDS_BUILD_DEPS is enabled")
