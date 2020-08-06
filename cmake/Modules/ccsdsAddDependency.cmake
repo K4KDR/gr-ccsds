@@ -50,6 +50,11 @@ macro(ccsds_add_dependency)
     else()
         message(STATUS "Looking for ${DEPENDENCY_NAME} in system paths")
         find_package(${DEPENDENCY_NAME} REQUIRED)
+        if(TARGET ${DEPENDENCY_TARGET})
+            get_target_property(_loc ${DEPENDENCY_TARGET} LOCATION)
+            message(STATUS  "Found ${DEPENDENCY_NAME} at ${_loc}")
+        endif()
+        
     endif()
 
     if(NOT TARGET ${DEPENDENCY_TARGET})
