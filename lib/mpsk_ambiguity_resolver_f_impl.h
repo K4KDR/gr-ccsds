@@ -15,27 +15,6 @@
 #include <boost/scoped_array.hpp>
 #include <volk/volk.h>
 
-/*! \brief Verbosity level: Do not output anything */
-#define CCSDS_AR_SOFT_OUTPUT_NONE 0
-
-/*! \brief Verbosity level: Do output state change information */
-#define CCSDS_AR_SOFT_OUTPUT_CHANGE 1
-
-/*! \brief Verbosity level: Do output state information */
-#define CCSDS_AR_SOFT_OUTPUT_STATE 2
-
-/*! \brief Verbosity level: Do output debug information */
-#define CCSDS_AR_SOFT_OUTPUT_DEBUG 3
-
-/*! \brief Level of verbosity of this block.
- *
- *  \sa #CCSDS_AR_SOFT_OUTPUT_NONE
- *  \sa #CCSDS_AR_SOFT_OUTPUT_CHANGE
- *  \sa #CCSDS_AR_SOFT_OUTPUT_STATE
- *  \sa #CCSDS_AR_SOFT_OUTPUT_DEBUG
- */
-#define CCSDS_AR_SOFT_VERBOSITY_LEVEL CCSDS_AR_SOFT_OUTPUT_CHANGE
-
 namespace gr {
   namespace ccsds {
 
@@ -101,6 +80,9 @@ namespace gr {
     	 */
     	const unsigned int d_SEARCH_LEN_MAX;
     
+	/*! \brief Block verbosity level */
+	const ambiguity_verbosity_t d_VERBOSITY;
+
     	/*! \brief Counter variable on how many ASMs have been observed */
     	unsigned int d_count;
     
@@ -134,23 +116,25 @@ namespace gr {
     	/*! \brief Aligned buffer of one float for ASM checking. */
     	float *d_tmp_f;
     
-    	#if CCSDS_AR_SOFT_VERBOSITY_LEVEL >= CCSDS_AR_SOFT_OUTPUT_DEBUG
-    		/*! \brief File pointer for debugging. */
-    		FILE *dbg_file_in;
-    
-    		/*! \brief File pointer for debugging. */
-    		FILE *dbg_file_in_hard;
-    
-    		/*! \brief File pointer for debugging. */
-    		FILE *dbg_file_out;
-    
-    		/*! \brief File pointer for debugging. */
-    		FILE *dbg_file_asms;
-    	#endif
-    	#if CCSDS_AR_SOFT_VERBOSITY_LEVEL >= CCSDS_AR_SOFT_OUTPUT_CHANGE
-    		/*! \brief Counter for debugging. */
-    		unsigned long dbg_count;
-    	#endif
+	/*! \brief File pointer for debugging. */
+	FILE *dbg_file_in;
+
+	/*! \brief File pointer for debugging. */
+	FILE *dbg_file_in_hard;
+
+	/*! \brief File pointer for debugging. */
+	FILE *dbg_file_out;
+
+	/*! \brief File pointer for debugging. */
+	FILE *dbg_file_asms;
+	
+	/*! \brief Counter for debugging. */
+	unsigned long dbg_count;
+    	
+	/* ControlPort test
+	 * export internal variable correlation
+	 */
+	float d_correlation;
     
     	/*! \brief Index of the input stream that the AR is locked in. If in
     	 *	search state, this variable may contain anything.
@@ -173,7 +157,13 @@ namespace gr {
     	 *	which's samples have already been consumed.
     	 */
     	unsigned int d_samp_skip_bits;
-    
+        
+        /*! \brief Remember if the stop function has been called, in which
+         * case the block will stop processing and  tell GNURadio that it has
+         * no more output available.
+         */
+        bool d_stopped;
+        
     	/*!
     	 *  \brief Returns the number of unpacked symbols (as float) that relate
     	 *	to the given number of packed bytes.
@@ -287,11 +277,7 @@ namespace gr {
     	 */
     	pmt::pmt_t extractTags(const uint64_t from, const unsigned int len);
 	
-	/* ControlPort test
-	 * export internal variable correlation
-	*/
-	float correlation;
-    public:
+	public:
     	/*!
     	 * \brief Public constructor of the AR
     	 *  \param M Modulation order. Determins how many parallel streams to
@@ -306,6 +292,7 @@ namespace gr {
     	 *  \param num_tail_syms Number of bits after the Frame that should be copied as
     	 *	well. Default is zero, so only the frame data is copied.
     	 *  \param frame_length Length of a frame (without ASM) in bytes.
+		 *  \param verbosity Verbosity level of block output.
     	 *
     	 *  Constructs a AR block that searches for the ASM in the \c M input
     	 *  streams and outputs the one that contains the ASM. If no ASM is
@@ -313,15 +300,16 @@ namespace gr {
     	 *  still needed for frame synchronization after decoding.
     	 */
     	mpsk_ambiguity_resolver_f_impl(const unsigned int M, std::string ASM, const unsigned int asm_len, const unsigned int threshold,
-	                                const float correlation_threshold, const unsigned int frame_length, const unsigned int num_tail_syms=0);
+	                                const float correlation_threshold, const unsigned int frame_length, const unsigned int num_tail_syms, ambiguity_verbosity_t verbosity);
     	/*! \brief Public deconstructor of the AR */	
     	~mpsk_ambiguity_resolver_f_impl ();  // public destructor
     
     	void forecast(int noutput_items,gr_vector_int &ninput_items_required);
     
     	bool stop(void);
-    	// get correlation is needed for ControlPorts
-	virtual float get_correlation() { return correlation; }
+    	
+	// get correlation is needed for ControlPorts
+	virtual float get_correlation();
 	
 	// the function that gives us the Controlport
 	void setup_rpc();

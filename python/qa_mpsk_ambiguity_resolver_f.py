@@ -52,7 +52,7 @@ class qa_mpsk_ambiguity_resolver_f (gr_unittest.TestCase):
 		self.src = blocks.vector_source_f(src_data, False, 1)
 		self.snk = blocks.vector_sink_b(1)
 		self.ccsds_softbits_msg_to_bytes_b_0 = ccsds.softbits_msg_to_bytes_b()
-		self.ccsds_mpsk_ambiguity_resolver_f_0 = ccsds.mpsk_ambiguity_resolver_f(M,ASM,ASM_len,1,ber_thresh,frame_len,num_tail)
+		self.ccsds_mpsk_ambiguity_resolver_f_0 = ccsds.mpsk_ambiguity_resolver_f(M,ASM,ASM_len,1,ber_thresh,frame_len,num_tail, ccsds.AR_OUTPUT_NONE)
 
 		##################################################
 		# Connections

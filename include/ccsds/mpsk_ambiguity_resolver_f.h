@@ -7,6 +7,14 @@
 namespace gr {
   namespace ccsds {
      
+    /*! \brief Enum of ambiguity resolver verbosity levels */
+    enum ambiguity_verbosity_t {
+        AR_OUTPUT_NONE,    ///< No output
+        AR_OUTPUT_CHANGE,  ///< Only print state changes
+        AR_OUTPUT_STATE,   ///< Output state every iteration
+        AR_OUTPUT_DEBUG    ///< Output debug information
+    };
+
     /*!
      * \brief M-PSK soft bit ambiguity resolution and frame synchronization.
      *
@@ -36,9 +44,11 @@ namespace gr {
     {
     public:
     	typedef boost::shared_ptr<mpsk_ambiguity_resolver_f> sptr;
+
     	static sptr make(const unsigned int M, std::string ASM, const unsigned int asm_len, const unsigned int threshold, 
-				const float correlation_threshold, const unsigned int frame_length, const unsigned int num_tail_syms=0);
-	virtual float get_correlation(void) = 0;
+      const float correlation_threshold, const unsigned int frame_length, const unsigned int num_tail_syms=0, ambiguity_verbosity_t verbosity=AR_OUTPUT_NONE);
+
+	    virtual float get_correlation(void) = 0;
     };
 
   } // namespace ccsds
