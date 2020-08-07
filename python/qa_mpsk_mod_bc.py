@@ -47,7 +47,7 @@ class qa_mpsk_mod_bc (gr_unittest.TestCase):
 	#print "expected data: %s\n" % (expected_result, )
 	#print "received data: %s\n" % (result_data, )
 	#print "==================================================\n"
-	self.assertFloatTuplesAlmostEqual (expected_result, result_data, 6, 'BPSK constellation does not match')
+	self.assertFloatTuplesAlmostEqual (expected_result, result_data, 4, 'BPSK constellation does not match')
 
     def test_mod_qpsk (self):
 	src_data = (0, 1, 2, 3)
@@ -66,7 +66,7 @@ class qa_mpsk_mod_bc (gr_unittest.TestCase):
 	#print "received data: %s\n" % (result_data, )
 	#print "==================================================\n"
 
-	self.assertFloatTuplesAlmostEqual (expected_result, result_data, 6, 'QPSK constellation does not match')
+	self.assertFloatTuplesAlmostEqual (expected_result, result_data, 4, 'QPSK constellation does not match')
 
     def test_mod_8psk (self):
 	src_data = (0, 1, 2, 3, 4, 5, 6, 7)
@@ -85,7 +85,7 @@ class qa_mpsk_mod_bc (gr_unittest.TestCase):
 	#print "received data: %s\n" % (result_data, )
 	#print "=================================================\n"
 
-	self.assertFloatTuplesAlmostEqual (expected_result, result_data, 6, '8-PSK constellation does not match')
+	self.assertFloatTuplesAlmostEqual (expected_result, result_data, 4, '8-PSK constellation does not match')
 
     def test_mod_16psk (self):
 	src_data = (0, 1, 2, 3, 4, 5, 6, 7,  8,  9, 10, 11, 12, 13, 14, 15)
@@ -104,7 +104,7 @@ class qa_mpsk_mod_bc (gr_unittest.TestCase):
 	#print "received data: %s\n" % (result_data, )
 	#print "=================================================\n"
 
-	self.assertFloatTuplesAlmostEqual (expected_result, result_data, 6, '16-PSK constellation does not match')
+	self.assertFloatTuplesAlmostEqual (expected_result, result_data, 4, '16-PSK constellation does not match')
 
 
 if __name__ == '__main__':
