@@ -32,8 +32,8 @@ class qa_softbittobit (gr_unittest.TestCase):
         self.tb = None
 
     def test_001_t (self):
-        src_data = (0,1,-1,-0.5,0.77)
-        expected_result = (1, 1, 0, 0, 1)
+        src_data = (1,-1,-0.5,0.77)
+        expected_result = (1, 0, 0, 1)
         src = blocks.vector_source_f(src_data)
         sqr = ccsds.softbittobit()
         dst = blocks.vector_sink_b()
