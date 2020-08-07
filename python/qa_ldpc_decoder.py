@@ -42,7 +42,7 @@ class qa_ldpc_decoder (gr_unittest.TestCase):
         # Blocks
         ##################################################
         self.null_src = ccsds.msg_null_src()
-        self.decoder = ccsds.ldpc_decoder(paritychecks, systype, puncttype, num_punct, punct_pos, True)
+        self.decoder = ccsds.ldpc_decoder(paritychecks, systype, puncttype, num_punct, punct_pos, False)
         self.dbg = blocks.message_debug()
 
         ##################################################
@@ -73,7 +73,7 @@ class qa_ldpc_decoder (gr_unittest.TestCase):
         
         block._post( port, pmt.PMT_EOF )
 
-        timeout = 50
+        timeout = 150
         while(self.dbg.num_messages() < num_messages+1 and timeout > 0):
             time.sleep(0.1)
             timeout -= 1
@@ -89,12 +89,13 @@ class qa_ldpc_decoder (gr_unittest.TestCase):
         self.assertEqual (pmt.is_eof_object(eof_msg), True, 'EOF block not at expected position')
 
         # test the blobs
+        pmt_invalid_frame_num = pmt.from_long(num_messages+100)
         for i in xrange(len(messages_out_exp)):
             dbg_msg_in = self.dbg.get_message(i)
             dbg_msg = pmt.cdr(dbg_msg_in)
             dbg_hdr = pmt.car(dbg_msg_in)
 
-            dbg_frame_num = int(pmt.to_long(pmt.dict_ref(dbg_hdr, pmt.intern("frame_number"), pmt.from_long(num_messages+100))))
+            dbg_frame_num = int(pmt.to_long(pmt.dict_ref(dbg_hdr, pmt.intern("frame_number"), pmt_invalid_frame_num)))
 
             self.assertEqual (i, dbg_frame_num, 'Frame number %d does not match the expected %d' %    (dbg_frame_num, i))
 
@@ -110,8 +111,8 @@ class qa_ldpc_decoder (gr_unittest.TestCase):
         # Decode all zero frames
         NUM_REP = 2
         
-        VAL_ZERO = -1.0
-        VAL_ONE =  1.0
+        VAL_ZERO = -1e5
+        VAL_ONE =  1e5
         
         message_in = (VAL_ZERO,)*2048
         message_out_exp = (VAL_ZERO,)*1024
