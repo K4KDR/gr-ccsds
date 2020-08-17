@@ -23,19 +23,6 @@
 
 #include <ccsds/ldpc_decoder.h>
 
-/*! \brief Verbosity level: Do not output anything */
-#define CCSDS_LDPC_DEC_OUTPUT_NONE 0
-
-/*! \brief Verbosity level: Do output decoding summary */
-#define CCSDS_LDPC_DEC_OUTPUT_SUMMARY 1
-
-/*! \brief Level of verbosity of this block.
- *
- *  \sa #CCSDS_LDPC_DEC_OUTPUT_NONE
- *  \sa #CCSDS_LDPC_DEC_OUTPUT_SUMMARY
- */
-#define CCSDS_LDPC_DEC_VERBOSITY_LEVEL CCSDS_LDPC_DEC_NONE
-
 namespace gr {
   namespace ccsds {
 
@@ -51,8 +38,11 @@ namespace gr {
       /** Store flag on whether or not invalid frames should be returned */
       const bool d_drop_invalid_frames;
 
+        /** Store blocks verbosity level */
+        const decoder_verbosity_t d_verbosity;
+
      public:
-      ldpc_decoder_impl(const char *parity_file, sys_t systype, punct_t puncttype, uint64_t num_punct, std::vector<size_t> punct_pos, bool drop_invalid_frames);
+      ldpc_decoder_impl(const char *parity_file, sys_t systype, punct_t puncttype, uint64_t num_punct, std::vector<size_t> punct_pos, bool drop_invalid_frames, decoder_verbosity_t verbosity);
       ~ldpc_decoder_impl();
 
       void process_frame(pmt::pmt_t msg_in);

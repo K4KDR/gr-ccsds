@@ -11,14 +11,15 @@ namespace gr {
   namespace ccsds {
     
     rs_decode::sptr
-    rs_decode::make(const unsigned int I, const repr_t representation) {
-        return gnuradio::get_initial_sptr (new rs_decode_impl(I,representation) );
+    rs_decode::make(const unsigned int I, const repr_t representation, decoder_verbosity_t verbosity) {
+        return gnuradio::get_initial_sptr (new rs_decode_impl(I,representation, verbosity) );
     }
     
-    rs_decode_impl::rs_decode_impl(const unsigned int I, const repr_t representation)
+    rs_decode_impl::rs_decode_impl(const unsigned int I, const repr_t representation, decoder_verbosity_t verbosity)
       : gr::block ("ccsds_rs_decode",
     	gr::io_signature::make (0, 0, 0),
     	gr::io_signature::make (0, 0, 0)), d_I(I), d_k(223), d_n(255), d_2E(32), d_DATA_LEN(d_k*d_I), d_IN_LEN(d_DATA_LEN+d_I*d_2E),
+        d_VERBOSITY(verbosity),
 	d_representation(representation)
     {
     	// create buffers
@@ -33,15 +34,15 @@ namespace gr {
     	message_port_register_in(pmt::mp("in"));
     	set_msg_handler(pmt::mp("in"), boost::bind(&rs_decode_impl::process_frame, this, _1));
     
-    	#if CCSDS_RS_DECODE_VERBOSITY_LEVEL >= CCSDS_RS_DECODE_OUTPUT_DEBUG
-    		dbg_file_in 	   = fopen("/tmp/rs_decode_impl_debug_in.dat","w");
-    		dbg_file_in_deinterleaved = fopen("/tmp/rs_decode_impl_debug_in_deinterleaved.dat","w");
-    		dbg_file_in_valid  = fopen("/tmp/rs_decode_impl_debug_in_valid.dat","w");
-    		dbg_file_out	   = fopen("/tmp/rs_decode_impl_debug_out.dat","w");
+    	if (d_VERBOSITY >= DECODER_VERBOSITY_DEBUG) {
+            dbg_file_in 	   = fopen("/tmp/rs_decode_impl_debug_in.dat","w");
+            dbg_file_in_deinterleaved = fopen("/tmp/rs_decode_impl_debug_in_deinterleaved.dat","w");
+            dbg_file_in_valid  = fopen("/tmp/rs_decode_impl_debug_in_valid.dat","w");
+            dbg_file_out	   = fopen("/tmp/rs_decode_impl_debug_out.dat","w");
 
-		fprintf(dbg_file_in, "# received byte stream, splitted into data frames and combined redundancy part\n");
-		fprintf(dbg_file_in_deinterleaved, "# deinterleaved byte stream as put into the RS decoder, redundancy part separated by whitespaces\n");
-    	#endif
+            fprintf(dbg_file_in, "# received byte stream, splitted into data frames and combined redundancy part\n");
+            fprintf(dbg_file_in_deinterleaved, "# deinterleaved byte stream as put into the RS decoder, redundancy part separated by whitespaces\n");
+    	}
     }
     
     rs_decode_impl::~rs_decode_impl () {
@@ -49,7 +50,7 @@ namespace gr {
     	delete[] d_buf_data;
     	delete[] d_buf_out;
     
-    	#if CCSDS_RS_DECODE_VERBOSITY_LEVEL >= CCSDS_RS_DECODE_OUTPUT_DEBUG
+    	if (d_VERBOSITY >= DECODER_VERBOSITY_DEBUG) {
     		fflush(dbg_file_in);
     		fflush(dbg_file_in_deinterleaved);
     		fflush(dbg_file_in_valid);
@@ -59,7 +60,7 @@ namespace gr {
     		fclose(dbg_file_in_deinterleaved);
     		fclose(dbg_file_in_valid);
     		fclose(dbg_file_out);
-    	#endif
+    	}
     }
     
     void rs_decode_impl::process_frame(pmt::pmt_t msg_in) {
@@ -91,10 +92,8 @@ namespace gr {
     		return;
     	}
     
-    	#if CCSDS_RS_DECODE_VERBOSITY_LEVEL >= CCSDS_RS_DECODE_OUTPUT_FRAMEERR
-		const uint64_t frame_number = pmt::to_uint64(pmt::dict_ref(hdr, pmt::mp("frame_number"), pmt::from_uint64(0)));
-    	#endif
-    
+    	const uint64_t frame_number = pmt::to_uint64(pmt::dict_ref(hdr, pmt::mp("frame_number"), pmt::from_uint64(0)));
+    	
     	const unsigned int blob_len = (unsigned int) pmt::blob_length(msg);
     
     	if(blob_len < d_IN_LEN) {
@@ -107,21 +106,21 @@ namespace gr {
     	// Message is BLOB
     	const unsigned char *data_in = (const unsigned char *) pmt::blob_data(msg);
     
-    	#if CCSDS_RS_DECODE_VERBOSITY_LEVEL >= CCSDS_RS_DECODE_OUTPUT_DEBUG
-    		// Write input to debug file
+    	if (d_VERBOSITY >= DECODER_VERBOSITY_DEBUG) {
+           // Write input to debug file
 
-		// data part
-    		for(unsigned int i=0;i<d_I;i++) {
-			for(unsigned int k=0;k<d_k;k++) {
-    				fprintf(dbg_file_in, "%02X ",data_in[i*d_n+k]);
-			}
-			fprintf(dbg_file_in, "\n");
-    		}
-		for(unsigned int i=d_I*d_k;i<d_I*d_n;i++) {
-    			fprintf(dbg_file_in, "%02X ",data_in[i]);
-		}
-    		fprintf(dbg_file_in, "\n\n");
-    	#endif
+		    // data part
+            for(unsigned int i=0;i<d_I;i++) {
+                for(unsigned int k=0;k<d_k;k++) {
+                    fprintf(dbg_file_in, "%02X ",data_in[i*d_n+k]);
+			    }
+			    fprintf(dbg_file_in, "\n");
+            }
+            for(unsigned int i=d_I*d_k;i<d_I*d_n;i++) {
+                fprintf(dbg_file_in, "%02X ",data_in[i]);
+            }
+            fprintf(dbg_file_in, "\n\n");
+        }
     
     	// start interleaving (1st step)
     	for(unsigned int i=0;i<d_IN_LEN;i++) {
@@ -130,20 +129,20 @@ namespace gr {
     
     	// decode
     	for(unsigned int i=0;i<d_I;i++) {
-	    	#if CCSDS_RS_DECODE_VERBOSITY_LEVEL >= CCSDS_RS_DECODE_OUTPUT_DEBUG
-	    		// Write deinterleaved input to debug file
+            if (d_VERBOSITY >= DECODER_VERBOSITY_DEBUG) {
+                // Write deinterleaved input to debug file
 
-			// data part
-			for(unsigned int k=0;k<d_k;k++) {
-    				fprintf(dbg_file_in_deinterleaved, "%02X ",d_buf_in[i*(d_k+d_2E)+k]);
-   	 		}
-    			fprintf(dbg_file_in_deinterleaved, "    ");
-			// redundancy part
-			for(unsigned int k=d_k;k<d_n;k++) {
-    				fprintf(dbg_file_in_deinterleaved, "%02X ",d_buf_in[i*(d_k+d_2E)+k]);
-   	 		}
-    			fprintf(dbg_file_in_deinterleaved, "\n");
-    		#endif
+                // data part
+                for(unsigned int k=0;k<d_k;k++) {
+                    fprintf(dbg_file_in_deinterleaved, "%02X ",d_buf_in[i*(d_k+d_2E)+k]);
+                }
+                fprintf(dbg_file_in_deinterleaved, "    ");
+                // redundancy part
+                for(unsigned int k=d_k;k<d_n;k++) {
+                    fprintf(dbg_file_in_deinterleaved, "%02X ",d_buf_in[i*(d_k+d_2E)+k]);
+                }
+                fprintf(dbg_file_in_deinterleaved, "\n");
+    		}
 
     		// no hints about erasures, use no padding
 		int ret;
@@ -157,16 +156,16 @@ namespace gr {
 		}
     		if(ret < 0) {
     			// unable to decode, drop this codeblock
-    			#if CCSDS_RS_DECODE_VERBOSITY_LEVEL >= CCSDS_RS_DECODE_OUTPUT_FRAMEERR
+    			if (d_VERBOSITY >= DECODER_VERBOSITY_DROPPED) {
     				printf("Invalid RS codeblock, dropping frame number %lu\n",frame_number);
-    			#endif
+    			}
     			return;
     		} else {
-    			#if CCSDS_RS_DECODE_VERBOSITY_LEVEL >= CCSDS_RS_DECODE_OUTPUT_FRAMEINFO
-    				if(ret > 0) {
-    					printf("Corrected %d symbols in frame number %lu\n",ret, frame_number);
-    				}
-    			#endif
+                if (d_VERBOSITY >= DECODER_VERBOSITY_DEBUG) {
+                    printf("RS codeblock for frame number %lu is valid after %d bytes have been corrected.\n", frame_number, ret);
+                } else if (d_VERBOSITY >= DECODER_VERBOSITY_ALL) {
+                    printf("RS codeblock for frame number %lu is valid.\n", frame_number);
+                }
     
     			// copy to data buffer (without parity) for an easier
     			// 2nd interleaving step
@@ -174,10 +173,10 @@ namespace gr {
     		}
     	}
     
-    	#if CCSDS_RS_DECODE_VERBOSITY_LEVEL >= CCSDS_RS_DECODE_OUTPUT_DEBUG
-		// Write newline after frame to debug file
-		fprintf(dbg_file_in_deinterleaved, "\n");
-	#endif
+        if (d_VERBOSITY >= DECODER_VERBOSITY_DEBUG) {
+            // Write newline after frame to debug file
+            fprintf(dbg_file_in_deinterleaved, "\n");
+        }
 
 
     	// perform interleaving (2nd step)
@@ -185,19 +184,19 @@ namespace gr {
     		d_buf_out[interl_indx(i, d_I, d_DATA_LEN)] = d_buf_data[i];
     	}
     
-    	#if CCSDS_RS_DECODE_VERBOSITY_LEVEL >= CCSDS_RS_DECODE_OUTPUT_DEBUG
-    		// Write input to debug file (at this point the frame is valid)
-    		for(unsigned int i=0;i<blob_len;i++) {
-    			fprintf(dbg_file_in_valid, "%02X ",data_in[i]);
-    		}
-    		fprintf(dbg_file_in_valid, "\n");
-    
-    		// Write output to debug file
-    		for(unsigned int i=0;i<d_DATA_LEN;i++) {
-    			fprintf(dbg_file_out, "%02X ",d_buf_out[i]);
-    		}
-    		fprintf(dbg_file_out, "\n");
-    	#endif
+        if (d_VERBOSITY >= DECODER_VERBOSITY_DEBUG) {
+            // Write input to debug file (at this point the frame is valid)
+            for(unsigned int i=0;i<blob_len;i++) {
+                fprintf(dbg_file_in_valid, "%02X ",data_in[i]);
+            }
+            fprintf(dbg_file_in_valid, "\n");
+
+            // Write output to debug file
+            for(unsigned int i=0;i<d_DATA_LEN;i++) {
+                fprintf(dbg_file_out, "%02X ",d_buf_out[i]);
+            }
+            fprintf(dbg_file_out, "\n");
+        }
     
     	// create output message data
     	pmt::pmt_t msg_out_data = pmt::make_blob(d_buf_out, d_DATA_LEN);

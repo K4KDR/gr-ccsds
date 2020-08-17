@@ -4,7 +4,7 @@
   <key>ccsds_rs_decode</key>
   <category>CCSDS/Channelcoding</category>
   <import>import ccsds</import>
-  <make>ccsds.rs_decode(int($I.fcn),int($repr.fcn))</make>
+  <make>ccsds.rs_decode(int($I.fcn),int($repr.fcn),int($verbosity.fcn))</make>
 	<param>
 		<name>Length of interleaving</name>
 		<key>I</key>
@@ -55,6 +55,32 @@
 			<name>Conventional</name>
 			<key>1</key>
 			<opt>fcn:1</opt>
+		</option>
+	</param>
+    <param>
+		<name>Output</name>
+		<key>verbosity</key>
+		<value>0</value>
+		<type>enum</type>
+		<option>
+			<name>Quiet</name>
+			<key>ccsds.DECODER_VERBOSITY_QUIET</key>
+			<opt>fcn:ccsds.DECODER_VERBOSITY_QUIET</opt>
+		</option>
+		<option>
+			<name>Dropped frames</name>
+			<key>ccsds.DECODER_VERBOSITY_DROPPED</key>
+			<opt>fcn:ccsds.DECODER_VERBOSITY_DROPPED</opt>
+		</option>
+		<option>
+			<name>All frames</name>
+			<key>ccsds.DECODER_VERBOSITY_ALL</key>
+			<opt>fcn:ccsds.DECODER_VERBOSITY_ALL</opt>
+		</option>
+		<option>
+			<name>Debug</name>
+			<key>ccsds.DECODER_VERBOSITY_DEBUG</key>
+			<opt>fcn:ccsds.DECODER_VERBOSITY_DEBUG</opt>
 		</option>
 	</param>
 	<sink>

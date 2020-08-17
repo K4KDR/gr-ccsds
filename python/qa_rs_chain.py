@@ -45,7 +45,7 @@ class qa_rs_chain (gr_unittest.TestCase):
 		self.src = blocks.vector_source_b(data, False)
 		self.snk = blocks.vector_sink_b(1)
 		self.encoder = ccsds.rs_encode(I)
-		self.decoder = ccsds.rs_decode(I, int(0))
+		self.decoder = ccsds.rs_decode(I, int(0), int(ccsds.DECODER_VERBOSITY_QUIET))
 		self.blob_source = ccsds.blob_msg_source_b(223*I)
 		self.blob_sink = ccsds.blob_msg_sink_b(223*I)
 

@@ -7,25 +7,6 @@
 
 #include <fec.h>
 
-/*! \brief Verbosity level: Do not output */
-#define CCSDS_RS_DECODE_OUTPUT_NONE 0
-
-/*! \brief Verbosity level: Do output debug information */
-#define CCSDS_RS_DECODE_OUTPUT_FRAMEERR 1
-
-/*! \brief Verbosity level: Do output debug information */
-#define CCSDS_RS_DECODE_OUTPUT_FRAMEINFO 2
-
-/*! \brief Verbosity level: Do output debug information */
-#define CCSDS_RS_DECODE_OUTPUT_DEBUG 3
-
-/*! \brief Level of verbosity of this block.
- *
- *  \sa #CCSDS_RS_DECODE_OUTPUT_NONE
- *  \sa #CCSDS_RS_DECODE_OUTPUT_DEBUG
- */
-#define CCSDS_RS_DECODE_VERBOSITY_LEVEL CCSDS_RS_DECODE_OUTPUT_FRAMEERR
-
 namespace gr {
   namespace ccsds {
 
@@ -51,7 +32,10 @@ namespace gr {
     
     	/*! \brief Number of bytes per codeblock. Value=(k+2E)*I */
     	const unsigned int d_IN_LEN;
-    
+
+        /*! \brief Store output verbosity level */
+        const decoder_verbosity_t d_VERBOSITY;
+
     	/*!  \brief Storage for the first interleaving stage */
     	unsigned char *d_buf_in;
     
@@ -64,19 +48,18 @@ namespace gr {
 	/*! \brief Storage for representation type */
 	const repr_t d_representation;
 
-    	#if CCSDS_RS_DECODE_VERBOSITY_LEVEL >= CCSDS_RS_DECODE_OUTPUT_DEBUG
-    		/*! \brief File pointer for debugging. */
-    		FILE *dbg_file_in;
-    
-    		/*! \brief File pointer for debugging. */
-    		FILE *dbg_file_in_deinterleaved;
-    
-    		/*! \brief File pointer for debugging. */
-    		FILE *dbg_file_in_valid;
-    
-    		/*! \brief File pointer for debugging. */
-    		FILE *dbg_file_out;
-    	#endif
+        /*! \brief File pointer for debugging. */
+        FILE *dbg_file_in;
+
+        /*! \brief File pointer for debugging. */
+        FILE *dbg_file_in_deinterleaved;
+
+        /*! \brief File pointer for debugging. */
+        FILE *dbg_file_in_valid;
+
+        /*! \brief File pointer for debugging. */
+        FILE *dbg_file_out;
+    	
     
     
     public:
@@ -87,7 +70,7 @@ namespace gr {
 	 *  \param representation Data representation to use. 0 For Berlekamp
 	 *  (dual basis) representation , 1 for conventional representation.
     	 */
-    	rs_decode_impl(const unsigned int I, const repr_t representation);
+    	rs_decode_impl(const unsigned int I, const repr_t representation, decoder_verbosity_t verbosity);
 
     	/*! \brief Public deconstructor of the AR */	
     	~rs_decode_impl ();  // public destructor

@@ -42,7 +42,7 @@ class qa_ldpc_decoder (gr_unittest.TestCase):
         # Blocks
         ##################################################
         self.null_src = ccsds.msg_null_src()
-        self.decoder = ccsds.ldpc_decoder(paritychecks, systype, puncttype, num_punct, punct_pos, False)
+        self.decoder = ccsds.ldpc_decoder(paritychecks, systype, puncttype, num_punct, punct_pos, False, int(ccsds.DECODER_VERBOSITY_QUIET))
         self.dbg = blocks.message_debug()
 
         ##################################################

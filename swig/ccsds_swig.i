@@ -14,6 +14,9 @@
 // Puncturing/systematics definitions for LDPC
 %include "ccsds/ldpc.h"
 
+// Verbosity definitions
+%include "ccsds/decoder_verbosity.h"
+
 // Message info constants
 %include "ccsds/message_info.h"
 

@@ -2,7 +2,10 @@
 #define INCLUDED_CCSDS_RS_DECODE_H
 
 #include <ccsds/api.h>
+#include <ccsds/decoder_verbosity.h>
+
 #include <gnuradio/block.h>
+
 namespace gr {
   namespace ccsds {
     /*!
@@ -30,8 +33,9 @@ namespace gr {
 	 *  \param I interleaving length
 	 *  \param representation Select the representation to use. 0 for dual basis
 	 *  (Berlekamp) representation and 1 for conventional representation
+     *  \param verbosity Select the level of output information
 	 */
-    	static sptr make(const unsigned int I, const repr_t representation);
+    	static sptr make(const unsigned int I, const repr_t representation, decoder_verbosity_t verbosity);
     };
 
   } // namespace ccsds

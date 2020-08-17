@@ -84,6 +84,37 @@
       <key>False</key>
     </option>
   </param>
+    <param>
+		<name>Output</name>
+		<key>verbosity</key>
+		<value>0</value>
+		<type>enum</type>
+		<option>
+			<name>Quiet</name>
+			<key>ccsds.DECODER_VERBOSITY_QUIET</key>
+			<opt>fcn:ccsds.DECODER_VERBOSITY_QUIET</opt>
+		</option>
+		<option>
+			<name>Dropped frames</name>
+			<key>ccsds.DECODER_VERBOSITY_DROPPED</key>
+			<opt>fcn:ccsds.DECODER_VERBOSITY_DROPPED</opt>
+		</option>
+		<option>
+			<name>Invalid frames</name>
+			<key>ccsds.DECODER_VERBOSITY_FAILED</key>
+			<opt>fcn:ccsds.DECODER_VERBOSITY_FAILED</opt>
+		</option>
+		<option>
+			<name>All frames</name>
+			<key>ccsds.DECODER_VERBOSITY_ALL</key>
+			<opt>fcn:ccsds.DECODER_VERBOSITY_ALL</opt>
+		</option>
+		<option>
+			<name>Debug</name>
+			<key>ccsds.DECODER_VERBOSITY_DEBUG</key>
+			<opt>fcn:ccsds.DECODER_VERBOSITY_DEBUG</opt>
+		</option>
+	</param>
 
   <check>$num_punct >= 0</check>
   

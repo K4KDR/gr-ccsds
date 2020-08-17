@@ -68,5 +68,6 @@ install(FILES
 	pack_bit_to_bytes.h
 	block_prefix_bb.h
 	byte_to_softbits_bf.h
+    decoder_verbosity.h
 	DESTINATION include/ccsds
 )

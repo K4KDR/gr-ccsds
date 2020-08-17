@@ -23,6 +23,7 @@
 #define INCLUDED_CCSDS_LDPC_DECODER_H
 
 #include <ccsds/api.h>
+#include <ccsds/decoder_verbosity.h>
 #include <gnuradio/sync_block.h>
 #include <ldpc/ldpc.h>
 #include <ldpc/decoder.h>
@@ -49,7 +50,7 @@ namespace gr {
        * class. ccsds::ldpc_decoder::make is the public interface for
        * creating new instances.
        */
-      static sptr make(const char *parity_file, sys_t systype, punct_t puncttype, uint64_t num_punct, std::vector<size_t> punct_pos, bool drop_invalid_frames);
+      static sptr make(const char *parity_file, sys_t systype, punct_t puncttype, uint64_t num_punct, std::vector<size_t> punct_pos, bool drop_invalid_frames, decoder_verbosity_t verbosity);
     };
 
   } // namespace ccsds

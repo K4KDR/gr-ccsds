@@ -32,20 +32,21 @@ namespace gr {
   namespace ccsds {
 
     ldpc_decoder::sptr
-    ldpc_decoder::make(const char *parity_file, sys_t systype, punct_t puncttype, uint64_t num_punct, std::vector<size_t> punct_pos, bool drop_invalid_frames)
+    ldpc_decoder::make(const char *parity_file, sys_t systype, punct_t puncttype, uint64_t num_punct, std::vector<size_t> punct_pos, bool drop_invalid_frames, decoder_verbosity_t verbosity)
     {
       return gnuradio::get_initial_sptr
-        (new ldpc_decoder_impl(parity_file, systype, puncttype, num_punct, punct_pos, drop_invalid_frames));
+        (new ldpc_decoder_impl(parity_file, systype, puncttype, num_punct, punct_pos, drop_invalid_frames, verbosity));
     }
 
     /*
      * The private constructor
      */
-    ldpc_decoder_impl::ldpc_decoder_impl(const char *parity_file, sys_t systype, punct_t puncttype, uint64_t num_punct, std::vector<size_t> punct_pos, bool drop_invalid_frames)
+    ldpc_decoder_impl::ldpc_decoder_impl(const char *parity_file, sys_t systype, punct_t puncttype, uint64_t num_punct, std::vector<size_t> punct_pos, bool drop_invalid_frames, decoder_verbosity_t verbosity)
       : gr::sync_block("ldpc_decoder",
               gr::io_signature::make(0, 0, sizeof(uint8_t)),
               gr::io_signature::make(0, 0, sizeof(uint8_t))),
-        d_drop_invalid_frames(drop_invalid_frames)
+        d_drop_invalid_frames(drop_invalid_frames),
+        d_verbosity(verbosity)
     {
         uint64_t *punct_pos_in = NULL;
         bool punct_pos_in_allocated = false;
@@ -141,12 +142,20 @@ namespace gr {
         this->d_decoder->decode(data_out.data(), data_in.data(), &meta);
         //this->d_decoder->decode(data_out.data(), data_in.data(), &meta,"/tmp/dec_out.bin"); // Create debug output
         
-#if CCSDS_LDPC_DEC_VERBOSITY_LEVEL >= CCSDS_LDPC_DEC_OUTPUT_SUMMARY
-        printf("LDPC DECODER: Decoding %s after %lu iterations. %lu bits corrected.\n", meta.success ? "SUCCESSFULL" : "FAILED", meta.num_iterations, meta.num_corrected);
-#endif
+        if (d_verbosity >= DECODER_VERBOSITY_DEBUG) {
+            printf("LDPC DECODER: Decoding %s after %lu iterations. %lu bits corrected.\n", meta.success ? "SUCCESSFULL" : "FAILED", meta.num_iterations, meta.num_corrected);
+        }
 
+        const std::string frame_number_str = pmt::write_string(pmt::dict_ref(hdr, pmt::intern("frame_number"), pmt::PMT_NIL));
         if (meta.success == false && d_drop_invalid_frames) {
+            if (d_verbosity >= DECODER_VERBOSITY_DROPPED) {
+                printf("Reed Solomon decoder: DROPPING frame number %s because it is INVALID.\n", frame_number_str.c_str());
+            }
             return;
+        } else if(meta.success == false && d_verbosity >= DECODER_VERBOSITY_FAILED) {
+            printf("Reed Solomon decoder: Frame number %s is INVALID.\n", frame_number_str.c_str());
+        } else if (d_verbosity >= DECODER_VERBOSITY_ALL) {
+            printf("Reed Solomon decoder: Frame number %s is %s.\n", frame_number_str.c_str(), (meta.success ? "VALID" : "INVALID"));
         }
 
         ldpc_common::attachMetadata(hdr, &meta);
