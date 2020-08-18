@@ -39,7 +39,7 @@ namespace gr {
       void RangeInterpolator::update() {
         _range_left = _range_right;
         _j++;
-        _range_right = getRangeAt((_j+1)*k_Tc_min)-_range0;
+        _range_right = getRangeAt(static_cast<double>(_j+1u)*k_Tc_min)-_range0;
         _m = _range_right-_range_left;
       }
       

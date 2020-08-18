@@ -26,6 +26,8 @@
 #include "ldpc_decoder_impl.h"
 #include "ldpc_decoder_common.h"
 
+#include <vector>
+
 namespace gr {
   namespace ccsds {
 
@@ -56,7 +58,7 @@ namespace gr {
             punct_pos_in = new uint64_t[num_punct];
             punct_pos_in_allocated=true;
             for(size_t i=0; i<num_punct; i++) {
-                punct_pos_in[i] = (uint64_t)punct_pos[i];
+                punct_pos_in[i] = punct_pos[i];
             }
         }
         // Create LDPC encoder
@@ -126,17 +128,18 @@ namespace gr {
     	}
     
     	// Message is f32_vector
-    	float data_in[M_punct];
-        for(size_t i=0; i<M_punct; i++) {
-            // LLRs are based on probabilities of 1, libLDPC uses LLRs based on zeros, invert here
-            data_in[i] = - pmt::f32vector_ref(msg, i);
-        }
-        float data_out[K];
+    	std::vector<float> data_in = pmt::f32vector_elements(msg);
+        std::vector<float> data_out(K);
         
+	// Convert gr-ccsds prop1 LLR to prob0 LLR from libLDPC
+	for(size_t i=0; i<M_punct; i++) {
+		data_in[i] = -data_in[i];
+	}
+
     	// decode
         ldpc::decoder::metadata_t meta;
-        this->d_decoder->decode(data_out, data_in, &meta);
-        //this->d_decoder->decode(data_out, data_in, &meta,"/tmp/dec_out.bin"); // Create debug output
+        this->d_decoder->decode(data_out.data(), data_in.data(), &meta);
+        //this->d_decoder->decode(data_out.data(), data_in.data(), &meta,"/tmp/dec_out.bin"); // Create debug output
         
 #if CCSDS_LDPC_DEC_VERBOSITY_LEVEL >= CCSDS_LDPC_DEC_OUTPUT_SUMMARY
         printf("LDPC DECODER: Decoding %s after %lu iterations. %lu bits corrected.\n", meta.success ? "SUCCESSFULL" : "FAILED", meta.num_iterations, meta.num_corrected);
@@ -151,10 +154,8 @@ namespace gr {
     	// create output message data
     	pmt::pmt_t msg_out_data = pmt::make_f32vector(K, 0.0f);
         for(size_t i=0; i<K; i++) {
-            // Convert LLRs back to one based LLRs
-            data_out[i] = - data_out[i];
-            
-            pmt::f32vector_set(msg_out_data, i, data_out[i]);
+		// Invert prob0 LLR from libLDPS back to gr-ccsds prob1 LLR by inverting the sign
+            pmt::f32vector_set(msg_out_data, i, -data_out[i]);
         }
         
     	// Construct the new message using the received header
@@ -166,8 +167,8 @@ namespace gr {
     
     
     int ldpc_decoder_impl::work(int noutput_items,
-        gr_vector_const_void_star &input_items,
-        gr_vector_void_star &output_items)
+        gr_vector_const_void_star &/*input_items*/,
+        gr_vector_void_star &/*output_items*/)
     {
       return (noutput_items >= 0) ? 0 : -1;
     }

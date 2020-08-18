@@ -23,6 +23,7 @@
 #endif
 
 #include "doppler_correction_cc_impl.h"
+#include "ccsds_utils.h"
 
 // Always test assertions
 #undef NDEBUG
@@ -41,7 +42,7 @@ namespace gr {
                                 double t_update,
                                 double frequency,
                                 std::vector<double> lla,
-                                size_t blocksize
+                                unsigned int blocksize
                                )
     {
       assert(lla.size() == 3u);
@@ -68,19 +69,19 @@ namespace gr {
               double t_update,
               double frequency,
               std::array<double,3> lla,
-              size_t blocksize)
+              unsigned int blocksize)
       : gr::sync_block("doppler_correction_cc",
               gr::io_signature::make(1, 1, sizeof(gr_complex)),
               gr::io_signature::make(1, 1, sizeof(gr_complex))),
-        d_scale(2.0*M_PI*(frequency/299792.458)),  // to be multiplied with ranges in km
+        d_scale(static_cast<float>(2.0*M_PI*frequency/299792.458)),  // to be multiplied with ranges in km
         d_blocksize(blocksize),
         d_range(tles[0], tles[1], lla, sampl_rate, 1.0/t_update) {
       const size_t _alignment = volk_get_alignment();
-      set_alignment(std::max(static_cast<size_t>(1),_alignment/sizeof(gr_complex)));
+      set_alignment(utils::pick_larger<size_t, int>(1lu, _alignment/sizeof(gr_complex)));
       
       // Set output_mulitple after alignment, because alignment sets it back, but make sure we are not losing alignment
-      if (d_blocksize % alignment() != 0) {
-        printf("gr-ccsds::doppler_correction_cc: ERROR: Blocksize %lu must be a multiple of the SIMD alignment %d\n", d_blocksize, alignment());
+      if (d_blocksize % static_cast<size_t>(alignment()) != 0) {
+        printf("gr-ccsds::doppler_correction_cc: ERROR: Blocksize %u must be a multiple of the SIMD alignment %d\n", d_blocksize, alignment());
         exit( EXIT_FAILURE );
       }
       set_output_multiple(static_cast<int>(d_blocksize));
@@ -118,7 +119,7 @@ namespace gr {
       assert(noutput_items >= 0);
       const size_t nout = static_cast<size_t>(noutput_items);
       if (nout < d_blocksize) {
-        printf("gr-ccsds::doppler_correction_cc::work: WARNING: Requested number of output samples %lu is lower than blockl size %lu, so no computation will be performed.\n", nout, d_blocksize);
+        printf("gr-ccsds::doppler_correction_cc::work: WARNING: Requested number of output samples %lu is lower than blockl size %u, so no computation will be performed.\n", nout, d_blocksize);
       }
       assert(nout >= d_blocksize);
       
@@ -128,7 +129,7 @@ namespace gr {
         d_range.computeDelta(d_tmp_d, d_blocksize);
         
         for(size_t j=0; j<d_blocksize; j++) {
-          d_tmp_f2[j] = std::remainder(d_tmp_d[j]*d_scale, 2.0*M_PI);
+          d_tmp_f2[j] = static_cast<float>(std::remainder(d_tmp_d[j]*d_scale, 2.0*M_PI));
         }
         /*
         for(size_t j=1; j<d_blocksize; j++) {
@@ -148,7 +149,7 @@ namespace gr {
         volk_32fc_x2_multiply_32fc(&out[i*d_blocksize], &in[i*d_blocksize], d_tmp_c, d_blocksize);
       }
       
-      return num_iterations*d_blocksize;
+      return static_cast<int>(num_iterations*d_blocksize);
     }
 
   } /* namespace ccsds */

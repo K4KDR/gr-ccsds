@@ -34,7 +34,7 @@ namespace gr {
                     return;
                 }
                 
-                double ber = (double)meta->num_corrected / meta->num_bits_total;
+                double ber = static_cast<double>(meta->num_corrected) / static_cast<double>(meta->num_bits_total);
                 
                 // //  All FEC blocks // //
                 // FEC results
@@ -52,10 +52,10 @@ namespace gr {
                 header = pmt::dict_add(header, HEADER_KEY_LDPC_BER, pmt::from_double(ber));
                 
                 // number of iterations
-                header = pmt::dict_add(header, HEADER_KEY_LDPC_NUM_ITERATIONS, pmt::from_double(meta->num_iterations));
+                header = pmt::dict_add(header, HEADER_KEY_LDPC_NUM_ITERATIONS, pmt::from_uint64(meta->num_iterations));
                 
                 // maximum number of iterations
-                header = pmt::dict_add(header, HEADER_KEY_LDPC_NUM_ITERATIONS_MAX, pmt::from_double(meta->num_iterations_max));
+                header = pmt::dict_add(header, HEADER_KEY_LDPC_NUM_ITERATIONS_MAX, pmt::from_uint64(meta->num_iterations_max));
             }
             
             inline uint64_t getFrameNumberFromPDU(pmt::pmt_t &pdu) {

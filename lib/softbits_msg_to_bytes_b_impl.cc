@@ -3,7 +3,7 @@
 #endif
 
 #include "softbits_msg_to_bytes_b_impl.h"
-
+#include "ccsds_utils.h"
 #include <ccsds/softbits.h>
 
 #include <gnuradio/io_signature.h>
@@ -63,15 +63,15 @@ namespace gr {
     		return;
     	}
     
-    	const unsigned int num_bits = pmt::length(msg);
+    	const size_t num_bits = pmt::length(msg);
     
-    	if(num_bits % 8 != 0) {
-    		fprintf(stderr,"WARNING SOFTBIT MSG TO BYTES: expecting message to contain a integer number of bytes. Actual length %d bits, last byte will be padded with zeros.\n", num_bits);
+    	if(num_bits % 8u != 0) {
+    		fprintf(stderr,"WARNING SOFTBIT MSG TO BYTES: expecting message to contain a integer number of bytes. Actual length %lu bits, last byte will be padded with zeros.\n", num_bits);
     	}
     
     	// Message is a f32vector with an integer multiple of 8 bits
     
-    	const unsigned int num_bytes = std::ceil(num_bits/8.0);
+    	const size_t num_bytes = utils::divide_ceil(num_bits, 8lu);
     
     	// go through all output bytes
     	for(unsigned int i=0;i<num_bytes;i++) {
@@ -84,7 +84,7 @@ namespace gr {
     			const uint8_t bit = (8*i+j < num_bits) ? softbits::hard_decision(pmt::f32vector_ref(msg,i*8+j)) : 0u;
     
     			// add bit to output
-    			byte = (byte<<1) | bit;
+    			byte = static_cast<uint8_t>(byte<<1) | bit;
     		}
     
     		d_queue.push(byte);
@@ -105,7 +105,7 @@ namespace gr {
     
     	unsigned char *out = (unsigned char *) output_items[0];
     
-    	unsigned int num_out;
+    	size_t num_out;
     
     	for(num_out = 0;num_out<(unsigned int)noutput_items && d_queue.size()>0;num_out++) {
     		out[num_out] = d_queue.front();
@@ -113,7 +113,7 @@ namespace gr {
     	}
     
     	// Tell runtime system how many output items we produced
-    	return num_out;
+    	return static_cast<int>(num_out);
     }
     
   } // namespace ccsds

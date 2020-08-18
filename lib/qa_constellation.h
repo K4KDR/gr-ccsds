@@ -30,7 +30,12 @@
 #include <gnuradio/gr_complex.h>
 
 #include <boost/shared_ptr.hpp>
+
+// Temporarily disable sign-conversion warning because we don't want to see warnings for 3rd party code
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wsign-conversion"
 #include <fmt/format.h>
+#pragma GCC diagnostic pop
 
 #include <array>
 #include <vector>
@@ -44,7 +49,7 @@ namespace gr {
                   protected:
                   
                     static gr_complex sample_at_angle(float deg) {
-                        const float angle_rad = deg*M_PIf32/180.0f;
+                        const float angle_rad = deg*static_cast<float>(M_PI)/180.0f;
                         return gr_complex(std::cos(angle_rad), std::sin(angle_rad));
                     }
 

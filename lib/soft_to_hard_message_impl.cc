@@ -131,8 +131,9 @@ namespace gr {
       assert(num_elements_bytes == num_bytes_out);
 
       for(size_t i=0; i<num_bytes_out; i++) {
-        for(size_t j=0; j<8; j++) {
-          byte_values[i] |= softbits::hard_decision(softbit_values[8*i+j]) << (7-j);
+        for(size_t j=0u; j<8u; j++) {
+          const unsigned int bit_shifted = softbits::hard_decision<unsigned int>(softbit_values[8lu*i+j]) << (7lu-j);
+          byte_values[i] |= static_cast<uint8_t>(bit_shifted);
         }
       }
     

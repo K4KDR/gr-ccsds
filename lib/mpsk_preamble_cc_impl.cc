@@ -3,6 +3,7 @@
 #endif
 
 #include "mpsk_preamble_cc_impl.h"
+#include "ccsds_utils.h"
 #include <gnuradio/io_signature.h>
 
 namespace gr {
@@ -63,21 +64,21 @@ namespace gr {
     		// return here to don't handle overlapping cases in the later
     		// copy code
     		consume_each(0);
-    		return num;
+    		return static_cast<int>(num);
     	} else {
     		// no, we can copy the input stream
     
     		// how many samples can we process
-    		const unsigned int num = std::min(noutput_items, ninput_items[0]);
+    		const unsigned int num = utils::pick_smaller<int, unsigned int>(noutput_items, ninput_items[0]);
     
     		// copy stream
     		memcpy(out, in, num*sizeof(gr_complex));
     
     		// consume input stream
-    		consume_each(num);
+    		consume_each(static_cast<int>(num));
     
     		// Tell runtime system how many output items we produced.
-    		return num;
+    		return static_cast<int>(num);
     	}
     }
   } // namespace ccsds

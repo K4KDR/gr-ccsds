@@ -43,7 +43,7 @@ namespace gr {
     	const uint16_t state_mask_end   = 0x7F00;
     
     	// read in new byte at the lowest 8 bit of the state vector
-    	d_state = d_state | (uint16_t)input_byte;
+    	d_state = static_cast<uint16_t>(d_state | static_cast<uint16_t>(input_byte));
     
     	output_bits = 0;
     
@@ -77,12 +77,12 @@ namespace gr {
     				// if this one affects the output
     
     				// mask to select the right bit in the poly mask
-    				uint8_t poly_mask = 0x40 >> t; // 0100 0000 >> t
+    				uint8_t poly_mask = static_cast<uint8_t>(0x40 >> t); // 0100 0000 >> t
     
     				
     				// if output is affected, output bit will be flipped
-    				out_c1 ^= (poly_mask & d_POLY_C1) ? 0x01 : 0x00;
-    				out_c2 ^= (poly_mask & d_POLY_C2) ? 0x01 : 0x00;
+    				out_c1 ^= (poly_mask & d_POLY_C1) ? static_cast<uint8_t>(0x01) : static_cast<uint8_t>(0x00);
+    				out_c2 ^= (poly_mask & d_POLY_C2) ? static_cast<uint8_t>(0x01) : static_cast<uint8_t>(0x00);
     
     				//printf("bit %u, t-%u, poly_mask=%2X, poly_a=%3u, poly_b=%3u, tmp_c1=%u, tmp_c2=%u\n",bit_in,t,poly_mask,(poly_mask & d_POLY_C1),(poly_mask & d_POLY_C1),out_c1, out_c2);
     
@@ -98,11 +98,11 @@ namespace gr {
     		// bit with (masking with 0x0001) and invert bit before, if the
     		// bit needs to be inverted
     
-    		// c1 first
-    		output_bits = (output_bits<<1) | (uint16_t) ( ((d_INVERT_C1) ? out_c1^0x01 : out_c1) & 0x01 );
-    		// then c2
-    		output_bits = (output_bits<<1) | (uint16_t) ( ((d_INVERT_C2) ? out_c2^0x01 : out_c2) & 0x01 );
-    
+    		// c1 first then c2
+			const uint16_t bit1 =  (d_INVERT_C1 ? out_c1^static_cast<uint16_t>(0x01) : out_c1) & static_cast<uint16_t>(0x0001);
+			const uint16_t bit2 =  (d_INVERT_C2 ? out_c2^static_cast<uint16_t>(0x01) : out_c2) & static_cast<uint16_t>(0x0001);
+			output_bits = static_cast<uint16_t>(output_bits << 2u) | static_cast<uint16_t>(bit1 << 1u) | bit2;
+    		
     		//printf("output stream: %X\n", output_bits);
     
     		// proceed with next input bit
@@ -117,7 +117,7 @@ namespace gr {
     	return;
     }
     
-    void conv_encode27_aux::puncture(uint16_t& output_bits, uint8_t& num_out_bits, uint16_t input_bits) {
+    void conv_encode27_aux::puncture(uint16_t& output_bits, unsigned int& num_out_bits, uint16_t input_bits) {
     	
     	// count number of output bits
     	num_out_bits = 0;
@@ -147,9 +147,9 @@ namespace gr {
     			//printf("keep it ");
     
     			// shift output to left to make space for the new bit
-    			output_bits = output_bits << 1;
+    			output_bits = static_cast<uint16_t>(output_bits << 1u);
     
-    			const uint16_t bit_mask = 0x8000>>i;
+    			const uint16_t bit_mask = static_cast<uint16_t>(0x8000>>i);
     
     			// is it a one
     			if(input_bits & bit_mask) {
@@ -168,7 +168,7 @@ namespace gr {
     }
     
     
-    void conv_encode27_aux::encode_punct(uint16_t& output_bits, uint8_t& num_out_bits, unsigned char input_byte) {
+    void conv_encode27_aux::encode_punct(uint16_t& output_bits, unsigned int& num_out_bits, unsigned char input_byte) {
     
     	// buffer for encoded and unpunctured bits	
     	uint16_t encoded;

@@ -52,7 +52,7 @@ namespace gr {
     	for(unsigned int count_out=0;count_out<num_out;count_out++) {
     		// true means bit is not dropped, so we need the input bit
     		// false means bi is dropped, so we can retrieve it again (erasure symbol) without an input bit
-    		count_in += pattern[count_pattern] ? 1 : 0;
+    		count_in += pattern[count_pattern] ? 1u : 0u;
     
     		// update wrapping counter for the pattern.
     		count_pattern = (count_pattern+1) % pattern_len;
@@ -65,27 +65,31 @@ namespace gr {
     int conv_decode27_impl::get_start_state(std::string ASM) {
     
     	// get length of ASM
-    	const int asm_len = ASM.length() / 2;
+		assert(ASM.length() % 2u == 0);
+    	const size_t asm_len = utils::divide_ceil(ASM.length(),2lu);
     
     	// Get ASM bytes out of string
     	boost::scoped_array<unsigned char> tmp(new unsigned char[asm_len]);
     	hexstring_to_binary(&ASM, tmp.get());
     
     	// We need the last 6 bits of the ASM
-    	return (int)(tmp[asm_len-1] & 0x3F); // 0x3F = 0011 1111
+		assert(asm_len > 0);
+		const uint8_t byte = tmp.get()[asm_len-1lu];
+    	return byte & static_cast<uint8_t>(0x3F); // 0x3F = 0011 1111
     }
     
     unsigned int conv_decode27_impl::get_term_state(std::string ASM) {
     
     	// get length of ASM
-    	const int asm_len = ASM.length() / 2;
+    	assert(ASM.length() % 2u == 0);
+    	const size_t asm_len = utils::divide_ceil(ASM.length(),2lu);
     
     	// Get ASM bytes out of string
     	boost::scoped_array<unsigned char> tmp(new unsigned char[asm_len]);
     	hexstring_to_binary(&ASM, tmp.get());
     
     	// We need the first 6 bits of the ASM
-    	return (unsigned int) ( (tmp[0] >> 2)  & 0x3F ); // 0x3F = 0011 1111
+    	return (unsigned int) ( static_cast<uint8_t>(tmp.get()[0] >> 2)  & static_cast<uint8_t>(0x3F) ); // 0x3F = 0011 1111
     }
     
     int conv_decode27_impl::convert_poly(const uint8_t in) {
@@ -205,10 +209,10 @@ namespace gr {
 		const size_t num_bits = pmt::length(msg);
 		if (num_bits == d_BLOCK_NUM_BITS_IN) {
 			// everything is as expected
-		} else if (num_bits == utils::divide_floor(num_bits, 8u)*8u) {
+		} else if (num_bits == utils::divide_floor(num_bits, 8lu)*8lu) {
 			// we got a few extra bits so that the total number of bits fits into an integer number of bytes. Do not warn in this case.
 		} else  {
-    		fprintf(stderr,"WARNING CONV DECODE27: expecting message of %u floats, got %lu, skipping.\n",d_BLOCK_NUM_BITS_IN,(long unsigned int)pmt::length(msg));
+    		fprintf(stderr,"WARNING CONV DECODE27: expecting message of %u floats, got %lu, skipping.\n",d_BLOCK_NUM_BITS_IN, pmt::length(msg));
     		return;
     	}
     
@@ -233,7 +237,7 @@ namespace gr {
     	FEC_FUNC_VITERBI27_INIT(d_viterbi, d_START_STATE);
     
     	// fill in data
-    	FEC_FUNC_VITERBI27_UPDATE_BLK(d_viterbi, d_buffer, d_BLOCK_NUM_BITS_OUT+6);
+    	FEC_FUNC_VITERBI27_UPDATE_BLK(d_viterbi, d_buffer, static_cast<int>(d_BLOCK_NUM_BITS_OUT+6u));
     
     	// allocate memory for the decoded bits (will be put into packed bytes
     	// by the library and we checked that the number of bits is a multiple

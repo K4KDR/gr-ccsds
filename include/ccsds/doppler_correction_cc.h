@@ -48,7 +48,7 @@ namespace gr {
        * class. ccsds::doppler_correction_cc::make is the public interface for
        * creating new instances.
        */
-      static sptr make(std::vector<std::string> tles, double sampl_rate, double t_update, double frequency, std::vector<double> lla, size_t blocksize);
+      static sptr make(std::vector<std::string> tles, double sampl_rate, double t_update, double frequency, std::vector<double> lla, unsigned int blocksize);
     };
 
   } // namespace ccsds

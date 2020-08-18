@@ -4,7 +4,7 @@
 
 #include "softbit_msg_sink_f_impl.h"
 #include <gnuradio/io_signature.h>
-
+#include "ccsds_utils.h"
 
 
 namespace gr {
@@ -43,7 +43,7 @@ namespace gr {
     {
     	const float *in = (const float *) input_items[0];
     
-    	unsigned int to_process = noutput_items;
+    	unsigned int to_process = static_cast<unsigned int>(noutput_items);
     
     	while(to_process > 0) {
     
@@ -54,7 +54,7 @@ namespace gr {
     		const unsigned int num_copy = std::min(to_process, d_FRAME_LEN-d_buffer_count);
     
     		// index of the input stream from where to start copying.
-    		const unsigned int num_processed = noutput_items - to_process;
+    		const unsigned int num_processed = utils::minus_cap_zero(static_cast<unsigned int>(noutput_items), to_process);
     
     		// fill buffer
     		memcpy(&d_buffer[d_buffer_count], &in[num_processed], num_copy*sizeof(float));

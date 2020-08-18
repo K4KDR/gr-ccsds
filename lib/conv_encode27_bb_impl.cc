@@ -44,7 +44,9 @@ namespace gr {
     }
     
     void conv_encode27_bb_impl::forecast(int noutput_items, gr_vector_int &ninput_items_required) {
-    	ninput_items_required[0] = std::ceil((noutput_items*8.0f-d_buffer_count) * d_RATE /8.0f);
+    	const size_t num_bytes_req = static_cast<size_t>(noutput_items)*8lu-d_buffer_count;
+		const float num_input_bytes = static_cast<float>(num_bytes_req) * d_RATE/8.0f;
+		ninput_items_required[0] = static_cast<int>(std::ceil(num_input_bytes));
     	//printf("CONVE ENCODE forecast: need %d inputs for %d output. Still have %u bits in buffer\n",ninput_items_required[0], noutput_items, d_buffer_count);
     	return;
     }
@@ -63,7 +65,7 @@ namespace gr {
     	unsigned int num_out = 0;
     
     	// is there still a full byte stored from last time?	
-    	if(d_buffer_count >= 8) {
+    	if(d_buffer_count >= 8u) {
     		// do we have memory to output?
     		if(noutput_items > 0) {
     			// output buffer
@@ -71,9 +73,9 @@ namespace gr {
     			// increase counter
     			num_out++;
     			// shift still unused bits at MSB position in buffer
-    			d_buffer = d_buffer << 8;
+    			d_buffer = static_cast<uint16_t>(d_buffer << 8);
     			// update buffer counter
-    			d_buffer_count -= 8;
+    			d_buffer_count -= 8u;
     		} else {
     			// no output memory
     			fprintf(stderr,"ERROR CONV ENCODE: called general_work() but no output memory allocated .\n");
@@ -89,7 +91,7 @@ namespace gr {
     		// so we will create one or two new output bits.
     
     		uint16_t bits_enc;
-    		uint8_t num_bits_out;
+    		unsigned int num_bits_out;
     
     		// read in new byte and encode it
     		encode_punct(bits_enc, num_bits_out, in[num_in]);
@@ -102,17 +104,17 @@ namespace gr {
     			// d_buffer_count old bytes at the front
     
     			// first make sure that the bits are left aligned
-    			uint16_t new_bits = bits_enc << (16-num_bits_out);
+    			uint16_t new_bits = static_cast<uint16_t>(bits_enc << (16u-num_bits_out));
     			// then shift back to the right to make space for the
     			// data and make sure the left 8 bits are empty as we
     			// want to cast to byte.
-    			new_bits = new_bits >> (d_buffer_count + 8);
+    			new_bits = static_cast<uint16_t>(new_bits >> (d_buffer_count + 8u));
     
     			// add bits from buffer
-    			new_bits |= (d_buffer >> 8);
+    			new_bits |= static_cast<uint16_t>(d_buffer >> 8);
     
     			// update bit count
-    			num_bits_out -= (8-d_buffer_count);
+    			num_bits_out -= (8u-d_buffer_count);
     
     			// empty buffer
     			d_buffer = 0;
@@ -129,7 +131,7 @@ namespace gr {
     		// are there a few bits left that did not fit into a full byte?
     		if(num_bits_out > 0) {
     			// align them to start at the MSB of a byte.
-    			d_buffer = bits_enc << (16-num_bits_out);
+    			d_buffer = static_cast<uint16_t>(bits_enc << (16u-num_bits_out));
     			d_buffer_count = num_bits_out;
     		}
     	}
@@ -137,10 +139,10 @@ namespace gr {
     	//printf("    %u bytes read, %u bytes written, %d bits in buffer\n",num_in,num_out,d_buffer_count);
     
     	// consume input stream
-    	consume_each(num_in);
+    	consume_each(static_cast<int>(num_in));
     
     	// Tell runtime system how many output items we produced.
-    	return num_out;
+    	return static_cast<int>(num_out);
     }
 
   } // namespace ccsds

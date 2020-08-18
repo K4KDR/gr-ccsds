@@ -92,7 +92,7 @@ namespace gr {
     	 *	bits in \c output_bits.
     	 *  \param input_bits Encoded unpunctured input bitstream (16bits).
     	 */
-    	void puncture(uint16_t& output_bits, uint8_t& num_out_bits, uint16_t input_bits);
+    	void puncture(uint16_t& output_bits, unsigned int& num_out_bits, uint16_t input_bits);
     
     public:
     	/*!
@@ -135,7 +135,7 @@ namespace gr {
     	 *	information based on chosen puncturing.
     	 *  \param input_byte 8 input bits to encode and puncture.
     	 */
-    	void encode_punct(uint16_t& output_bits, uint8_t& num_out_bits, unsigned char input_byte);
+    	void encode_punct(uint16_t& output_bits, unsigned int& num_out_bits, unsigned char input_byte);
     };
 
   } // namespace ccsds

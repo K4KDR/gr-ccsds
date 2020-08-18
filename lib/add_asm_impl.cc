@@ -4,6 +4,7 @@
 
 #include "add_asm_impl.h"
 #include "hexstring_to_binary.h"
+#include "ccsds_utils.h"
 #include <gnuradio/io_signature.h>
 
 namespace gr {
@@ -20,7 +21,9 @@ namespace gr {
     add_asm_impl::add_asm_impl(std::string ASM, const unsigned int frame_len)
       : gr::sync_block ("add_asm",
     	gr::io_signature::make (0, 0, 0),
-    	gr::io_signature::make (0, 0, 0)), d_ASM_LEN(std::floor(ASM.length()/2)), d_FRAME_LEN(frame_len)
+    	gr::io_signature::make (0, 0, 0)),
+		d_ASM_LEN(static_cast<unsigned int>(utils::divide_floor<size_t>(ASM.length(), 2))),
+		d_FRAME_LEN(frame_len)
     {
     	// Transfer ASM from Hex to bytes
     	d_ASM = new unsigned char[d_ASM_LEN];

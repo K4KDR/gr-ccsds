@@ -4,6 +4,7 @@
 
 #include "mpsk_detector_soft_cf_impl.h"
 #include <ccsds/softbits.h>
+#include "ccsds_utils.h"
 #include <gnuradio/io_signature.h>
 
 
@@ -22,8 +23,8 @@ namespace gr {
     	  gr::io_signature::make (1, 1, sizeof (float)),get_ldM(M)),
     	d_M(M),
     	d_ldM(get_ldM(M)),
-    	d_TWOPI(2.0*M_PI),
-		d_PHASE_OFFSET_RAD(phase_offset_points*2.0f*M_PI/static_cast<float>(M))
+    	d_TWOPI(static_cast<float>(2.0*M_PI)),
+		d_PHASE_OFFSET_RAD(phase_offset_points*d_TWOPI/static_cast<float>(M))
     {
     	if(d_M > 256) {
     		fprintf(stderr,"ERROR MPSK DETECTOR SOFT: modulation order M=%d to high (maximum 256).\n",d_M);
@@ -33,10 +34,9 @@ namespace gr {
     
     	map = make_mpsk_map(M);
     
-    	const int alignment_multiple = volk_get_alignment() / sizeof(gr_complex);
-    	set_alignment(std::max(1, alignment_multiple));
+    	set_alignment(utils::pick_smaller<size_t, int>(1lu, volk_get_alignment() / sizeof(gr_complex)));
     
-    	set_output_multiple(d_ldM);
+    	set_output_multiple(static_cast<int>(d_ldM));
     }
     
     mpsk_detector_soft_cf_impl::~mpsk_detector_soft_cf_impl ()
@@ -56,13 +56,13 @@ namespace gr {
     	const gr_complex *in = (const gr_complex *) input_items[0];
     	float *out = (float *) output_items[0];
     
-    	if(noutput_items%d_ldM != 0) {
+    	if(static_cast<unsigned int>(noutput_items)%d_ldM != 0u) {
     		fprintf(stderr,"ERROR MPSK DETECTOR SOFT: Requested %u output samples, which is not a multiple of %u.\n",noutput_items, d_ldM);
     		exit(EXIT_FAILURE);
     		return 0;
     	}
     
-    	const unsigned int num_in = noutput_items/d_ldM;
+    	const unsigned int num_in = static_cast<unsigned int>(noutput_items)/d_ldM;
     
     	if(num_in == 0) {
     		printf("nothing to do, because of lacking input items\n");
@@ -104,7 +104,7 @@ namespace gr {
     	volk_free(tmp_mag);
     
     	// Tell runtime system how many output items we produced.
-    	return num_in*d_ldM;
+    	return noutput_items;
     }
 
   } // namespace ccsds

@@ -62,14 +62,13 @@ namespace gr {
     }
 
     int tag_storage_impl::general_work(int noutput_items,
-        gr_vector_int &ninput_items,
-        gr_vector_const_void_star &input_items,
-        gr_vector_void_star &output_items)
+        gr_vector_int &/*ninput_items*/,
+        gr_vector_const_void_star &/*input_items*/,
+        gr_vector_void_star &/*output_items*/)
     {
-      assert(noutput_items == ninput_items[0]);
-      processTags(noutput_items);
+      processTags(static_cast<size_t>(noutput_items));
 
-      const bool eof = d_eof_offset && nitems_read(0)+noutput_items >= d_eof_offset.value();
+      const bool eof = d_eof_offset && (nitems_read(0)+static_cast<uint64_t>(noutput_items) >= d_eof_offset.value());
       
       consume_each(noutput_items);
 

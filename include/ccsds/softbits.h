@@ -26,9 +26,9 @@ namespace gr {
          * To avoid numeric issues [1] is used for negative LLRs and [2] is used for positive LLRs.
          */
         static constexpr float probability_one(float llr_one) {
-          return (llr_one < 0.0)
-            ? std::exp(-llr_one)/(1.0+std::exp(-llr_one))
-            : 1.0/(std::exp(llr_one)+1.0)
+          return (llr_one < 0.0f)
+            ? std::exp(llr_one)/(1.0f+std::exp(llr_one))
+            : 1.0f/(std::exp(-llr_one)+1.0f)
           ;
         }
 
@@ -42,9 +42,9 @@ namespace gr {
          * To avoid numeric issues [1] is used for negative LLRs and [2] is used for positive LLRs.
          */
         static constexpr float probability_zero(float llr_one) {
-          return (llr_one < 0.0)
-            ? 1.0/(std::exp(llr_one)+1.0)
-            : std::exp(-llr_one)/(1.0+std::exp(-llr_one))
+          return (llr_one < 0.0f)
+            ? 1.0f/(std::exp(llr_one)+1.0f)
+            : std::exp(-llr_one)/(1.0f+std::exp(-llr_one))
           ;
         }
         
@@ -52,7 +52,7 @@ namespace gr {
         template <typename T> static constexpr T floor_to(float in) {
           return (static_cast<float>(static_cast<T>(in)) == in)
             ? static_cast<T>(in)
-            : (static_cast<T>(in) - static_cast<T>((in > 0) ? 0 : 1))
+            : (static_cast<T>(in) - ((in > 0.0f) ? static_cast<T>(0) : static_cast<T>(1)))
           ;
         }
 
@@ -60,7 +60,7 @@ namespace gr {
         template <typename T> static constexpr T ceil_to(float in) {
           return (static_cast<float>(static_cast<T>(in)) == in)
             ? static_cast<T>(in)
-            : (static_cast<T>(in) + static_cast<T>((in > 0) ? 1 : 0))
+            : (static_cast<T>(in) + ((in > 0.0f) ? static_cast<T>(1) : static_cast<T>(0)))
           ;
         }
 
@@ -73,7 +73,7 @@ namespace gr {
          * 255 is a string one bit
          */
         static constexpr uint8_t map_to_uint8(float llr_one) {
-          return floor_to<uint64_t>( llr_one*255.0 );
+          return static_cast<uint8_t>(floor_to<unsigned int>( probability_one(llr_one)*255.0f ));
         }
 
         /** 
@@ -81,15 +81,15 @@ namespace gr {
          * 
          * \return Either 0 or 1
          */
-        static uint8_t hard_decision(float llr_one) {
-          return (llr_one >= 0.0) ? 1u : 0u;
+        template<typename T=uint8_t> static T hard_decision(float llr_one) {
+          return (llr_one >= 0.0f) ? static_cast<T>(1) : static_cast<T>(0);
         }
 
         /**
          * \brief Compute LLR based on (real) symbol value. Assuming positive value means 1, negative value means 0
          */
-        static constexpr float create_from_sample(float symbol, float noise_power=1.0) {
-          return 2.0*symbol/noise_power;
+        static constexpr float create_from_sample(float symbol, float noise_power=1e-3f) {
+          return 2.0f*symbol/noise_power;
         }
 
         /**

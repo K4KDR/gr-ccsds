@@ -3,6 +3,7 @@
 
 #include <cstdio>
 #include <vector>
+#include <string>
 
 namespace gr {
   namespace ccsds {
@@ -66,7 +67,7 @@ inline void hexstring_to_binary(const std::string *str, unsigned char *bin) {
 	// go through all output bytes
 	for(unsigned int i=0;i<str->length()/2;i++) {
 		//       first hex value shifted by 4   second hex value (unshifted)
-		bin[i] =  (hex2bin(c_str[2*i]) << 4)  |    hex2bin(c_str[2*i+1]);
+		bin[i] =  static_cast<unsigned char>(hex2bin(c_str[2*i]) << 4)  |    hex2bin(c_str[2*i+1]);
 	}
 
 	return;
@@ -85,7 +86,7 @@ namespace byteutils {
 			while(num_bits_read <= 7u) {
 				// read bit
 				const T bit = (byte>>(7-num_bits_read++)) & 0x01;
-				tmp = (tmp << 1) | bit;
+				tmp = static_cast<T>(tmp << 1) | bit;
 				num_bits_collected++;
 				
 				if (num_bits_collected >= num_bits_per_symbol) {
@@ -111,7 +112,7 @@ namespace byteutils {
 		const size_t num_bytes = hex.length()/2u;
 		std::vector<uint8_t> bytes(num_bytes);
 		for (size_t i=0u; i<num_bytes; i++) {
-			bytes[i] = (hex2bin(c_str[2u*i]) << 4) | hex2bin(c_str[2u*i+1u]);
+			bytes[i] = static_cast<unsigned char>(hex2bin(c_str[2u*i]) << 4) | hex2bin(c_str[2u*i+1u]);
 		}
 		return bytes;
 	}

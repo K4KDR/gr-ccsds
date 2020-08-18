@@ -36,7 +36,7 @@ namespace gr {
       d_constellation.resize(4);
       // Gray-coded
 
-      const float component = 1.0/std::sqrt(2.0);
+      const float component = 1.0f/std::sqrt(2.0f);
       d_constellation[0] = gr_complex(+component, +component);
       d_constellation[1] = gr_complex(+component, -component);
       d_constellation[2] = gr_complex(-component, +component);
@@ -53,7 +53,7 @@ namespace gr {
     constellation_ccsds_qpsk::~constellation_ccsds_qpsk() {}
 
     std::vector<float> constellation_ccsds_qpsk::calc_soft_dec(gr_complex sample, float npwr) {
-      const float component = 1.0/std::sqrt(2.0);
+      const float component = 1.0f/std::sqrt(2.0f);
       return {
         -2.0f*component*std::real(sample)/npwr,
         -2.0f*component*std::imag(sample)/npwr

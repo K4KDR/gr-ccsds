@@ -103,17 +103,17 @@ namespace gr {
     	return d_phi;
     }
     
-    inline float lpf2::wrap(float in, float max) {
+    inline double lpf2::wrap(double in, double max) {
     	// if nothing to wrap, return immediatley
     	if(in <= max && in > -max) {
     		return in;
     	}
     
     	while(in > max) {
-    		in -= 2.0*max;
+    		in -= 2.0f*max;
     	}
     	while(in <= -max) {
-    		in += 2.0*max;
+    		in += 2.0f*max;
     	}
     
     	return in;
@@ -158,8 +158,8 @@ namespace gr {
     
     void lpf2::filter_wrapped(float *values, float *freq_est, const float wrap_max, const unsigned int n) {
     	for(unsigned int i=0;i<n;i++) {
-    		values[i] = filter_step_wrapped(values[i], wrap_max);
-    		freq_est[i] = get_freq_estimate();
+    		values[i] = static_cast<float>(filter_step_wrapped(values[i], wrap_max));
+    		freq_est[i] = static_cast<float>(get_freq_estimate());
     	}
     }
     

@@ -37,10 +37,10 @@ namespace gr {
                              gr_vector_const_void_star   &input_items,
                              gr_vector_void_star         &output_items)
     {
-    	const char *in = (const char *) input_items[0];
+    	const uint8_t *in = (const uint8_t *) input_items[0];
     	gr_complex *out = (gr_complex *) output_items[0];
     
-    	const unsigned int num = noutput_items;
+    	const unsigned int num = static_cast<unsigned int>(noutput_items);
     
     	for(unsigned int i=0;i<num;i++) {
     		out[i] = d_constellation[(in[i]) % d_M];
@@ -49,7 +49,7 @@ namespace gr {
     	//consume_each(i);
     
     	// Tell runtime system how many output items we produced.
-    	return num;
+    	return noutput_items;
     }
 
   } // namespace ccsds

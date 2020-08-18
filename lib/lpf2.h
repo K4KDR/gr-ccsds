@@ -120,7 +120,7 @@ namespace gr {
     	 *  the interval between -pi and pi. This could be achieved by:
     	 *  \code wrap(phi, pi); \endcode
     	 */
-    	float wrap(float in, float max);
+    	double wrap(double in, double max);
     
     	/*! \brief Update filtered state from a single input.
     	 *

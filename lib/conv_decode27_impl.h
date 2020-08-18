@@ -112,8 +112,7 @@ namespace gr {
     	 *	\c block_len / 8).
     	 *  \param ASM Unencoded attached sync marker that is used to determine the
     	 *	start and termination state of the decoder.
-    	 *  \return Shared pointer of the Convolutional encoder block.
-    	 *
+    	 *  
     	 *  The compact generator polynom contains two informations. Encoded in the MSB
     	 *  is the information whether the stream should be inverted (MSB set) or not
     	 *  (MSB unset). Encoded in the 7 less significant bits is the information about

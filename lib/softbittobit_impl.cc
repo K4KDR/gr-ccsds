@@ -60,7 +60,7 @@ namespace gr {
 			  gr_vector_void_star &output_items)
     {
         const float *in = (const float *) input_items[0];
-        char *out = (char *) output_items[0];
+        uint8_t *out = (uint8_t *) output_items[0];
 
 	      for (int i=0; i<noutput_items; i++) {
 	        out[i] = softbits::hard_decision(in[i]);

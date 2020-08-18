@@ -3,9 +3,7 @@
 #endif
 
 #include "blob_msg_source_b_impl.h"
-//#include <gr_io_signature.h>
-//#include <gr_msg_queue.h>
-//#include <gr_message.h>
+#include "ccsds_utils.h"
 
 namespace gr {
   namespace ccsds {
@@ -77,7 +75,7 @@ namespace gr {
     
     	// check if message has right length
     	if(pmt::length(msg) != d_BLOB_LEN) {
-    		fprintf(stderr,"WARNING MSG BLOB SOURCE: message of length %lu does not match the expected length of %u, skipping.\n",(long unsigned int)pmt::length(msg), d_BLOB_LEN);
+    		fprintf(stderr,"WARNING MSG BLOB SOURCE: message of length %lu does not match the expected length of %u, skipping.\n", pmt::length(msg), d_BLOB_LEN);
     		return;
     	}
     
@@ -105,9 +103,9 @@ namespace gr {
     
     	unsigned char *out = (unsigned char *) output_items[0];
     
-    	const unsigned int num_out = std::min(noutput_items,(int)d_queue.size());
+    	const size_t num_out = utils::pick_smaller(static_cast<size_t>(noutput_items),d_queue.size());
     
-    	for(unsigned int i=0;i<num_out;i++) {
+    	for(size_t i=0;i<num_out;i++) {
     		// Pull element from queue
     		out[i] = d_queue.front();
     
@@ -115,7 +113,7 @@ namespace gr {
     		d_queue.pop();
     	}
     
-    	return num_out;
+    	return static_cast<int>(num_out);
     }
 
   } // namespace ccsds 

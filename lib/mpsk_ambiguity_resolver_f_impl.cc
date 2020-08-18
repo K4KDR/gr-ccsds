@@ -321,9 +321,11 @@ namespace gr {
 			    time_frac  = pmt::to_uint64(pmt::tuple_ref( d_tag_buffer["rx_time"], 0 ));
 		      } else {
 			    fprintf(stderr,"ERROR AR: time tag has %lu elements. 2 were expected.\n", pmt::length(d_tag_buffer["rx_time"]));
+			    return dict;
 		      }
 		} else {
 		      fprintf(stderr,"ERROR AR: time tag has wrong format.\n");
+		      return dict;
 		}
     
     		// update fractional time passed

@@ -4,6 +4,7 @@
 
 #include "pll_cc_impl.h"
 #include <gnuradio/io_signature.h>
+#include "ccsds_utils.h"
 #include <volk/volk.h>
 #include <stdio.h>
 #include <math.h>
@@ -26,8 +27,8 @@ namespace gr {
     	gr::io_signature::make (1, 1, sizeof (gr_complex)),
     	gr::io_signature::make (1, 1, sizeof (gr_complex))), d_M(m)
     {
-    	const int alignment_multiple = volk_get_alignment() / sizeof(gr_complex);
-    	set_alignment(std::max(1, alignment_multiple));
+    	const int alignment_multiple = static_cast<int>(volk_get_alignment() / sizeof(gr_complex));
+    	set_alignment(utils::pick_larger<int>(1, alignment_multiple));
     
     	d_filter = ccsds_make_lpf2(loop_bandwidth, 0.5, 1.0);
     
@@ -194,9 +195,8 @@ namespace gr {
     	gr_complex *out = (gr_complex *) output_items[0];
     	
     	// how many samples can we process?
-    	unsigned int num = (noutput_items > ninput_items[0]) ? ninput_items[0] : noutput_items;
-    	const uint64_t nread = this->nitems_read(0); //number of items read on port 0
-    
+    	const unsigned int num = static_cast<unsigned int>(utils::pick_smaller(noutput_items, ninput_items[0]));
+    	
     	// auxilliary variables
     	gr_complex *tmp_c;
     	float *tmp_f, *tmp_freq;
@@ -236,7 +236,7 @@ namespace gr {
     	#endif
     
     	// Put these calculations into the filter
-    	d_filter->filter_wrapped(tmp_f, tmp_freq, M_PI/(float)d_M,num);
+    	d_filter->filter_wrapped(tmp_f, tmp_freq, static_cast<float>(M_PI)/static_cast<float>(d_M),num);
     	
     	
     	// rotate the samples according to the filtered phase
@@ -257,10 +257,10 @@ namespace gr {
     	volk_free(tmp_c);
     
     	// Tell runtime how many input samples we used
-    	consume_each(num);
+    	consume_each(static_cast<int>(num));
     
     	// Tell runtime system how many output items we produced
-    	return num;
+    	return static_cast<int>(num);
     }
 
   } // namespace ccsds

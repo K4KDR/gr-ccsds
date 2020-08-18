@@ -19,11 +19,11 @@ namespace gr {
       
       class range {
       private:
-        elsetrec sat_struct;
         double t_since0;
         double jd0;
         bool started;
         std::array<double, 3> lla_scaled;
+        elsetrec sat_struct;
         
       public:
         range(std::string tle1, std::string tle2, std::array<double,3> lla);

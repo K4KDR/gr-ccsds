@@ -35,7 +35,7 @@ namespace gr {
     {
      private:
        const float d_scale;
-       const size_t d_blocksize;
+       const unsigned int d_blocksize;
        orbits::RangeInterpolator d_range;
        float *d_tmp_f1;
        float *d_tmp_f2;
@@ -48,7 +48,7 @@ namespace gr {
                                  double t_update,
                                  double frequency,
                                  std::array<double,3> lla,
-                                 size_t block_length);
+                                 unsigned int block_length);
       ~doppler_correction_cc_impl();
 
       bool start() override;

@@ -3,6 +3,7 @@
 #endif
 
 #include "blob_msg_sink_b_impl.h"
+#include "ccsds_utils.h"
 #include <gnuradio/io_signature.h>
 
 
@@ -41,27 +42,28 @@ namespace gr {
                                     gr_vector_const_void_star&   input_items,
                                     gr_vector_void_star&         /*output_items*/)
     {
-    	const unsigned char *in = (const unsigned char *) input_items[0];
+        const unsigned char *in = (const unsigned char *) input_items[0];
     
-    	unsigned int to_process = noutput_items;
-    
-    	while(to_process > 0) {
+        const unsigned int num_out = static_cast<unsigned int>(noutput_items);
+        
+        unsigned int num_processed = 0u;
+        while(utils::minus_cap_zero(num_out, num_processed) > 0u) {
     
     		// fill buffer
     
     		// how many bytes to copy before either the buffer is full, or
     		// we processed all input samples?
-    		const unsigned int num_copy = std::min(to_process, d_BLOB_LEN-d_buffer_count);
-    
-    		// index of the input stream from where to start copying.
-    		const unsigned int num_processed = noutput_items - to_process;
-    
+    		const unsigned int num_copy = utils::pick_smaller(
+				utils::minus_cap_zero(num_out, num_processed),
+				utils::minus_cap_zero(d_BLOB_LEN, d_buffer_count)
+			);
+			
     		// fill buffer
     		memcpy(&d_buffer[d_buffer_count], &in[num_processed], num_copy);
     
     		// updated counters
     		d_buffer_count += num_copy;
-    		to_process -= num_copy;
+			num_processed += num_copy;
     
     
     		// empty buffer, if full

@@ -49,7 +49,8 @@ namespace gr {
      */
     inline gr_complex* make_psk_const(unsigned int M) {
     	// create phasor for rotation between the symbols
-    	const gr_complex diff_phasor = gr_complex(cos(2*M_PI/M),sin(2*M_PI/M));
+      const float kTwoPiPerM = static_cast<float>(2.0*M_PI)/static_cast<float>(M);
+    	const gr_complex diff_phasor = gr_complex(cosf(kTwoPiPerM),sinf(kTwoPiPerM));
     
     	// initial phasor is on the real axis
     	gr_complex phasor = gr_complex(1.0f,0.0f);
@@ -96,7 +97,7 @@ namespace gr {
     	gr_complex *map = new gr_complex[4];
     
     	// scale factor to normalize constellation
-    	const float scale = 1.0/sqrt(2.0);
+    	const float scale = 1.0f/sqrt(2.0f);
     
     	map[0] = gr_complex( 1.0f, 1.0f) * scale;
     	map[1] = gr_complex( 1.0f,-1.0f) * scale;

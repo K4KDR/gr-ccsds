@@ -103,10 +103,12 @@ namespace gr {
         return ret;
       }
       
-
       range::range(std::string tle1, std::string tle2, std::array<double,3> lla)
-          : lla_scaled({lla[0]*M_PI/180.0, lla[1]*M_PI/180.0, lla[2]/1e3}),
-            started(false) {
+          : t_since0(0.0),
+            jd0(0.0),
+            started(false),
+            lla_scaled({lla[0]*M_PI/180.0, lla[1]*M_PI/180.0, lla[2]/1e3})
+          {
         assert(lla[0] >=  -90.0);
         assert(lla[0] <=  +90.0);
         assert(lla[1] >= -180.0);

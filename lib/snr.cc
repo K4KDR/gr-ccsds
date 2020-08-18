@@ -71,7 +71,7 @@ namespace gr {
     }
 
     float snr::SNR_dB() const {
-      return 10.0*std::log10(Es()/N0());
+      return 10.0f*std::log10(Es()/N0());
     }
 
   } /* namespace ccsds */

@@ -36,7 +36,7 @@ namespace gr {
 
 	// iterate from (input) LSB (i=0) to MSB (i=7)
 	for(unsigned char i=0;i<8;i++) {
-		out = (out << 1) | ( (in >> i) & 0x01 );
+		out = static_cast<unsigned char>(out << 1) | ( static_cast<unsigned char>(in >> i) & static_cast<unsigned char>(0x01) );
 	}
 	return out;
     }
@@ -73,7 +73,7 @@ namespace gr {
     	}
 
 	// check message length
-    	const unsigned int BLOB_LEN = pmt::length(msg);
+    	const size_t BLOB_LEN = pmt::length(msg);
 	if(BLOB_LEN != d_MSG_LEN) {
 		fprintf(stderr,"WARNING REVERSEBITS: message of length %lu does not match expected length of %lu, skipping.\n", (long unsigned int)BLOB_LEN, (long unsigned int)d_MSG_LEN);
 		return;
@@ -83,15 +83,15 @@ namespace gr {
 
     	// Assign input and output pointer
     	const unsigned char *data_in = (const unsigned char *) pmt::blob_data(msg);
-	unsigned char data_out[d_MSG_LEN];
+	std::vector<unsigned char> data_out(d_MSG_LEN);
 
 	// Copy message, reverse bits afterwards
-	memcpy(data_out, data_in, d_MSG_LEN);
+	memcpy(data_out.data(), data_in, d_MSG_LEN);
 
 	// Iterate over all bytes to reverse
 	for(std::vector<unsigned int>::const_iterator it = d_POSITIONS.begin(); it != d_POSITIONS.end(); ++it) {
 		// Check if index is within our message
-		if(*it >= d_MSG_LEN || *it < 0) {
+		if(*it >= d_MSG_LEN) {
 			fprintf(stderr, "WARNING REVERSEBITS: attempting to reverse bits of byte at position %lu, which is outside the message, skipping.\n", (long unsigned int)*it);
 			continue;
 		}
@@ -101,7 +101,7 @@ namespace gr {
 	}
 
     	// Generate output message data
-    	pmt::pmt_t msg_out_data = pmt::make_blob(data_out, BLOB_LEN);
+    	pmt::pmt_t msg_out_data = pmt::make_blob(data_out.data(), BLOB_LEN);
 
     	// Construct the new message using the received header
     	pmt::pmt_t msg_out = pmt::cons(hdr, msg_out_data);

@@ -50,14 +50,14 @@ namespace gr {
     
     		// go through all positions in input_bits and summ them up
     		for(unsigned int j=0;j<8;j++) {
-    			input_bit ^= (input_bits>>j) & 0x01;
+    			input_bit ^= static_cast<uint8_t>(input_bits>>j) & static_cast<uint8_t>(0x01);
     		}
     
     		// collect the MSB as output before it is shifted out of scope
-    		out = (out<<1) | ((d_state>>7) & 0x01);
+    		out = static_cast<uint8_t>(out<<1) | static_cast<uint8_t>((d_state>>7) & 0x01);
     
     		// perform the shift and add new bit
-    		d_state = (d_state<<1) | input_bit;
+    		d_state = static_cast<uint8_t>(d_state<<1) | input_bit;
     	}
     
     	// The state has been updated 8 times now, output the collected bits
@@ -96,7 +96,7 @@ namespace gr {
     	}
     
     	// Message is BLOB
-    	const unsigned int BLOB_LEN = pmt::length(msg);
+    	const size_t BLOB_LEN = pmt::length(msg);
     
     	// Assign input and output pointer
     	const uint8_t *data_in = (const uint8_t *) pmt::blob_data(msg);

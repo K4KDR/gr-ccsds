@@ -25,6 +25,8 @@
 #include <gnuradio/io_signature.h>
 #include "ldpc_encoder_impl.h"
 
+#include <vector>
+
 namespace gr {
   namespace ccsds {
 
@@ -54,7 +56,7 @@ namespace gr {
             punct_pos_in = new uint64_t[num_punct];
             punct_pos_in_allocated=true;
             for(size_t i=0; i<num_punct; i++) {
-                punct_pos_in[i] = (uint64_t)punct_pos[i];
+                punct_pos_in[i] = punct_pos[i];
             }
         }
         // Create LDPC encoder
@@ -124,13 +126,13 @@ namespace gr {
     
     	// Message is BLOB
     	const uint8_t *data_in = (const unsigned char *) pmt::blob_data(msg);
-        uint8_t data_out[M_punct_bytes];
+        std::vector<uint8_t> data_out(M_punct_bytes);
         
     	// encode
-        this->d_encoder->encode(data_out, data_in);
+        this->d_encoder->encode(data_out.data(), data_in);
         
     	// create output message data
-    	pmt::pmt_t msg_out_data = pmt::make_blob(data_out, M_punct_bytes);
+    	pmt::pmt_t msg_out_data = pmt::make_blob(data_out.data(), M_punct_bytes);
     
     	// Construct the new message using the received header
     	pmt::pmt_t msg_out = pmt::cons(hdr, msg_out_data);
@@ -140,8 +142,8 @@ namespace gr {
     }
     
     int ldpc_encoder_impl::work(int noutput_items,
-        gr_vector_const_void_star &input_items,
-        gr_vector_void_star &output_items)
+        gr_vector_const_void_star &/*input_items*/,
+        gr_vector_void_star &/*output_items*/)
     {
       return (noutput_items >= 0) ? 0 : -1;
     }

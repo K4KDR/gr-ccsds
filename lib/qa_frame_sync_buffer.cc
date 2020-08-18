@@ -13,12 +13,11 @@ namespace gr {
 
     void qa_frame_sync_buffer::test() {
       const size_t kBlockLen = 255;
-      const volk::vector<gr_complex> kAsm = {0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8};
+      const volk::vector<gr_complex> kAsm = {0.1f, 0.2f, 0.3f, 0.4f, 0.5f, 0.6f, 0.7f, 0.8f};
       const size_t kOverlap = kAsm.size() -1u;
       size_t num_items_in_buffer = 0u;
       aux::frame_sync_buffer buffer(kBlockLen, kAsm, 2u, 0u);
       
-      printf("Block length %lu, ASM length %lu, #symbols missing %lu\n", kBlockLen, kAsm.size(), buffer.num_symbols_missing());
       CPPUNIT_ASSERT( !buffer.full() );
       CPPUNIT_ASSERT( buffer.offset() == 0u );
       CPPUNIT_ASSERT( buffer.num_symbols_missing() == kBlockLen + kAsm.size() -1u );
@@ -31,7 +30,7 @@ namespace gr {
           in[j+i*kBlockLen] = static_cast<float>(j) + static_cast<float>(i)*kBlockLen;
         }
       }
-      size_t num_read = buffer.read_signal(&in[0u], kBlockLen+kOverlap, snr(1.0f, 1e-5));
+      size_t num_read = buffer.read_signal(&in[0u], kBlockLen+kOverlap, snr(1.0f, 1e-5f));
       CPPUNIT_ASSERT_EQUAL(kBlockLen + kAsm.size() -1u, num_read);
       CPPUNIT_ASSERT( buffer.full() );
       num_items_in_buffer += num_read;
@@ -46,7 +45,7 @@ namespace gr {
       CPPUNIT_ASSERT( !buffer.full() );
 
       // Frame 2
-      num_read = buffer.read_signal(&in[num_items_in_buffer], kBlockLen, snr(1.0f, 1e-5));
+      num_read = buffer.read_signal(&in[num_items_in_buffer], kBlockLen, snr(1.0f, 1e-5f));
       CPPUNIT_ASSERT_EQUAL(kBlockLen, num_read);
       CPPUNIT_ASSERT( buffer.full() );
       num_items_in_buffer += num_read;
@@ -60,7 +59,7 @@ namespace gr {
       CPPUNIT_ASSERT( !buffer.full() );
 
       // Frame 3
-      num_read = buffer.read_signal(&in[num_items_in_buffer], kBlockLen, snr(1.0f, 1e-5));
+      num_read = buffer.read_signal(&in[num_items_in_buffer], kBlockLen, snr(1.0f, 1e-5f));
       CPPUNIT_ASSERT_EQUAL(kBlockLen, num_read);
       CPPUNIT_ASSERT( buffer.full() );
       num_items_in_buffer += num_read;

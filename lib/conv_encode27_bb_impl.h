@@ -24,7 +24,7 @@ namespace gr {
     	 *
     	 *  \sa d_buffer
     	 */
-    	uint8_t  d_buffer_count;
+    	unsigned int d_buffer_count;
 
     public:
     	/*! \brief Public constructor for the convolutional encoder block.
@@ -32,7 +32,6 @@ namespace gr {
     	 *  \param gen_poly_c1 Compact generator polynom for c1 stream. Default is 0x79.
     	 *  \param gen_poly_c2 Compact generator polynom for c2 stream. Default is 0xDB.
     	 *  \param puncturing_type Symbol for type of puncturing. Default is NONE.
-    	 *  \return Shared pointer of the Convolutional encoder block.
     	 *
     	 *  The compact generator polynom contains two informations. Encoded in the MSB
     	 *  is the information whether the stream should be inverted (MSB set) or not

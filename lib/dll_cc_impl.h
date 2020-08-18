@@ -74,7 +74,7 @@ namespace gr {
     	 *  interpolated sample lies exactly in the middle between the basepoint
     	 *  sample and the following sample.
     	 */
-    	double d_mu;
+    	float d_mu;
     
     	/*! \brief Storage for complex to real conversion */
     	float *d_real;

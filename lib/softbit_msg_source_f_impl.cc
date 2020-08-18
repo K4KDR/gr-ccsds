@@ -3,9 +3,7 @@
 #endif
 
 #include "softbit_msg_source_f_impl.h"
-//#include <gr_io_signature.h>
-//#include <gr_msg_queue.h>
-//#include <gr_message.h>
+#include "ccsds_utils.h"
 
 namespace gr {
   namespace ccsds {
@@ -77,7 +75,7 @@ namespace gr {
     
     	// check if message has right length
     	if(pmt::length(msg) != d_FRAME_LEN) {
-    		fprintf(stderr,"WARNING MSG SOFTBIT SOURCE: message of length %lu does not match the expected length of %u, skipping.\n",(long unsigned int)pmt::length(msg), d_FRAME_LEN);
+    		fprintf(stderr,"WARNING MSG SOFTBIT SOURCE: message of length %lu does not match the expected length of %u, skipping.\n", pmt::length(msg), d_FRAME_LEN);
     		return;
     	}
     
@@ -101,7 +99,7 @@ namespace gr {
     
     	float *out = (float *) output_items[0];
     
-    	const unsigned int num_out = std::min(noutput_items,(int)d_queue.size());
+    	const size_t num_out = utils::pick_smaller(static_cast<size_t>(noutput_items),d_queue.size());
     
     	for(unsigned int i=0;i<num_out;i++) {
     		// Pull element from queue
@@ -111,7 +109,7 @@ namespace gr {
     		d_queue.pop();
     	}
     
-    	return num_out;
+    	return static_cast<int>(num_out);
     }
 
   } // namespace ccsds 

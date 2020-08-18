@@ -3,6 +3,7 @@
 #endif
 
 #include "dll_cc_impl.h"
+#include "ccsds_utils.h"
 #include <gnuradio/io_signature.h>
 #include <math.h>
 #include <complex>
@@ -86,7 +87,7 @@ namespace gr {
     void dll_cc_impl::forecast(int noutput_items,gr_vector_int &ninput_items_required){
     	// basically decimating by a factor of d_OSF, but for interpolation we
     	// need to see 2 more samples "into the future"
-    	ninput_items_required[0] = d_OSF * noutput_items + 4;
+    	ninput_items_required[0] = static_cast<int>(d_OSF) * noutput_items + 4;
     }
     
     inline void dll_cc_impl::to_real(float *out, const gr_complex *in, const unsigned int num) {
@@ -201,7 +202,7 @@ namespace gr {
     	//float *freq = (float *) output_items[1];
     	
     	// how many samples can we process?
-    	unsigned int num = ninput_items[0];
+    	unsigned int num = static_cast<unsigned int>(ninput_items[0]);
     	
     	// how many samples to output, when we want to have 2*d_OSF spare
     	// samples at the end and one at the front, to ensure the interpolator
@@ -310,7 +311,7 @@ namespace gr {
     		consume_each(d_l-1);
     
     		// make sure tags are propagated to the following blocks
-    		propagate_tags(d_l-1);
+    		propagate_tags(utils::minus_cap_zero<unsigned int>(static_cast<unsigned int>(d_l),1u));
     
     		// next block will contain exactly one sample prior to the
     		// basepoint sample
@@ -405,7 +406,7 @@ namespace gr {
     		// d_l 		: index of next intermediate symbol
     		// get_int(...) : advance to next symbol
     		// 3		: additional samples for interpolation
-    		missing = d_l + get_int(d_mu + d_OSF_HALF) + 3 - num;
+    		missing = d_l + get_int(d_mu + d_OSF_HALF) + 3 - static_cast<int>(num);
     		missing = (missing > 0) ? missing : 0;
     		if( missing > 0 || num_out >= (unsigned int)noutput_items) {
     			break;
@@ -427,7 +428,7 @@ namespace gr {
     //	consume_each(d_l-1-missing);
     	consume_each(d_l-1);
     
-    	propagate_tags(d_l-1);
+    	propagate_tags(utils::minus_cap_zero(static_cast<unsigned int>(d_l),1u));
     
     	// next block will contain exactly one sample prior to the basepoint
     	// sample or $missing$ more, if we could not consume the full last block
@@ -436,7 +437,7 @@ namespace gr {
     	d_l = 1;
     
     	// Tell runtime system how many output items we produced
-    	return num_out;
+    	return static_cast<int>(num_out);
     }
 
   } // namespace ccsds

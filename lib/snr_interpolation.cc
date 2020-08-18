@@ -57,7 +57,7 @@ namespace gr {
 
     snr_interpolation::snr_interpolation(const snr &start, const snr &end, uint64_t offset_start, size_t block_length)
     : d_OFFSET_START(offset_start),
-      d_BLOCK_LEN_SCALE(1.0/static_cast<float>(block_length)),
+      d_BLOCK_LEN_SCALE(1.0f/static_cast<float>(block_length)),
       d_sqrtEs_0(std::sqrt(snr::pick_first_if_valid(start, end).Es())),
       d_N0_0(snr::pick_first_if_valid(start, end).N0()),
       d_sqrtEs_m(std::sqrt(snr::pick_first_if_valid(end, start).Es())-std::sqrt(snr::pick_first_if_valid(start, end).Es())),
@@ -104,7 +104,7 @@ namespace gr {
     }
 
     float snr_interpolation::SNR_dB(uint64_t pos) const {
-      return 10.0*std::log10( Es(pos) / N0(pos) );
+      return 10.0f*std::log10( Es(pos) / N0(pos) );
     }
 
     float snr_interpolation::sqrtEs_window(size_t pos) const {
@@ -120,7 +120,7 @@ namespace gr {
     }
 
     float snr_interpolation::SNR_dB_window(size_t pos) const {
-      return 10.0*std::log10( Es_window(pos) / N0_window(pos) );
+      return 10.0f*std::log10( Es_window(pos) / N0_window(pos) );
     }
 
 
