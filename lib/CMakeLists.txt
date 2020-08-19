@@ -78,6 +78,7 @@ list(APPEND ccsds_sources
 	pack_bit_to_bytes_impl.cc
 	block_prefix_bb_impl.cc
 	byte_to_softbits_bf_impl.cc
+	sort_frames_impl.cc
 )
 
 set(ccsds_sources "${ccsds_sources}" PARENT_SCOPE)

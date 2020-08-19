@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<block>
+  <name>sort_frames</name>
+  <key>ccsds_sort_frames</key>
+  <category>[ccsds]</category>
+  <import>import ccsds</import>
+  <make>ccsds.sort_frames($window_size, $allow_duplicates, $sort_field, $score_field, $pick_highest_score)</make>
+  <param>
+    <name>Window size</name>
+    <key>window_size</key>
+    <value>10</value>
+    <type>int</type>
+  </param>
+  <param>
+    <name>Allow duplicates</name>
+    <key>allow_duplicates</key>
+    <value>False</value>
+    <type>bool</type>
+  </param>
+  <param>
+    <name>Allow duplicates</name>
+    <key>allow_duplicates</key>
+    <value>False</value>
+    <type>bool</type>
+  </param>
+  <param>
+    <name>Sort field</name>
+    <key>sort_field</key>
+    <value>'asm_number'</value>
+    <type>str</type>
+  </param>
+  <param>
+    <name>Score field</name>
+    <key>score_field</key>
+    <value>'asm_score'</value>
+    <type>str</type>
+  </param>
+  <param>
+      <name>Pick highest score</name>
+      <key>pick_highest_score</key>
+      <value>True</value>
+      <type>bool</type>
+  </param>
+  <param>
+      <name>Output Mode</name>
+      <key>mode</key>
+      <value>ccsds.SORT_FRAME_OUTPUT_QUIET</value>
+      <type>enum</type>
+      <option>
+          <name>Quiet</name>
+          <key>ccsds.ccsds.SORT_FRAME_OUTPUT_QUIET</key>
+          <opt>fcn:ccsds.ccsds.SORT_FRAME_OUTPUT_QUIET</opt>
+      </option>
+      <option>
+          <name>Dropped Frames</name>
+          <key>ccsds.ccsds.SORT_FRAME_OUTPUT_DROPPED</key>
+          <opt>fcn:ccsds.ccsds.SORT_FRAME_OUTPUT_DROPPED</opt>
+      </option>
+      <option>
+          <name>Duplicate Frames</name>
+          <key>ccsds.ccsds.SORT_FRAME_OUTPUT_DUPLICATE</key>
+          <opt>fcn:ccsds.ccsds.SORT_FRAME_OUTPUT_DUPLICATE</opt>
+      </option>
+      <option>
+          <name>All Frames</name>
+          <key>ccsds.ccsds.SORT_FRAME_OUTPUT_ALL</key>
+          <opt>fcn:ccsds.ccsds.SORT_FRAME_OUTPUT_ALL</opt>
+      </option>
+  </param>
+  
+  <sink>
+    <name>in</name>
+    <type>message</type>
+  </sink>
+
+  <source>
+    <name>out</name>
+    <type>message</type>
+  </source>
+</block>

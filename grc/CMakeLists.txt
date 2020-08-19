@@ -56,5 +56,6 @@ install(FILES
 	ccsds_pack_bit_to_bytes.xml
 	ccsds_block_prefix_bb.xml
 	ccsds_byte_to_softbits_bf.xml
+	ccsds_sort_frames.xml
 	DESTINATION share/gnuradio/grc/blocks
 )

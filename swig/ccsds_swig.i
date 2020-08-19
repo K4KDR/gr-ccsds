@@ -64,6 +64,7 @@
 #include "ccsds/pack_bit_to_bytes.h"
 #include "ccsds/block_prefix_bb.h"
 #include "ccsds/byte_to_softbits_bf.h"
+#include "ccsds/sort_frames.h"
 %}
 
 
@@ -179,3 +180,5 @@ GR_SWIG_BLOCK_MAGIC2(ccsds, pack_bit_to_bytes);
 GR_SWIG_BLOCK_MAGIC2(ccsds, block_prefix_bb);
 %include "ccsds/byte_to_softbits_bf.h"
 GR_SWIG_BLOCK_MAGIC2(ccsds, byte_to_softbits_bf);
+%include "ccsds/sort_frames.h"
+GR_SWIG_BLOCK_MAGIC2(ccsds, sort_frames);

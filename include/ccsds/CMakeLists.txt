@@ -69,5 +69,6 @@ install(FILES
 	block_prefix_bb.h
 	byte_to_softbits_bf.h
     decoder_verbosity.h
+	sort_frames.h
 	DESTINATION include/ccsds
 )
