@@ -421,7 +421,7 @@ class qa_frame_sync(gr_unittest.TestCase):
             
             expected_header_str = self.dict_to_str(self.exp_headers[i])
             computed_headers = [pmt.to_python(pmt.car(computed[k])) for k in range(len(computed)-1)]
-            computed_headers_str = '\n'.join([self.dict_to_str(d) for d in computed_headers])
+            computed_headers_str = '\n'.join([self.dict_to_str(d) for d in computed_headers if d is not None])
             self.assertTrue(computed_indx is not None, 'Cannot find expected headers for frame {} in computed headers.\nExpected:\n{}\n\nCandidates:\n{}'.format(i, expected_header_str, computed_headers_str))
             data_comp = pmt.cdr(computed[computed_indx])
             

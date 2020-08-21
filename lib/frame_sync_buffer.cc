@@ -177,7 +177,7 @@ size_t frame_sync_buffer::read_signal(const gr_complex *in, size_t num_available
     return num_copy;
 }
 
-size_t frame_sync_buffer::localOffset(uint64_t abs_offset, size_t max_len) const{
+size_t frame_sync_buffer::localOffset(uint64_t abs_offset, size_t max_len __attribute__((unused))) const{
     assert(abs_offset >= offset_start());
     assert(abs_offset <= offset_end());
     const size_t local_offset = utils::minus_cap_zero(abs_offset + d_HISTORY_LEN, d_offset_counter);

@@ -75,11 +75,7 @@ namespace gr {
       }
     }
 
-    int frame_sync_impl::work(
-      int noutput_items,
-      gr_vector_const_void_star &input_items,
-      gr_vector_void_star &output_items
-    ) {
+    int frame_sync_impl::work(int noutput_items, gr_vector_const_void_star &input_items, gr_vector_void_star &output_items __attribute__((unused))) {
       assert(input_items.size() == 1);
       assert(output_items.size() == 0);
       assert(noutput_items >= 0);
