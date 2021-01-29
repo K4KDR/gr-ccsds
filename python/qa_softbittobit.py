@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # 
 # Copyright 2014 <+YOU OR YOUR COMPANY+>.
@@ -45,4 +45,4 @@ class qa_softbittobit (gr_unittest.TestCase):
 
 
 if __name__ == '__main__':
-    gr_unittest.run(qa_softbittobit, "qa_softbittobit.xml")
+    gr_unittest.run(qa_softbittobit)

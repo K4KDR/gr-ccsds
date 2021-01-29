@@ -26,9 +26,9 @@
 #include <gnuradio/attributes.h>
 
 #ifdef gnuradio_ccsds_EXPORTS
-#  define CCSDS_API __GR_ATTR_EXPORT
+#define CCSDS_API __GR_ATTR_EXPORT
 #else
-#  define CCSDS_API __GR_ATTR_IMPORT
+#define CCSDS_API __GR_ATTR_IMPORT
 #endif
 
 #endif /* INCLUDED_CCSDS_API_H */

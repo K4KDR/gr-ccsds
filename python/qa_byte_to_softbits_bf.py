@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # 
 # Copyright 2020 Martin Luelf <mail@mluelf.de>.
@@ -90,4 +90,4 @@ class qa_byte_to_softbits_bf (gr_unittest.TestCase):
 
 
 if __name__ == '__main__':
-    gr_unittest.run(qa_byte_to_softbits_bf, "qa_byte_to_softbits_bf.xml")
+    gr_unittest.run(qa_byte_to_softbits_bf)

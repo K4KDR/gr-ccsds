@@ -28,11 +28,11 @@ def gen_and_append_crc16(s):
     return s + struct.pack(">H", gru.hexint(crc) & 0xFFFF)
 
 def check_crc16(s):
-	if len(s) < 2:
-		return (False, '')
-	msg = s[:-2]
-	# print "msg = \n%s\n" % (msg,)
-	actual = ccsds_swig.crc16(msg)
-	(expected,) = struct.unpack("!H", s[-2:])
-	# print "actual =", hex(actual), "expected =", hex(expected)
-	return (actual == expected, msg)
+        if len(s) < 2:
+                return (False, '')
+        msg = s[:-2]
+        # print "msg = \n%s\n" % (msg,)
+        actual = ccsds_swig.crc16(msg)
+        (expected,) = struct.unpack("!H", s[-2:])
+        # print "actual =", hex(actual), "expected =", hex(expected)
+        return (actual == expected, msg)

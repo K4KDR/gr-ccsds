@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-
-OUTDIR="/home/ngs1/.predict"
-
-wget -q http://www.celestrak.com/NORAD/elements/engineering.txt -O ${OUTDIR}/engineering.txt
-wget -q http://www.celestrak.com/NORAD/elements/amateur.txt -O ${OUTDIR}/amateur.txt
-wget -q http://www.celestrak.com/NORAD/elements/stations.txt -O ${OUTDIR}/stations.txt
-
-predict -u ${OUTDIR}/engineering.txt ${OUTDIR}/amateur.txt

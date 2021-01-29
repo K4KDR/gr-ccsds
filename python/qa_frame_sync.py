@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # 
 # Copyright 2020 Martin Luelf.
@@ -182,7 +182,7 @@ class qa_frame_sync(gr_unittest.TestCase):
         payload_len_bytes = sync_conf.payload_num_bytes()
         
         # 500 symbols / ( 4 symbols per byte)
-        self.generate_symbols([0,]*(500/4), sync_conf.constellation(), ambiguity=0, noise_amp=1e-3)
+        self.generate_symbols([0,]*int(500/4), sync_conf.constellation(), ambiguity=0, noise_amp=1e-3)
         
         # First frame
         self.queue_frame(
@@ -230,7 +230,7 @@ class qa_frame_sync(gr_unittest.TestCase):
         
         
         # 400 symbols / ( 4 symbols per byte)
-        self.generate_symbols([0,]*(400/4), sync_conf.constellation(), ambiguity=1, noise_amp=1e-3)
+        self.generate_symbols([0,]*int(400/4), sync_conf.constellation(), ambiguity=1, noise_amp=1e-3)
         
         ### Second frame
         self.queue_frame(
@@ -286,7 +286,7 @@ class qa_frame_sync(gr_unittest.TestCase):
             'asm_primary':     pmt.PMT_F,
         })
         
-        self.generate_symbols([0,]*((4080+16)*3), sync_conf.constellation(), ambiguity=0, noise_amp=1e-3)
+        self.generate_symbols([0,]*int((4080+16)*3), sync_conf.constellation(), ambiguity=0, noise_amp=1e-3)
         
         #print('Generated {} samples'.format(len(self.symbols)))
         
@@ -366,18 +366,21 @@ class qa_frame_sync(gr_unittest.TestCase):
     
     def dict_to_str(self, d):
             self.assertTrue(isinstance(d,dict), 'Header {} is not a dictionary'.format(d))
-            elements = ['{}: {}'.format(k, v) for k, v in d.iteritems()]
+            elements = ['{}: {}'.format(k, v) for k, v in d.items()]
             return '{{ {} }}'.format(', '.join(elements))
     
     def check_frames(self, computed):
         #print('------------------------------\nExpected:')
-        ##for i in range(len(self.exp_headers)):
-        #for i in [0,]:
+        #for i in range(len(self.exp_headers)):
+        ##for i in [0,]:
             #print('Frame {}'.format(i))
             #print(str(self.exp_headers[i]))
             #print(self.to_hex_str(self.frames[i]))
-        ##print('==============================\nComputed:')
-        ##print(computed)
+        #print('==============================\nComputed:')
+        #for i in range(len(computed)):
+            #print('  header: {}'.format(ascii(pmt.car(computed[i]))))
+            #print('  body: {}'.format(self.to_hex_str(pmt.to_python(pmt.cdr(computed[i])))))
+            #break
         #print('------------------------------')
         
         # expected frames and headers must have consistent length
@@ -387,7 +390,8 @@ class qa_frame_sync(gr_unittest.TestCase):
                         '{} messages computed, but at least {}+1 EOF expected.'.format(len(computed), len(self.frames))
         )
         
-        self.assertTrue(pmt.is_eof_object(computed[-1]), 'Last computed frame should be the EOF object, instead it was {}'.format(pmt.to_python(computed[-1])))
+        last_element = computed[-1]
+        self.assertTrue(pmt.is_eof_object(last_element), 'Last computed frame should be the EOF object, instead it was {}'.format(last_element))
         
         
         for i in range(len(self.exp_headers)):
@@ -402,7 +406,7 @@ class qa_frame_sync(gr_unittest.TestCase):
                 self.assertTrue(pmt.is_dict(header_comp), 'Computed frame {} is not a PDU (first element not a dictionary)'.format(j))
                 
                 flag_matches = True
-                for k, v in self.exp_headers[i].iteritems():
+                for k, v in self.exp_headers[i].items():
                     key_pmt = pmt.intern(k)
                     
                     if not pmt.dict_has_key(header_comp, key_pmt):
@@ -546,7 +550,7 @@ class qa_frame_sync(gr_unittest.TestCase):
                 # no eof received yet, keep going
                 continue
         if timeout < 0:
-            printf('Timeout')
+            print('Timeout')
             
         tb.stop()
         tb.wait()
@@ -558,4 +562,4 @@ class qa_frame_sync(gr_unittest.TestCase):
         return [blocks_message_debug.get_message(i) for i in range(blocks_message_debug.num_messages())]
     
 if __name__ == '__main__':
-    gr_unittest.run(qa_frame_sync, "qa_frame_sync.xml")
+    gr_unittest.run(qa_frame_sync)

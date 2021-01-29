@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # 
 # Copyright 2020 Martin Luelf <mail@mluelf.de>.
@@ -38,7 +38,7 @@ class qa_block_prefix_bb (gr_unittest.TestCase):
         self.src = blocks.vector_source_b(data_in, False)
         self.prefix = ccsds.block_prefix_bb(asm, block_len)
         self.snk = blocks.vector_sink_b(1)
-		
+                
         ##################################################
         # Connections
         ##################################################
@@ -91,4 +91,4 @@ class qa_block_prefix_bb (gr_unittest.TestCase):
 
 
 if __name__ == '__main__':
-    gr_unittest.run(qa_block_prefix_bb, "qa_block_prefix_bb.xml")
+    gr_unittest.run(qa_block_prefix_bb)

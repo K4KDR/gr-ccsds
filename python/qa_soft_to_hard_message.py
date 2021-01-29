@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # 
 # Copyright 2018 Martin Luelf.
@@ -61,7 +61,7 @@ class qa_soft_to_hard_message(gr_unittest.TestCase):
         if(len(bytes_out_exp) != NUM_PDUS):
             raise ValueError('Inconsistent number of Header and expected output byte lists')
         
-        for i in xrange(NUM_PDUS):
+        for i in range(NUM_PDUS):
             # compile softbit PDU
             
             # dict
@@ -99,7 +99,7 @@ class qa_soft_to_hard_message(gr_unittest.TestCase):
         self.assertEqual (pmt.is_eof_object(eof_msg), True, 'EOF block not at expected position')
         
         # test PDUs
-        for i in xrange(NUM_PDUS):
+        for i in range(NUM_PDUS):
             _recv_msg = self.debug.get_message(i)
             
             self.assertEqual(pmt.is_pair(_recv_msg), True, "Message %d is not a pair" % i)
@@ -134,7 +134,7 @@ class qa_soft_to_hard_message(gr_unittest.TestCase):
                     )
             )
             
-            for j in xrange(len(bytes_out_exp[i])):
+            for j in range(len(bytes_out_exp[i])):
                 _byte_recv = pmt.u8vector_ref(_recv_payload, j)
                 
                 self.assertEqual(bytes_out_exp[i][j], _byte_recv,
@@ -175,4 +175,4 @@ class qa_soft_to_hard_message(gr_unittest.TestCase):
             ])
 
 if __name__ == '__main__':
-    gr_unittest.run(qa_soft_to_hard_message, "qa_soft_to_hard_message.xml")
+    gr_unittest.run(qa_soft_to_hard_message)

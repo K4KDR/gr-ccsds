@@ -1,6 +1,6 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # 
-# Copyright 2012 <+YOU OR YOUR COMPANY+>.
+# Copyright 2020 Martin Luelf <mail@mluelf.de>.
 # 
 # This is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -115,4 +115,4 @@ class qa_mpsk_detector_soft_cf (gr_unittest.TestCase):
         self.run_test(4, 0.0, test_data)
 
 if __name__ == '__main__':
-    gr_unittest.run(qa_mpsk_detector_soft_cf, "qa_mpsk_detector_soft_cf.xml")
+    gr_unittest.run(qa_mpsk_detector_soft_cf)

@@ -2,6 +2,8 @@
 #define __doppler_correction_aux_
 
 #include <array>
+#include <cstdint>
+#include <string>
 #include <vector>
 
 //#include "SGP4/sgp4ext.h"

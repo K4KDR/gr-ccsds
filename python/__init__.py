@@ -29,10 +29,10 @@ from __future__ import unicode_literals
 
 # import swig generated symbols into the ccsds namespace
 try:
-	# this might fail if the module is python-only
-	from ccsds_swig import *
+    # this might fail if the module is python-only
+    from .ccsds_swig import *
 except ImportError:
-	pass
+    pass
 
 # import any pure python here
 import ccsds.util

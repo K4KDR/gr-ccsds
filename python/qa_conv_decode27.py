@@ -1,6 +1,6 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # 
-# Copyright 2012 <+YOU OR YOUR COMPANY+>.
+# Copyright 2020 Martin Luelf <mail@mluelf.de>.
 # 
 # This is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -67,9 +67,9 @@ class qa_conv_decode27(gr_unittest.TestCase):
 
         num_messages = 0
         
-        for i in xrange(len(messages_in)) :
+        for i in range(len(messages_in)) :
             msg_in = pmt.make_f32vector(len(messages_in[i]), 0.0)
-            for j in xrange(len(messages_in[i])) :
+            for j in range(len(messages_in[i])) :
                 pmt.f32vector_set(msg_in, j, messages_in[i][j])
 
             meta = pmt.make_dict()
@@ -96,7 +96,7 @@ class qa_conv_decode27(gr_unittest.TestCase):
         self.assertEqual (pmt.is_eof_object(eof_msg), True, 'EOF block not at expected position')
 
         # test the blobs
-        for i in xrange(len(messages_out_exp)):
+        for i in range(len(messages_out_exp)):
             dbg_msg_in = self.dbg.get_message(i)
             dbg_msg = pmt.cdr(dbg_msg_in)
             dbg_hdr = pmt.car(dbg_msg_in)
@@ -106,7 +106,7 @@ class qa_conv_decode27(gr_unittest.TestCase):
             self.assertEqual (i, dbg_frame_num, 'Frame number %d does not match the expected %d' %    (dbg_frame_num, i))
 
             dbg_data = []
-            [dbg_data.append(pmt.u8vector_ref(dbg_msg, j)) for j in xrange(pmt.length(dbg_msg))]
+            [dbg_data.append(pmt.u8vector_ref(dbg_msg, j)) for j in range(pmt.length(dbg_msg))]
             dbg_data = tuple(dbg_data)
 
             out_hex = map(self.to_hex,dbg_data)
@@ -395,4 +395,4 @@ class qa_conv_decode27(gr_unittest.TestCase):
     ## unpuncturing is synchronized
     ##
 if __name__ == '__main__':
-    gr_unittest.run(qa_conv_decode27, "qa_conv_decode27.xml")
+    gr_unittest.run(qa_conv_decode27)

@@ -32,8 +32,8 @@ endif()
 GR_PYTHON_INSTALL(
     FILES
     __init__.py
-	bpsk_frame_sync.py
-    util.py DESTINATION ${GR_PYTHON_DIR}/ccsds
+    util.py
+    DESTINATION ${GR_PYTHON_DIR}/ccsds
 )
 
 ########################################################################

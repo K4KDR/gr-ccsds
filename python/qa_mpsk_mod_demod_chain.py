@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # 
 # Copyright 2020 Martin Luelf <mail@mluelf.de>
 # 
@@ -151,4 +151,4 @@ class qa_mpsk_mod_demod_chain(gr_unittest.TestCase):
         self.runChainExperiment(np.random.randint(0, 256, 3*1024), 8)
 
 if __name__ == '__main__':
-	gr_unittest.run(qa_mpsk_mod_demod_chain, "qa_mpsk_mod_demod_chain.xml")
+        gr_unittest.run(qa_mpsk_mod_demod_chain)

@@ -1,6 +1,6 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # 
-# Copyright 2012 <+YOU OR YOUR COMPANY+>.
+# Copyright 2020 Martin Luelf <mail@mluelf.de>.
 # 
 # This is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -130,4 +130,4 @@ class qa_conv_decode27_bytes(gr_unittest.TestCase):
         )
     
 if __name__ == '__main__':
-    gr_unittest.run(qa_conv_decode27_bytes, "qa_conv_decode27_bytes.xml")
+    gr_unittest.run(qa_conv_decode27_bytes)

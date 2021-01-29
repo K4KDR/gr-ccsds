@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # 
 # Copyright 2020 Martin Luelf <mail@mluelf.de>
 # 
@@ -139,12 +139,12 @@ class qa_softbits_msg_to_bytes_b (gr_unittest.TestCase):
 
         port = pmt.intern("in")
 
-        for i in xrange(len(input_softbits)):
+        for i in range(len(input_softbits)):
             frame_len = len(input_softbits[i])
             
             self.assertTrue(frame_len%8==0, 'Frame length for frame {} is not a multiple of 8'.format(i))
             
-            frame_len_bytes = frame_len / 8
+            frame_len_bytes = int(frame_len / 8)
             
             #post message
             data = pmt.init_f32vector(frame_len, input_softbits[i])
@@ -161,10 +161,10 @@ class qa_softbits_msg_to_bytes_b (gr_unittest.TestCase):
         self.tb.wait()
         
         computed_data = self.snk.data()
-        for i in xrange(num_frames):
+        for i in range(num_frames):
             frame_len = len(input_softbits[i])
             self.assertTrue(frame_len%8==0, 'Frame length for frame {} is not a multiple of 8'.format(i))
-            frame_len_bytes = frame_len / 8
+            frame_len_bytes = int(frame_len / 8)
             
             frame_computed = tuple( computed_data[i*frame_len_bytes:(i+1)*frame_len_bytes])
             frame_expected = tuple(expected_bytes[i*frame_len_bytes:(i+1)*frame_len_bytes])
@@ -174,4 +174,4 @@ class qa_softbits_msg_to_bytes_b (gr_unittest.TestCase):
     
 
 if __name__ == '__main__':
-    gr_unittest.run(qa_softbits_msg_to_bytes_b, "qa_softbits_msg_to_bytes_b.xml")
+    gr_unittest.run(qa_softbits_msg_to_bytes_b)
