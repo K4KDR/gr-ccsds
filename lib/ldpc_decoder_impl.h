@@ -40,7 +40,9 @@ namespace gr {
 
         /** Store blocks verbosity level */
         const decoder_verbosity_t d_verbosity;
-
+        
+        /** Output file for debug information (only used when verbosity is set to DEBUG) */
+        const std::string d_debug_file;
      public:
       ldpc_decoder_impl(const char *parity_file, sys_t systype, punct_t puncttype, uint64_t num_punct, std::vector<size_t> punct_pos, bool drop_invalid_frames, decoder_verbosity_t verbosity);
       ~ldpc_decoder_impl();

@@ -23,12 +23,10 @@ parameters:
     label: Secondary threshold
     dtype: real
     default: '0.0'
-value: ${ ccsds.frame_generation_config(numbefore, numafter, thresholdprimary, thresholdsecondary)
-    }
+value: ${ ccsds.frame_generation_config(numbefore, numafter, thresholdprimary, thresholdsecondary) }
 
 templates:
     imports: import ccsds
-    var_make: self.${id} = ${id} = ccsds.frame_generation_config(${numbefore}, ${numafter},
-        ${thresholdprimary}, ${thresholdsecondary})
+    var_make: self.${id} = ${id} = ccsds.frame_generation_config(${numbefore}, ${numafter}, ${thresholdprimary}, ${thresholdsecondary})
 
 file_format: 1

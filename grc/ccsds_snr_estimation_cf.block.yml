@@ -1,0 +1,25 @@
+id: ccsds_snr_estimation_cf
+label: SNR Estimation (PSK)
+category: '[ccsds]'
+
+templates:
+  imports: import ccsds
+  make: ccsds.snr_estimation_cf(${decimation})
+
+parameters:
+- id: decimation
+  label: Decimation
+  dtype: int
+  default: 1
+
+inputs:
+- domain: stream
+  dtype: complex
+  vlen: 1
+
+outputs:
+- domain: stream
+  dtype: float
+  vlen: 1
+
+file_format: 1

@@ -35,6 +35,6 @@ value: ${ value }
 templates:
     imports: import ccsds
     var_make: self.${id} = ${id} = ccsds.frame_sync_config(${constellation}, ${sync_marker},
-        ${sync_num_bits}, ${payload_len_bits}, ${head_num_bits}, ${tail_num_bits})
+        ${sync_num_bits}, ${payload_len_bits}, ${num_head_bits}, ${num_tail_bits})
 
 file_format: 1

@@ -70,5 +70,5 @@ install(FILES
 	byte_to_softbits_bf.h
 	decoder_verbosity.h
 	sort_frames.h
-	DESTINATION include/ccsds
+    snr_estimation_cf.h DESTINATION include/ccsds
 )

@@ -28,12 +28,8 @@ It's documentation is done in doxygen and is installed under $PREFIX/doc/gr-ccsd
 from __future__ import unicode_literals
 
 # import swig generated symbols into the ccsds namespace
-try:
-    # this might fail if the module is python-only
-    from .ccsds_swig import *
-except ImportError:
-    pass
+from .ccsds_swig import *
 
 # import any pure python here
-import ccsds.util
+from ccsds import util
 #

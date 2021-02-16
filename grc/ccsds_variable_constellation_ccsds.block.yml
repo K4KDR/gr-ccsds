@@ -12,7 +12,7 @@ parameters:
     dtype: enum
     options: [bpsk, qpsk]
     option_labels: [BPSK, QPSK]
-value: ${ ccsds.constellation_ccsds_type }
+value: ${ value }
 
 templates:
     imports: import ccsds

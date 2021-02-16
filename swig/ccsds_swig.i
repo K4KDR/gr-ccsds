@@ -65,6 +65,7 @@
 #include "ccsds/block_prefix_bb.h"
 #include "ccsds/byte_to_softbits_bf.h"
 #include "ccsds/sort_frames.h"
+#include "ccsds/snr_estimation_cf.h"
 %}
 
 
@@ -182,3 +183,6 @@ GR_SWIG_BLOCK_MAGIC2(ccsds, block_prefix_bb);
 GR_SWIG_BLOCK_MAGIC2(ccsds, byte_to_softbits_bf);
 %include "ccsds/sort_frames.h"
 GR_SWIG_BLOCK_MAGIC2(ccsds, sort_frames);
+
+%include "ccsds/snr_estimation_cf.h"
+GR_SWIG_BLOCK_MAGIC2(ccsds, snr_estimation_cf);

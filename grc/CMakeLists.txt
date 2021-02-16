@@ -17,7 +17,6 @@
 # along with GNU Radio; see the file COPYING.  If not, write to
 # the Free Software Foundation, Inc., 51 Franklin Street,
 # Boston, MA 02110-1301, USA.
-
 install(FILES
 	ccsds_randomiser.block.yml
 	ccsds_randomiser_softbits.block.yml
@@ -49,13 +48,14 @@ install(FILES
 	ccsds_doppler_correction_cc.block.yml
 	ccsds_tag_storage.block.yml
 	ccsds_variable_constellation_ccsds.block.yml
-	ccsds_frame_sync_config.block.yml
-	ccsds_frame_sync_config_concatenated.block.yml
+	ccsds_variable_frame_sync_config.block.yml
+	ccsds_variable_frame_sync_config_concatenated.block.yml
 	ccsds_variable_frame_generation_config.block.yml
 	ccsds_frame_sync.block.yml
 	ccsds_pack_bit_to_bytes.block.yml
 	ccsds_block_prefix_bb.block.yml
 	ccsds_byte_to_softbits_bf.block.yml
 	ccsds_sort_frames.block.yml
+	ccsds_snr_estimation_cf.block.yml
 	DESTINATION share/gnuradio/grc/blocks
 )

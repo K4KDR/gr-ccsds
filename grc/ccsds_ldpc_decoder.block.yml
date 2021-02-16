@@ -63,6 +63,6 @@ asserts:
 templates:
     imports: import ccsds
     make: ccsds.ldpc_decoder(${par_file}, ${systype.fcn}, ${puncttype.fcn}, ${num_punct},
-        tuple(${punct_pos}), ${drop_invalid})
+        tuple(${punct_pos}), ${drop_invalid}, ${verbosity})
 
 file_format: 1

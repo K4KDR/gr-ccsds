@@ -46,7 +46,8 @@ namespace gr {
               gr::io_signature::make(0, 0, sizeof(uint8_t)),
               gr::io_signature::make(0, 0, sizeof(uint8_t))),
         d_drop_invalid_frames(drop_invalid_frames),
-        d_verbosity(verbosity)
+        d_verbosity(verbosity),
+        d_debug_file("/tmp/ldpc_dec_out.bin")
     {
         uint64_t *punct_pos_in = NULL;
         bool punct_pos_in_allocated = false;
@@ -62,7 +63,7 @@ namespace gr {
                 punct_pos_in[i] = punct_pos[i];
             }
         }
-        // Create LDPC encoder
+        // Create LDPC decoder
         this->d_punctconf = new ldpc::puncturing::conf_t((ldpc::puncturing::puncturing_t)puncttype, num_punct, punct_pos_in);
         this->d_decoder = new ldpc::decoder(parity_file, (ldpc::systematic::systematic_t)systype, this->d_punctconf);
         
@@ -139,8 +140,12 @@ namespace gr {
 
     	// decode
         ldpc::decoder::metadata_t meta;
-        this->d_decoder->decode(data_out.data(), data_in.data(), &meta);
-        //this->d_decoder->decode(data_out.data(), data_in.data(), &meta,"/tmp/dec_out.bin"); // Create debug output
+        
+        if (d_verbosity >= DECODER_VERBOSITY_DEBUG) {
+            this->d_decoder->decode(data_out.data(), data_in.data(), &meta, d_debug_file.c_str()); // Create debug output
+        } else {
+            this->d_decoder->decode(data_out.data(), data_in.data(), &meta);
+        }
         
         if (d_verbosity >= DECODER_VERBOSITY_DEBUG) {
             printf("LDPC DECODER: Decoding %s after %lu iterations. %lu bits corrected.\n", meta.success ? "SUCCESSFULL" : "FAILED", meta.num_iterations, meta.num_corrected);
@@ -149,13 +154,13 @@ namespace gr {
         const std::string frame_number_str = pmt::write_string(pmt::dict_ref(hdr, pmt::intern("frame_number"), pmt::PMT_NIL));
         if (meta.success == false && d_drop_invalid_frames) {
             if (d_verbosity >= DECODER_VERBOSITY_DROPPED) {
-                printf("Reed Solomon decoder: DROPPING frame number %s because it is INVALID.\n", frame_number_str.c_str());
+                printf("LDPC decoder: DROPPING frame number %s because it is INVALID.\n", frame_number_str.c_str());
             }
             return;
         } else if(meta.success == false && d_verbosity >= DECODER_VERBOSITY_FAILED) {
-            printf("Reed Solomon decoder: Frame number %s is INVALID.\n", frame_number_str.c_str());
+            printf("LDPC decoder: Frame number %s is INVALID.\n", frame_number_str.c_str());
         } else if (d_verbosity >= DECODER_VERBOSITY_ALL) {
-            printf("Reed Solomon decoder: Frame number %s is %s.\n", frame_number_str.c_str(), (meta.success ? "VALID" : "INVALID"));
+            printf("LDPC decoder: Frame number %s is %s.\n", frame_number_str.c_str(), (meta.success ? "VALID" : "INVALID"));
         }
 
         ldpc_common::attachMetadata(hdr, &meta);

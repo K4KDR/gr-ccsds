@@ -70,3 +70,4 @@ GR_ADD_TEST(qa_pack_bit_to_bytes ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR
 GR_ADD_TEST(qa_block_prefix_bb ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_block_prefix_bb.py)
 GR_ADD_TEST(qa_byte_to_softbits_bf ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_byte_to_softbits_bf.py)
 GR_ADD_TEST(qa_sort_frames ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_sort_frames.py)
+GR_ADD_TEST(qa_snr_estimation_cf ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_snr_estimation_cf.py)

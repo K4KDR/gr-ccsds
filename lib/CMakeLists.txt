@@ -22,7 +22,6 @@
 # Setup library
 ########################################################################
 include(GrPlatform) #define LIB_SUFFIX
-
 list(APPEND ccsds_sources
 	sgp4/sgp4ext.cpp
 	sgp4/sgp4unit.cpp
@@ -76,6 +75,7 @@ list(APPEND ccsds_sources
 	block_prefix_bb_impl.cc
 	byte_to_softbits_bf_impl.cc
 	sort_frames_impl.cc
+	snr_estimation_cf_impl.cc
 )
 
 set(ccsds_sources "${ccsds_sources}" PARENT_SCOPE)
