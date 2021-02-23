@@ -29,7 +29,7 @@ endif(NOT ccsds_sources)
 ########################################################################
 # Include swig generation macros
 ########################################################################
-find_package(SWIG)
+find_package(SWIG REQUIRED)
 find_package(PythonLibs)
 if(NOT SWIG_FOUND OR NOT PYTHONLIBS_FOUND)
     return()
