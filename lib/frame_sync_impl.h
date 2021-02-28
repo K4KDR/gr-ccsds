@@ -79,6 +79,8 @@ namespace gr {
       std::list<frame_copy_task_t> d_frame_queue;
       uint64_t d_sequence_number;
       
+      pmt::pmt_t d_extra_tags;
+      
       asm_position findMaximumInBuffer(size_t last_indx);
       asm_header computeSingleScore(asm_position asm_pos, bool primary);
       void processBuffer(size_t last_indx);

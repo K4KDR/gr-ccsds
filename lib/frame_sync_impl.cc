@@ -83,6 +83,18 @@ namespace gr {
       const size_t num_out = static_cast<size_t>(noutput_items);
       const gr_complex *in = (const gr_complex *) input_items[0];
       
+      if (nitems_read(0) == 0lu) {
+          // Very first run
+          std::vector<gr::tag_t> tags;
+          get_tags_in_range(tags, 0lu, 0lu, 1lu);
+          
+          d_extra_tags = pmt::make_dict();
+          
+          for ( const auto& tag : tags) {
+              d_extra_tags = dict_add (d_extra_tags, tag.key, tag.value);
+          }
+      }
+      
       size_t processed = 0u;
       while(processed < num_out) {
         const size_t num_copy = utils::pick_smaller(utils::minus_cap_zero<size_t>(num_out,processed), d_buffer.num_symbols_missing());
@@ -273,30 +285,14 @@ namespace gr {
         d_frame_queue.push_back(t);
         //printf("Creating a new frame\n");
       } else if (primary) {
-        /*
-        // if we found this frame (primary) overwrite sequence number and primary property
-        frame_copy_task_t &task = *existing_task_it;
-        printf("replaceing frame at offset %lu (%lu) from amb %lu to %lu\n", task.asm_pos.offset(), info.offset(), task.asm_pos.ambiguity(), info.ambiguity());
-        task.primary = primary;
-        task.asm_pos.set_sequence(info.sequence());
-        // force recomputation of header
-        task.header_computed = false;
-        */
         d_frame_queue.erase(existing_task_it);
         d_frame_queue.push_back(t);
-        
         //printf("Frame is already in queue and a primary frame.\n");
       } else {
         //printf("Frame is already in queue and a secondary frame, ignoring.\n");
       }
       
     }
-
-    void frame_sync_impl::setTaskHeader(frame_copy_task_t &task, asm_header header) {
-      const pmt::pmt_t old_header = task.header;
-      task.header = header.generate_header(d_NUM_BITS_PER_SYMBOL, d_BLOCK_LEN_SYMBOLS, old_header);
-    }
-      
 
     void frame_sync_impl::processFrameQueue() {
       const uint64_t avail_from = d_buffer.offset_start();
@@ -319,6 +315,8 @@ namespace gr {
             // Start frame
             asm_header frame_meta = computeSingleScore(task.asm_pos, task.primary);
             task.header = frame_meta.generate_header(d_NUM_BITS_PER_SYMBOL, d_BLOCK_LEN_SYMBOLS, task.header);
+            task.header = pmt::dict_update(task.header, d_extra_tags);
+            
             task.header_computed = true;
           }
 
