@@ -44,7 +44,8 @@ asserts:
 - ${ M >= 2 }
 - ${ len(ASM) != 0 }
 - ${ ASM_len > 0 }
-- ${ math.ceil(ASM_len/8.0) == len(ASM)/2 }
+- ${ int(ASM_len/8.0) == len(ASM)/2 }
+- ${ ASM_len == len(ASM)*4 }
 - ${ threshold > 0 }
 - ${ corr_threshold > 0.0 }
 - ${ corr_threshold <= 1.0 }

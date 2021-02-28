@@ -23,7 +23,7 @@ parameters:
     label: Secondary threshold
     dtype: real
     default: '0.0'
-value: ${ ccsds.frame_generation_config(numbefore, numafter, thresholdprimary, thresholdsecondary) }
+value: ${ value }
 
 templates:
     imports: import ccsds
