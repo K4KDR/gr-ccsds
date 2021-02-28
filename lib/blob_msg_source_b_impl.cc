@@ -19,6 +19,7 @@ namespace gr {
     	gr::io_signature::make (1, 1, sizeof(unsigned char))), d_BLOB_LEN(blob_len)
     {
     	d_stop = false;
+        d_num_bytes_copied = 0lu;
     
     	// register input type
     	message_port_register_in(pmt::mp("in"));
@@ -87,6 +88,8 @@ namespace gr {
     	for(unsigned int i=0;i<d_BLOB_LEN;i++) {
     		d_queue.push(data_in[i]);
     	}
+    	
+    	d_metadata_queue.push(hdr);
     
     	return;
     }
@@ -104,11 +107,23 @@ namespace gr {
     	unsigned char *out = (unsigned char *) output_items[0];
     
     	const size_t num_out = utils::pick_smaller(static_cast<size_t>(noutput_items),d_queue.size());
-    
-    	for(size_t i=0;i<num_out;i++) {
+        
+        for(size_t i=0;i<num_out;i++) {
+            if ((d_num_bytes_copied % static_cast<uint64_t>(d_BLOB_LEN)) == 0lu) {
+                pmt::pmt_t hdr_items = pmt::dict_items(d_metadata_queue.front());
+                const size_t len = pmt::length(hdr_items);
+                for (size_t i=0lu; i<len; i++) {
+                    pmt::pmt_t kvpair = pmt::nth(i, hdr_items);
+                    
+                    add_item_tag(0, d_num_bytes_copied, pmt::car(kvpair), pmt::cdr(kvpair));
+                }
+                d_metadata_queue.pop();
+            }
+            
     		// Pull element from queue
     		out[i] = d_queue.front();
-    
+            d_num_bytes_copied++;
+            
     		// Delete element from queue
     		d_queue.pop();
     	}

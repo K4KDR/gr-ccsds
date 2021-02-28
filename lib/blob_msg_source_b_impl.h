@@ -17,7 +17,12 @@ namespace gr {
     
     	/*! \brief Queue in which to buffer the message bytes. */
     	std::queue<unsigned char> d_queue;
-    
+        
+        /*! \brief Queue in which to buffer the headers of each message. */
+    	std::queue<pmt::pmt_t> d_metadata_queue;
+        
+        uint64_t d_num_bytes_copied;
+        
     	/*! \brief Flag to indicate EOF arrival. When true and the buffers are
     	 *	empty, signal EOF.
     	 */
