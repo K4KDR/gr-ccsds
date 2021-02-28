@@ -47,11 +47,11 @@ cache:
 
 Clang Build:
     <<: *tmpl_build
-    image: "${IMAGE_PREFIX}alpine-clang-gnuradio"
+    image: "${IMAGE_PREFIX}alpine-clang-gnuradio:3.8"
 
 GCC Build:
     <<: *tmpl_build
-    image: "${IMAGE_PREFIX}alpine-gcc-gnuradio"
+    image: "${IMAGE_PREFIX}alpine-gcc-gnuradio:3.8"
 
 
 ########################################################################################################################
@@ -62,13 +62,13 @@ GCC Build:
 
 Clang Test:
     <<: *tmpl_test
-    image: "${IMAGE_PREFIX}alpine-clang-gnuradio"
+    image: "${IMAGE_PREFIX}alpine-clang-gnuradio:3.8"
     dependencies: [Clang Build]
     needs: [Clang Build]
 
 GCC Test:
     <<: *tmpl_test
-    image: "${IMAGE_PREFIX}alpine-gcc-gnuradio"
+    image: "${IMAGE_PREFIX}alpine-gcc-gnuradio:3.8"
     dependencies: [GCC Build]
     needs: [GCC Build]
 
@@ -81,13 +81,13 @@ GCC Test:
 
 Clang Install:
     <<: *tmpl_install
-    image: "${IMAGE_PREFIX}alpine-clang-gnuradio"
+    image: "${IMAGE_PREFIX}alpine-clang-gnuradio:3.8"
     dependencies: [Clang Build]
     needs: [Clang Build]
 
 GCC Install:
     <<: *tmpl_install
-    image: "${IMAGE_PREFIX}alpine-gcc-gnuradio"
+    image: "${IMAGE_PREFIX}alpine-gcc-gnuradio:3.8"
     dependencies: [GCC Build]
     needs: [GCC Build]
 
