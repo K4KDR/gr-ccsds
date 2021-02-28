@@ -24,6 +24,8 @@
 
 #include <ccsds/snr_interpolation.h>
 
+#include "ccsds_utils.h"
+
 #include <limits>
 #include <cassert>
 #include <cmath>
@@ -57,7 +59,7 @@ namespace gr {
 
     snr_interpolation::snr_interpolation(const snr &start, const snr &end, uint64_t offset_start, size_t block_length)
     : d_OFFSET_START(offset_start),
-      d_BLOCK_LEN_SCALE(1.0f/static_cast<float>(block_length)),
+      d_BLOCK_LEN_SCALE(1.0f/static_cast<float>(utils::minus_cap_zero(block_length, 1lu))),
       d_sqrtEs_0(std::sqrt(snr::pick_first_if_valid(start, end).Es())),
       d_N0_0(snr::pick_first_if_valid(start, end).N0()),
       d_sqrtEs_m(std::sqrt(snr::pick_first_if_valid(end, start).Es())-std::sqrt(snr::pick_first_if_valid(start, end).Es())),
@@ -129,7 +131,7 @@ namespace gr {
     }
 
     size_t snr_interpolation::block_length() const {
-      return static_cast<size_t>(std::round(1.0/d_BLOCK_LEN_SCALE));
+      return static_cast<size_t>(std::round(1.0/d_BLOCK_LEN_SCALE))+1lu;
     }
 
     float snr_interpolation::block_length_scale() const {
@@ -141,7 +143,7 @@ namespace gr {
     }
 
     float snr_interpolation::Es_slope() const {
-      return d_Es_m;
+      return d_Es_m*d_BLOCK_LEN_SCALE;
     }
 
     float snr_interpolation::sqrtEs_start() const {
@@ -149,7 +151,7 @@ namespace gr {
     }
 
     float snr_interpolation::sqrtEs_slope() const {
-      return d_sqrtEs_m;
+      return d_sqrtEs_m*d_BLOCK_LEN_SCALE;
     }
 
     float snr_interpolation::N0_start() const {
@@ -157,7 +159,7 @@ namespace gr {
     }
 
     float snr_interpolation::N0_slope() const {
-      return d_N0_m;
+      return d_N0_m*d_BLOCK_LEN_SCALE;
     }
 
     float snr_interpolation::SNR_dB_start() const {

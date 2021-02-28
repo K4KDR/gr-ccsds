@@ -76,7 +76,7 @@ list(APPEND ccsds_sources
 	byte_to_softbits_bf_impl.cc
 	sort_frames_impl.cc
 	snr_estimation_cf_impl.cc
-)
+    )
 
 set(ccsds_sources "${ccsds_sources}" PARENT_SCOPE)
 if(NOT ccsds_sources)
@@ -205,7 +205,8 @@ list(APPEND test_ccsds_sources
 #    qa_frame_sync_buffer.cc
 #    qa_frame_sync_config.cc
 #    qa_softbits.cc
-#    qa_utils.cc
+   qa_utils.cc
+   qa_snr_interpolation.cc
 )
 # Anything we need to link to for the unit tests go here
 list(APPEND GR_TEST_TARGET_DEPS gnuradio-ccsds ${CPPUNIT_LIBRARIES} fmt::fmt)
