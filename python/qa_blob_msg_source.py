@@ -71,7 +71,8 @@ class qa_blob_msg_source (gr_unittest.TestCase):
         
         #send EOF
         self.blob_source.to_basic_block()._post( port, pmt.PMT_EOF )
-        
+        self.blob_source.to_basic_block()._post(pmt.intern("system"), pmt.cons(pmt.intern("done"), pmt.from_long(1)))
+
         # wait for flowgraph to end
         self.tb.wait()
         
