@@ -1,0 +1,661 @@
+options:
+  parameters:
+    author: Martin Luelf
+    category: '[GRC Hier Blocks]'
+    cmake_opt: ''
+    comment: ''
+    copyright: ''
+    description: Take Doppler corrected baseband recording and decode the signal blocks
+      within. The decoded blocks are saved with metadata in a detached header file.
+    gen_cmake: 'On'
+    gen_linking: dynamic
+    generate_options: no_gui
+    hier_block_src_path: '.:'
+    id: move2_postprocessing
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: 'True'
+    run_command: '{python} -u {filename}'
+    run_options: run
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: MOVE-II recording post processing
+    window_size: ''
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 8]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: constellation_ccsds
+  id: variable_constellation_ccsds
+  parameters:
+    comment: MOVE-II downlink modulation (BPSK)
+    type: bpsk
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [725, 210]
+    rotation: 0
+    state: true
+- name: frame_gen_config
+  id: variable_frame_generation_config
+  parameters:
+    comment: Look for previous frames, include all detected blocks.
+    numafter: '0'
+    numbefore: '5'
+    thresholdprimary: '0.0'
+    thresholdsecondary: '0.0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [196, 364]
+    rotation: 0
+    state: true
+- name: frame_sync_config
+  id: variable_frame_sync_config
+  parameters:
+    comment: ''
+    constellation: constellation_ccsds
+    num_head_bits: '0'
+    num_tail_bits: '0'
+    payload_len_bits: int(1024*2)
+    sync_marker: '''49E0DCC7'''
+    sync_num_bits: '32'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [13, 361]
+    rotation: 0
+    state: true
+- name: osf
+  id: variable
+  parameters:
+    comment: Oversampling factor before the timing synchronization (>= 2)
+    value: int(input_rate/symbol_rate)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [357, 207]
+    rotation: 0
+    state: true
+- name: symbol_rate
+  id: variable
+  parameters:
+    comment: MOVE-II downlink symbol rate
+    value: 12.5e3
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [131, 208]
+    rotation: 0
+    state: true
+- name: analog_agc_xx_0
+  id: analog_agc_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    gain: '1.0'
+    max_gain: '65536'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    rate: 1e-4
+    reference: '1.0'
+    type: complex
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [338, 749]
+    rotation: 0
+    state: true
+- name: analog_agc_xx_0_0
+  id: analog_agc_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    gain: '1.0'
+    max_gain: '65536'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    rate: 1e-4
+    reference: '1.0'
+    type: complex
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1126, 970]
+    rotation: 0
+    state: true
+- name: blocks_file_meta_sink_0
+  id: blocks_file_meta_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    detached: 'True'
+    extra_dict: pmt.make_dict()
+    file: output_file
+    max_seg_size: '1000000'
+    rel_rate: input_rate/symbol_rate
+    samp_rate: input_rate
+    type: byte
+    unbuffered: 'True'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [851, 1932]
+    rotation: 0
+    state: enabled
+- name: blocks_file_meta_source_0
+  id: blocks_file_meta_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    detached: 'True'
+    file: input_file
+    hdr_file: input_file+'.hdr'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    repeat: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [41, 820]
+    rotation: 0
+    state: true
+- name: blocks_selector_0
+  id: blocks_selector
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: Switch between old and new frame sync block
+    enabled: 'True'
+    input_index: '0'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_inputs: '1'
+    num_outputs: '2'
+    output_index: frame_sync
+    showports: 'True'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [271, 1373]
+    rotation: 0
+    state: true
+- name: blocks_tag_debug_0
+  id: blocks_tag_debug
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    display: 'True'
+    filter: '""'
+    name: source
+    num_inputs: '1'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [340, 879]
+    rotation: 0
+    state: true
+- name: ccsds_blob_msg_source_b_0
+  id: ccsds_blob_msg_source_b
+  parameters:
+    affinity: ''
+    alias: ''
+    blob_len: '128'
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [616, 1985]
+    rotation: 0
+    state: true
+- name: ccsds_frame_sync_0
+  id: ccsds_frame_sync
+  parameters:
+    additional_frames: ccsds.asm_position_list()
+    affinity: ''
+    alias: ''
+    comment: ''
+    gen_config: frame_gen_config
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    sync_config: frame_sync_config
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [688, 1500]
+    rotation: 0
+    state: enabled
+- name: ccsds_ldpc_decoder_0
+  id: ccsds_ldpc_decoder
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    drop_invalid: 'False'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_punct: '512'
+    par_file: /opt/GnuRadio/AR4JA_r12_k1024n.a
+    punct_pos: '[]'
+    puncttype: punct_back
+    systype: sys_front
+    verbosity: ccsds.DECODER_VERBOSITY_QUIET
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [749, 1663]
+    rotation: 0
+    state: enabled
+- name: ccsds_mpsk_ambiguity_resolver_f_0
+  id: ccsds_mpsk_ambiguity_resolver_f
+  parameters:
+    ASM: '''49E0DCC7'''
+    ASM_len: '32'
+    M: '8'
+    affinity: ''
+    alias: ''
+    comment: ''
+    corr_threshold: '0.8'
+    frame_len: 2*128
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_tail_sym: '0'
+    threshold: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [890, 1259]
+    rotation: 0
+    state: enabled
+- name: ccsds_mpsk_detector_soft_cf_0
+  id: ccsds_mpsk_detector_soft_cf
+  parameters:
+    M: '2'
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [571, 1311]
+    rotation: 0
+    state: enabled
+- name: ccsds_randomiser_softbits_0
+  id: ccsds_randomiser_softbits
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    poly: '0x95'
+    seed: '0xFF'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [395, 1707]
+    rotation: 0
+    state: enabled
+- name: ccsds_soft_to_hard_message_0
+  id: ccsds_soft_to_hard_message
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [327, 1993]
+    rotation: 0
+    state: true
+- name: digital_clock_recovery_mm_xx_0
+  id: digital_clock_recovery_mm_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    gain_mu: '0.05'
+    gain_omega: '0.1'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    mu: '0.25'
+    omega: osf
+    omega_relative_limit: '0.01'
+    type: complex
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [913, 962]
+    rotation: 0
+    state: true
+- name: digital_costas_loop_cc_1
+  id: digital_costas_loop_cc
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    order: '2'
+    use_snr: 'True'
+    w: pi/100.0
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [631, 1002]
+    rotation: 0
+    state: true
+- name: digital_probe_mpsk_snr_est_c_0
+  id: digital_probe_mpsk_snr_est_c
+  parameters:
+    affinity: ''
+    alias: ''
+    alpha: '0.001'
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    msg_nsamples: '10000'
+    type: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [288, 1085]
+    rotation: 0
+    state: true
+- name: frame_sync
+  id: parameter
+  parameters:
+    alias: ''
+    comment: '0: Use old M-PSK Ambiguity Resolver with Softbits (CCSDS) block
+
+      1: Use new Frame Sync block'
+    hide: part
+    label: frame_sync
+    short_id: ''
+    type: intx
+    value: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [531, 10]
+    rotation: 0
+    state: true
+- name: import_0
+  id: import
+  parameters:
+    alias: ''
+    comment: ''
+    imports: from cmath import pi
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 212]
+    rotation: 0
+    state: true
+- name: import_0_0
+  id: import
+  parameters:
+    alias: ''
+    comment: ''
+    imports: import pmt
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [10, 269]
+    rotation: 0
+    state: true
+- name: input_file
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: input
+    short_id: i
+    type: str
+    value: ''
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [235, 11]
+    rotation: 0
+    state: true
+- name: input_rate
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: input_rate
+    short_id: r
+    type: eng_float
+    value: 25e3
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [330, 11]
+    rotation: 0
+    state: true
+- name: output_file
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: output
+    short_id: o
+    type: str
+    value: ''
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [440, 10]
+    rotation: 0
+    state: true
+- name: root_raised_cosine_filter_0
+  id: root_raised_cosine_filter
+  parameters:
+    affinity: ''
+    alias: ''
+    alpha: '0.5'
+    comment: ''
+    decim: '1'
+    gain: '1'
+    interp: '1'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    ntaps: 50*osf+1
+    samp_rate: input_rate
+    sym_rate: symbol_rate
+    type: fir_filter_ccf
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [542, 733]
+    rotation: 0
+    state: enabled
+- name: virtual_sink_0
+  id: virtual_sink
+  parameters:
+    alias: ''
+    comment: ''
+    stream_id: symbols_filtered
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [802, 773]
+    rotation: 0
+    state: true
+- name: virtual_sink_0_0
+  id: virtual_sink
+  parameters:
+    alias: ''
+    comment: ''
+    stream_id: decoded_pdus
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1017, 1716]
+    rotation: 0
+    state: true
+- name: virtual_sink_0_0_1
+  id: virtual_sink
+  parameters:
+    alias: ''
+    comment: ''
+    stream_id: detected_pdus
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1285, 1428]
+    rotation: 0
+    state: enabled
+- name: virtual_sink_0_1
+  id: virtual_sink
+  parameters:
+    alias: ''
+    comment: ''
+    stream_id: symbols_synced
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1332, 994]
+    rotation: 0
+    state: true
+- name: virtual_source_0
+  id: virtual_source
+  parameters:
+    alias: ''
+    comment: ''
+    stream_id: symbols_synced
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [42, 1389]
+    rotation: 0
+    state: enabled
+- name: virtual_source_0_0
+  id: virtual_source
+  parameters:
+    alias: ''
+    comment: ''
+    stream_id: decoded_pdus
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [94, 1986]
+    rotation: 0
+    state: true
+- name: virtual_source_0_0_0
+  id: virtual_source
+  parameters:
+    alias: ''
+    comment: ''
+    stream_id: detected_pdus
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [108, 1715]
+    rotation: 0
+    state: true
+- name: virtual_source_0_1_0
+  id: virtual_source
+  parameters:
+    alias: ''
+    comment: ''
+    stream_id: symbols_filtered
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [43, 1026]
+    rotation: 0
+    state: enabled
+
+connections:
+- [analog_agc_xx_0, '0', root_raised_cosine_filter_0, '0']
+- [analog_agc_xx_0_0, '0', virtual_sink_0_1, '0']
+- [blocks_file_meta_source_0, '0', analog_agc_xx_0, '0']
+- [blocks_file_meta_source_0, '0', blocks_tag_debug_0, '0']
+- [blocks_selector_0, '0', ccsds_mpsk_detector_soft_cf_0, '0']
+- [blocks_selector_0, '1', ccsds_frame_sync_0, '0']
+- [ccsds_blob_msg_source_b_0, '0', blocks_file_meta_sink_0, '0']
+- [ccsds_frame_sync_0, out, virtual_sink_0_0_1, '0']
+- [ccsds_ldpc_decoder_0, out, virtual_sink_0_0, '0']
+- [ccsds_mpsk_ambiguity_resolver_f_0, out, virtual_sink_0_0_1, '0']
+- [ccsds_mpsk_detector_soft_cf_0, '0', ccsds_mpsk_ambiguity_resolver_f_0, '0']
+- [ccsds_randomiser_softbits_0, out, ccsds_ldpc_decoder_0, in]
+- [ccsds_soft_to_hard_message_0, out, ccsds_blob_msg_source_b_0, in]
+- [digital_clock_recovery_mm_xx_0, '0', analog_agc_xx_0_0, '0']
+- [digital_costas_loop_cc_1, '0', digital_clock_recovery_mm_xx_0, '0']
+- [digital_probe_mpsk_snr_est_c_0, noise, digital_costas_loop_cc_1, noise]
+- [root_raised_cosine_filter_0, '0', virtual_sink_0, '0']
+- [virtual_source_0, '0', blocks_selector_0, '0']
+- [virtual_source_0_0, '0', ccsds_soft_to_hard_message_0, in]
+- [virtual_source_0_0_0, '0', ccsds_randomiser_softbits_0, in]
+- [virtual_source_0_1_0, '0', digital_costas_loop_cc_1, '0']
+- [virtual_source_0_1_0, '0', digital_probe_mpsk_snr_est_c_0, '0']
+
+metadata:
+  file_format: 1
