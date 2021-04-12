@@ -47,11 +47,11 @@ cache:
 
 Clang Build:
     <<: *tmpl_build
-    image: "${IMAGE_PREFIX}alpine-clang-gnuradio:3.8"
+    image: "${IMAGE_PREFIX}alpine-clang-gnuradio38"
 
 GCC Build:
     <<: *tmpl_build
-    image: "${IMAGE_PREFIX}alpine-gcc-gnuradio:3.8"
+    image: "${IMAGE_PREFIX}alpine-gcc-gnuradio38"
 
 
 ########################################################################################################################
