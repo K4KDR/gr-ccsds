@@ -9,6 +9,10 @@ parameters:
     label: BLOB length
     dtype: int
     default: '40'
+-   id: length_tag_name
+    label: Length tag name
+    dtype: str
+    default: 'packet_len'
 
 inputs:
 -   domain: message
@@ -20,7 +24,7 @@ outputs:
 
 templates:
     imports: import ccsds
-    make: ccsds.blob_msg_source_b(${blob_len})
+    make: ccsds.blob_msg_source_b(${blob_len}, ${length_tag_name})
 
 documentation: |-
     BLOB Message source
@@ -28,5 +32,5 @@ documentation: |-
     Copies the bytes contained in the incomming BLOB messages to the output stream.
 
     BLOB length: Length of a BLOB in bytes.
-
+    Length tag name: Each BLOB will be marked with a new tag that contains the length of the BLOB. This parameter is the key of that tag.
 file_format: 1

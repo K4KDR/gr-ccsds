@@ -9,14 +9,17 @@ namespace gr {
   namespace ccsds {
     
     blob_msg_source_b::sptr 
-    blob_msg_source_b::make(const unsigned int blob_len) {
-        return gnuradio::get_initial_sptr (new blob_msg_source_b_impl(blob_len) );
+    blob_msg_source_b::make(const unsigned int blob_len, const std::string length_tag_name) {
+        return gnuradio::get_initial_sptr (new blob_msg_source_b_impl(blob_len, length_tag_name) );
     }
     
-    blob_msg_source_b_impl::blob_msg_source_b_impl (const unsigned int blob_len)
+    blob_msg_source_b_impl::blob_msg_source_b_impl (const unsigned int blob_len, const std::string length_tag_name)
       : gr::sync_block ("blob_msg_source_b",
     	gr::io_signature::make (0, 0, sizeof(unsigned char)),
-    	gr::io_signature::make (1, 1, sizeof(unsigned char))), d_BLOB_LEN(blob_len)
+    	gr::io_signature::make (1, 1, sizeof(unsigned char))),
+    	d_BLOB_LEN(blob_len),
+    	d_LENGTH_TAG_KEY(pmt::string_to_symbol(length_tag_name)),
+    	d_LENGTH_TAG_VALUE(pmt::from_uint64(blob_len))
     {
     	d_stop = false;
         d_num_bytes_copied = 0lu;
@@ -41,7 +44,6 @@ namespace gr {
     }
     
     void blob_msg_source_b_impl::process_message(pmt::pmt_t msg_in) {
-    
     	if(d_stop) {
     		// Do not accept new messages after EOF
     		return;
@@ -90,8 +92,8 @@ namespace gr {
     	}
     	
     	d_metadata_queue.push(hdr);
-    
-    	return;
+        
+        return;
     }
     
     int blob_msg_source_b_impl::work (int		               noutput_items,
@@ -110,6 +112,8 @@ namespace gr {
         
         for(size_t i=0;i<num_out;i++) {
             if ((d_num_bytes_copied % static_cast<uint64_t>(d_BLOB_LEN)) == 0lu) {
+                add_item_tag(0, d_num_bytes_copied, d_LENGTH_TAG_KEY, d_LENGTH_TAG_VALUE);
+
                 pmt::pmt_t hdr_items = pmt::dict_items(d_metadata_queue.front());
                 const size_t len = pmt::length(hdr_items);
                 for (size_t i=0lu; i<len; i++) {

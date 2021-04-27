@@ -15,6 +15,12 @@ namespace gr {
     	/*! \brief Length of BLOBs in bytes */
     	const unsigned int d_BLOB_LEN;
     
+        /*! \brief Key of the length tag that is added to every block (even if there is no header in the PDU) */
+        const pmt::pmt_t d_LENGTH_TAG_KEY;
+        
+    	/*! \brief Value of the length tag that is added to every block (even if there is no header in the PDU) */
+        const pmt::pmt_t d_LENGTH_TAG_VALUE;
+        
     	/*! \brief Queue in which to buffer the message bytes. */
     	std::queue<unsigned char> d_queue;
         
@@ -44,7 +50,7 @@ namespace gr {
     	 *
     	 *  \param blob_len Length of a BLOB in bytes.
     	 */
-    	blob_msg_source_b_impl(const unsigned int blob_len);
+    	blob_msg_source_b_impl(const unsigned int blob_len, const std::string length_tag_name);
 
     	/*! \brief Public deconstructor of the ticp frame sink */	
     	~blob_msg_source_b_impl ();  // public destructor

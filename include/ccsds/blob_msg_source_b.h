@@ -16,7 +16,7 @@ namespace gr {
     {
     public:
     	typedef boost::shared_ptr<blob_msg_source_b> sptr;
-    	static sptr make(const unsigned int blob_len);
+    	static sptr make(const unsigned int blob_len, const std::string length_tag_name);
     };
 
   } // namepsace ccsds
