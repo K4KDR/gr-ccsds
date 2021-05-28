@@ -11,7 +11,7 @@ parameters:
     default: '40'
 -   id: length_tag_name
     label: Length tag name
-    dtype: str
+    dtype: string
     default: 'packet_len'
 
 inputs:
