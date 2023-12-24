@@ -1,9 +1,9 @@
 [submodule "extern/ldpc"]
 	path = extern/ldpc
-	url = ../../sdr/ldpc.git
+	url = https://github.com/K4KDR/ldpc.git
 [submodule "extern/fec"]
 	path = extern/fec
-	url = ../../sdr/libfec.git
+	url = https://github.com/K4KDR/libfec.git
 [submodule "extern/fmt"]
 	path = extern/fmt
 	url = https://github.com/fmtlib/fmt.git
