@@ -1,6 +1,12 @@
 # Install instructions for libfec dependency
 The original library from Phil Karn needs a few patches to be used in C++ code on a modern x64 processor. A completely patched copy with CMake project files is available at https://gitlab.lrz.de/sdr/libfec.git
 
+***** Fork of above referenced "completely patched copy" has been placed at https://github.com/K4KDR/libfec.git and will automatically be pulled as a dependency via the listing in .gitmodules file *****
+
+================================================================================
+!!! Below steps not needed if normal install w/ dependencies is done (-- K4KDR)
+================================================================================
+
 The following document describes how to get the library running from the original files.
 
 You can download the base library from Phil Karns website: http://ka9q.net/code/fec
