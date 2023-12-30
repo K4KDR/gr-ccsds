@@ -1,7 +1,7 @@
 #ifndef INCLUDED_CCSDS_REVERSEBITS_IMPL_H
 #define INCLUDED_CCSDS_REVERSEBITS_IMPL_H
 
-#include <ccsds/reversebits.h>
+#include <gnuradio/ccsds/reversebits.h>
 
 namespace gr {
   namespace ccsds {

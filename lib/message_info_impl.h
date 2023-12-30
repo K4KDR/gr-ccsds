@@ -21,7 +21,7 @@
 #ifndef INCLUDED_CCSDS_MESSAGE_INFO_IMPL_H
 #define INCLUDED_CCSDS_MESSAGE_INFO_IMPL_H
 
-#include <ccsds/message_info.h>
+#include <gnuradio/ccsds/message_info.h>
 
 namespace gr {
   namespace ccsds {

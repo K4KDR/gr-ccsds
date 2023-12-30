@@ -1,7 +1,7 @@
 #ifndef INCLUDED_CCSDS_BLOB_MSG_SOURCE_B_IMPL_H
 #define INCLUDED_CCSDS_BLOB_MSG_SOURCE_B_IMPL_H
 
-#include <ccsds/blob_msg_source_b.h>
+#include <gnuradio/ccsds/blob_msg_source_b.h>
 #include <queue>
 #include <cstdio>
 #include "asynchronous_start.hpp"

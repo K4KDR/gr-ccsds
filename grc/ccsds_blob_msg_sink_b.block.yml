@@ -19,7 +19,7 @@ outputs:
     id: out
 
 templates:
-    imports: import ccsds
+    imports: import gnuradio.ccsds as ccsds
     make: ccsds.blob_msg_sink_b(${blob_len})
 
 documentation: |-

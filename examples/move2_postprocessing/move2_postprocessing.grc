@@ -1,6 +1,7 @@
 options:
   parameters:
     author: Martin Luelf
+    catch_exceptions: 'True'
     category: '[GRC Hier Blocks]'
     cmake_opt: ''
     comment: ''
@@ -42,7 +43,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [725, 210]
+    coordinate: [328, 148.0]
     rotation: 0
     state: true
 - name: frame_gen_config
@@ -86,7 +87,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [357, 207]
+    coordinate: [192, 244.0]
     rotation: 0
     state: true
 - name: symbol_rate
@@ -98,7 +99,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [131, 208]
+    coordinate: [112, 148.0]
     rotation: 0
     state: true
 - name: analog_agc_xx_0
@@ -233,6 +234,7 @@ blocks:
     alias: ''
     blob_len: '128'
     comment: ''
+    length_tag_name: packet_len
     maxoutbuf: '0'
     minoutbuf: '0'
   states:
@@ -659,3 +661,4 @@ connections:
 
 metadata:
   file_format: 1
+  grc_version: v3.11.0.0git-510-g2180acce

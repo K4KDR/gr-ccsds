@@ -1,18 +1,17 @@
 title: The CCSDS OOT Module
-brief: Modules for CCSDS reception
+brief: Short description of gr-ccsds
 tags: # Tags are arbitrary, but look at CGRAN what other authors are using
   - sdr
-  - ccsds
 author:
-  - Martin Luelf <mail@mluelf.de>
+  - Author Name <authors@email.address>
 copyright_owner:
   - Copyright Owner 1
 license:
-gr_supported_version: 3.8
-#repo: https://gitlab.lrz.de/sdr/gr-ccsds
+gr_supported_version: # Put a comma separated list of supported GR versions here
+#repo: # Put the URL of the repository here, or leave blank for default
 #website: <module_website> # If you have a separate project website, put it here
 #icon: <icon_url> # Put a URL to a square image here that will be used as an icon on CGRAN
 ---
-This package provides signal processing blocks used for sending and receiving
-signals conforming to the Standards by the Consultative Committee for Space Data
-Systems (CCSDS).
+A longer, multi-line description of gr-ccsds.
+You may use some *basic* Markdown here.
+If left empty, it will try to find a README file instead.

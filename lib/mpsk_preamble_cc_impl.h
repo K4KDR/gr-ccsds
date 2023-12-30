@@ -1,7 +1,7 @@
 #ifndef INCLUDED_CCSDS_MPSK_PREAMBLE_CC_IMPL_H
 #define INCLUDED_CCSDS_MPSK_PREAMBLE_CC_IMPL_H
 
-#include <ccsds/mpsk_preamble_cc.h>
+#include <gnuradio/ccsds/mpsk_preamble_cc.h>
 #include "mpsk_constellation.h"
 #include <stdio.h>
 #include <math.h>

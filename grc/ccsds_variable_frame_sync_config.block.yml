@@ -33,7 +33,7 @@ parameters:
 value: ${ value }
 
 templates:
-    imports: import ccsds
+    imports: import gnuradio.ccsds as ccsds
     var_make: self.${id} = ${id} = ccsds.frame_sync_config(${constellation}, ${sync_marker},
         ${sync_num_bits}, ${payload_len_bits}, ${num_head_bits}, ${num_tail_bits})
 

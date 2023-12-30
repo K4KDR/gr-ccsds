@@ -27,7 +27,7 @@ asserts:
 - ${ M >= 1 }
 
 templates:
-    imports: import ccsds
+    imports: import gnuradio.ccsds as ccsds
     make: ccsds.pll_cc(${M}, ${BL})
 
 documentation: |-

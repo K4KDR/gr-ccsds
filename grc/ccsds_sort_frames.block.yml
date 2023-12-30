@@ -49,7 +49,7 @@ outputs:
     id: out
 
 templates:
-    imports: import ccsds
+    imports: import gnuradio.ccsds as ccsds
     make: ccsds.sort_frames(${window_size}, ${allow_duplicates}, ${sort_field}, ${score_field},
         ${pick_highest_score})
 

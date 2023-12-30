@@ -1,7 +1,7 @@
 #ifndef INCLUDED_CCSDS_RANDOMIZER_SOFTBITS_IMPL_H
 #define INCLUDED_CCSDS_RANDOMIZER_SOFTBITS_IMPL_H
 
-#include <ccsds/randomiser_softbits.h>
+#include <gnuradio/ccsds/randomiser_softbits.h>
 //#include <string>
 
 namespace gr {

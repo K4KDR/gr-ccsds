@@ -47,7 +47,7 @@ asserts:
 - ${ len(ASM) % 2 == 0 }
 
 templates:
-    imports: import ccsds
+    imports: import gnuradio.ccsds as ccsds
     make: ccsds.conv_decode27(${gen_poly_c1}, ${gen_poly_c2}, int(${punct.fcn}), ${num_bits_out},
         ${ASM})
 

@@ -21,7 +21,7 @@
 #ifndef INCLUDED_CCSDS_TAG_STORAGE_IMPL_H
 #define INCLUDED_CCSDS_TAG_STORAGE_IMPL_H
 
-#include <ccsds/tag_storage.h>
+#include <gnuradio/ccsds/tag_storage.h>
 
 #include <list>
 
@@ -32,7 +32,7 @@ namespace gr {
     {
      private:
       const pmt::pmt_t d_KEY_EOF;
-      boost::optional<uint64_t> d_eof_offset;
+      std::optional<uint64_t> d_eof_offset;
       std::list<gr::tag_t> d_tags;
       bool d_eof_signalled;
 

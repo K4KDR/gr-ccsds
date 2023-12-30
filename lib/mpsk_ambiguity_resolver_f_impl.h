@@ -2,7 +2,7 @@
 #define INCLUDED_CCSDS_MPSK_AMBIGUITY_RESOLVER_F_IMPL_H
 
 
-#include <ccsds/mpsk_ambiguity_resolver_f.h>
+#include <gnuradio/ccsds/mpsk_ambiguity_resolver_f.h>
 #include "hexstring_to_binary.h"
 #include "mpsk_constellation.h"
 #include <gnuradio/tags.h>

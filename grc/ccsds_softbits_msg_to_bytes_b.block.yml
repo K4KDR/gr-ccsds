@@ -13,7 +13,7 @@ outputs:
     dtype: byte
 
 templates:
-    imports: import ccsds
+    imports: import gnuradio.ccsds as ccsds
     make: ccsds.softbits_msg_to_bytes_b()
 
 documentation: |-

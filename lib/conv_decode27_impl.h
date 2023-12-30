@@ -1,7 +1,7 @@
 #ifndef INCLUDED_CCSDS_CONV_DECODE27_IMPL_H
 #define INCLUDED_CCSDS_CONV_DECODE27_IMPL_H
 
-#include <ccsds/conv_decode27.h>
+#include <gnuradio/ccsds/conv_decode27.h>
 
 #include <fec.h>
 
@@ -19,7 +19,7 @@ namespace gr {
     class conv_decode27_impl : public conv_decode27 {
 
     private:
-    	typedef boost::shared_ptr<float[]> softbits_sptr;
+    	typedef std::shared_ptr<float[]> softbits_sptr;
 
 
     	/*! \brief Type of unpuncturing that has to be performed before the decoding. */
@@ -64,7 +64,7 @@ namespace gr {
     	/*! \brief buffer for storing unpunctured soft bits. */
     	unsigned char *d_buffer;
     
-    	boost::shared_ptr<bool[]> d_punct_pattern;
+    	std::shared_ptr<bool[]> d_punct_pattern;
     
     	const unsigned int d_PATTERN_LEN;
     

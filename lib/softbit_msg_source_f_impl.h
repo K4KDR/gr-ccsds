@@ -1,7 +1,7 @@
 #ifndef INCLUDED_CCSDS_SOFTBIT_MSG_SOURCE_F_IMPL_H
 #define INCLUDED_CCSDS_SOFTBIT_MSG_SOURCE_F_IMPL_H
 
-#include <ccsds/softbit_msg_source_f.h>
+#include <gnuradio/ccsds/softbit_msg_source_f.h>
 #include <queue>
 #include <cstdio>
 #include "asynchronous_start.hpp"

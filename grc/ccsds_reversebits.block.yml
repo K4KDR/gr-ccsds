@@ -26,7 +26,7 @@ asserts:
 - ${ len(rev_indices) <= msg_len }
 
 templates:
-    imports: import ccsds
+    imports: import gnuradio.ccsds as ccsds
     make: ccsds.reversebits(${msg_len},${rev_indices})
 
 documentation: |-

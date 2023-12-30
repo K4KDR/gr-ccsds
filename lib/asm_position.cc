@@ -23,8 +23,8 @@
 #endif
 
 #include <gnuradio/io_signature.h>
-#include <ccsds/asm_position.h>
-#include <ccsds/exceptions.h>
+#include <gnuradio/ccsds/asm_position.h>
+#include <gnuradio/ccsds/exceptions.h>
 
 namespace gr {
   namespace ccsds {

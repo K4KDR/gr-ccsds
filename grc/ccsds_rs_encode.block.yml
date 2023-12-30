@@ -22,7 +22,7 @@ outputs:
     id: out
 
 templates:
-    imports: import ccsds
+    imports: import gnuradio.ccsds as ccsds
     make: ccsds.rs_encode(int(${I.fcn}))
 
 documentation: |-

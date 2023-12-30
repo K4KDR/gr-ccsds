@@ -8,7 +8,7 @@
 #include <boost/scoped_array.hpp>
 #include "hexstring_to_binary.h"
 #include "ccsds_utils.h"
-#include <ccsds/softbits.h>
+#include <gnuradio/ccsds/softbits.h>
 
 namespace gr {
   namespace ccsds {
@@ -42,7 +42,7 @@ namespace gr {
     unsigned int conv_decode27_impl::get_num_inputs_req(conv_puncturing27::punct_t puncturing_type, const unsigned int num_out) {
     
     	const unsigned int pattern_len = conv_puncturing27::get_pattern_len(puncturing_type);
-    	boost::shared_ptr<bool[]> pattern = conv_puncturing27::get_pattern(puncturing_type);
+    	std::shared_ptr<bool[]> pattern = conv_puncturing27::get_pattern(puncturing_type);
     
     	unsigned int count_in = 0;
     	unsigned int count_pattern = 0;
@@ -166,7 +166,7 @@ namespace gr {
     
     	// register input type
     	message_port_register_in(pmt::mp("in"));
-    	set_msg_handler(pmt::mp("in"), boost::bind(&conv_decode27_impl::process_message, this, _1));
+    	set_msg_handler(pmt::mp("in"), [this](pmt::pmt_t msg) { this->process_message(msg); });
     }
     
     conv_decode27_impl::~conv_decode27_impl(void) {

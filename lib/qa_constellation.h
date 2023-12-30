@@ -22,7 +22,7 @@
 #ifndef _QA_CCSDS_CONSTELLATION_H_
 #define _QA_CCSDS_CONSTELLATION_H_
 
-#include <ccsds/softbits.h>
+#include <gnuradio/ccsds/softbits.h>
 
 #include <cppunit/extensions/HelperMacros.h>
 #include <cppunit/TestCase.h>
@@ -57,7 +57,7 @@ namespace gr {
                     using test_data_t = std::vector<test_data_entry_t>;
                     
                     void test_dimensions() {
-                        boost::shared_ptr<C> c = C::make();
+                        std::shared_ptr<C> c = C::make();
 
                         CPPUNIT_ASSERT_EQUAL(
                             expected_arity,
@@ -81,7 +81,7 @@ namespace gr {
                     }
 
                     void run_decisions_test(const test_data_t& test_data) {
-                        boost::shared_ptr<C> c = C::make();
+                        std::shared_ptr<C> c = C::make();
 
                         const size_t NUM_SYMBOLS = test_data.size();
 
@@ -119,7 +119,7 @@ namespace gr {
                     }
 
                     void test_chain() {
-                        boost::shared_ptr<C> c = C::make();
+                        std::shared_ptr<C> c = C::make();
 
                         for (unsigned int i=0; i<c->arity(); i++) {
                             std::vector<gr_complex> points = c->map_to_points_v(i);

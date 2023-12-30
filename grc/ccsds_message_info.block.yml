@@ -23,7 +23,7 @@ inputs:
     id: in
 
 templates:
-    imports: import ccsds
+    imports: import gnuradio.ccsds as ccsds
     make: ccsds.message_info(${prefix}, ${mode})
 
 documentation: |-

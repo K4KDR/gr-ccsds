@@ -25,7 +25,7 @@
 #include "frame_sync_config_impl.h"
 #include "hexstring_to_binary.h"
 
-#include <ccsds/exceptions.h>
+#include <gnuradio/ccsds/exceptions.h>
 
 namespace {
 
@@ -66,7 +66,7 @@ inline size_t compute_output_len(size_t payload_len, int head_len, int tail_len)
 namespace gr {
   namespace ccsds {
 
-frame_sync_config::sptr frame_sync_config::make(boost::shared_ptr<gr::digital::constellation> constellation, std::string asm_hex, size_t asm_len_bits, size_t payload_len_bits, int head_len_bits, int tail_len_bits) {
+frame_sync_config::sptr frame_sync_config::make(std::shared_ptr<gr::digital::constellation> constellation, std::string asm_hex, size_t asm_len_bits, size_t payload_len_bits, int head_len_bits, int tail_len_bits) {
   const size_t bits_per_symbol = constellation->bits_per_symbol();
   
   if (asm_hex.length()*8/2 < asm_len_bits) {
@@ -116,7 +116,7 @@ frame_sync_config_impl::~frame_sync_config_impl() {
   // nothing to do
 }
 
-boost::shared_ptr<gr::digital::constellation> frame_sync_config_impl::constellation() const {
+std::shared_ptr<gr::digital::constellation> frame_sync_config_impl::constellation() const {
   return d_CONSTELLATION;
 }
 
@@ -208,7 +208,7 @@ int frame_sync_config_impl::tail_num_symbols() const {
 }
 
 
-frame_sync_config_impl::frame_sync_config_impl(boost::shared_ptr<gr::digital::constellation> constellation, std::string asm_hex, volk::vector<gr_complex> asm_symbols, size_t payload_len_symbols, int head_len_symbols, int tail_len_symbols)
+frame_sync_config_impl::frame_sync_config_impl(std::shared_ptr<gr::digital::constellation> constellation, std::string asm_hex, volk::vector<gr_complex> asm_symbols, size_t payload_len_symbols, int head_len_symbols, int tail_len_symbols)
   : d_CONSTELLATION(constellation),
     d_BLOCK_LEN_SYMBOLS(asm_symbols.size()+payload_len_symbols),
     d_ASM_LEN_SYMBOLS(asm_symbols.size()),

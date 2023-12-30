@@ -21,8 +21,8 @@
 #ifndef INCLUDED_CCSDS_SNR_ESTIMATION_CF_IMPL_H
 #define INCLUDED_CCSDS_SNR_ESTIMATION_CF_IMPL_H
 
-#include <ccsds/snr_estimation_cf.h>
-#include <ccsds/snr_est.h>
+#include <gnuradio/ccsds/snr_estimation_cf.h>
+#include <gnuradio/ccsds/snr_est.h>
 
 namespace gr {
   namespace ccsds {

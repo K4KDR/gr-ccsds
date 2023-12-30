@@ -21,8 +21,8 @@
 #ifndef INCLUDED_CCSDS_AUX_frame_sync_BUFFER_H
 #define INCLUDED_CCSDS_AUX_frame_sync_BUFFER_H
 
-#include <ccsds/snr.h>
-#include <ccsds/snr_interpolation.h>
+#include <gnuradio/ccsds/snr.h>
+#include <gnuradio/ccsds/snr_interpolation.h>
 
 #include <gnuradio/gr_complex.h>
 #include <volk/volk.h>
@@ -31,7 +31,7 @@
 #include <volk/volk_alloc.hh>
 #else
 // TODO remove this once gr-ccsds is ported to GNURadio 3.8 (that has a recent version of VOLK with volk_alloc.hh). Also remove the copy shipped with gr-ccsds once ported.
-#include <ccsds/volk_alloc.hh>
+#include <gnuradio/ccsds/volk_alloc.hh>
 #endif
 
 

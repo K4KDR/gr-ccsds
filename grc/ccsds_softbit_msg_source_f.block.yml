@@ -19,7 +19,7 @@ outputs:
     dtype: float
 
 templates:
-    imports: import ccsds
+    imports: import gnuradio.ccsds as ccsds
     make: ccsds.softbit_msg_source_f(${frame_len})
 
 documentation: |-

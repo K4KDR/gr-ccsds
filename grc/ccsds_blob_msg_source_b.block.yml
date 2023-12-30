@@ -23,7 +23,7 @@ outputs:
     dtype: byte
 
 templates:
-    imports: import ccsds
+    imports: import gnuradio.ccsds as ccsds
     make: ccsds.blob_msg_source_b(${blob_len}, ${length_tag_name})
 
 documentation: |-

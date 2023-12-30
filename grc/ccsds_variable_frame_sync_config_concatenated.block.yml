@@ -20,7 +20,7 @@ value: ${ ccsds.frame_sync_config(ccsds.constellation_ccsds_modulation.base(),'8
     }
 
 templates:
-    imports: import ccsds
+    imports: import gnuradio.ccsds as ccsds
     var_make: "\nself.${id} = ${id} = ccsds.frame_sync_config(ccsds.constellation_ccsds_${modulation}().base(),\n\
         \    '81C971AA73D3E0',\n    52,\n    ${interleaving_depth}*255*8*2+12,\n \
         \   0,\n    0\n)\n\t"

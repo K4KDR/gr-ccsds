@@ -21,7 +21,7 @@ asserts:
 - ${ num_syms >= 0 }
 
 templates:
-    imports: import ccsds
+    imports: import gnuradio.ccsds as ccsds
     make: ccsds.mpsk_preamble_cc(${num_syms})
 
 documentation: |-

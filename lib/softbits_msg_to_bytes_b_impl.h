@@ -1,6 +1,6 @@
 #ifndef INCLUDED_CCSDS_SOFTBITS_MSG_TO_BYTES_B_IMPL_H
 #define INCLUDED_CCSDS_SOFTBITS_MSG_TO_BYTES_B_IMPL_H
-#include <ccsds/softbits_msg_to_bytes_b.h>
+#include <gnuradio/ccsds/softbits_msg_to_bytes_b.h>
 #include <queue>
 #include <cstdio>
 

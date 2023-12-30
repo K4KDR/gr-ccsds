@@ -18,7 +18,7 @@ outputs:
     dtype: ''
 
 templates:
-    imports: import ccsds
+    imports: import gnuradio.ccsds as ccsds
     make: ccsds.pack_bit_to_bytes()
 
 file_format: 1

@@ -13,7 +13,7 @@ outputs:
     id: out
 
 templates:
-    imports: import ccsds
+    imports: import gnuradio.ccsds as ccsds
     make: ccsds.soft_to_hard_message()
 
 documentation: |-

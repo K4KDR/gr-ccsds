@@ -1,7 +1,7 @@
 /* -*- c++ -*- */
 
 #include "qa_constellation_ccsds_bpsk.h"
-#include <ccsds/constellation_ccsds_bpsk.h>
+#include <gnuradio/ccsds/constellation_ccsds_bpsk.h>
 #include <cppunit/TestAssert.h>
 #include <stdio.h>
 

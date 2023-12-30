@@ -1,7 +1,7 @@
 #ifndef INCLUDED_CCSDS_TRUNK_TAIL_IMPL_H
 #define INCLUDED_CCSDS_TRUNK_TAIL_IMPL_H
 
-#include <ccsds/trunk_tail.h>
+#include <gnuradio/ccsds/trunk_tail.h>
 #include <cstdio>
 
 namespace gr {

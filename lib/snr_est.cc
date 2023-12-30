@@ -23,7 +23,7 @@
 #endif
 
 #include <gnuradio/io_signature.h>
-#include <ccsds/snr_est.h>
+#include <gnuradio/ccsds/snr_est.h>
 #include "ccsds_utils.h"
 
 namespace gr {

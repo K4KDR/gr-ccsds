@@ -1,7 +1,7 @@
 /* -*- c++ -*- */
 
 #include "qa_softbits.h"
-#include <ccsds/softbits.h>
+#include <gnuradio/ccsds/softbits.h>
 #include <cppunit/TestAssert.h>
 #include <stdio.h>
 #include <limits>
