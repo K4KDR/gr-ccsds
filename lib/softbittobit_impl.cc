@@ -24,7 +24,7 @@
 
 #include "softbittobit_impl.h"
 
-#include <ccsds/softbits.h>
+#include <gnuradio/ccsds/softbits.h>
 
 #include <gnuradio/io_signature.h>
 

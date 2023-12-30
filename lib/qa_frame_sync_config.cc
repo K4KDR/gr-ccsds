@@ -4,10 +4,10 @@
 
 #include "ccsds_utils.h"
 
-#include <ccsds/frame_sync_config.h>
-#include <ccsds/constellation_ccsds_bpsk.h>
-#include <ccsds/constellation_ccsds_qpsk.h>
-#include <ccsds/constellation_ccsds_qpsk_axis.h>
+#include <gnuradio/ccsds/frame_sync_config.h>
+#include <gnuradio/ccsds/constellation_ccsds_bpsk.h>
+#include <gnuradio/ccsds/constellation_ccsds_qpsk.h>
+#include <gnuradio/ccsds/constellation_ccsds_qpsk_axis.h>
 
 #include <cppunit/TestAssert.h>
 #include <stdio.h>

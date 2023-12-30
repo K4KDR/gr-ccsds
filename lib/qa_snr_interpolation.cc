@@ -22,7 +22,7 @@
 #include <config.h>
 #endif
 
-#include <ccsds/snr_interpolation.h>
+#include <gnuradio/ccsds/snr_interpolation.h>
 #include <gnuradio/attributes.h>
 #include <boost/test/unit_test.hpp>
 

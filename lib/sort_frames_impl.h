@@ -21,7 +21,7 @@
 #ifndef INCLUDED_CCSDS_SORT_FRAMES_IMPL_H
 #define INCLUDED_CCSDS_SORT_FRAMES_IMPL_H
 
-#include <ccsds/sort_frames.h>
+#include <gnuradio/ccsds/sort_frames.h>
 
 #include <pmt/pmt.h>
 
@@ -67,8 +67,8 @@ namespace gr {
         
         frame_duplicates_t& get_duplicates(uint64_t frame_number);
         
-        boost::optional<uint64_t> get_frame_number(const pmt::pmt_t& header) const;
-        boost::optional<double> get_frame_score(const pmt::pmt_t& header) const;
+        std::optional<uint64_t> get_frame_number(const pmt::pmt_t& header) const;
+        std::optional<double> get_frame_score(const pmt::pmt_t& header) const;
         
         void store_frame(pmt::pmt_t frame);
         void send_frame(uint64_t frame_number);

@@ -1,7 +1,7 @@
 #ifndef INCLUDED_CCSDS_SOFTBIT_MSG_SINK_F_IMPL_H
 #define INCLUDED_CCSDS_SOFTBIT_MSG_SINK_F_IMPL_H
 
-#include <ccsds/softbit_msg_sink_f.h>
+#include <gnuradio/ccsds/softbit_msg_sink_f.h>
 
 namespace gr {
   namespace ccsds {

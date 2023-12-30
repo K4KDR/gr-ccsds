@@ -26,7 +26,7 @@ asserts:
 - ${ gamma > 0.0 }
 
 templates:
-    imports: import ccsds
+    imports: import gnuradio.ccsds as ccsds
     make: ccsds.dll_cc(${osf},${gamma})
 
 documentation: |-

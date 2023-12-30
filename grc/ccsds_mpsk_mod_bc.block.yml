@@ -21,7 +21,7 @@ asserts:
 - ${ M >= 2 }
 
 templates:
-    imports: import ccsds
+    imports: import gnuradio.ccsds as ccsds
     make: ccsds.mpsk_mod_bc(${M})
 
 documentation: |-

@@ -54,7 +54,7 @@ asserts:
 
 templates:
     imports: |-
-        import ccsds
+        import gnuradio.ccsds as ccsds
         import math
     make: ccsds.mpsk_ambiguity_resolver_f(${M},${ASM},${ASM_len},${threshold},${corr_threshold},${frame_len},${num_tail_sym})
 

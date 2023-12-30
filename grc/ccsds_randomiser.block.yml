@@ -28,7 +28,7 @@ asserts:
 - ${ seed < 256 }
 
 templates:
-    imports: import ccsds
+    imports: import gnuradio.ccsds as ccsds
     make: ccsds.randomiser(${poly},${seed})
 
 documentation: "Pseudo (De)randomiser\nCombines the input frame with a pseudo random\

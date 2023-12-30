@@ -22,7 +22,7 @@
 #include "config.h"
 #endif
 
-#include <ccsds/softbits.h>
+#include <gnuradio/ccsds/softbits.h>
 
 #include <gnuradio/io_signature.h>
 #include "soft_to_hard_message_impl.h"
@@ -50,13 +50,7 @@ namespace gr {
     {
       // register input
       message_port_register_in(pmt::mp("in"));
-    	set_msg_handler(
-          pmt::mp("in"),
-          boost::bind(
-            &soft_to_hard_message_impl::process_message,
-            this,
-            _1)
-      );
+      set_msg_handler(pmt::mp("in"), [this](pmt::pmt_t msg) { this->process_message(msg); });
       
       // register outnput type
     	message_port_register_out(pmt::mp("out"));

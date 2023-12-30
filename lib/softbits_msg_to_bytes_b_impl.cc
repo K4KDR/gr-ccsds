@@ -4,7 +4,7 @@
 
 #include "softbits_msg_to_bytes_b_impl.h"
 #include "ccsds_utils.h"
-#include <ccsds/softbits.h>
+#include <gnuradio/ccsds/softbits.h>
 
 #include <gnuradio/io_signature.h>
 
@@ -27,7 +27,7 @@ namespace gr {
     
     	// register input type
     	message_port_register_in(pmt::mp("in"));
-    	set_msg_handler(pmt::mp("in"), boost::bind(&softbits_msg_to_bytes_b_impl::process_message, this, _1));
+    	set_msg_handler(pmt::mp("in"), [this](pmt::pmt_t msg) { this->process_message(msg); });
     }
     
     softbits_msg_to_bytes_b_impl::~softbits_msg_to_bytes_b_impl () {

@@ -21,7 +21,7 @@
 #ifndef INCLUDED_CCSDS_FRAME_CONFIG_IMPL_H
 #define INCLUDED_CCSDS_FRAME_CONFIG_IMPL_H
 
-#include <ccsds/frame_generation_config.h>
+#include <gnuradio/ccsds/frame_generation_config.h>
 
 
 

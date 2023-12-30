@@ -21,7 +21,7 @@
 #ifndef INCLUDED_CCSDS_SOFTBITTOBIT_IMPL_H
 #define INCLUDED_CCSDS_SOFTBITTOBIT_IMPL_H
 
-#include <ccsds/softbittobit.h>
+#include <gnuradio/ccsds/softbittobit.h>
 
 namespace gr {
   namespace ccsds {

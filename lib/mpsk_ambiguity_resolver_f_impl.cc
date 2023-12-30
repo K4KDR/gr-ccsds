@@ -3,7 +3,7 @@
 #endif
 
 #include <mpsk_ambiguity_resolver_f_impl.h>
-#include <ccsds/softbits.h>
+#include <gnuradio/ccsds/softbits.h>
 #include "ccsds_utils.h"
 
 #include <gnuradio/io_signature.h>

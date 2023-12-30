@@ -15,7 +15,7 @@ parameters:
 value: ${ value }
 
 templates:
-    imports: import ccsds
+    imports: import gnuradio.ccsds as ccsds
     var_make: self.${id} = ${id} = ccsds.constellation_ccsds_${type}().base()
 
 file_format: 1

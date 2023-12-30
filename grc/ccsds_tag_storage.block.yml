@@ -9,7 +9,7 @@ inputs:
     dtype: complex
 
 templates:
-    imports: import ccsds
+    imports: import gnuradio.ccsds as ccsds
     make: ccsds.tag_storage()
 
 file_format: 1

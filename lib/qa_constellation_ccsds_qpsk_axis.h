@@ -26,7 +26,7 @@
 #include <cppunit/TestCase.h>
 
 #include "qa_constellation.h"
-#include <ccsds/constellation_ccsds_qpsk_axis.h>
+#include <gnuradio/ccsds/constellation_ccsds_qpsk_axis.h>
 
 
 namespace gr {

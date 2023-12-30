@@ -26,7 +26,7 @@ namespace gr {
     
     	// register input type
     	message_port_register_in(pmt::mp("in"));
-    	set_msg_handler(pmt::mp("in"), boost::bind(&randomiser_impl::process_frame, this, _1));
+    	set_msg_handler(pmt::mp("in"), [this](pmt::pmt_t msg) { this->process_frame(msg); });
     }
     
     randomiser_impl::~randomiser_impl () {
@@ -100,7 +100,7 @@ namespace gr {
     
     	// Assign input and output pointer
     	const uint8_t *data_in = (const uint8_t *) pmt::blob_data(msg);
-    	boost::shared_ptr<uint8_t[]> data_out = boost::shared_ptr<uint8_t[]>(new uint8_t[BLOB_LEN]);
+    	std::shared_ptr<uint8_t[]> data_out = std::shared_ptr<uint8_t[]>(new uint8_t[BLOB_LEN]);
     
     	// Reset state before new block
     	reset();

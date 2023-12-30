@@ -1,7 +1,7 @@
 #ifndef INCLUDED_CCSDS_ADD_ASM_IMPL_H
 #define INCLUDED_CCSDS_ADD_ASM_IMPL_H
 
-#include "ccsds/add_asm.h"
+#include "gnuradio/ccsds/add_asm.h"
 
 
 namespace gr {

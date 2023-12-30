@@ -26,7 +26,7 @@
 #include "byte_to_softbits_bf_impl.h"
 
 #include "ccsds_utils.h"
-#include <ccsds/softbits.h>
+#include <gnuradio/ccsds/softbits.h>
 
 namespace gr {
   namespace ccsds {

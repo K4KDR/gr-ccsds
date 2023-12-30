@@ -20,7 +20,7 @@
 
 #include "frame_sync_buffer.h"
 #include "ccsds_utils.h"
-#include <ccsds/exceptions.h>
+#include <gnuradio/ccsds/exceptions.h>
 
 #include <gnuradio/gr_complex.h>
 

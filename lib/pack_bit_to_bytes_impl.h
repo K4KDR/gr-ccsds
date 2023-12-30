@@ -21,7 +21,7 @@
 #ifndef INCLUDED_CCSDS_PACK_BIT_TO_BYTES_IMPL_H
 #define INCLUDED_CCSDS_PACK_BIT_TO_BYTES_IMPL_H
 
-#include <ccsds/pack_bit_to_bytes.h>
+#include <gnuradio/ccsds/pack_bit_to_bytes.h>
 
 namespace gr {
   namespace ccsds {

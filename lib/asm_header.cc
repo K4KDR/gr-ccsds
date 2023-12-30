@@ -23,9 +23,9 @@
 #endif
 
 #include <gnuradio/io_signature.h>
-#include <ccsds/asm_header.h>
+#include <gnuradio/ccsds/asm_header.h>
 
-#include <ccsds/exceptions.h>
+#include <gnuradio/ccsds/exceptions.h>
 
 #include <limits>
 

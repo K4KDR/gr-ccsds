@@ -1,7 +1,7 @@
 #ifndef INCLUDED_CCSDS_RANDOMIZER_IMPL_H
 #define INCLUDED_CCSDS_RANDOMIZER_IMPL_H
 
-#include <ccsds/randomiser.h>
+#include <gnuradio/ccsds/randomiser.h>
 //#include <string>
 
 namespace gr {

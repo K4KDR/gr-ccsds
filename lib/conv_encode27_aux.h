@@ -2,7 +2,7 @@
 #define CCSDS_CONV_ENCODE27_AUX_H
 
 #include <stdint.h>
-#include <ccsds/conv_puncturing27.h>
+#include <gnuradio/ccsds/conv_puncturing27.h>
 namespace gr {
   namespace ccsds {
  
@@ -64,7 +64,7 @@ namespace gr {
     	uint16_t d_state;
     
     	/*! \brief Array of booleans when to keep (true) and when to drop bits. */
-    	boost::shared_ptr<bool[]> d_punct_pattern;
+    	std::shared_ptr<bool[]> d_punct_pattern;
     
     	/*!
     	 *  \brief Number of bits we already processed in the current puncturing

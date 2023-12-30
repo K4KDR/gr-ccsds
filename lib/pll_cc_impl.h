@@ -1,7 +1,7 @@
 #ifndef INCLUDED_CCSDS_PLL_CC_IMPL_H
 #define INCLUDED_CCSDS_PLL_CC_IMPL_H
 
-#include <ccsds/pll_cc.h>
+#include <gnuradio/ccsds/pll_cc.h>
 #include "lpf2.h"
 #include <math.h>
 

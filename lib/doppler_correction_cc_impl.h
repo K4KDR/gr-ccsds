@@ -21,7 +21,7 @@
 #ifndef INCLUDED_CCSDS_DOPPLER_CORRECTION_CC_IMPL_H
 #define INCLUDED_CCSDS_DOPPLER_CORRECTION_CC_IMPL_H
 
-#include <ccsds/doppler_correction_cc.h>
+#include <gnuradio/ccsds/doppler_correction_cc.h>
 
 #include <vector>
 #include <array>

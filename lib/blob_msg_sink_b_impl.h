@@ -1,7 +1,7 @@
 #ifndef INCLUDED_CCSDS_BLOB_MSG_SINK_B_IMPL_H
 #define INCLUDED_CCSDS_BLOB_MSG_SINK_B_IMPL_H
 
-#include <ccsds/blob_msg_sink_b.h>
+#include <gnuradio/ccsds/blob_msg_sink_b.h>
 
 namespace gr {
   namespace ccsds {

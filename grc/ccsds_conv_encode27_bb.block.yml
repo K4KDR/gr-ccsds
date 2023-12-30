@@ -36,7 +36,7 @@ asserts:
 - ${ gen_poly_c2 <= 255 }
 
 templates:
-    imports: import ccsds
+    imports: import gnuradio.ccsds as ccsds
     make: ccsds.conv_encode27_bb(${gen_poly_c1}, ${gen_poly_c2}, int(${punct.fcn}))
 
 documentation: |-

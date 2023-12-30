@@ -3,7 +3,7 @@ label: SNR Estimation (PSK)
 category: '[ccsds]'
 
 templates:
-  imports: import ccsds
+  imports: import gnuradio.ccsds as ccsds
   make: ccsds.snr_estimation_cf(${decimation})
 
 parameters:

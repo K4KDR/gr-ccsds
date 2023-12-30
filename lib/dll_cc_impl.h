@@ -1,7 +1,7 @@
 #ifndef INCLUDED_CCSDS_DLL_CC_IMPL_H
 #define INCLUDED_CCSDS_DLL_CC_IMPL_H
 
-#include <ccsds/dll_cc.h>
+#include <gnuradio/ccsds/dll_cc.h>
 
 /*!
  *  \brief Number of samples used for one interpolation

@@ -1,7 +1,7 @@
 #ifndef INCLUDED_CCSDS_RS_DECODE_IMPL_H
 #define INCLUDED_CCSDS_RS_DECODE_IMPL_H
 
-#include <ccsds/rs_decode.h>
+#include <gnuradio/ccsds/rs_decode.h>
 #include <cstdio>
 #include <string> // required by fec
 

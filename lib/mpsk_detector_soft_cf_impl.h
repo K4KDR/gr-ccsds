@@ -1,7 +1,7 @@
 #ifndef INCLUDED_CCSDS_MPSK_DETECTOR_SOFT_CF_IMPL_H
 #define INCLUDED_CCSDS_MPSK_DETECTOR_SOFT_CF_IMPL_H
 
-#include <ccsds/mpsk_detector_soft_cf.h>
+#include <gnuradio/ccsds/mpsk_detector_soft_cf.h>
 #include "mpsk_constellation.h"
 #include <stdio.h>
 #include <math.h>

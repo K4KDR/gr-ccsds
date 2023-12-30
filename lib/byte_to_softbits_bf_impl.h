@@ -21,7 +21,7 @@
 #ifndef INCLUDED_CCSDS_BYTE_TO_SOFTBITS_BF_IMPL_H
 #define INCLUDED_CCSDS_BYTE_TO_SOFTBITS_BF_IMPL_H
 
-#include <ccsds/byte_to_softbits_bf.h>
+#include <gnuradio/ccsds/byte_to_softbits_bf.h>
 
 namespace gr {
   namespace ccsds {

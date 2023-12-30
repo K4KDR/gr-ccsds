@@ -9,7 +9,7 @@ outputs:
     id: out
 
 templates:
-    imports: import ccsds
+    imports: import gnuradio.ccsds as ccsds
     make: ccsds.msg_null_src()
 
 documentation: |-

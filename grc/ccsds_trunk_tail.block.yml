@@ -30,7 +30,7 @@ asserts:
 - ${ blanc_bits >= 0 }
 
 templates:
-    imports: import ccsds
+    imports: import gnuradio.ccsds as ccsds
     make: ccsds.trunk_tail(${tail_len},${frame_len}, ${blanc_bits})
 
 documentation: |-

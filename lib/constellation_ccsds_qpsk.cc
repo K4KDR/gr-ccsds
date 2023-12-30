@@ -23,7 +23,7 @@
 #endif
 
 #include <gnuradio/io_signature.h>
-#include <ccsds/constellation_ccsds_qpsk.h>
+#include <gnuradio/ccsds/constellation_ccsds_qpsk.h>
 
 namespace gr {
   namespace ccsds {

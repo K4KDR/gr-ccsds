@@ -26,7 +26,7 @@ namespace gr {
     
     	// register input type
     	message_port_register_in(pmt::mp("in"));
-    	set_msg_handler(pmt::mp("in"), boost::bind(&blob_msg_source_b_impl::process_message, this, _1));
+    	set_msg_handler(pmt::mp("in"), [this](pmt::pmt_t msg) { this->process_message(msg); });
     }
     
     blob_msg_source_b_impl::~blob_msg_source_b_impl () {

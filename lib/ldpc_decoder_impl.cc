@@ -76,7 +76,7 @@ namespace gr {
     
     	// register input type
     	message_port_register_in(pmt::mp("in"));
-    	set_msg_handler(pmt::mp("in"), boost::bind(&ldpc_decoder_impl::process_frame, this, _1));
+    	set_msg_handler(pmt::mp("in"), [this](pmt::pmt_t msg) { this->process_frame(msg); });
         
     }
 

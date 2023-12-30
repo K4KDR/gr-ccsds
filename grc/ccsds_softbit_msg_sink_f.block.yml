@@ -19,7 +19,7 @@ outputs:
     id: out
 
 templates:
-    imports: import ccsds
+    imports: import gnuradio.ccsds as ccsds
     make: ccsds.softbit_msg_sink_f(${frame_len})
 
 documentation: |-

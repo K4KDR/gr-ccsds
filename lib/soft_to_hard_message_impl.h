@@ -21,7 +21,7 @@
 #ifndef INCLUDED_CCSDS_SOFT_TO_HARD_MESSAGE_IMPL_H
 #define INCLUDED_CCSDS_SOFT_TO_HARD_MESSAGE_IMPL_H
 
-#include <ccsds/soft_to_hard_message.h>
+#include <gnuradio/ccsds/soft_to_hard_message.h>
 
 namespace gr {
   namespace ccsds {

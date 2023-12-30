@@ -21,11 +21,11 @@
 #ifndef INCLUDED_CCSDS_FRAME_SYNC_IMPL_H
 #define INCLUDED_CCSDS_FRAME_SYNC_IMPL_H
 
-#include <ccsds/frame_sync.h>
+#include <gnuradio/ccsds/frame_sync.h>
 
-#include <ccsds/asm_header.h>
-#include <ccsds/asm_position.h>
-#include <ccsds/snr_est.h>
+#include <gnuradio/ccsds/asm_header.h>
+#include <gnuradio/ccsds/asm_position.h>
+#include <gnuradio/ccsds/snr_est.h>
 #include "frame_sync_buffer.h"
 
 #include <boost/optional.hpp>
@@ -93,8 +93,8 @@ namespace gr {
 
      public:
       frame_sync_impl(
-        boost::shared_ptr<frame_sync_config> sync_conf,  // Note: use explicit boost::shared_ptr instead of constellation_sptr typedef because the latter confuses SWIG
-        boost::shared_ptr<frame_generation_config> gen_conf,
+        std::shared_ptr<frame_sync_config> sync_conf,  // Note: use explicit std::shared_ptr instead of constellation_sptr typedef because the latter confuses SWIG
+        std::shared_ptr<frame_generation_config> gen_conf,
         asm_position_list::sptr additional_positions
       );
       ~frame_sync_impl() = default;

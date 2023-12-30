@@ -61,7 +61,7 @@ asserts:
 - ${ num_punct >= 0 }
 
 templates:
-    imports: import ccsds
+    imports: import gnuradio.ccsds as ccsds
     make: ccsds.ldpc_decoder(${par_file}, ${systype.fcn}, ${puncttype.fcn}, ${num_punct},
         tuple(${punct_pos}), ${drop_invalid}, ${verbosity})
 

@@ -25,7 +25,7 @@ outputs:
     id: out
 
 templates:
-    imports: import ccsds
+    imports: import gnuradio.ccsds as ccsds
     make: ccsds.frame_sync(${sync_config}, ${gen_config}, ${additional_frames})
 
 file_format: 1

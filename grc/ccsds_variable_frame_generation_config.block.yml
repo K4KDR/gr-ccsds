@@ -26,7 +26,7 @@ parameters:
 value: ${ value }
 
 templates:
-    imports: import ccsds
+    imports: import gnuradio.ccsds as ccsds
     var_make: self.${id} = ${id} = ccsds.frame_generation_config(${numbefore}, ${numafter}, ${thresholdprimary}, ${thresholdsecondary})
 
 file_format: 1

@@ -21,7 +21,7 @@
 #ifndef INCLUDED_CCSDS_BLOCK_PREFIX_BB_IMPL_H
 #define INCLUDED_CCSDS_BLOCK_PREFIX_BB_IMPL_H
 
-#include <ccsds/block_prefix_bb.h>
+#include <gnuradio/ccsds/block_prefix_bb.h>
 
 namespace gr {
   namespace ccsds {

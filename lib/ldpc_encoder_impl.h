@@ -21,7 +21,7 @@
 #ifndef INCLUDED_CCSDS_LDPC_ENCODER_IMPL_H
 #define INCLUDED_CCSDS_LDPC_ENCODER_IMPL_H
 
-#include <ccsds/ldpc_encoder.h>
+#include <gnuradio/ccsds/ldpc_encoder.h>
 
 namespace gr {
   namespace ccsds {

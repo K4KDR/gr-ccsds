@@ -1,7 +1,7 @@
 #ifndef INCLUDED_CCSDS_MPSK_MOD_BC_IMPL_H
 #define INCLUDED_CCSDS_MPSK_MOD_BC_IMPL_H
 
-#include <ccsds/mpsk_mod_bc.h>
+#include <gnuradio/ccsds/mpsk_mod_bc.h>
 #include "mpsk_constellation.h"
 #include <complex.h>
 #include <stdio.h>

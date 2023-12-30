@@ -32,7 +32,7 @@ namespace gr {
     
     	// register input type
     	message_port_register_in(pmt::mp("in"));
-    	set_msg_handler(pmt::mp("in"), boost::bind(&rs_decode_impl::process_frame, this, _1));
+    	set_msg_handler(pmt::mp("in"), [this](pmt::pmt_t msg) { this->process_frame(msg); });
     
     	if (d_VERBOSITY >= DECODER_VERBOSITY_DEBUG) {
             dbg_file_in 	   = fopen("/tmp/rs_decode_impl_debug_in.dat","w");

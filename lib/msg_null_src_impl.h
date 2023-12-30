@@ -1,7 +1,7 @@
 #ifndef INCLUDED_CCSDS_MSG_NULL_SRC_IMPL_H
 #define INCLUDED_CCSDS_MSG_NULL_SRC_IMPL_H
 
-#include <ccsds/msg_null_src.h>
+#include <gnuradio/ccsds/msg_null_src.h>
 
 
 

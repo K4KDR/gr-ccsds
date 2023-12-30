@@ -68,7 +68,7 @@ namespace gr {
         d_flushed = false;
         
         message_port_register_in(d_INTPUT_PORT);
-        set_msg_handler(d_INTPUT_PORT, boost::bind(&sort_frames_impl::store_frame, this, _1));
+        set_msg_handler(d_INTPUT_PORT, [this](pmt::pmt_t msg) { this->store_frame(msg); });
         
         message_port_register_out(d_OUTPUT_PORT);
     }
@@ -97,17 +97,17 @@ namespace gr {
         return d_frame_storage[index];
     }
     
-    boost::optional<uint64_t> sort_frames_impl::get_frame_number(const pmt::pmt_t& header) const {
+    std::optional<uint64_t> sort_frames_impl::get_frame_number(const pmt::pmt_t& header) const {
         const pmt::pmt_t sort_value = pmt::dict_ref(header, d_SORT_FIELD, pmt::PMT_NIL);
-        return pmt::is_null(sort_value) ? boost::none : boost::optional<uint64_t>{pmt::to_uint64(sort_value)};
+        return pmt::is_null(sort_value) ? std::nullopt : std::optional<uint64_t>{pmt::to_uint64(sort_value)};
     }
     
-    boost::optional<double> sort_frames_impl::get_frame_score(const pmt::pmt_t& header) const {
+    std::optional<double> sort_frames_impl::get_frame_score(const pmt::pmt_t& header) const {
         if (d_HAS_SCORE_FIELD) {
             const pmt::pmt_t value = pmt::dict_ref(header, d_SCORE_FIELD, pmt::PMT_NIL);
-            return pmt::is_null(value) ? boost::none : boost::optional<double>{pmt::to_double(value)};
+            return pmt::is_null(value) ? std::nullopt : std::optional<double>{pmt::to_double(value)};
         } else {
-            return boost::none;
+            return std::nullopt;
         }
     }
     
@@ -136,8 +136,8 @@ namespace gr {
             return;
         }
         
-        const boost::optional<uint64_t> frame_number = get_frame_number(header);
-        const boost::optional<double> frame_score = get_frame_score(header);
+        const std::optional<uint64_t> frame_number = get_frame_number(header);
+        const std::optional<double> frame_score = get_frame_score(header);
         
         
         if (!frame_number) {

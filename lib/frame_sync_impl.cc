@@ -26,7 +26,7 @@
 #include "hexstring_to_binary.h"
 #include "ccsds_utils.h"
 
-#include <ccsds/exceptions.h>
+#include <gnuradio/ccsds/exceptions.h>
 
 #include <gnuradio/io_signature.h>
 
@@ -37,8 +37,8 @@ namespace gr {
   namespace ccsds {
 
     frame_sync::sptr
-    frame_sync::make(boost::shared_ptr<frame_sync_config> sync_conf,
-                     boost::shared_ptr<frame_generation_config> gen_conf,
+    frame_sync::make(std::shared_ptr<frame_sync_config> sync_conf,
+                     std::shared_ptr<frame_generation_config> gen_conf,
                      asm_position_list::sptr additional_asm
     ) {
       return gnuradio::get_initial_sptr(new frame_sync_impl(sync_conf, gen_conf, additional_asm));
@@ -47,8 +47,8 @@ namespace gr {
     /*
      * The private constructor
      */
-    frame_sync_impl::frame_sync_impl(boost::shared_ptr<frame_sync_config> sync_conf,
-                                     boost::shared_ptr<frame_generation_config> gen_conf,
+    frame_sync_impl::frame_sync_impl(std::shared_ptr<frame_sync_config> sync_conf,
+                                     std::shared_ptr<frame_generation_config> gen_conf,
                                      asm_position_list::sptr additional_asm
                                     )
       : gr::sync_block("frame_sync",

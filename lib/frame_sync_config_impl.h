@@ -21,7 +21,7 @@
 #ifndef INCLUDED_CCSDS_FRAME_SYNC_CONFIG_IMPL_H
 #define INCLUDED_CCSDS_FRAME_SYNC_CONFIG_IMPL_H
 
-#include <ccsds/frame_sync_config.h>
+#include <gnuradio/ccsds/frame_sync_config.h>
 
 
 namespace gr {
@@ -32,7 +32,7 @@ namespace gr {
         frame_sync_config_impl(gr::digital::constellation_sptr constellation, std::string asm_hex, volk::vector<gr_complex> asm_symbols, size_t payload_len_symbols, int head_len_symbols, int tail_len_symbols);
         ~frame_sync_config_impl();
 
-        boost::shared_ptr<gr::digital::constellation> constellation() const override;
+        std::shared_ptr<gr::digital::constellation> constellation() const override;
 
         size_t asm_num_bits() const override;
         size_t asm_num_symbols() const override;

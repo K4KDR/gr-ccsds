@@ -40,7 +40,7 @@ outputs:
     dtype: complex
 
 templates:
-    imports: import ccsds
+    imports: import gnuradio.ccsds as ccsds
     make: ccsds.doppler_correction_cc(ccsds.util.getTleFromFile(${tle_filename}, ${tle_satname}),
         ${sampl_rate}, ${t_update}, ${frequency}, ${lla}, ${blocksize})
 

@@ -22,7 +22,7 @@
 #include "config.h"
 #endif
 
-#include <ccsds/snr.h>
+#include <gnuradio/ccsds/snr.h>
 
 #include <limits>
 #include <cassert>

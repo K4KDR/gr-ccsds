@@ -1,7 +1,7 @@
 #ifndef INCLUDED_CCSDS_conv_encode27_bb_IMPL_H
 #define INCLUDED_CCSDS_conv_encode27_bb_IMPL_H
 
-#include <ccsds/conv_encode27_bb.h>
+#include <gnuradio/ccsds/conv_encode27_bb.h>
 #include <complex.h>
 #include "conv_encode27_aux.h"
 

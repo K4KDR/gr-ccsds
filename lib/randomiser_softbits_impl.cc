@@ -26,7 +26,7 @@ namespace gr {
     
     	// register input type
     	message_port_register_in(pmt::mp("in"));
-    	set_msg_handler(pmt::mp("in"), boost::bind(&randomiser_softbits_impl::process_frame, this, _1));
+    	set_msg_handler(pmt::mp("in"), [this](pmt::pmt_t msg) { this->process_frame(msg); });
     }
     
     randomiser_softbits_impl::~randomiser_softbits_impl () {
@@ -100,7 +100,7 @@ namespace gr {
     	size_t len;
     	// Assign input and output pointer
     	const float *data_in = pmt::f32vector_elements(msg, len);
-    	boost::shared_ptr<float[]> data_out = boost::shared_ptr<float[]>(new float[NUM_BITS]);
+    	std::shared_ptr<float[]> data_out = std::shared_ptr<float[]>(new float[NUM_BITS]);
     
     	// Reset state before new block
     	reset();
