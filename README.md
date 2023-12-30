@@ -10,6 +10,12 @@ Dependencies:
 
 The dependencies are automatically downloaded and build alongside gr-ccsds. This can be disabled by providing the cmake option `-DCCSDS_BUILD_DEPS=Off`
 
+***
+*** K4KDR Notes specific to this fork ***
+--- please note that all dependency repositories have been copied here as well.   So, following the BUILD instructions below, I'm hoping that the dependencies will be sourced from the locations listed in the .gitmodules file.   If not, then the next best option would be to install them manually ---
+***
+***
+
 Build:
 ```
 cd gr-ccsds
