@@ -65,7 +65,7 @@ blocks:
     start: '-20000'
     step: '50'
     stop: '20000'
-    value: '6000'
+    value: '9050'
     widget: counter_slider
   states:
     bus_sink: false
@@ -226,7 +226,7 @@ blocks:
     alias: ''
     begin_tag: pmt.PMT_NIL
     comment: ''
-    file: /mnt/9000dcbc-ee53-4063-abea-b89cee0d66f1/1tb_SSD/iq/move2-single-packet-222_78125.raw
+    file: /tmp/move2-single-packet-222_78125.raw
     length: '0'
     maxoutbuf: '0'
     minoutbuf: '0'
@@ -377,11 +377,11 @@ blocks:
     affinity: ''
     alias: ''
     comment: ''
-    file: /mnt/9000dcbc-ee53-4063-abea-b89cee0d66f1/1tb_SSD/iq/MOVE-II_k4kdr_2023-12-30_1-45-sec_packet-NR_AUDIO.wav
+    file: /tmp/N6RFM_center-9050_AUDIO.wav
     maxoutbuf: '0'
     minoutbuf: '0'
     nchan: '1'
-    repeat: 'True'
+    repeat: 'False'
   states:
     bus_sink: false
     bus_source: false
@@ -415,7 +415,7 @@ blocks:
     maxoutbuf: '0'
     minoutbuf: '0'
     num_punct: '512'
-    par_file: /home/k4kdr/AR4JA_r12_k1024n.a
+    par_file: /home/k4kdr/gr-ccsds/examples/move2_postprocessing/AR4JA_r12_k1024n.a
     punct_pos: '[]'
     puncttype: punct_back
     systype: sys_front
