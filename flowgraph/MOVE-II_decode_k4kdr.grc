@@ -87,7 +87,7 @@ blocks:
     start: '5000'
     step: '50'
     stop: '20000'
-    value: '8000'
+    value: '10000'
     widget: counter_slider
   states:
     bus_sink: false
@@ -108,7 +108,7 @@ blocks:
     start: '100'
     step: '50'
     stop: '10000'
-    value: '3500'
+    value: '2400'
     widget: counter_slider
   states:
     bus_sink: false
@@ -315,7 +315,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [288, 356.0]
+    coordinate: [280, 372.0]
     rotation: 0
     state: enabled
 - name: blocks_throttle2_0_0
@@ -336,7 +336,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [528, 84.0]
+    coordinate: [512, 84.0]
     rotation: 0
     state: disabled
 - name: blocks_wavfile_source_0
@@ -379,11 +379,11 @@ blocks:
     affinity: ''
     alias: ''
     comment: ''
-    drop_invalid: 'True'
+    drop_invalid: 'False'
     maxoutbuf: '0'
     minoutbuf: '0'
     num_punct: '512'
-    par_file: ./examples/move2_postprocessing/AR4JA_r12_k1024n.a
+    par_file: /home/k4kdr/gr-ccsds/examples/move2_postprocessing/AR4JA_r12_k1024n.a
     punct_pos: '[]'
     puncttype: punct_back
     systype: sys_front
@@ -394,7 +394,7 @@ blocks:
     bus_structure: null
     coordinate: [1104, 444.0]
     rotation: 180
-    state: true
+    state: enabled
 - name: ccsds_message_info_0
   id: ccsds_message_info
   parameters:
@@ -419,7 +419,7 @@ blocks:
     affinity: ''
     alias: ''
     comment: ''
-    corr_threshold: '0.8'
+    corr_threshold: '0.7'
     frame_len: '256'
     maxoutbuf: '0'
     minoutbuf: '0'
@@ -480,7 +480,7 @@ blocks:
     minoutbuf: '0'
     order: '2'
     use_snr: 'False'
-    w: '0.01'
+    w: ' 0.01'
   states:
     bus_sink: false
     bus_source: false
@@ -488,7 +488,7 @@ blocks:
     coordinate: [1368, 96.0]
     rotation: 0
     state: enabled
-- name: digital_symbol_sync_xx_0
+- name: digital_symbol_sync_xx_0_0
   id: digital_symbol_sync_xx
   parameters:
     affinity: ''
@@ -512,7 +512,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [984, 4.0]
+    coordinate: [1000, 4.0]
     rotation: 0
     state: enabled
 - name: freq_xlating_fir_filter_xxx_0
@@ -548,6 +548,19 @@ blocks:
     coordinate: [416, 4.0]
     rotation: 0
     state: true
+- name: import_0_0
+  id: import
+  parameters:
+    alias: ''
+    comment: ''
+    imports: import gnuradio.ccsds.util
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [176, 4.0]
+    rotation: 0
+    state: true
 - name: import_0_0_0
   id: import
   parameters:
@@ -559,6 +572,32 @@ blocks:
     bus_source: false
     bus_structure: null
     coordinate: [416, 52.0]
+    rotation: 0
+    state: true
+- name: import_0_0_0_0
+  id: import
+  parameters:
+    alias: ''
+    comment: ''
+    imports: import fractions
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [280, 4.0]
+    rotation: 0
+    state: true
+- name: import_0_0_1
+  id: import
+  parameters:
+    alias: ''
+    comment: ''
+    imports: import cmath
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [176, 52.0]
     rotation: 0
     state: true
 - name: network_udp_source_0
@@ -581,7 +620,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [24, 548.0]
+    coordinate: [24, 540.0]
     rotation: 0
     state: disabled
 - name: note_1_0_0_0_0_0_0
@@ -620,7 +659,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1048, 396.0]
+    coordinate: [1048, 404.0]
     rotation: 0
     state: enabled
 - name: note_1_0_0_0_0_0_0_0_0_0
@@ -672,7 +711,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1184, 396.0]
+    coordinate: [1176, 404.0]
     rotation: 0
     state: enabled
 - name: note_3_0_1_0_0_0
@@ -728,7 +767,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1056, 596.0]
+    coordinate: [1048, 596.0]
     rotation: 0
     state: enabled
 - name: qtgui_const_sink_x_0
@@ -922,7 +961,7 @@ blocks:
     autoscale: 'False'
     average: '1.0'
     axislabels: 'True'
-    bw: samp_rate/2
+    bw: samp_rate
     color1: '"blue"'
     color10: '"dark blue"'
     color2: '"red"'
@@ -1012,7 +1051,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1120, 676.0]
+    coordinate: [1080, 644.0]
     rotation: 180
     state: enabled
 - name: satellites_print_timestamp_0_0
@@ -1082,7 +1121,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [24, 500.0]
+    coordinate: [8, 492.0]
     rotation: 0
     state: disabled
 
@@ -1108,7 +1147,7 @@ connections:
 - [ccsds_softbits_msg_to_bytes_b_0, '0', ccsds_blob_msg_sink_b_0, '0']
 - [digital_costas_loop_cc_0, '0', blocks_complex_to_real_0, '0']
 - [digital_costas_loop_cc_0, '0', qtgui_const_sink_x_0, '0']
-- [digital_symbol_sync_xx_0, '0', digital_costas_loop_cc_0, '0']
+- [digital_symbol_sync_xx_0_0, '0', digital_costas_loop_cc_0, '0']
 - [freq_xlating_fir_filter_xxx_0, '0', qtgui_freq_sink_x_0_0_0, '0']
 - [freq_xlating_fir_filter_xxx_0, '0', satellites_rms_agc_0_0, '0']
 - [network_udp_source_0, '0', blocks_short_to_float_0, '0']
@@ -1116,7 +1155,7 @@ connections:
 - [pdu_tagged_stream_to_pdu_0, pdus, satellites_print_timestamp_0_0, in]
 - [satellites_print_timestamp_0_0, out, satellites_hexdump_sink_1, in]
 - [satellites_print_timestamp_0_0, out, satellites_telemetry_submit_0, in]
-- [satellites_rms_agc_0_0, '0', digital_symbol_sync_xx_0, '0']
+- [satellites_rms_agc_0_0, '0', digital_symbol_sync_xx_0_0, '0']
 - [satnogs_ogg_source_0, '0', blocks_throttle2_0, '0']
 
 metadata:
