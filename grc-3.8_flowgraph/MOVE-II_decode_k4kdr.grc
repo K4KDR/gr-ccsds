@@ -451,7 +451,7 @@ blocks:
     affinity: ''
     alias: ''
     comment: ''
-    corr_threshold: '0.7'
+    corr_threshold: '0.8'
     frame_len: '256'
     maxoutbuf: '0'
     minoutbuf: '0'
