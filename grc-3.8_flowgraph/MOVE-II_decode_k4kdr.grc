@@ -86,7 +86,7 @@ blocks:
     start: '5000'
     step: '50'
     stop: '20000'
-    value: '10000'
+    value: '12000'
     widget: counter_slider
   states:
     bus_sink: false
